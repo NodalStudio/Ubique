@@ -11,6 +11,7 @@
     "type": "git",
     "url": "https://github.com/maxto/ubique.git"
   },
+  "type": "module",
   "keywords": [
     "mathematic",
     "matrix",
@@ -23,26 +24,29 @@
     "quantitative analysis"
   ],
   "scripts": {
+    "generate-indexes": "node scripts/generate-indexes.js",
     "test": "mocha --ui tdd --recursive"
   },
   "engines": {
     "node": ">= 0.11.0"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-util": "^3.0.4",
-    "mocha": "^2.2.4",
-    "uglify-js": "^2.4.21",
-    "webpack": "^1.8.11"
+    "@types/babel__traverse": "^7.20.6",
+    "gulp": "^5.0.0",
+    "gulp-util": "^3.0.8",
+    "mocha": "^10.7.3",
+    "typescript": "^5.5.4",
+    "uglify-js": "^3.19.2",
+    "webpack": "^5.94.0"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/maxto/ubique/issues"
   },
   "dependencies": {
-    "moment": "^2.10.2",
-    "request": "^2.55.0",
-    "sync-request": "^2.0.1"
+    "dayjs": "^1.11.13",
+    "request": "^2.88.2",
+    "sync-request": "^6.1.0"
   },
   "browser": {
     "request": false

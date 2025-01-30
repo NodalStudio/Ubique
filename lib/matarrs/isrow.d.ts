@@ -1,0 +1,32 @@
+/**
+ * @function isrow
+ * @summary Checks if the input is a row vector.
+ * @description Returns `true` if the input matrix is a row vector, meaning it has exactly one row and more than one column.
+ *
+ * @param x The input matrix to check.
+ * @returns Returns `true` if `x` is a row vector, otherwise `false`.
+ * @throws {Error} If the input is not a valid matrix or if no argument is provided.
+ *
+ * @example
+ * // Example 1: Valid row vector
+ * assert.strictEqual(isrow([[2, 2]]), true);
+ *
+ * // Example 2: Column vector (not a row vector)
+ * assert.strictEqual(isrow([[2], [2]]), false);
+ *
+ * // Example 3: Row vector with multiple columns
+ * assert.strictEqual(isrow([[1, 2, 3]]), true);
+ *
+ * // Example 4: Square matrix (not a row vector)
+ * assert.strictEqual(isrow([[1, 2], [3, 4]]), false);
+ *
+ * // Example 5: Single-element row vector
+ * assert.strictEqual(isrow([[1]]), true);
+ *
+ * // Example 6: Invalid input (not a matrix)
+ * assert.throws(() => isrow(5), /Input must be a non-empty matrix/);
+ *
+ * // Example 7: Empty matrix (should throw an error)
+ * assert.throws(() => isrow([]), /Input must be a non-empty matrix/);
+ */
+export function isrow(x: any): boolean;
