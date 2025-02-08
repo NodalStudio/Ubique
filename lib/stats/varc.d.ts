@@ -1,12 +1,4 @@
-/** @import { array, matrix } from '../types.js' */
-
-import { mean } from './mean.js';
-import { sum } from '../elemop/sum.js';
-import { power } from '../elemop/power.js';
-import { abs } from '../elmath/abs.js';
-import { minus } from '../elemop/minus.js';
-import { vectorfun } from '../datatype/vectorfun.js';
-import { isarray } from '../datatype/isarray.js';
+import { array, matrix } from '../types.ts';
 
 /**
  * @function varc
@@ -20,13 +12,12 @@ import { isarray } from '../datatype/isarray.js';
  * - Sample (flag = 1, default):
  *   **s² = Σ (xᵢ - x̄)² / (N - 1)**
  *
- * @param {array|matrix} x Input array or matrix.
- * @param {number} [flag=1] Normalization type:
+ * @param x Input array or matrix.
+ * @param flag Normalization type:
  *   - `0`: Population variance
  *   - `1`: Sample variance (default)
- * @param {number} [dim=0] Dimension to operate on (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The computed variance.
- * @throws {Error} If the input is invalid.
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise).
+ * @returns The computed variance.
  *
  * @example
  * // Example 1: Variance of a 1D array (sample)
@@ -46,15 +37,8 @@ import { isarray } from '../datatype/isarray.js';
  * // Example 5: Throws an error for invalid input
  * assert.throws(() => varc(123), /Input must be an array or matrix/);
  */
-export function varc(x, flag = 1, dim = 0) {
-  if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
-  }
-
-  return vectorfun(dim, x, arr => computeVariance(arr, flag));
-}
-
-function computeVariance(arr, flag) {
-  const mu = mean(arr);
-  return sum(power(abs(minus(arr, mu)), 2)) / (arr.length - flag);
-}
+export function varc(
+  x: array | matrix,
+  flag?: number,
+  dim?: number
+): number | array | matrix;

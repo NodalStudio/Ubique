@@ -4,15 +4,13 @@
  * @description Returns the PDF of the normal distribution with mean `mu` and standard deviation `sigma`, evaluated at `x`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
- * @param {number} x The value at which to evaluate the PDF.
- * @param {number} [mu=0] The mean of the normal distribution.
- * @param {number} [sigma=1] The standard deviation of the normal distribution.
- * @returns {number} The probability density function value at `x`.
- * @throws {Error} If `sigma` is not a positive number.
+ * @param x The value at which to evaluate the PDF.
+ * @param mu The mean of the normal distribution.
+ * @param sigma The standard deviation of the normal distribution.
+ * @returns The probability density function value at `x`.
+ * @throws If `sigma` is not a positive number.
  *
  * @example
- * import { normpdf } from './normpdf.js';
- *
  * // Example 1: Compute the standard normal PDF at x = 1
  * assert.strictEqual(normpdf(1), 0.241971);
  *
@@ -28,13 +26,4 @@
  * // Example 5: Compute normal PDF for a negative value
  * assert.strictEqual(normpdf(-1, 0, 1), 0.241971);
  */
-export function normpdf(x, mu = 0, sigma = 1) {
-  if (sigma <= 0) {
-    throw new Error('Standard deviation must be a positive number');
-  }
-
-  const coefficient = 1 / (Math.sqrt(2 * Math.PI) * sigma);
-  const exponent = -0.5 * ((x - mu) / sigma) ** 2;
-
-  return coefficient * Math.exp(exponent);
-}
+export function normpdf(x: number, mu?: number, sigma?: number): number;

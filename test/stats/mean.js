@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mean } from '../../lib/elemop/mean.js';
+import { mean } from '../../lib/stats/mean.js';
 
 // Example 1: Mean of a vector
 assert.strictEqual(mean([5, 6, 3]), 4.666666666666667);

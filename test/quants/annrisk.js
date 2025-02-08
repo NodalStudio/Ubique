@@ -1,11 +1,10 @@
 import assert from 'assert';
-import { annrisk } from '../../quants/annrisk.js';
+import { annrisk } from '../../lib/quants/annrisk.js';
 
-var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
-var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
-var cat = ubique.cat;
+// Example 1: Annualized risk for a single asset
+const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+assert.strictEqual(annrisk(x, 12), 0.08047276972160623);
 
-ubique.annrisk(x,12);
-
-ubique.annrisk(cat(0,x,y),12);
-
+// Example 3: Throws error for invalid input
+assert.throws(() => annrisk(123), /Input must be an array or matrix/);
+assert.throws(() => annrisk('invalid'), /Input must be an array or matrix/);
