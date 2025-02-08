@@ -1,11 +1,10 @@
 import assert from 'assert';
-import { annreturn } from '../../quants/annreturn.js';
+import { annreturn } from '../../lib/quants/annreturn.js';
 
-var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
-var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
-var cat = ubique.cat;
+// Example 1: Annualized return for a single asset
+const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+assert.strictEqual(annreturn(x, 12), 0.2338146820656939);
 
-ubique.annreturn(x,12);
-
-ubique.annreturn(cat(0,x,y),12);
-
+// Example 2: Throws error for non-array input
+assert.throws(() => annreturn(123, 12), /Input must be an array or matrix/);
+assert.throws(() => annreturn('invalid', 12), /Input must be an array or matrix/);

@@ -1,13 +1,13 @@
 import assert from 'assert';
-import { avgdrawdown } from '../../quants/avgdrawdown.js';
+import { avgdrawdown } from '../../lib/quants/avgdrawdown.js';
 
-var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
-var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
-var cat = ubique.cat;
+// Example 1: Average drawdown for a single asset
+const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+assert.strictEqual(avgdrawdown(x), 0.007299999999999999);
 
-ubique.avgdrawdown(x);
+// Example 2: 1-largest drawdown
+assert.strictEqual(avgdrawdown(x, 1), 0.014);
 
-ubique.avgdrawdown(x,1);
-
-ubique.avgdrawdown(cat(0,x,y));
-
+// Example 3: Throws error for invalid input
+assert.throws(() => avgdrawdown(123), /Input must be an array or matrix/);
+assert.throws(() => avgdrawdown('invalid'), /Input must be an array or matrix/);
