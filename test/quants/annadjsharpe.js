@@ -1,11 +1,10 @@
 import assert from 'assert';
-import { annadjsharpe } from '../../quants/annadjsharpe.js';
+import { annadjsharpe } from '../../lib/quants/annadjsharpe.js';
 
-var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
-var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
-var cat = ubique.cat;
+// Example 1: Annualized Adjusted Sharpe Ratio for a single asset
+const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+assert.strictEqual(annadjsharpe(x, 0.02, 12, 'geometric'), 3.3767236091658313);
 
-ubique.annadjsharpe(x,0.02,12,'geometric');
-
-ubique.annadjsharpe(cat(0,x,y),0,12);
-
+// Example 2: Throws error for invalid input
+assert.throws(() => annadjsharpe(123), /Input must be an array or matrix/);
+assert.throws(() => annadjsharpe('invalid'), /Input must be an array or matrix/);
