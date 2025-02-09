@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { subsetlin } from '../../lib/matarrs/subsetlin.js';
+import subsetlin from '../../lib/matarrs/subsetlin.js';
 
 // Test dataset
 const a = [[5,6,5],[7,8,-1]];

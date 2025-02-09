@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { iscolumn } from '../../lib/matarrs/iscolumn.js';
+import iscolumn from '../../lib/matarrs/iscolumn.js';
 
 /**
  * Tests for iscolumn function

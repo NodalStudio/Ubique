@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isscalar } from '../../lib/datatype/isscalar.js';
+import isscalar from '../../lib/datatype/isscalar.js';
 
 // Example 1: Single number
 assert.strictEqual(isscalar(2), true);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { eq } from '../../lib/elemop/eq.js';
+import eq from '../../lib/elemop/eq.js';
 // /root/ubique/lib/elemop/eq.js
 
 // Example 1: Equality comparison between two numbers

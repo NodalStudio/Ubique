@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isnumber } from '../../lib/datatype/isnumber.js';
+import isnumber from '../../lib/datatype/isnumber.js';
 
 // Example 1: Input is a number
 assert.strictEqual(isnumber(5), true);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { reshape } from '../../lib/matarrs/reshape.js';
+import reshape from '../../lib/matarrs/reshape.js';
 
 // Example 1: Reshape a row vector into a column vector
 assert.deepStrictEqual(reshape([5, 6, 3], 3, 1), [[5], [6], [3]]);

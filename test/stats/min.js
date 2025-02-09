@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { min } from '../../stats/min.js';
+import min from '../../stats/min.js';
 
 ubique.min([5,6,-1]);
 

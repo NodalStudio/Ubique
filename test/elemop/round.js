@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { round } from '../../lib/elemop/round.js';
+import round from '../../lib/elemop/round.js';
 
 // Example 1: Round a number to 12 decimal places
 assert.strictEqual(round(Math.PI, 12), 3.14159265359);

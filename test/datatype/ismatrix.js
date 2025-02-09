@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ismatrix } from '../../lib/datatype/ismatrix.js';
+import ismatrix from '../../lib/datatype/ismatrix.js';
 
 // Example 1: Valid matrix of numbers with one row
 assert.strictEqual(ismatrix([[1, 3, 4]]), true);

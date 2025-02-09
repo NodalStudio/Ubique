@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { flipdim } from '../../lib/matarrs/flipdim.js';
+import flipdim from '../../lib/matarrs/flipdim.js';
 
 // Example 1: Flip a 1D array (dim = 1)
 assert.deepStrictEqual(flipdim([5, 6, 3], 1), [3, 6, 5]);

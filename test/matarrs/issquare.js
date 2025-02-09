@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { issquare } from '../../lib/matarrs/issquare.js';
+import issquare from '../../lib/matarrs/issquare.js';
 
 
 // Example 1: Valid square matrix

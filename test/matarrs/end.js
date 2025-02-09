@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { end } from '../../lib/matarrs/end.js';
+import end from '../../lib/matarrs/end.js';
 
 // Example 1: Last index of a vector
 assert.strictEqual(end([5, 6, 3]), 2);

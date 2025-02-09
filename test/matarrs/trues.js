@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { trues } from '../../lib/matarrs/trues.js';
+import trues from '../../lib/matarrs/trues.js';
 
 // Example 1: Create an empty array
 assert.deepStrictEqual(trues(0), []);

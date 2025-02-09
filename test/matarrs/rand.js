@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { rand } from '../../lib/matarrs/rand.js';
+import rand from '../../lib/matarrs/rand.js';
 
 // Example 1: Single random number
 assert.strictEqual(typeof rand(), 'number');

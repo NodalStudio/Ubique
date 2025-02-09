@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { sign } from '../../lib/elmath/sign.js';
+import sign from '../../lib/elmath/sign.js';
 
 // Example 1: Sign of a single number
 assert.strictEqual(sign(-0.5), -1);

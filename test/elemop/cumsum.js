@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cumsum } from '../../lib/elemop/cumsum.js';
+import cumsum from '../../lib/elemop/cumsum.js';
 
 // Example 1: Cumulative sum of a 1D array
 assert.deepStrictEqual(cumsum([5, 6, 3]), [5, 11, 14]);

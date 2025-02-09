@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { weekday } from '../../lib/datatype/weekday.js';
+import weekday from '../../lib/datatype/weekday.js';
 
 // Example 1: Single Unix timestamp
 assert.strictEqual(weekday(1426636800), 3); // (Wednesday)

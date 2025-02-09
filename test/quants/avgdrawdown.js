@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { avgdrawdown } from '../../lib/quants/avgdrawdown.js';
+import avgdrawdown from '../../lib/quants/avgdrawdown.js';
 
 // Example 1: Average drawdown for a single asset
 const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];

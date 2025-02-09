@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isfunction } from '../../lib/datatype/isfunction.js';
+import isfunction from '../../lib/datatype/isfunction.js';
 
 // Test case 1: Inline function
 assert.strictEqual(isfunction(function(a) { return console.log(a); }), true, 'Inline function should return true');

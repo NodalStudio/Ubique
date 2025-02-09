@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { sub2ind } from '../../lib/matarrs/sub2ind.js';
+import sub2ind from '../../lib/matarrs/sub2ind.js';
 
 // Example 1: Convert single 2D coordinate to linear index
 assert.strictEqual(sub2ind([2, 3], [1, 2]), 5);

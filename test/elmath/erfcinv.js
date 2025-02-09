@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { erfcinv } from '../../lib/elmath/erfcinv.js';
+import erfcinv from '../../lib/elmath/erfcinv.js';
 
 // Example 1: Compute the inverse complementary error function for a value less than 1
 assert.strictEqual(erfcinv(1.5), -0.476936236121904);

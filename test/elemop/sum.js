@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { sum } from '../../lib/elemop/sum.js';
+import sum from '../../lib/elemop/sum.js';
 
 // Example 1: Sum of elements in a 1D array
 assert.strictEqual(sum([5, 6, 3]), 14);

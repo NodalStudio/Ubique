@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ge } from '../../lib/elemop/ge.js';
+import ge from '../../lib/elemop/ge.js';
 
 // Example 1: Comparison between two numbers
 assert.strictEqual(ge(5, 5), true);

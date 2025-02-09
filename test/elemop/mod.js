@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mod } from '../../lib/elemop/mod.js';
+import mod from '../../lib/elemop/mod.js';
 
 // Example 1: Modulus of a vector with a scalar divisor
 assert.deepStrictEqual(mod([13, -7], 2.2), [1.9999999999999991, -0.39999999999999947]);

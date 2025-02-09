@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mode } from '../../stats/mode.js';
+import mode from '../../stats/mode.js';
 
 ubique.mode([5,6,3]);
 

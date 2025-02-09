@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { diff } from '../../lib/elemop/diff.js';
+import diff from '../../lib/elemop/diff.js';
 
 // Example 1: Differences in a 1D array
 assert.deepStrictEqual(diff([5, 6, 3]), [1, -3]);

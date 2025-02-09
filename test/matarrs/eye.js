@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { eye } from '../../lib/matarrs/eye.js';
+import eye from '../../lib/matarrs/eye.js';
 
 // Example 1: Create a 0x0 matrix (empty matrix)
 assert.deepStrictEqual(eye(0), []);

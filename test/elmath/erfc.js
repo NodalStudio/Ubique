@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { erfc } from '../../lib/elmath/erfc.js';
+import erfc from '../../lib/elmath/erfc.js';
 
 // Example 1: Compute the complementary error function for a single value
 assert.strictEqual(erfc(0.5), 0.47950009227675744);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { diag } from '../../lib/matarrs/diag.js';
+import diag from '../../lib/matarrs/diag.js';
 
 // Example 1: Create a diagonal matrix from a vector
 assert.deepStrictEqual(diag([5, 6, -3]), [[5, 0, 0], [0, 6, 0], [0, 0, -3]]);

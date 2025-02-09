@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { minus } from '../../lib/elemop/minus.js';
+import minus from '../../lib/elemop/minus.js';
 
 // Example 1: Subtract two numbers
 assert.strictEqual(minus(5, 6), -1);

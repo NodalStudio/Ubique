@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ldivide } from '../../lib/elemop/ldivide.js';
+import ldivide from '../../lib/elemop/ldivide.js';
 
 // Example 1: Single number division
 assert.strictEqual(ldivide(5, 10), 2);
