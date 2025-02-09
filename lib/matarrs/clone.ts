@@ -24,7 +24,7 @@ import { array, matrix, numarraymatrix } from "../types.d.ts";
  * // Example 3: Clone a single number
  * assert.strictEqual(clone(5), 5);
  */
-export default function clone<T extends number | array | matrix>(x: T): T {
+export default function clone<T extends numarraymatrix>(x: T): T {
   if (arguments.length === 0) {
     throw new Error("not enough input arguments");
   }

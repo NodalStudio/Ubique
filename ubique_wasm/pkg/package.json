@@ -1,0 +1,17 @@
+{
+  "name": "ubique_wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "ubique_wasm_bg.wasm",
+    "ubique_wasm.js",
+    "ubique_wasm_bg.js",
+    "ubique_wasm.d.ts"
+  ],
+  "main": "ubique_wasm.js",
+  "types": "ubique_wasm.d.ts",
+  "sideEffects": [
+    "./ubique_wasm.js",
+    "./snippets/*"
+  ]
+}

@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import isnumber from "../datatype/isnumber.ts";
-import isarray from "../datatype/isarray.ts";
-import ismatrix from "../datatype/ismatrix.ts";
-import nrows from "../matarrs/nrows.ts";
-import getrow from "../matarrs/getrow.ts";
-import arrayfun from "../datatype/arrayfun.ts";
-import { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import {
+  arrayfun,
+  getrow,
+  isarray,
+  ismatrix,
+  isnumber,
+  nrows,
+} from "../../index.ts";
 
 /**
  * @function times
@@ -19,19 +19,26 @@ import { array, matrix, numarraymatrix } from "../types.d.ts";
  * @throws {Error} If no arguments are provided or if the input dimensions do not match.
  *
  * @example
+ * ``` ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * // Example 1: Multiply two numbers
- * assert.strictEqual(times(5, 6), 30);
+ * assertEquals(times(5, 6), 30);
  *
  * // Example 2: Element-wise multiplication of two vectors
- * assert.deepStrictEqual(times([5, 6, 4], [3, -1, 0]), [15, -6, 0]);
+ * assertEquals(times([5, 6, 4], [3, -1, 0]), [15, -6, 0]);
  *
  * // Example 3: Multiply a vector by a scalar
- * assert.deepStrictEqual(times([5, 6, 4], 10), [50, 60, 40]);
+ * assertEquals(times([5, 6, 4], 10), [50, 60, 40]);
  *
  * // Example 4: Element-wise multiplication of two matrices
- * assert.deepStrictEqual(times([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[-5, 18, -5], [28, 40, -9]]);
+ * assertEquals(times([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[-5, 18, -5], [28, 40, -9]]);
+ * ```
  */
-export default function times(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function times(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (arguments.length === 0) {
     throw new Error("not enough input arguments");
   }
@@ -59,17 +66,20 @@ export default function times(x: numarraymatrix, y: numarraymatrix): numarraymat
  * @returns {number|array|matrix} The result of the multiplication.
  * @throws {Error} If the input arguments are not valid.
  */
-function handleNumberMultiplication(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+function handleNumberMultiplication(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return x * y;
   }
 
   if (isnumber(x)) {
-    return arrayfun(y, val => x * val);
+    return arrayfun(y, (val) => x * val);
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, val => val * y);
+    return arrayfun(x, (val) => val * y);
   }
 
   throw new Error("unknown input arguments");

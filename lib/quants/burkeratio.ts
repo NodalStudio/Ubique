@@ -53,9 +53,9 @@ export default function burkeratio(
 
   return vectorfun(dim, x, (a: any) => {
     const annRet = annreturn(a, t);
-    const dd = sqrt(sum(power(cdrawdown(a), 2)));
+    const dd = sqrt(sum(power(cdrawdown(a), 2))) as number;
     return mode === "simple"
       ? (annRet - frisk) / dd
-      : ((annRet - frisk) / dd) * sqrt(a.length);
+      : ((annRet - frisk) / dd) * (sqrt(a.length) as number);
   });
 }

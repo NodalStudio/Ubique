@@ -36,10 +36,12 @@
   "tasks": {
     "index": "deno run --allow-read --allow-write ./scripts/generate-index.ts",
     "build": "deno run -A build.ts",
-    "build:all": "deno task index && deno task build && deno task types",
-    "test": "deno fmt --check && deno test --doc lib",
+    "build:wasm": "deno run --allow-run ./scripts/build-wasm.ts",
+    "build:all": "deno task index && deno task build && deno task build:wasm && deno task types",
+    "test": "deno fmt --check lib && deno test --doc lib",
     "lint": "deno lint --rules-exclude=no-explicit-any",
-    "lint:fix": "deno fmt && deno lint --rules-exclude=no-explicit-any --fix"
+    "lint:fix": "deno fmt && deno lint --rules-exclude=no-explicit-any --fix",
+    "benchmark": "deno run --allow-run ./scripts/benchmark.ts"
   },
   "lint": {
     "rules": {
