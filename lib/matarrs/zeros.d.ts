@@ -1,4 +1,4 @@
-import { matrix } from "../types.js";
+import { matrix } from '../types';
 
 /**
  * @function zeros

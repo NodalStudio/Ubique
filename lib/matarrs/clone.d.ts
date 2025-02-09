@@ -1,4 +1,4 @@
-import { array, matrix } from "../types.js";
+import { array, matrix } from '../types';
 
 /**
  * Creates a deep copy of the input array or matrix.

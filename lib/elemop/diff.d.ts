@@ -1,4 +1,4 @@
-import { array, matrix } from '../types.ts';
+import { array, matrix } from '../types';
 
 /**
  * @function diff

@@ -1,4 +1,4 @@
-import { matrix } from '../types.ts';
+import { matrix } from '../types';
 
 /**
  * @function mpower

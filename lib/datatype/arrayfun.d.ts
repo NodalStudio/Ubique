@@ -1,5 +1,3 @@
-/** @import { array, matrix } from '../types.ts' */
-
 /**
  * @function arrayfun
  * @summary Applies a function to each element of a array or matrix.
@@ -65,4 +63,4 @@
  * // Example 10: Check if each element of an array is greater than a threshold
  * assert.deepStrictEqual(arrayfun([5, 8, 2], (x, threshold) => x > threshold, 4), [true, true, false]);
  */
- export function arrayfun(x: any, fun: Function, ...funArgs: any[]): any;
+export function arrayfun(x: any, fun: Function, ...funArgs: any[]): any;
