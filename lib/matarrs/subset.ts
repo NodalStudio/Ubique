@@ -8,6 +8,7 @@ import ncols from "./ncols.ts";
 import zeros from "./zeros.ts";
 import squeeze from "./squeeze.ts";
 import isarray from "../datatype/isarray.ts";
+import isundefined from "../datatype/isundefined.ts";
 
 /**
  * @function subset
@@ -45,26 +46,16 @@ import isarray from "../datatype/isarray.ts";
  * // Example 7: Extract an entire column
  * assert.deepStrictEqual(subset(a, ':', 0), [[5], [7]]);
  */
-export default function subset(m: any, r: any, c: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  if (arguments.length > 3) {
-    throw new Error("too many input arguments");
-  }
-
-  if (arguments.length === 1) {
+export default function subset(m: any, r?: any, c?: any) {
+  if (isundefined(r) && isundefined(c)) {
     return m;
   }
 
-  if (arguments.length === 2) {
+  if (isundefined(c)) {
     return handleArraySubset(m, r);
   }
 
-  if (arguments.length === 3) {
-    return handleMatrixSubset(m, r, c);
-  }
+  return handleMatrixSubset(m, r, c);
 }
 
 /**

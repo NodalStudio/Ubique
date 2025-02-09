@@ -67,7 +67,6 @@ export default function linsolve(A: any, b: any) {
   const P = lud.P;
 
   // Handle `b` permutation
-  // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
   const permutedB = ismatrix(b)
     ? subset(b, P, colon(0, ncols(b) - 1))
     : subset(b, P);

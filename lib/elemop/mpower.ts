@@ -33,7 +33,7 @@ export default function mpower(x: matrix, y: number): matrix {
 
   let out = x;
   for (let t = 1; t < y; t++) {
-    out = mtimes(out, x);
+    out = mtimes(out, x) as matrix;
   }
   return out;
 }
