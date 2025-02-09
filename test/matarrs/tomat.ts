@@ -1,5 +1,6 @@
-import assert from 'assert';
-import tomat from '../../lib/matarrs/tomat.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import tomat from "../../lib/matarrs/tomat.js";
 
 // Example 1: Convert a number to a matrix
 assert.deepStrictEqual(tomat(5), [[5]]);

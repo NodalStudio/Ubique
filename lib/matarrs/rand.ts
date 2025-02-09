@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function rand
@@ -38,31 +38,31 @@
  * assert.strictEqual(result1x2.length, 1);
  * assert.strictEqual(result1x2[0].length, 2);
  */
-export default function rand(...args) {
+export default function rand(...args: any[]) {
   if (args.length === 0) {
     return Math.random();
   } else if (args.length === 1) {
     const arg = args[0];
-    if (typeof arg === 'number') {
+    if (typeof arg === "number") {
       return rand_mat(arg, arg);
     } else if (Array.isArray(arg)) {
       return rand_mat(arg[0], arg[1]);
     } else {
-      throw new Error('unknown input type');
+      throw new Error("unknown input type");
     }
   } else if (args.length === 2) {
     const [rows, cols] = args;
-    if (typeof rows === 'number' && typeof cols === 'number') {
+    if (typeof rows === "number" && typeof cols === "number") {
       return rand_mat(rows, cols);
     } else {
-      throw new Error('unknown input type');
+      throw new Error("unknown input type");
     }
   } else {
-    throw new Error('too many input arguments');
+    throw new Error("too many input arguments");
   }
 }
 
-function rand_mat(rows, cols) {
+function rand_mat(rows: any, cols: any) {
   const result = [];
   for (let i = 0; i < rows; i++) {
     const row = [];
@@ -72,4 +72,4 @@ function rand_mat(rows, cols) {
     result.push(row);
   }
   return result;
-};
+}

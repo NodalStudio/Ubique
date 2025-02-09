@@ -1,8 +1,9 @@
 /**
  * Descriptive Statistic
  */
-module.exports = function($u) {
-/**
+// @ts-expect-error TS(2580): Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
+module.exports = function ($u: any) {
+  /**
  * @method cov
  * @summary Covariance matrix
  * @description Covariance matrix
@@ -34,47 +35,56 @@ module.exports = function($u) {
  * ubique.cov(l);
  * // [ [ 0.333333, 1.166667, 0 ],[ 1.166667, 6.333333, -3 ],[ 0, -3, 4 ] ]
  */
-  $u.cov = function(x) {
+  $u.cov = function (x: any) {
     var arglen = arguments.length;
- 	if (arglen === 0) {
- 		throw new Error('not enough input arguments');
- 	}
- 	if (arglen > 3) {
- 		throw new Error('too many input arguments');
- 	}
- 	if (arglen === 3) {
- 		flag = arguments[arglen - 1];
- 		var flagrule = $u.isscalar(flag) && (flag === 0 || flag === 1);
- 		if (!flagrule) {
- 			throw new Error('third input must be 0 or 1');
- 		}
- 		arglen = arglen - 1;
- 	} else
- 	if (arglen === 2 && $u.isscalar(arguments[arglen - 1]) && (arguments[arglen - 1] === 0 || arguments[arglen - 1] === 1)) {
- 			flag = arguments[arglen - 1];
- 			arglen = arglen - 1;
- 	} else {
- 		flag = 1;
- 	}
+    if (arglen === 0) {
+      throw new Error("not enough input arguments");
+    }
+    if (arglen > 3) {
+      throw new Error("too many input arguments");
+    }
+    if (arglen === 3) {
+      // @ts-expect-error TS(2304): Cannot find name 'flag'.
+      flag = arguments[arglen - 1];
+      // @ts-expect-error TS(2304): Cannot find name 'flag'.
+      var flagrule = $u.isscalar(flag) && (flag === 0 || flag === 1);
+      if (!flagrule) {
+        throw new Error("third input must be 0 or 1");
+      }
+      arglen = arglen - 1;
+    } else if (
+      arglen === 2 && $u.isscalar(arguments[arglen - 1]) &&
+      (arguments[arglen - 1] === 0 || arguments[arglen - 1] === 1)
+    ) {
+      // @ts-expect-error TS(2304): Cannot find name 'flag'.
+      flag = arguments[arglen - 1];
+      arglen = arglen - 1;
+    } else {
+      // @ts-expect-error TS(2304): Cannot find name 'flag'.
+      flag = 1;
+    }
 
     if (arglen === 1 && ($u.isvector(x) || $u.isvector(x))) {
-    	x = $u.flatten(x);
-    	return $u.varc(x);
+      x = $u.flatten(x);
+      return $u.varc(x);
     }
- 	if (arglen === 2) {
- 		y = arguments[1];
- 		x = $u.transpose($u.flatten(x));
- 		y = $u.transpose($u.flatten(y));
- 		if (x.length !== y.length) {
- 			throw new Error('input dimension must agree');
- 		}
- 		x = $u.cat(1,x,y);
- 	}
- 	var m = $u.nrows(x);
- 	var mu = $u.mean(x,1);
- 	var z = $u.minus(x,$u.repmat(mu,m,1));
- 	return $u.rdivide($u.mtimes($u.transpose(z),z), m - flag);
+    if (arglen === 2) {
+      // @ts-expect-error TS(2304): Cannot find name 'y'.
+      y = arguments[1];
+      x = $u.transpose($u.flatten(x));
+      // @ts-expect-error TS(2304): Cannot find name 'y'.
+      y = $u.transpose($u.flatten(y));
+      // @ts-expect-error TS(2304): Cannot find name 'y'.
+      if (x.length !== y.length) {
+        throw new Error("input dimension must agree");
+      }
+      // @ts-expect-error TS(2304): Cannot find name 'y'.
+      x = $u.cat(1, x, y);
+    }
+    var m = $u.nrows(x);
+    var mu = $u.mean(x, 1);
+    var z = $u.minus(x, $u.repmat(mu, m, 1));
+    // @ts-expect-error TS(2304): Cannot find name 'flag'.
+    return $u.rdivide($u.mtimes($u.transpose(z), z), m - flag);
   };
-
 };
-

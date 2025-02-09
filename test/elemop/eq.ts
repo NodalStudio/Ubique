@@ -1,5 +1,6 @@
-import assert from 'assert';
-import eq from '../../lib/elemop/eq.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import eq from "../../lib/elemop/eq.js";
 // /root/ubique/lib/elemop/eq.js
 
 // Example 1: Equality comparison between two numbers
@@ -21,4 +22,7 @@ assert.deepStrictEqual(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
 assert.deepStrictEqual(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
 
 // Example 7: Equality comparison between two matrices
-assert.deepStrictEqual(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+assert.deepStrictEqual(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [
+  false,
+  false,
+]]);

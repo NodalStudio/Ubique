@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import cat from '../matarrs/cat.js';
+import cat from "../matarrs/cat.ts";
 
 /**
  * @function horzcat
@@ -21,9 +21,9 @@ import cat from '../matarrs/cat.js';
  * // Example 3: Invalid input (no arguments)
  * assert.throws(() => { horzcat(); }, Error, 'Not enough input arguments');
  */
-export default function horzcat(...args) {
+export default function horzcat(...args: any[]) {
   if (args.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   return cat(1, ...args);

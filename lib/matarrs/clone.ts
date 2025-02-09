@@ -1,16 +1,17 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import { array, matrix, numarraymatrix } from "../types.d.ts";
 
 /**
  * @function clone
  * @summary Create a clone of the input array or matrix.
  * @description Creates a deep copy of the input array or matrix. If the input is a number, it simply returns that number.
  *
- * @param {array|matrix} x Array or matrix to clone.
- * @returns {array|matrix} A deep copy of the input array or matrix.
+ * @param x Array or matrix to clone.
+ * @returns A deep copy of the input array or matrix.
  * @throws {Error} If no input is provided.
  *
  * @example
@@ -23,9 +24,9 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 3: Clone a single number
  * assert.strictEqual(clone(5), 5);
  */
-export default function clone(x) {
+export default function clone<T extends number | array | matrix>(x: T): T {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isnumber(x)) {
@@ -33,12 +34,12 @@ export default function clone(x) {
   }
 
   if (isarray(x)) {
-    return [...x];
+    return [...x] as T;
   }
 
   if (ismatrix(x)) {
-    return x.map((row) => [...row]);
+    return (x as matrix).map((row: array) => [...row]) as T;
   }
 
-  throw new Error('unsupported input type');
+  throw new Error("unsupported input type");
 }

@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import mean from './mean.js';
-import vectorfun from '../datatype/vectorfun.js';
+import mean from "./mean.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function moment
@@ -15,7 +15,7 @@ import vectorfun from '../datatype/vectorfun.js';
  * @throws {Error} If the number of arguments is insufficient.
  *
  * @example
- * import moment from './moment.js';
+ * import moment from './moment.ts';
  *
  * // Example 1: Compute the third central moment of an array
  * assert.strictEqual(moment([0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039], 3), 0.000007);
@@ -32,9 +32,9 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 5: Compute the fourth moment of a dataset
  * assert.strictEqual(moment([1, 2, 3, 4, 5], 4), 2);
  */
-export default function moment(x, k, dim = 0) {
+export default function moment(x: any, k: any, dim = 0) {
   if (x === undefined || k === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!Array.isArray(x)) {
@@ -44,8 +44,8 @@ export default function moment(x, k, dim = 0) {
   return vectorfun(dim, x, computeMoment, k);
 }
 
-function computeMoment(arr, order) {
+function computeMoment(arr: any, order: any) {
   const mu = mean(arr);
 
-  return mean(arr.map((val) => (val - mu) ** order));
+  return mean(arr.map((val: any) => (val - mu) ** order));
 }

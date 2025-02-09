@@ -1,6 +1,6 @@
-import size from '../matarrs/size.js';
+import size from "../matarrs/size.ts";
 
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function numel
@@ -24,9 +24,9 @@ import size from '../matarrs/size.js';
  * // Example 4: Number of elements in an empty array
  * assert.strictEqual(numel([]), 0);
  */
-export default function numel(x) {
+export default function numel(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const [rows, cols] = size(x);

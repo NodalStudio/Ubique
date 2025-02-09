@@ -27,13 +27,13 @@
  * // Example 6: Invalid input (not a matrix)
  * assert.throws(() => { issquare(123) }, Error);
  */
-export default function issquare(x) {
+export default function issquare(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!Array.isArray(x) || x.length === 0 || !Array.isArray(x[0])) {
-    throw new Error('Input must be a non-empty matrix (array of arrays)');
+    throw new Error("Input must be a non-empty matrix (array of arrays)");
   }
 
   const nrows = x.length;

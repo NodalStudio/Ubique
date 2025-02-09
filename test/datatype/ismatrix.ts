@@ -1,5 +1,6 @@
-import assert from 'assert';
-import ismatrix from '../../lib/datatype/ismatrix.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import ismatrix from "../../lib/datatype/ismatrix.js";
 
 // Example 1: Valid matrix of numbers with one row
 assert.strictEqual(ismatrix([[1, 3, 4]]), true);
@@ -11,7 +12,7 @@ assert.strictEqual(ismatrix([[1], [3], [4]]), true);
 assert.strictEqual(ismatrix([[1, 2], [3, 4, 5]]), false);
 
 // Example 4: Invalid matrix with non-number elements
-assert.strictEqual(ismatrix([[1, 2], [3, '4']]), true);
+assert.strictEqual(ismatrix([[1, 2], [3, "4"]]), true);
 
 // Example 5: Empty array (not a matrix)
 assert.strictEqual(ismatrix([]), false);
@@ -26,7 +27,7 @@ assert.strictEqual(ismatrix([1, 2, 3]), false);
 assert.strictEqual(ismatrix([[NaN, 2, 3], [4, 5, NaN]]), true);
 
 // Example 9: Invalid matrix with mixed types (not all numbers)
-assert.strictEqual(ismatrix([[1, 'b', true], [4, 'e', false]]), true);
+assert.strictEqual(ismatrix([[1, "b", true], [4, "e", false]]), true);
 
 // Example 10: Nested arrays but not uniform length
 assert.strictEqual(ismatrix([[1, [2]], [[3]], [4]]), false);

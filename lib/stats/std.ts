@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import varc from './varc.js';
-import sqrt from '../elmath/sqrt.js';
-import isarray from '../datatype/isarray.js';
+import varc from "./varc.ts";
+import sqrt from "../elmath/sqrt.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function std
@@ -25,7 +25,7 @@ import isarray from '../datatype/isarray.js';
  * @throws {Error} If the input is invalid.
  *
  * @example
- * import std from './std.js';
+ * import std from './std.ts';
  *
  * // Example 1: Standard deviation of a 1D array (sample)
  * const c = [5, 6, 3];
@@ -44,9 +44,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 5: Throws an error for invalid input
  * assert.throws(() => std(123), /Input must be an array or matrix/);
  */
-export default function std(x, flag = 1, dim = 0) {
+export default function std(x: any, flag = 1, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
   return sqrt(varc(x, flag, dim));

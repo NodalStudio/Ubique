@@ -1,5 +1,6 @@
-import assert from 'assert';
-import abs from '../../lib/elmath/abs.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import abs from "../../lib/elmath/abs.js";
 
 // Example 1: Compute the absolute value of a single number
 assert.strictEqual(abs(-0.5), 0.5);

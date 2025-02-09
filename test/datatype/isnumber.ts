@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isnumber from '../../lib/datatype/isnumber.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isnumber from "../../lib/datatype/isnumber.js";
 
 // Example 1: Input is a number
 assert.strictEqual(isnumber(5), true);
@@ -8,7 +9,7 @@ assert.strictEqual(isnumber(5), true);
 assert.strictEqual(isnumber(NaN), true);
 
 // Example 3: Input is a string representing a number (not a number)
-assert.strictEqual(isnumber('5'), false);
+assert.strictEqual(isnumber("5"), false);
 
 // Example 4: Input is `undefined`
 assert.strictEqual(isnumber(undefined), false);

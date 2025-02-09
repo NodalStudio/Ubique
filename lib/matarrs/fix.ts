@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import arrayfun from '../datatype/arrayfun.js';
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function fix
@@ -21,16 +21,15 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 3: Round a matrix of numbers toward zero
  * assert.deepStrictEqual(fix([[4.51, -1.4], [3.78, 0.01]]), [[4, -1], [3, 0]]);
  */
-export default function fix(x) {
+export default function fix(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  const _fix = (a) => {
+  const _fix = (a: any) => {
     const rounded = a < 0 ? Math.ceil(a) : Math.floor(a);
     return rounded === 0 ? 0 : rounded;
   };
-
 
   return arrayfun(x, _fix);
 }

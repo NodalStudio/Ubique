@@ -1,13 +1,13 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import colon from './colon.js';
-import nrows from './nrows.js';
-import ncols from './ncols.js';
-import zeros from './zeros.js';
-import squeeze from './squeeze.js';
-import isarray from '../datatype/isarray.js';
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import colon from "./colon.ts";
+import nrows from "./nrows.ts";
+import ncols from "./ncols.ts";
+import zeros from "./zeros.ts";
+import squeeze from "./squeeze.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function subset
@@ -45,13 +45,13 @@ import isarray from '../datatype/isarray.js';
  * // Example 7: Extract an entire column
  * assert.deepStrictEqual(subset(a, ':', 0), [[5], [7]]);
  */
-export default function subset(m, r, c) {
+export default function subset(m: any, r: any, c: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (arguments.length > 3) {
-    throw new Error('too many input arguments');
+    throw new Error("too many input arguments");
   }
 
   if (arguments.length === 1) {
@@ -74,7 +74,7 @@ export default function subset(m, r, c) {
  * @param {number|array} indices The indices to extract.
  * @returns {number|array} The extracted subset.
  */
-function handleArraySubset(array, indices) {
+function handleArraySubset(array: any, indices: any) {
   if (isnumber(array)) {
     return array;
   }
@@ -83,11 +83,11 @@ function handleArraySubset(array, indices) {
     if (isnumber(indices)) {
       return array[indices];
     } else {
-      return indices.map((index) => array[index]);
+      return indices.map((index: any) => array[index]);
     }
   }
 
-  throw new Error('input must be an array');
+  throw new Error("input must be an array");
 }
 
 /**
@@ -99,16 +99,16 @@ function handleArraySubset(array, indices) {
  * @returns {matrix} The extracted subset of the matrix.
  * @throws {Error} If the input is not a matrix.
  */
-function handleMatrixSubset(matrix, rows, cols) {
+function handleMatrixSubset(matrix: any, rows: any, cols: any) {
   if (!ismatrix(matrix)) {
-    throw new Error('input must be a matrix');
+    throw new Error("input must be a matrix");
   }
 
-  if (rows === ':') {
+  if (rows === ":") {
     rows = colon(0, nrows(matrix) - 1);
   }
 
-  if (cols === ':') {
+  if (cols === ":") {
     cols = colon(0, ncols(matrix) - 1);
   }
 

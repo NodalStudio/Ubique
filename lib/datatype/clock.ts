@@ -1,4 +1,4 @@
-/** @import { array } from '../types' */
+import type { array } from "../types.d.ts";
 
 /**
  * @function clock
@@ -6,7 +6,7 @@
  * @description Returns the current date and time as an array with the following elements:
  * [year, month, day, hour, minute, seconds, milliseconds]. Note that the month is adjusted to be 1-based (January is 1, December is 12).
  *
- * @returns {array} An array representing the current date and time: [year, month, day, hour, minute, seconds, milliseconds].
+ * @returns  An array representing the current date and time: [year, month, day, hour, minute, seconds, milliseconds].
  *
  * @example
  * // Example: Get the current date and time as a array
@@ -18,15 +18,15 @@
  * // The array should have 7 elements
  * assert(currentTime.length === 7);
  */
-export default function clock() {
+export default function clock(): array {
   const now = new Date();
   return [
-    now.getFullYear(),        // Year
-    now.getMonth() + 1,       // Month (0-based, so add 1)
-    now.getDate(),            // Day of the month
-    now.getHours(),           // Hour
-    now.getMinutes(),         // Minute
-    now.getSeconds(),         // Second
-    now.getMilliseconds()     // Millisecond
+    now.getFullYear(), // Year
+    now.getMonth() + 1, // Month (0-based, so add 1)
+    now.getDate(), // Day of the month
+    now.getHours(), // Hour
+    now.getMinutes(), // Minute
+    now.getSeconds(), // Second
+    now.getMilliseconds(), // Millisecond
   ];
 }

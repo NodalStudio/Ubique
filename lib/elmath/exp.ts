@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
-import arrayfun from '../datatype/arrayfun.js';
-import isnumber from '../datatype/isnumber.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import arrayfun from "../datatype/arrayfun.ts";
+import isnumber from "../datatype/isnumber.ts";
 
 /**
  * @function exp
@@ -24,9 +24,9 @@ import isnumber from '../datatype/isnumber.js';
  *   [1096.63, 2980.96, 0.367879]
  * ]);
  */
-export default function exp(x) {
+export default function exp(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   const computeExp = Math.exp;

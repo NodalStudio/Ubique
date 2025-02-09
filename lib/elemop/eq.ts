@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import minus from '../elemop/minus.js';
-import arrayfun from '../datatype/arrayfun.js';
+import minus from "../elemop/minus.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function eq
@@ -35,12 +35,12 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 7: Equality comparison between two matrices
  * assert.deepStrictEqual(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
  */
-export default function eq(x, y) {
+export default function eq(x: any, y: any) {
   if (arguments.length < 2) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  const _eq = (el) => el === 0;
+  const _eq = (el: any) => el === 0;
   const difference = minus(x, y);
   return arrayfun(difference, _eq);
 }

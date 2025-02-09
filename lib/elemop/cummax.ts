@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import vectorfun from '../datatype/vectorfun.js';
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function cummax
@@ -22,10 +22,14 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 3: Cumulative maximum of a matrix along rows (dim=0)
  * assert.deepStrictEqual(cummax([[5, 6, 5], [7, 8, -1]], 0), [[5, 6, 6], [7, 8, 8]]);
  */
-export default function cummax(x, dim = 1) {
+export default function cummax(x: any, dim = 1) {
   if (x === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  return vectorfun(dim, x, (a) => a.map((_, i) => Math.max(...a.slice(0, i + 1))));
+  return vectorfun(
+    dim,
+    x,
+    (a: any) => a.map((_: any, i: any) => Math.max(...a.slice(0, i + 1))),
+  );
 }

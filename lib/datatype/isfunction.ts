@@ -21,9 +21,9 @@
  * // Example 4: Not a function (string)
  * assert.strictEqual(isfunction("hello"), false, 'String should return false');
  */
-export default function isfunction(x) {
+export default function isfunction(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
-  return typeof x === 'function';
+  return typeof x === "function";
 }

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import erf from '../../lib/elmath/erf.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import erf from "../../lib/elmath/erf.js";
 
 // Example 1: Compute the error function for a single value
 assert.strictEqual(erf(0.5), 0.5204999077232426);

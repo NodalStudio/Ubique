@@ -23,6 +23,11 @@
  * assert.strictEqual(result3.length, 8);
  * assert.ok(/^[A-Za-z0-9]+$/.test(result3));
  */
-export default function randchar(n = 6, strset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
-  return [...Array(n)].map(() => strset[Math.floor(Math.random() * strset.length)]).join('');
+export default function randchar(
+  n = 6,
+  strset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+) {
+  return [...Array(n)].map(() =>
+    strset[Math.floor(Math.random() * strset.length)]
+  ).join("");
 }

@@ -1,11 +1,11 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import rdivide from '../elemop/rdivide.js';
-import numel from '../matarrs/numel.js';
-import size from '../matarrs/size.js';
-import sum from '../elemop/sum.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import rdivide from "../elemop/rdivide.ts";
+import numel from "../matarrs/numel.ts";
+import size from "../matarrs/size.ts";
+import sum from "../elemop/sum.ts";
 
 /**
  * @function mean
@@ -27,14 +27,17 @@ import sum from '../elemop/sum.js';
  * // Example 3: Mean of a matrix along columns (dim=1)
  * assert.deepStrictEqual(mean([[5, 6, 5], [7, 8, -1]], 1), [6, 7, 2]);
  */
-export default function mean(x, dim = 0) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function mean(x: any, dim = 0) {
+  if (!x) throw new Error("Not enough input arguments");
 
-  if (isnumber(x))
-  {return x;}
+  if (isnumber(x)) {
+    return x;
+  }
 
-  if (isarray(x))
-  {return sum(x, dim) / numel(x);}
+  if (isarray(x)) {
+    return sum(x, dim) / numel(x);
+  }
 
+  // @ts-expect-error TS(2554): Expected 1 arguments, but got 2.
   return rdivide(sum(x, dim), size(x, dim)[1 - dim]);
 }

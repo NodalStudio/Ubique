@@ -1,5 +1,6 @@
-import assert from 'assert';
-import mergesort from '../../lib/matarrs/mergesort.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import mergesort from "../../lib/matarrs/mergesort.js";
 
 // Example 1: Sort an array in ascending order with indexes
 assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1]), [
@@ -8,7 +9,7 @@ assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1]), [
 ]);
 
 // Example 2: Sort an array in descending order with indexes
-assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1], 'descend'), [
+assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1], "descend"), [
   [9, 2, 1, 0, -3, -12],
   [0, 2, 5, 4, 1, 3],
 ]);
@@ -17,7 +18,10 @@ assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1], 'descend'), [
 assert.deepStrictEqual(mergesort([5]), [[5], [0]]);
 
 // Example 4: Invalid mode
-assert.throws(() => mergesort([1, 2, 3], 'invalid'), /sorting must be "ascend" or "descend"/);
+assert.throws(
+  () => mergesort([1, 2, 3], "invalid"),
+  /sorting must be "ascend" or "descend"/,
+);
 
 // Example 5: Empty array
 assert.deepStrictEqual(mergesort([]), [[], []]);

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import uminus from '../../lib/elemop/uminus.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import uminus from "../../lib/elemop/uminus.js";
 
 // Example 1: Unary minus on a single number
 assert.strictEqual(uminus(-5), 5);

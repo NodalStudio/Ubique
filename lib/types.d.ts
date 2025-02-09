@@ -23,3 +23,5 @@ export type array<T = number> = T[];
  * ];
  */
 export type matrix<T = number> = T[][];
+
+export type numarraymatrix<T = number> = T | array<T> | matrix<T>;

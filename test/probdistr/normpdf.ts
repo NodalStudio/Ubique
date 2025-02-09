@@ -1,5 +1,6 @@
-import assert from 'assert';
-import normpdf from '../../lib/probdistr/normpdf.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import normpdf from "../../lib/probdistr/normpdf.js";
 
 // Example 1: Compute the standard normal PDF at x = 1
 assert.strictEqual(normpdf(1), 0.24197072451914337);
@@ -26,7 +27,13 @@ assert.strictEqual(normpdf(1, 1, 0.1), 3.989422804014327);
 assert.strictEqual(normpdf(1, 1, 100), 0.003989422804014327);
 
 // Example 9: Edge case: Standard deviation 0 (should throw an error)
-assert.throws(() => normpdf(2, 0, 0), /Standard deviation must be a positive number/);
+assert.throws(
+  () => normpdf(2, 0, 0),
+  /Standard deviation must be a positive number/,
+);
 
 // Example 10: Edge case: Negative standard deviation (should throw an error)
-assert.throws(() => normpdf(2, 0, -1), /Standard deviation must be a positive number/);
+assert.throws(
+  () => normpdf(2, 0, -1),
+  /Standard deviation must be a positive number/,
+);

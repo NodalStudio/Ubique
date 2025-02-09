@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import arrayfun from '../datatype/arrayfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function power
@@ -36,34 +36,36 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 6: Scalar raised to the power of a matrix
  * assert.deepStrictEqual(power(5, a), [[3125, 15625, 3125], [78125, 390625, 0.2]]);
  */
-export default function power(x, y) {
-  if (arguments.length < 2) {throw new Error('Not enough input arguments');}
+export default function power(x: any, y: any) {
+  if (arguments.length < 2) throw new Error("Not enough input arguments");
 
-  const applyPower = (a, b) => Math.pow(a, b);
+  const applyPower = (a: any, b: any) => Math.pow(a, b);
 
   if (isnumber(x) && isnumber(y)) {
     return applyPower(x, y);
   }
 
   if (isnumber(x)) {
-    return arrayfun(y, (val) => applyPower(x, val));
+    return arrayfun(y, (val: any) => applyPower(x, val));
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val) => applyPower(val, y));
+    return arrayfun(x, (val: any) => applyPower(val, y));
   }
 
   if (isarray(x) && isarray(y)) {
-    if (x.length !== y.length) {throw new Error('Input dimensions must agree');}
-    return x.map((val, idx) => applyPower(val, y[idx]));
+    if (x.length !== y.length) throw new Error("Input dimensions must agree");
+    return x.map((val: any, idx: any) => applyPower(val, y[idx]));
   }
 
   if (ismatrix(x) && ismatrix(y)) {
     if (x.length !== y.length || x[0].length !== y[0].length) {
-      throw new Error('Input dimensions must agree');
+      throw new Error("Input dimensions must agree");
     }
-    return x.map((row, i) => row.map((val, j) => applyPower(val, y[i][j])));
+    return x.map((row: any, i: any) =>
+      row.map((val: any, j: any) => applyPower(val, y[i][j]))
+    );
   }
 
-  throw new Error('Invalid input types');
+  throw new Error("Invalid input types");
 }

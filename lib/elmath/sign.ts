@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
-import arrayfun from '../datatype/arrayfun.js';
-import isnumber from '../datatype/isnumber.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import arrayfun from "../datatype/arrayfun.ts";
+import isnumber from "../datatype/isnumber.ts";
 
 /**
  * @function sign
@@ -22,14 +22,14 @@ import isnumber from '../datatype/isnumber.js';
  * // Example 3: Sign of a matrix of numbers
  * assert.deepStrictEqual(sign([[5, -2], [-3, 4]]), [[1, -1], [-1, 1]]);
  */
-export default function sign(x) {
+export default function sign(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  const computeSign = (val) => {
-    if (val > 0) {return 1;}
-    if (val < 0) {return -1;}
+  const computeSign = (val: any) => {
+    if (val > 0) return 1;
+    if (val < 0) return -1;
     return 0;
   };
 

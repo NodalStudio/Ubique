@@ -28,8 +28,8 @@
  * // Example 7: Empty matrix (not a scalar)
  * assert.strictEqual(isscalar([[]]), false);
  */
-export default function isscalar(x) {
-  if (typeof x === 'number') {
+export default function isscalar(x: any) {
+  if (typeof x === "number") {
     return true;
   }
 

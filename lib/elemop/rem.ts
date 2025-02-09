@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import fix from '../matarrs/fix.js';
-import rdivide from './rdivide.js';
-import minus from './minus.js';
-import times from './times.js';
+import fix from "../matarrs/fix.ts";
+import rdivide from "./rdivide.ts";
+import minus from "./minus.ts";
+import times from "./times.ts";
 
 /**
  * @function rem
@@ -28,9 +28,9 @@ import times from './times.js';
  * rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]);
  * // [[0, 0, 0], [3, 3, -1]]
  */
-export default function rem(x, y) {
+export default function rem(x: any, y: any) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const n = fix(rdivide(x, y));

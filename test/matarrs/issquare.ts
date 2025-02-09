@@ -1,6 +1,6 @@
-import assert from 'assert';
-import issquare from '../../lib/matarrs/issquare.js';
-
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import issquare from "../../lib/matarrs/issquare.js";
 
 // Example 1: Valid square matrix
 assert.strictEqual(issquare([[9, 5], [6, 1]]), true); // true
@@ -15,7 +15,11 @@ assert.strictEqual(issquare([[9, 5, 3], [6, 1, 7]]), false); // false
 assert.strictEqual(issquare([[9]]), true); // true
 
 // Example 5: Empty matrix (should throw an error)
-assert.throws(() => { issquare([]); }, Error);
+assert.throws(() => {
+  issquare([]);
+}, Error);
 
 // Example 6: Invalid input (not a matrix)
-assert.throws(() => { issquare(123); }, Error);
+assert.throws(() => {
+  issquare(123);
+}, Error);

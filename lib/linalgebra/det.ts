@@ -1,9 +1,9 @@
-/** @import { matrix } from '../types' */
-import isnumber from '../datatype/isnumber.js';
-import isvector from '../datatype/isvector.js';
-import issquare from '../matarrs/issquare.js';
-import lu from '../linalgebra/lu.js';
-import ncols from '../matarrs/ncols.js';
+/** @import { matrix } from '../types.d.ts' */
+import isnumber from "../datatype/isnumber.ts";
+import isvector from "../datatype/isvector.ts";
+import issquare from "../matarrs/issquare.ts";
+import lu from "../linalgebra/lu.ts";
+import ncols from "../matarrs/ncols.ts";
 
 /**
  * @function det
@@ -39,17 +39,17 @@ import ncols from '../matarrs/ncols.js';
  * // Example 8: Determinant of a matrix with fractional values
  * assert.strictEqual(det([[-40.54, 34.02], [91.81, 57.47]]), -5453.21);
  */
-export default function det(x) {
+export default function det(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x) || isvector(x)) {
-    throw new Error('Input must be a matrix');
+    throw new Error("Input must be a matrix");
   }
 
   if (!issquare(x)) {
-    throw new Error('Matrix must be square');
+    throw new Error("Matrix must be square");
   }
 
   const { LU, S } = lu(x);

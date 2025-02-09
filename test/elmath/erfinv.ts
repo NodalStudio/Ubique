@@ -1,5 +1,6 @@
-import assert from 'assert';
-import erfinv from '../../lib/elmath/erfinv.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import erfinv from "../../lib/elmath/erfinv.js";
 
 // Example 1: Compute the inverse error function for a positive value
 assert.strictEqual(erfinv(0.1), 0.08885596505119556);

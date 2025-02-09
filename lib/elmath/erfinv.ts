@@ -1,5 +1,5 @@
-/** @import { array, matrix } from '../types' */
-import erf from './erf.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import erf from "./erf.ts";
 
 /**
  * @function erfinv
@@ -28,13 +28,13 @@ import erf from './erf.js';
  * // Example 5: Compute the inverse error function for -1 (should return negative infinity)
  * assert.strictEqual(erfinv(-1), -Infinity);
  */
-export default function erfinv(y) {
+export default function erfinv(y: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  if (y <= -1) {return -Infinity;}
-  if (y >= 1) {return Infinity;}
+  if (y <= -1) return -Infinity;
+  if (y >= 1) return Infinity;
 
   let z, x;
 
@@ -60,11 +60,14 @@ export default function erfinv(y) {
  * @param {number} z Intermediate value based on the input.
  * @returns {number} Initial approximation.
  */
-function calculateX(z) {
-  const c1 = 1.641345311, c2 = 3.429567803, c3 = -1.624906493, c4 = -1.970840454;
+function calculateX(z: any) {
+  const c1 = 1.641345311,
+    c2 = 3.429567803,
+    c3 = -1.624906493,
+    c4 = -1.970840454;
   const c5 = 1.637067800, c6 = 3.543889200;
   const numerator = ((c1 * z + c2) * z + c3) * z + c4;
-  const denominator = ((c5 * z + c6) * z + 1);
+  const denominator = (c5 * z + c6) * z + 1;
   return numerator / denominator;
 }
 
@@ -75,9 +78,15 @@ function calculateX(z) {
  * @param {number} y Input value.
  * @returns {number} Initial approximation.
  */
-function calculateCentral(z, y) {
-  const c1 = -0.140543331, c2 = 0.914624893, c3 = -1.645349621, c4 = 0.886226899;
-  const c5 = 0.012229801, c6 = -0.329097515, c7 = 1.442710462, c8 = -2.118377725;
+function calculateCentral(z: any, y: any) {
+  const c1 = -0.140543331,
+    c2 = 0.914624893,
+    c3 = -1.645349621,
+    c4 = 0.886226899;
+  const c5 = 0.012229801,
+    c6 = -0.329097515,
+    c7 = 1.442710462,
+    c8 = -2.118377725;
   const numerator = ((c1 * z + c2) * z + c3) * z + c4;
   const denominator = (((c5 * z + c6) * z + c7) * z + c8) * z + 1;
   return y * numerator / denominator;
@@ -90,7 +99,7 @@ function calculateCentral(z, y) {
  * @param {number} y Input value.
  * @returns {number} Refined approximation.
  */
-function refineResult(x, y) {
+function refineResult(x: any, y: any) {
   const sqrtPiInv = 2 / Math.sqrt(Math.PI);
   for (let i = 0; i < 2; i++) {
     const error = erf(x) - y;

@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function trues
@@ -26,7 +26,7 @@
  * // Example 5: Create a 2x3 matrix of `true`
  * assert.deepStrictEqual(trues(2,3), [[true, true, true], [true, true, true]]);
  */
-export default function trues(rows, cols) {
+export default function trues(rows: any, cols: any) {
   if (arguments.length === 1) {
     cols = rows;
   }
@@ -35,8 +35,8 @@ export default function trues(rows, cols) {
     [rows, cols] = rows;
   }
 
-  if (typeof rows !== 'number' || typeof cols !== 'number') {
-    throw new Error('Invalid dimensions');
+  if (typeof rows !== "number" || typeof cols !== "number") {
+    throw new Error("Invalid dimensions");
   }
 
   return Array.from({ length: rows }, () => Array(cols).fill(true));

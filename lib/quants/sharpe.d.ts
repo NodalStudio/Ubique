@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function sharpe
@@ -28,7 +28,7 @@ import { array, matrix } from '../types';
  * assert.throws(() => sharpe(123), /Input must be an array or matrix/);
  */
 export function sharpe(
-	x: array | matrix,
-	frisk?: number,
-	dim?: number
-  ): number | array | matrix;
+  x: array | matrix,
+  frisk?: number,
+  dim?: number,
+): number | array | matrix;

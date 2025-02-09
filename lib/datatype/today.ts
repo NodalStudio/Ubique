@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 /**
  * @function today
@@ -14,5 +14,5 @@ import dayjs from 'dayjs';
  * assert.strictEqual(todayTimestamp, dayjs().startOf('day').unix());
  */
 export default function today() {
-  return dayjs().startOf('day').unix();
+  return dayjs().startOf("day").unix();
 }

@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import isarray from '../datatype/isarray.js';
-import getrow from '../matarrs/getrow.js';
-import arrayfun from '../datatype/arrayfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import isarray from "../datatype/isarray.ts";
+import getrow from "../matarrs/getrow.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function ldivide
@@ -35,12 +35,12 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 6: Scalar divided by matrix
  * assert.deepStrictEqual(ldivide([[3, 5], [6, 1]], 3), [[1, 0.6], [0.5, 3]]);
  */
-export default function ldivide(x, y) {
+export default function ldivide(x: any, y: any) {
   if (arguments.length < 2) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  const divide = (a, b) => b / a;
+  const divide = (a: any, b: any) => b / a;
 
   if (isnumber(x) || isnumber(y)) {
     return handleNumberDivision(x, y, divide);
@@ -54,29 +54,33 @@ export default function ldivide(x, y) {
     return handleMatrixDivision(x, y, divide);
   }
 
-  throw new Error('types not supported');
+  throw new Error("types not supported");
 }
 
-function handleNumberDivision(x, y, divide) {
+function handleNumberDivision(x: any, y: any, divide: any) {
   if (isnumber(x)) {
-    return isnumber(y) ? divide(x, y) : arrayfun(y, (val) => divide(x, val));
+    return isnumber(y)
+      ? divide(x, y)
+      : arrayfun(y, (val: any) => divide(x, val));
   }
 
   return ismatrix(x)
-    ? x.map((row) => arrayfun(row, (val) => divide(val, y)))
-    : arrayfun(x, (val) => divide(val, y));
+    ? x.map((row: any) => arrayfun(row, (val: any) => divide(val, y)))
+    : arrayfun(x, (val: any) => divide(val, y));
 }
 
-function handleArrayDivision(x, y, divide) {
+function handleArrayDivision(x: any, y: any, divide: any) {
   if (x.length !== y.length) {
-    throw new Error('input dimensions must agree');
+    throw new Error("input dimensions must agree");
   }
-  return x.map((xi, i) => divide(xi, y[i]));
+  return x.map((xi: any, i: any) => divide(xi, y[i]));
 }
 
-function handleMatrixDivision(x, y, divide) {
+function handleMatrixDivision(x: any, y: any, divide: any) {
   if (x.length !== y.length || x[0].length !== y[0].length) {
-    throw new Error('input dimensions must agree');
+    throw new Error("input dimensions must agree");
   }
-  return x.map((row, i) => handleArrayDivision(row, getrow(y, i), divide));
+  return x.map((row: any, i: any) =>
+    handleArrayDivision(row, getrow(y, i), divide)
+  );
 }

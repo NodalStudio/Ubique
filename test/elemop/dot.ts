@@ -1,5 +1,6 @@
-import assert from 'assert';
-import dot from '../../lib/elemop/dot.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import dot from "../../lib/elemop/dot.js";
 
 // Example 1: Dot product of two 1D arrays
 assert.strictEqual(dot([5, 6, 3], [0, -3, 2]), -12);
@@ -14,7 +15,7 @@ assert.strictEqual(dot([1, 2, 3], [1, 2, 3]), 14);
 assert.strictEqual(dot([0, 0, 0], [0, 0, 0]), 0);
 
 // Example 5: Error when input arrays are of different sizes
-assert.throws(() => dot([1, 2], [1, 2, 3]), Error, 'input size mismatch');
+assert.throws(() => dot([1, 2], [1, 2, 3]), Error, "input size mismatch");
 
 // Example 6: Dot product of two empty arrays (should return 0)
 assert.strictEqual(dot([], []), 0);
