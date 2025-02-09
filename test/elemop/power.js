@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { power } from '../../lib/elemop/power.js';
+import power from '../../lib/elemop/power.js';
 
 // Example 1: Power of two numbers
 assert.strictEqual(power(5, 4), 625);

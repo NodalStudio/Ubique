@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { zscore } from '../../stats/zscore.js';
+import zscore from '../../stats/zscore.js';
 
 ubique.zscore([5,6,3]);
 

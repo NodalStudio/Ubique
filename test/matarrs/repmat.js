@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { repmat } from '../../lib/matarrs/repmat.js';
+import repmat from '../../lib/matarrs/repmat.js';
 
 // Example 1: Replicate a scalar value into a 3x3 matrix
 assert.deepStrictEqual(repmat(10, 3), [

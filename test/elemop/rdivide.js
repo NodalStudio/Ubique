@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { rdivide } from '../../lib/elemop/rdivide.js';
+import rdivide from '../../lib/elemop/rdivide.js';
 
 // Example 1: Divide two numbers
 assert.strictEqual(rdivide(3, 6), 0.5);

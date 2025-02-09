@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isempty } from '../../lib/datatype/isempty.js';
+import isempty from '../../lib/datatype/isempty.js';
 
 // Example 1: An empty array
 assert.strictEqual(isempty([]), true);

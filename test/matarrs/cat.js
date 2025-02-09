@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cat } from '../../lib/matarrs/cat.js';
+import cat from '../../lib/matarrs/cat.js';
 
 // Example 1: Vertical Concatenation (dim = 0) with numbers
 assert.deepStrictEqual(cat(0, 1, 2, 3, 4), [[1], [2], [3], [4]]);

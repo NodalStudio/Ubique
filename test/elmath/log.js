@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { log } from '../../lib/elmath/log.js';
+import log from '../../lib/elmath/log.js';
 
 // Example 1: Natural logarithm of a single number
 assert.strictEqual(log(6), 1.791759469228055);

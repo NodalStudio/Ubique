@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { annreturn } from '../../lib/quants/annreturn.js';
+import annreturn from '../../lib/quants/annreturn.js';
 
 // Example 1: Annualized return for a single asset
 const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];

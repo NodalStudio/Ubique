@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { lt } from '../../lib/elemop/lt.js';
+import lt from '../../lib/elemop/lt.js';
 
 // Example 1: Comparison between two numbers
 assert.strictEqual(lt(5, 5), false);

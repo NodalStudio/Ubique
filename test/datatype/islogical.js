@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { islogical } from '../../lib/datatype/islogical.js';
+import islogical from '../../lib/datatype/islogical.js';
 
 // Example 1: Boolean true
 assert.strictEqual(islogical(true), true);

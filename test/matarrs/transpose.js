@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { transpose } from '../../lib/matarrs/transpose.js';
+import transpose from '../../lib/matarrs/transpose.js';
 
 // Example 1: Transpose a 2x3 matrix
 assert.deepStrictEqual(transpose([[5, 6, 5], [7, 8, -1]]), [[5, 7], [6, 8], [5, -1]]);

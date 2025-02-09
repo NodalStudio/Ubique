@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { plus } from '../../lib/elemop/plus.js';
+import plus from '../../lib/elemop/plus.js';
 
 // Example 1: Add two numbers
 assert.strictEqual(plus(5, 6), 11);

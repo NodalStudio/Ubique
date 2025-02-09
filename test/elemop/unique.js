@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { unique } from '../../lib/elemop/unique.js';
+import unique from '../../lib/elemop/unique.js';
 
 // Example 1: Unique values from an array
 assert.deepStrictEqual(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mergesort } from '../../lib/matarrs/mergesort.js';
+import mergesort from '../../lib/matarrs/mergesort.js';
 
 // Example 1: Sort an array in ascending order with indexes
 assert.deepStrictEqual(mergesort([9, -3, 2, -12, 0, 1]), [

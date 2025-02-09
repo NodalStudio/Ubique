@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ind2sub } from '../../lib/matarrs/ind2sub.js';
+import ind2sub from '../../lib/matarrs/ind2sub.js';
 
 // Example 1: Convert linear index 5 to subscripts in a 2x3 matrix
 assert.deepStrictEqual(ind2sub([2, 3], 5), [1, 2]);

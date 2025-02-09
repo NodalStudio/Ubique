@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mtimes } from '../../lib/elemop/mtimes.js';
+import mtimes from '../../lib/elemop/mtimes.js';
 
 // Example 1: Multiply two numbers
 assert.strictEqual(mtimes(5, 6), 30);

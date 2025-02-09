@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cov } from '../../stats/cov.js';
+import cov from '../../stats/cov.js';
 
 var c = [5,6,3];
 var d = [0.5,-3,2.3];

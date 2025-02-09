@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isarray } from '../../lib/datatype/isarray.js';
+import isarray from '../../lib/datatype/isarray.js';
 
 // Example 1: A valid 1D array of numbers
 assert.strictEqual(isarray([1.4, 2.3, 3]), true);

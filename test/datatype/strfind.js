@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { strfind } from '../../lib/datatype/strfind.js';
+import strfind from '../../lib/datatype/strfind.js';
 
 // Example 1: Basic usage with multiple occurrences
 assert.deepStrictEqual(strfind('find indices in the string', 'in'), [1, 5, 13, 23]);

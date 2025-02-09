@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ceil } from '../../lib/elemop/ceil.js';
+import ceil from '../../lib/elemop/ceil.js';
 
 // Example 1: Round a number (Math.PI) to 12 decimal places
 assert.strictEqual(ceil(Math.PI, 12), 3.141592653590);

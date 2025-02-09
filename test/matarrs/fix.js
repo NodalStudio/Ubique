@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { fix } from '../../lib/matarrs/fix.js';
+import fix from '../../lib/matarrs/fix.js';
 
 // Example 1: Round a single number toward zero
 assert.strictEqual(fix(3.78), 3);

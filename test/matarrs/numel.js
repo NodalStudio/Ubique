@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { numel } from '../../lib/matarrs/numel.js';
+import numel from '../../lib/matarrs/numel.js';
 
 // Example 1: Number of elements in a vector
 assert.strictEqual(numel([3, 5, 6]), 3);

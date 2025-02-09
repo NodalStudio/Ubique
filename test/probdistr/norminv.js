@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { norminv } from '../../lib/probdistr/norminv.js';
+import norminv from '../../lib/probdistr/norminv.js';
 
 // Example 1: Compute the inverse CDF for standard normal distribution
 assert.strictEqual(norminv(0.05), -1.6448536127562647);

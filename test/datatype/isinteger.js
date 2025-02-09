@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isinteger } from '../../lib/datatype/isinteger.js';
+import isinteger from '../../lib/datatype/isinteger.js';
 
 // Example 1: An integer
 assert.strictEqual(isinteger(5), true);

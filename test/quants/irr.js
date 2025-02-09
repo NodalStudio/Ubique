@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { irr } from '../../quants/irr.js';
+import irr from '../../quants/irr.js';
 
 ubique.irr([250000,25000,-10000,-285000]);
 

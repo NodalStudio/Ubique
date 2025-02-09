@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isrow } from '../../lib/matarrs/isrow.js';
+import isrow from '../../lib/matarrs/isrow.js';
 
 // Example 1: Valid row vector
 assert.strictEqual(isrow([[2, 2]]), true);

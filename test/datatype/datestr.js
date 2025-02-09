@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { datestr } from '../../lib/datatype/datestr.js';
+import datestr from '../../lib/datatype/datestr.js';
 
 // Example 1: Convert a single Unix timestamp to a date string
 assert.strictEqual(datestr(1419984000), '2014-12-31');

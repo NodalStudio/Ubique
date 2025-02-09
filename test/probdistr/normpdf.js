@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { normpdf } from '../../lib/probdistr/normpdf.js';
+import normpdf from '../../lib/probdistr/normpdf.js';
 
 // Example 1: Compute the standard normal PDF at x = 1
 assert.strictEqual(normpdf(1), 0.24197072451914337);

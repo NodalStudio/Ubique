@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mdietz } from '../../quants/mdietz.js';
+import mdietz from '../../quants/mdietz.js';
 
 var ev = 104.4,bv = 74.2,cf = 37.1,cfd = 14, cd = 31;
 ubique.mdietz(ev,bv,cf,cfd,cd);
