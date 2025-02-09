@@ -1,4 +1,4 @@
-import { matrix } from "../types";
+import { matrix } from '../types';
 
 /**
  * @function vectorfun

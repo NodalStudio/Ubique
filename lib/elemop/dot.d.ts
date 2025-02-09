@@ -1,4 +1,4 @@
-import { array } from "../types";
+import { array } from '../types';
 
 /**
  * @function dot

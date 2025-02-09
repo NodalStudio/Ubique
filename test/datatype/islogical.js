@@ -11,4 +11,4 @@ assert.strictEqual(islogical(false), true);
 assert.strictEqual(islogical(1), false);
 
 // Example 4: Not a boolean (string)
-assert.strictEqual(islogical("true"), false);
+assert.strictEqual(islogical('true'), false);

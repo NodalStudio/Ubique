@@ -15,7 +15,7 @@ assert.strictEqual(issquare([[9, 5, 3], [6, 1, 7]]), false); // false
 assert.strictEqual(issquare([[9]]), true); // true
 
 // Example 5: Empty matrix (should throw an error)
-assert.throws(() => { issquare([]) }, Error);
+assert.throws(() => { issquare([]); }, Error);
 
 // Example 6: Invalid input (not a matrix)
-assert.throws(() => { issquare(123) }, Error);
+assert.throws(() => { issquare(123); }, Error);

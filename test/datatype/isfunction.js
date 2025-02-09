@@ -11,4 +11,4 @@ assert.strictEqual(isfunction(Math.log), true, 'Built-in function should return 
 assert.strictEqual(isfunction(42), false, 'Number should return false');
 
 // Test case 4: Not a function (string)
-assert.strictEqual(isfunction("hello"), false, 'String should return false');
+assert.strictEqual(isfunction('hello'), false, 'String should return false');

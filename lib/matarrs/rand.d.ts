@@ -1,4 +1,4 @@
-import { array } from '../types.ts';
+import { array } from '../types';
 
 /**
  * @function rand

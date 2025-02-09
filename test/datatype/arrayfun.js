@@ -9,31 +9,31 @@ assert.deepStrictEqual(arrayfun([[5, 6], [1, 3]], Math.pow, 3), [[125, 216], [1,
 
 // Example 3: Apply a custom sign function to an array
 function sign(x) {
-    if (x > 0) {
-        return 1;
-    } else if (x < 0) {
-        return -1;
-    } else {
-        return 0;
-    }
+  if (x > 0) {
+    return 1;
+  } else if (x < 0) {
+    return -1;
+  } else {
+    return 0;
+  }
 }
 assert.deepStrictEqual(arrayfun([1.4, 0, -10], sign), [1, 0, -1]);
 
 // Example 4: Apply a string search function to each element of a matrix
 function strfind(str, substr) {
-    const indices = [];
-    let i = str.indexOf(substr);
-    while (i !== -1) {
-        indices.push(i);
-        i = str.indexOf(substr, i + 1);
-    }
-    return indices;
+  const indices = [];
+  let i = str.indexOf(substr);
+  while (i !== -1) {
+    indices.push(i);
+    i = str.indexOf(substr, i + 1);
+  }
+  return indices;
 }
 assert.deepStrictEqual(arrayfun([['cat', 'concat'], ['cattle', 'catch the catfish']], strfind, 'cat'), [[[0], [3]], [[0], [0, 10]]]);
 
 // Example 5: Apply a function to check for null values in an array
 function isnull(value) {
-    return value === null;
+  return value === null;
 }
 assert.deepStrictEqual(arrayfun([null, true, 'hello', 5, NaN], isnull), [true, false, false, false, false]);
 

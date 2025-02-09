@@ -1,6 +1,4 @@
-import dayjs from 'dayjs';
-import { arrayfun } from './arrayfun.js';
-import { matrix, array } from '../types.js';
+import { matrix, array } from '../types';
 
 
 /**

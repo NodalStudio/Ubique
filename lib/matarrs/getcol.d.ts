@@ -1,4 +1,4 @@
-import { array, matrix } from "../types";
+import { array, matrix } from '../types';
 
 /**
  * @function getcol

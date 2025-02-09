@@ -1,4 +1,4 @@
-import { matrix, array } from "../types";
+import { matrix, array } from '../types';
 
 /**
  * @function datenum

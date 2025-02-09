@@ -1,4 +1,4 @@
-import { array, matrix } from "../types.js";
+import { array, matrix } from '../types';
 
 /**
  * @function falses

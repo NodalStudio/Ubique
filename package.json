@@ -1,18 +1,17 @@
 {
   "name": "ubique",
-  "version": "0.5.1",
-  "date": "2015-09-23",
-  "author": "Max Todaro <m.todaro.ge@gmail.com>",
-  "description": "A mathematical and quantitative library for Javascript and Node.js",
-  "contributors": [],
-  "homepage": "http://maxto.github.io/index.html",
+  "version": "1.0.0",
+  "description": "A mathematical and quantitative library for JavaScript and Node.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/maxto/ubique.git"
   },
-  "type": "module",
+  "bugs": {
+    "url": "https://github.com/maxto/ubique/issues"
+  },
   "keywords": [
-    "mathematic",
+    "mathematics",
     "matrix",
     "arithmetic",
     "statistics",
@@ -22,24 +21,41 @@
     "finance",
     "quantitative analysis"
   ],
+  "contributors": [
+    {
+      "name": "Benoît Mayer",
+      "email": "mayer.benoit@gmail.com",
+      "url": "https://github.com/bemayer"
+    },
+    {
+      "name": "Max Todaro",
+      "email": "m.todaro.ge@gmail.com",
+      "url": "https://github.com/maxto"
+    }
+  ],
+  "type": "module",
+  "main": "dist/ubique.js",
+  "module": "dist/ubique.js",
+  "types": "dist/ubique.d.ts",
   "scripts": {
-    "build": "webpack",
     "index": "node ./scripts/generate-index.js",
-    "test": "mocha --ui tdd --recursive"
-  },
-  "devDependencies": {
-    "mocha": "^11.1.0",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/maxto/ubique/issues"
+    "build": "webpack",
+    "types": "cp -r lib/**/*.d.ts dist/",
+    "build:all": "npm run index && npm run build && npm run types",
+    "test": "mocha --ui tdd --recursive",
+    "lint": "eslint lib test",
+    "lint:fix": "eslint lib test --fix"
   },
   "dependencies": {
     "dayjs": "^1.11.13"
   },
-  "browser": {
-    "request": false
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
+    "mocha": "^11.1.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   }
 }
