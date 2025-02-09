@@ -35,7 +35,6 @@ function runBenchmark() {
     [10, 10, 10],
     [100, 100, 100],
     [1000, 1000, 1000],
-    [10000, 10000, 10000],
   ];
 
   const results = matrixSizes.map(([rowsA, colsA, colsB]) => {
@@ -45,22 +44,20 @@ function runBenchmark() {
     const A = randomMatrix(rowsA, colsA);
     const B = randomMatrix(colsA, colsB);
 
-    // Benchmark custom mtimes
-    const customTime = benchmark(() => mtimes(A, B));
+    // Benchmark rubique mtimes
+    const rubiqueTime = benchmark(() => mtimes(A, B));
 
     // Benchmark math.js
     const mathTime = benchmark(() => math.multiply(A, B));
 
-    // Compute how much faster (or slower) Custom is compared to math.js
-    //   positive value => Custom is faster by X%
-    //   negative value => Custom is slower by X%
-    const fasterPercent = ((mathTime - customTime) / mathTime) * 100;
+    // Compute how much faster (or slower) rubique is compared to math.js
+    const timesFaster = mathTime / rubiqueTime;
 
     return {
       size: `${rowsA}x${colsA}`,
-      "Custom mtimes (ms)": customTime.toFixed(2),
+      "Custom mtimes (ms)": rubiqueTime.toFixed(2),
       "math.js (ms)": mathTime.toFixed(2),
-      "Faster (%)": fasterPercent.toFixed(2),
+      "Faster": timesFaster.toFixed(2),
     };
   });
 
