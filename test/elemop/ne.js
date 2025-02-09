@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ne } from '../../lib/elemop/ne.js';
+import ne from '../../lib/elemop/ne.js';
 
 // Example 1: Compare two numbers
 assert.strictEqual(ne(5, 5), false);

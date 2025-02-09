@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { std } from '../../lib/quants/std.js';
+import std from '../../lib/quants/std.js';
 
 // Example 1: Standard deviation of a 1D array (sample)
 const c = [5, 6, 3];

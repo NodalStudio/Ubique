@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { inv } from '../../lib/linalgebra/inv.js';
+import inv from '../../lib/linalgebra/inv.js';
 
 // Example 1: Inverse of a 2x2 matrix
 assert.deepStrictEqual(inv([[3, 2], [5, 2]]), [[-0.5, 0.5], [1.25, -0.7499999999999999]]);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { datevec } from '../../lib/datatype/datevec.js';
+import datevec from '../../lib/datatype/datevec.js';
 
 // Example 1: Convert a date string to an array
 assert.deepStrictEqual(datevec('2015-01-01 03:34:05', 'YYYY-MM-DD HH:mm:ss'), [2015, 1, 1, 3, 34, 5, 0]);

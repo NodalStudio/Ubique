@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { horzcat } from '../../lib/matarrs/horzcat.js';
+import horzcat from '../../lib/matarrs/horzcat.js';
 
 // Example 1: Concatenate two 2x3 matrices
 assert.deepStrictEqual(

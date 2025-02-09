@@ -1,6 +1,6 @@
 import assert from 'assert';
-import { linsolve } from '../../lib/linalgebra/linsolve.js';
-import { eye } from '../../lib/matarrs/eye.js';
+import linsolve from '../../lib/linalgebra/linsolve.js';
+import eye from '../../lib/matarrs/eye.js';
 
 // Example 1: Solve linear system with a vector
 assert.deepStrictEqual(linsolve([[1,1,-1],[1,-2,3],[2,3,1]], [5,6,3]), [5.846153846153846, -2.3846153846153846, -1.5384615384615385]);

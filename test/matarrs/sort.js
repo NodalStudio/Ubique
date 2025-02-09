@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { sort } from '../../lib/matarrs/sort.js';
+import sort from '../../lib/matarrs/sort.js';
 
 // Example 1: Sort an array in ascending order
 assert.deepStrictEqual(sort([0, 5, -1, 3, -4, 9, 0], 'ascend'), [-4, -1, 0, 0, 3, 5, 9]);

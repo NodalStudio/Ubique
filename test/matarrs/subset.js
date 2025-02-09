@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { subset } from '../../lib/matarrs/subset.js';
+import subset from '../../lib/matarrs/subset.js';
 
 // Example 1: Extract a single element from an array
 const c = [5, 6, 3];

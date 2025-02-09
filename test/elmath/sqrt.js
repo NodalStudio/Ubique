@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { sqrt } from '../../lib/elmath/sqrt.js';
+import sqrt from '../../lib/elmath/sqrt.js';
 
 // Example 1: Square root of a single number
 assert.strictEqual(sqrt(6), 2.449489742783178);

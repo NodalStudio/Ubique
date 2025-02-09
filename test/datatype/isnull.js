@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isnull } from '../../lib/datatype/isnull.js';
+import isnull from '../../lib/datatype/isnull.js';
 
 // Example 1: Input is `null`
 assert.strictEqual(isnull(null), true);

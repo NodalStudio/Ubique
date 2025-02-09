@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { erfinv } from '../../lib/elmath/erfinv.js';
+import erfinv from '../../lib/elmath/erfinv.js';
 
 // Example 1: Compute the inverse error function for a positive value
 assert.strictEqual(erfinv(0.1), 0.08885596505119556);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { prod } from '../../lib/elemop/prod.js';
+import prod from '../../lib/elemop/prod.js';
 
 // Example 1: Product of a vector
 assert.strictEqual(prod([5, 6, 3]), 90);

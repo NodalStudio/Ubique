@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { floor } from '../../lib/elemop/floor.js';
+import floor from '../../lib/elemop/floor.js';
 
 // Example 1: Round PI to 12 decimal places
 assert.strictEqual(floor(Math.PI, 12), 3.141592653589);

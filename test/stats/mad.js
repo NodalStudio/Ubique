@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mad } from '../../stats/mad.js';
+import mad from '../../stats/mad.js';
 
 var a = [[5,6,5],[7,8,-1]];
 var c = [5,6,3];

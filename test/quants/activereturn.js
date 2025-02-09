@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { activereturn } from '../../lib/quants/activereturn.js';
+import activereturn from '../../lib/quants/activereturn.js';
 
 // Example 1: Compute active return for a single portfolio and benchmark
 const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];

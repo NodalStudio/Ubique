@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { tomat } from '../../lib/matarrs/tomat.js';
+import tomat from '../../lib/matarrs/tomat.js';
 
 // Example 1: Convert a number to a matrix
 assert.deepStrictEqual(tomat(5), [[5]]);

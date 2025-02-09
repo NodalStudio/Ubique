@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cumprod } from '../../lib/elemop/cumprod.js';
+import cumprod from '../../lib/elemop/cumprod.js';
 
 // Example 1: Cumulative product of a 1D array
 assert.deepStrictEqual(cumprod([5, 6, 3]), [5, 30, 90]);

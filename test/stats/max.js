@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { max } from '../../stats/max.js';
+import max from '../../stats/max.js';
 
 ubique.max([5,6,-1]);
 

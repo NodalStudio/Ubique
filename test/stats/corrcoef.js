@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { corrcoef } from '../../stats/corrcoef.js';
+import corrcoef from '../../stats/corrcoef.js';
 
 var c = [5,6,3];
 var d = [0.5,-3,2.3];

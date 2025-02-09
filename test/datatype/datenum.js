@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { datenum } from '../../lib/datatype/datenum.js';
+import datenum from '../../lib/datatype/datenum.js';
 
 // Example 1: Convert a date string to a Unix timestamp
 assert.strictEqual(datenum('31-12-2014', 'DD-MM-YYYY'), 1419984000);

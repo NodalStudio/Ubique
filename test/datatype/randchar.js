@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { randchar } from '../../lib/datatype/randchar.js';
+import randchar from '../../lib/datatype/randchar.js';
 
 // Example 1: Generate a random string of 12 characters from a custom set
 const result1 = randchar(12, 'ABCD!-|/%&$1234567890');

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { now } from '../../lib/datatype/now.js';
+import now from '../../lib/datatype/now.js';
 
 // Example: Get the current Unix timestamp
 const currentTimestamp = now();

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { squeeze } from '../../lib/matarrs/squeeze.js';
+import squeeze from '../../lib/matarrs/squeeze.js';
 
 // Example 1: Squeeze deeply nested arrays
 assert.deepStrictEqual(squeeze([[[[[8]]]]]), [[8]]);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { normcdf } from '../../lib/probdistr/normcdf.js';
+import normcdf from '../../lib/probdistr/normcdf.js';
 
 // Example 1: Compute standard normal CDF at x = 2
 assert.strictEqual(normcdf(2), 0.9772498701098755);

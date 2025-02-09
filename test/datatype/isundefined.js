@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isundefined } from '../../lib/datatype/isundefined.js';
+import isundefined from '../../lib/datatype/isundefined.js';
 
 // Example 1: Input is undefined
 assert.strictEqual(isundefined(undefined), true);

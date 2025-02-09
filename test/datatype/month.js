@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { month } from '../../lib/datatype/month.js';
+import month from '../../lib/datatype/month.js';
 
 // Example 1: Single timestamp
 assert.strictEqual(month(1424708525), 1);

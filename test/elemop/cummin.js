@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cummax } from '../../lib/elemop/cummax.js';
+import cummax from '../../lib/elemop/cummax.js';
 
 // Example 1: Cumulative maximum of a 1D array
 assert.deepStrictEqual(cummax([5, 6, 3]), [5, 6, 6]);

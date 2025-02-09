@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { zeros } from '../../lib/matarrs/zeros.js';
+import zeros from '../../lib/matarrs/zeros.js';
 
 // Example 1: Create a 1x1 matrix of zeros (default behavior)
 assert.deepStrictEqual(zeros(), [[0]]);

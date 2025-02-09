@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { uminus } from '../../lib/elemop/uminus.js';
+import uminus from '../../lib/elemop/uminus.js';
 
 // Example 1: Unary minus on a single number
 assert.strictEqual(uminus(-5), 5);

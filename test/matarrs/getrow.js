@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { getrow } from '../../lib/matarrs/getrow.js';
+import getrow from '../../lib/matarrs/getrow.js';
 
 // Example 1: Get the first row
 assert.deepStrictEqual(getrow([[5, 6, 5], [7, 8, -1]], 0), [5, 6, 5]);

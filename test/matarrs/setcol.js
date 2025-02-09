@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { setcol } from '../../lib/matarrs/setcol.js';
+import setcol from '../../lib/matarrs/setcol.js';
 
 // Example 1: Replace the first column of a matrix
  assert.deepStrictEqual(setcol([2, 0], [[5, 6, 5], [7, 8, -1]], 0), [

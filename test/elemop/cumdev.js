@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cumdev } from '../../lib/elemop/cumdev.js';
+import cumdev from '../../lib/elemop/cumdev.js';
 
 // Example 1: Cumulative mean deviation of a 1D array
 assert.deepStrictEqual(cumdev([-4, 8, 2]), [-6, 0, 0]);

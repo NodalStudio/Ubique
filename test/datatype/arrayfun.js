@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { arrayfun } from '../../lib/datatype/arrayfun.js';
+import arrayfun from '../../lib/datatype/arrayfun.js';
 
 // Example 1: Apply Math.log to each element of an array
 assert.deepStrictEqual(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);

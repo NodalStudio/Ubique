@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { getcol } from '../../lib/matarrs/getcol.js';
+import getcol from '../../lib/matarrs/getcol.js';
 
 // Example 1: Get the first column
 assert.deepStrictEqual(getcol([[5, 6, 5], [7, 8, -1]], 0), [5, 7]); // [ 5, 7 ]

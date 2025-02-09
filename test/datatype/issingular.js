@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { issingular } from '../../lib/datatype/issingular.js';
+import issingular from '../../lib/datatype/issingular.js';
 
 // Example 1: Non-singular square matrix
 assert.strictEqual(issingular([[2, 6], [1, 3]]), false);

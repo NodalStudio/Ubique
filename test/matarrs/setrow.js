@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { setrow } from '../../lib/matarrs/setrow.js';
+import setrow from '../../lib/matarrs/setrow.js';
 
 // Example 1: Replace the first row of a matrix
 assert.deepStrictEqual(setrow([2, 0, -2], [[5, 6, 5], [7, 8, -1]], 0), [

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { cummin } from '../../lib/elemop/cummin.js';
+import cummin from '../../lib/elemop/cummin.js';
 
 // Example 1: Cumulative minimum of a 1D array
 assert.deepStrictEqual(cummin([5, 6, 3]), [5, 5, 3]);

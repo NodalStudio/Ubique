@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { length } from '../../lib/matarrs/length.js';
+import length from '../../lib/matarrs/length.js';
 
 /**
  * Tests for length function

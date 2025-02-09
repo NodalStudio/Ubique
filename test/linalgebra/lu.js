@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { lu } from '../../lib/linalgebra/lu.js';
+import lu from '../../lib/linalgebra/lu.js';
 
 // Example 1: LU decomposition of a 2x2 square matrix
 assert.deepStrictEqual(lu([[3, 2], [5, 2]]), {

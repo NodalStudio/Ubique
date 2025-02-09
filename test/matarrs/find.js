@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { find } from '../../lib/matarrs/find.js';
+import find from '../../lib/matarrs/find.js';
 
 // Example 1: Find indices of true elements in a 1D array
 assert.deepStrictEqual(find([0.3, -0.4, 0.5, 0.9].map(a => a > 0)), [0, 2, 3]);

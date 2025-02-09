@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { times } from '../../lib/elemop/times.js';
+import times from '../../lib/elemop/times.js';
 
 // Example 1: Multiply two numbers
 assert.strictEqual(times(5, 6), 30);

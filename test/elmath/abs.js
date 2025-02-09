@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { abs } from '../../lib/elmath/abs.js';
+import abs from '../../lib/elmath/abs.js';
 
 // Example 1: Compute the absolute value of a single number
 assert.strictEqual(abs(-0.5), 0.5);

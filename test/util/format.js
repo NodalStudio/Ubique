@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { format } from '../../util/format.js';
+import format from '../../util/format.js';
 
 ubique.format(5.6677798348349,0);
 

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { mldivide } from '../../lib/elemop/mldivide.js';
+import mldivide from '../../lib/elemop/mldivide.js';
 
 // Example 1: Divide two numbers
 assert.strictEqual(mldivide(5, 6), 1.2);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { det } from '../../lib/linalgebra/det.js';
+import det from '../../lib/linalgebra/det.js';
 
 // Example 1: Determinant of a 2x2 matrix
 assert.strictEqual(det([[1, 5], [6, 2]]), -28);

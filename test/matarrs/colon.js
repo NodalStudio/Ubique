@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { colon } from '../../lib/matarrs/colon.js';
+import colon from '../../lib/matarrs/colon.js';
 
 // Example 1: Generate array from 1 to 10 with step 1
 assert.deepStrictEqual(colon(1, 10, 1), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);

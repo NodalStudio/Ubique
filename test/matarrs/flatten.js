@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { flatten } from '../../lib/matarrs/flatten.js';
+import flatten from '../../lib/matarrs/flatten.js';
 
 // Example 1: Flatten a 2x2 matrix (row-wise by default)
 assert.deepStrictEqual(flatten([[5, 6], [7, 8]]), [5, 6, 7, 8]);

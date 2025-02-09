@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { flipud } from '../../lib/matarrs/flipud.js';
+import flipud from '../../lib/matarrs/flipud.js';
 
 // Example 1: Flip a 2D matrix upside down
 assert.deepStrictEqual(flipud([[1, 4], [2, 5], [3, 6]]), [[3, 6], [2, 5], [1, 4]]);

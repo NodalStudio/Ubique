@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { linspace } from '../../lib/matarrs/linspace.js';
+import linspace from '../../lib/matarrs/linspace.js';
 
 // Example 1: Generate 5 linearly spaced points between 1 and 10
 assert.deepStrictEqual(linspace(1, 10, 5), [1, 3.25, 5.5, 7.75, 10]);

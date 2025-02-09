@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { exp } from '../../lib/elmath/exp.js';
+import exp from '../../lib/elmath/exp.js';
 
 // Example 1: Exponential of a single number
 assert.strictEqual(exp(6), 403.4287934927351);

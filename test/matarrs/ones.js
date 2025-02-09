@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ones } from '../../lib/matarrs/ones.js';
+import ones from '../../lib/matarrs/ones.js';
 
 // Example 1: Create a 0x0 matrix
 assert.deepStrictEqual(ones(0), []);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ncols } from '../../lib/matarrs/ncols.js';
+import ncols from '../../lib/matarrs/ncols.js';
 
 // Example 1: Row vector
 assert.strictEqual(ncols([5, 6, 7]), 3);

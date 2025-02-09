@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { median } from '../../stats/median.js';
+import median from '../../stats/median.js';
 
 ubique.median([5,6,3]);
 

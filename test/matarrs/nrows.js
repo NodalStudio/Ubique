@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { nrows } from '../../lib/matarrs/nrows.js';
+import nrows from '../../lib/matarrs/nrows.js';
 
 // Example 1: Row vector (1D array)
 assert.strictEqual(nrows([5, 6, 7]), 1);

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { annadjsharpe } from '../../lib/quants/annadjsharpe.js';
+import annadjsharpe from '../../lib/quants/annadjsharpe.js';
 
 // Example 1: Annualized Adjusted Sharpe Ratio for a single asset
 const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];

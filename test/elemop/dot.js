@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { dot } from '../../lib/elemop/dot.js';
+import dot from '../../lib/elemop/dot.js';
 
 // Example 1: Dot product of two 1D arrays
 assert.strictEqual(dot([5, 6, 3], [0, -3, 2]), -12);

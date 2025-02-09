@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { vectorfun } from '../../lib/datatype/vectorfun.js';
+import vectorfun from '../../lib/datatype/vectorfun.js';
 
 // Example 1: Apply function along rows of a matrix
 const testfun1 = (a, b, c) => a.reduce((sum, num) => sum + num, 0) / a.length * b + c;

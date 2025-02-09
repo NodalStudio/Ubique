@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isvector } from '../../lib/datatype/isvector.js';
+import isvector from '../../lib/datatype/isvector.js';
 
 // Example 1: A row vector
 assert.strictEqual(isvector([[5, 6, 7]]), true);

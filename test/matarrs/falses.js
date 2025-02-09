@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { falses } from '../../lib/matarrs/falses.js';
+import falses from '../../lib/matarrs/falses.js';
 
 // Example 1: Create an empty array (0x0 matrix)
 assert.deepStrictEqual(falses(0), []);
