@@ -1,14 +1,11 @@
 {
-  "name": "@bemayer/ubique",
+  "name": "@bemayer/rubique",
   "version": "1.0.0",
-  "description": "A mathematical and quantitative library for JavaScript and Deno",
+  "description": "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/maxto/ubique.git"
-  },
-  "bugs": {
-    "url": "https://github.com/maxto/ubique/issues"
+    "url": "https://github.com/bemayer/rubique.git"
   },
   "keywords": [
     "mathematics",
