@@ -11,6 +11,30 @@ const LIB_DIR = "./lib";
 const OUTPUT_FILE = "./index.ts";
 
 /**
+ * Check if a TypeScript file has a default export.
+ *
+ * @param {string} filePath - Path to the TypeScript file
+ * @returns {Promise<boolean>} - Whether the file has a default export
+ */
+async function hasDefaultExport(filePath: string): Promise<boolean> {
+  try {
+    const content = await Deno.readTextFile(filePath);
+
+    // Regular expressions to match different forms of default exports
+    const patterns = [
+      /export\s+default\s+/, // export default ...
+      /export\s*{\s*.*\s+as\s+default\s*}/, // export { something as default }
+      /export\s*=\s*/, // export = ...
+    ];
+
+    return patterns.some((pattern) => pattern.test(content));
+  } catch (error) {
+    console.error(`Error reading file ${filePath}:`, error);
+    return false;
+  }
+}
+
+/**
  * Recursively get all `.ts` files inside `lib/`, excluding `.d.ts` files.
  *
  * @param {string} dir - The directory to scan.
@@ -37,6 +61,12 @@ async function getFiles(dir: string): Promise<string[]> {
   return entries;
 }
 
+interface ModuleInfo {
+  path: string;
+  name: string;
+  hasDefaultExport: boolean;
+}
+
 /**
  * Generate `index.ts` at the root, importing and re-exporting all modules.
  */
@@ -60,29 +90,48 @@ async function generateIndex() {
       return;
     }
 
-    // Generate import statements with default imports
-    const imports = files.map((file) => {
-      // Normalize path to always start with './' and use forward slashes
-      const relativePath = file.replace(/^\.?\//, "./").replace(/\\/g, "/");
-      // Use the file's basename (without .ts) as the module name
-      const moduleName = basename(relativePath, ".ts");
-      return `import ${moduleName} from '${relativePath}';`;
-    });
+    // Analyze each file for default exports
+    const moduleInfos: ModuleInfo[] = await Promise.all(
+      files.map(async (file) => {
+        const hasDefault = await hasDefaultExport(file);
+        return {
+          path: file.replace(/^\.?\//, "./").replace(/\\/g, "/"),
+          name: basename(file, ".ts"),
+          hasDefaultExport: hasDefault,
+        };
+      }),
+    );
 
-    // Generate export statement that re-exports all modules
-    const exportNames = files
-      .map((file) => {
-        const relativePath = file.replace(LIB_DIR + "/", "");
-        return basename(relativePath, ".ts");
-      })
+    // Generate import statements only for modules with default exports
+    const imports = moduleInfos
+      .filter((module) => module.hasDefaultExport)
+      .map((module) => `import ${module.name} from '${module.path}';`);
+
+    // Generate export statement that re-exports only modules with default exports
+    const exportNames = moduleInfos
+      .filter((module) => module.hasDefaultExport)
+      .map((module) => module.name)
       .join(", ");
 
-    const exportStatement = `export { ${exportNames} };`;
+    // Generate warning for modules without default exports
+    const skippedModules = moduleInfos
+      .filter((module) => !module.hasDefaultExport)
+      .map((module) => module.path);
+
+    if (skippedModules.length > 0) {
+      console.warn("⚠️ Skipped modules without default exports:");
+      skippedModules.forEach((path) => console.warn(`  - ${path}`));
+    }
 
     // Final content for index.ts
-    const content = `// Auto-generated index.ts\n${
-      imports.join("\n")
-    }\n\n${exportStatement}\n`;
+    const content = [
+      "// Auto-generated index.ts",
+      imports.length > 0 ? imports.join("\n") : "",
+      exportNames
+        ? `\nexport { ${exportNames} };`
+        : "// No default exports found",
+      "",
+    ].filter(Boolean).join("\n");
 
     // Write to index.ts at the project root
     await Deno.writeTextFile(OUTPUT_FILE, content);
