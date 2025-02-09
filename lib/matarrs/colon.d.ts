@@ -1,4 +1,4 @@
-import { array } from "../types.js";
+import { array } from '../types';
 
 /**
  * @function colon

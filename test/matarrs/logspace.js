@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from 'assert';
 import logspace from '../../lib/matarrs/logspace.js';
 
 // Example 1: Logarithmically spaced points from 10^0 to 10^1 with 5 points

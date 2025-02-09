@@ -26,7 +26,7 @@ assert.strictEqual(ismatrix([1, 2, 3]), false);
 assert.strictEqual(ismatrix([[NaN, 2, 3], [4, 5, NaN]]), true);
 
 // Example 9: Invalid matrix with mixed types (not all numbers)
-assert.strictEqual(ismatrix([[1, "b", true], [4, "e", false]]), true);
+assert.strictEqual(ismatrix([[1, 'b', true], [4, 'e', false]]), true);
 
 // Example 10: Nested arrays but not uniform length
 assert.strictEqual(ismatrix([[1, [2]], [[3]], [4]]), false);

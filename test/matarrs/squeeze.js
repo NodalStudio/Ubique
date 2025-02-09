@@ -17,7 +17,7 @@ assert.deepStrictEqual(squeeze([[[[[['31-12-2014', '31-01-2015'], ['15-02-2015',
 assert.strictEqual(squeeze(42), 42);
 
 // Example 5: Input is a string (no squeezing needed)
-assert.strictEqual(squeeze("hello"), "hello");
+assert.strictEqual(squeeze('hello'), 'hello');
 
 // Example 6: Throw an error for no input arguments
 assert.throws(() => { squeeze(); }, Error, 'Not enough input arguments');

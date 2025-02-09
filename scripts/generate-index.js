@@ -23,7 +23,7 @@ const getFiles = (dir) => {
       const fullPath = path.join(dir, entry.name);
       return entry.isDirectory() ? getFiles(fullPath) : fullPath;
     })
-    .filter(file => file.endsWith('.js'));
+    .filter((file) => file.endsWith('.js'));
 };
 
 /**
@@ -44,14 +44,14 @@ const generateIndex = () => {
   }
 
   // Generate import statements
-  const imports = files.map(file => {
+  const imports = files.map((file) => {
     const relativePath = `./${path.relative('.', file).replace(/\\/g, '/')}`;
     const moduleName = path.basename(file, '.js');
     return `import ${moduleName} from '${relativePath}';`;
   });
 
   // Generate export statement
-  const exportNames = files.map(file => path.basename(file, '.js')).join(', ');
+  const exportNames = files.map((file) => path.basename(file, '.js')).join(', ');
   const exportStatement = `export { ${exportNames} };`;
 
   // Final content
@@ -59,7 +59,7 @@ const generateIndex = () => {
 
   // Write to index.js at the root
   fs.writeFileSync(outputFile, content, 'utf8');
-  console.log(`✅ index.js generated successfully at the root.`);
+  console.log('✅ index.js generated successfully at the root.');
 };
 
 // Run the script
