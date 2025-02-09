@@ -24,7 +24,7 @@ import { array } from "../types.d.ts";
  * // Example 5: A 2D array (array of arrays)
  * assert.strictEqual(isarray([[1], [2], [3]]), false);
  */
-export default function isarray(x: any): x is array<any> {
+export default function isarray(x: unknown): x is array<any> {
   if (arguments.length === 0) {
     throw new Error("not enough input arguments");
   }

@@ -8,15 +8,16 @@ import getcol from "../matarrs/getcol.ts";
 import dot from "./dot.ts";
 import squeeze from "../matarrs/squeeze.ts";
 import times from "./times.ts";
+import { numarraymatrix } from "../types.d.ts";
 
 /**
  * @function mtimes
  * @summary Matrix multiplication X * Y
  * @description Performs matrix multiplication X * Y. If X is MxP and Y is PxN, it returns a matrix MxN.
  *
- * @param {number|array|matrix} x Number, array, or matrix representing the first factor.
- * @param {number|array|matrix} y Number, array, or matrix representing the second factor.
- * @returns {number|array|matrix} The result of the multiplication.
+ * @param x Number, array, or matrix representing the first factor.
+ * @param y Number, array, or matrix representing the second factor.
+ * @returns The result of the multiplication.
  * @throws {Error} If the inner dimensions of the matrices do not match.
  *
  * @example
@@ -35,11 +36,7 @@ import times from "./times.ts";
  * // Example 5: Multiply a 2x3 matrix by a 3x1 matrix
  * assert.deepStrictEqual(mtimes([[5, 6, 5], [7, 8, -1]], [[5], [6], [3]]), [[76], [80]]);
  */
-export default function mtimes(x: any, y: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function mtimes(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
   if (!isnumber(x) && !isnumber(y)) {
     const xsize = size(x);
     const ysize = size(y);
