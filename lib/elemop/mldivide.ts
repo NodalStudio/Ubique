@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import issquare from '../matarrs/issquare.js';
-import inv from '../linalgebra/inv.js';
-import ldivide from './ldivide.js';
-import mtimes from './mtimes.js';
-import ncols from '../matarrs/ncols.js';
-import nrows from '../matarrs/nrows.js';
+import isnumber from "../datatype/isnumber.ts";
+import issquare from "../matarrs/issquare.ts";
+import inv from "../linalgebra/inv.ts";
+import ldivide from "./ldivide.ts";
+import mtimes from "./mtimes.ts";
+import ncols from "../matarrs/ncols.ts";
+import nrows from "../matarrs/nrows.ts";
 
 /**
  * @function mldivide
@@ -31,8 +31,10 @@ import nrows from '../matarrs/nrows.js';
  * // Example 4: Matrix left division with non-square matrix
  * assert.deepStrictEqual(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.428571, 1.619048, -0.47619], [-1.571429, -1.714286, 1.857143]]);
  */
-export default function mldivide(y, x) {
-  if (y === undefined || x === undefined) {throw new Error('Not enough input arguments');}
+export default function mldivide(y: any, x: any) {
+  if (y === undefined || x === undefined) {
+    throw new Error("Not enough input arguments");
+  }
 
   if (isnumber(x) && isnumber(y)) {
     return x / y;
@@ -43,7 +45,7 @@ export default function mldivide(y, x) {
   }
 
   if (issquare(y)) {
-    if (ncols(y) !== nrows(x)) {throw new Error('Matrix dimensions mismatch');}
+    if (ncols(y) !== nrows(x)) throw new Error("Matrix dimensions mismatch");
     return mtimes(inv(y), x);
   }
 }

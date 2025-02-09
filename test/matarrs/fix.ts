@@ -1,5 +1,6 @@
-import assert from 'assert';
-import fix from '../../lib/matarrs/fix.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import fix from "../../lib/matarrs/fix.js";
 
 // Example 1: Round a single number toward zero
 assert.strictEqual(fix(3.78), 3);
@@ -23,4 +24,3 @@ assert.deepStrictEqual(fix(negativeMatrixInput), expectedNegativeMatrixOutput);
 assert.strictEqual(fix(0), 0);
 assert.strictEqual(fix(-0.001), 0);
 assert.deepStrictEqual(fix([0.00001, -0.00001]), [0, 0]);
-

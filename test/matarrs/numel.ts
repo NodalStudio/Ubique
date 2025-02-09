@@ -1,5 +1,6 @@
-import assert from 'assert';
-import numel from '../../lib/matarrs/numel.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import numel from "../../lib/matarrs/numel.js";
 
 // Example 1: Number of elements in a vector
 assert.strictEqual(numel([3, 5, 6]), 3);

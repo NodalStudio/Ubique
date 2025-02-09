@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isscalar from '../../lib/datatype/isscalar.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isscalar from "../../lib/datatype/isscalar.js";
 
 // Example 1: Single number
 assert.strictEqual(isscalar(2), true);

@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import issquare from '../matarrs/issquare.js';
-import isnumber from '../datatype/isnumber.js';
-import nrows from '../matarrs/nrows.js';
-import linsolve from './linsolve.js';
-import eye from '../matarrs/eye.js';
+import issquare from "../matarrs/issquare.ts";
+import isnumber from "../datatype/isnumber.ts";
+import nrows from "../matarrs/nrows.ts";
+import linsolve from "./linsolve.ts";
+import eye from "../matarrs/eye.ts";
 
 /**
  * @function inv
@@ -35,9 +35,9 @@ import eye from '../matarrs/eye.js';
  * // Example 5: Error when no arguments are provided
  * assert.throws(() => inv(), Error, 'not enough input arguments');
  */
-export default function inv(x) {
+export default function inv(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isnumber(x)) {
@@ -45,10 +45,11 @@ export default function inv(x) {
   }
 
   if (!issquare(x)) {
-    throw new Error('matrix must be square');
+    throw new Error("matrix must be square");
   }
 
   const m = nrows(x);
+  // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
   const I = eye(m);
   return linsolve(x, I);
 }

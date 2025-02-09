@@ -1,5 +1,5 @@
-import skewness from '../stats/skewness.js';
-import kurtosis from '../stats/kurtosis.js';
+import skewness from "../stats/skewness.ts";
+import kurtosis from "../stats/kurtosis.ts";
 
 /**
  * @function jbtest
@@ -12,7 +12,7 @@ import kurtosis from '../stats/kurtosis.js';
  * @throws {Error} If the input is not an array or is empty.
  *
  * @example
- * import jbtest from './jbtest.js';
+ * import jbtest from './jbtest.ts';
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
@@ -28,9 +28,9 @@ import kurtosis from '../stats/kurtosis.js';
  * // Example 4: Test with a highly skewed dataset
  * assert.strictEqual(jbtest([1, 1, 1, 1, 100]), 76.923);
  */
-export default function jbtest(x) {
+export default function jbtest(x: any) {
   if (!Array.isArray(x) || x.length === 0) {
-    throw new Error('Input must be a non-empty array');
+    throw new Error("Input must be a non-empty array");
   }
 
   const n = x.length;

@@ -1,4 +1,4 @@
-import linspace from './linspace.js';
+import linspace from "./linspace.ts";
 
 /**
  * @function logspace
@@ -44,9 +44,9 @@ import linspace from './linspace.js';
  *   [1000, 2154.4346900318847, 4641.588833612777, 10000]
  * );
  */
-export default function logspace(a, b, n = 10) {
+export default function logspace(a: any, b: any, n = 10) {
   if (a === undefined || b === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const linearPoints = linspace(a, b, n);

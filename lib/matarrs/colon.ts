@@ -1,4 +1,4 @@
-/** @import { array } from '../types' */
+/** @import { array } from '../types.d.ts' */
 
 /**
  * @function colon
@@ -24,9 +24,9 @@
  * // Example 4: Generate array from -7 to 14 with step 2
  * console.log(colon(-7, 14, 2)); // [-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13]
  */
-export default function colon(start, end, step = 1) {
+export default function colon(start: any, end: any, step = 1) {
   if (arguments.length < 2) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (step === 0 || (step > 0 && start > end) || (step < 0 && start < end)) {

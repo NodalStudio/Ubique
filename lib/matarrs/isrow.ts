@@ -1,4 +1,4 @@
-import ismatrix from '../datatype/ismatrix.js';
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function isrow
@@ -31,13 +31,13 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 7: Empty matrix (should throw an error)
  * assert.throws(() => isrow([]), /Input must be a non-empty matrix/);
  */
-export default function isrow(x) {
+export default function isrow(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!ismatrix(x)) {
-    throw new Error('Input must be a non-empty matrix (array of arrays)');
+    throw new Error("Input must be a non-empty matrix (array of arrays)");
   }
 
   const nrows = x.length;

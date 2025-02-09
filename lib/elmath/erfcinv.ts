@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import erfc from './erfc.js';
+import erfc from "./erfc.ts";
 
 /**
  * @function erfcinv
@@ -29,18 +29,19 @@ import erfc from './erfc.js';
  * // Example 5: Compute the inverse complementary error function for 0 (should return positive infinity)
  * assert.strictEqual(erfcinv(0), Infinity);
  */
-export default function erfcinv(y) {
+export default function erfcinv(y: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
-  if (y >= 2) {return -Infinity;}
-  if (y === 1) {return 0;}
-  if (y <= 0) {return Infinity;}
+  if (y >= 2) return -Infinity;
+  if (y === 1) return 0;
+  if (y <= 0) return Infinity;
 
   let z = 0;
   const _y = (y < 1) ? y : 2 - y;
   const t = Math.sqrt(-2 * Math.log(_y / 2));
-  let x = -0.70711 * ((2.30753 + t * 0.27061) / (1 + t * (0.99229 + t * 0.04481)) - t);
+  let x = -0.70711 *
+    ((2.30753 + t * 0.27061) / (1 + t * (0.99229 + t * 0.04481)) - t);
 
   for (let i = 0; i < 2; i++) {
     z = erfc(x) - _y;

@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import minus from './minus.js';
-import arrayfun from '../datatype/arrayfun.js';
+import minus from "./minus.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function ne
@@ -35,11 +35,11 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 7: Compare two matrices
  * assert.deepStrictEqual(ne([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[false, false], [true, true]]);
  */
-export default function ne(x, y) {
+export default function ne(x: any, y: any) {
   if (arguments.length < 2) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const difference = minus(x, y);
-  return arrayfun(difference, (el) => el !== 0);
+  return arrayfun(difference, (el: any) => el !== 0);
 }

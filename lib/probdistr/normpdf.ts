@@ -11,7 +11,7 @@
  * @throws {Error} If `sigma` is not a positive number.
  *
  * @example
- * import normpdf from './normpdf.js';
+ * import normpdf from './normpdf.ts';
  *
  * // Example 1: Compute the standard normal PDF at x = 1
  * assert.strictEqual(normpdf(1), 0.241971);
@@ -28,9 +28,9 @@
  * // Example 5: Compute normal PDF for a negative value
  * assert.strictEqual(normpdf(-1, 0, 1), 0.241971);
  */
-export default function normpdf(x, mu = 0, sigma = 1) {
+export default function normpdf(x: any, mu = 0, sigma = 1) {
   if (sigma <= 0) {
-    throw new Error('Standard deviation must be a positive number');
+    throw new Error("Standard deviation must be a positive number");
   }
 
   const coefficient = 1 / (Math.sqrt(2 * Math.PI) * sigma);

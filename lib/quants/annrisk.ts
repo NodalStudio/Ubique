@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isarray from '../datatype/isarray.js';
-import std from '../stats/std.js';
-import vectorfun from '../datatype/vectorfun.js';
+import isarray from "../datatype/isarray.ts";
+import std from "../stats/std.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function annrisk
@@ -32,14 +32,14 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 2: Throws an error for invalid input
  * assert.throws(() => annrisk(123), /Input must be an array or matrix/);
  */
-export default function annrisk(x, t = 252, dim = 0) {
+export default function annrisk(x: any, t = 252, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr) => computeAnnRisk(arr, t));
+  return vectorfun(dim, x, (arr: any) => computeAnnRisk(arr, t));
 }
 
-function computeAnnRisk(arr, t) {
-  return Math.sqrt(t) * std(arr);
+function computeAnnRisk(arr: any, t: any) {
+  return Math.sqrt(t) * (std(arr) as number);
 }

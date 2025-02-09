@@ -1,13 +1,12 @@
-import flatten from './flatten.js';
-
-/** @import { array, matrix } from '../types' */
+import { array, matrix } from "../types.d.ts";
+import { flatten } from "../../index.ts";
 
 /**
  * @function reshape
  * @summary Reshape an array or matrix into a new matrix of given dimensions.
  * @description Rearranges elements of an array or matrix into a new shape while preserving order.
  *
- * @param {array|matrix} x The array or matrix to reshape.
+ * @param {} x The array or matrix to reshape.
  * @param {number} m Number of rows for the new matrix.
  * @param {number} n Number of columns for the new matrix.
  * @param {number} [flag=0] Flag (0: row-wise, 1: column-wise).
@@ -33,12 +32,17 @@ import flatten from './flatten.js';
  * // Example 6: Reshape into a single-column matrix (column-wise)
  * assert.deepStrictEqual(reshape([[-1, 3, -1], [4, 5, 9]], 6, 1, 1), [[-1], [3], [-1], [4], [5], [9]]);
  */
-export default function reshape(x, m, n, flag = 0) {
+export default function reshape(
+  x: array | matrix,
+  m: number,
+  n: number,
+  flag: number = 0,
+): matrix {
   if (m === undefined || n === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
   if (!Number.isInteger(m) || !Number.isInteger(n)) {
-    throw new Error('Dimensions must be integer numbers');
+    throw new Error("Dimensions must be integer numbers");
   }
 
   const matrix = toMatrix(x);
@@ -46,17 +50,18 @@ export default function reshape(x, m, n, flag = 0) {
   const newSize = m * n;
 
   if (originalSize !== newSize) {
-    throw new Error('Total number of elements must be the same');
+    throw new Error("Total number of elements must be the same");
   }
 
-  const flattened = flatten(matrix, flag);
+  const flattened = flatten(matrix, flag) as number[];
 
-  return Array.from({ length: m }, (_, i) =>
-    flattened.slice(i * n, (i + 1) * n)
+  return Array.from(
+    { length: m },
+    (_, i) => flattened.slice(i * n, (i + 1) * n),
   );
 }
 
-function toMatrix(x) {
+function toMatrix(x: any) {
   if (!Array.isArray(x)) {
     return [[x]];
   }

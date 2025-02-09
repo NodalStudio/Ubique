@@ -34,9 +34,9 @@
  *   message: 'Not enough input arguments',
  * });
  */
-export default function linspace(a, b, n = 10) {
+export default function linspace(a: any, b: any, n = 10) {
   if (arguments.length < 2) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (n <= 1) {

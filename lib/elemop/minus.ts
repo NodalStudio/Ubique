@@ -1,21 +1,21 @@
-/** @import { array, matrix } from '../types' */
+import type { array, numarraymatrix } from "../types.d.ts";
 
-import arrayfun from '../datatype/arrayfun.js';
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import nrows from '../matarrs/nrows.js';
-import ncols from '../matarrs/ncols.js';
-import getrow from '../matarrs/getrow.js';
-import isarray from '../datatype/isarray.js';
+import arrayfun from "../datatype/arrayfun.ts";
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import nrows from "../matarrs/nrows.ts";
+import ncols from "../matarrs/ncols.ts";
+import getrow from "../matarrs/getrow.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function minus
  * @summary Subtracts one number, array, or matrix from another.
  * @description Subtracts Y from X. X and Y must have the same dimensions unless one is a number.
  *
- * @param {number|array|matrix} x The left-hand operand.
- * @param {number|array|matrix} y The right-hand operand.
- * @returns {number|array|matrix} The result of the subtraction.
+ * @param x The left-hand operand.
+ * @param y The right-hand operand.
+ * @returns The result of the subtraction.
  * @throws {Error} If input dimensions do not agree.
  *
  * @example
@@ -30,33 +30,35 @@ import isarray from '../datatype/isarray.js';
  *
  * // Example 4: Subtract two matrices
  * assert.deepStrictEqual(minus([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]),
- *   [[6, 3, 6], [3, 3, -10]]);
  */
-export default function minus(x, y) {
+export default function minus(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isnumber(x)) {
-    return isnumber(y)
-      ? x - y
-      : arrayfun(y, (val) => x - val);
+    return isnumber(y) ? x - y : arrayfun(y, (val: any) => x - val) as array;
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val) => val - y);
+    return arrayfun(x, (val: any) => val - y) as numarraymatrix;
   }
 
   if (isarray(x) && isarray(y)) {
-    return x.map((xi, i) => xi - y[i]);
+    return x.map((xi: any, i: number) => xi - (y[i] as number));
   }
 
   if (ismatrix(x) && ismatrix(y)) {
     if (nrows(x) !== nrows(y) || ncols(x) !== ncols(y)) {
-      throw new Error('input dimensions must agree');
+      throw new Error("input dimensions must agree");
     }
-    return x.map((row, i) => minus(row, getrow(y, i)));
+    return x.map((row: any, i: any) =>
+      minus(row, getrow(y, i))
+    ) as numarraymatrix;
   }
 
-  throw new Error('Invalid input types');
+  throw new Error("Invalid input types");
 }

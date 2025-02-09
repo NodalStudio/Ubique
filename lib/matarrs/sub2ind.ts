@@ -1,7 +1,7 @@
-import getcol from './getcol.js';
-import squeeze from './squeeze.js';
-import numel from './numel.js';
-import isarray from '../datatype/isarray.js';
+import getcol from "./getcol.ts";
+import squeeze from "./squeeze.ts";
+import numel from "./numel.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function sub2ind
@@ -25,9 +25,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 3: Convert index for a row vector
  * assert.strictEqual(sub2ind([1, 3], [2, 0]), 2);
  */
-export default function sub2ind(size, index) {
+export default function sub2ind(size: any, index: any) {
   if (!size || !index) {
-    throw new Error('Not enough input arguments.');
+    throw new Error("Not enough input arguments.");
   }
 
   const indexArray = isarray(index) ? [index] : index;

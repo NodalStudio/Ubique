@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function prod
@@ -23,10 +23,11 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 3: Product of matrix elements along columns
  * assert.deepStrictEqual(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
  */
-export default function prod(x, dim = 1) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function prod(x: any, dim = 1) {
+  if (!x) throw new Error("Not enough input arguments");
 
-  const multiply = (arr) => arr.reduce((acc, val) => acc * val, 1);
+  const multiply = (arr: any) =>
+    arr.reduce((acc: any, val: any) => acc * val, 1);
 
   if (isarray(x)) {
     return multiply(x);
@@ -34,9 +35,11 @@ export default function prod(x, dim = 1) {
 
   if (ismatrix(x)) {
     return dim === 0
-      ? x.map((row) => multiply(row))
-      : x[0].map((_, colIndex) => multiply(x.map((row) => row[colIndex])));
+      ? x.map((row: any) => multiply(row))
+      : x[0].map((_: any, colIndex: any) =>
+        multiply(x.map((row: any) => row[colIndex]))
+      );
   }
 
-  throw new Error('Invalid input type');
+  throw new Error("Invalid input type");
 }

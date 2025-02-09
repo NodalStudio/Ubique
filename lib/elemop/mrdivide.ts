@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import issquare from '../matarrs/issquare.js';
-import ncols from '../matarrs/ncols.js';
-import nrows from '../matarrs/nrows.js';
-import inv from '../linalgebra/inv.js';
-import mtimes from './mtimes.js';
-import rdivide from './rdivide.js';
+import isnumber from "../datatype/isnumber.ts";
+import issquare from "../matarrs/issquare.ts";
+import ncols from "../matarrs/ncols.ts";
+import nrows from "../matarrs/nrows.ts";
+import inv from "../linalgebra/inv.ts";
+import mtimes from "./mtimes.ts";
+import rdivide from "./rdivide.ts";
 
 /**
  * @function mrdivide
@@ -35,9 +35,9 @@ import rdivide from './rdivide.js';
  * assert.deepStrictEqual(mrdivide([[5, 6, 5], [7, 8, -1]], [[1, 1, -1], [1, -2, 3], [2, 3, 1]]),
  *   [[-0.769231, 0.538462, 2.615385], [3.384615, 0.230769, 1.692308]]);
  */
-export default function mrdivide(x, y) {
+export default function mrdivide(x: any, y: any) {
   if (arguments.length < 2) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isnumber(x) && isnumber(y)) {
@@ -50,10 +50,10 @@ export default function mrdivide(x, y) {
 
   if (issquare(y)) {
     if (ncols(x) !== nrows(y)) {
-      throw new Error('matrix dimensions mismatch');
+      throw new Error("matrix dimensions mismatch");
     }
     return mtimes(x, inv(y));
   }
 
-  throw new Error('second argument must be square');
+  throw new Error("second argument must be square");
 }

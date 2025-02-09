@@ -1,11 +1,11 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import nrows from '../matarrs/nrows.js';
-import getrow from '../matarrs/getrow.js';
-import arrayfun from '../datatype/arrayfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import nrows from "../matarrs/nrows.ts";
+import getrow from "../matarrs/getrow.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function times
@@ -30,9 +30,9 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 4: Element-wise multiplication of two matrices
  * assert.deepStrictEqual(times([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[-5, 18, -5], [28, 40, -9]]);
  */
-export default function times(x, y) {
+export default function times(x: any, y: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isnumber(x) || isnumber(y)) {
@@ -47,7 +47,7 @@ export default function times(x, y) {
     return elementwiseMatrixMultiplication(x, y);
   }
 
-  throw new Error('unknown input arguments');
+  throw new Error("unknown input arguments");
 }
 
 /**
@@ -57,17 +57,17 @@ export default function times(x, y) {
  * @param {number|array|matrix} y The second operand.
  * @returns {number|array|matrix} The result of the multiplication.
  */
-function handleNumberMultiplication(x, y) {
+function handleNumberMultiplication(x: any, y: any) {
   if (isnumber(x) && isnumber(y)) {
     return x * y;
   }
 
   if (isnumber(x)) {
-    return arrayfun(y, (val) => x * val);
+    return arrayfun(y, (val: any) => x * val);
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val) => val * y);
+    return arrayfun(x, (val: any) => val * y);
   }
 }
 
@@ -78,8 +78,8 @@ function handleNumberMultiplication(x, y) {
  * @param {array} y The second array.
  * @returns {array} The result of the element-wise multiplication.
  */
-function elementwiseArrayMultiplication(x, y) {
-  return x.map((val, i) => val * y[i]);
+function elementwiseArrayMultiplication(x: any, y: any) {
+  return x.map((val: any, i: any) => val * y[i]);
 }
 
 /**
@@ -89,7 +89,7 @@ function elementwiseArrayMultiplication(x, y) {
  * @param {matrix} y The second matrix.
  * @returns {matrix} The result of the element-wise multiplication.
  */
-function elementwiseMatrixMultiplication(x, y) {
+function elementwiseMatrixMultiplication(x: any, y: any) {
   const v = [];
   for (let i = 0; i < nrows(x); i++) {
     const vx = getrow(x, i);

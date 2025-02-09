@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import mean from '../stats/mean.js';
-import prod from '../elemop/prod.js';
-import vectorfun from '../datatype/vectorfun.js';
+import mean from "../stats/mean.ts";
+import prod from "../elemop/prod.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function annreturn
@@ -19,7 +19,7 @@ import vectorfun from '../datatype/vectorfun.js';
  * @throws {Error} If the input is invalid or an unknown mode is specified.
  *
  * @example
- * import annreturn from './annreturn.js';
+ * import annreturn from './annreturn.ts';
  *
  * // Example 1: Annualized return for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
@@ -28,21 +28,26 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 2: Throws an error for unknown mode
  * assert.throws(() => annreturn(x, 12, 'invalid'), /Unknown mode/);
  */
-export default function annreturn(x, t = 252, mode = 'geometric', dim = 0) {
+export default function annreturn(
+  x: any,
+  t = 252,
+  mode = "geometric",
+  dim = 0,
+) {
   if (!Array.isArray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr) => computeAnnReturn(arr, t, mode));
+  return vectorfun(dim, x, (arr: any) => computeAnnReturn(arr, t, mode));
 }
 
-function computeAnnReturn(arr, t, mode) {
+function computeAnnReturn(arr: any, t: any, mode: any) {
   const n = arr.length;
-  if (mode === 'geometric') {
-    return Math.pow(prod(arr.map((val) => val + 1)), t / n) - 1;
+  if (mode === "geometric") {
+    return Math.pow(prod(arr.map((val: any) => val + 1)), t / n) - 1;
   }
-  if (mode === 'simple') {
+  if (mode === "simple") {
     return mean(arr) * t;
   }
-  throw new Error('Unknown mode');
+  throw new Error("Unknown mode");
 }

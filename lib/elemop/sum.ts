@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import vectorfun from '../datatype/vectorfun.js';
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function sum
@@ -22,12 +22,12 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 3: Sum of elements across columns in a 2D array
  * assert.deepStrictEqual(sum([[5, 6, 5], [7, 8, -1]], 1), [[12, 14, 4]]);
  */
-export default function sum(x, dim = 0) {
+export default function sum(x: any, dim = 0) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  const _sum = (a) => a.reduce((acc, val) => acc + val, 0);
+  const _sum = (a: any) => a.reduce((acc: any, val: any) => acc + val, 0);
 
   return vectorfun(dim, x, _sum);
 }

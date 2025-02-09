@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import vectorfun from '../datatype/vectorfun.js';
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function diff
@@ -22,8 +22,12 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 3: Differences in a matrix along rows (dim=0)
  * assert.deepStrictEqual(diff([[5, 6, 5], [7, 8, -1]], 0), [[1, -1], [1, -9]]);
  */
-export default function diff(x, dim = 1) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function diff(x: any, dim = 1) {
+  if (!x) throw new Error("Not enough input arguments");
 
-  return vectorfun(dim, x, (a) => a.slice(1).map((val, i) => val - a[i]));
+  return vectorfun(
+    dim,
+    x,
+    (a: any) => a.slice(1).map((val: any, i: any) => val - a[i]),
+  );
 }

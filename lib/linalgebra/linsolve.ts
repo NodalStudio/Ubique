@@ -1,16 +1,17 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import nrows from '../matarrs/nrows.js';
-import ncols from '../matarrs/ncols.js';
-import issquare from '../matarrs/issquare.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import lu from './lu.js';
-import issingular from '../datatype/issingular.js';
-import subset from '../matarrs/subset.js';
-import colon from '../matarrs/colon.js';
-import transpose from '../matarrs/transpose.js';
-import getcol from '../matarrs/getcol.js';
+import nrows from "../matarrs/nrows.ts";
+import ncols from "../matarrs/ncols.ts";
+import issquare from "../matarrs/issquare.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import lu from "./lu.ts";
+import issingular from "../datatype/issingular.ts";
+import subset from "../matarrs/subset.ts";
+import colon from "../matarrs/colon.ts";
+import transpose from "../matarrs/transpose.ts";
+import getcol from "../matarrs/getcol.ts";
+import { matrix } from "../types.d.ts";
 
 /**
  * @function linsolve
@@ -38,13 +39,13 @@ import getcol from '../matarrs/getcol.js';
  * linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], eye(3));
  * // [[0.846154, 0.307692, -0.0769231], [-0.384615, -0.230769, 0.307692], [-0.538462, 0.0769231, 0.230769]]
  */
-export default function linsolve(A, b) {
+export default function linsolve(A: any, b: any) {
   if (arguments.length < 2) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!issquare(A)) {
-    throw new Error('Matrix must be square');
+    throw new Error("Matrix must be square");
   }
 
   if (isarray(b)) {
@@ -53,23 +54,26 @@ export default function linsolve(A, b) {
   }
 
   if (nrows(A) !== nrows(b)) {
-    throw new Error('Matrix dimensions must agree');
+    throw new Error("Matrix dimensions must agree");
   }
 
   const lud = lu(A);
 
   if (issingular(lud.LU)) {
-    throw new Error('Matrix is singular');
+    throw new Error("Matrix is singular");
   }
 
   const LU = lud.LU;
   const P = lud.P;
 
   // Handle `b` permutation
-  const permutedB = ismatrix(b) ? subset(b, P, colon(0, ncols(b) - 1)) : subset(b, P);
+  // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
+  const permutedB = ismatrix(b)
+    ? subset(b, P, colon(0, ncols(b) - 1))
+    : subset(b, P);
 
   // Solve for each column of `b`
-  const result = [];
+  const result: matrix = [];
   for (let i = 0; i < ncols(permutedB); i++) {
     const col = getcol(permutedB, i);
     const solvedCol = solve(LU, col);
@@ -86,7 +90,7 @@ export default function linsolve(A, b) {
  * @param {array} b The vector to solve for.
  * @returns {array} The solution vector.
  */
-function solve(LU, b) {
+function solve(LU: any, b: any) {
   const n = nrows(LU);
   const x = [...b];
 
@@ -111,4 +115,3 @@ function solve(LU, b) {
 
   return x;
 }
-

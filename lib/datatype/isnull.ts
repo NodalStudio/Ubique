@@ -19,9 +19,9 @@
  * // Example 4: Input is an empty string (not `null`)
  * assert.strictEqual(isnull(''), false);
  */
-export default function isnull(x) {
+export default function isnull(x: any) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
   return x === null;
 }

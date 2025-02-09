@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function erfc
@@ -33,12 +33,12 @@
  * // Example 5: Compute the complementary error function for a large negative value
  * assert.strictEqual(erfc(-2), 1.9953222650189527);
  */
-export default function erfc(x) {
+export default function erfc(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  if (x === 0) {return 1;}
+  if (x === 0) return 1;
 
   const z = Math.abs(x);
   const t = 1 / (0.5 * z + 1);

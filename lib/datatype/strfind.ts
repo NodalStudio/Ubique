@@ -1,4 +1,4 @@
-/** @import { array } from '../types' */
+/** @import { array } from '../types.d.ts' */
 
 /**
  * @function strfind
@@ -31,14 +31,17 @@
  *   assert.strictEqual(e.message, 'Both arguments must be strings');
  * }
  */
-export default function strfind(str, pattern) {
-  if (typeof str !== 'string' || typeof pattern !== 'string') {
-    throw new Error('Both arguments must be strings');
+export default function strfind(str: any, pattern: any) {
+  if (typeof str !== "string" || typeof pattern !== "string") {
+    throw new Error("Both arguments must be strings");
   }
 
   if (pattern.length > str.length) {
     return null;
   }
 
-  return Array.from(str.matchAll(new RegExp(pattern, 'g')), (match) => match.index);
+  return Array.from(
+    str.matchAll(new RegExp(pattern, "g")),
+    (match) => match.index,
+  );
 }

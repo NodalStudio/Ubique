@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function unique
@@ -23,18 +23,20 @@
  * // Example 4: Unique values and indices from a matrix
  * assert.deepStrictEqual(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
  */
-export default function unique(x, flag = 0) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function unique(x: any, flag = 0) {
+  if (!x) throw new Error("Not enough input arguments");
 
   const flatX = Array.isArray(x[0]) ? x.flat() : x;
   const sorted = flatX
-    .map((value, index) => [value, index])
+    .map((value: any, index: any) => [value, index])
+    // @ts-expect-error TS(7031): Binding element 'a' implicitly has an 'any' type.
     .sort(([a], [b]) => a - b);
 
-  const uvalue = [];
-  const uindex = [];
+  const uvalue: any = [];
+  const uindex: any = [];
 
-  sorted.forEach(([value, index], i) => {
+  // @ts-expect-error TS(7031): Binding element 'value' implicitly has an 'any' ty... Remove this comment to see the full error message
+  sorted.forEach(([value, index], i: any) => {
     if (i === 0 || value !== sorted[i - 1][0]) {
       uvalue.push(value);
       uindex.push(index);
@@ -46,6 +48,6 @@ export default function unique(x, flag = 0) {
   } else if (flag === 0) {
     return uvalue;
   } else {
-    throw new Error('Flag can be only 0 (default) or 1');
+    throw new Error("Flag can be only 0 (default) or 1");
   }
 }

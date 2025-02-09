@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isvector from '../../lib/datatype/isvector.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isvector from "../../lib/datatype/isvector.js";
 
 // Example 1: A row vector
 assert.strictEqual(isvector([[5, 6, 7]]), true);

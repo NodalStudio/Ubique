@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import annreturn from './annreturn.js';
-import vectorfun from '../datatype/vectorfun.js';
+import annreturn from "./annreturn.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function activereturn
@@ -17,7 +17,7 @@ import vectorfun from '../datatype/vectorfun.js';
  * @throws {Error} If inputs are not valid arrays or matrices.
  *
  * @example
- * import activereturn from './activereturn.js';
+ * import activereturn from './activereturn.ts';
  *
  * // Example 1: Compute active return for a single portfolio and benchmark
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
@@ -28,12 +28,19 @@ import vectorfun from '../datatype/vectorfun.js';
  * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
  * assert.deepStrictEqual(activereturn([x, y], z, 12), [[0.041979], [-0.046746]]);
  */
-export default function activereturn(x, y, t = 252, mode = 'geometric', dim = 0) {
+export default function activereturn(
+  x: any,
+  y: any,
+  t = 252,
+  mode = "geometric",
+  dim = 0,
+) {
   if (!Array.isArray(x) || !Array.isArray(y)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  const computeActiveReturn = (a, benchmark) => annreturn(a, t, mode) - annreturn(benchmark, t, mode);
+  const computeActiveReturn = (a: any, benchmark: any) =>
+    annreturn(a, t, mode) - annreturn(benchmark, t, mode);
 
   return vectorfun(dim, x, computeActiveReturn, y);
 }

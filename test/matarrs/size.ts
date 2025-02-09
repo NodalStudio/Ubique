@@ -1,5 +1,6 @@
-import assert from 'assert';
-import size from '../../lib/matarrs/size.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import size from "../../lib/matarrs/size.js";
 
 // Example 1: Size of a 4D array
 assert.deepStrictEqual(size([[[[5, 6, 5], [7, 8, -1]]]]), [1, 1, 2, 3]);
@@ -14,10 +15,10 @@ assert.deepStrictEqual(size([5, 4, 4]), [1, 3]);
 assert.deepStrictEqual(size(5), [1, 1]);
 
 // Example 5: Size of a string
-assert.deepStrictEqual(size('ubique'), [1, 6]);
+assert.deepStrictEqual(size("ubique"), [1, 6]);
 
 // Example 6: Size of a 1x2 array of strings
-assert.deepStrictEqual(size([['first', 'second']]), [1, 2]);
+assert.deepStrictEqual(size([["first", "second"]]), [1, 2]);
 
 // Example 7: Size of an empty array
 assert.deepStrictEqual(size([]), [0, 0]);

@@ -1,11 +1,11 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import cdrawdown from './cdrawdown.js';
-import mean from '../stats/mean.js';
-import sort from '../matarrs/sort.js';
-import subsetlin from '../matarrs/subsetlin.js';
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import cdrawdown from "./cdrawdown.ts";
+import mean from "../stats/mean.ts";
+import sort from "../matarrs/sort.ts";
+import subsetlin from "../matarrs/subsetlin.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function avgdrawdown
@@ -24,7 +24,7 @@ import isarray from '../datatype/isarray.js';
  * @throws {Error} If the input is invalid.
  *
  * @example
- * import avgdrawdown from './avgdrawdown.js';
+ * import avgdrawdown from './avgdrawdown.ts';
  *
  * // Example 1: Average drawdown for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
@@ -36,21 +36,21 @@ import isarray from '../datatype/isarray.js';
  * // Example 3: Throws an error for invalid input
  * assert.throws(() => avgdrawdown(123), /Input must be an array or matrix/);
  */
-export default function avgdrawdown(x, k = 0, dim = 0) {
+export default function avgdrawdown(x: any, k = 0, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (x) => computeAvgDrawdown(x, k));
+  return vectorfun(dim, x, (x: any) => computeAvgDrawdown(x, k));
 }
 
-function computeAvgDrawdown(arr, k) {
+function computeAvgDrawdown(arr: any, k: any) {
   const cdd = cdrawdown(arr);
   if (k === 0) {
     return mean(cdd);
   }
   if (k > 0 && k <= cdd.length) {
-    const sortedCdd = sort(cdd, 'descend');
+    const sortedCdd = sort(cdd, "descend");
     return mean(subsetlin(sortedCdd, Array.from({ length: k }, (_, i) => i)));
   }
   return NaN;

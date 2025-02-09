@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
-import flipdim from './flipdim.js';
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import flipdim from "./flipdim.ts";
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function flipud
@@ -25,9 +25,9 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 4: No input provided (should throw an error)
  * assert.throws(() => { flipud(); }, Error, 'Not enough input arguments');
  */
-export default function flipud(x) {
+export default function flipud(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x)) {
@@ -38,5 +38,5 @@ export default function flipud(x) {
     return flipdim(x, 0); // Flip rows (upside down)
   }
 
-  throw new Error('Unknown input arguments');
+  throw new Error("Unknown input arguments");
 }

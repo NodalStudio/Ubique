@@ -1,4 +1,4 @@
-import size from './size.js';
+import size from "./size.ts";
 
 /**
  * @function length
@@ -22,9 +22,9 @@ import size from './size.js';
  * // Example 4: Empty array (should be 0)
  * assert.strictEqual(length([]), 0);
  */
-export default function length(x) {
+export default function length(x: any) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const dims = size(x);

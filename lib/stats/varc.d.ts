@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function varc
@@ -40,5 +40,5 @@ import { array, matrix } from '../types';
 export function varc(
   x: array | matrix,
   flag?: number,
-  dim?: number
+  dim?: number,
 ): number | array | matrix;

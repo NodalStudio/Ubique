@@ -1,5 +1,6 @@
-import assert from 'assert';
-import clock from '../../lib/datatype/clock.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import clock from "../../lib/datatype/clock";
 
 // Example: Get the current date and time as a array
 const currentTime = clock();

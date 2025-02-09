@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import islogical from '../datatype/islogical.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
+import isnumber from "../datatype/isnumber.ts";
+import islogical from "../datatype/islogical.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function tomat
@@ -32,9 +32,9 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 5: Invalid input (null)
  * assert.throws(() => tomat(null), /Invalid input argument./);
  */
-export default function tomat(x) {
+export default function tomat(x: any) {
   if (x === undefined) {
-    throw new Error('Not enough input arguments.');
+    throw new Error("Not enough input arguments.");
   }
 
   if (isnumber(x) || islogical(x)) {
@@ -49,5 +49,5 @@ export default function tomat(x) {
     return x;
   }
 
-  throw new Error('Invalid input argument.');
+  throw new Error("Invalid input argument.");
 }

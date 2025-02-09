@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function getrow
@@ -21,19 +21,19 @@
  * // Example 3: Invalid row index (out of bounds)
  * assert.throws(() => { getrow([[5, 6, 5], [7, 8, -1]], 2); }, Error, 'Row index must be an integer between 0 and N - 1 rows');
  */
-export default function getrow(x, n) {
+export default function getrow(x: any, n: any) {
   if (!x || n === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!Array.isArray(x) || !Array.isArray(x[0])) {
-    throw new Error('Input must be a matrix (2D array)');
+    throw new Error("Input must be a matrix (2D array)");
   }
 
   const numRows = x.length;
 
   if (!Number.isInteger(n) || n < 0 || n >= numRows) {
-    throw new Error('Row index must be an integer between 0 and N - 1 rows');
+    throw new Error("Row index must be an integer between 0 and N - 1 rows");
   }
 
   return x[n];

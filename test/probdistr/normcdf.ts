@@ -1,5 +1,6 @@
-import assert from 'assert';
-import normcdf from '../../lib/probdistr/normcdf.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import normcdf from "../../lib/probdistr/normcdf.js";
 
 // Example 1: Compute standard normal CDF at x = 2
 assert.strictEqual(normcdf(2), 0.9772498701098755);
@@ -23,4 +24,7 @@ assert.strictEqual(normcdf(-100, 50, 10), 0);
 assert.strictEqual(normcdf(0, 0, 1), 0.5);
 
 // Example 8: Edge case: sigma is negative (should throw an error)
-assert.throws(() => normcdf(2, 0, -1), /Standard deviation must be a positive number/);
+assert.throws(
+  () => normcdf(2, 0, -1),
+  /Standard deviation must be a positive number/,
+);

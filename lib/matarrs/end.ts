@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import nrows from '../matarrs/nrows.js';
-import ncols from '../matarrs/ncols.js';
-import isarray from '../datatype/isarray.js';
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import nrows from "../matarrs/nrows.ts";
+import ncols from "../matarrs/ncols.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function end
@@ -32,9 +32,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 5: Last index of a number (returns the number itself)
  * console.log(end(5)); // 5
  */
-export default function end(x, dim = -1) {
+export default function end(x: any, dim = -1) {
   if (x === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x)) {
@@ -47,7 +47,7 @@ export default function end(x, dim = -1) {
 
   if (ismatrix(x)) {
     if (!Number.isInteger(dim) || dim < -1 || dim > 1) {
-      throw new Error('Dimension must be -1, 0, or 1');
+      throw new Error("Dimension must be -1, 0, or 1");
     }
 
     const idx = [nrows(x) - 1, ncols(x) - 1];
@@ -59,5 +59,5 @@ export default function end(x, dim = -1) {
     return idx[dim];
   }
 
-  throw new Error('Unknown input arguments');
+  throw new Error("Unknown input arguments");
 }

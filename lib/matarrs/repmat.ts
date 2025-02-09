@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function repmat
@@ -67,21 +67,23 @@
  *   [4, 4]
  * ]);
  */
-export default function repmat(x, m, n = m) {
+export default function repmat(x: any, m: any, n = m) {
   if (m === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const matrix = toMatrix(x);
   const rows = matrix.length;
   const cols = matrix[0].length;
 
-  return Array.from({ length: rows * m }, (_, i) =>
-    Array.from({ length: cols * n }, (_, j) => matrix[i % rows][j % cols])
+  return Array.from(
+    { length: rows * m },
+    (_, i) =>
+      Array.from({ length: cols * n }, (_, j) => matrix[i % rows][j % cols]),
   );
 }
 
-function toMatrix(x) {
+function toMatrix(x: any) {
   if (!Array.isArray(x)) {
     return [[x]];
   }

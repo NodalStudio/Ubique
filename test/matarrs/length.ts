@@ -1,5 +1,6 @@
-import assert from 'assert';
-import length from '../../lib/matarrs/length.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import length from "../../lib/matarrs/length.js";
 
 /**
  * Tests for length function
@@ -18,4 +19,5 @@ assert.strictEqual(length([[5, 4], [-1, 2]]), 2);
 assert.strictEqual(length([]), 0);
 
 // Example 5: Invalid input (should throw an error)
+// @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 assert.throws(() => length(), /Not enough input arguments/);

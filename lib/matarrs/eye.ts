@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import zeros from './zeros.js';
-import isarray from '../datatype/isarray.js';
+import zeros from "./zeros.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function eye
@@ -29,9 +29,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 5: Create a 2x3 identity matrix
  * assert.deepStrictEqual(eye(2, 3), [[1, 0, 0], [0, 1, 0]]);
  */
-export default function eye(dimOrRows, cols) {
+export default function eye(dimOrRows: any, cols: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   let nrows, ncols;
@@ -43,6 +43,7 @@ export default function eye(dimOrRows, cols) {
     ncols = cols !== undefined ? cols : nrows;
   }
 
+  // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
   const matrix = zeros([nrows, ncols]);
 
   for (let i = 0; i < Math.min(nrows, ncols); i++) {

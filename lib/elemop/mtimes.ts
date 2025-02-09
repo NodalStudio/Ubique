@@ -1,13 +1,13 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import size from '../matarrs/size.js';
-import zeros from '../matarrs/zeros.js';
-import getrow from '../matarrs/getrow.js';
-import getcol from '../matarrs/getcol.js';
-import dot from './dot.js';
-import squeeze from '../matarrs/squeeze.js';
-import times from './times.js';
+import isnumber from "../datatype/isnumber.ts";
+import size from "../matarrs/size.ts";
+import zeros from "../matarrs/zeros.ts";
+import getrow from "../matarrs/getrow.ts";
+import getcol from "../matarrs/getcol.ts";
+import dot from "./dot.ts";
+import squeeze from "../matarrs/squeeze.ts";
+import times from "./times.ts";
 
 /**
  * @function mtimes
@@ -35,9 +35,9 @@ import times from './times.js';
  * // Example 5: Multiply a 2x3 matrix by a 3x1 matrix
  * assert.deepStrictEqual(mtimes([[5, 6, 5], [7, 8, -1]], [[5], [6], [3]]), [[76], [80]]);
  */
-export default function mtimes(x, y) {
+export default function mtimes(x: any, y: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (!isnumber(x) && !isnumber(y)) {
@@ -45,7 +45,7 @@ export default function mtimes(x, y) {
     const ysize = size(y);
 
     if (xsize[1] !== ysize[0]) {
-      throw new Error('inner dimension mismatch');
+      throw new Error("inner dimension mismatch");
     }
 
     const out = zeros(xsize[0], ysize[1]);

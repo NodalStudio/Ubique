@@ -22,9 +22,9 @@
  * // Example 5: Input is `null`
  * assert.strictEqual(isnumber(null), false);
  */
-export default function isnumber(x) {
+export default function isnumber(x: any): x is number {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
-  return typeof x === 'number';
+  return typeof x === "number";
 }

@@ -1,11 +1,11 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import annreturn from './annreturn.js';
-import annrisk from './annrisk.js';
-import skewness from '../stats/skewness.js';
-import kurtosis from '../stats/kurtosis.js';
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import annreturn from "./annreturn.ts";
+import annrisk from "./annrisk.ts";
+import skewness from "../stats/skewness.ts";
+import kurtosis from "../stats/kurtosis.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function annadjsharpe
@@ -40,15 +40,25 @@ import isarray from '../datatype/isarray.js';
  * // Example 2: Throws an error for invalid input
  * assert.throws(() => annadjsharpe(123), /Input must be an array or matrix/);
  */
-export default function annadjsharpe(x, frisk = 0, t = 252, mode = 'geometric', dim = 0) {
+export default function annadjsharpe(
+  x: any,
+  frisk = 0,
+  t = 252,
+  mode = "geometric",
+  dim = 0,
+) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr) => computeAnnAdjSharpe(arr, frisk, t, mode));
+  return vectorfun(
+    dim,
+    x,
+    (arr: any) => computeAnnAdjSharpe(arr, frisk, t, mode),
+  );
 }
 
-function computeAnnAdjSharpe (arr, frisk, t, mode) {
+function computeAnnAdjSharpe(arr: any, frisk: any, t: any, mode: any) {
   const annualReturn = annreturn(arr, t, mode);
   const annualRisk = annrisk(arr, t);
   const sr = (annualReturn - frisk) / annualRisk;

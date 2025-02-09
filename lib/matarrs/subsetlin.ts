@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import flatten from './flatten.js';
-import squeeze from './squeeze.js';
-import arrayfun from '../datatype/arrayfun.js';
+import flatten from "./flatten.ts";
+import squeeze from "./squeeze.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function subsetlin
@@ -37,9 +37,9 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 6: Extract a 2D subset from a vector
  * assert.deepStrictEqual(subsetlin(c, [[0,1], [1,2]]), [[5, 6], [6, 3]]);
  */
-export default function subsetlin(m, idx, flag = 0) {
+export default function subsetlin(m: any, idx: any, flag = 0) {
   if (m === undefined) {
-    throw new Error('Not enough input arguments.');
+    throw new Error("Not enough input arguments.");
   }
   if (idx === undefined) {
     return m;
@@ -48,5 +48,8 @@ export default function subsetlin(m, idx, flag = 0) {
   const flatM = flatten(m, flag);
   const indices = Array.isArray(idx) ? idx : [idx];
 
-  return squeeze(arrayfun(indices, (val) => flatM[val]));
+  if (!Array.isArray(flatM)) {
+    throw new Error("Input cannot be flattened to an array.");
+  }
+  return squeeze(arrayfun(indices, (val: number) => flatM[val]));
 }

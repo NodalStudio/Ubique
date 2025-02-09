@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import arrayfun from '../datatype/arrayfun.js';
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function ceil
@@ -25,9 +25,9 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 4: Round a matrix of numbers to 2 decimal places
  * assert.deepStrictEqual(ceil([[4.5134, -1.4345], [3.7809, 0.0134]], 2), [[4.52, -1.43], [3.79, 0.02]]);
  */
-export default function ceil(x, n = 0) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function ceil(x: any, n = 0) {
+  if (!x) throw new Error("Not enough input arguments");
 
   const factor = 10 ** n;
-  return arrayfun(x, (a) => Math.ceil(a * factor) / factor);
+  return arrayfun(x, (a: any) => Math.ceil(a * factor) / factor);
 }

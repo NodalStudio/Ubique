@@ -1,8 +1,12 @@
-import assert from 'assert';
-import transpose from '../../lib/matarrs/transpose.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import transpose from "../../lib/matarrs/transpose.js";
 
 // Example 1: Transpose a 2x3 matrix
-assert.deepStrictEqual(transpose([[5, 6, 5], [7, 8, -1]]), [[5, 7], [6, 8], [5, -1]]);
+assert.deepStrictEqual(transpose([[5, 6, 5], [7, 8, -1]]), [[5, 7], [6, 8], [
+  5,
+  -1,
+]]);
 
 // Example 2: Transpose a 1D array (row vector)
 assert.deepStrictEqual(transpose([5, 6, 3]), [[5], [6], [3]]);

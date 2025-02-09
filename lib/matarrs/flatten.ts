@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import transpose from './transpose.js';
-import isarray from '../datatype/isarray.js';
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import transpose from "./transpose.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function flatten
@@ -25,9 +25,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 3: Flatten a 3x3 matrix by columns (dim = 1)
  * flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]], 1); // [1, 1, 2, 1, -2, 3, -1, 3, 1]
  */
-export default function flatten(x, dim = 0) {
+export default function flatten(x: any, dim = 0) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x) || isarray(x)) {
@@ -39,5 +39,5 @@ export default function flatten(x, dim = 0) {
     return [].concat(...matrixToFlatten);
   }
 
-  throw new Error('Unknown input arguments');
+  throw new Error("Unknown input arguments");
 }

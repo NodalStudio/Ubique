@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function transpose
@@ -23,12 +23,12 @@
  * // Example 4: Transpose a square matrix
  * assert.deepStrictEqual(transpose([[1, 2], [3, 4]]), [[1, 3], [2, 4]]);
  */
-export default function transpose(x) {
+export default function transpose(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  if (typeof x === 'number') {
+  if (typeof x === "number") {
     return x;
   }
 
@@ -38,5 +38,7 @@ export default function transpose(x) {
   }
 
   // Transpose a 2D matrix by swapping rows and columns
-  return x[0].map((_, colIndex) => x.map((row) => row[colIndex]));
+  return x[0].map((_: any, colIndex: any) =>
+    x.map((row: any) => row[colIndex])
+  );
 }

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import erfc from '../../lib/elmath/erfc.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import erfc from "../../lib/elmath/erfc.js";
 
 // Example 1: Compute the complementary error function for a single value
 assert.strictEqual(erfc(0.5), 0.47950009227675744);

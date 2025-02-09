@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isstring from '../datatype/isstring.js';
-import size from './size.js';
+import isnumber from "../datatype/isnumber.ts";
+import isstring from "../datatype/isstring.ts";
+import size from "./size.ts";
 
 /**
  * @function squeeze
@@ -37,7 +37,7 @@ import size from './size.js';
  * // Example 6: Throw an error for no input arguments
  * assert.throws(() => { squeeze(); }, Error, 'Not enough input arguments');
  */
-export default function squeeze(x) {
+export default function squeeze(x: any) {
   if (isnumber(x) || isstring(x)) {
     return x;
   }

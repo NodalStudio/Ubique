@@ -1,8 +1,8 @@
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import size from './size.js';
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import size from "./size.ts";
 
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function nrows
@@ -21,13 +21,13 @@ import size from './size.js';
  * // Example 2: Matrix with multiple rows (2D array)
  * assert.strictEqual(nrows([[3, 2, 7], [4, 5, 6]]), 2); // 2
  */
-export default function nrows(x) {
+export default function nrows(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!(isarray(x) || ismatrix(x))) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
   return size(x)[0];

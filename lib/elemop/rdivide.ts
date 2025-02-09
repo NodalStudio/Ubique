@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import nrows from '../matarrs/nrows.js';
-import ncols from '../matarrs/ncols.js';
-import getrow from '../matarrs/getrow.js';
-import arrayfun from '../datatype/arrayfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import nrows from "../matarrs/nrows.ts";
+import ncols from "../matarrs/ncols.ts";
+import getrow from "../matarrs/getrow.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function rdivide
@@ -40,9 +40,9 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 6: Divide a matrix by a scalar
  * assert.deepStrictEqual(rdivide(e, 3), [[3, 1.66667], [2, 0.333333]]);
  */
-export default function rdivide(x, y) {
+export default function rdivide(x: any, y: any) {
   if (x === undefined || y === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x)) {
@@ -61,7 +61,7 @@ export default function rdivide(x, y) {
     return elementWiseMatrixDivision(x, y);
   }
 
-  throw new Error('Incompatible types for rdivide');
+  throw new Error("Incompatible types for rdivide");
 }
 
 /**
@@ -71,20 +71,20 @@ export default function rdivide(x, y) {
  * @param {number|array|matrix} y The divisor.
  * @returns {number|array|matrix} The result of the division.
  */
-function divideNumber(x, y) {
+function divideNumber(x: any, y: any) {
   if (isnumber(y)) {
     return x / y;
   }
 
   if (isarray(y)) {
-    return arrayfun(y, (val) => x / val);
+    return arrayfun(y, (val: any) => x / val);
   }
 
   if (ismatrix(y)) {
-    return y.map((row) => arrayfun(row, (val) => x / val));
+    return y.map((row: any) => arrayfun(row, (val: any) => x / val));
   }
 
-  throw new Error('Incompatible types for divideNumber');
+  throw new Error("Incompatible types for divideNumber");
 }
 
 /**
@@ -94,16 +94,16 @@ function divideNumber(x, y) {
  * @param {number} y The divisor.
  * @returns {array|matrix} The result of the division.
  */
-function divideByNumber(x, y) {
+function divideByNumber(x: any, y: any) {
   if (isarray(x)) {
-    return arrayfun(x, (val) => val / y);
+    return arrayfun(x, (val: any) => val / y);
   }
 
   if (ismatrix(x)) {
-    return x.map((row) => arrayfun(row, (val) => val / y));
+    return x.map((row: any) => arrayfun(row, (val: any) => val / y));
   }
 
-  throw new Error('Incompatible types for divideByNumber');
+  throw new Error("Incompatible types for divideByNumber");
 }
 
 /**
@@ -113,11 +113,11 @@ function divideByNumber(x, y) {
  * @param {array} y The second array.
  * @returns {array} The result of element-wise division.
  */
-function elementWiseArrayDivision(x, y) {
+function elementWiseArrayDivision(x: any, y: any) {
   if (x.length !== y.length) {
-    throw new Error('Array dimensions must agree');
+    throw new Error("Array dimensions must agree");
   }
-  return x.map((val, i) => val / y[i]);
+  return x.map((val: any, i: any) => val / y[i]);
 }
 
 /**
@@ -127,9 +127,11 @@ function elementWiseArrayDivision(x, y) {
  * @param {matrix} y The second matrix.
  * @returns {matrix} The result of element-wise division.
  */
-function elementWiseMatrixDivision(x, y) {
+function elementWiseMatrixDivision(x: any, y: any) {
   if (nrows(x) !== nrows(y) || ncols(x) !== ncols(y)) {
-    throw new Error('Matrix dimensions must agree');
+    throw new Error("Matrix dimensions must agree");
   }
-  return x.map((xrow, i) => elementWiseArrayDivision(xrow, getrow(y, i)));
+  return x.map((xrow: any, i: any) =>
+    elementWiseArrayDivision(xrow, getrow(y, i))
+  );
 }

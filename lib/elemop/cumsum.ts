@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import vectorfun from '../datatype/vectorfun.js';
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function cumsum
@@ -22,8 +22,12 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 3: Cumulative sum of a matrix along rows (dim=0)
  * assert.deepStrictEqual(cumsum([[5, 6, 5], [7, 8, -1]], 0), [[5, 11, 16], [7, 15, 14]]);
  */
-export default function cumsum(x, dim = 1) {
-  if (!x) {throw new Error('Not enough input arguments');}
+export default function cumsum(x: any, dim = 1) {
+  if (!x) throw new Error("Not enough input arguments");
 
-  return vectorfun(dim, x, (a) => a.map(((sum) => (value) => sum += value)(0)));
+  return vectorfun(
+    dim,
+    x,
+    (a: any) => a.map(((sum) => (value: any) => sum += value)(0)),
+  );
 }

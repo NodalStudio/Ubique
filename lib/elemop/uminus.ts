@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function uminus
@@ -19,10 +19,10 @@
  * // Example 3: Unary minus on a matrix of numbers
  * assert.deepStrictEqual(uminus([[5, 6], [-1, -3]]), [[-5, -6], [1, 3]]);
  */
-export default function uminus(x) {
-  if (x === undefined) {throw new Error('Not enough input arguments');}
+export default function uminus(x: any) {
+  if (x === undefined) throw new Error("Not enough input arguments");
 
   return Array.isArray(x)
-	  ? x.map((row) => Array.isArray(row) ? row.map((val) => -val) : -row)
-	  : -x;
+    ? x.map((row) => Array.isArray(row) ? row.map((val) => -val) : -row)
+    : -x;
 }

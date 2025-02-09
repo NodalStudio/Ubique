@@ -1,6 +1,6 @@
-import ismatrix from './ismatrix.js';
-import iscolumn from './../matarrs/iscolumn.js';
-import isrow from './../matarrs/isrow.js';
+import ismatrix from "./ismatrix.ts";
+import iscolumn from "./../matarrs/iscolumn.ts";
+import isrow from "./../matarrs/isrow.ts";
 
 /**
  * @function isvector
@@ -26,9 +26,9 @@ import isrow from './../matarrs/isrow.js';
  * // Example 5: Empty matrix
  * assert.strictEqual(isvector([]), false);
  */
-export default function isvector(x) {
+export default function isvector(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (ismatrix(x)) {

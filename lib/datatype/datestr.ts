@@ -1,8 +1,7 @@
-/** @import { array, matrix } from '../types' */
-
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-import arrayfun from './arrayfun.js';
+import dayjs from "https://esm.sh/dayjs";
+import utc from "https://esm.sh/dayjs/plugin/utc";
+import arrayfun from "./arrayfun.ts";
+import { numarraymatrix } from "../types.d.ts";
 
 dayjs.extend(utc);
 
@@ -12,9 +11,9 @@ dayjs.extend(utc);
  * @description Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
  * Can handle individual numbers, arrays, and matrices of Unix timestamps.
  *
- * @param {number|array|matrix} d ISO Unix timestamp(s) to convert.
- * @param {string} [fmt='YYYY-MM-DD'] The format string to use for conversion.
- * @returns {string|array<string>|matrix<string>} The formatted date string(s).
+ * @param d ISO Unix timestamp(s) to convert.
+ * @param [fmt='YYYY-MM-DD'] The format string to use for conversion.
+ * @returns The formatted date string(s).
  * @throws {Error} If the input is not valid.
  *
  * @example
@@ -34,14 +33,17 @@ dayjs.extend(utc);
  * // Example 5: Convert an array with a single Unix timestamp to date string
  * assert.deepStrictEqual(datestr([1609459200]), ['2021-01-01']);
  */
-export default function datestr(d, fmt = 'YYYY-MM-DD') {
+export default function datestr(
+  d: numarraymatrix,
+  fmt: string = "YYYY-MM-DD",
+): numarraymatrix<string> {
   if (!d) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   return arrayfun(d, _datestr, fmt);
 }
 
-function _datestr(a, format) {
+function _datestr(a: any, format: string): string {
   return dayjs.unix(a).utc().format(format);
 }

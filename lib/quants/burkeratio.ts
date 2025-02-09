@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import annreturn from './annreturn.js';
-import cdrawdown from './cdrawdown.js';
-import sqrt from '../elmath/sqrt.js';
-import sum from '../elemop/sum.js';
-import power from '../elemop/power.js';
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import annreturn from "./annreturn.ts";
+import cdrawdown from "./cdrawdown.ts";
+import sqrt from "../elmath/sqrt.ts";
+import sum from "../elemop/sum.ts";
+import power from "../elemop/power.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function burkeratio
@@ -36,18 +36,26 @@ import isarray from '../datatype/isarray.js';
  * // Example 3: Invalid input
  * assert.throws(() => burkeratio([x, y]), /Input must be an array/);
  */
-export default function burkeratio(x, frisk = 0, t = 252, mode = 'simple', dim = 0) {
+export default function burkeratio(
+  x: any,
+  frisk = 0,
+  t = 252,
+  mode = "simple",
+  dim = 0,
+) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array');
+    throw new Error("Input must be an array");
   }
 
-  if (!['simple', 'modified'].includes(mode)) {
+  if (!["simple", "modified"].includes(mode)) {
     throw new Error('Invalid mode: must be "simple" or "modified"');
   }
 
-  return vectorfun(dim, x, (a) => {
+  return vectorfun(dim, x, (a: any) => {
     const annRet = annreturn(a, t);
     const dd = sqrt(sum(power(cdrawdown(a), 2)));
-    return mode === 'simple' ? (annRet - frisk) / dd : ((annRet - frisk) / dd) * sqrt(a.length);
+    return mode === "simple"
+      ? (annRet - frisk) / dd
+      : ((annRet - frisk) / dd) * sqrt(a.length);
   });
 }

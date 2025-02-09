@@ -1,7 +1,8 @@
-/** @import { array, matrix } from '../types' */
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import flatten from './flatten.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import { array } from "../types.d.ts";
+import flatten from "./flatten.ts";
 
 /**
  * @function find
@@ -28,20 +29,20 @@ import flatten from './flatten.js';
  * // Example 5: All true elements
  * find([true, true, true]); // [0, 1, 2]
  */
-export default function find(x) {
+export default function find(x: any) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
   if (!isarray(x) && !ismatrix(x)) {
     console.log(x);
     console.log(ismatrix(x));
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  const flatX = ismatrix(x) ? flatten(x) : x;
-  const indices = [];
+  const flatX = (ismatrix(x) ? flatten(x) : x) as array;
+  const indices: any = [];
 
-  flatX.forEach((el, idx) => {
+  flatX.forEach((el: any, idx: any) => {
     if (el === true) {
       indices.push(idx);
     }

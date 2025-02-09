@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import sharpe from './sharpe.js';
-import skewness from '../stats/skewness.js';
-import kurtosis from '../stats/kurtosis.js';
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import sharpe from "./sharpe.ts";
+import skewness from "../stats/skewness.ts";
+import kurtosis from "../stats/kurtosis.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function adjsharpe
@@ -33,15 +33,15 @@ import isarray from '../datatype/isarray.js';
  * // Example 2: Throws an error for invalid input
  * assert.throws(() => adjsharpe(123), /Input must be an array or matrix/);
  */
-export default function adjsharpe(x, frisk = 0, dim = 0) {
+export default function adjsharpe(x: any, frisk = 0, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr) => computeAdjSharpe(arr, frisk));
+  return vectorfun(dim, x, (arr: any) => computeAdjSharpe(arr, frisk));
 }
 
-function computeAdjSharpe(arr, frisk) {
+function computeAdjSharpe(arr: any, frisk: any) {
   const sr = sharpe(arr, frisk);
   const sk = skewness(arr);
   const ku = kurtosis(arr);

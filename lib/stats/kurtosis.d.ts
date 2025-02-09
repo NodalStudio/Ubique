@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function kurtosis
@@ -28,4 +28,8 @@ import { array, matrix } from '../types';
  * // Example 5: Compute kurtosis for a dataset with equal elements (should be NaN)
  * assert.strictEqual(kurtosis([1, 1, 1, 1, 1]), NaN);
  */
-export function kurtosis(x: array | matrix, flag?: number, dim?: number): number | array | matrix;
+export function kurtosis(
+  x: array | matrix,
+  flag?: number,
+  dim?: number,
+): number | array | matrix;

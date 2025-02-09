@@ -1,12 +1,12 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import mean from './mean.js';
-import sum from '../elemop/sum.js';
-import power from '../elemop/power.js';
-import abs from '../elmath/abs.js';
-import minus from '../elemop/minus.js';
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import mean from "./mean.ts";
+import sum from "../elemop/sum.ts";
+import power from "../elemop/power.ts";
+import abs from "../elmath/abs.ts";
+import minus from "../elemop/minus.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function varc
@@ -46,15 +46,15 @@ import isarray from '../datatype/isarray.js';
  * // Example 5: Throws an error for invalid input
  * assert.throws(() => varc(123), /Input must be an array or matrix/);
  */
-export default function varc(x, flag = 1, dim = 0) {
+export default function varc(x: any, flag = 1, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr) => computeVariance(arr, flag));
+  return vectorfun(dim, x, (arr: any) => computeVariance(arr, flag));
 }
 
-function computeVariance(arr, flag) {
+function computeVariance(arr: any, flag: any) {
   const mu = mean(arr);
   return sum(power(abs(minus(arr, mu)), 2)) / (arr.length - flag);
 }

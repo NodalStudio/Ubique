@@ -21,9 +21,9 @@
  * // Example 4: Not a boolean (string)
  * assert.strictEqual(islogical("true"), false);
  */
-export default function islogical(x) {
+export default function islogical(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
-  return typeof x === 'boolean';
+  return typeof x === "boolean";
 }

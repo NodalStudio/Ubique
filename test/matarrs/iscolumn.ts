@@ -1,5 +1,6 @@
-import assert from 'assert';
-import iscolumn from '../../lib/matarrs/iscolumn.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import iscolumn from "../../lib/matarrs/iscolumn.js";
 
 /**
  * Tests for iscolumn function

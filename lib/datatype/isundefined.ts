@@ -25,9 +25,9 @@
  *   assert.strictEqual(error.message, 'not enough input arguments');
  * }
  */
-export default function isundefined(x) {
+export default function isundefined(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   return x === undefined;

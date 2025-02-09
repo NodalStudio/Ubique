@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
-import flipdim from './flipdim.js';
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import isarray from '../datatype/isarray.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import flipdim from "./flipdim.ts";
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function fliplr
@@ -20,9 +20,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 2: Flip a 1D array (no change)
  * fliplr([1, 2, 3]); // [1, 2, 3]
  */
-export default function fliplr(x) {
+export default function fliplr(x: any) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x) || isarray(x)) {
@@ -33,5 +33,5 @@ export default function fliplr(x) {
     return flipdim(x, 1); // Flip columns (left to right)
   }
 
-  throw new Error('Unknown input arguments');
+  throw new Error("Unknown input arguments");
 }

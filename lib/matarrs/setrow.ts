@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function setrow
@@ -36,28 +36,30 @@
  * // Example 6: Invalid row vector error
  * assert.throws(() => setrow("not a vector", [[4, 5, 6], [7, 8, 9]], 1), /Row vector must be an array./);
  */
-export default function setrow(x, mat, n) {
+export default function setrow(x: any, mat: any, n: any) {
   if (!Array.isArray(mat) || !Array.isArray(mat[0])) {
-    throw new Error('Input matrix must be a 2D array.');
+    throw new Error("Input matrix must be a 2D array.");
   }
   if (!Array.isArray(x)) {
-    throw new Error('Row vector must be an array.');
+    throw new Error("Row vector must be an array.");
   }
   if (!Number.isInteger(n) || n < 0 || n >= mat.length) {
-    throw new Error('Row index must be an integer between 0 and M-1.');
+    throw new Error("Row index must be an integer between 0 and M-1.");
   }
 
   const rowVector = toRowVector(x);
   if (rowVector.length !== mat[0].length) {
-    throw new Error('Row vector length must match the number of matrix columns.');
+    throw new Error(
+      "Row vector length must match the number of matrix columns.",
+    );
   }
 
   return mat.map((row, i) => (i === n ? rowVector : row));
 }
 
-function toRowVector(x) {
+function toRowVector(x: any) {
   if (!Array.isArray(x)) {
-    throw new Error('Input must be an array.');
+    throw new Error("Input must be an array.");
   }
   return Array.isArray(x[0]) ? x.flat() : x;
 }

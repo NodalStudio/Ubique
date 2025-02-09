@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnull from '../datatype/isnull.js';
-import isundefined from '../datatype/isundefined.js';
-import isstring from '../datatype/isstring.js';
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
+import isnull from "../datatype/isnull.ts";
+import isundefined from "../datatype/isundefined.ts";
+import isstring from "../datatype/isstring.ts";
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function size
@@ -37,15 +37,14 @@ import isarray from '../datatype/isarray.js';
  *
  * // Example 7: Size of an empty array
  * assert.deepStrictEqual(size([]), [0, 0]);
- *
  */
-export default function size(x) {
+export default function size(x: any) {
   if (isundefined(x)) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnull(x) || isundefined(x)) {
-    throw new Error('Unknown input type');
+    throw new Error("Unknown input type");
   }
 
   if (isstring(x)) {
@@ -57,7 +56,7 @@ export default function size(x) {
   }
 
   if (isarray(x)) {
-    return x.length ? [1, x.length]: [0 ,0];
+    return x.length ? [1, x.length] : [0, 0];
   }
 
   const dimensions = [];

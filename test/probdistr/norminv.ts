@@ -1,5 +1,6 @@
-import assert from 'assert';
-import norminv from '../../lib/probdistr/norminv.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import norminv from "../../lib/probdistr/norminv.js";
 
 // Example 1: Compute the inverse CDF for standard normal distribution
 assert.strictEqual(norminv(0.05), -1.6448536127562647);
@@ -26,9 +27,15 @@ assert.strictEqual(norminv(0.0001, 0, 1), -3.7190165078119177);
 assert.strictEqual(norminv(0.9999, 0, 1), 3.7190165078119457);
 
 // Example 9: Edge case: Probability 0 (should throw an error)
-assert.throws(() => norminv(0, 0, 1), /Probability value must be in the range \(0,1\)/);
+assert.throws(
+  () => norminv(0, 0, 1),
+  /Probability value must be in the range \(0,1\)/,
+);
 
 // Example 10: Edge case: Probability 1 (should throw an error)
-assert.throws(() => norminv(1, 0, 1), /Probability value must be in the range \(0,1\)/);
+assert.throws(
+  () => norminv(1, 0, 1),
+  /Probability value must be in the range \(0,1\)/,
+);
 
 // Example 11: Edge case:

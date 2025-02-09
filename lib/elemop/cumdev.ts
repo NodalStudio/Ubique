@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import cumsum from './cumsum.js';
-import mean from '../stats/mean.js';
-import minus from './minus.js';
-import vectorfun from '../datatype/vectorfun.js';
+import cumsum from "./cumsum.ts";
+import mean from "../stats/mean.ts";
+import minus from "./minus.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function cumdev
@@ -25,12 +25,12 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 3: Cumulative mean deviation of a matrix along columns (dim=1)
  * assert.deepStrictEqual(cumdev([[-1, 3, -1], [4, 5, 9]]), [[-2.5, -1, -5], [0, 0, 0]]);
  */
-export default function cumdev(x, dim = 1) {
+export default function cumdev(x: any, dim = 1) {
   if (x === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  const _cumdev = (a) => cumsum(minus(a, mean(a)));
+  const _cumdev = (a: any) => cumsum(minus(a, mean(a)));
 
   return vectorfun(dim, x, _cumdev);
 }
