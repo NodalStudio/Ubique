@@ -1,9 +1,9 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import arrayfun from '../datatype/arrayfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function mod
@@ -27,26 +27,28 @@ import arrayfun from '../datatype/arrayfun.js';
  * const b = [[-1, 3, -1], [4, 5, 9]];
  * assert.deepStrictEqual(mod(a, b), [[0, 0, 0], [3, 3, 8]]);
  */
-export default function mod(x, y) {
+export default function mod(x: any, y: any) {
   if (x === undefined || y === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (isnumber(x)) {
-    return isnumber(y) ? x % y : arrayfun(y, (val) => x % val);
+    return isnumber(y) ? x % y : arrayfun(y, (val: any) => x % val);
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val) => val % y);
+    return arrayfun(x, (val: any) => val % y);
   }
 
   if (isarray(x) && isarray(y)) {
-    return x.map((val, i) => val % y[i]);
+    return x.map((val: any, i: any) => val % y[i]);
   }
 
   if (ismatrix(x) && ismatrix(y)) {
-    return x.map((row, i) => row.map((val, j) => val % y[i][j]));
+    return x.map((row: any, i: any) =>
+      row.map((val: any, j: any) => val % y[i][j])
+    );
   }
 
-  throw new Error('Incompatible types for mod operation');
+  throw new Error("Incompatible types for mod operation");
 }

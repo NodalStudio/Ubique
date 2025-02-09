@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import ismatrix from '../datatype/ismatrix.js';
-import isarray from '../datatype/isarray.js';
-import isinteger from '../datatype/isinteger.js';
-import ncols from './ncols.js';
-import transpose from './transpose.js';
+import ismatrix from "../datatype/ismatrix.ts";
+import isarray from "../datatype/isarray.ts";
+import isinteger from "../datatype/isinteger.ts";
+import ncols from "./ncols.ts";
+import transpose from "./transpose.ts";
 
 /**
  * @function setcol
@@ -42,26 +42,26 @@ import transpose from './transpose.js';
  * // Example 6: Invalid column vector error
  * assert.throws(() => setcol("not a vector", [[4, 5], [6, 7]], 1), /Column vector must be an array./);
  */
-export default function setcol(x, mat, n) {
+export default function setcol(x: any, mat: any, n: any) {
   if (!ismatrix(mat)) {
-    throw new Error('Input matrix must be a 2D array.');
+    throw new Error("Input matrix must be a 2D array.");
   }
   if (!isarray(x)) {
-    throw new Error('Column vector must be an array.');
+    throw new Error("Column vector must be an array.");
   }
   if (!isinteger(n) || n < 0 || n >= ncols(mat)) {
-    throw new Error('Column index must be an integer between 0 and N-1.');
+    throw new Error("Column index must be an integer between 0 and N-1.");
   }
 
   const x_t = transpose(x);
 
   if (x_t.length !== mat.length) {
     throw new Error(
-      'Column vector length must match the number of matrix rows.'
+      "Column vector length must match the number of matrix rows.",
     );
   }
 
-  return mat.map((row, i) =>
-    row.map((val, j) => (j === n ? x_t[i][0] : val))
+  return mat.map((row: any, i: any) =>
+    row.map((val: any, j: any) => (j === n ? x_t[i][0] : val))
   );
 }

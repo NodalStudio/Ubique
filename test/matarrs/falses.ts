@@ -1,5 +1,6 @@
-import assert from 'assert';
-import falses from '../../lib/matarrs/falses.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import falses from "../../lib/matarrs/falses.js";
 
 // Example 1: Create an empty array (0x0 matrix)
 assert.deepStrictEqual(falses(0), []);
@@ -14,4 +15,8 @@ assert.deepStrictEqual(falses(2), [[false, false], [false, false]]);
 assert.deepStrictEqual(falses([2, 1]), [[false], [false]]);
 
 // Example 5: Create a 2x3 matrix of `false`
-assert.deepStrictEqual(falses(2, 3), [[false, false, false], [false, false, false]]);
+assert.deepStrictEqual(falses(2, 3), [[false, false, false], [
+  false,
+  false,
+  false,
+]]);

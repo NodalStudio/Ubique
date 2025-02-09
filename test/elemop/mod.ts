@@ -1,8 +1,12 @@
-import assert from 'assert';
-import mod from '../../lib/elemop/mod.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import mod from "../../lib/elemop/mod.js";
 
 // Example 1: Modulus of a vector with a scalar divisor
-assert.deepStrictEqual(mod([13, -7], 2.2), [1.9999999999999991, -0.39999999999999947]);
+assert.deepStrictEqual(mod([13, -7], 2.2), [
+  1.9999999999999991,
+  -0.39999999999999947,
+]);
 
 // Example 2: Modulus of two vectors
 assert.deepStrictEqual(mod([13, -7], [5, 6]), [3, -1]);

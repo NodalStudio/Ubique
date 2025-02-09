@@ -1,6 +1,6 @@
-import issquare from '../matarrs/issquare.js';
-import ncols from '../matarrs/ncols.js';
-import ismatrix from './ismatrix.js';
+import issquare from "../matarrs/issquare.ts";
+import ncols from "../matarrs/ncols.ts";
+import ismatrix from "./ismatrix.ts";
 
 /**
  * @function issingular
@@ -25,17 +25,17 @@ import ismatrix from './ismatrix.js';
  * // Example 4: Non-square matrix
  * assert.throws(() => { issingular([[1, 2, 3], [4, 5, 6]]) }, Error, 'input must be a square matrix');
  */
-export default function issingular(x) {
+export default function issingular(x: any) {
   if (!x || arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (!ismatrix(x)) {
-    throw new Error('input must be a matrix');
+    throw new Error("input must be a matrix");
   }
 
   if (!issquare(x)) {
-    throw new Error('input must be a square matrix');
+    throw new Error("input must be a square matrix");
   }
 
   const n = ncols(x);

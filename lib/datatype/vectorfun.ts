@@ -1,13 +1,13 @@
-/** @import { matrix } from '../types' */
+/** @import { matrix } from '../types.d.ts' */
 
-import isfunction from './isfunction.js';
-import isarray from './isarray.js';
-import isempty from './isempty.js';
-import ncols from '../matarrs/ncols.js';
-import nrows from '../matarrs/nrows.js';
-import getcol from '../matarrs/getcol.js';
-import getrow from '../matarrs/getrow.js';
-import transpose from '../matarrs/transpose.js';
+import isfunction from "./isfunction.ts";
+import isarray from "./isarray.ts";
+import isempty from "./isempty.ts";
+import ncols from "../matarrs/ncols.ts";
+import nrows from "../matarrs/nrows.ts";
+import getcol from "../matarrs/getcol.ts";
+import getrow from "../matarrs/getrow.ts";
+import transpose from "../matarrs/transpose.ts";
 
 /**
  * @function vectorfun
@@ -58,9 +58,9 @@ import transpose from '../matarrs/transpose.js';
  * const sumFunction = a => a.reduce((sum, num) => sum + num, 0);
  * assert.deepStrictEqual(vectorfun(0, [1, 2, 3], sumFunction), [6]);
  */
-export default function vectorfun(...args) {
+export default function vectorfun(...args: any[]) {
   if (args.length < 3) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   const [dim, x, fun, ...varargin] = args;
@@ -78,29 +78,35 @@ export default function vectorfun(...args) {
   return formatResult(dim, v);
 }
 
-function validateInputs(dim, fun) {
+function validateInputs(dim: any, fun: any) {
   if (dim !== 0 && dim !== 1) {
-    throw new Error('dimension must be 0 (rows) or 1 (columns)');
+    throw new Error("dimension must be 0 (rows) or 1 (columns)");
   }
   if (!isfunction(fun)) {
-    throw new Error('third input argument must be a function');
+    throw new Error("third input argument must be a function");
   }
 }
 
-function applyFunction(fun, x, varargin) {
+function applyFunction(fun: any, x: any, varargin: any) {
   return isempty(varargin) ? fun(x) : fun(x, ...varargin);
 }
 
-function getMatrixParams(dim, x) {
+function getMatrixParams(dim: any, x: any) {
   if (dim === 1) {
     return { ndim: ncols(x), narray: getcol };
   } else if (dim === 0) {
     return { ndim: nrows(x), narray: getrow };
   }
-  throw new Error('Invalid dimension parameter');
+  throw new Error("Invalid dimension parameter");
 }
 
-function processMatrix(ndim, narray, x, fun, varargin) {
+function processMatrix(
+  ndim: any,
+  narray: any,
+  x: any,
+  fun: any,
+  varargin: any,
+) {
   const v = [];
   for (let i = 0; i < ndim; i++) {
     const d = narray(x, i);
@@ -110,7 +116,7 @@ function processMatrix(ndim, narray, x, fun, varargin) {
   return v;
 }
 
-function formatResult(dim, v) {
+function formatResult(dim: any, v: any) {
   if (dim === 1) {
     return isarray(v) ? [v] : transpose(v);
   }

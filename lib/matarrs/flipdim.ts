@@ -1,10 +1,10 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isnumber from '../datatype/isnumber.js';
-import ismatrix from '../datatype/ismatrix.js';
-import isarray from '../datatype/isarray.js';
-import clone from './clone.js';
-import vectorfun from '../datatype/vectorfun.js';
+import isnumber from "../datatype/isnumber.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import isarray from "../datatype/isarray.ts";
+import clone from "./clone.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function flipdim
@@ -29,12 +29,12 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 4: Flip a 2D matrix along rows (dim = 0)
  * flipdim([[5, 6, 5], [7, 8, -1]], 0); // [[7, 8, -1], [5, 6, 5]]
  */
-export default function flipdim(x, dim = 1) {
+export default function flipdim(x: any, dim = 1) {
   if (!x) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  const flipArray = (arr) => clone(arr.reverse());
+  const flipArray = (arr: any) => clone(arr.reverse());
 
   if (isnumber(x)) {
     return x;
@@ -48,5 +48,5 @@ export default function flipdim(x, dim = 1) {
     return vectorfun(1 - dim, x, flipArray);
   }
 
-  throw new Error('Unknown input arguments');
+  throw new Error("Unknown input arguments");
 }

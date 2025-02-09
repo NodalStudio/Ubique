@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function moment
@@ -27,4 +27,8 @@ import { array, matrix } from '../types';
  * // Example 5: Compute the fourth moment of a dataset
  * assert.strictEqual(moment([1, 2, 3, 4, 5], 4), 2);
  */
-export function moment(x: array | matrix, k: number, dim?: number): number | array | matrix;
+export function moment(
+  x: array | matrix,
+  k: number,
+  dim?: number,
+): number | array | matrix;

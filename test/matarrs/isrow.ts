@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isrow from '../../lib/matarrs/isrow.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isrow from "../../lib/matarrs/isrow.js";
 
 // Example 1: Valid row vector
 assert.strictEqual(isrow([[2, 2]]), true);

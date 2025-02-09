@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import arrayfun from '../datatype/arrayfun.js';
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function abs
@@ -21,9 +21,9 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 3: Compute the absolute value of a matrix
  * assert.deepStrictEqual(abs([[5, -2], [-3, 4]]), [[5, 2], [3, 4]]);
  */
-export default function abs(x) {
+export default function abs(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   return arrayfun(x, Math.abs);

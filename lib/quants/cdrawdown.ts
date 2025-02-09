@@ -1,5 +1,5 @@
-import vectorfun from '../datatype/vectorfun.js';
-import isarray from '../datatype/isarray.js';
+import vectorfun from "../datatype/vectorfun.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function cdrawdown
@@ -13,7 +13,7 @@ import isarray from '../datatype/isarray.js';
  * @throws {Error} If the input is invalid.
  *
  * @example
- * import cdrawdown from './cdrawdown.js';
+ * import cdrawdown from './cdrawdown.ts';
  *
  * // Example 1: Continuous drawdown for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
@@ -22,17 +22,21 @@ import isarray from '../datatype/isarray.js';
  * // Example 2: Throws an error for invalid input
  * assert.throws(() => cdrawdown(123), /Input must be an array or matrix/);
  */
-export default function cdrawdown(x, dim = 0) {
+export default function cdrawdown(x: any, dim = 0) {
   if (!isarray(x)) {
-    throw new Error('Input must be an array or matrix');
+    throw new Error("Input must be an array or matrix");
   }
 
   return vectorfun(dim, x, computeContinuousDrawdown);
 }
 
-function computeContinuousDrawdown(returns) {
+function computeContinuousDrawdown(returns: any) {
   return returns.reduce(
-    ({ drawdowns, drawdown, max }, value) => {
+    ({
+      drawdowns,
+      drawdown,
+      max,
+    }: any, value: any) => {
       const newDrawdown = Math.min(drawdown + value, 0);
       const newMax = Math.min(max, newDrawdown);
 

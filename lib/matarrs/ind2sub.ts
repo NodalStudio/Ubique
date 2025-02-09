@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
-import isarray from '../datatype/isarray.js';
-import rem from '../elemop/rem.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import isarray from "../datatype/isarray.ts";
+import rem from "../elemop/rem.ts";
 
 /**
  * @function ind2sub
@@ -26,22 +26,22 @@ import rem from '../elemop/rem.js';
  * // Example 4: Invalid input (size is not an array)
  * // Throws error: 'size must be an array representing the matrix dimensions'
  */
-export default function ind2sub(size, index) {
+export default function ind2sub(size: any, index: any) {
   if (!Array.isArray(size)) {
-    throw new Error('size must be an array representing the matrix dimensions');
+    throw new Error("size must be an array representing the matrix dimensions");
   }
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  const _ind2sub = (siz, idx) => {
-    const row = rem(idx, siz[0]);
+  const _ind2sub = (siz: any, idx: any) => {
+    const row = rem(idx, siz[0]) as number;
     const col = (idx - row) / siz[0];
     return [row, col];
   };
 
   if (isarray(index)) {
-    return index.map((idx) => _ind2sub(size, idx));
+    return index.map((idx: any) => _ind2sub(size, idx));
   }
 
   return _ind2sub(size, index);

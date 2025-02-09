@@ -1,4 +1,4 @@
-import erfcinv from '../elmath/erfcinv.js';
+import erfcinv from "../elmath/erfcinv.ts";
 
 /**
  * @function norminv
@@ -13,7 +13,7 @@ import erfcinv from '../elmath/erfcinv.js';
  * @throws {Error} If `p` is not in the range (0,1) or `sigma` is not positive.
  *
  * @example
- * import norminv from './norminv.js';
+ * import norminv from './norminv.ts';
  *
  * // Example 1: Compute the inverse CDF for standard normal distribution
  * assert.strictEqual(norminv(0.05), -1.6448536127562647);
@@ -30,12 +30,12 @@ import erfcinv from '../elmath/erfcinv.js';
  * // Example 5: Compute inverse CDF for a low probability (should be negative)
  * assert.strictEqual(norminv(0.025, 0, 1), -1.95996);
  */
-export default function norminv(p, mu = 0, sigma = 1) {
+export default function norminv(p: any, mu = 0, sigma = 1) {
   if (p <= 0 || p >= 1) {
-    throw new Error('Probability value must be in the range (0,1)');
+    throw new Error("Probability value must be in the range (0,1)");
   }
   if (sigma <= 0) {
-    throw new Error('Standard deviation must be a positive number');
+    throw new Error("Standard deviation must be a positive number");
   }
 
   const x0 = -Math.sqrt(2) * erfcinv(2 * p);

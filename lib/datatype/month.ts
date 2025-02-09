@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import arrayfun from './arrayfun.js';
+import dayjs from "dayjs";
+import arrayfun from "./arrayfun.ts";
 
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function month
@@ -23,12 +23,12 @@ import arrayfun from './arrayfun.js';
  * // Example 3: Matrix of timestamps
  * assert.deepStrictEqual(month([[1414886399, 1414972799], [1415059199, 1415145599]]), [[10, 10], [10, 10]]);
  */
-export default function month(x) {
+export default function month(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
-  const extractMonth = (timestamp) => dayjs.unix(timestamp).month();
+  const extractMonth = (timestamp: any) => dayjs.unix(timestamp).month();
 
   return arrayfun(x, extractMonth);
 }

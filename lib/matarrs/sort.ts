@@ -1,8 +1,8 @@
-import isnumber from '../datatype/isnumber.js';
-import isarray from '../datatype/isarray.js';
-import ismatrix from '../datatype/ismatrix.js';
-import vectorfun from '../datatype/vectorfun.js';
-import mergesort from './mergesort.js';
+import isnumber from "../datatype/isnumber.ts";
+import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
+import vectorfun from "../datatype/vectorfun.ts";
+import mergesort from "./mergesort.ts";
 
 /**
  * @function sort
@@ -40,12 +40,12 @@ import mergesort from './mergesort.js';
  * // Example 6: Invalid matrix input
  * assert.throws(() => sort(5), /Input must be an array or matrix./);
  */
-export default function sort(x, mode = 'ascend', dim = 1) {
+export default function sort(x: any, mode = "ascend", dim = 1) {
   if (!x) {
-    throw new Error('Not enough input arguments.');
+    throw new Error("Not enough input arguments.");
   }
 
-  const _sort = (a, mode) => mergesort(a, mode)[0];
+  const _sort = (a: any, mode: any) => mergesort(a, mode)[0];
 
   if (isnumber(x)) {
     return x;
@@ -56,7 +56,7 @@ export default function sort(x, mode = 'ascend', dim = 1) {
   }
 
   if (!ismatrix(x)) {
-    throw new Error('Input must be a number, an array or matrix.');
+    throw new Error("Input must be a number, an array or matrix.");
   }
 
   return vectorfun(dim, x, _sort, mode);

@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
 /**
  * @function getcol
@@ -21,19 +21,21 @@
  * // Example 3: Invalid column index (out of bounds)
  * assert.throws(() => { getcol([[5, 6, 5], [7, 8, -1]], 3); }, Error, 'Column index must be an integer between 0 and N - 1 columns');
  */
-export default function getcol(x, n) {
+export default function getcol(x: any, n: any) {
   if (!x || n === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!Array.isArray(x) || !Array.isArray(x[0])) {
-    throw new Error('Input must be a matrix (2D array)');
+    throw new Error("Input must be a matrix (2D array)");
   }
 
   const numCols = x[0].length;
 
   if (!Number.isInteger(n) || n < 0 || n >= numCols) {
-    throw new Error('Column index must be an integer between 0 and N - 1 columns');
+    throw new Error(
+      "Column index must be an integer between 0 and N - 1 columns",
+    );
   }
 
   return x.map((row) => row[n]);

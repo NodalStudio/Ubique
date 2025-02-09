@@ -1,3 +1,5 @@
+import { array } from "../types.d.ts";
+
 /**
  * @function isarray
  * @summary Checks if the input is a 1D array of numbers.
@@ -22,9 +24,9 @@
  * // Example 5: A 2D array (array of arrays)
  * assert.strictEqual(isarray([[1], [2], [3]]), false);
  */
-export default function isarray(x) {
+export default function isarray(x: any): x is array<any> {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   return Array.isArray(x) && x.every((el) => !Array.isArray(el));

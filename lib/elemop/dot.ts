@@ -1,8 +1,8 @@
-/** @import { array } from '../types' */
+/** @import { array } from '../types.d.ts' */
 
-import sum from './sum.js';
-import times from './times.js';
-import size from '../matarrs/size.js';
+import sum from "./sum.ts";
+import times from "./times.ts";
+import size from "../matarrs/size.ts";
 
 /**
  * @function dot
@@ -31,12 +31,12 @@ import size from '../matarrs/size.js';
  * // Example 5: Error when input arrays are of different sizes
  * assert.throws(() => dot([1, 2], [1, 2, 3]), Error, 'input size mismatch');
  */
-export default function dot(x, y) {
+export default function dot(x: any, y: any) {
   const xSize = size(x);
   const ySize = size(y);
 
   if (xSize[0] !== ySize[0] || xSize[1] !== ySize[1]) {
-    throw new Error('input size mismatch');
+    throw new Error("input size mismatch");
   }
 
   return sum(times(x, y));

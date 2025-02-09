@@ -1,4 +1,5 @@
-import isarray from './isarray.js';
+import { matrix } from "../types.d.ts";
+import isarray from "./isarray.ts";
 
 /**
  * @function ismatrix
@@ -42,6 +43,7 @@ import isarray from './isarray.js';
  * // Example 11: Empty matrix
  * assert.strictEqual(ismatrix([[]]), true);
  */
-export default function ismatrix(x) {
-  return Array.isArray(x) && x.length > 0 && x.every((row) => isarray(row) && row.length === x[0].length);
+export default function ismatrix(x: unknown): x is matrix<any> {
+  return Array.isArray(x) && x.length > 0 &&
+    x.every((row) => isarray(row) && row.length === x[0].length);
 }

@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types' */
-import ismatrix from '../datatype/ismatrix.js';
-import nrows from '../matarrs/nrows.js';
-import zeros from '../matarrs/zeros.js';
-import isarray from '../datatype/isarray.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import ismatrix from "../datatype/ismatrix.ts";
+import nrows from "../matarrs/nrows.ts";
+import zeros from "../matarrs/zeros.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function diag
@@ -36,7 +36,7 @@ import isarray from '../datatype/isarray.js';
  * // Example 7: Extract a diagonal out of bounds (diagonal 2)
  * diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2); // [0]
  */
-export default function diag(x, k = 0) {
+export default function diag(x: any, k = 0) {
   const absK = Math.abs(k);
 
   if (isarray(x)) {
@@ -72,5 +72,5 @@ export default function diag(x, k = 0) {
     return out;
   }
 
-  throw new Error('unknown input');
+  throw new Error("unknown input");
 }

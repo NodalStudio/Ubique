@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function std
@@ -20,7 +20,7 @@ import { array, matrix } from '../types';
  * @returns The computed standard deviation.
  *
  * @example
- * import { std } from './std.js';
+ * import { std } from './std.ts';
  *
  * // Example 1: Standard deviation of a 1D array (sample)
  * const c = [5, 6, 3];
@@ -42,5 +42,5 @@ import { array, matrix } from '../types';
 export function std(
   x: array | matrix,
   flag?: number,
-  dim?: number
+  dim?: number,
 ): number | array | matrix;

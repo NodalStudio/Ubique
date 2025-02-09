@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import arrayfun from '../datatype/arrayfun.js';
+import arrayfun from "../datatype/arrayfun.ts";
 
 /**
  * @function round
@@ -37,13 +37,13 @@ import arrayfun from '../datatype/arrayfun.js';
  * // Example 8: Round a single negative number to 2 decimal places
  * assert.strictEqual(round(-2.34567, 2), -2.35);
  */
-export default function round(x, n = 0) {
+export default function round(x: any, n = 0) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const p = Math.pow(10, n);
-  const _round = (a) => {
+  const _round = (a: any) => {
     const res = Math.round(a * p) / p;
     return res === 0 ? 0 : res;
   };

@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import arrayfun from '../datatype/arrayfun.js';
-import isnumber from '../datatype/isnumber.js';
+import arrayfun from "../datatype/arrayfun.ts";
+import isnumber from "../datatype/isnumber.ts";
 
 /**
  * @function sqrt
@@ -22,9 +22,9 @@ import isnumber from '../datatype/isnumber.js';
  * // Example 3: Square root of a matrix of numbers
  * assert.deepStrictEqual(sqrt([[5, 6, 5], [7, 8, 2]]), [[2.23607, 2.44949, 2.23607], [2.64575, 2.82843, 1.41421]]);
  */
-export default function sqrt(x) {
+export default function sqrt(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   const computeSqrt = Math.sqrt;

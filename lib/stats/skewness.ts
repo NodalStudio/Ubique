@@ -1,7 +1,7 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import moment from './moment.js';
-import vectorfun from '../datatype/vectorfun.js';
+import moment from "./moment.ts";
+import vectorfun from "../datatype/vectorfun.ts";
 
 /**
  * @function skewness
@@ -16,7 +16,7 @@ import vectorfun from '../datatype/vectorfun.js';
  * @throws {Error} If the input arguments are insufficient.
  *
  * @example
- * import skewness from './skewness.js';
+ * import skewness from './skewness.ts';
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
@@ -36,9 +36,9 @@ import vectorfun from '../datatype/vectorfun.js';
  * // Example 5: Compute skewness for a dataset with equal elements (should be NaN)
  * assert.strictEqual(skewness([1, 1, 1, 1, 1]), NaN);
  */
-export default function skewness(x, flag = 1, dim = 0) {
+export default function skewness(x: any, flag = 1, dim = 0) {
   if (x === undefined) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   if (!Array.isArray(x)) {
@@ -48,12 +48,9 @@ export default function skewness(x, flag = 1, dim = 0) {
   return vectorfun(dim, x, computeSkewness, flag);
 }
 
-function computeSkewness(arr, biasFlag) {
+function computeSkewness(arr: any, biasFlag: any) {
   const n = arr.length;
   const mom3 = moment(arr, 3) / moment(arr, 2) ** 1.5;
 
-  return biasFlag === 1
-    ? mom3
-    : Math.sqrt((n - 1) / n) * (n / (n - 2)) * mom3;
+  return biasFlag === 1 ? mom3 : Math.sqrt((n - 1) / n) * (n / (n - 2)) * mom3;
 }
-

@@ -1,4 +1,4 @@
-import { array, matrix } from '../types';
+import { array, matrix } from "../types.d.ts";
 
 /**
  * @function skewness
@@ -28,4 +28,8 @@ import { array, matrix } from '../types';
  * // Example 5: Compute skewness for a dataset with equal elements (should be NaN)
  * assert.strictEqual(skewness([1, 1, 1, 1, 1]), NaN);
  */
-export function skewness(x: array | matrix, flag?: number, dim?: number): number | array | matrix;
+export function skewness(
+  x: array | matrix,
+  flag?: number,
+  dim?: number,
+): number | array | matrix;

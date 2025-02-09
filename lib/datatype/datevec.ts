@@ -1,13 +1,12 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-import toArray from 'dayjs/plugin/toArray.js';
-import customParseFormat from 'dayjs/plugin/customParseFormat.js';
+import { array, matrix } from "../types.d.ts";
+import dayjs from "https://esm.sh/dayjs";
+import utc from "https://esm.sh/dayjs/plugin/utc";
+import toArray from "https://esm.sh/dayjs/plugin/toArray";
+import customParseFormat from "https://esm.sh/dayjs/plugin/customParseFormat";
 
 dayjs.extend(utc);
 dayjs.extend(toArray);
 dayjs.extend(customParseFormat);
-
-/** @import { array, matrix } from '../types' */
 
 /**
  * @function datevec
@@ -15,7 +14,7 @@ dayjs.extend(customParseFormat);
  * @description Converts a given date and time to an array of components such as year, month, day, hour, minute, second, and millisecond.
  * The function supports both date strings and Unix timestamps as input. Input is restricted to either a single value or an array (1D array).
  *
- * @param {string | number | array<string | number>} d The date input, which can be a string, Unix timestamp, or an array of such values.
+ * @param {} d The date input, which can be a string, Unix timestamp, or an array of such values.
  * @param {string} [fmt] The format string to parse the date if the input is a date string.
  * @returns {array | matrix} An array or an array of arrays containing the date components.
  *
@@ -47,26 +46,29 @@ dayjs.extend(customParseFormat);
  * // Example 9: Convert an array of mixed Unix timestamps and date strings to an array of arrays
  * assert.deepStrictEqual(datevec([1428236430, '2015-01-01 03:34:05'], 'YYYY-MM-DD HH:mm:ss'), [[2015, 4, 5, 12, 20, 30, 0], [2015, 1, 1, 3, 34, 5, 0]]);
  */
-export default function datevec(d, fmt) {
+export default function datevec(
+  d: string | number | array<string | number>,
+  fmt: string,
+): array | matrix {
   if (!d) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
-  const parseDate = (input, format) => {
+  const parseDate = (input: any, format: any) => {
     let parsedDate;
 
-    if (typeof input === 'string') {
+    if (typeof input === "string") {
       if (!format) {
-        throw new Error('Insert format for date string');
+        throw new Error("Insert format for date string");
       }
 
       // If 'Z' is in the format string, assume UTC conversion is needed
-      if (format.includes('Z')) {
+      if (format.includes("Z")) {
         parsedDate = dayjs(input, format).utc();
       } else {
         parsedDate = dayjs(input, format).local();
       }
-    } else if (typeof input === 'number') {
+    } else if (typeof input === "number") {
       // Multiply by 1000 if the input is a 10-digit Unix timestamp
       if (input.toString().length === 10) {
         input *= 1000;
@@ -74,7 +76,7 @@ export default function datevec(d, fmt) {
 
       parsedDate = dayjs(input).utc();
     } else {
-      throw new Error('Input must be a string or Unix timestamp');
+      throw new Error("Input must be a string or Unix timestamp");
     }
 
     const dateArray = parsedDate.toArray();

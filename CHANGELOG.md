@@ -6,15 +6,19 @@
 
 ### 0.5.0 - 20150622
 
-- MAJOR UPDATE: changed some basic structure, now `Array` follows the natural `1xN` dimension (row-major). `Arrayfun` and `Vectorfun` are optimized to managed variabile inputs arguments for both arrays and matrices. 
-- Matrices: removed `row` and `col`. Now it's possible to get values with `getrow` and `getvalue` and set values with `setrow` and `setcol`.
+- MAJOR UPDATE: changed some basic structure, now `Array` follows the natural
+  `1xN` dimension (row-major). `Arrayfun` and `Vectorfun` are optimized to
+  managed variabile inputs arguments for both arrays and matrices.
+- Matrices: removed `row` and `col`. Now it's possible to get values with
+  `getrow` and `getvalue` and set values with `setrow` and `setcol`.
 - Removed: `NaN`, `uplus`
 - Added: `strfind`,`argsarray`
 - Modified: `yahoo`, added `yahooSync`
 
 ### 0.2.0 - 20150504
 
-- Added new folder _datafeed_ with `yahoo` function to download historical stock data
+- Added new folder _datafeed_ with `yahoo` function to download historical stock
+  data
 - Added: `clock`, `today`, `datevec`
 - Modified: `datenum`, `datestr`
 
@@ -31,7 +35,8 @@
 
 ### 0.1.7 - 20150406
 
-- Added in _quants_ `martinratio`, `painindex`, `painratio`,`sterlingratio`,`m2sortino`
+- Added in _quants_ `martinratio`, `painindex`,
+  `painratio`,`sterlingratio`,`m2sortino`
 - Modified: `ulcerindex`,`sortino`
 
 ### 0.1.6 - 20150329
@@ -65,9 +70,10 @@
 
 ### 0.1.1 - 20150227
 
-- Fixed `size`,`squeeze`,`subset`(it's possible to get a whole col/row with ':' symbol),
-`subsetlin`
-- New time series functions: `datenum`,`datestr`,`month`,`weekday`,`toweekly`,`tomonthly`
+- Fixed `size`,`squeeze`,`subset`(it's possible to get a whole col/row with ':'
+  symbol), `subsetlin`
+- New time series functions:
+  `datenum`,`datestr`,`month`,`weekday`,`toweekly`,`tomonthly`
 - Added `unique`,`find`
 - Added dependency `moment.js` for date time manipulation
 
@@ -84,27 +90,30 @@
 - Modified some _test_ functions
 - Added in _quants_ `cdrawdown`, deleted `maxdrawdown`,`riskretratio`
 - Modified `avgdrawdown`,`drawdown`,`montecarlovar`,`omegaratio`,`sharpe`,
-`sortino`,`trackerr`,`treynor`,`ulcerindex`,`xreturn`
+  `sortino`,`trackerr`,`treynor`,`ulcerindex`,`xreturn`
 - Added folder _util_ with `format`
-- Added in _matarrs_ `array` 
+- Added in _matarrs_ `array`
 - Modified `matrix` and `drawdown`
-- Changed README 
-- Added in _quants_ `histvar`,`histcondvar`,`sharpe`,`adjsharpe`,`annavgrisk`,`downsiderisk`,
+- Changed README
+- Added in _quants_
+  `histvar`,`histcondvar`,`sharpe`,`adjsharpe`,`annavgrisk`,`downsiderisk`,
   `paramvar`,`paramcondvar`,`downsidepot`,`upsidepot`,`modigliani`,`inforatio`,`jensenalpha`
-- Modified `isvector`,`linearreg` 
+- Modified `isvector`,`linearreg`
 
 ### 0.0.7 - 20150119
 
 - Update README file with comparative MATLAB® vs ubique
 - Modified `end`, `mldivide`, `mrdivide`, `flipud`, `fliprl`
 - Renamed `flip` in `flipdim`
-- Added functions in _quants_ `annavgreturn`,`annreturn`,`cagr`,`irr`,`mdietz`,`percpos`,`ror`,`twr`,`xreturn`
+- Added functions in _quants_
+  `annavgreturn`,`annreturn`,`cagr`,`irr`,`mdietz`,`percpos`,`ror`,`twr`,`xreturn`
 
 ### 0.0.6 - 20150115
 
 - Added Install methods: Git, Npm, Bower.
 - Added minified version in _dist_ folder
-- Added `gulpfile.js` for bundle, minify `npm run build` and watch  `npm run watch`
+- Added `gulpfile.js` for bundle, minify `npm run build` and watch
+  `npm run watch`
 
 ### 0.0.5 - 20150114
 
@@ -118,14 +127,15 @@
 - Added in _statrnd_ `jbtest`,`pdist`
 - Added in _test\util_ `arrayTestUtils`
 - Added some test functions
-- Bugfix 
+- Bugfix
 
 ### 0.0.3 - 20150103
 
 - Added _test_ folder
 - Added _interpol_ folder with `interp1` function
 - Added _regressmod_ folder with `linearreg` function
-- Added in _statrnd_ `hurst`,`iqr`,`kurtosis`,`moment`,`prctile`,`quantile`,`quartile`,`skewness`,`xkurtosis`
+- Added in _statrnd_
+  `hurst`,`iqr`,`kurtosis`,`moment`,`prctile`,`quantile`,`quartile`,`skewness`,`xkurtosis`
 
 ### 0.0.2 - 20141231
 

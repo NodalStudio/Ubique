@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import isarray from '../datatype/isarray.js';
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function falses
@@ -27,9 +27,9 @@ import isarray from '../datatype/isarray.js';
  * // Example 5: Create a 2x3 matrix of `false`
  * console.log(falses(2, 3)); // [ [ false, false, false ], [ false, false, false ] ]
  */
-export default function falses(...args) {
+export default function falses(...args: any[]) {
   if (args.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   let rows, cols;
@@ -43,7 +43,7 @@ export default function falses(...args) {
   } else if (args.length === 2) {
     [rows, cols] = args;
   } else {
-    throw new Error('Invalid input arguments');
+    throw new Error("Invalid input arguments");
   }
 
   const result = [];

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import lt from '../../lib/elemop/lt.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import lt from "../../lib/elemop/lt.js";
 
 // Example 1: Comparison between two numbers
 assert.strictEqual(lt(5, 5), false);
@@ -8,16 +9,25 @@ assert.strictEqual(lt(5, 5), false);
 assert.deepStrictEqual(lt(5, [5, 6, 3]), [false, true, false]);
 
 // Example 3: Comparison between a number and a matrix
-assert.deepStrictEqual(lt(5, [[5, 6], [3, 5]]), [[false, true], [false, false]]);
+assert.deepStrictEqual(lt(5, [[5, 6], [3, 5]]), [[false, true], [
+  false,
+  false,
+]]);
 
 // Example 4: Comparison between an array and a number
 assert.deepStrictEqual(lt([5, 6, 3], 5), [false, false, true]);
 
 // Example 5: Comparison between a matrix and a number
-assert.deepStrictEqual(lt([[5, 6], [3, 5]], 5), [[false, false], [true, false]]);
+assert.deepStrictEqual(lt([[5, 6], [3, 5]], 5), [[false, false], [
+  true,
+  false,
+]]);
 
 // Example 6: Comparison between two arrays
 assert.deepStrictEqual(lt([5, 6, 3], [2, 6, 0]), [false, false, false]);
 
 // Example 7: Comparison between two matrices
-assert.deepStrictEqual(lt([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[false, false], [true, true]]);
+assert.deepStrictEqual(lt([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [
+  [false, false],
+  [true, true],
+]);

@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
+/** @import { array, matrix } from '../types.d.ts' */
 
-import erfc from './erfc.js';
+import erfc from "./erfc.ts";
 
 /**
  * @function erf
@@ -35,9 +35,9 @@ import erfc from './erfc.js';
  * // Example 5: Compute the error function for a large negative value
  * assert.strictEqual(erf(-2), -0.9953222650189527);
  */
-export default function erf(x) {
+export default function erf(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
   return 1 - erfc(x);
 }

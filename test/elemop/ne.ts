@@ -1,5 +1,6 @@
-import assert from 'assert';
-import ne from '../../lib/elemop/ne.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import ne from "../../lib/elemop/ne.js";
 
 // Example 1: Compare two numbers
 assert.strictEqual(ne(5, 5), false);
@@ -20,4 +21,7 @@ assert.deepStrictEqual(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
 assert.deepStrictEqual(ne([5, 6, 3], [2, 6, 0]), [true, false, true]);
 
 // Example 7: Compare two matrices
-assert.deepStrictEqual(ne([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[false, false], [true, true]]);
+assert.deepStrictEqual(ne([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [
+  [false, false],
+  [true, true],
+]);

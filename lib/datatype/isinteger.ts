@@ -1,4 +1,4 @@
-import isnumber from './isnumber.js';
+import isnumber from "./isnumber.ts";
 
 /**
  * @function isinteger
@@ -23,9 +23,9 @@ import isnumber from './isnumber.js';
  * // Example 4: Not a number (null)
  * assert.strictEqual(isinteger(null), false);
  */
-export default function isinteger(x) {
+export default function isinteger(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
   return isnumber(x) && Math.round(x) === x;
 }

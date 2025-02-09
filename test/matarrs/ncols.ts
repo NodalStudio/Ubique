@@ -1,5 +1,6 @@
-import assert from 'assert';
-import ncols from '../../lib/matarrs/ncols.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import ncols from "../../lib/matarrs/ncols.js";
 
 // Example 1: Row vector
 assert.strictEqual(ncols([5, 6, 7]), 3);
@@ -20,13 +21,17 @@ assert.strictEqual(ncols([]), 0);
 assert.strictEqual(ncols([[]]), 0);
 
 // Example 7: Non-array input (should throw an error)
-assert.throws(() => { ncols(5); }, Error);
+assert.throws(() => {
+  ncols(5);
+}, Error);
 
 // Example 8: 2D matrix with a single row
 assert.strictEqual(ncols([[1, 2, 3, 4]]), 4);
 
 // Example 9: 2D matrix with varying row lengths (should throw an error)
-assert.throws(() => { ncols([[1, 2], [3, 4, 5]]); }, Error);
+assert.throws(() => {
+  ncols([[1, 2], [3, 4, 5]]);
+}, Error);
 
 // Example 10: Multi-dimensional array (should be treated as a 2D matrix)
 assert.strictEqual(ncols([[1, 2], [3, 4]]), 2);

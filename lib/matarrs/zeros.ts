@@ -1,6 +1,6 @@
-/** @import { matrix } from '../types' */
+/** @import { matrix } from '../types.d.ts' */
 
-import isarray from '../datatype/isarray.js';
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function zeros
@@ -25,15 +25,11 @@ import isarray from '../datatype/isarray.js';
  * // Example 4: Create a 2x1 matrix of zeros using array input
  * assert.deepStrictEqual(zeros([2, 1]), [[0], [0]]);
  */
-export default function zeros(nrowsOrDims, ncols) {
-  const dimensions = isarray(nrowsOrDims)
-    ? nrowsOrDims
-    : [nrowsOrDims ?? 1];
+export default function zeros(nrowsOrDims: any, ncols: any) {
+  const dimensions = isarray(nrowsOrDims) ? nrowsOrDims : [nrowsOrDims ?? 1];
 
   const [nrows] = dimensions;
   const cols = ncols ?? dimensions[1] ?? nrows;
 
-  return Array.from({ length: nrows },
-    () => Array(cols).fill(0)
-  );
+  return Array.from({ length: nrows }, () => Array(cols).fill(0));
 }

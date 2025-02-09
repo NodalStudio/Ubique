@@ -1,187 +1,320 @@
-// Auto-generated index.js
-import arrayfun from './lib/datatype/arrayfun.js';
-import clock from './lib/datatype/clock.js';
-import datenum from './lib/datatype/datenum.js';
-import datestr from './lib/datatype/datestr.js';
-import datevec from './lib/datatype/datevec.js';
-import isarray from './lib/datatype/isarray.js';
-import isempty from './lib/datatype/isempty.js';
-import isfunction from './lib/datatype/isfunction.js';
-import isinteger from './lib/datatype/isinteger.js';
-import islogical from './lib/datatype/islogical.js';
-import ismatrix from './lib/datatype/ismatrix.js';
-import isnull from './lib/datatype/isnull.js';
-import isnumber from './lib/datatype/isnumber.js';
-import isscalar from './lib/datatype/isscalar.js';
-import issingular from './lib/datatype/issingular.js';
-import isstring from './lib/datatype/isstring.js';
-import isundefined from './lib/datatype/isundefined.js';
-import isvector from './lib/datatype/isvector.js';
-import month from './lib/datatype/month.js';
-import now from './lib/datatype/now.js';
-import randchar from './lib/datatype/randchar.js';
-import strfind from './lib/datatype/strfind.js';
-import today from './lib/datatype/today.js';
-import vectorfun from './lib/datatype/vectorfun.js';
-import weekday from './lib/datatype/weekday.js';
-import ceil from './lib/elemop/ceil.js';
-import cumdev from './lib/elemop/cumdev.js';
-import cummax from './lib/elemop/cummax.js';
-import cummin from './lib/elemop/cummin.js';
-import cumprod from './lib/elemop/cumprod.js';
-import cumsum from './lib/elemop/cumsum.js';
-import diff from './lib/elemop/diff.js';
-import dot from './lib/elemop/dot.js';
-import eq from './lib/elemop/eq.js';
-import floor from './lib/elemop/floor.js';
-import ge from './lib/elemop/ge.js';
-import gt from './lib/elemop/gt.js';
-import ldivide from './lib/elemop/ldivide.js';
-import le from './lib/elemop/le.js';
-import lt from './lib/elemop/lt.js';
-import minus from './lib/elemop/minus.js';
-import mldivide from './lib/elemop/mldivide.js';
-import mod from './lib/elemop/mod.js';
-import mpower from './lib/elemop/mpower.js';
-import mrdivide from './lib/elemop/mrdivide.js';
-import mtimes from './lib/elemop/mtimes.js';
-import ne from './lib/elemop/ne.js';
-import plus from './lib/elemop/plus.js';
-import power from './lib/elemop/power.js';
-import prod from './lib/elemop/prod.js';
-import rdivide from './lib/elemop/rdivide.js';
-import rem from './lib/elemop/rem.js';
-import round from './lib/elemop/round.js';
-import sum from './lib/elemop/sum.js';
-import times from './lib/elemop/times.js';
-import uminus from './lib/elemop/uminus.js';
-import unique from './lib/elemop/unique.js';
-import abs from './lib/elmath/abs.js';
-import erf from './lib/elmath/erf.js';
-import erfc from './lib/elmath/erfc.js';
-import erfcinv from './lib/elmath/erfcinv.js';
-import erfinv from './lib/elmath/erfinv.js';
-import exp from './lib/elmath/exp.js';
-import log from './lib/elmath/log.js';
-import sign from './lib/elmath/sign.js';
-import sqrt from './lib/elmath/sqrt.js';
-import det from './lib/linalgebra/det.js';
-import inv from './lib/linalgebra/inv.js';
-import linsolve from './lib/linalgebra/linsolve.js';
-import lu from './lib/linalgebra/lu.js';
-import cat from './lib/matarrs/cat.js';
-import clone from './lib/matarrs/clone.js';
-import colon from './lib/matarrs/colon.js';
-import diag from './lib/matarrs/diag.js';
-import end from './lib/matarrs/end.js';
-import eye from './lib/matarrs/eye.js';
-import falses from './lib/matarrs/falses.js';
-import find from './lib/matarrs/find.js';
-import fix from './lib/matarrs/fix.js';
-import flatten from './lib/matarrs/flatten.js';
-import flipdim from './lib/matarrs/flipdim.js';
-import fliplr from './lib/matarrs/fliplr.js';
-import flipud from './lib/matarrs/flipud.js';
-import getcol from './lib/matarrs/getcol.js';
-import getrow from './lib/matarrs/getrow.js';
-import horzcat from './lib/matarrs/horzcat.js';
-import ind2sub from './lib/matarrs/ind2sub.js';
-import iscolumn from './lib/matarrs/iscolumn.js';
-import isrow from './lib/matarrs/isrow.js';
-import issquare from './lib/matarrs/issquare.js';
-import length from './lib/matarrs/length.js';
-import linspace from './lib/matarrs/linspace.js';
-import logspace from './lib/matarrs/logspace.js';
-import mergesort from './lib/matarrs/mergesort.js';
-import ncols from './lib/matarrs/ncols.js';
-import ndims from './lib/matarrs/ndims.js';
-import nrows from './lib/matarrs/nrows.js';
-import numel from './lib/matarrs/numel.js';
-import ones from './lib/matarrs/ones.js';
-import rand from './lib/matarrs/rand.js';
-import repmat from './lib/matarrs/repmat.js';
-import reshape from './lib/matarrs/reshape.js';
-import setcol from './lib/matarrs/setcol.js';
-import setrow from './lib/matarrs/setrow.js';
-import size from './lib/matarrs/size.js';
-import sort from './lib/matarrs/sort.js';
-import squeeze from './lib/matarrs/squeeze.js';
-import sub2ind from './lib/matarrs/sub2ind.js';
-import subset from './lib/matarrs/subset.js';
-import subsetlin from './lib/matarrs/subsetlin.js';
-import tomat from './lib/matarrs/tomat.js';
-import transpose from './lib/matarrs/transpose.js';
-import trues from './lib/matarrs/trues.js';
-import vertcat from './lib/matarrs/vertcat.js';
-import zeros from './lib/matarrs/zeros.js';
-import jbtest from './lib/probdistr/jbtest.js';
-import normcdf from './lib/probdistr/normcdf.js';
-import norminv from './lib/probdistr/norminv.js';
-import normpdf from './lib/probdistr/normpdf.js';
-import activereturn from './lib/quants/activereturn.js';
-import adjsharpe from './lib/quants/adjsharpe.js';
-import annadjsharpe from './lib/quants/annadjsharpe.js';
-import annreturn from './lib/quants/annreturn.js';
-import annrisk from './lib/quants/annrisk.js';
-import avgdrawdown from './lib/quants/avgdrawdown.js';
-import burkeratio from './lib/quants/burkeratio.js';
-import cagr from './lib/quants/cagr.js';
-import calmarratio from './lib/quants/calmarratio.js';
-import cdrawdown from './lib/quants/cdrawdown.js';
-import downsidepot from './lib/quants/downsidepot.js';
-import downsiderisk from './lib/quants/downsiderisk.js';
-import drawdown from './lib/quants/drawdown.js';
-import histcondvar from './lib/quants/histcondvar.js';
-import histvar from './lib/quants/histvar.js';
-import hurst from './lib/quants/hurst.js';
-import inforatio from './lib/quants/inforatio.js';
-import irr from './lib/quants/irr.js';
-import jensenalpha from './lib/quants/jensenalpha.js';
-import m2sortino from './lib/quants/m2sortino.js';
-import martinratio from './lib/quants/martinratio.js';
-import mdietz from './lib/quants/mdietz.js';
-import modigliani from './lib/quants/modigliani.js';
-import montecarlovar from './lib/quants/montecarlovar.js';
-import omegaratio from './lib/quants/omegaratio.js';
-import painindex from './lib/quants/painindex.js';
-import painratio from './lib/quants/painratio.js';
-import paramcondvar from './lib/quants/paramcondvar.js';
-import paramvar from './lib/quants/paramvar.js';
-import percpos from './lib/quants/percpos.js';
-import ret2tick from './lib/quants/ret2tick.js';
-import ror from './lib/quants/ror.js';
-import sharpe from './lib/quants/sharpe.js';
-import sortino from './lib/quants/sortino.js';
-import sterlingratio from './lib/quants/sterlingratio.js';
-import tick2ret from './lib/quants/tick2ret.js';
-import tomonthly from './lib/quants/tomonthly.js';
-import toweekly from './lib/quants/toweekly.js';
-import trackerr from './lib/quants/trackerr.js';
-import treynor from './lib/quants/treynor.js';
-import twr from './lib/quants/twr.js';
-import ulcerindex from './lib/quants/ulcerindex.js';
-import upsidepot from './lib/quants/upsidepot.js';
-import corrcoef from './lib/stats/corrcoef.js';
-import cov from './lib/stats/cov.js';
-import histc from './lib/stats/histc.js';
-import iqr from './lib/stats/iqr.js';
-import kurtosis from './lib/stats/kurtosis.js';
-import mad from './lib/stats/mad.js';
-import max from './lib/stats/max.js';
-import mean from './lib/stats/mean.js';
-import median from './lib/stats/median.js';
-import min from './lib/stats/min.js';
-import mode from './lib/stats/mode.js';
-import moment from './lib/stats/moment.js';
-import pdist from './lib/stats/pdist.js';
-import prctile from './lib/stats/prctile.js';
-import quantile from './lib/stats/quantile.js';
-import quartile from './lib/stats/quartile.js';
-import range from './lib/stats/range.js';
-import skewness from './lib/stats/skewness.js';
-import std from './lib/stats/std.js';
-import varc from './lib/stats/varc.js';
-import xkurtosis from './lib/stats/xkurtosis.js';
-import zscore from './lib/stats/zscore.js';
+// Auto-generated index.ts
+import isarray from "./lib/datatype/isarray.ts";
+import isinteger from "./lib/datatype/isinteger.ts";
+import isstring from "./lib/datatype/isstring.ts";
+import issingular from "./lib/datatype/issingular.ts";
+import randchar from "./lib/datatype/randchar.ts";
+import isfunction from "./lib/datatype/isfunction.ts";
+import datestr from "./lib/datatype/datestr.ts";
+import clock from "./lib/datatype/clock.ts";
+import weekday from "./lib/datatype/weekday.ts";
+import vectorfun from "./lib/datatype/vectorfun.ts";
+import isundefined from "./lib/datatype/isundefined.ts";
+import ismatrix from "./lib/datatype/ismatrix.ts";
+import isnumber from "./lib/datatype/isnumber.ts";
+import now from "./lib/datatype/now.ts";
+import today from "./lib/datatype/today.ts";
+import strfind from "./lib/datatype/strfind.ts";
+import datevec from "./lib/datatype/datevec.ts";
+import arrayfun from "./lib/datatype/arrayfun.ts";
+import isempty from "./lib/datatype/isempty.ts";
+import isscalar from "./lib/datatype/isscalar.ts";
+import month from "./lib/datatype/month.ts";
+import datenum from "./lib/datatype/datenum.ts";
+import isvector from "./lib/datatype/isvector.ts";
+import isnull from "./lib/datatype/isnull.ts";
+import islogical from "./lib/datatype/islogical.ts";
+import lu from "./lib/linalgebra/lu.ts";
+import inv from "./lib/linalgebra/inv.ts";
+import linsolve from "./lib/linalgebra/linsolve.ts";
+import det from "./lib/linalgebra/det.ts";
+// import max from './lib/stats/max.ts';
+import mean from "./lib/stats/mean.ts";
+// import mode from './lib/stats/mode.ts';
+// import pdist from './lib/stats/pdist.ts';
+// import quartile from './lib/stats/quartile.ts';
+// import median from './lib/stats/median.ts';
+// import histc from './lib/stats/histc.ts';
+// import mad from './lib/stats/mad.ts';
+// import cov from './lib/stats/cov.ts';
+// import range from './lib/stats/range.ts';
+// import zscore from './lib/stats/zscore.ts';
+import varc from "./lib/stats/varc.ts";
+// import min from './lib/stats/min.ts';
+import moment from "./lib/stats/moment.ts";
+// import corrcoef from './lib/stats/corrcoef.ts';
+import std from "./lib/stats/std.ts";
+// import prctile from './lib/stats/prctile.ts';
+// import xkurtosis from './lib/stats/xkurtosis.ts';
+import skewness from "./lib/stats/skewness.ts";
+// import iqr from './lib/stats/iqr.ts';
+import kurtosis from "./lib/stats/kurtosis.ts";
+// import quantile from './lib/stats/quantile.ts';
+import jbtest from "./lib/probdistr/jbtest.ts";
+import norminv from "./lib/probdistr/norminv.ts";
+import normcdf from "./lib/probdistr/normcdf.ts";
+import normpdf from "./lib/probdistr/normpdf.ts";
+// import painratio from './lib/quants/painratio.ts';
+// import jensenalpha from './lib/quants/jensenalpha.ts';
+import annadjsharpe from "./lib/quants/annadjsharpe.ts";
+// import trackerr from './lib/quants/trackerr.ts';
+import activereturn from "./lib/quants/activereturn.ts";
+// import twr from './lib/quants/twr.ts';
+import avgdrawdown from "./lib/quants/avgdrawdown.ts";
+// import m2sortino from './lib/quants/m2sortino.ts';
+// import ulcerindex from './lib/quants/ulcerindex.ts';
+// import toweekly from './lib/quants/toweekly.ts';
+// import sterlingratio from './lib/quants/sterlingratio.ts';
+// import calmarratio from './lib/quants/calmarratio.ts';
+import cdrawdown from "./lib/quants/cdrawdown.ts";
+// import ror from './lib/quants/ror.ts';
+// import drawdown from './lib/quants/drawdown.ts';
+// import paramcondvar from './lib/quants/paramcondvar.ts';
+// import painindex from './lib/quants/painindex.ts';
+// import martinratio from './lib/quants/martinratio.ts';
+import annreturn from "./lib/quants/annreturn.ts";
+import annrisk from "./lib/quants/annrisk.ts";
+// import paramvar from './lib/quants/paramvar.ts';
+// import ret2tick from './lib/quants/ret2tick.ts';
+import sharpe from "./lib/quants/sharpe.ts";
+// import modigliani from './lib/quants/modigliani.ts';
+// import percpos from './lib/quants/percpos.ts';
+// import omegaratio from './lib/quants/omegaratio.ts';
+// import inforatio from './lib/quants/inforatio.ts';
+// import downsidepot from './lib/quants/downsidepot.ts';
+// import irr from './lib/quants/irr.ts';
+// import hurst from './lib/quants/hurst.ts';
+// import montecarlovar from './lib/quants/montecarlovar.ts';
+// import tomonthly from './lib/quants/tomonthly.ts';
+// import sortino from './lib/quants/sortino.ts';
+// import adjsharpe from './lib/quants/adjsharpe.ts';
+// import tick2ret from './lib/quants/tick2ret.ts';
+// import burkeratio from './lib/quants/burkeratio.ts';
+// import histcondvar from './lib/quants/histcondvar.ts';
+// import upsidepot from './lib/quants/upsidepot.ts';
+// import cagr from './lib/quants/cagr.ts';
+// import mdietz from './lib/quants/mdietz.ts';
+// import downsiderisk from './lib/quants/downsiderisk.ts';
+// import histvar from './lib/quants/histvar.ts';
+// import treynor from './lib/quants/treynor.ts';
+import ones from "./lib/matarrs/ones.ts";
+import fix from "./lib/matarrs/fix.ts";
+import reshape from "./lib/matarrs/reshape.ts";
+import logspace from "./lib/matarrs/logspace.ts";
+import getrow from "./lib/matarrs/getrow.ts";
+import fliplr from "./lib/matarrs/fliplr.ts";
+import trues from "./lib/matarrs/trues.ts";
+import flatten from "./lib/matarrs/flatten.ts";
+import squeeze from "./lib/matarrs/squeeze.ts";
+import nrows from "./lib/matarrs/nrows.ts";
+import issquare from "./lib/matarrs/issquare.ts";
+import flipdim from "./lib/matarrs/flipdim.ts";
+import subsetlin from "./lib/matarrs/subsetlin.ts";
+import vertcat from "./lib/matarrs/vertcat.ts";
+import setrow from "./lib/matarrs/setrow.ts";
+import getcol from "./lib/matarrs/getcol.ts";
+import setcol from "./lib/matarrs/setcol.ts";
+import repmat from "./lib/matarrs/repmat.ts";
+import diag from "./lib/matarrs/diag.ts";
+import horzcat from "./lib/matarrs/horzcat.ts";
+import tomat from "./lib/matarrs/tomat.ts";
+import end from "./lib/matarrs/end.ts";
+import zeros from "./lib/matarrs/zeros.ts";
+import cat from "./lib/matarrs/cat.ts";
+import size from "./lib/matarrs/size.ts";
+import rand from "./lib/matarrs/rand.ts";
+import subset from "./lib/matarrs/subset.ts";
+import eye from "./lib/matarrs/eye.ts";
+import numel from "./lib/matarrs/numel.ts";
+import falses from "./lib/matarrs/falses.ts";
+import ndims from "./lib/matarrs/ndims.ts";
+import find from "./lib/matarrs/find.ts";
+import colon from "./lib/matarrs/colon.ts";
+import ncols from "./lib/matarrs/ncols.ts";
+import transpose from "./lib/matarrs/transpose.ts";
+import clone from "./lib/matarrs/clone.ts";
+import iscolumn from "./lib/matarrs/iscolumn.ts";
+import isrow from "./lib/matarrs/isrow.ts";
+import ind2sub from "./lib/matarrs/ind2sub.ts";
+import flipud from "./lib/matarrs/flipud.ts";
+import sort from "./lib/matarrs/sort.ts";
+import linspace from "./lib/matarrs/linspace.ts";
+import sub2ind from "./lib/matarrs/sub2ind.ts";
+import length from "./lib/matarrs/length.ts";
+import mergesort from "./lib/matarrs/mergesort.ts";
+import exp from "./lib/elmath/exp.ts";
+import log from "./lib/elmath/log.ts";
+import erfc from "./lib/elmath/erfc.ts";
+import erfinv from "./lib/elmath/erfinv.ts";
+import erfcinv from "./lib/elmath/erfcinv.ts";
+import sign from "./lib/elmath/sign.ts";
+import abs from "./lib/elmath/abs.ts";
+import erf from "./lib/elmath/erf.ts";
+import sqrt from "./lib/elmath/sqrt.ts";
+import ceil from "./lib/elemop/ceil.ts";
+import eq from "./lib/elemop/eq.ts";
+import cumprod from "./lib/elemop/cumprod.ts";
+import rem from "./lib/elemop/rem.ts";
+import gt from "./lib/elemop/gt.ts";
+import times from "./lib/elemop/times.ts";
+import diff from "./lib/elemop/diff.ts";
+import cumsum from "./lib/elemop/cumsum.ts";
+import round from "./lib/elemop/round.ts";
+import cumdev from "./lib/elemop/cumdev.ts";
+import floor from "./lib/elemop/floor.ts";
+import uminus from "./lib/elemop/uminus.ts";
+import ne from "./lib/elemop/ne.ts";
+import power from "./lib/elemop/power.ts";
+import prod from "./lib/elemop/prod.ts";
+import rdivide from "./lib/elemop/rdivide.ts";
+import mldivide from "./lib/elemop/mldivide.ts";
+import cummax from "./lib/elemop/cummax.ts";
+import lt from "./lib/elemop/lt.ts";
+import mtimes from "./lib/elemop/mtimes.ts";
+import minus from "./lib/elemop/minus.ts";
+import cummin from "./lib/elemop/cummin.ts";
+import mrdivide from "./lib/elemop/mrdivide.ts";
+import ldivide from "./lib/elemop/ldivide.ts";
+import mod from "./lib/elemop/mod.ts";
+import le from "./lib/elemop/le.ts";
+import ge from "./lib/elemop/ge.ts";
+import dot from "./lib/elemop/dot.ts";
+import plus from "./lib/elemop/plus.ts";
+import unique from "./lib/elemop/unique.ts";
+import sum from "./lib/elemop/sum.ts";
+import mpower from "./lib/elemop/mpower.ts";
 
-export { arrayfun, clock, datenum, datestr, datevec, isarray, isempty, isfunction, isinteger, islogical, ismatrix, isnull, isnumber, isscalar, issingular, isstring, isundefined, isvector, month, now, randchar, strfind, today, vectorfun, weekday, ceil, cumdev, cummax, cummin, cumprod, cumsum, diff, dot, eq, floor, ge, gt, ldivide, le, lt, minus, mldivide, mod, mpower, mrdivide, mtimes, ne, plus, power, prod, rdivide, rem, round, sum, times, uminus, unique, abs, erf, erfc, erfcinv, erfinv, exp, log, sign, sqrt, det, inv, linsolve, lu, cat, clone, colon, diag, end, eye, falses, find, fix, flatten, flipdim, fliplr, flipud, getcol, getrow, horzcat, ind2sub, iscolumn, isrow, issquare, length, linspace, logspace, mergesort, ncols, ndims, nrows, numel, ones, rand, repmat, reshape, setcol, setrow, size, sort, squeeze, sub2ind, subset, subsetlin, tomat, transpose, trues, vertcat, zeros, jbtest, normcdf, norminv, normpdf, activereturn, adjsharpe, annadjsharpe, annreturn, annrisk, avgdrawdown, burkeratio, cagr, calmarratio, cdrawdown, downsidepot, downsiderisk, drawdown, histcondvar, histvar, hurst, inforatio, irr, jensenalpha, m2sortino, martinratio, mdietz, modigliani, montecarlovar, omegaratio, painindex, painratio, paramcondvar, paramvar, percpos, ret2tick, ror, sharpe, sortino, sterlingratio, tick2ret, tomonthly, toweekly, trackerr, treynor, twr, ulcerindex, upsidepot, corrcoef, cov, histc, iqr, kurtosis, mad, max, mean, median, min, mode, moment, pdist, prctile, quantile, quartile, range, skewness, std, varc, xkurtosis, zscore };
+export {
+  abs,
+  activereturn,
+  annadjsharpe,
+  annreturn,
+  annrisk,
+  arrayfun,
+  avgdrawdown,
+  cat,
+  cdrawdown,
+  ceil,
+  clock,
+  clone,
+  colon,
+  cumdev,
+  cummax,
+  cummin,
+  cumprod,
+  cumsum,
+  datenum,
+  datestr,
+  datevec,
+  det,
+  diag,
+  diff,
+  dot,
+  end,
+  eq,
+  erf,
+  erfc,
+  erfcinv,
+  erfinv,
+  exp,
+  eye,
+  falses,
+  find,
+  fix,
+  flatten,
+  flipdim,
+  fliplr,
+  flipud,
+  floor,
+  ge,
+  getcol,
+  getrow,
+  gt,
+  horzcat,
+  ind2sub,
+  inv,
+  isarray,
+  iscolumn,
+  isempty,
+  isfunction,
+  isinteger,
+  islogical,
+  ismatrix,
+  isnull,
+  isnumber,
+  isrow,
+  isscalar,
+  issingular,
+  issquare,
+  isstring,
+  isundefined,
+  isvector,
+  jbtest,
+  kurtosis,
+  ldivide,
+  le,
+  length,
+  linsolve,
+  linspace,
+  log,
+  logspace,
+  lt,
+  lu,
+  mean,
+  mergesort,
+  minus,
+  mldivide,
+  mod,
+  moment,
+  month,
+  mpower,
+  mrdivide,
+  mtimes,
+  ncols,
+  ndims,
+  ne,
+  normcdf,
+  norminv,
+  normpdf,
+  now,
+  nrows,
+  numel,
+  ones,
+  plus,
+  power,
+  prod,
+  rand,
+  randchar,
+  rdivide,
+  rem,
+  repmat,
+  reshape,
+  round,
+  setcol,
+  setrow,
+  sharpe,
+  sign,
+  size,
+  skewness,
+  sort,
+  sqrt,
+  squeeze,
+  std,
+  strfind,
+  sub2ind,
+  subset,
+  subsetlin,
+  sum,
+  times,
+  today,
+  tomat,
+  transpose,
+  trues,
+  uminus,
+  unique,
+  varc,
+  vectorfun,
+  vertcat,
+  weekday,
+  zeros,
+};

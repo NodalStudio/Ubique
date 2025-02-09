@@ -1,5 +1,6 @@
-import assert from 'assert';
-import round from '../../lib/elemop/round.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import round from "../../lib/elemop/round.js";
 
 // Example 1: Round a number to 12 decimal places
 assert.strictEqual(round(Math.PI, 12), 3.14159265359);
@@ -14,7 +15,10 @@ assert.deepStrictEqual(round([-1.9, -0.2, 3.4, 5.6, 7.0]), [-2, 0, 3, 6, 7]);
 assert.deepStrictEqual(round([[1.45, -2.3], [1.1, -4.3]]), [[1, -2], [1, -4]]);
 
 // Example 5: Round a matrix of numbers to 1 decimal place
-assert.deepStrictEqual(round([[1.456, -2.354], [1.123, -4.345]], 1), [[1.5, -2.4], [1.1, -4.3]]);
+assert.deepStrictEqual(round([[1.456, -2.354], [1.123, -4.345]], 1), [[
+  1.5,
+  -2.4,
+], [1.1, -4.3]]);
 
 // Example 6: Round a single number without specifying decimal places
 assert.strictEqual(round(5.678), 6);

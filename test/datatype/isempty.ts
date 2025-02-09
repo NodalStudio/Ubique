@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isempty from '../../lib/datatype/isempty.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isempty from "../../lib/datatype/isempty.js";
 
 // Example 1: An empty array
 assert.strictEqual(isempty([]), true);

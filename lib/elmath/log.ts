@@ -1,6 +1,6 @@
-/** @import { array, matrix } from '../types' */
-import arrayfun from '../datatype/arrayfun.js';
-import isnumber from '../datatype/isnumber.js';
+/** @import { array, matrix } from '../types.d.ts' */
+import arrayfun from "../datatype/arrayfun.ts";
+import isnumber from "../datatype/isnumber.ts";
 
 /**
  * @function log
@@ -24,9 +24,9 @@ import isnumber from '../datatype/isnumber.js';
  *   [1.94591, 2.07944, 0.69315]
  * ]);
  */
-export default function log(x) {
+export default function log(x: any) {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   const computeLog = Math.log;

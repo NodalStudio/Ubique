@@ -1,4 +1,4 @@
-import erf from '../elmath/erf.js';
+import erf from "../elmath/erf.ts";
 
 /**
  * @function normcdf
@@ -13,7 +13,7 @@ import erf from '../elmath/erf.js';
  * @throws {Error} If `sigma` is not a positive number.
  *
  * @example
- * import normcdf from './normcdf.js';
+ * import normcdf from './normcdf.ts';
  *
  * // Example 1: Compute standard normal CDF at x = 2
  * assert.strictEqual(normcdf(2), 0.97725);
@@ -30,9 +30,9 @@ import erf from '../elmath/erf.js';
  * // Example 5: Compute normal CDF for a very large value (should be close to 1)
  * assert.strictEqual(normcdf(100, 50, 10), 1);
  */
-export default function normcdf(x, mu = 0, sigma = 1) {
+export default function normcdf(x: any, mu = 0, sigma = 1) {
   if (sigma <= 0) {
-    throw new Error('Standard deviation must be a positive number');
+    throw new Error("Standard deviation must be a positive number");
   }
 
   const z = (x - mu) / (sigma * Math.sqrt(2));

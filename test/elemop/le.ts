@@ -1,5 +1,6 @@
-import assert from 'assert';
-import le from '../../lib/elemop/le.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import le from "../../lib/elemop/le.js";
 
 // Example 1: Comparison between two numbers
 assert.strictEqual(le(5, 5), true);
@@ -20,4 +21,7 @@ assert.deepStrictEqual(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
 assert.deepStrictEqual(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
 
 // Example 7: Comparison between two matrices
-assert.deepStrictEqual(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+assert.deepStrictEqual(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [
+  true,
+  true,
+]]);

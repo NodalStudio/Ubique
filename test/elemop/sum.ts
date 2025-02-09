@@ -1,5 +1,6 @@
-import assert from 'assert';
-import sum from '../../lib/elemop/sum.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import sum from "../../lib/elemop/sum.js";
 
 // Example 1: Sum of elements in a 1D array
 assert.strictEqual(sum([5, 6, 3]), 14);

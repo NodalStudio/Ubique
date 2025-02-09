@@ -1,9 +1,9 @@
-/** @import { matrix } from '../types' */
+/** @import { matrix } from '../types.d.ts' */
 
-import clone from '../matarrs/clone.js';
-import nrows from '../matarrs/nrows.js';
-import ncols from '../matarrs/ncols.js';
-import zeros from '../matarrs/zeros.js';
+import clone from "../matarrs/clone.ts";
+import nrows from "../matarrs/nrows.ts";
+import ncols from "../matarrs/ncols.ts";
+import zeros from "../matarrs/zeros.ts";
 
 /**
  * @function lu
@@ -13,120 +13,120 @@ import zeros from '../matarrs/zeros.js';
  *
  * @param {matrix} x The input matrix.
  * @returns {{
-*   LU: matrix;  // Combined LU matrix
-*   L: matrix;   // Lower triangular matrix
-*   U: matrix;   // Upper triangular matrix
-*   P: array;    // Pivot vector (zero-based)
-*   S: number;   // Pivot sign (+1 or -1)
-* }}
-* @throws {Error} If no input arguments are provided.
-*
-* @example
-* // Example 1: LU decomposition of a 2x2 square matrix
-* assert.deepStrictEqual(lu([[3, 2], [5, 2]]), {
-*   LU: [
-*     [5, 2],
-*     [0.6, 0.8]
-*   ],
-*   L: [
-*     [1, 0],
-*     [0.6, 1]
-*   ],
-*   U: [
-*     [5, 2],
-*     [0, 0.8]
-*   ],
-*   P: [1, 0],
-*   S: -1
-* });
-*
-* // Example 2: LU decomposition of a 3x3 square matrix
-* assert.deepStrictEqual(lu([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), {
-*   LU: [
-*     [2, 3, 1],
-*     [0.5, -3.5, 2.5],
-*     [0.5, -0.42857142857142855, -0.7142857142857143]
-*   ],
-*   L: [
-*     [1, 0, 0],
-*     [0.5, 1, 0],
-*     [0.5, -0.42857142857142855, 1]
-*   ],
-*   U: [
-*     [2, 3, 1],
-*     [0, -3.5, 2.5],
-*     [0, 0, -0.7142857142857143]
-*   ],
-*   P: [2, 0, 1],
-*   S: 1
-* });
-*
-* // Example 3: LU decomposition of a 2x3 rectangular matrix
-* assert.deepStrictEqual(lu([[5, 6, 5], [7, 8, -1]]), {
-*   LU: [
-*     [7, 8, -1],
-*     [0.714286, 0.285714, 5.714286]
-*   ],
-*   L: [
-*     [1, 0],
-*     [0.714286, 1]
-*   ],
-*   U: [
-*     [7, 8, -1],
-*     [0, 0.285714, 5.714286]
-*   ],
-*   P: [1, 0],
-*   S: -1
-* });
-*
-* // Example 4: LU decomposition of a singular 3x3 matrix
-* assert.deepStrictEqual(lu([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), {
-*   LU: [
-*     [7, 8, 9],
-*     [0.142857, 0.857143, 1.285714],
-*     [0.571429, 0.5, 0]
-*   ],
-*   L: [
-*     [1, 0, 0],
-*     [0.571429, 1, 0],
-*     [0.142857, 0.5, 1]
-*   ],
-*   U: [
-*     [7, 8, 9],
-*     [0, 0.857143, 1.285714],
-*     [0, 0, 0]
-*   ],
-*   P: [2, 0, 1],
-*   S: 1
-* });
-*
-* // Example 5: LU decomposition of a 3x2 rectangular matrix
-* assert.deepStrictEqual(lu([[1, 2], [3, 4], [5, 6]]), {
-*   LU: [
-*     [5, 6],
-*     [0.6, 0.4],
-*     [0.2, 0]
-*   ],
-*   L: [
-*     [1, 0],
-*     [0.6, 1],
-*     [0.2, 0]
-*   ],
-*   U: [
-*     [5, 6],
-*     [0, 0.4],
-*     [0, 0]
-*   ],
-*   P: [2, 1, 0],
-*   S: 1
-* });
-*
-* // Example 6: Error when input is not provided
-* assert.throws(() => lu(), Error, 'not enough input arguments');
-*/
-export default function lu(x) {
+ *   LU: matrix;  // Combined LU matrix
+ *   L: matrix;   // Lower triangular matrix
+ *   U: matrix;   // Upper triangular matrix
+ *   P: array;    // Pivot vector (zero-based)
+ *   S: number;   // Pivot sign (+1 or -1)
+ * }}
+ * @throws {Error} If no input arguments are provided.
+ *
+ * @example
+ * // Example 1: LU decomposition of a 2x2 square matrix
+ * assert.deepStrictEqual(lu([[3, 2], [5, 2]]), {
+ *   LU: [
+ *     [5, 2],
+ *     [0.6, 0.8]
+ *   ],
+ *   L: [
+ *     [1, 0],
+ *     [0.6, 1]
+ *   ],
+ *   U: [
+ *     [5, 2],
+ *     [0, 0.8]
+ *   ],
+ *   P: [1, 0],
+ *   S: -1
+ * });
+ *
+ * // Example 2: LU decomposition of a 3x3 square matrix
+ * assert.deepStrictEqual(lu([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), {
+ *   LU: [
+ *     [2, 3, 1],
+ *     [0.5, -3.5, 2.5],
+ *     [0.5, -0.42857142857142855, -0.7142857142857143]
+ *   ],
+ *   L: [
+ *     [1, 0, 0],
+ *     [0.5, 1, 0],
+ *     [0.5, -0.42857142857142855, 1]
+ *   ],
+ *   U: [
+ *     [2, 3, 1],
+ *     [0, -3.5, 2.5],
+ *     [0, 0, -0.7142857142857143]
+ *   ],
+ *   P: [2, 0, 1],
+ *   S: 1
+ * });
+ *
+ * // Example 3: LU decomposition of a 2x3 rectangular matrix
+ * assert.deepStrictEqual(lu([[5, 6, 5], [7, 8, -1]]), {
+ *   LU: [
+ *     [7, 8, -1],
+ *     [0.714286, 0.285714, 5.714286]
+ *   ],
+ *   L: [
+ *     [1, 0],
+ *     [0.714286, 1]
+ *   ],
+ *   U: [
+ *     [7, 8, -1],
+ *     [0, 0.285714, 5.714286]
+ *   ],
+ *   P: [1, 0],
+ *   S: -1
+ * });
+ *
+ * // Example 4: LU decomposition of a singular 3x3 matrix
+ * assert.deepStrictEqual(lu([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), {
+ *   LU: [
+ *     [7, 8, 9],
+ *     [0.142857, 0.857143, 1.285714],
+ *     [0.571429, 0.5, 0]
+ *   ],
+ *   L: [
+ *     [1, 0, 0],
+ *     [0.571429, 1, 0],
+ *     [0.142857, 0.5, 1]
+ *   ],
+ *   U: [
+ *     [7, 8, 9],
+ *     [0, 0.857143, 1.285714],
+ *     [0, 0, 0]
+ *   ],
+ *   P: [2, 0, 1],
+ *   S: 1
+ * });
+ *
+ * // Example 5: LU decomposition of a 3x2 rectangular matrix
+ * assert.deepStrictEqual(lu([[1, 2], [3, 4], [5, 6]]), {
+ *   LU: [
+ *     [5, 6],
+ *     [0.6, 0.4],
+ *     [0.2, 0]
+ *   ],
+ *   L: [
+ *     [1, 0],
+ *     [0.6, 1],
+ *     [0.2, 0]
+ *   ],
+ *   U: [
+ *     [5, 6],
+ *     [0, 0.4],
+ *     [0, 0]
+ *   ],
+ *   P: [2, 1, 0],
+ *   S: 1
+ * });
+ *
+ * // Example 6: Error when input is not provided
+ * assert.throws(() => lu(), Error, 'not enough input arguments');
+ */
+export default function lu(x: any) {
   if (arguments.length === 0) {
-    throw new Error('Not enough input arguments');
+    throw new Error("Not enough input arguments");
   }
 
   const m = nrows(x); // Number of rows
@@ -178,7 +178,7 @@ export default function lu(x) {
  * @param {number} row2 The index of the second row.
  * @param {number} n The number of columns.
  */
-function swapRows(A, row1, row2, n) {
+function swapRows(A: any, row1: any, row2: any, n: any) {
   for (let k = 0; k < n; k++) {
     const temp = A[row1][k];
     A[row1][k] = A[row2][k];
@@ -191,7 +191,7 @@ function swapRows(A, row1, row2, n) {
  * @param {matrix} LU The LU matrix.
  * @returns {matrix} The lower triangular matrix.
  */
-function extractLowerTriangular(LU) {
+function extractLowerTriangular(LU: any) {
   const m = nrows(LU);
   const n = ncols(LU);
   const L = zeros(m, n);
@@ -208,7 +208,7 @@ function extractLowerTriangular(LU) {
  * @param {matrix} LU The LU matrix.
  * @returns {matrix} The upper triangular matrix.
  */
-function extractUpperTriangular(LU) {
+function extractUpperTriangular(LU: any) {
   const m = nrows(LU);
   const n = ncols(LU);
   const U = zeros(m, n);

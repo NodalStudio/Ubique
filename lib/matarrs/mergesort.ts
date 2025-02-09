@@ -1,5 +1,5 @@
-import colon from './colon.js';
-import isarray from '../datatype/isarray.js';
+import colon from "./colon.ts";
+import isarray from "../datatype/isarray.ts";
 
 /**
  * @function mergesort
@@ -41,9 +41,10 @@ import isarray from '../datatype/isarray.js';
  *   [1, 3, 0, 2, 4],
  * ]);
  */
-export default function mergesort(x, mode = 'ascend') {
+// @ts-expect-error TS(7023): 'mergesort' implicitly has return type 'any' becau... Remove this comment to see the full error message
+export default function mergesort(x: any, mode = "ascend") {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   if (isarray(x)) {
@@ -63,14 +64,14 @@ export default function mergesort(x, mode = 'ascend') {
   const _sx = [sx, sxi];
   const _dx = [dx, dxi];
 
-  const merge = (sxarr, dxarr, mode) => {
+  const merge = (sxarr: any, dxarr: any, mode: any) => {
     const sorted = [];
     const idx = [];
     while (sxarr[0].length && dxarr[0].length) {
       let compare;
-      if (mode === 'ascend') {
+      if (mode === "ascend") {
         compare = sxarr[0][0] <= dxarr[0][0];
-      } else if (mode === 'descend') {
+      } else if (mode === "descend") {
         compare = sxarr[0][0] >= dxarr[0][0];
       } else {
         throw new Error('sorting must be "ascend" or "descend"');

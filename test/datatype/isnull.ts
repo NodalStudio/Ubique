@@ -1,5 +1,6 @@
-import assert from 'assert';
-import isnull from '../../lib/datatype/isnull.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import isnull from "../../lib/datatype/isnull.js";
 
 // Example 1: Input is `null`
 assert.strictEqual(isnull(null), true);
@@ -11,4 +12,4 @@ assert.strictEqual(isnull(undefined), false);
 assert.strictEqual(isnull(0), false);
 
 // Example 4: Input is an empty string (not `null`)
-assert.strictEqual(isnull(''), false);
+assert.strictEqual(isnull(""), false);

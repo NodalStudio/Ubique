@@ -1,5 +1,6 @@
-import assert from 'assert';
-import rem from '../../lib/elemop/rem.js';
+// @ts-expect-error TS(2307): Cannot find module 'assert' or its corresponding t... Remove this comment to see the full error message
+import assert from "assert";
+import rem from "../../lib/elemop/rem.js";
 
 // Example 1: Remainder of a vector divided by a scalar
 assert.deepStrictEqual(rem([13, -11], 2.2), [2, 0]);

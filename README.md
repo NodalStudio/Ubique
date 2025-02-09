@@ -1,6 +1,5 @@
 ![Ubique](http://maxto.github.io/ubique-logo.jpg)
 
-
 # Ubique 0.5.1 (See [ChangeLog](CHANGELOG.md))
 
 ## CLOSED project
@@ -19,7 +18,9 @@ See [Builder](/builder/) folder:
 
 A mathematical and quantitative library for Javascript and Node.js.
 
-Ubique supports vectors and matrices, providing a lot of functionalities for elementary operations, linear algebra, statistics, time series analysis and computational finance.
+Ubique supports vectors and matrices, providing a lot of functionalities for
+elementary operations, linear algebra, statistics, time series analysis and
+computational finance.
 
 Easy to use, Ubique runs both in Node.js/Io.js and in the Browser.
 
@@ -39,17 +40,50 @@ For further details see the [API Documentation](/doc/contents.md)
 
 ```js
 // Load Ubique
-var ubique = require('ubique');
+var ubique = require("ubique");
 
 // EXAMPLE 1 - BASIC STATISTICS
 
 // set variables
-var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
-var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
-var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
+var x = [
+  0.003,
+  0.026,
+  0.015,
+  -0.009,
+  0.014,
+  0.024,
+  0.015,
+  0.066,
+  -0.014,
+  0.039,
+];
+var y = [
+  -0.005,
+  0.081,
+  0.04,
+  -0.037,
+  -0.061,
+  0.058,
+  -0.049,
+  -0.021,
+  0.062,
+  0.058,
+];
+var z = [
+  0.04,
+  -0.022,
+  0.043,
+  0.028,
+  -0.078,
+  -0.011,
+  0.033,
+  -0.049,
+  0.09,
+  0.087,
+];
 
 // Concatenate X,Y and Z along columns, returns a matrix W with size 10x3
-var W = ubique.cat(1,x,y,z);
+var W = ubique.cat(1, x, y, z);
 
 // [ [ 0.003, -0.005, 0.04 ],
 //   [ 0.026, 0.081, -0.022 ],
@@ -65,30 +99,28 @@ var W = ubique.cat(1,x,y,z);
 // Get statistics for matrix W along column (default)
 
 var myStats = {
-
   ArrayDimension: ubique.size(W), // size of the matrix
-  NumRows:        ubique.nrows(W), // number of rows
-  NumColumns:     ubique.ncols(W), // number of columns
-  Mean:           ubique.mean(W), // average value for columns
-  StandardDev:    ubique.std(W), // standard deviation (sample)
-  Variance:       ubique.varc(W), // variance
-  Mode:           ubique.mode(W), // mode
-  Median:         ubique.median(W), // median
-  Max:            ubique.max(W), // max
-  Min:            ubique.min(W), //  min
-  Kurtosis:       ubique.kurtosis(W), // kurtosis
-  Skewness:       ubique.skewness(W), // skewness
-  Interquartile:  ubique.iqr(W), //interquartile range
-  MeanAbsDev:     ubique.mad(W), // mean absolute deviation
-  Range:          ubique.range(W), // range
-  Moment:         ubique.moment(W,2), // second moment
-  Percentile:     ubique.prctile(W,5), // 5-th percentile
-  Quantile:       ubique.quantile(W,0.05), // quantile at 5%
-  Quartile:       ubique.quartile(W), // quartile
+  NumRows: ubique.nrows(W), // number of rows
+  NumColumns: ubique.ncols(W), // number of columns
+  Mean: ubique.mean(W), // average value for columns
+  StandardDev: ubique.std(W), // standard deviation (sample)
+  Variance: ubique.varc(W), // variance
+  Mode: ubique.mode(W), // mode
+  Median: ubique.median(W), // median
+  Max: ubique.max(W), // max
+  Min: ubique.min(W), //  min
+  Kurtosis: ubique.kurtosis(W), // kurtosis
+  Skewness: ubique.skewness(W), // skewness
+  Interquartile: ubique.iqr(W), //interquartile range
+  MeanAbsDev: ubique.mad(W), // mean absolute deviation
+  Range: ubique.range(W), // range
+  Moment: ubique.moment(W, 2), // second moment
+  Percentile: ubique.prctile(W, 5), // 5-th percentile
+  Quantile: ubique.quantile(W, 0.05), // quantile at 5%
+  Quartile: ubique.quartile(W), // quartile
   ExcessKurtosis: ubique.xkurtosis(W), //excess kurtosis
-  Zscore:         ubique.zscore(W) // Z-score
-
-}
+  Zscore: ubique.zscore(W), // Z-score
+};
 
 //  { ArrayDimension: [ 10, 3 ],
 //    NumRows: 10,
@@ -108,12 +140,12 @@ var myStats = {
 //    Moment: [ [ 0.000486, 0.00251, 0.002749 ] ],
 //    Percentile: [ [ -0.014, -0.061, -0.078 ] ],
 //    Quantile: [ [ -0.014, -0.061, -0.078 ] ],
-//    Quartile: 
+//    Quartile:
 //    [ [ 0.003, -0.037, -0.022 ],
 //      [ 0.015, 0.0175, 0.0305 ],
 //      [ 0.026, 0.058, 0.043 ] ],
 //    ExcessKurtosis: [ [ 0.037581, -1.602358, -0.947963 ] ],
-//    Zscore: 
+//    Zscore:
 //    [ [ -0.641399, -0.333255, 0.432455 ],
 //      [ 0.34868, 1.295149, -0.689394 ],
 //      [ -0.124836, 0.518817, 0.486738 ],
@@ -125,50 +157,47 @@ var myStats = {
 //      [ -1.373195, 0.935385, 1.337171 ],
 //      [ 0.908289, 0.859646, 1.282888 ] ] }
 
-
 // EXMPLE 2 - QUANTITATIVE METRICS FOR FINANCE
 
 var mean = ubique.mean,
-std = ubique.std,
-cat = ubique.cat;
+  std = ubique.std,
+  cat = ubique.cat;
 
 var myFinMetrics = {
-
-  ActiveReturn:        ubique.activereturn(W,z), // active or excess return ober Z
-  AnnualizedReturn:    ubique.annreturn(W,12), // annualized return (monthly)
-  Cagr:                ubique.cagr(W,10/12), // compound annual growth rate
-  Percpos:             ubique.percpos(W), // percentage of positive values
-  Ror:                 ubique.ror(W),// simple rate of return
-  AdjSharpeRatio:      ubique.adjsharpe(W), // adjusted sharpe ratio
-  AnnuaAdjSharpeRatio: ubique.annadjsharpe(W,0,12), // annualized sharpe ratio
-  AnnualizedRisk:      ubique.annrisk(W), // annualized risk
-  AverageDrawdown:     ubique.avgdrawdown(W), // average drawdown
-  ContinuousDrawdow:   ubique.cdrawdown(W), // continuous drawdown
-  Drawdown:            ubique.drawdown(x), // drawdown, maxdrawdown, recovery period
-  BurkeRatio:          ubique.burkeratio(W), // burke ratio
-  CalmarRatio:         ubique.calmarratio(W), // calmar ratio
-  InformationRatio:    ubique.inforatio(cat(1,x,y),z), // information ratio
-  JensenAlpha:         ubique.jensenalpha(cat(1,x,y),z), // jensen-Alpha
-  M2Sortino:           ubique.m2sortino(cat(1,x,y),z), // m2-Sortino
-  MartinRatio:         ubique.martinratio(W), // martin ratio
-  Modigliani:          ubique.modigliani(cat(1,x,y),z), // modigliani
-  OmegaRatio:          ubique.omegaratio(W), // omega ratio
-  PainIndex:           ubique.painindex(W), // pain index
-  PainRatio:           ubique.painratio(W), // pain ratio
-  SharpeRatio:         ubique.sharpe(W), // sharpe ratio
-  Sortino:             ubique.sortino(W), // sortino
-  SterlingRatio:       ubique.sterlingratio(W), // sterling ratio
-  TrackingError:       ubique.trackerr(x,z), // tracking error
-  TreynorRatio:        ubique.treynor(x,z), // treynor ratio
-  UlcerIndex:          ubique.ulcerindex(W), // ulcer index
-  UpsidePotential:     ubique.upsidepot(W), // upside potential
-  HistoricalVaR:       ubique.histvar(W), // historical VaR
-  ParametricVaR:       ubique.paramvar(mean(W),std(W)), // parametric VaR
-  MontecarloVaR:       ubique.montecarlovar(x), // montecarlo VaR
-  HistConditionalVaR:  ubique.histcondvar(W,0.95), // historical conditional VaR 
-  ParamConditionalVaR: ubique.paramcondvar(mean(W),std(W)), // param conditional VaR
-
-}
+  ActiveReturn: ubique.activereturn(W, z), // active or excess return ober Z
+  AnnualizedReturn: ubique.annreturn(W, 12), // annualized return (monthly)
+  Cagr: ubique.cagr(W, 10 / 12), // compound annual growth rate
+  Percpos: ubique.percpos(W), // percentage of positive values
+  Ror: ubique.ror(W), // simple rate of return
+  AdjSharpeRatio: ubique.adjsharpe(W), // adjusted sharpe ratio
+  AnnuaAdjSharpeRatio: ubique.annadjsharpe(W, 0, 12), // annualized sharpe ratio
+  AnnualizedRisk: ubique.annrisk(W), // annualized risk
+  AverageDrawdown: ubique.avgdrawdown(W), // average drawdown
+  ContinuousDrawdow: ubique.cdrawdown(W), // continuous drawdown
+  Drawdown: ubique.drawdown(x), // drawdown, maxdrawdown, recovery period
+  BurkeRatio: ubique.burkeratio(W), // burke ratio
+  CalmarRatio: ubique.calmarratio(W), // calmar ratio
+  InformationRatio: ubique.inforatio(cat(1, x, y), z), // information ratio
+  JensenAlpha: ubique.jensenalpha(cat(1, x, y), z), // jensen-Alpha
+  M2Sortino: ubique.m2sortino(cat(1, x, y), z), // m2-Sortino
+  MartinRatio: ubique.martinratio(W), // martin ratio
+  Modigliani: ubique.modigliani(cat(1, x, y), z), // modigliani
+  OmegaRatio: ubique.omegaratio(W), // omega ratio
+  PainIndex: ubique.painindex(W), // pain index
+  PainRatio: ubique.painratio(W), // pain ratio
+  SharpeRatio: ubique.sharpe(W), // sharpe ratio
+  Sortino: ubique.sortino(W), // sortino
+  SterlingRatio: ubique.sterlingratio(W), // sterling ratio
+  TrackingError: ubique.trackerr(x, z), // tracking error
+  TreynorRatio: ubique.treynor(x, z), // treynor ratio
+  UlcerIndex: ubique.ulcerindex(W), // ulcer index
+  UpsidePotential: ubique.upsidepot(W), // upside potential
+  HistoricalVaR: ubique.histvar(W), // historical VaR
+  ParametricVaR: ubique.paramvar(mean(W), std(W)), // parametric VaR
+  MontecarloVaR: ubique.montecarlovar(x), // montecarlo VaR
+  HistConditionalVaR: ubique.histcondvar(W, 0.95), // historical conditional VaR
+  ParamConditionalVaR: ubique.paramcondvar(mean(W), std(W)), // param conditional VaR
+};
 
 //  { ActiveReturn: [ [ 42.60025, -22.656613, 0 ] ],
 //  AnnualizedReturn: [ [ 0.233815, 0.14509, 0.191836 ] ],
@@ -180,7 +209,7 @@ var myFinMetrics = {
 //  AnnualizedRisk: [ [ 0.368773, 0.838372, 0.877319 ] ],
 //  AverageDrawdown: [ [ 0.0115, 0.056571, 0.053047 ] ],
 //  ContinuousDrawdow: [ [ 0.009, 0.005, 0.022 ], [ 0.014, 0.095743, 0.088142 ] ],
-//  Drawdown: 
+//  Drawdown:
 //   { dd: [ 0, 0, 0, 0.009, 0, 0, 0, 0, 0.01399, 0 ],
 //     ddrecov: [ 0, 0, 0, 4, 0, 0, 0, 0, 9, 0 ],
 //     maxdd: 0.01399,
@@ -210,39 +239,37 @@ var myFinMetrics = {
 
 // EXAMPLE 3 - ARRAY, VECTOR AND MATRIX
 
-var A = [[5,6,5],[7,8,-1]],
-B = [[-1,3,-1],[4,5,9]],
-C = [5,6,3],
-D = [[1,1,-1],[1,-2,3],[2,3,1]],
-E = [[3, 2], [5, 2]];
+var A = [[5, 6, 5], [7, 8, -1]],
+  B = [[-1, 3, -1], [4, 5, 9]],
+  C = [5, 6, 3],
+  D = [[1, 1, -1], [1, -2, 3], [2, 3, 1]],
+  E = [[3, 2], [5, 2]];
 
 var myData = {
+  sizeA: ubique.size(A), // 2x3 matrix
+  sizeB: ubique.size(B), // 2x3 matrix
+  sizeC: ubique.size(C), // 3x1 vector (= array)
+  sizeD: ubique.size(D), // 3x3 matrix
+  sizeE: ubique.size(E), // 2x2 matrix
 
-  sizeA:     ubique.size(A), // 2x3 matrix
-  sizeB:     ubique.size(B), // 2x3 matrix
-  sizeC:     ubique.size(C), // 3x1 vector (= array)
-  sizeD:     ubique.size(D), // 3x3 matrix
-  sizeE:     ubique.size(E), // 2x2 matrix
+  "A+B": ubique.plus(A, B), // A + B -> 2x3 matrix
+  "A-B": ubique.minus(A, B), // A - B -> 2x3 matrix
+  "A.*B": ubique.times(A, B), // A * B element-wise -> 2x3 matrix
+  "A*C": ubique.mtimes(A, C), // A * C -> 2x1 vector
+  "A./B": ubique.rdivide(A, B), // A / B element-wise -> 2x3 matrix
+  "A/D": ubique.mrdivide(A, D), // A / D -> 2x3 matrix
+  "A.\\B": ubique.ldivide(A, B), // A \ B element-wise -> 2x3 matrix
+  "E\\B": ubique.mldivide(E, B), // A \ E -> 2x2 matrix
+  "det(D)": ubique.det(D), // determinant -> 1x1 array
+  "inv(D)": ubique.inv(D), // inverse -> 3x3 matrix
+  "Dx=C": ubique.linsolve(D, C), // linear solver -> 3x1 vector
 
-  'A+B':     ubique.plus(A,B), // A + B -> 2x3 matrix
-  'A-B':     ubique.minus(A,B), // A - B -> 2x3 matrix
-  'A.*B':    ubique.times(A,B), // A * B element-wise -> 2x3 matrix
-  'A*C':     ubique.mtimes(A,C), // A * C -> 2x1 vector
-  'A./B':    ubique.rdivide(A,B), // A / B element-wise -> 2x3 matrix
-  'A/D':     ubique.mrdivide(A,D), // A / D -> 2x3 matrix
-  'A.\\B':   ubique.ldivide(A,B), // A \ B element-wise -> 2x3 matrix
-  'E\\B':    ubique.mldivide(E,B), // A \ E -> 2x2 matrix 
-  'det(D)':  ubique.det(D), // determinant -> 1x1 array
-  'inv(D)':  ubique.inv(D), // inverse -> 3x3 matrix
-  'Dx=C':    ubique.linsolve(D,C), // linear solver -> 3x1 vector
-
-   reshapeD: ubique.reshape(D,1,9), // reshape matrix -> 1x9 vector
-   repmatC:  ubique.repmat(C,1,4), // replicate matrix -> 3x4 matrix
-   matrixX:  ubique.matrix(2,4,NaN), // new matrix -> 2x4 matrix
-   zerosX:   ubique.zeros(2,4), // zeros matrix-> 2x4 matrix
-   eyeX:     ubique.eye(2), // identity matrix -> 2x2 matrix
-   
-}
+  reshapeD: ubique.reshape(D, 1, 9), // reshape matrix -> 1x9 vector
+  repmatC: ubique.repmat(C, 1, 4), // replicate matrix -> 3x4 matrix
+  matrixX: ubique.matrix(2, 4, NaN), // new matrix -> 2x4 matrix
+  zerosX: ubique.zeros(2, 4), // zeros matrix-> 2x4 matrix
+  eyeX: ubique.eye(2), // identity matrix -> 2x2 matrix
+};
 
 //  { sizeA: [ 2, 3 ],
 //  sizeB: [ 2, 3 ],
@@ -254,13 +281,13 @@ var myData = {
 //  'A.*B': [ [ -5, 18, -5 ], [ 28, 40, -9 ] ],
 //  'A*C': [ [ 76 ], [ 80 ] ],
 //  'A./B': [ [ -5, 2, -5 ], [ 1.75, 1.6, -0.111111 ] ],
-//  'A/D': 
+//  'A/D':
 //   [ [ -0.769231, 0.538462, 2.615385 ],
 //     [ 3.384615, 0.230769, 1.692308 ] ],
 //  'A.\B': [ [ -0.2, 0.5, -0.2 ], [ 0.571429, 0.625, -9 ] ],
 //  'E\B': [ [ 2.5, 1, 5 ], [ -4.25, 0, -8 ] ],
 //  'det(D)': -13,
-//  'inv(D)': 
+//  'inv(D)':
 //   [ [ 0.846154, 0.307692, -0.076923 ],
 //     [ -0.384615, -0.230769, 0.307692 ],
 //     [ -0.538462, 0.076923, 0.230769 ] ],
@@ -275,21 +302,22 @@ var myData = {
 
 // Yahoo Historical Data (Async mode)
 var options = {
-'symbol': 'AAPL',
-'from': '2015-01-01',
-'to': '2015-05-01',
-'period': 'd',
-'fmt': 'YYYY-MM-DD'};
+  "symbol": "AAPL",
+  "from": "2015-01-01",
+  "to": "2015-05-01",
+  "period": "d",
+  "fmt": "YYYY-MM-DD",
+};
 
- ubique.yahoo.historical(options,function(err,data){
- // console.log(data)
- });
-
+ubique.yahoo.historical(options, function (err, data) {
+  // console.log(data)
+});
 ```
 
 ## For MATLAB Users
 
-Ubique mimics some basic MATLAB functionalities and applications in the matrix environment.
+Ubique mimics some basic MATLAB functionalities and applications in the matrix
+environment.
 
 For some comparative code see [For Matlab Users](/doc/formatlabusers.md)
 
@@ -309,7 +337,8 @@ Download the project dependencies:
 npm install
 ```
 
-To update main class constructor ubique.js, bundled and minified versions in `./dist` folder:
+To update main class constructor ubique.js, bundled and minified versions in
+`./dist` folder:
 
 ```
 npm run build
@@ -323,19 +352,19 @@ npm install ubique
 
 - Using [Bower](http://bower.io/search/?q=ubique)
 
-
 ```
 bower install ubique
 ```
 
 ## Browser Bundle
 
-Ubique can be used in the browser with bundled and minified version in `./dist` folder.
+Ubique can be used in the browser with bundled and minified version in `./dist`
+folder.
 
 Example:
 
 ```html
-	<script src="ubique.min.js" type="text/javascript"></script>
+<script src="ubique.min.js" type="text/javascript"></script>
 ```
 
 ## Test
@@ -348,35 +377,27 @@ npm test
 
 ## ChangeLog
 
-View [ChangeLog](CHANGELOG.md) 
+View [ChangeLog](CHANGELOG.md)
 
 ## License
 
-The MIT License 
+The MIT License
 
 Copyright© 2014-2015 Max Todaro
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-
-
-
-
-
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

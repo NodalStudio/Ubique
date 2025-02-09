@@ -1,4 +1,4 @@
-import ismatrix from '../datatype/ismatrix.js';
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function ones
@@ -26,9 +26,9 @@ import ismatrix from '../datatype/ismatrix.js';
  * // Example 5: Create a 2x3 matrix
  * assert.deepStrictEqual(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
  */
-export default function ones(...args) {
+export default function ones(...args: any[]) {
   if (args.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   let _args = args;

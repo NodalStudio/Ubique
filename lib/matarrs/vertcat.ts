@@ -1,4 +1,4 @@
-import cat from './cat.js';
+import cat from "./cat.ts";
 
 /**
  * @function vertcat
@@ -27,9 +27,9 @@ import cat from './cat.js';
  * // Example 5: Invalid input (no arguments)
  * assert.throws(() => vertcat(), /Not enough input arguments./);
  */
-export default function vertcat(...args) {
+export default function vertcat(...args: any[]) {
   if (args.length === 0) {
-    throw new Error('Not enough input arguments.');
+    throw new Error("Not enough input arguments.");
   }
 
   return cat(0, ...args);
