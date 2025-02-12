@@ -1,3 +1,8 @@
+// @generated file from wasmbuild -- do not edit
+// @ts-nocheck: generated
+// deno-lint-ignore-file
+// deno-fmt-ignore-file
+
 let wasm;
 export function __wbg_set_wasm(val) {
   wasm = val;

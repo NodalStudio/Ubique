@@ -38,7 +38,8 @@
     "test": "deno fmt --check lib && deno test --doc lib",
     "lint": "deno lint --rules-exclude=no-explicit-any",
     "lint:fix": "deno fmt && deno lint --rules-exclude=no-explicit-any --fix",
-    "benchmark": "deno run --allow-run ./scripts/benchmark.ts"
+    "benchmark": "deno run --allow-run ./scripts/benchmark.ts",
+    "wasmbuild": "deno run -A jsr:@deno/wasmbuild --out ./rs_lib/pkg"
   },
   "lint": {
     "rules": {

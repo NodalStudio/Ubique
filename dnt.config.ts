@@ -9,8 +9,8 @@ await build({
     deno: true,
   },
   compilerOptions: {
-    target: "esnext",
-    lib: ["esnext"],
+    target: "ES2017",
+    lib: ["ES2017"],
   },
   package: {
     name: "ubique",
@@ -43,6 +43,6 @@ await build({
       node: ">=12",
     },
   },
-  typeCheck: true,
+  typeCheck: "single",
   test: false,
 });

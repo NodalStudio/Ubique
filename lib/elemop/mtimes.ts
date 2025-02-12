@@ -2,7 +2,7 @@ import isnumber from "../datatype/isnumber.ts";
 import size from "../matarrs/size.ts";
 import times from "./times.ts";
 import { numarraymatrix } from "../types.d.ts";
-import { timeswasm } from "../../ubique_wasm/pkg/ubique_wasm.js";
+import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
  * @function mtimes
@@ -12,7 +12,7 @@ import { timeswasm } from "../../ubique_wasm/pkg/ubique_wasm.js";
  * @param x Number, array, or matrix representing the first factor.
  * @param y Number, array, or matrix representing the second factor.
  * @returns The result of the multiplication.
- * @throws {Error} If the inner dimensions of the matrices do not match.
+ * @throws If the inner dimensions of the matrices do not match.
  *
  * @example
  * ```ts

@@ -1,5 +1,7 @@
-/* tslint:disable */
-/* eslint-disable */
+// @generated file from wasmbuild -- do not edit
+// deno-lint-ignore-file
+// deno-fmt-ignore-file
+
 /**
  * Performs standard matrix multiplication of two dynamic matrices.
  *
