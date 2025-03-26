@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix, arrayfun } from "../../index.ts";
+import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function ldivide
@@ -38,7 +38,7 @@ export default function ldivide(x: matrix, y: number): matrix;
 export default function ldivide(x: matrix, y: matrix): matrix;
 export default function ldivide(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return y / x;
@@ -52,7 +52,7 @@ export default function ldivide(
  */
 function handleLeftDivision(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x)) {
     return arrayfun(y, (val: number) => val / (x as number));

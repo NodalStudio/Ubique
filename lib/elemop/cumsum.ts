@@ -31,10 +31,16 @@ export default function cumsum(x: array, dim: 0): array;
 export default function cumsum(x: array, dim: 1): array;
 export default function cumsum(x: matrix, dim: 0): matrix;
 export default function cumsum(x: matrix, dim: 1): matrix;
-export default function cumsum(x: array | matrix, dim: 0 | 1 = 1): array | matrix {
+export default function cumsum(
+  x: array | matrix,
+  dim: 0 | 1 = 1,
+): array | matrix {
   return vectorfun(
     dim,
     x,
-    (a: array) => a.map((_: number, i: number) => a.slice(0, i + 1).reduce((p, c) => p + c)),
+    (a: array) =>
+      a.map((_: number, i: number) =>
+        a.slice(0, i + 1).reduce((p, c) => p + c)
+      ),
   );
 }

@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix } from "../../index.ts";
+import { isarray, ismatrix, isnumber } from "../../index.ts";
 import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
@@ -41,7 +41,7 @@ export default function mtimes(x: array, y: matrix): array;
 export default function mtimes(x: matrix, y: matrix): matrix;
 export default function mtimes(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return x * y;
@@ -55,7 +55,7 @@ export default function mtimes(
  */
 function handleMatrixMultiplication(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x)) {
     return scalarMultiplication(x as number, y);
@@ -87,7 +87,10 @@ function handleMatrixMultiplication(
 /**
  * Multiply a scalar by an array or matrix
  */
-function scalarMultiplication(scalar: number, operand: numarraymatrix): numarraymatrix {
+function scalarMultiplication(
+  scalar: number,
+  operand: numarraymatrix,
+): numarraymatrix {
   if (isarray(operand)) {
     return (operand as array).map((val: number) => scalar * val);
   }
@@ -179,7 +182,7 @@ function multiplyMatrices(a: number[][], b: number[][]): number[][] {
 
     return Array.from(
       { length: rowsA },
-      (_, i) => Array.from({ length: colsB }, (_, j) => result[i * colsB + j])
+      (_, i) => Array.from({ length: colsB }, (_, j) => result[i * colsB + j]),
     );
   }
 

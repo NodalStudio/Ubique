@@ -31,7 +31,10 @@ export default function diff(x: array, dim: 0): array;
 export default function diff(x: array, dim: 1): array;
 export default function diff(x: matrix, dim: 0): matrix;
 export default function diff(x: matrix, dim: 1): matrix;
-export default function diff(x: array | matrix, dim: 0|1 = 1): array | matrix {
+export default function diff(
+  x: array | matrix,
+  dim: 0 | 1 = 1,
+): array | matrix {
   return vectorfun(
     dim,
     x,

@@ -1,6 +1,14 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, issquare, ncols, nrows, inv, mtimes, rdivide } from "../../index.ts";
+import {
+  inv,
+  isnumber,
+  issquare,
+  mtimes,
+  ncols,
+  nrows,
+  rdivide,
+} from "../../index.ts";
 
 /**
  * @function mrdivide
@@ -41,7 +49,10 @@ export default function mrdivide(x: array, y: number): array;
 export default function mrdivide(x: matrix, y: number): matrix;
 export default function mrdivide(x: array, y: array): array;
 export default function mrdivide(x: matrix, y: matrix): matrix;
-export default function mrdivide(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function mrdivide(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return x / y;
   }

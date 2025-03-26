@@ -31,7 +31,10 @@ export default function prod(x: array, dim: 0): number;
 export default function prod(x: array, dim: 1): number;
 export default function prod(x: matrix, dim: 0): array;
 export default function prod(x: matrix, dim: 1): array;
-export default function prod(x: array | matrix, dim: 0|1 = 1): number | array {
+export default function prod(
+  x: array | matrix,
+  dim: 0 | 1 = 1,
+): number | array {
   const multiply = (arr: array): number =>
     arr.reduce((acc: number, val: number) => acc * val, 1);
 

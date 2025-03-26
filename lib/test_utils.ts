@@ -6,11 +6,11 @@ export function formatArray(arr: any[]): string {
 
   // Handle nested arrays (matrices)
   if (Array.isArray(arr[0])) {
-    return `[${arr.map(row => formatArray(row)).join(', ')}]`;
+    return `[${arr.map((row) => formatArray(row)).join(", ")}]`;
   }
 
   // Handle flat arrays
-  return `[${arr.map(String).join(', ')}]`;
+  return `[${arr.map(String).join(", ")}]`;
 }
 
 /**

@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix, arrayfun } from "../../index.ts";
+import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function minus
@@ -41,7 +41,7 @@ export default function minus(x: matrix, y: number): matrix;
 export default function minus(x: matrix, y: matrix): matrix;
 export default function minus(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return x - y;
@@ -55,7 +55,7 @@ export default function minus(
  */
 function handleMinusOperation(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x)) {
     return arrayfun(y, (val: number) => (x as number) - val);

@@ -44,7 +44,10 @@ import { arrayfun } from "../../index.ts";
 export default function round(x: number, n?: number): number;
 export default function round(x: array, n?: number): array;
 export default function round(x: matrix, n?: number): matrix;
-export default function round(x: numarraymatrix, n: number = 0): numarraymatrix {
+export default function round(
+  x: numarraymatrix,
+  n: number = 0,
+): numarraymatrix {
   if (arguments.length === 0) {
     throw new Error("Not enough input arguments");
   }

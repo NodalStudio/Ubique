@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix } from "../../index.ts";
+import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function eq
@@ -47,7 +47,7 @@ export default function eq(x: matrix, y: number): matrix<boolean>;
 export default function eq(x: matrix, y: matrix): matrix<boolean>;
 export default function eq(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): boolean | array<boolean> | matrix<boolean> {
   return handleEqualityComparison(x, y);
 }
@@ -57,7 +57,7 @@ export default function eq(
  */
 function handleEqualityComparison(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): boolean | array<boolean> | matrix<boolean> {
   const _eq = (el: number) => el === 0;
 
@@ -75,28 +75,28 @@ function handleEqualityComparison(
 
   if (isnumber(x)) {
     if (isarray(y)) {
-      return y.map(val => x === val);
+      return y.map((val) => x === val);
     }
     if (ismatrix(y)) {
-      return y.map(row => row.map(val => x === val));
+      return y.map((row) => row.map((val) => x === val));
     }
   }
 
   if (isnumber(y)) {
     if (isarray(x)) {
-      return x.map(val => val === y);
+      return x.map((val) => val === y);
     }
     if (ismatrix(x)) {
-      return x.map(row => row.map(val => val === y));
+      return x.map((row) => row.map((val) => val === y));
     }
   }
 
   if (isarray(x) && ismatrix(y)) {
-    return y.map(row => row.map((val, j) => x[j] === val));
+    return y.map((row) => row.map((val, j) => x[j] === val));
   }
 
   if (ismatrix(x) && isarray(y)) {
-    return x.map(row => row.map((val, j) => val === y[j]));
+    return x.map((row) => row.map((val, j) => val === y[j]));
   }
 
   throw new Error("Unsupported input types");
