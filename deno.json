@@ -49,12 +49,7 @@
     "exclude": ["dist/"]
   },
   "imports": {
-    "dayjs": "npm:dayjs@1.11.13",
-    "rollup": "npm:rollup@4",
-    "@rollup/plugin-typescript": "npm:@rollup/plugin-typescript",
-    "@rollup/plugin-node-resolve": "npm:@rollup/plugin-node-resolve",
-    "@rollup/plugin-commonjs": "npm:@rollup/plugin-commonjs",
-    "rollup-plugin-terser": "npm:rollup-plugin-terser"
+    "dayjs": "npm:dayjs@1.11.13"
   },
   "exports": {
     "./": "./index.ts"
