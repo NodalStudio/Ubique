@@ -32,7 +32,10 @@ import { arrayfun } from "../../index.ts";
 export default function floor(x: number, n?: number): number;
 export default function floor(x: array, n?: number): array;
 export default function floor(x: matrix, n?: number): matrix;
-export default function floor(x: numarraymatrix, n: number = 0): numarraymatrix {
+export default function floor(
+  x: numarraymatrix,
+  n: number = 0,
+): numarraymatrix {
   const factor = 10 ** n;
   return arrayfun(x, (a: number) => Math.floor(a * factor) / factor);
 }

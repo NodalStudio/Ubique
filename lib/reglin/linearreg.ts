@@ -39,7 +39,7 @@ export default function linearreg(y: array, x: array): {
   fun: (x: number) => number;
 } {
   if (arguments.length < 2) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
 
   const n = y.length;
@@ -51,12 +51,15 @@ export default function linearreg(y: array, x: array): {
 
   const beta = (n * sxy - sx * sy) / (n * sxx - sx * sx);
   const alpha = (sy - beta * sx) / n;
-  const rsq = Math.pow((n * sxy - sx * sy) / Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy)), 2);
+  const rsq = Math.pow(
+    (n * sxy - sx * sy) / Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy)),
+    2,
+  );
 
   return {
     beta,
     alpha,
     rsq,
-    fun: (x: number) => beta * x + alpha
+    fun: (x: number) => beta * x + alpha,
   };
 }

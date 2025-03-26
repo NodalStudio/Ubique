@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix } from "../../index.ts";
+import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function ne
@@ -47,7 +47,7 @@ export default function ne(x: matrix, y: number): boolean[][];
 export default function ne(x: matrix, y: matrix): boolean[][];
 export default function ne(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): boolean | boolean[] | boolean[][] {
   if (isnumber(x) && isnumber(y)) {
     return x !== y;
@@ -66,7 +66,9 @@ export default function ne(
       return (y as array).map((val: number) => x !== val);
     }
     if (ismatrix(y)) {
-      return (y as matrix).map((row: array) => row.map((val: number) => x !== val));
+      return (y as matrix).map((row: array) =>
+        row.map((val: number) => x !== val)
+      );
     }
   }
 
@@ -75,7 +77,9 @@ export default function ne(
       return (x as array).map((val: number) => val !== y);
     }
     if (ismatrix(x)) {
-      return (x as matrix).map((row: array) => row.map((val: number) => val !== y));
+      return (x as matrix).map((row: array) =>
+        row.map((val: number) => val !== y)
+      );
     }
   }
 

@@ -1,6 +1,14 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, issquare, inv, ldivide, mtimes, ncols, nrows } from "../../index.ts";
+import {
+  inv,
+  isnumber,
+  issquare,
+  ldivide,
+  mtimes,
+  ncols,
+  nrows,
+} from "../../index.ts";
 
 /**
  * @function mldivide
@@ -35,7 +43,10 @@ export default function mldivide(y: number, x: array): array;
 export default function mldivide(y: number, x: matrix): matrix;
 export default function mldivide(y: array, x: array): array;
 export default function mldivide(y: matrix, x: matrix): matrix;
-export default function mldivide(y: numarraymatrix, x: numarraymatrix): numarraymatrix {
+export default function mldivide(
+  y: numarraymatrix,
+  x: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x) && isnumber(y)) {
     return x / y;
   }
@@ -44,7 +55,9 @@ export default function mldivide(y: numarraymatrix, x: numarraymatrix): numarray
   }
 
   if (issquare(y as matrix)) {
-    if (ncols(y as matrix) !== nrows(x as matrix)) throw new Error("Matrix dimensions mismatch");
+    if (ncols(y as matrix) !== nrows(x as matrix)) {
+      throw new Error("Matrix dimensions mismatch");
+    }
     return mtimes(inv(y as matrix), x as matrix);
   }
 

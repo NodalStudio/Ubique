@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix, arrayfun } from "../../index.ts";
+import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function mod
@@ -35,7 +35,10 @@ export default function mod(x: array, y: array): array;
 export default function mod(x: number, y: matrix): matrix;
 export default function mod(x: matrix, y: number): matrix;
 export default function mod(x: matrix, y: matrix): matrix;
-export default function mod(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function mod(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x)) {
     return isnumber(y) ? x % y : arrayfun(y, (val: number) => x % val);
   }

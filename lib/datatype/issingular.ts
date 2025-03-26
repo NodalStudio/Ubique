@@ -1,4 +1,4 @@
-import { issquare, ncols, ismatrix } from "../../index.ts";
+import { ismatrix, issquare, ncols } from "../../index.ts";
 
 /**
  * @function issingular

@@ -1,12 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import {
-  arrayfun,
-  getrow,
-  isarray,
-  ismatrix,
-  isnumber,
-} from "../../index.ts";
+import { arrayfun, getrow, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function times
@@ -45,7 +39,10 @@ export default function times(x: array, y: array): array;
 export default function times(x: number, y: matrix): matrix;
 export default function times(x: matrix, y: number): matrix;
 export default function times(x: matrix, y: matrix): matrix;
-export default function times(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function times(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (arguments.length === 0) {
     throw new Error("not enough input arguments");
   }
@@ -65,7 +62,10 @@ export default function times(x: numarraymatrix, y: numarraymatrix): numarraymat
  * @returns The result of the multiplication
  * @throws {Error} If the input arguments are not valid
  */
-function handleNumberMultiplication(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+function handleNumberMultiplication(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x)) {
     return arrayfun(y, (v: number) => x as number * v);
   }
@@ -110,5 +110,7 @@ function elementwiseMatrixMultiplication(x: matrix, y: matrix): matrix {
   if (x.length !== y.length) {
     throw new Error("Matrices must have the same number of rows");
   }
-  return x.map((row: array, i: number) => elementwiseArrayMultiplication(row, getrow(y, i)));
+  return x.map((row: array, i: number) =>
+    elementwiseArrayMultiplication(row, getrow(y, i))
+  );
 }

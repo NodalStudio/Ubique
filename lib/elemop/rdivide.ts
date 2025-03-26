@@ -1,6 +1,14 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix, nrows, ncols, getrow, arrayfun } from "../../index.ts";
+import {
+  arrayfun,
+  getrow,
+  isarray,
+  ismatrix,
+  isnumber,
+  ncols,
+  nrows,
+} from "../../index.ts";
 
 /**
  * @function rdivide
@@ -46,7 +54,10 @@ export default function rdivide(x: array, y: array): array;
 export default function rdivide(x: number, y: matrix): matrix;
 export default function rdivide(x: matrix, y: number): matrix;
 export default function rdivide(x: matrix, y: matrix): matrix;
-export default function rdivide(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function rdivide(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (isnumber(x)) {
     return divideNumber(x, y);
   }
@@ -83,7 +94,9 @@ function divideNumber(x: number, y: numarraymatrix): numarraymatrix {
   }
 
   if (ismatrix(y)) {
-    return (y as matrix).map((row: array) => arrayfun(row, (val: number) => x / val));
+    return (y as matrix).map((row: array) =>
+      arrayfun(row, (val: number) => x / val)
+    );
   }
 
   throw new Error("Incompatible types for divideNumber");
@@ -102,7 +115,9 @@ function divideByNumber(x: array | matrix, y: number): array | matrix {
   }
 
   if (ismatrix(x)) {
-    return (x as matrix).map((row: array) => arrayfun(row, (val: number) => val / y));
+    return (x as matrix).map((row: array) =>
+      arrayfun(row, (val: number) => val / y)
+    );
   }
 
   throw new Error("Incompatible types for divideByNumber");

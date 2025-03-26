@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix } from "../../index.ts";
+import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function le
@@ -47,7 +47,7 @@ export default function le(x: matrix, y: number): matrix<boolean>;
 export default function le(x: matrix, y: matrix): matrix<boolean>;
 export default function le(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): boolean | array<boolean> | matrix<boolean> {
   if (isnumber(x) && isnumber(y)) {
     return x <= y;
@@ -69,11 +69,15 @@ export default function le(
   }
 
   if (isnumber(x) && ismatrix(y)) {
-    return (y as matrix).map((row: array) => row.map((val: number) => x <= val));
+    return (y as matrix).map((row: array) =>
+      row.map((val: number) => x <= val)
+    );
   }
 
   if (ismatrix(x) && isnumber(y)) {
-    return (x as matrix).map((row: array) => row.map((val: number) => val <= y));
+    return (x as matrix).map((row: array) =>
+      row.map((val: number) => val <= y)
+    );
   }
 
   throw new Error("Invalid input types");
