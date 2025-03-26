@@ -1,6 +1,4 @@
-import issquare from "../matarrs/issquare.ts";
-import ncols from "../matarrs/ncols.ts";
-import ismatrix from "./ismatrix.ts";
+import { issquare, ncols, ismatrix } from "../../index.ts";
 
 /**
  * @function issingular

@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import type { array, matrix } from "../types.d.ts";
+
 import { isarray, ismatrix } from "../../index.ts";
 
 type MapReturnType<X, U> = X extends matrix<any> ? matrix<U>

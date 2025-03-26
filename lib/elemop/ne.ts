@@ -1,17 +1,16 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import minus from "./minus.ts";
-import arrayfun from "../datatype/arrayfun.ts";
+import { isnumber, isarray, ismatrix } from "../../index.ts";
 
 /**
  * @function ne
- * @summary Inequality X !== Y
- * @description Compares two inputs and returns `true` if they are not equal. Handles individual numbers, arrays, and matrices.
+ * @summary Not equal comparison X ~= Y
+ * @description Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
  *
- * @param {number|array|matrix} x The left operand.
- * @param {number|array|matrix} y The right operand.
- * @returns {boolean|array<boolean>|matrix<boolean>} `true` if the corresponding elements of `x` and `y` are not equal, otherwise `false`.
- * @throws {Error} If fewer than two arguments are provided.
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws {Error} If the input dimensions do not agree or if no arguments are provided
  *
  * @example
  * ```ts
@@ -21,29 +20,86 @@ import arrayfun from "../datatype/arrayfun.ts";
  * assertEquals(ne(5, 5), false);
  *
  * // Example 2: Compare a number with an array
- * assert.deepStrictEqual(ne(5, [5, 6, 3]), [false, true, true]);
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
  *
  * // Example 3: Compare a number with a matrix
- * assert.deepStrictEqual(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
  *
  * // Example 4: Compare an array with a number
- * assert.deepStrictEqual(ne([5, 6, 3], 5), [false, true, true]);
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
  *
  * // Example 5: Compare a matrix with a number
- * assert.deepStrictEqual(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
  *
  * // Example 6: Compare two arrays
- * assert.deepStrictEqual(ne([5, 6, 3], [2, 6, 0]), [true, false, true]);
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
  *
  * // Example 7: Compare two matrices
- * assert.deepStrictEqual(ne([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[false, false], [true, true]]);
-
- * ```*/
-export default function ne(x: any, y: any) {
-  if (arguments.length < 2) {
-    throw new Error("Not enough input arguments");
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
+export default function ne(x: number, y: number): boolean;
+export default function ne(x: number, y: array): boolean[];
+export default function ne(x: array, y: number): boolean[];
+export default function ne(x: array, y: array): boolean[];
+export default function ne(x: number, y: matrix): boolean[][];
+export default function ne(x: matrix, y: number): boolean[][];
+export default function ne(x: matrix, y: matrix): boolean[][];
+export default function ne(
+  x: numarraymatrix,
+  y: numarraymatrix
+): boolean | boolean[] | boolean[][] {
+  if (isnumber(x) && isnumber(y)) {
+    return x !== y;
   }
 
-  const difference = minus(x, y);
-  return arrayfun(difference, (el: any) => el !== 0);
+  if (isarray(x) && isarray(y)) {
+    return elementwiseArrayComparison(x as array, y as array);
+  }
+
+  if (ismatrix(x) && ismatrix(y)) {
+    return elementwiseMatrixComparison(x as matrix, y as matrix);
+  }
+
+  if (isnumber(x)) {
+    if (isarray(y)) {
+      return (y as array).map((val: number) => x !== val);
+    }
+    if (ismatrix(y)) {
+      return (y as matrix).map((row: array) => row.map((val: number) => x !== val));
+    }
+  }
+
+  if (isnumber(y)) {
+    if (isarray(x)) {
+      return (x as array).map((val: number) => val !== y);
+    }
+    if (ismatrix(x)) {
+      return (x as matrix).map((row: array) => row.map((val: number) => val !== y));
+    }
+  }
+
+  throw new Error("Invalid input types");
+}
+
+/**
+ * Element-wise comparison of two arrays
+ */
+function elementwiseArrayComparison(x: array, y: array): boolean[] {
+  if (x.length !== y.length) {
+    throw new Error("Arrays must have the same length");
+  }
+  return x.map((val: number, i: number) => val !== y[i]);
+}
+
+/**
+ * Element-wise comparison of two matrices
+ */
+function elementwiseMatrixComparison(x: matrix, y: matrix): boolean[][] {
+  if (x.length !== y.length || x[0].length !== y[0].length) {
+    throw new Error("Matrices must have the same dimensions");
+  }
+  return x.map((row: array, i: number) =>
+    row.map((val: number, j: number) => val !== y[i][j])
+  );
 }
