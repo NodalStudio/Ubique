@@ -1,11 +1,25 @@
-import { array, matrix } from "../types.d.ts";
-import isarray from "./isarray.ts";
-import isempty from "./isempty.ts";
-import ncols from "../matarrs/ncols.ts";
-import nrows from "../matarrs/nrows.ts";
-import getcol from "../matarrs/getcol.ts";
-import getrow from "../matarrs/getrow.ts";
-import transpose from "../matarrs/transpose.ts";
+import type { array, matrix } from "../types.d.ts";
+
+import {
+  isarray,
+  isempty,
+  ncols,
+  nrows,
+  getcol,
+  getrow,
+  transpose,
+  ismatrix,
+  squeeze
+} from "../../index.ts";
+
+/**
+ * Return type of vectorfun based on input type
+ * - For array input: returns array
+ * - For matrix input: returns matrix
+ */
+type VectorFunReturnType<X> = X extends matrix ? matrix
+  : X extends array ? array
+  : never;
 
 /**
  * @function vectorfun
@@ -18,103 +32,89 @@ import transpose from "../matarrs/transpose.ts";
  *
  * // Example 1: Apply function along rows of a matrix
  * const testfun = (a: number[], b: number, c: number): number => a.reduce((sum: number, num: number) => sum + num, 0) / a.length * b + c;
- * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], testfun, 5, 10), [ 36.666666666666664, 33.333333333333336 ]);
+ * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], testfun, 5, 10), [36.666666666666664, 33.333333333333336]);
  *
  * // Example 2: Apply function along columns of a matrix
- * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], testfun, 5, 10), [ [ 40 ], [ 45 ], [ 20 ] ]);
+ * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], testfun, 5, 10), [[40], [45], [20]]);
+ *
+ * // Example 3: Applying function on a single array
+ * const sumArray = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0);
+ * assertEquals(vectorfun(0, [1, 2, 3, 4], sumArray), 10);
+ *
+ * // Example 4: Apply function without additional arguments
+ * const maxVal = (arr: number[]): number => Math.max(...arr);
+ * assertEquals(vectorfun(0, [[1, 3, 5], [2, 4, 6]], maxVal), [5, 6]);
+ *
+ * // Example 5: Apply function on an empty matrix
+ * assertEquals(vectorfun(0, [], maxVal), []);
+ *
+ * // Example 6: Apply function with varying number of additional arguments
+ * const multiplyAndAdd = (arr: number[], factor: number, addend: number): number => arr.reduce((sum, num) => sum + num * factor, 0) + addend;
+ * assertEquals(vectorfun(0, [[1, 2, 3], [4, 5, 6]], multiplyAndAdd, 2, 10), [22, 40]);
+ *
+ * // Example 7: Apply function on a non-numeric matrix
+ * const concatStrings = (arr: string[]): string => arr.join("-");
+ * assertEquals(vectorfun(0, [["a", "b"], ["c", "d"]], concatStrings), ["a-b", "c-d"]);
+ *
+ * // Example 8: Apply function on a column-wise basis with different data types
+ * assertEquals(vectorfun(1, [["apple", "banana"], ["carrot", "date"]], concatStrings), [["apple-carrot"], ["banana-date"]]);
  * ```
  */
+export default function vectorfun<X extends array | matrix>(
+  dim: 0 | 1,
+  x: X,
+  fun: (vector: array, ...args: any[]) => any,
+  ...varargin: any[]
+): VectorFunReturnType<X> {
 
-export default function vectorfun<T, U, Args extends unknown[]>(
-  dim: 0 | 1,
-  x: array<T>,
-  fun: (vector: array<T>, ...args: Args) => U,
-  ...varargin: Args
-): [U];
-export default function vectorfun<T, U, Args extends unknown[]>(
-  dim: 0,
-  x: matrix<T>,
-  fun: (vector: array<T>, ...args: Args) => U,
-  ...varargin: Args
-): array<U>;
-export default function vectorfun<T, U, Args extends unknown[]>(
-  dim: 1,
-  x: matrix<T>,
-  fun: (vector: array<T>, ...args: Args) => U,
-  ...varargin: Args
-): matrix<U>;
-export default function vectorfun<T, U, Args extends unknown[]>(
-  dim: 0 | 1,
-  x: array<T> | matrix<T>,
-  fun: (vector: array<T>, ...args: Args) => U,
-  ...varargin: Args
-): [U] | array<U> | matrix<U> {
-  if (isarray(x)) {
-    return [applyFunction(fun, x as array<T>, varargin)];
+  let ndim: number;
+  let narray: (x: matrix, idx: number) => array;
+
+  if (isempty(x)) {
+    return [] as unknown as VectorFunReturnType<X>;
   }
 
-  const { ndim, narray } = getMatrixParams(dim, x as matrix<T>);
-
-  const v = processMatrix(ndim, narray, x as matrix<T>, fun, varargin);
-
-  return formatResult(dim, v);
-}
-
-/**
- * Applies a function to an array with variable arguments
- */
-function applyFunction<T, U, Args extends unknown[]>(
-  fun: (vector: array<T>, ...args: Args) => U,
-  x: array<T>,
-  varargin: Args,
-): U {
-  return isempty(varargin)
-    ? fun(x, ...([] as unknown as Args))
-    : fun(x, ...varargin);
-}
-
-/**
- * Gets the appropriate matrix parameters based on dimension
- */
-function getMatrixParams<T>(dim: 0 | 1, x: matrix<T>): {
-  ndim: number;
-  narray: (x: matrix<T>, idx: number) => array<T>;
-} {
   if (dim === 1) {
-    return { ndim: ncols(x), narray: getcol };
+    ndim = ncols(x as matrix);
+    narray = getcol;
   } else {
-    return { ndim: nrows(x), narray: getrow };
+    ndim = nrows(x as matrix);
+    narray = getrow;
   }
-}
 
-/**
- * Processes a matrix by applying a function to each vector
- */
-function processMatrix<T, U, Args extends unknown[]>(
-  ndim: number,
-  narray: (x: matrix<T>, idx: number) => array<T>,
-  x: matrix<T>,
-  fun: (vector: array<T>, ...args: Args) => U,
-  varargin: Args,
-): array<U> {
-  const v: U[] = [];
-  for (let i = 0; i < ndim; i++) {
-    const d = narray(x, i);
-    const temp = fun(d, ...varargin);
-    v.push(temp);
+  if (isarray(x) && !ismatrix(x)) {
+    if (isempty(varargin)) {
+      return fun(x as array) as unknown as VectorFunReturnType<X>;
+    }
+    return fun(x as array, ...varargin) as unknown as VectorFunReturnType<X>;
   }
-  return v;
-}
 
-/**
- * Formats the result based on the dimension
- */
-function formatResult<U>(dim: 0 | 1, v: array<U>): [U] | array<U> | matrix<U> {
+  const v: any[] = [];
+  if (ismatrix(x)) {
+    for (let i = 0; i < ndim; i++) {
+      const d = narray(x as matrix, i);
+      let temp;
+      if (isempty(varargin)) {
+        temp = fun(d);
+      } else {
+        temp = fun(d, ...varargin);
+      }
+      v.push(temp);
+    }
+  }
+
   if (dim === 1) {
-    return isarray(v[0]) ? [v] : transpose([v]) as matrix<U>;
+    if (ismatrix(v)) {
+      return v as unknown as VectorFunReturnType<X>;
+    }
+    return squeeze(transpose([v])) as unknown as VectorFunReturnType<X>;
   }
+
   if (dim === 0) {
-    return isarray(v[0]) ? transpose([v]) as matrix<U> : v;
+    if (ismatrix(v)) {
+      return v as unknown as VectorFunReturnType<X>;
+    }
   }
-  return v;
+
+  return squeeze(v) as unknown as VectorFunReturnType<X>;
 }

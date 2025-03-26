@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
-import { array, cumprod, isnumber, log, plus, vectorfun } from "../../index.ts";
+import type { array } from "../types.d.ts";
+import { cumprod, isnumber, log, plus, vectorfun } from "../../index.ts";
 
 /**
  * @function drawdown

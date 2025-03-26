@@ -1,68 +1,99 @@
-import type { array, numarraymatrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import arrayfun from "../datatype/arrayfun.ts";
-import isnumber from "../datatype/isnumber.ts";
-import ismatrix from "../datatype/ismatrix.ts";
-import nrows from "../matarrs/nrows.ts";
-import ncols from "../matarrs/ncols.ts";
-import getrow from "../matarrs/getrow.ts";
-import isarray from "../datatype/isarray.ts";
+import { isnumber, isarray, ismatrix, arrayfun } from "../../index.ts";
 
 /**
  * @function minus
- * @summary Subtracts one number, array, or matrix from another.
- * @description Subtracts Y from X. X and Y must have the same dimensions unless one is a number.
+ * @summary Subtraction X - Y
+ * @description Subtracts two numbers, arrays, or matrices element-wise. Handles mixed inputs of scalars, arrays, and matrices.
  *
- * @param x The left-hand operand.
- * @param y The right-hand operand.
- * @returns The result of the subtraction.
- * @throws {Error} If input dimensions do not agree.
+ * @param x The first operand, can be a number, array, or matrix.
+ * @param y The second operand, can be a number, array, or matrix.
+ * @returns The result of subtracting `y` from `x`.
+ * @throws {Error} If the input dimensions do not agree or if no arguments are provided.
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Subtract two numbers
- * assertEquals(minus(5, 6), -1);
+ * assertEquals(minus(5, 3), 2);
  *
- * // Example 2: Subtract two arrays
- * assertEquals(minus([5, 6, 4], [3, -1, 0]), [2, 7, 4]);
+ * // Example 2: Subtract two arrays element-wise
+ * assertEquals(minus([5, 6, 4], [3, 1, 2]), [2, 5, 2]);
  *
- * // Example 3: Subtract a number from an array
- * assertEquals(minus([5, 6, 4], 10), [-5, -4, -6]);
+ * // Example 3: Subtract a number from each element of an array
+ * assertEquals(minus([15, 16, 14], 10), [5, 6, 4]);
  *
- * // Example 4: Subtract two matrices
- * assertEquals(minus([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[6, 3, 6], [3, 3, -10]]);
+ * // Example 4: Subtract a number from each element of a matrix
+ * assertEquals(minus([[15, 16], [13, 14]], 10), [[5, 6], [3, 4]]);
+ *
+ * // Example 5: Subtract two matrices element-wise
+ * assertEquals(minus([[7, 9], [4, 6]], [[2, 3], [1, 2]]), [[5, 6], [3, 4]]);
  * ```
  */
+export default function minus(x: number, y: number): number;
+export default function minus(x: number, y: array): array;
+export default function minus(x: array, y: number): array;
+export default function minus(x: array, y: array): array;
+export default function minus(x: number, y: matrix): matrix;
+export default function minus(x: matrix, y: number): matrix;
+export default function minus(x: matrix, y: matrix): matrix;
 export default function minus(
   x: numarraymatrix,
-  y: numarraymatrix,
+  y: numarraymatrix
 ): numarraymatrix {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
+  if (isnumber(x) && isnumber(y)) {
+    return x - y;
   }
 
+  return handleMinusOperation(x, y);
+}
+
+/**
+ * Handle subtraction where at least one operand is not a number
+ */
+function handleMinusOperation(
+  x: numarraymatrix,
+  y: numarraymatrix
+): numarraymatrix {
   if (isnumber(x)) {
-    return isnumber(y) ? x - y : arrayfun(y, (val: any) => x - val) as array;
+    return arrayfun(y, (val: number) => (x as number) - val);
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val: any) => val - y) as numarraymatrix;
+    return arrayfun(x, (val: number) => val - (y as number));
   }
 
   if (isarray(x) && isarray(y)) {
-    return x.map((xi: any, i: number) => xi - (y[i] as number));
+    return elementwiseArraySubtraction(x as array, y as array);
   }
 
   if (ismatrix(x) && ismatrix(y)) {
-    if (nrows(x) !== nrows(y) || ncols(x) !== ncols(y)) {
-      throw new Error("input dimensions must agree");
-    }
-    return x.map((row: any, i: any) =>
-      minus(row, getrow(y, i))
-    ) as numarraymatrix;
+    return elementwiseMatrixSubtraction(x as matrix, y as matrix);
   }
 
   throw new Error("Invalid input types");
+}
+
+/**
+ * Element-wise subtraction of two arrays
+ */
+function elementwiseArraySubtraction(x: array, y: array): array {
+  if (x.length !== y.length) {
+    throw new Error("Arrays must have the same length");
+  }
+  return x.map((val: number, i: number) => val - y[i]);
+}
+
+/**
+ * Element-wise subtraction of two matrices
+ */
+function elementwiseMatrixSubtraction(x: matrix, y: matrix): matrix {
+  if (x.length !== y.length || x[0].length !== y[0].length) {
+    throw new Error("Matrices must have the same dimensions");
+  }
+  return x.map((row: array, i: number) =>
+    row.map((val: number, j: number) => val - y[i][j])
+  );
 }

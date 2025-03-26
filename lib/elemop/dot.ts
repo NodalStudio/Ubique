@@ -1,26 +1,23 @@
-/** @import { array } from '../types.d.ts' */
+import type { array } from "../types.d.ts";
 
-import sum from "./sum.ts";
-import times from "./times.ts";
-import size from "../matarrs/size.ts";
+import { size, sum, times } from "../../index.ts";
 
 /**
  * @function dot
- * @summary Computes the dot product of two arrays.
- * @description Takes two arrays of equal length and computes the dot product.
- * The arrays must be of the same size.
+ * @summary Computes the dot product of two arrays
+ * @description Takes two arrays of equal length and computes their dot product (sum of element-wise products).
  *
- * @param {array} x Array of numbers.
- * @param {array} y Array of numbers.
- * @returns {number} The dot product of the two arrays.
- * @throws {Error} If the arrays are not of the same size.
+ * @param x First array for dot product
+ * @param y Second array for dot product
+ * @returns The dot product of the two arrays
+ * @throws {Error} If inputs are not arrays, arrays are not of the same size, or if no arguments are provided
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Dot product of two 1D arrays
- * assertEquals(dot([5, 6, 3], [0.5, -3, 2.3]), -8.6);
+ * assertEquals(dot([5, 6, 3], [0.5, -3, 2.3]), -8.600000000000001);
  *
  * // Example 2: Dot product of two arrays with negative numbers
  * assertEquals(dot([-1, -2, -3], [-4, -5, -6]), 32);
@@ -32,16 +29,15 @@ import size from "../matarrs/size.ts";
  * assertEquals(dot([0, 0, 0], [0, 0, 0]), 0);
  *
  * // Example 5: Error when input arrays are of different sizes
- * assert.throws(() => dot([1, 2], [1, 2, 3]), Error, 'input size mismatch');
+ * assertThrows(() => dot([1, 2], [1, 2, 3]), Error, "Arrays must have the same length");
+ * ```
+ */
+export default function dot(x: array, y: array): number {
+  const sx = size(x);
+  const sy = size(y);
 
- * ```*/
-export default function dot(x: any, y: any) {
-  const xSize = size(x);
-  const ySize = size(y);
-
-  if (xSize[0] !== ySize[0] || xSize[1] !== ySize[1]) {
-    throw new Error("input size mismatch");
+  if (sx[0] !== sy[0]) {
+    throw new Error("Arrays must have the same length");
   }
-
   return sum(times(x, y));
 }

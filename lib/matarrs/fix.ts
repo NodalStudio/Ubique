@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import { array, matrix, numarraymatrix } from "../types.d.ts";
 
 import arrayfun from "../datatype/arrayfun.ts";
 
@@ -7,8 +7,8 @@ import arrayfun from "../datatype/arrayfun.ts";
  * @summary Rounds numbers toward zero.
  * @description Rounds numbers toward zero. This operation is element-wise for arrays and matrices.
  *
- * @param {number|array|matrix} x The input number, array, or matrix.
- * @returns {number|array|matrix} The rounded value(s).
+ * @param x The input number.
+ * @returns The rounded value.
  * @throws {Error} If no input argument is provided.
  *
  * @example
@@ -19,18 +19,17 @@ import arrayfun from "../datatype/arrayfun.ts";
  * assertEquals(fix(3.78), 3);
  *
  * // Example 2: Round an array of numbers toward zero
- * assert.deepStrictEqual(fix([4.51, -1.4]), [4, -1]);
+ * assertEquals(fix([4.51, -1.4]), [4, -1]);
  *
  * // Example 3: Round a matrix of numbers toward zero
- * assert.deepStrictEqual(fix([[4.51, -1.4], [3.78, 0.01]]), [[4, -1], [3, 0]]);
-
- * ```*/
-export default function fix(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _fix = (a: any) => {
+ * assertEquals(fix([[4.51, -1.4], [3.78, 0.01]]), [[4, -1], [3, 0]]);
+ * ```
+ */
+export default function fix(x: number): number;
+export default function fix(x: array): array;
+export default function fix(x: matrix): matrix;
+export default function fix(x: numarraymatrix): numarraymatrix {
+  const _fix = (a: number): number => {
     const rounded = a < 0 ? Math.ceil(a) : Math.floor(a);
     return rounded === 0 ? 0 : rounded;
   };

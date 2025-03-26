@@ -1,90 +1,96 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import isnumber from "../datatype/isnumber.ts";
-import ismatrix from "../datatype/ismatrix.ts";
-import isarray from "../datatype/isarray.ts";
-import getrow from "../matarrs/getrow.ts";
-import arrayfun from "../datatype/arrayfun.ts";
+import { isnumber, isarray, ismatrix, arrayfun } from "../../index.ts";
 
 /**
  * @function ldivide
- * @summary Left array division X. \ Y
- * @description Divides each element of Y by the corresponding element of X. Inputs X and Y must have the same size.
+ * @summary Left array division X .\ Y
+ * @description Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
  *
- * @param {number|array|matrix} x Number or array of values.
- * @param {number|array|matrix} y Number or array of values.
- * @returns {number|array|matrix} Result of the division.
- * @throws {Error} If fewer than two arguments are provided.
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws {Error} If the input dimensions do not agree or if no arguments are provided
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single number division
- * assertEquals(ldivide(5, 10), 2);
+ * // Example 1: Divide two numbers
+ * assertEquals(ldivide(2, 6), 3);
  *
- * // Example 2: Scalar divided by array
- * assert.deepStrictEqual(ldivide([1, 2, 3], 6), [6, 3, 2]);
+ * // Example 2: Element-wise division of arrays
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
  *
- * // Example 3: Scalar divided by array with negative numbers
- * assert.deepStrictEqual(ldivide(2, [-12, -8, -4]), [-6, -4, -2]);
+ * // Example 3: Divide array by scalar
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
  *
- * // Example 4: Element-wise division of two arrays
- * assert.deepStrictEqual(ldivide([5, 10, 3], [10, 20, 30]), [2, 2, 10]);
- *
- * // Example 5: Element-wise division of two matrices
- * assert.deepStrictEqual(ldivide([[5, 5], [6, 1]], [[10, 2], [6, 2]]), [[2, 0.4], [1, 2]]);
- *
- * // Example 6: Scalar divided by matrix
- * assert.deepStrictEqual(ldivide([[3, 5], [6, 1]], 3), [[1, 0.6], [0.5, 3]]);
-
- * ```*/
-export default function ldivide(x: any, y: any) {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
+ * // Example 4: Element-wise division of matrices
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
+export default function ldivide(x: number, y: number): number;
+export default function ldivide(x: number, y: array): array;
+export default function ldivide(x: array, y: number): array;
+export default function ldivide(x: array, y: array): array;
+export default function ldivide(x: number, y: matrix): matrix;
+export default function ldivide(x: matrix, y: number): matrix;
+export default function ldivide(x: matrix, y: matrix): matrix;
+export default function ldivide(
+  x: numarraymatrix,
+  y: numarraymatrix
+): numarraymatrix {
+  if (isnumber(x) && isnumber(y)) {
+    return y / x;
   }
 
-  const divide = (a: any, b: any) => b / a;
+  return handleLeftDivision(x, y);
+}
 
-  if (isnumber(x) || isnumber(y)) {
-    return handleNumberDivision(x, y, divide);
+/**
+ * Handle left division where at least one operand is not a number
+ */
+function handleLeftDivision(
+  x: numarraymatrix,
+  y: numarraymatrix
+): numarraymatrix {
+  if (isnumber(x)) {
+    return arrayfun(y, (val: number) => val / (x as number));
+  }
+
+  if (isnumber(y)) {
+    return arrayfun(x, (val: number) => y / val);
   }
 
   if (isarray(x) && isarray(y)) {
-    return handleArrayDivision(x, y, divide);
+    return elementwiseArrayDivision(x as array, y as array);
   }
 
   if (ismatrix(x) && ismatrix(y)) {
-    return handleMatrixDivision(x, y, divide);
+    return elementwiseMatrixDivision(x as matrix, y as matrix);
   }
 
-  throw new Error("types not supported");
+  throw new Error("Invalid input types");
 }
 
-function handleNumberDivision(x: any, y: any, divide: any) {
-  if (isnumber(x)) {
-    return isnumber(y)
-      ? divide(x, y)
-      : arrayfun(y, (val: any) => divide(x, val));
-  }
-
-  return ismatrix(x)
-    ? x.map((row: any) => arrayfun(row, (val: any) => divide(val, y)))
-    : arrayfun(x, (val: any) => divide(val, y));
-}
-
-function handleArrayDivision(x: any, y: any, divide: any) {
+/**
+ * Element-wise division of two arrays
+ */
+function elementwiseArrayDivision(x: array, y: array): array {
   if (x.length !== y.length) {
-    throw new Error("input dimensions must agree");
+    throw new Error("Arrays must have the same length");
   }
-  return x.map((xi: any, i: any) => divide(xi, y[i]));
+  return x.map((val: number, i: number) => y[i] / val);
 }
 
-function handleMatrixDivision(x: any, y: any, divide: any) {
+/**
+ * Element-wise division of two matrices
+ */
+function elementwiseMatrixDivision(x: matrix, y: matrix): matrix {
   if (x.length !== y.length || x[0].length !== y[0].length) {
-    throw new Error("input dimensions must agree");
+    throw new Error("Matrices must have the same dimensions");
   }
-  return x.map((row: any, i: any) =>
-    handleArrayDivision(row, getrow(y, i), divide)
+  return x.map((row: array, i: number) =>
+    row.map((val: number, j: number) => y[i][j] / val)
   );
 }

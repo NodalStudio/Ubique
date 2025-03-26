@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
@@ -27,7 +27,7 @@ import { isnumber, vectorfun } from "../../index.ts";
  */
 export default function min(
   x: numarraymatrix,
-  dim: number = 0,
+  dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _min = function (a: number[]) {
     return Math.min.apply(null, a);
