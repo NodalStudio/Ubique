@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from "https://esm.sh/dayjs";
 
 /**
  * @function now

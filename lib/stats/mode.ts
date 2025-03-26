@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { numarraymatrix } from "../types.d.ts";
 import { isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
@@ -27,7 +27,7 @@ import { isnumber, sort, vectorfun } from "../../index.ts";
  */
 export default function mode(
   x: numarraymatrix,
-  dim: number = 0,
+  dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _mode = function (a: number[]) {
     const counter: Record<number, number> = {};

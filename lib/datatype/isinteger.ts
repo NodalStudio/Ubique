@@ -1,4 +1,4 @@
-import isnumber from "./isnumber.ts";
+import { isnumber } from "../../index.ts";
 
 /**
  * @function isinteger

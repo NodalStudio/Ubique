@@ -1,21 +1,21 @@
+import { array, matrix } from "../types.d.ts";
+
 import dayjs from "https://esm.sh/dayjs";
 import utc from "https://esm.sh/dayjs/plugin/utc";
 import isoWeek from "https://esm.sh/dayjs/plugin/isoWeek";
-import arrayfun from "./arrayfun.ts";
-import { array, matrix } from "../types.d.ts";
-import isarray from "./isarray.ts";
-import ismatrix from "./ismatrix.ts";
 
 dayjs.extend(utc);
 dayjs.extend(isoWeek);
+
+import { arrayfun } from "../../index.ts";
 
 /**
  * @function weekday
  * @summary Gets the ISO weekday for a given Unix timestamp.
  * @description Returns a number representing the ISO weekday (1 = Monday, 7 = Sunday) for each element in `x`.
  *
- * @param {number|array<number>|matrix<number>} x - Unix timestamp(s) to convert to the ISO weekday.
- * @returns {number|array<number>|matrix<number>} - The corresponding ISO weekday(s).
+ * @param x Unix timestamp(s) to convert to the ISO weekday.
+ * @returns The corresponding ISO weekday(s).
  *
  * @example
  * ```ts

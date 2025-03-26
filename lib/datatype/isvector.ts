@@ -1,6 +1,4 @@
-import ismatrix from "./ismatrix.ts";
-import iscolumn from "./../matarrs/iscolumn.ts";
-import isrow from "./../matarrs/isrow.ts";
+import { iscolumn, ismatrix, isrow } from "../../index.ts";
 
 /**
  * @function isvector
