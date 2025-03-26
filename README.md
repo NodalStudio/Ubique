@@ -106,13 +106,14 @@ from Ubique and MATLAB-like environments.
 Rubique is an ongoing project with a clear vision for continuous improvement.
 Planned enhancements include:
 
-[ ] **Documentation Tests:** Add all tests to the `@example` sections to
-leverage Deno’s documentation testing. [ ] **Enhanced WebAssembly Usage:**
-Generalize the use of WebAssembly for heavy matrix operations to further boost
-performance. [ ] **Refactoring:** Complete the refactoring of the `quants`
-function to ensure consistency and reliability. [ ] **Type Improvements:** Clean
-up type definitions to avoid the overuse of `any` and ensure robust TypeScript
-support.
+- [ ] **Documentation Tests:** Add all tests to the `@example` sections to
+  leverage Deno’s documentation testing.
+- [ ] **Enhanced WebAssembly Usage:** Generalize the use of WebAssembly for
+  heavy matrix operations to further boost performance.
+- [ ] **Refactoring:** Complete the refactoring of the `quants` function to
+  ensure consistency and reliability.
+- [ ] **Type Improvements:** Clean up type definitions to avoid the overuse of
+  `any` and ensure robust TypeScript support.
 
 ## Contributing
 
