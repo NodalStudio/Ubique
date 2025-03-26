@@ -1,15 +1,15 @@
 import type { array, matrix } from "../types.d.ts";
 
 import {
-  isarray,
-  isempty,
-  ncols,
-  nrows,
   getcol,
   getrow,
-  transpose,
+  isarray,
+  isempty,
   ismatrix,
-  squeeze
+  ncols,
+  nrows,
+  squeeze,
+  transpose,
 } from "../../index.ts";
 
 /**
@@ -66,7 +66,6 @@ export default function vectorfun<X extends array | matrix>(
   fun: (vector: array, ...args: any[]) => any,
   ...varargin: any[]
 ): VectorFunReturnType<X> {
-
   let ndim: number;
   let narray: (x: matrix, idx: number) => array;
 

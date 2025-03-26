@@ -28,12 +28,16 @@ import { isnumber } from "../../index.ts";
  * assertEquals(interp1(x,y,3.5), 7);
  * ```
  */
-export default function interp1(x: array, y: array, xnew: number | array): number | array {
+export default function interp1(
+  x: array,
+  y: array,
+  xnew: number | array,
+): number | array {
   if (arguments.length === 0) {
-    throw new Error('not enough input arguments');
+    throw new Error("not enough input arguments");
   }
   if (x.length !== y.length) {
-    throw new Error('input dimension mismatch');
+    throw new Error("input dimension mismatch");
   }
 
   const xMin = x[0];

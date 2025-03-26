@@ -33,8 +33,13 @@ export default function unique(x: array, flag: 1): matrix;
 export default function unique(x: matrix): array;
 export default function unique(x: matrix, flag: 0): array;
 export default function unique(x: matrix, flag: 1): matrix;
-export default function unique(x: numarraymatrix, flag: 0|1 = 0): array | matrix {
-  const flatX = Array.isArray(x) ? (Array.isArray(x[0]) ? (x as matrix).flat() : x as array) : [x];
+export default function unique(
+  x: numarraymatrix,
+  flag: 0 | 1 = 0,
+): array | matrix {
+  const flatX = Array.isArray(x)
+    ? (Array.isArray(x[0]) ? (x as matrix).flat() : x as array)
+    : [x];
   const sorted = flatX
     .map((value: number, index: number) => [value, index])
     .sort(([a], [b]) => a - b);

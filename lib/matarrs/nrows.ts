@@ -26,6 +26,6 @@ import size from "./size.ts";
  * assertEquals(nrows([[3, 2, 7], [4, 5, 6]]), 2);
 
  * ```*/
-export default function nrows(x: array|matrix): number {
+export default function nrows(x: array | matrix): number {
   return size(x)[0];
 }

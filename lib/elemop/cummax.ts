@@ -27,12 +27,16 @@ import { vectorfun } from "../../index.ts";
  * ```
  */
 export default function cummax(x: array): array;
-export default function cummax(x: array, dim?: 0| 1): array;
+export default function cummax(x: array, dim?: 0 | 1): array;
 export default function cummax(x: matrix, dim?: 0 | 1): matrix;
-export default function cummax(x: array | matrix, dim: 0|1 = 1): array | matrix {
+export default function cummax(
+  x: array | matrix,
+  dim: 0 | 1 = 1,
+): array | matrix {
   return vectorfun(
     dim,
     x,
-    (a: array) => a.map((_: number, i: number) => Math.max(...a.slice(0, i + 1))),
+    (a: array) =>
+      a.map((_: number, i: number) => Math.max(...a.slice(0, i + 1))),
   );
 }

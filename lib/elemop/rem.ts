@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix, fix } from "../../index.ts";
+import { fix, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function rem
@@ -31,7 +31,10 @@ export default function rem(x: array, y: number): array;
 export default function rem(x: matrix, y: number): matrix;
 export default function rem(x: array, y: array): array;
 export default function rem(x: matrix, y: matrix): matrix;
-export default function rem(x: numarraymatrix, y: numarraymatrix): numarraymatrix {
+export default function rem(
+  x: numarraymatrix,
+  y: numarraymatrix,
+): numarraymatrix {
   if (arguments.length === 0) {
     throw new Error("Not enough input arguments");
   }
@@ -64,15 +67,15 @@ export default function rem(x: numarraymatrix, y: numarraymatrix): numarraymatri
   if (isnumber(y)) {
     if (isarray(x)) {
       const xArr = x as array;
-      return xArr.map(val => {
+      return xArr.map((val) => {
         const n = fix(val / y);
         return val - n * y;
       });
     }
     if (ismatrix(x)) {
       const xMat = x as matrix;
-      return xMat.map(row =>
-        row.map(val => {
+      return xMat.map((row) =>
+        row.map((val) => {
           const n = fix(val / y);
           return val - n * y;
         })
@@ -83,15 +86,15 @@ export default function rem(x: numarraymatrix, y: numarraymatrix): numarraymatri
   if (isnumber(x)) {
     if (isarray(y)) {
       const yArr = y as array;
-      return yArr.map(val => {
+      return yArr.map((val) => {
         const n = fix(x / val);
         return x - n * val;
       });
     }
     if (ismatrix(y)) {
       const yMat = y as matrix;
-      return yMat.map(row =>
-        row.map(val => {
+      return yMat.map((row) =>
+        row.map((val) => {
           const n = fix(x / val);
           return x - n * val;
         })

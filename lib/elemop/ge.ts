@@ -1,6 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
-import { isnumber, isarray, ismatrix } from "../../index.ts";
+import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
  * @function ge
@@ -40,7 +40,7 @@ import { isnumber, isarray, ismatrix } from "../../index.ts";
  */
 export default function ge(
   x: numarraymatrix,
-  y: numarraymatrix
+  y: numarraymatrix,
 ): boolean | boolean[] | boolean[][] {
   if (isnumber(x) && isnumber(y)) {
     return x >= y;
@@ -56,28 +56,32 @@ export default function ge(
 
   if (isnumber(x)) {
     if (isarray(y)) {
-      return (y as array).map(val => x >= val);
+      return (y as array).map((val) => x >= val);
     }
     if (ismatrix(y)) {
-      return (y as matrix).map(row => row.map(val => x >= val));
+      return (y as matrix).map((row) => row.map((val) => x >= val));
     }
   }
 
   if (isnumber(y)) {
     if (isarray(x)) {
-      return (x as array).map(val => val >= y);
+      return (x as array).map((val) => val >= y);
     }
     if (ismatrix(x)) {
-      return (x as matrix).map(row => row.map(val => val >= y));
+      return (x as matrix).map((row) => row.map((val) => val >= y));
     }
   }
 
   if (isarray(x) && ismatrix(y)) {
-    return (y as matrix).map(row => row.map((val, j) => (x as array)[j] >= val));
+    return (y as matrix).map((row) =>
+      row.map((val, j) => (x as array)[j] >= val)
+    );
   }
 
   if (ismatrix(x) && isarray(y)) {
-    return (x as matrix).map(row => row.map((val, j) => val >= (y as array)[j]));
+    return (x as matrix).map((row) =>
+      row.map((val, j) => val >= (y as array)[j])
+    );
   }
 
   throw new Error("Unsupported input types");
