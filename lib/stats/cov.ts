@@ -2,7 +2,6 @@ import type { array, matrix } from "../types.d.ts";
 import {
   cat,
   flatten,
-  isscalar,
   isvector,
   mean,
   minus,
