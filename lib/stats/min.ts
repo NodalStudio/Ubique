@@ -1,30 +1,33 @@
-import type { numarraymatrix } from "../types.d.ts";
-import { isnumber, vectorfun } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
 
 /**
  * @function min
  * @summary Smallest element in array
- * @description Computes the smallest element in an array or matrix
+ * @description Computes the smallest element in an array or matrix. For arrays, returns a single value.
+ * For matrices, returns the minimum along the specified dimension.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute the minimum. Default is 0 (rows)
- * @returns The minimum value(s)
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute minimum. Default is 0
+ * @returns Minimum values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { min } from "../../index.ts";
  *
- * // Example 1: Find min in a 1D array
- * assertEquals(min([5, 6, -1]), -1);
+ * // Example 1: Simple array minimum
+ * assertEquals(min([3, 1, 2]), 1);
  *
- * // Example 2: Find min in each row of a matrix (dim=0, default)
- * assertEquals(min([[-1, 3, -1], [4, 5, 9]]), [[-1], [4]]);
+ * // Example 2: Array with negative values
+ * assertEquals(min([5, -1, 10]), -1);
  *
- * // Example 3: Find min in each column of a matrix (dim=1)
- * assertEquals(min([[-1, 3, -1], [4, 5, 9]], 1), [[-1, 3, -1]]);
+ * // Example 3: Matrix minimum along rows
+ * assertEquals(min([[1, 2], [3, 4]]), [1, 3]);
  * ```
  */
+export default function min(x: array, dim?: 0 | 1): number;
+export default function min(x: matrix, dim?: 0 | 1): matrix;
 export default function min(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

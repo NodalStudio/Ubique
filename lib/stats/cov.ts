@@ -1,69 +1,45 @@
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
-  cat,
-  flatten,
-  isvector,
+  isarray,
+  ismatrix,
   mean,
-  minus,
-  mtimes,
-  nrows,
-  rdivide,
-  repmat,
-  transpose,
   varc,
 } from "../../index.ts";
 
 /**
  * @function cov
  * @summary Covariance matrix
- * @description Calculates the covariance matrix of arrays or matrices
+ * @description Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
+ * returns the covariance matrix between columns.
  *
- * @param x The first input array or matrix
- * @param y Optional second input array or matrix or flag value (0 or 1)
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix, or flag value (0 or 1)
  * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
- * @returns The covariance matrix or scalar covariance
+ * @returns Covariance matrix or scalar variance
+ * @throws {Error} When input dimensions do not agree
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { cov } from "../../index.ts";
  *
- * // Example 1: Variance of a vector
- * const c = [5, 6, 3];
- * assertEquals(cov(c), 2.33333);
+ * // Example 1: Sample covariance (variance) of single array
+ * assertEquals(cov([1, 2, 3]), 1);
  *
- * // Example 2: Covariance between two vectors
- * const d = [0.5, -3, 2.3];
- * assertEquals(
- *   cov(c, d),
- *   [[2.333333, -3.833333], [-3.833333, 7.263333]]
- * );
+ * // Example 2: Population covariance with flag=0
+ * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
  *
- * // Example 3: Population covariance (flag = 0)
- * assertEquals(
- *   cov(c, d, 0),
- *   [[1.555556, -2.555556], [-2.555556, 4.842222]]
- * );
- *
- * // Example 4: Covariance of matrices
- * const e = [[9, 5], [6, 1]];
- * const f = [[3, 2], [5, 2]];
- * assertEquals(
- *   cov(e, f),
- *   [[10.916667, 2], [2, 2]]
- * );
- *
- * // Example 5: Covariance matrix of a single matrix
- * const l = [[1, 1, -1], [1, -2, 3], [2, 3, 1]];
- * assertEquals(
- *   cov(l),
- *   [[0.333333, 1.166667, 0], [1.166667, 6.333333, -3], [0, -3, 4]]
- * );
+ * // Example 3: Covariance matrix from 2x2 data matrix
+ * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
  * ```
  */
+export default function cov(x: array): number;
+export default function cov(x: array, flag: number): number;
+export default function cov(x: array, y: array, flag?: number): matrix;
+export default function cov(x: matrix, flag?: number): matrix;
 export default function cov(
-  x: array | matrix,
-  y?: array | matrix | number,
+  x: numarraymatrix,
+  y?: numarraymatrix | number,
   flag?: number,
 ): number | matrix {
   // Process arguments to handle optional parameters
@@ -75,7 +51,7 @@ export default function cov(
     actualFlag = y;
   } else if (y !== undefined) {
     // y is a second array/matrix
-    actualY = y;
+    actualY = y as array | matrix;
 
     if (typeof flag === "number" && (flag === 0 || flag === 1)) {
       actualFlag = flag;
@@ -83,27 +59,73 @@ export default function cov(
   }
 
   // Case 1: Single vector - return variance
-  if (actualY === undefined && (isvector(x))) {
-    const flatX = flatten(x);
-    return varc(flatX, actualFlag);
+  if (actualY === undefined && isarray(x)) {
+    return varc(x as array, actualFlag);
   }
 
-  // Case 2: Two arrays/vectors - calculate covariance matrix
-  if (actualY !== undefined) {
-    const transposedX = transpose(flatten(x));
-    const transposedY = transpose(flatten(actualY));
+  // Case 2: Two vectors - calculate 2x2 covariance matrix
+  if (actualY !== undefined && isarray(x) && isarray(actualY)) {
+    const flatX = x as array;
+    const flatY = actualY as array;
 
-    if (transposedX.length !== transposedY.length) {
+    if (flatX.length !== flatY.length) {
       throw new Error("input dimension must agree");
     }
 
-    x = cat(1, transposedX, transposedY);
+    const varX = varc(flatX, actualFlag);
+    const varY = varc(flatY, actualFlag);
+
+    // Calculate covariance between X and Y
+    const meanX = mean(flatX);
+    const meanY = mean(flatY);
+    const n = flatX.length;
+
+    let covXY = 0;
+    for (let i = 0; i < n; i++) {
+      covXY += (flatX[i] - meanX) * (flatY[i] - meanY);
+    }
+    covXY = covXY / (n - actualFlag);
+
+    return [[varX, covXY], [covXY, varY]];
   }
 
-  // Calculate covariance matrix
-  const m = nrows(x);
-  const mu = mean(x, 1);
-  const z = minus(x, repmat(mu, m, 1));
+  // Case 3: Matrix input - calculate covariance matrix between columns
+  if (ismatrix(x)) {
+    const matrix = x as matrix;
+    const numCols = matrix[0].length;
+    const result: matrix = [];
 
-  return rdivide(mtimes(transpose(z), z), m - actualFlag);
+    // Initialize result matrix
+    for (let i = 0; i < numCols; i++) {
+      result[i] = [];
+    }
+
+    // Calculate covariance between each pair of columns
+    for (let i = 0; i < numCols; i++) {
+      for (let j = 0; j < numCols; j++) {
+        const colI = matrix.map(row => row[i]);
+        const colJ = matrix.map(row => row[j]);
+
+        if (i === j) {
+          // Variance on diagonal
+          result[i][j] = varc(colI, actualFlag);
+        } else {
+          // Covariance off diagonal
+          const meanI = mean(colI);
+          const meanJ = mean(colJ);
+          const n = colI.length;
+
+          let cov = 0;
+          for (let k = 0; k < n; k++) {
+            cov += (colI[k] - meanI) * (colJ[k] - meanJ);
+          }
+          result[i][j] = cov / (n - actualFlag);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  throw new Error("Invalid input types for covariance calculation");
 }

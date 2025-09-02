@@ -17,17 +17,13 @@ import rem from "../elemop/rem.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Convert linear index 5 to subscripts in a 2x3 matrix
- * var a = [[5,6,5],[7,8,-1]];
- * console.log(ind2sub([2, 3], 5)); // [1, 2]
+ * assertEquals(ind2sub([2, 3], 5), [1, 2]);
  *
  * // Example 2: Convert multiple linear indices to subscripts
- * console.log(ind2sub([2, 3], [0, 1, 2])); // [[0, 0], [1, 0], [0, 1]]
+ * assertEquals(ind2sub([2, 3], [0, 1, 2]), [[0, 0], [1, 0], [0, 1]]);
  *
  * // Example 3: Convert linear index to subscripts in a vector (3x1 matrix)
- * console.log(ind2sub([3, 1], 2)); // [2, 0]
- *
- * // Example 4: Invalid input (size is not an array)
- * // Throws error: 'size must be an array representing the matrix dimensions'
+ * assertEquals(ind2sub([3, 1], 2), [2, 0]);
 
  * ```*/
 export default function ind2sub(size: any, index: any) {

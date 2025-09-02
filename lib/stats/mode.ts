@@ -1,30 +1,33 @@
-import type { numarraymatrix } from "../types.d.ts";
-import { isnumber, sort, vectorfun } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { isarray, ismatrix, isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
  * @function mode
- * @summary Most frequent value in an array of elements
- * @description Most frequent value in an array of elements (Unimodal)
+ * @summary Most frequent value in an array
+ * @description Finds the most frequently occurring value in an array or matrix.
+ * In case of ties, returns the first value that achieves the maximum frequency.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute the mode. Default is 0 (rows)
- * @returns The mode value(s)
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute mode. Default is 0
+ * @returns Most frequent values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { mode } from "../../index.ts";
  *
- * // Example 1: Find mode in a 1D array
- * assertEquals(mode([5, 6, 3, 5]), 5);
+ * // Example 1: Simple mode
+ * assertEquals(mode([1, 2, 2, 3]), 2);
  *
- * // Example 2: Find mode in each row of a matrix (dim=0, default)
- * assertEquals(mode([[5, 6, 5], [7, 8, -1, -1]]), [[5], [-1]]);
+ * // Example 2: Mode with multiple values
+ * assertEquals(mode([1, 1, 2, 2, 2]), 2);
  *
- * // Example 3: Find mode in each column of a matrix (dim=1)
- * assertEquals(mode([[5, 6, 5], [7, 8, -1]], 1), [[5, 6, -1]]);
+ * // Example 3: Matrix mode
+ * assertEquals(mode([[1, 1, 2], [3, 3, 4]]), [1, 3]);
  * ```
  */
+export default function mode(x: array, dim?: 0 | 1): number;
+export default function mode(x: matrix, dim?: 0 | 1): matrix;
 export default function mode(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

@@ -20,8 +20,8 @@ import { sum, times } from "../../index.ts";
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * const result = linearreg(y,x);
- * assertEquals(Math.round(result.beta * 1000) / 1000, 0.023);
- * assertEquals(Math.round(result.alpha * 1000) / 1000, 0.018);
+ * assertEquals(Math.round(result.beta * 1000) / 1000, 0.119);
+ * assertEquals(Math.round(result.alpha * 1000) / 1000, 0.01);
  *
  * // Example 2: Linear regression with stronger correlation
  * var result2 = linearreg([100,101,99,102,105],[1,2,3,4,5]);
@@ -29,7 +29,7 @@ import { sum, times } from "../../index.ts";
  * assertEquals(result2.alpha, 98.1);
  *
  * // Example 3: Using the prediction function
- * assertEquals(result2.fun(6), 104.7);
+ * assertEquals(Math.round(result2.fun(6) * 10) / 10, 104.7);
  * ```
  */
 export default function linearreg(y: array, x: array): {

@@ -20,13 +20,13 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Flatten a 2x2 matrix (row-wise by default)
- * flatten([[5, 6], [7, 8]]); // [5, 7, 6, 8]
+ * assertEquals(flatten([[5, 6], [7, 8]]), [5, 6, 7, 8]);
  *
  * // Example 2: Flatten a 3x3 matrix by rows
- * flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]]); // [1, 1, -1, 1, -2, 3, 2, 3, 1]
+ * assertEquals(flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), [1, 1, -1, 1, -2, 3, 2, 3, 1]);
  *
  * // Example 3: Flatten a 3x3 matrix by columns (dim = 1)
- * flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]], 1); // [1, 1, 2, 1, -2, 3, -1, 3, 1]
+ * assertEquals(flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]], 1), [1, 1, 2, 1, -2, 3, -1, 3, 1]);
 
  * ```*/
 export default function flatten(x: any, dim = 0) {

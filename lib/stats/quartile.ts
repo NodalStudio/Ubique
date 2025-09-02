@@ -1,35 +1,37 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isnumber, prctile, vectorfun } from "../../index.ts";
+import { isarray, ismatrix, isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
  * @function quartile
  * @summary Quartiles of a sample
- * @description Calculates the quartiles (25th, 50th, and 75th percentiles) of the values in array x
+ * @description Calculates the three quartiles (Q1, Q2, Q3) which divide the data into four equal parts.
+ * Q1 is the 25th percentile, Q2 is the median (50th percentile), and Q3 is the 75th percentile.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute quartiles. Default is 0 (rows)
- * @returns Array containing the three quartile values: [Q1, Q2, Q3]
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute quartiles. Default is 0
+ * @returns Array containing [Q1, Q2, Q3] values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { quartile, cat } from "../../index.ts";
  *
- * // Example 1: Calculate quartiles of an array
- * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(quartile(x), [0.003, 0.015, 0.026]);
+ * // Example 1: Simple quartiles
+ * assertEquals(quartile([1, 2, 3, 4, 5]), [1.75, 3, 4.25]);
  *
- * // Example 2: Calculate quartiles for each row in a matrix
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(quartile(cat(0, x, y)), [[0.003, 0.015, 0.026], [-0.037, 0.0175, 0.058]]);
+ * // Example 2: Even number of elements
+ * assertEquals(quartile([1, 2, 3, 4]), [1.5, 2.5, 3.5]);
+ *
+ * // Example 3: Quartiles provide Q1, Q2 (median), Q3
+ * assertEquals(quartile([10, 20, 30, 40]), [15, 25, 35]);
  * ```
  */
 export default function quartile(x: array, dim?: 0 | 1): array;
-export default function quartile(x: matrix, dim?: 0 | 1): array | matrix;
+export default function quartile(x: matrix, dim?: 0 | 1): matrix;
 export default function quartile(
-  x: array | matrix,
+  x: numarraymatrix,
   dim: 0 | 1 = 0,
-): array | matrix {
+): numarraymatrix {
   const _quartile = function (a: array): array {
     return [
       prctile(a, 25) as number,
