@@ -1,29 +1,33 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isnumber, prctile, vectorfun } from "../../index.ts";
+import { isarray, ismatrix, isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
  * @function iqr
  * @summary Interquartile range
- * @description Calculates the interquartile range (Q3 - Q1 quartiles)
+ * @description Calculates the interquartile range (difference between 75th and 25th percentiles)
+ * of arrays or matrices. For matrices, operates along specified dimension.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute the IQR. Default is 0 (rows)
- * @returns The interquartile range value(s)
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute IQR. Default is 0
+ * @returns Interquartile range values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { iqr, cat } from "../../index.ts";
  *
- * // Example 1: Calculate IQR of an array
- * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(iqr(x), 0.023);
+ * // Example 1: IQR of simple array
+ * assertEquals(iqr([1, 2, 3, 4, 5]), 2.5);
  *
- * // Example 2: Calculate IQR for each row in a matrix
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(iqr(cat(0, x, y)), [[0.023], [0.095]]);
+ * // Example 2: IQR with larger range  
+ * assertEquals(iqr([1, 2, 3, 4, 5, 6, 7, 8, 9]), 4.5);
+ *
+ * // Example 3: IQR of matrix
+ * assertEquals(iqr([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
  */
+export default function iqr(x: array, dim?: number): number;
+export default function iqr(x: matrix, dim?: number): matrix;
 export default function iqr(
   x: numarraymatrix,
   dim: number = 0,

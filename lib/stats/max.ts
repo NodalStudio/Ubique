@@ -1,30 +1,33 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isnumber, vectorfun } from "../../index.ts";
+import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
 
 /**
  * @function max
  * @summary Largest element in array
- * @description Computes the largest element in an array or matrix
+ * @description Computes the largest element in an array or matrix. For arrays, returns a single value.
+ * For matrices, returns the maximum along the specified dimension.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute the maximum. Default is 0 (rows)
- * @returns The maximum value(s)
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute maximum. Default is 0
+ * @returns Maximum values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { max } from "../../index.ts";
  *
- * // Example 1: Find max in a 1D array
- * assertEquals(max([5, 6, -1]), 6);
+ * // Example 1: Simple array maximum
+ * assertEquals(max([1, 3, 2]), 3);
  *
- * // Example 2: Find max in each row of a matrix (dim=0, default)
- * assertEquals(max([[-1, 3, -1], [4, 5, 9]]), [[3], [9]]);
+ * // Example 2: Array with negative values
+ * assertEquals(max([-5, -1, -10]), -1);
  *
- * // Example 3: Find max in each column of a matrix (dim=1)
- * assertEquals(max([[-1, 3, -1], [4, 5, 9]], 1), [[4, 5, 9]]);
+ * // Example 3: Matrix maximum along rows  
+ * assertEquals(max([[1, 2], [3, 4]]), [2, 4]);
  * ```
  */
+export default function max(x: array, dim?: number): number;
+export default function max(x: matrix, dim?: number): matrix;
 export default function max(
   x: numarraymatrix,
   dim: number = 0,

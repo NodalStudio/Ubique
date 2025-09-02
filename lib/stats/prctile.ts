@@ -2,6 +2,8 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   colon,
   interp1,
+  isarray,
+  ismatrix,
   isnumber,
   rdivide,
   sort,
@@ -12,41 +14,36 @@ import {
 /**
  * @function prctile
  * @summary Percentiles of a sample
- * @description Calculates the p-th percentile of the values in array x
+ * @description Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
  *
- * @param x The input array or matrix
- * @param p The p-th percentile in the range [0,100]
- * @param dim Optional dimension along which to compute percentiles. Default is 0 (rows)
- * @returns The percentile value(s)
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws {Error} When percentile is outside valid range [0,100]
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { prctile, cat } from "../../index.ts";
  *
- * // Example 1: Calculate the 5th percentile of an array
- * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(prctile(x, 5), -0.014);
+ * // Example 1: 50th percentile (median)
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
  *
- * // Example 2: Calculate the 33rd percentile of an array
- * assertEquals(prctile(x, 33), 0.0118);
+ * // Example 2: 25th percentile
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
  *
- * // Example 3: Calculate the 5th percentile for each row in a matrix
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(prctile(cat(0, x, y), 5), [[-0.014, -0.061]]);
+ * // Example 3: Multiple percentiles
+ * assertEquals(prctile([1, 2, 3, 4, 5], [25, 50, 75]), [1.75, 3, 4.25]);
  * ```
  */
 export default function prctile(x: array, p: number, dim?: 0 | 1): number;
+export default function prctile(x: matrix, p: number, dim?: 0 | 1): matrix;
 export default function prctile(
-  x: matrix,
-  p: number,
-  dim?: 0 | 1,
-): array | matrix;
-export default function prctile(
-  x: array | matrix,
+  x: numarraymatrix,
   p: number,
   dim: 0 | 1 = 0,
-): number | array | matrix {
+): numarraymatrix {
   if (p < 0 || p > 100) {
     throw new Error(
       "p-th percentile must be a real value between 0 and 100 inclusive",

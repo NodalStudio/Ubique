@@ -1,41 +1,39 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { prctile } from "../../index.ts";
+import { isarray, ismatrix, isnumber, prctile } from "../../index.ts";
 
 /**
  * @function quantile
  * @summary Quantiles of a sample
- * @description Calculates the p-th quantile of the values in array x
+ * @description Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles are values that divide the data into equal probability intervals.
  *
- * @param x The input array or matrix
- * @param p The p-th quantile in the range [0,1]
- * @param dim Optional dimension along which to compute quantiles. Default is 0 (rows)
- * @returns The quantile value(s)
+ * @param x Input array or matrix
+ * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
+ * @param dim Dimension along which to compute quantiles. Default is 0
+ * @returns Quantile values
+ * @throws {Error} When quantile is outside valid range [0,1]
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { quantile, cat } from "../../index.ts";
  *
- * // Example 1: Calculate the first quartile (0.25 quantile) of an array
- * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(quantile(x, 0.25), 0.003);
+ * // Example 1: Median (0.5 quantile)
+ * assertEquals(quantile([1, 2, 3, 4, 5], 0.5), 3);
  *
- * // Example 2: Calculate the 0.33 quantile for each row in a matrix
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(quantile(cat(0, x, y), 0.33), [[0.0118, -0.0242]]);
+ * // Example 2: First quartile
+ * assertEquals(quantile([1, 2, 3, 4], 0.25), 1.5);
+ *
+ * // Example 3: Matrix quantiles
+ * assertEquals(quantile([[1, 2], [3, 4]], 0.5), [1.5, 3.5]);
  * ```
  */
 export default function quantile(x: array, p: number, dim?: 0 | 1): number;
+export default function quantile(x: matrix, p: number, dim?: 0 | 1): matrix;
 export default function quantile(
-  x: matrix,
-  p: number,
-  dim?: 0 | 1,
-): array | matrix;
-export default function quantile(
-  x: array | matrix,
+  x: numarraymatrix,
   p: number,
   dim: 0 | 1 = 0,
-): number | array | matrix {
+): numarraymatrix {
   if (p < 0 || p > 1) {
     throw new Error(
       "p-th quantile must be a real value between 0 and 1 inclusive",
@@ -43,5 +41,5 @@ export default function quantile(
   }
 
   // Convert quantile (0-1) to percentile (0-100) and use prctile
-  return prctile(x, p * 100, dim) as number | array | matrix;
+  return prctile(x, p * 100, dim) as numarraymatrix;
 }

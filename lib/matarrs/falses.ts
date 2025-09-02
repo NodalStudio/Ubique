@@ -16,19 +16,19 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Create an empty array (0x0 matrix)
- * console.log(falses(0)); // []
+ * assertEquals(falses(0), []);
  *
  * // Example 2: Create a 1x1 matrix of `false`
- * console.log(falses(1)); // [ [ false ] ]
+ * assertEquals(falses(1), [[false]]);
  *
  * // Example 3: Create a 2x2 matrix of `false`
- * console.log(falses(2)); // [ [ false, false ], [ false, false ] ]
+ * assertEquals(falses(2), [[false, false], [false, false]]);
  *
  * // Example 4: Create a 2x1 matrix of `false`
- * console.log(falses([2, 1])); // [ [ false ], [ false ] ]
+ * assertEquals(falses([2, 1]), [[false], [false]]);
  *
  * // Example 5: Create a 2x3 matrix of `false`
- * console.log(falses(2, 3)); // [ [ false, false, false ], [ false, false, false ] ]
+ * assertEquals(falses(2, 3), [[false, false, false], [false, false, false]]);
 
  * ```*/
 export default function falses(...args: any[]) {

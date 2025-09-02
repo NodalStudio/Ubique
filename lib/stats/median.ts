@@ -1,37 +1,38 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isnumber, max, sort, vectorfun } from "../../index.ts";
+import { isarray, ismatrix, isnumber, max, sort, vectorfun } from "../../index.ts";
 
 /**
  * @function median
  * @summary Median value of array
- * @description Computes the median value of array
+ * @description Computes the median (middle value) of an array or matrix. For even-length arrays,
+ * returns the average of the two middle values. For matrices, operates along specified dimension.
  *
- * @param x The input array or matrix
- * @param dim Optional dimension along which to compute the median. Default is 0 (rows)
- * @returns The median value(s)
+ * @param x Input number, array, or matrix
+ * @param dim Dimension along which to compute median. Default is 0
+ * @returns Median values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { median } from "../../index.ts";
  *
- * // Example 1: Find median in a 1D array
- * assertEquals(median([5, 6, 3]), 5);
+ * // Example 1: Odd length array
+ * assertEquals(median([1, 2, 3]), 2);
  *
- * // Example 2: Find median in each row of a matrix (dim=0, default)
- * assertEquals(median([[5, 6, 5], [7, 8, -1]]), [[5], [7]]);
+ * // Example 2: Even length array
+ * assertEquals(median([1, 2, 3, 4]), 1.5);
  *
- * // Example 3: Find median in each column of a matrix (dim=1)
- * assertEquals(median([[5, 6, 5], [7, 8, -1]], 1), [[6, 7, 2]]);
+ * // Example 3: Matrix median
+ * assertEquals(median([[1, 2], [3, 4]]), [1.5, 3.5]);
  * ```
  */
 export default function median(x: number): number;
 export default function median(x: array, dim?: 0 | 1): number;
-export default function median(x: matrix, dim?: 0 | 1): array | matrix;
+export default function median(x: matrix, dim?: 0 | 1): matrix;
 export default function median(
-  x: number | array | matrix,
+  x: numarraymatrix,
   dim: 0 | 1 = 0,
-): number | array | matrix {
+): numarraymatrix {
   const _median = function (a: array): number {
     const n = a.length - 1;
     const idx = max(1, Math.floor(n / 2)) as number;

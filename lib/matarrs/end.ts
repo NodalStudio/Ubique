@@ -21,19 +21,19 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Last index of a vector
- * console.log(end([5, 6, 3])); // 2
+ * assertEquals(end([5, 6, 3]), 2);
  *
  * // Example 2: Last indices of a matrix
- * console.log(end([[4, 5, 0], [-1, 2, -3]])); // [1, 2]
+ * assertEquals(end([[4, 5, 0], [-1, 2, -3]]), [1, 2]);
  *
  * // Example 3: Last row index of a matrix
- * console.log(end([[4, 5, 0], [-1, 2, -3]], 0)); // 1
+ * assertEquals(end([[4, 5, 0], [-1, 2, -3]], 0), 1);
  *
  * // Example 4: Last column index of a matrix
- * console.log(end([[4, 5, 0], [-1, 2, -3]], 1)); // 2
+ * assertEquals(end([[4, 5, 0], [-1, 2, -3]], 1), 2);
  *
  * // Example 5: Last index of a number (returns the number itself)
- * console.log(end(5)); // 5
+ * assertEquals(end(5), 5);
 
  * ```*/
 export default function end(x: any, dim = -1) {

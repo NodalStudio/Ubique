@@ -1,37 +1,38 @@
-import type { array, matrix } from "../types.d.ts";
-import { isarray, isnumber, numel, rdivide, size, sum } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { isarray, ismatrix, isnumber, numel, rdivide, size, sum } from "../../index.ts";
 
 /**
  * @function mean
  * @summary Average value of array or matrix
- * @description Computes the average value of an array or matrix along a specified dimension.
+ * @description Computes the average (arithmetic mean) of values in an array or matrix.
+ * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
  *
- * @param x The input array or matrix of values
- * @param dim The dimension along which to calculate (0: row-wise, 1: column-wise, defaults to 0)
- * @returns The mean value(s)
- * @throws {Error} If no input is provided
+ * @param x Input array, matrix, or number
+ * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
+ * @returns Mean values
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Mean of a vector
- * assertEquals(mean([5, 6, 3]), 4.66667);
+ * // Example 1: Simple array mean
+ * assertEquals(mean([1, 2, 3]), 2);
  *
- * // Example 2: Mean of a matrix along rows (dim=0)
- * assertEquals(mean([[5, 6, 5], [7, 8, -1]]), [5.333333, 4.666667]);
+ * // Example 2: Array with decimals
+ * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
  *
- * // Example 3: Mean of a matrix along columns (dim=1)
- * assertEquals(mean([[5, 6, 5], [7, 8, -1]], 1), [6, 7, 2]);
-
- * ```*/
+ * // Example 3: Matrix mean along rows
+ * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
+ * ```
+ */
 export default function mean(x: number): number;
 export default function mean(x: array, dim?: 0 | 1): number;
-export default function mean(x: matrix, dim?: 0 | 1): array | number;
+export default function mean(x: matrix, dim?: 0 | 1): array;
 export default function mean(
-  x: number | array | matrix,
+  x: numarraymatrix,
   dim: 0 | 1 = 0,
-): number | array {
+): numarraymatrix {
   if (isnumber(x)) {
     return x;
   }

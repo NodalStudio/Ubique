@@ -16,16 +16,16 @@
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Generate array from 1 to 10 with step 1
- * console.log(colon(1, 10, 1)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ * assertEquals(colon(1, 10, 1), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
  *
  * // Example 2: Generate array from 10 to 1 with step 1 (should return empty array)
- * console.log(colon(10, 1, 1)); // []
+ * assertEquals(colon(10, 1, 1), []);
  *
  * // Example 3: Generate array from -5 to 5 with step 2
- * console.log(colon(-5, 5, 2)); // [-5, -3, -1, 1, 3, 5]
+ * assertEquals(colon(-5, 5, 2), [-5, -3, -1, 1, 3, 5]);
  *
  * // Example 4: Generate array from -7 to 14 with step 2
- * console.log(colon(-7, 14, 2)); // [-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13]
+ * assertEquals(colon(-7, 14, 2), [-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13]);
 
  * ```*/
 export default function colon(start: any, end: any, step = 1) {

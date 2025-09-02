@@ -2,7 +2,6 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   isarray,
   ismatrix,
-  isnumber,
   kurtosis,
   sharpe,
   skewness,
