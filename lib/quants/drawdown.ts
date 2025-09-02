@@ -1,6 +1,19 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array } from "../types.d.ts";
-import { cumprod, isnumber, log, plus, vectorfun } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import {
+  cumprod,
+  isarray,
+  ismatrix,
+  log,
+  plus,
+  vectorfun,
+} from "../../index.ts";
+
+interface DrawdownResult {
+  dd: array;
+  ddrecov: array;
+  maxdd: number;
+  maxddrecov: [number, number];
+}
 
 /**
  * @function drawdown
@@ -14,10 +27,11 @@ import { cumprod, isnumber, log, plus, vectorfun } from "../../index.ts";
  * - maxdd (max drawdown)
  * - maxddrecov (max drawdown recovery period): [start period, end period]
  *
- * @param x asset/portfolio returns
- * @param mode drawdown calculation. 'return','geometric' (def: 'return')
- * @param dim dimension 0: row, 1: column (def: 0)
- * @return Drawdown information object
+ * @param x Asset/portfolio returns
+ * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Drawdown information object
+ * @throws {Error} If input must be an array or matrix
  *
  * @example
  * ```ts
@@ -25,24 +39,37 @@ import { cumprod, isnumber, log, plus, vectorfun } from "../../index.ts";
  * import { drawdown } from "../../index.ts";
  *
  * // Example 1: Calculate drawdown metrics for a return series
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * const result = drawdown(x);
- * assertEquals(result.dd, [0, 0, 0, 0.009, 0, 0, 0, 0, 0.014, 0]);
+ * assertEquals(result.dd, [0, 0, 0, 0.00900000000000004, 0, 0, 0, 0, 0.013999999999999995, 0]);
  * assertEquals(result.ddrecov, [0, 0, 0, 4, 0, 0, 0, 0, 9, 0]);
- * assertEquals(result.maxdd, 0.014);
+ * assertEquals(result.maxdd, 0.013999999999999995);
  * assertEquals(result.maxddrecov, [8, 9]);
+ *
+ * // Example 2: Drawdown with geometric mode
+ * assertEquals(drawdown(x, "geometric").maxdd, 0.014098924379501637);
+ *
+ * // Example 3: Drawdown for multiple assets
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals((drawdown([x, y]) as any).length, 2);
  * ```
  */
 export default function drawdown(
-  x: any,
+  x: array,
+  mode?: string,
+  dim?: 0 | 1,
+): DrawdownResult;
+export default function drawdown(
+  x: matrix,
+  mode?: string,
+  dim?: 0 | 1,
+): DrawdownResult[];
+export default function drawdown(
+  x: numarraymatrix,
   mode: string = "return",
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const calculateDrawdown = function (a: any, mode: string) {
+  dim: 0 | 1 = 0,
+): DrawdownResult | DrawdownResult[] {
+  const calculateDrawdown = function (a: array, mode: string): DrawdownResult {
     let prices;
     if (mode === "return") {
       prices = cumprod(plus(a, 1));
@@ -54,10 +81,10 @@ export default function drawdown(
 
     let highest = prices[0];
     let highestidx = 1;
-    const _dd = array(prices.length, 0);
-    const _recov = array(prices.length, 0);
+    const _dd = new Array(prices.length).fill(0);
+    const _recov = new Array(prices.length).fill(0);
     let _maxdd = 0;
-    const _maxddidx = [1, prices.length];
+    const _maxddidx: [number, number] = [1, prices.length];
 
     for (let i = 0; i < prices.length; i++) {
       if (highest <= prices[i]) {
@@ -90,9 +117,11 @@ export default function drawdown(
     };
   };
 
-  if (isnumber(x)) {
-    return 0;
+  if (!isarray(x) && !ismatrix(x)) {
+    throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, calculateDrawdown, mode);
+  return vectorfun(dim, x, (a: array) => calculateDrawdown(a, mode)) as
+    | DrawdownResult
+    | DrawdownResult[];
 }

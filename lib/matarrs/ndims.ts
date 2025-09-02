@@ -1,3 +1,4 @@
+import { array, matrix } from "../types.d.ts";
 import size from "./size.ts";
 import length from "./length.ts";
 
@@ -23,9 +24,6 @@ import length from "./length.ts";
  * assertEquals(ndims([[3, 2, 7], [4, 5, 6]]), 2);
 
  * ```*/
-export default function ndims(x: any) {
-  if (x === undefined) {
-    throw new Error("Not enough input arguments");
-  }
+export default function ndims(x: array | matrix) {
   return length(size(x));
 }

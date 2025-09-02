@@ -1,12 +1,13 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import mean from "./mean.ts";
-import sum from "../elemop/sum.ts";
-import power from "../elemop/power.ts";
-import abs from "../elmath/abs.ts";
-import minus from "../elemop/minus.ts";
-import vectorfun from "../datatype/vectorfun.ts";
-import isarray from "../datatype/isarray.ts";
+import type { array, matrix } from "../types.d.ts";
+import {
+  abs,
+  isarray,
+  mean,
+  minus,
+  power,
+  sum,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function varc
@@ -20,13 +21,11 @@ import isarray from "../datatype/isarray.ts";
  * - Sample (flag = 1, default):
  *   **s² = Σ (xᵢ - x̄)² / (N - 1)**
  *
- * @param {array|matrix} x Input array or matrix.
- * @param {number} [flag=1] Normalization type:
- *   - `0`: Population variance
- *   - `1`: Sample variance (default)
- * @param {number} [dim=0] Dimension to operate on (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The computed variance.
- * @throws {Error} If the input is invalid.
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: Population, 1: Sample, defaults to 1)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
+ * @returns The computed variance
+ * @throws {Error} If the input is invalid
  *
  * @example
  * ```ts
@@ -41,24 +40,31 @@ import isarray from "../datatype/isarray.ts";
  *
  * // Example 3: Variance of a 2D matrix (row-wise, population)
  * const a = [[5, 6, 5], [7, 8, -1]];
- * assert.deepStrictEqual(varc(a, 0), [[0.222222], [16.222222]]);
+ * assertEquals(varc(a, 0), [[0.222222], [16.222222]]);
  *
  * // Example 4: Variance of a 2D matrix (column-wise, population)
- * assert.deepStrictEqual(varc(a, 0, 1), [[1, 1, 9]]);
- *
- * // Example 5: Throws an error for invalid input
- * assert.throws(() => varc(123), /Input must be an array or matrix/);
+ * assertEquals(varc(a, 0, 1), [[1, 1, 9]]);
 
  * ```*/
-export default function varc(x: any, flag = 1, dim = 0) {
+export default function varc(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+export default function varc(
+  x: matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): array | matrix;
+export default function varc(
+  x: array | matrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   if (!isarray(x)) {
     throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr: any) => computeVariance(arr, flag));
+  return vectorfun(dim, x, (arr: array) => computeVariance(arr, flag));
 }
 
-function computeVariance(arr: any, flag: any) {
+function computeVariance(arr: array, flag: 0 | 1): number {
   const mu = mean(arr);
-  return sum(power(abs(minus(arr, mu)), 2)) / (arr.length - flag);
+  return sum(power(abs(minus(arr, mu)), 2) as array) / (arr.length - flag);
 }

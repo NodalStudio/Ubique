@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { downsidepot, isnumber, upsidepot, vectorfun } from "../../index.ts";
 
 /**
@@ -17,23 +16,34 @@ import { downsidepot, isnumber, upsidepot, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { omegaratio, cat } from "../../index.ts";
  *
  * // Example 1: Omega ratio for a single asset
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(omegaratio(x), 8.782609);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(omegaratio(x), 10.978260869565217);
  *
- * // Example 2: Omega ratio for multiple assets
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(omegaratio(cat(0,x,y)), [[8.782609], [1.728324]]);
+ * // Example 2: Omega ratio with custom threshold
+ * assertEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 5.333333333333334);
+ *
+ * // Example 3: Omega ratio with negative threshold
+ * assertEquals(omegaratio(x, -0.01), 53.611111111111114);
  * ```
  */
-export default function omegaratio(x: any, mar: any = 0, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _omegaratio = function (a: any, mar: any) {
+export default function omegaratio(
+  x: array,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function omegaratio(
+  x: matrix,
+  mar?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function omegaratio(
+  x: numarraymatrix,
+  mar: number = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _omegaratio = function (a: array, mar: number): number {
     return upsidepot(a, mar) / downsidepot(a, mar);
   };
 

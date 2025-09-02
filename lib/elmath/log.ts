@@ -1,39 +1,36 @@
-/** @import { array, matrix } from '../types.d.ts' */
-import arrayfun from "../datatype/arrayfun.ts";
-import isnumber from "../datatype/isnumber.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { arrayfun, isnumber } from "../../index.ts";
 
 /**
  * @function log
  * @summary Computes the natural logarithm (base e).
  * @description Computes the natural logarithm (base e) for each element in a number, array, or matrix.
  *
- * @param {number|array|matrix} x The input value(s).
- * @returns {number|array|matrix} The natural logarithm of the input value(s).
- * @throws {Error} If no arguments are provided.
+ * @param x The input value(s)
+ * @returns The natural logarithm of the input value(s)
+ * @throws {Error} If no arguments are provided
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Natural logarithm of a single number
- * assertEquals(log(6), 1.79176);
+ * assertEquals(log(6), 1.791759469228055);
  *
  * // Example 2: Natural logarithm of an array of numbers
- * assert.deepStrictEqual(log([5, 6, 3]), [1.60944, 1.79176, 1.09861]);
+ * assertEquals(log([5, 6, 3]), [1.6094379124341003, 1.791759469228055, 1.0986122886681096]);
  *
  * // Example 3: Natural logarithm of a matrix of numbers
- * assert.deepStrictEqual(log([[5, 6, 5], [7, 8, 2]]), [
- *   [1.60944, 1.79176, 1.60944],
- *   [1.94591, 2.07944, 0.69315]
+ * assertEquals(log([[5, 6, 5], [7, 8, 2]]), [
+ *   [1.6094379124341003, 1.791759469228055, 1.6094379124341003],
+ *   [1.9459101490553132, 2.0794415416798357, 0.6931471805599453]
  * ]);
 
  * ```*/
-export default function log(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function log(x: number): number;
+export default function log(x: array): array;
+export default function log(x: matrix): matrix;
+export default function log(x: numarraymatrix): numarraymatrix {
   const computeLog = Math.log;
-
   return isnumber(x) ? computeLog(x) : arrayfun(x, computeLog);
 }

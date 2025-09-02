@@ -1,7 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import moment from "./moment.ts";
-import vectorfun from "../datatype/vectorfun.ts";
+import type { array, matrix } from "../types.d.ts";
+import { moment, vectorfun } from "../../index.ts";
 
 /**
  * @function skewness
@@ -9,11 +7,11 @@ import vectorfun from "../datatype/vectorfun.ts";
  * @description Measures the asymmetry of the probability distribution of a dataset.
  * A positive skew indicates a longer tail on the right, while a negative skew indicates a longer tail on the left.
  *
- * @param {array|matrix} x The dataset (array or matrix).
- * @param {number} [flag=1] Bias correction flag (0 for bias correction, 1 for simple calculation).
- * @param {number} [dim=0] Dimension to compute skewness along (0 for row-wise, 1 for column-wise).
- * @returns {number|array|matrix} The computed skewness.
- * @throws {Error} If the input arguments are insufficient.
+ * @param x The dataset (array or matrix)
+ * @param flag Bias correction flag (0 for bias correction, 1 for simple calculation, defaults to 1)
+ * @param dim Dimension to compute skewness along (0 for row-wise, 1 for column-wise, defaults to 0)
+ * @returns The computed skewness
+ * @throws {Error} If the input arguments are insufficient
  *
  * @example
  * ```ts
@@ -31,20 +29,26 @@ import vectorfun from "../datatype/vectorfun.ts";
  * assertEquals(skewness(x, 0), 0.64892);
  *
  * // Example 3: Compute skewness for a matrix along rows
- * assert.deepStrictEqual(skewness([[...x], [...y]]), [[0.617481], [-0.118909]]);
+ * assertEquals(skewness([[...x], [...y]]), [[0.617481], [-0.118909]]);
  *
  * // Example 4: Compute skewness for a matrix along columns
- * assert.deepStrictEqual(skewness([[0.003, 0.026], [0.015, -0.009]], 1, 1), [[1.223], [-1.223]]);
+ * assertEquals(skewness([[0.003, 0.026], [0.015, -0.009]], 1, 1), [[1.223], [-1.223]]);
  *
  * // Example 5: Compute skewness for a dataset with equal elements (should be NaN)
  * assertEquals(skewness([1, 1, 1, 1, 1]), NaN);
 
  * ```*/
-export default function skewness(x: any, flag = 1, dim = 0) {
-  if (x === undefined) {
-    throw new Error("Not enough input arguments");
-  }
-
+export default function skewness(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+export default function skewness(
+  x: matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): array | matrix;
+export default function skewness(
+  x: array | matrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   if (!Array.isArray(x)) {
     return NaN;
   }
@@ -52,9 +56,9 @@ export default function skewness(x: any, flag = 1, dim = 0) {
   return vectorfun(dim, x, computeSkewness, flag);
 }
 
-function computeSkewness(arr: any, biasFlag: any) {
+function computeSkewness(arr: array, biasFlag: 0 | 1): number {
   const n = arr.length;
-  const mom3 = moment(arr, 3) / moment(arr, 2) ** 1.5;
+  const mom3 = moment(arr, 3) as number / (moment(arr, 2) as number) ** 1.5;
 
   return biasFlag === 1 ? mom3 : Math.sqrt((n - 1) / n) * (n / (n - 2)) * mom3;
 }

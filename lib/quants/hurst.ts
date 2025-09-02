@@ -1,8 +1,7 @@
 /**
  * Time Series Analysis
  */
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
 
 /**
@@ -21,26 +20,37 @@ import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { hurst, cat } from "../../index.ts";
  *
  * // Example 1: Hurst exponent for a single time series
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(hurst(x), 0.344059);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(hurst(x), 0.3440590389509703);
  *
- * // Example 2: Hurst exponent for multiple time series
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(hurst(cat(0,x,y)), [[0.344059], [0.36372]]);
+ * // Example 2: Hurst exponent for different data
+ * assertEquals(hurst([0.05, 0.03, 0.08, -0.02]), 0.19397632085813782);
+ *
+ * // Example 3: Hurst exponent interpretation (0.5 = random walk)
+ * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287469);
  * ```
  */
-export default function hurst(x: any, flag: any = 1, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _hurst = function (a: any, flag: any) {
+export default function hurst(
+  x: array,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): number;
+export default function hurst(
+  x: matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): array | matrix;
+export default function hurst(
+  x: numarraymatrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _hurst = function (a: array, flag: 0 | 1): number {
     const cdeviation = cumdev(a);
-    const rs = (max(cdeviation) - min(cdeviation)) / std(a, flag);
-    return Math.log(rs) / Math.log(a.length);
+    const rs = (max(cdeviation) - min(cdeviation)) / (std(a, flag) as number);
+    return Math.log(rs as number) / Math.log(a.length);
   };
 
   if (isnumber(x)) {

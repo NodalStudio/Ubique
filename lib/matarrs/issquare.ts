@@ -10,7 +10,7 @@
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Valid square matrix
  * assertEquals(issquare([[9, 5], [6, 1]]), true);
@@ -25,10 +25,10 @@
  * assertEquals(issquare([[9]]), true);
  *
  * // Example 5: Empty matrix (should throw an error)
- * assert.throws(() => { issquare([]) }, Error);
+ * assertThrows(() => { issquare([]) }, Error);
  *
  * // Example 6: Invalid input (not a matrix)
- * assert.throws(() => { issquare(123) }, Error);
+ * assertThrows(() => { issquare(123) }, Error);
 
  * ```*/
 export default function issquare(x: any) {

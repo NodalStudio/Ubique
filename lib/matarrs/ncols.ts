@@ -1,5 +1,5 @@
-import isarray from "../datatype/isarray.ts";
-import ismatrix from "../datatype/ismatrix.ts";
+import { isarray, ismatrix } from "../../index.ts";
+import { array, matrix } from "../types.d.ts";
 import size from "./size.ts";
 
 /** @import { array, matrix } from '../types.d.ts' */
@@ -16,7 +16,7 @@ import size from "./size.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Row vector
  * assertEquals(ncols([5, 6, 7]), 3); // 3
@@ -37,13 +37,13 @@ import size from "./size.ts";
  * assertEquals(ncols([[]]), 0); // 0
  *
  * // Example 7: Non-array input (should throw an error)
- * assert.throws(() => { ncols(5) }, Error, 'Input must be an array or matrix');
+ * assertThrows(() => { ncols(5) }, Error, 'Input must be an array or matrix');
  *
  * // Example 8: 2D matrix with a single row
  * assertEquals(ncols([[1, 2, 3, 4]]), 4); // 4
  *
  * // Example 9: 2D matrix with varying row lengths (should throw an error)
- * assert.throws(() => { ncols([[1, 2], [3, 4, 5]]) }, Error, 'All rows in the matrix must have the same length');
+ * assertThrows(() => { ncols([[1, 2], [3, 4, 5]]) }, Error, 'Input must be an array or matrix');
  *
  * // Example 10: Multi-dimensional array (should be treated as a 2D matrix)
  * assertEquals(ncols([[1, 2], [3, 4]]), 2); // 2

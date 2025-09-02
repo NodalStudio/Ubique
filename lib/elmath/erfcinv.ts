@@ -1,6 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import erfc from "./erfc.ts";
+import { erfc } from "../../index.ts";
 
 /**
  * @function erfcinv
@@ -9,9 +7,9 @@ import erfc from "./erfc.ts";
  *
  * It satisfies \( y = \text{erfc}(x) \) for \( 2 \geq y \geq 0 \) with \( -\infty \leq x \leq \infty \).
  *
- * @param {number} y A real value in the range [2, 0].
- * @returns {number} The value of the inverse complementary error function.
- * @throws {Error} If no arguments are provided or if the input is out of range.
+ * @param y A real value in the range [2, 0]
+ * @returns The value of the inverse complementary error function
+ * @throws {Error} If the input is out of range
  *
  * @example
  * ```ts
@@ -33,10 +31,7 @@ import erfc from "./erfc.ts";
  * assertEquals(erfcinv(0), Infinity);
 
  * ```*/
-export default function erfcinv(y: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
+export default function erfcinv(y: number): number {
   if (y >= 2) return -Infinity;
   if (y === 1) return 0;
   if (y <= 0) return Infinity;

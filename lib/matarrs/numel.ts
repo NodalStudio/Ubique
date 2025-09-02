@@ -1,3 +1,4 @@
+import { array, matrix } from "../types.d.ts";
 import size from "../matarrs/size.ts";
 
 /** @import { array, matrix } from '../types.d.ts' */
@@ -28,11 +29,7 @@ import size from "../matarrs/size.ts";
  * assertEquals(numel([]), 0);
 
  * ```*/
-export default function numel(x: any) {
-  if (!x) {
-    throw new Error("Not enough input arguments");
-  }
-
+export default function numel(x: array | matrix) {
   const [rows, cols] = size(x);
   return rows * cols;
 }

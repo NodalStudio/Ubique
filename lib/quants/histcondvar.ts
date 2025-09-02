@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { find, isnumber, mean, quantile, vectorfun } from "../../index.ts";
 
 /**
@@ -13,38 +12,51 @@ import { find, isnumber, mean, quantile, vectorfun } from "../../index.ts";
  * @param p confidence level in the range [0,1] (def: 0.95)
  * @param amount amount (def: 1)
  * @param dim dimension 0: row, 1: column (def: 0)
- * @return {number|array} Historical Conditional Value-At-Risk
+ * @return Historical Conditional Value-At-Risk
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { histcondvar, cat } from "../../index.ts";
  *
- * // Example 1: Historical conditional VaR for multiple assets
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(histcondvar(cat(0,x,y),0.95), [[-0.014], [-0.061]]);
+ * // Example 1: Historical conditional VaR for single asset
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(histcondvar(x, 0.95), 0.014);
  *
  * // Example 2: Historical conditional VaR with custom amount
- * assertEquals(histcondvar(x,0.99,100000), 1400);
+ * assertEquals(histcondvar(x, 0.99, 100000), 1400);
+ *
+ * // Example 3: Historical conditional VaR for matrix (row-wise)
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * const matrix = [x, y];
+ * assertEquals(histcondvar(matrix, 0.95, 1, 0), [0.014, 0.061]);
  * ```
  */
 export default function histcondvar(
-  x: any,
-  p: any = 0.95,
-  amount: any = 1,
-  dim: any = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _histcondvar = function (a: any, p: any, amount: any) {
+  x: array,
+  p?: number,
+  amount?: number,
+  dim?: 0 | 1,
+): number;
+export default function histcondvar(
+  x: matrix,
+  p?: number,
+  amount?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function histcondvar(
+  x: numarraymatrix,
+  p: number = 0.95,
+  amount: number = 1,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _histcondvar = function (a: array, p: number, amount: number): number {
     const q = quantile(a, 1 - p);
-    // find values below quantile
-    const idx = find(a, function (el: any) {
-      return el <= q;
-    });
+    // Create boolean array for values below quantile
+    const belowQuantile = a.map((el: number) => el <= q);
+    const idx = find(belowQuantile);
+    if (idx.length === 0) {
+      return 0;
+    }
     const cvar = [];
     for (let i = 0; i < idx.length; i++) {
       cvar[i] = a[idx[i]];
@@ -53,7 +65,7 @@ export default function histcondvar(
   };
 
   if (isnumber(x)) {
-    return x;
+    return NaN;
   }
 
   return vectorfun(dim, x, _histcondvar, p, amount);

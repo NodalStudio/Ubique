@@ -19,20 +19,16 @@ import { array, matrix, numarraymatrix } from "../types.d.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Clone a matrix
- * assert.deepStrictEqual(clone([[-1, 3, -1], [4, 5, 9]]), [[-1, 3, -1], [4, 5, 9]]);
+ * assertEquals(clone([[-1, 3, -1], [4, 5, 9]]), [[-1, 3, -1], [4, 5, 9]]);
  *
  * // Example 2: Clone an array
- * assert.deepStrictEqual(clone([5, 6, 3]), [5, 6, 3]);
+ * assertEquals(clone([5, 6, 3]), [5, 6, 3]);
  *
  * // Example 3: Clone a single number
  * assertEquals(clone(5), 5);
 
  * ```*/
 export default function clone<T extends numarraymatrix>(x: T): T {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
   if (isnumber(x)) {
     return x;
   }

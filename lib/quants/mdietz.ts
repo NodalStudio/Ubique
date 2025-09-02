@@ -1,5 +1,4 @@
-import type { array, matrix } from "../types.d.ts";
-import { isnumber, isundefined } from "../../index.ts";
+import type { array } from "../types.d.ts";
 
 /**
  * @function mdietz
@@ -16,7 +15,6 @@ import { isnumber, isundefined } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { mdietz } from "../../index.ts";
  *
  * // Example 1: Calculate Modified Dietz Return with multiple cash flows
  * var bv = 100000; // beginning value
@@ -27,31 +25,35 @@ import { isnumber, isundefined } from "../../index.ts";
  * var cf = [cf1,cf2,cf3]; //cash flow array
  * var cfd = [0.25,0.5,0.75]; //cash flow dates array as fraction of the total period
  *
- * assertEquals(mdietz(ev,bv,cf,cfd), 0.068627);
+ * assertEquals(mdietz(ev,bv,cf,cfd), -0.0273972602739726);
  * ```
  */
-export default function mdietz(ev: any, bv: any, cf: any, cfd: any): any {
-  if (arguments.length < 4) {
-    throw new Error("not enough input arguments");
+export default function mdietz(
+  ev: number,
+  bv: number,
+  cf: number | array,
+  cfd: number | array,
+): number {
+  let cashFlows: array;
+  let cashFlowDates: array;
+
+  if (typeof cf === "number") {
+    cashFlows = [cf];
+  } else {
+    cashFlows = cf || [];
   }
 
-  if (isnumber(cf)) {
-    cf = [cf];
-  }
-
-  if (isnumber(cfd)) {
-    cfd = [cfd];
-  }
-
-  if (isundefined(cf)) {
-    cf = [];
+  if (typeof cfd === "number") {
+    cashFlowDates = [cfd];
+  } else {
+    cashFlowDates = cfd || [];
   }
 
   let CF = 0;
   let W = 0;
-  for (let i = 0; i < cf.length; i++) {
-    CF = CF + cf[i];
-    W = W + cf[i] * (1 - cfd[i]);
+  for (let i = 0; i < cashFlows.length; i++) {
+    CF = CF + cashFlows[i];
+    W = W + cashFlows[i] * (1 - cashFlowDates[i]);
   }
 
   return (ev - bv - CF) / (bv + W);

@@ -18,26 +18,22 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Create a 0x0 matrix (empty matrix)
- * assert.deepStrictEqual(eye(0), []);
+ * assertEquals(eye(0), []);
  *
  * // Example 2: Create a 1x1 identity matrix
- * assert.deepStrictEqual(eye(1), [[1]]);
+ * assertEquals(eye(1), [[1]]);
  *
  * // Example 3: Create a 2x2 identity matrix
- * assert.deepStrictEqual(eye(2), [[1, 0], [0, 1]]);
+ * assertEquals(eye(2), [[1, 0], [0, 1]]);
  *
  * // Example 4: Create a 2x1 identity matrix
- * assert.deepStrictEqual(eye([2, 1]), [[1], [0]]);
+ * assertEquals(eye([2, 1]), [[1], [0]]);
  *
  * // Example 5: Create a 2x3 identity matrix
- * assert.deepStrictEqual(eye(2, 3), [[1, 0, 0], [0, 1, 0]]);
+ * assertEquals(eye(2, 3), [[1, 0, 0], [0, 1, 0]]);
 
  * ```*/
 export default function eye(dimOrRows: any, cols: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
   let nrows, ncols;
 
   if (isarray(dimOrRows)) {

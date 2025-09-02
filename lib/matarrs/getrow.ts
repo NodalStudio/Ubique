@@ -13,16 +13,16 @@
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Get the first row
- * assert.deepStrictEqual(getrow([[5, 6, 5], [7, 8, -1]], 0), [5, 6, 5]); // [5, 6, 5]
+ * assertEquals(getrow([[5, 6, 5], [7, 8, -1]], 0), [5, 6, 5]); // [5, 6, 5]
  *
  * // Example 2: Get the second row
- * assert.deepStrictEqual(getrow([[5, 6, 5], [7, 8, -1]], 1), [7, 8, -1]); // [7, 8, -1]
+ * assertEquals(getrow([[5, 6, 5], [7, 8, -1]], 1), [7, 8, -1]); // [7, 8, -1]
  *
  * // Example 3: Invalid row index (out of bounds)
- * assert.throws(() => { getrow([[5, 6, 5], [7, 8, -1]], 2); }, Error, 'Row index must be an integer between 0 and N - 1 rows');
+ * assertThrows(() => { getrow([[5, 6, 5], [7, 8, -1]], 2); }, Error, 'Row index must be an integer between 0 and N - 1 rows');
 
  * ```*/
 export default function getrow(x: any, n: any) {

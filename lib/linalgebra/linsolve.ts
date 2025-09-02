@@ -29,18 +29,21 @@ import { matrix } from "../types.d.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
+ * import { transpose, eye } from "../../index.ts";
  *
  * // Example 1: Solve a linear system with a vector
- * linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], transpose([5, 6, 3]));
- * // [5.846154, -2.384615, -1.538462]
+ * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], transpose([5, 6, 3])),
+ *   [5.846153846153846, -2.3846153846153846, -1.5384615384615385]);
  *
  * // Example 2: Solve a linear system with a matrix
- * linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], [[4], [-6], [7]]);
- * // [1, 2, -1]
+ * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], [[4], [-6], [7]]),
+ *   [1, 2, -0.9999999999999999]);
  *
  * // Example 3: Solve a linear system with an identity matrix
- * linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], eye(3));
- * // [[0.846154, 0.307692, -0.0769231], [-0.384615, -0.230769, 0.307692], [-0.538462, 0.0769231, 0.230769]]
+ * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], eye(3)),
+ *   [[0.846153846153846, 0.3076923076923077, -0.07692307692307707],
+ *    [-0.3846153846153846, -0.23076923076923078, 0.30769230769230776],
+ *    [-0.5384615384615384, 0.07692307692307691, 0.23076923076923078]]);
 
  * ```*/
 export default function linsolve(A: any, b: any) {

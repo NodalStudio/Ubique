@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
@@ -15,26 +14,32 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { percpos, cat } from "../../index.ts";
  *
  * // Example 1: Percentage of positive values in a single array
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(percpos(x), 0.8);
  *
- * // Example 2: Percentage of positive values for multiple arrays (row-wise)
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(percpos(cat(0,x,y)), [[0.8], [0.5]]);
+ * // Example 2: Percentage of positive values in different array
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals(percpos(y), 0.5);
  *
- * // Example 3: Percentage of positive values calculated column-wise
- * assertEquals(percpos(cat(0,x,y),1), [[0.5, 1, 1, 0, 0.5, 1, 0.5, 0.5, 0.5, 1]]);
+ * // Example 3: Percentage of positive values with threshold
+ * assertEquals(percpos([0.05, 0.03, -0.02, 0.08]), 0.75);
  * ```
  */
-export default function percpos(x: any, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _percpos = function (a: any) {
+export default function percpos(
+  x: array,
+  dim?: 0 | 1,
+): number;
+export default function percpos(
+  x: matrix,
+  dim?: 0 | 1,
+): array | matrix;
+export default function percpos(
+  x: numarraymatrix,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _percpos = function (a: array): number {
     let count = 0;
     for (let i = 0; i < a.length; i++) {
       if (a[i] >= 0) {
