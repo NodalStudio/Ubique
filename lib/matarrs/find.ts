@@ -34,15 +34,6 @@ import flatten from "./flatten.ts";
 
  * ```*/
 export default function find(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("Not enough input arguments");
-  }
-  if (!isarray(x) && !ismatrix(x)) {
-    console.log(x);
-    console.log(ismatrix(x));
-    throw new Error("Input must be an array or matrix");
-  }
-
   const flatX = (ismatrix(x) ? flatten(x) : x) as array;
   const indices: any = [];
 

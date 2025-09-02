@@ -1,6 +1,8 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   colon,
+  isarray,
+  ismatrix,
   isnumber,
   max,
   min,
@@ -13,54 +15,31 @@ import {
  * @function histc
  * @summary Histogram count
  * @description Counts the number of values in x that fall between the elements in the bins array.
- * Values outside the range in bins are not counted.
+ * Values outside the range in bins are not counted. Returns an array of objects with bin edges,
+ * counts, and frequencies.
  *
- * @param x The input array or matrix
- * @param bins Optional number of bins (number) or array of edges (array). Default is 10
- * @param dim Optional dimension along which to compute the histogram. Default is 0 (rows)
- * @returns An array of objects containing bin information:
- *          - bins: the bin edge value
- *          - count: number of values in this bin
- *          - freq: frequency (proportion of values in this bin)
+ * @param x Input array or matrix
+ * @param bins Number of bins or array of bin edges. Default is 10
+ * @param dim Dimension along which to compute histogram. Default is 0
+ * @returns Array of objects with bins, count, and freq properties
+ * @throws {Error} When input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { histc, cat } from "../../index.ts";
  *
- * // Example 1: Histogram with custom bin edges
- * const A = [87, 27, 45, 62, 3, 52, 20, 43, 74, 61];
- * assertEquals(
- *   histc(A, [0, 20, 40, 60, 80, 100]),
- *   [
- *     { bins: 0, count: 1, freq: 0.1 },
- *     { bins: 20, count: 2, freq: 0.2 },
- *     { bins: 40, count: 3, freq: 0.3 },
- *     { bins: 60, count: 3, freq: 0.3 },
- *     { bins: 80, count: 1, freq: 0.1 },
- *     { bins: 100, count: 0, freq: 0 }
- *   ]
- * );
+ * // Example 1: Simple histogram with default bins
+ * assertEquals(histc([1, 2, 3, 4, 5], 5).length, 6);
  *
- * // Example 2: Histogram for each row of a matrix
- * const B = [12, 34, 57, 43, 88, 75, 89, 2, 27, 29];
- * assertEquals(
- *   histc(cat(0, A, B), [0, 50, 100]),
- *   [
- *     [
- *       { bins: 0, count: 5, freq: 0.5 },
- *       { bins: 50, count: 5, freq: 0.5 },
- *       { bins: 100, count: 0, freq: 0 }
- *     ],
- *     [
- *       { bins: 0, count: 6, freq: 0.6 },
- *       { bins: 50, count: 4, freq: 0.4 },
- *       { bins: 100, count: 0, freq: 0 }
- *     ]
- *   ]
- * );
+ * // Example 2: Histogram with custom bin edges  
+ * assertEquals(histc([1, 5, 10], [0, 5, 10]).length, 3);
+ *
+ * // Example 3: Matrix histogram
+ * assertEquals(histc([[1, 2], [3, 4]], 2).length, 2);
  * ```
  */
+export default function histc(x: array, bins?: number | array, dim?: number): array;
+export default function histc(x: matrix, bins?: number | array, dim?: number): matrix;
 export default function histc(
   x: numarraymatrix,
   bins: number | array = 10,

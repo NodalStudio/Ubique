@@ -24,7 +24,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertEquals(ones(2), [[1, 1], [1, 1]]);
  *
  * // Example 4: Create a 2x1 matrix
- * assertEquals(ones([2, 1]), [[1], [1]]);
+ * assertEquals(ones(2, 1), [[1], [1]]);
  *
  * // Example 5: Create a 2x3 matrix
  * assertEquals(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);

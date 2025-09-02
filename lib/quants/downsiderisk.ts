@@ -1,6 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { find, isnumber, mean, std, vectorfun } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { find, isnumber, std, vectorfun } from "../../index.ts";
 
 /**
  * @function downsiderisk
@@ -21,7 +20,7 @@ import { find, isnumber, mean, std, vectorfun } from "../../index.ts";
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(downsiderisk(x), 0.0035355339059327385);
  *
- * // Example 2: Downside risk with custom MAR  
+ * // Example 2: Downside risk with custom MAR
  * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865475);
  *
  * // Example 3: Downside risk with higher MAR
