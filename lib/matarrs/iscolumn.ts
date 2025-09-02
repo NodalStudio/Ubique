@@ -11,7 +11,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Valid column vector
  * assertEquals(iscolumn([[2], [2]]), true);
@@ -29,10 +29,10 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertEquals(iscolumn([[1]]), true);
  *
  * // Example 6: Invalid input (not a matrix)
- * assert.throws(() => iscolumn(5), /Input must be a non-empty matrix/);
+ * assertThrows(() => iscolumn(5), /Input must be a non-empty matrix/);
  *
  * // Example 7: Empty matrix (should throw an error)
- * assert.throws(() => iscolumn([]), /Input must be a non-empty matrix/);
+ * assertThrows(() => iscolumn([]), /Input must be a non-empty matrix/);
 
  * ```*/
 export default function iscolumn(x: any) {

@@ -24,11 +24,13 @@ import { isnumber, prctile, vectorfun } from "../../index.ts";
  * assertEquals(quartile(cat(0, x, y)), [[0.003, 0.015, 0.026], [-0.037, 0.0175, 0.058]]);
  * ```
  */
+export default function quartile(x: array, dim?: 0 | 1): array;
+export default function quartile(x: matrix, dim?: 0 | 1): array | matrix;
 export default function quartile(
-  x: numarraymatrix,
-  dim: number = 0,
-): numarraymatrix {
-  const _quartile = function (a: number[]) {
+  x: array | matrix,
+  dim: 0 | 1 = 0,
+): array | matrix {
+  const _quartile = function (a: array): array {
     return [
       prctile(a, 25) as number,
       prctile(a, 50) as number,

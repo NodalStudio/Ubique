@@ -35,5 +35,5 @@ import { isarray } from "../../index.ts";
  */
 export default function ismatrix(x: unknown): x is matrix<any> {
   return Array.isArray(x) && x.length > 0 &&
-    x.every((row) => isarray(row) && row.length === x[0].length);
+    x.every((row) => Array.isArray(row) && row.length === x[0].length);
 }

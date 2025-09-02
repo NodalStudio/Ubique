@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
@@ -15,23 +14,35 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { downsidepot, cat } from "../../index.ts";
  *
- * // Example 1: Downside potential with custom MAR
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(downsidepot(x, 0.001), 0.0023);
+ * // Example 1: Downside potential with default MAR
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(downsidepot(x), 0.0023);
  *
- * // Example 2: Downside potential for multiple assets with default MAR
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(downsidepot(cat(0,x,y)), [[0.0023], [0.0173]]);
+ * // Example 2: Downside potential with custom MAR
+ * assertEquals(downsidepot([0.05, 0.03, 0.08, -0.02], 0.02), 0.01);
+ *
+ * // Example 3: Downside potential for matrix (row-wise)
+ * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
+ * assertEquals(downsidepot(matrix, 0, 0), [0, 0.005, 0]);
  * ```
  */
-export default function downsidepot(x: any, mar: any = 0, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _downsidepot = function (a: any, mar: any) {
+export default function downsidepot(
+  x: array,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function downsidepot(
+  x: matrix,
+  mar?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function downsidepot(
+  x: numarraymatrix,
+  mar: number = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _downsidepot = function (a: array, mar: number): number {
     let sum = 0;
     for (let i = 0; i < a.length; i++) {
       sum += Math.max(mar - a[i], 0) / a.length;
@@ -40,7 +51,7 @@ export default function downsidepot(x: any, mar: any = 0, dim: any = 0): any {
   };
 
   if (isnumber(x)) {
-    return x;
+    return NaN;
   }
 
   return vectorfun(dim, x, _downsidepot, mar);

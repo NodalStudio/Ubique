@@ -18,22 +18,22 @@ import ismatrix from "../datatype/ismatrix.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Convert a number to a matrix
- * assert.deepStrictEqual(tomat(5), [[5]]);
+ * assertEquals(tomat(5), [[5]]);
  *
  * // Example 2: Convert a boolean to a matrix
- * assert.deepStrictEqual(tomat(true), [[true]]);
+ * assertEquals(tomat(true), [[true]]);
  *
  * // Example 3: Convert a row vector to a matrix
- * assert.deepStrictEqual(tomat([5, 6, 3]), [[5, 6, 3]]);
+ * assertEquals(tomat([5, 6, 3]), [[5, 6, 3]]);
  *
  * // Example 4: Convert an already formatted matrix
- * assert.deepStrictEqual(tomat([[1, 2], [3, 4]]), [[1, 2], [3, 4]]);
+ * assertEquals(tomat([[1, 2], [3, 4]]), [[1, 2], [3, 4]]);
  *
  * // Example 5: Invalid input (null)
- * assert.throws(() => tomat(null), /Invalid input argument./);
+ * assertThrows(() => tomat(null), /Invalid input argument./);
 
  * ```*/
 export default function tomat(x: any) {

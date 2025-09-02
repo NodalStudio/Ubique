@@ -13,22 +13,24 @@ import erfcinv from "../elmath/erfcinv.ts";
  * @throws {Error} If `p` is not in the range (0,1) or `sigma` is not positive.
  *
  * @example
- * import norminv from './norminv.ts';
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Compute the inverse CDF for standard normal distribution
- * assert.strictEqual(norminv(0.05), -1.6448536127562647);
+ * assertEquals(norminv(0.05), -1.6448536127562647);
  *
  * // Example 2: Compute inverse CDF with custom mean and standard deviation
- * assert.strictEqual(norminv(0.01, 10, 2),  5.347304312449656);
+ * assertEquals(norminv(0.01, 10, 2),  5.347304312449656);
  *
  * // Example 3: Compute inverse CDF at median (should return mean)
- * assert.strictEqual(norminv(0.5, 5, 1), 5);
+ * assertEquals(norminv(0.5, 5, 1), 5);
  *
  * // Example 4: Compute inverse CDF for a high probability (should be positive)
- * assert.strictEqual(norminv(0.975, 0, 1), 1.95996);
+ * assertEquals(norminv(0.975, 0, 1), 1.9599639471668915);
  *
  * // Example 5: Compute inverse CDF for a low probability (should be negative)
- * assert.strictEqual(norminv(0.025, 0, 1), -1.95996);
+ * assertEquals(norminv(0.025, 0, 1), -1.9599639471668922);
+ * ```
  */
 export default function norminv(p: any, mu = 0, sigma = 1) {
   if (p <= 0 || p >= 1) {

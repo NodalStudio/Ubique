@@ -2,11 +2,11 @@ import { array } from "../types.d.ts";
 
 /**
  * @function isarray
- * @summary Checks if the input is a 1D array of numbers.
- * @description Returns `true` if the input is a 1D array and all its elements are numbers.
+ * @summary Checks if the input is a 1D array.
+ * @description Returns `true` if the input is a 1D array (not a 2D array/matrix).
  *
  * @param x The input to check.
- * @returns Returns `true` if `x` is a 1D array of numbers, otherwise `false`.
+ * @returns Returns `true` if `x` is a 1D array, otherwise `false`.
  *
  * @example
  * ```ts
@@ -15,7 +15,7 @@ import { array } from "../types.d.ts";
  * // Example 1: A valid 1D array of numbers
  * assertEquals(isarray([1.4, 2.3, 3]), true);
  *
- * // Example 2: An array with mixed types
+ * // Example 2: An array with mixed types (still an array)
  * assertEquals(isarray([1, "a", {}]), true);
  *
  * // Example 3: An empty array

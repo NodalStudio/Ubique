@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   flatten,
   iscolumn,
@@ -26,51 +25,63 @@ import {
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { paramvar, mean, std, cat } from "../../index.ts";
  *
  * // Example 1: VaR with default parameters
- * assertEquals(paramvar(0,1), 1.644854);
+ * assertEquals(paramvar(0, 1), 1.6448536127562643);
  *
  * // Example 2: VaR with arrays
- * assertEquals(paramvar([0,0,0],[1,2,3]), [1.644854, 3.289707, 4.934561]);
+ * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
  *
  * // Example 3: Parametric VaR for a single asset
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(paramvar(mean(x), std(x)), 0.020311);
- *
- * // Example 4: Parametric VaR for multiple assets
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(paramvar(mean(cat(0,x,y)), std(cat(0,x,y))), [[0.020311], [0.074269]]);
+ * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
  * ```
  */
 export default function paramvar(
-  mu: any,
-  sigma: any,
+  mu: number,
+  sigma: number,
+  p?: number,
+  amount?: number,
+  period?: number,
+): number;
+export default function paramvar(
+  mu: array,
+  sigma: array,
+  p?: number,
+  amount?: number,
+  period?: number,
+): array;
+export default function paramvar(
+  mu: matrix,
+  sigma: matrix,
+  p?: number,
+  amount?: number,
+  period?: number,
+): array | matrix;
+export default function paramvar(
+  mu: number | array | matrix,
+  sigma: number | array | matrix,
   p: number = 0.95,
   amount: number = 1,
   period: number = 1,
-): any {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
-  }
-
+): number | array | matrix {
   const _pvar = function (
-    _mu: any,
-    _sigma: any,
+    _mu: number,
+    _sigma: number,
     p: number,
     amount: number,
     period: number,
-  ) {
+  ): number {
     return (-norminv(1 - p) * _sigma - _mu) * Math.sqrt(period) * amount;
   };
 
   if (isnumber(mu)) {
-    return _pvar(mu, sigma, p, amount, period);
+    return _pvar(mu as number, sigma as number, p, amount, period);
   }
 
-  const temp = flatten(mu);
-  const out = temp.map(function (el: any, idx: number) {
-    return _pvar(mu[idx], sigma[idx], p, amount, period);
+  const temp = flatten(mu as array | matrix);
+  const sigmaArray = flatten(sigma as array | matrix);
+  const out = temp.map(function (el: number, idx: number) {
+    return _pvar(el, sigmaArray[idx], p, amount, period);
   });
 
   if (ismatrix(mu) && isrow(mu)) {

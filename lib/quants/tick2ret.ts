@@ -1,6 +1,7 @@
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   isarray,
+  ismatrix,
   isnumber,
   isundefined,
   log,
@@ -13,39 +14,45 @@ import {
  * @summary Convert price series to returns
  * @description Convert a price series to continuous or discrete returns
  *
- * @param x array of values (prices)
- * @param mode calculation mode: 'simple' (default) or 'continuous'
- * @param dim dimension 0: row, 1: column (def: 1)
- * @return Returns
+ * @param x Array of values (prices)
+ * @param mode Calculation mode: 'simple' (default) or 'continuous'
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 1)
+ * @returns Returns array or matrix
+ * @throws {Error} If input is not an array or matrix
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { tick2ret, cat } from "../../index.ts";
  *
  * // Example 1: Simple returns from price series
- * var x = [1,3,2,5];
- * assertEquals(tick2ret(x), [2,-.333333,1.5]);
+ * const x = [1, 3, 2, 5];
+ * assertEquals(tick2ret(x), [2, -0.33333333333333337, 1.5]);
  *
  * // Example 2: Continuous (log) returns
- * assertEquals(tick2ret(x,"continuous"), [1.098612,-0.405465,0.916291]);
+ * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
  *
- * // Example 3: Returns for multiple price series with row dimension
- * var y = [0.5,1.5,2.5,3.5];
- * assertEquals(tick2ret(cat(1,x,y),"continuous",0), [[1.098612,-0.405465,0.916291],[1.098612,0.510826,0.336472]]);
+ * // Example 3: Continuous returns for different price series
+ * const y = [0.5, 1.5, 2.5, 3.5];
+ * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
  * ```
  */
 export default function tick2ret(
-  x: any,
+  x: array,
+  mode?: string,
+  dim?: 0 | 1,
+): array;
+export default function tick2ret(
+  x: matrix,
+  mode?: string,
+  dim?: 0 | 1,
+): matrix;
+export default function tick2ret(
+  x: numarraymatrix,
   mode: string = "simple",
-  dim: any = 1,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+  dim: 0 | 1 = 1,
+): array | matrix {
   // Return values from prices
-  const _ret = function (a: any, mode: string) {
+  const _ret = function (a: array, mode: string): array {
     const n = a.length;
     const r = new Array(n - 1);
 

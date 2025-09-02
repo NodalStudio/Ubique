@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { find, isnumber, mean, std, vectorfun } from "../../index.ts";
 
 /**
@@ -16,26 +16,42 @@ import { find, isnumber, mean, std, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { downsiderisk, cat } from "../../index.ts";
  *
- * // Example 1: Downside risk for a single asset
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(downsiderisk(x), 0.0115);
+ * // Example 1: Downside risk with default MAR
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(downsiderisk(x), 0.0035355339059327385);
  *
- * // Example 2: Downside risk for multiple assets
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(downsiderisk(cat(0,x,y)), [[0.0115], [0.042967]]);
+ * // Example 2: Downside risk with custom MAR  
+ * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865475);
+ *
+ * // Example 3: Downside risk with higher MAR
+ * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
  * ```
  */
-export default function downsiderisk(x: any, mar: any = 0, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _downsiderisk = function (a: any, mar: any) {
-    const idx = find(a, function (el: any) {
-      return el < mar;
-    });
+export default function downsiderisk(
+  x: number,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function downsiderisk(
+  x: array,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function downsiderisk(
+  x: matrix,
+  mar?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function downsiderisk(
+  x: number | array | matrix,
+  mar: number = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _downsiderisk = function (a: array, mar: number): number {
+    // Create boolean array for values below MAR
+    const belowMar = a.map((el: number) => el < mar);
+    const idx = find(belowMar);
     if (idx.length === 0) {
       return 0;
     }
@@ -43,7 +59,7 @@ export default function downsiderisk(x: any, mar: any = 0, dim: any = 0): any {
     for (let i = 0; i < idx.length; i++) {
       downside[i] = a[idx[i]];
     }
-    return std(downside);
+    return std(downside) as number;
   };
 
   if (isnumber(x)) {

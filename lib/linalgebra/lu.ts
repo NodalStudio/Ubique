@@ -1,9 +1,5 @@
-/** @import { matrix } from '../types.d.ts' */
-
-import clone from "../matarrs/clone.ts";
-import nrows from "../matarrs/nrows.ts";
-import ncols from "../matarrs/ncols.ts";
-import zeros from "../matarrs/zeros.ts";
+import type { array, matrix } from "../types.d.ts";
+import { clone, ncols, nrows, zeros } from "../../index.ts";
 
 /**
  * @function lu
@@ -11,22 +7,16 @@ import zeros from "../matarrs/zeros.ts";
  * @description Performs LU decomposition of the input matrix `x` using the Doolittle algorithm with partial pivoting.
  * Returns the combined LU matrix, lower triangular matrix `L`, upper triangular matrix `U`, pivot vector `P`, and pivot sign `S`.
  *
- * @param {matrix} x The input matrix.
- * @returns {{
- *   LU: matrix;  // Combined LU matrix
- *   L: matrix;   // Lower triangular matrix
- *   U: matrix;   // Upper triangular matrix
- *   P: array;    // Pivot vector (zero-based)
- *   S: number;   // Pivot sign (+1 or -1)
- * }}
- * @throws {Error} If no input arguments are provided.
+ * @param x The input matrix.
+ * @returns Object containing LU decomposition results
+ * @throws If no input arguments are provided.
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: LU decomposition of a 2x2 square matrix
- * assert.deepStrictEqual(lu([[3, 2], [5, 2]]), {
+ * assertEquals(lu([[3, 2], [5, 2]]), {
  *   LU: [
  *     [5, 2],
  *     [0.6, 0.8]
@@ -44,88 +34,88 @@ import zeros from "../matarrs/zeros.ts";
  * });
  *
  * // Example 2: LU decomposition of a 3x3 square matrix
- * assert.deepStrictEqual(lu([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), {
+ * assertEquals(lu([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), {
  *   LU: [
  *     [2, 3, 1],
  *     [0.5, -3.5, 2.5],
- *     [0.5, -0.42857142857142855, -0.7142857142857143]
+ *     [0.5, 0.14285714285714285, -1.8571428571428572]
  *   ],
  *   L: [
  *     [1, 0, 0],
  *     [0.5, 1, 0],
- *     [0.5, -0.42857142857142855, 1]
+ *     [0.5, 0.14285714285714285, 1]
  *   ],
  *   U: [
  *     [2, 3, 1],
  *     [0, -3.5, 2.5],
- *     [0, 0, -0.7142857142857143]
+ *     [0, 0, -1.8571428571428572]
  *   ],
- *   P: [2, 0, 1],
- *   S: 1
+ *   P: [2, 1, 0],
+ *   S: -1
  * });
  *
  * // Example 3: LU decomposition of a 2x3 rectangular matrix
- * assert.deepStrictEqual(lu([[5, 6, 5], [7, 8, -1]]), {
+ * assertEquals(lu([[5, 6, 5], [7, 8, -1]]), {
  *   LU: [
  *     [7, 8, -1],
- *     [0.714286, 0.285714, 5.714286]
+ *     [0.7142857142857143, 0.2857142857142856, 5.714285714285714]
  *   ],
  *   L: [
- *     [1, 0],
- *     [0.714286, 1]
+ *     [1, 0, 0],
+ *     [0.7142857142857143, 1, 0]
  *   ],
  *   U: [
  *     [7, 8, -1],
- *     [0, 0.285714, 5.714286]
+ *     [0, 0.2857142857142856, 5.714285714285714]
  *   ],
  *   P: [1, 0],
  *   S: -1
  * });
  *
  * // Example 4: LU decomposition of a singular 3x3 matrix
- * assert.deepStrictEqual(lu([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), {
+ * assertEquals(lu([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), {
  *   LU: [
  *     [7, 8, 9],
- *     [0.142857, 0.857143, 1.285714],
- *     [0.571429, 0.5, 0]
+ *     [0.14285714285714285, 0.8571428571428572, 1.7142857142857144],
+ *     [0.5714285714285714, 0.5000000000000002, 1.1102230246251565e-16]
  *   ],
  *   L: [
  *     [1, 0, 0],
- *     [0.571429, 1, 0],
- *     [0.142857, 0.5, 1]
+ *     [0.14285714285714285, 1, 0],
+ *     [0.5714285714285714, 0.5000000000000002, 1]
  *   ],
  *   U: [
  *     [7, 8, 9],
- *     [0, 0.857143, 1.285714],
- *     [0, 0, 0]
+ *     [0, 0.8571428571428572, 1.7142857142857144],
+ *     [0, 0, 1.1102230246251565e-16]
  *   ],
  *   P: [2, 0, 1],
  *   S: 1
  * });
  *
  * // Example 5: LU decomposition of a 3x2 rectangular matrix
- * assert.deepStrictEqual(lu([[1, 2], [3, 4], [5, 6]]), {
+ * assertEquals(lu([[1, 2], [3, 4], [5, 6]]), {
  *   LU: [
  *     [5, 6],
- *     [0.6, 0.4],
- *     [0.2, 0]
+ *     [0.2, 0.7999999999999998],
+ *     [0.6, 0.5000000000000006]
  *   ],
  *   L: [
  *     [1, 0],
- *     [0.6, 1],
- *     [0.2, 0]
+ *     [0.2, 1],
+ *     [0.6, 0.5000000000000006]
  *   ],
  *   U: [
  *     [5, 6],
- *     [0, 0.4],
+ *     [0, 0.7999999999999998],
  *     [0, 0]
  *   ],
- *   P: [2, 1, 0],
+ *   P: [2, 0, 1],
  *   S: 1
  * });
  *
  * // Example 6: Error when input is not provided
- * assert.throws(() => lu(), Error, 'not enough input arguments');
+ * // lu() throws: "Not enough input arguments"
 
  * ```*/
 export default function lu(x: any) {

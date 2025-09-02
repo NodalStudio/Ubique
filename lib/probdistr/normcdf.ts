@@ -1,4 +1,4 @@
-import erf from "../elmath/erf.ts";
+import { erf } from "../../index.ts";
 
 /**
  * @function normcdf
@@ -6,31 +6,37 @@ import erf from "../elmath/erf.ts";
  * @description Calculates the probability that a normally distributed random variable with mean `mu` and standard deviation `sigma` is less than or equal to `x`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
- * @param {number} x The value at which to evaluate the CDF.
- * @param {number} [mu=0] The mean of the normal distribution.
- * @param {number} [sigma=1] The standard deviation of the normal distribution.
- * @returns {number} The cumulative probability for `x`.
- * @throws {Error} If `sigma` is not a positive number.
+ * @param x The value at which to evaluate the CDF
+ * @param mu The mean of the normal distribution (defaults to 0)
+ * @param sigma The standard deviation of the normal distribution (defaults to 1)
+ * @returns The cumulative probability for x
+ * @throws {Error} If sigma is not a positive number
  *
  * @example
- * import normcdf from './normcdf.ts';
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Compute standard normal CDF at x = 2
- * assert.strictEqual(normcdf(2), 0.97725);
+ * assertEquals(normcdf(2), 0.9772498701098755);
  *
  * // Example 2: Compute normal CDF with custom mean and standard deviation
- * assert.strictEqual(normcdf(0, 1, 2), 0.30854);
+ * assertEquals(normcdf(0, 1, 2), 0.30853751691860176);
  *
  * // Example 3: Compute normal CDF at the mean (should be close to 0.5)
- * assert.strictEqual(normcdf(10, 10, 3), 0.5);
+ * assertEquals(normcdf(10, 10, 3), 0.5);
  *
  * // Example 4: Compute normal CDF for negative values
- * assert.strictEqual(normcdf(-1.5, 0, 1), 0.06681);
+ * assertEquals(normcdf(-1.5, 0, 1), 0.06680720195906442);
  *
  * // Example 5: Compute normal CDF for a very large value (should be close to 1)
- * assert.strictEqual(normcdf(100, 50, 10), 1);
+ * assertEquals(normcdf(100, 50, 10), 0.9999997133484314);
+ * ```
  */
-export default function normcdf(x: any, mu = 0, sigma = 1) {
+export default function normcdf(
+  x: number,
+  mu: number = 0,
+  sigma: number = 1,
+): number {
   if (sigma <= 0) {
     throw new Error("Standard deviation must be a positive number");
   }

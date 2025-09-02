@@ -36,18 +36,24 @@ import {
  * assertEquals(prctile(cat(0, x, y), 5), [[-0.014, -0.061]]);
  * ```
  */
+export default function prctile(x: array, p: number, dim?: 0 | 1): number;
 export default function prctile(
-  x: numarraymatrix,
+  x: matrix,
   p: number,
-  dim: number = 0,
-): numarraymatrix {
+  dim?: 0 | 1,
+): array | matrix;
+export default function prctile(
+  x: array | matrix,
+  p: number,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   if (p < 0 || p > 100) {
     throw new Error(
       "p-th percentile must be a real value between 0 and 100 inclusive",
     );
   }
 
-  const _prctile = function (a: number[], pr: number) {
+  const _prctile = function (a: array, pr: number): number {
     const arrnum = colon(0.5, a.length - 0.5) as number[];
     const _a = sort(a) as number[];
     const pq = rdivide(times(arrnum, 100), a.length) as number[];
@@ -60,7 +66,7 @@ export default function prctile(
   };
 
   if (isnumber(x)) {
-    return x;
+    return NaN;
   }
 
   return vectorfun(dim, x, _prctile, p);

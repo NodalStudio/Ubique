@@ -1,8 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import mean from "../stats/mean.ts";
-import prod from "../elemop/prod.ts";
-import vectorfun from "../datatype/vectorfun.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { isarray, ismatrix, mean, prod, vectorfun } from "../../index.ts";
 
 /**
  * @function annreturn
@@ -10,47 +7,59 @@ import vectorfun from "../datatype/vectorfun.ts";
  * @description Calculates the annualized return of an asset or portfolio over a period.
  * It supports both geometric (compounded) and simple (arithmetic) return modes.
  *
- * @param {array|matrix} x Asset/portfolio returns.
- * @param {number} [t=252] Frequency of data points in a year.
- *   (1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily).
- * @param {string} [mode='geometric'] Return mode: 'geometric' (default) or 'simple'.
- * @param {number} [dim=0] Dimension to operate on (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The computed annualized return.
- * @throws {Error} If the input is invalid or an unknown mode is specified.
+ * @param x Asset/portfolio returns
+ * @param t Frequency of data points in a year (1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily)
+ * @param mode Return mode: 'geometric' (default) or 'simple'
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
+ * @returns The computed annualized return
+ * @throws {Error} If the input is invalid or an unknown mode is specified
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { annreturn, cat } from "../../index.ts";
  *
- * // Example 1: Annualized return for a single asset
+ * // Example 1: Annualized return for a single asset (geometric)
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annreturn(x, 12), 0.2338146820656939);
  *
- * // Example 2: Annualized return with simple mode
- * assertEquals(annreturn(x, 12, 'simple'), 0.24);
+ * // Example 2: Annualized return with simple (arithmetic) mode
+ * assertEquals(annreturn(x, 12, 'simple'), 0.2148);
  *
- * // Example 3: Annualized return for multiple assets
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(annreturn(cat(0, x, y), 12), [[0.2338146820656939], [0.12467878675658589]]);
- * ``` */
+ * // Example 3: Annualized return for multiple assets (matrix)
+ * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
+ * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(annreturn([x1, x2], 12), [0.12321338265292425, 0.3553067415252329]);
+ * ```
+ */
 export default function annreturn(
-  x: any,
+  x: array,
+  t?: number,
+  mode?: string,
+  dim?: 0 | 1,
+): number;
+export default function annreturn(
+  x: matrix,
+  t?: number,
+  mode?: string,
+  dim?: 0 | 1,
+): array;
+export default function annreturn(
+  x: numarraymatrix,
   t = 252,
   mode = "geometric",
-  dim = 0,
-) {
-  if (!Array.isArray(x)) {
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  if (!isarray(x) && !ismatrix(x)) {
     throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (arr: any) => computeAnnReturn(arr, t, mode));
+  return vectorfun(dim, x, (arr: array) => computeAnnReturn(arr, t, mode));
 }
 
-function computeAnnReturn(arr: any, t: any, mode: any) {
+function computeAnnReturn(arr: array, t: number, mode: string): number {
   const n = arr.length;
   if (mode === "geometric") {
-    return Math.pow(prod(arr.map((val: any) => val + 1)), t / n) - 1;
+    return Math.pow(prod(arr.map((val: number) => val + 1)), t / n) - 1;
   }
   if (mode === "simple") {
     return mean(arr) * t;

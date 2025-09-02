@@ -32,17 +32,19 @@ import { isnumber, mean, minus, rdivide, std, vectorfun } from "../../index.ts";
  * );
  * ```
  */
+export default function zscore(x: array, flag?: 0 | 1, dim?: 0 | 1): array;
+export default function zscore(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
 export default function zscore(
-  x: numarraymatrix,
-  flag: number = 1,
-  dim: number = 0,
-): numarraymatrix {
-  const _zscore = function (a: number[], normFlag: number) {
-    return rdivide(minus(a, mean(a)), std(a, normFlag)) as number[];
+  x: array | matrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): array | matrix {
+  const _zscore = function (a: array, normFlag: 0 | 1): array {
+    return rdivide(minus(a, mean(a)), std(a, normFlag)) as array;
   };
 
   if (isnumber(x)) {
-    return NaN;
+    return [NaN] as any;
   }
 
   return vectorfun(dim, x, _zscore, flag);

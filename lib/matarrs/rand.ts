@@ -19,7 +19,7 @@
  * assertEquals(typeof rand(), 'number');
  *
  * // Example 2: Empty matrix
- * assert.deepStrictEqual(rand(0), []);
+ * assertEquals(rand(0), []);
  *
  * // Example 3: 1x1 matrix
  * const result1x1 = rand(1);
