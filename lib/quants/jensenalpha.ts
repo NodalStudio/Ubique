@@ -1,6 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
-import { ismatrix, isvector, linearreg, mean, vectorfun } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { isarray, ismatrix, linearreg, mean, vectorfun } from "../../index.ts";
 
 /**
  * @function jensenalpha
@@ -18,40 +17,44 @@ import { ismatrix, isvector, linearreg, mean, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { jensenalpha, cat } from "../../index.ts";
  *
  * // Example 1: Single asset vs benchmark
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(jensenalpha(x,y), 0.017609);
+ * assertEquals(jensenalpha(x,y), 0.01760907323602524);
  *
  * // Example 2: Multiple assets vs benchmark
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
- * assertEquals(jensenalpha(cat(0,x,y),z), [[0.020772], [0.006256]]);
+ * assertEquals(jensenalpha(x,z), 0.02077158416670001);
+ * assertEquals(jensenalpha(y,z), 0.006256147026618015);
  * ```
  */
 export default function jensenalpha(
-  x: any,
+  x: array,
+  y: array,
+  frisk?: number,
+  dim?: 0 | 1,
+): number;
+export default function jensenalpha(
+  x: matrix,
+  y: array,
+  frisk?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function jensenalpha(
+  x: numarraymatrix,
   y: array,
   frisk: number = 0,
-  dim: number = 0,
-): any {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _ja = function (a: any, b: any, frisk: number) {
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _ja = function (a: array, b: array, frisk: number): number {
     const beta = linearreg(a, b).beta;
-    return mean(a) - frisk - beta * (mean(b) - frisk);
+    return (mean(a) as number) - frisk - beta * ((mean(b) as number) - frisk);
   };
 
-  if (isvector(x) && isvector(y)) {
-    return _ja(x, y, frisk);
-  } else if (ismatrix(x) && isvector(y)) {
-    return vectorfun(dim, x, _ja, y, frisk);
-  } else {
-    throw new Error(
-      "first input must be an array/matrix, the second one an array",
-    );
+  if (!isarray(x) || !isarray(y)) {
+    throw new Error("Inputs must be arrays or matrices");
   }
+
+  return vectorfun(dim, x, (a: array) => _ja(a, y, frisk));
 }

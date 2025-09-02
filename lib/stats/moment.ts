@@ -1,18 +1,16 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import mean from "./mean.ts";
-import vectorfun from "../datatype/vectorfun.ts";
+import type { array, matrix } from "../types.d.ts";
+import { mean, vectorfun } from "../../index.ts";
 
 /**
  * @function moment
  * @summary Computes the central moment of an array or matrix.
  * @description Computes the k-th central moment of a dataset. The first moment is always zero, and the second moment is the variance.
  *
- * @param {array|matrix} x The dataset (array or matrix).
- * @param {number} k The order of the moment (k-th central moment).
- * @param {number} [dim=0] The dimension to compute the moment along (0 for row-wise, 1 for column-wise).
- * @returns {number|array|matrix} The computed central moment.
- * @throws {Error} If the number of arguments is insufficient.
+ * @param x The dataset (array or matrix)
+ * @param k The order of the moment (k-th central moment)
+ * @param dim The dimension to compute the moment along (0 for row-wise, 1 for column-wise, defaults to 0)
+ * @returns The computed central moment
+ * @throws {Error} If the number of arguments is insufficient
  *
  * @example
  * ```ts
@@ -27,20 +25,26 @@ import vectorfun from "../datatype/vectorfun.ts";
  * assertEquals(moment([0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039], 1), 0);
  *
  * // Example 3: Compute the second central moment (variance) for a matrix along rows
- * assert.deepStrictEqual(moment([[0.003, 0.026], [0.015, -0.009]], 2), [[0.000265], [0.000144]]);
+ * assertEquals(moment([[0.003, 0.026], [0.015, -0.009]], 2), [[0.000265], [0.000144]]);
  *
  * // Example 4: Compute the second central moment (variance) for a matrix along columns
- * assert.deepStrictEqual(moment([[0.003, 0.026], [0.015, -0.009]], 2, 1), [[0.000114, 0.000605]]);
+ * assertEquals(moment([[0.003, 0.026], [0.015, -0.009]], 2, 1), [[0.000114, 0.000605]]);
  *
  * // Example 5: Compute the fourth moment of a dataset
  * assertEquals(moment([1, 2, 3, 4, 5], 4), 2);
 
  * ```*/
-export default function moment(x: any, k: any, dim = 0) {
-  if (x === undefined || k === undefined) {
-    throw new Error("Not enough input arguments");
-  }
-
+export default function moment(x: array, k: number, dim?: 0 | 1): number;
+export default function moment(
+  x: matrix,
+  k: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function moment(
+  x: array | matrix,
+  k: number,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   if (!Array.isArray(x)) {
     return NaN;
   }
@@ -48,8 +52,7 @@ export default function moment(x: any, k: any, dim = 0) {
   return vectorfun(dim, x, computeMoment, k);
 }
 
-function computeMoment(arr: any, order: any) {
+function computeMoment(arr: array, order: number): number {
   const mu = mean(arr);
-
-  return mean(arr.map((val: any) => (val - mu) ** order));
+  return mean(arr.map((val: number) => (val - mu) ** order));
 }

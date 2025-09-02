@@ -17,16 +17,16 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Create a 1x1 matrix of zeros (default behavior)
- * assert.deepStrictEqual(zeros(), [[0]]);
+ * assertEquals(zeros(), [[0]]);
  *
  * // Example 2: Create a 2x2 square matrix of zeros
- * assert.deepStrictEqual(zeros(2), [[0, 0], [0, 0]]);
+ * assertEquals(zeros(2), [[0, 0], [0, 0]]);
  *
  * // Example 3: Create a 2x3 matrix of zeros
- * assert.deepStrictEqual(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
+ * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
  *
  * // Example 4: Create a 2x1 matrix of zeros using array input
- * assert.deepStrictEqual(zeros([2, 1]), [[0], [0]]);
+ * assertEquals(zeros([2, 1]), [[0], [0]]);
 
  * ```*/
 export default function zeros(nrowsOrDims: any, ncols: any) {

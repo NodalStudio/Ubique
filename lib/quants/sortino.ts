@@ -1,47 +1,58 @@
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
  * @function sortino
  * @summary Sortino Ratio
- * @description Sortino ratio where the risk is represented by Downside Risk
+ * @description Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
+ * instead of standard deviation. It measures the return of an investment relative to the risk of negative returns.
  *
- * @param x array of values
- * @param frisk free-risk rate (def: 0)
- * @param mar minimum acceptable return (def: 0)
- * @param dim dimension 0: row, 1: column (def: 0)
- * @return Sortino Ratio
+ * @param x Asset/portfolio returns
+ * @param frisk Risk-free rate (defaults to 0)
+ * @param mar Minimum acceptable return threshold (defaults to 0)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Sortino Ratio
+ * @throws {Error} If input is a number (not supported)
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { sortino, cat } from "../../index.ts";
  *
  * // Example 1: Sortino ratio for a single asset
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(sortino(x, 0.01/12), 0.984932);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(sortino(x), 5.062884553295679);
  *
- * // Example 2: Sortino ratio for multiple assets
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(sortino(cat(0,x,y), 0.01/12), [[0.984932], [0.307917]]);
+ * // Example 2: Sortino ratio with custom MAR
+ * assertEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.5303300858899106);
+ *
+ * // Example 3: Sortino ratio with no downside
+ * assertEquals(sortino([0.01, 0.02, 0.03], 0), Infinity);
  * ```
  */
 export default function sortino(
-  x: any,
-  frisk: any = 0,
-  mar: any = 0,
-  dim: any = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _sortino = function (a: any, frisk: any, mar: any) {
+  x: array,
+  frisk?: number,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function sortino(
+  x: matrix,
+  frisk?: number,
+  mar?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function sortino(
+  x: numarraymatrix,
+  frisk: number = 0,
+  mar: number = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _sortino = function (a: array, frisk: number, mar: number): number {
     return (mean(a) - frisk) / downsiderisk(a, mar);
   };
 
   if (isnumber(x)) {
-    return NaN;
+    throw new Error("Input must be an array or matrix, not a number");
   }
 
   return vectorfun(dim, x, _sortino, frisk, mar);

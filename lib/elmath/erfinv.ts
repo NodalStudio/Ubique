@@ -1,5 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
-import erf from "./erf.ts";
+import { erf } from "../../index.ts";
 
 /**
  * @function erfinv
@@ -8,19 +7,19 @@ import erf from "./erf.ts";
  *
  * The inverse error function satisfies \( y = \text{erf}(x) \), for \( -1 \leq y \leq 1 \) and \( -\infty \leq x \leq \infty \).
  *
- * @param {number} y A real value in the range [-1, 1].
- * @returns {number} The value of the inverse error function.
- * @throws {Error} If no arguments are provided or if the input is out of range.
+ * @param y A real value in the range [-1, 1]
+ * @returns The value of the inverse error function
+ * @throws {Error} If the input is out of range
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Compute the inverse error function for a positive value
- * assertEquals(erfinv(0.1), 0.08885596505119545);
+ * assertEquals(erfinv(0.1), 0.08885596505119556);
  *
  * // Example 2: Compute the inverse error function for a negative value
- * assertEquals(erfinv(-0.5), -0.476936236121904);
+ * assertEquals(erfinv(-0.5), -0.47693623612190483);
  *
  * // Example 3: Compute the inverse error function for 0 (should return 0)
  * assertEquals(erfinv(0), 0);
@@ -32,11 +31,7 @@ import erf from "./erf.ts";
  * assertEquals(erfinv(-1), -Infinity);
 
  * ```*/
-export default function erfinv(y: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function erfinv(y: number): number {
   if (y <= -1) return -Infinity;
   if (y >= 1) return Infinity;
 
@@ -61,10 +56,10 @@ export default function erfinv(y: any) {
 /**
  * @function calculateX
  * @description Helper function to calculate the initial approximation for the inverse error function.
- * @param {number} z Intermediate value based on the input.
- * @returns {number} Initial approximation.
+ * @param z Intermediate value based on the input
+ * @returns Initial approximation
  */
-function calculateX(z: any) {
+function calculateX(z: number): number {
   const c1 = 1.641345311,
     c2 = 3.429567803,
     c3 = -1.624906493,
@@ -78,11 +73,11 @@ function calculateX(z: any) {
 /**
  * @function calculateCentral
  * @description Helper function to calculate the initial approximation for values close to 0.
- * @param {number} z Square of the input value.
- * @param {number} y Input value.
- * @returns {number} Initial approximation.
+ * @param z Square of the input value
+ * @param y Input value
+ * @returns Initial approximation
  */
-function calculateCentral(z: any, y: any) {
+function calculateCentral(z: number, y: number): number {
   const c1 = -0.140543331,
     c2 = 0.914624893,
     c3 = -1.645349621,
@@ -99,11 +94,11 @@ function calculateCentral(z: any, y: any) {
 /**
  * @function refineResult
  * @description Refines the initial approximation using the Newton-Raphson method.
- * @param {number} x Initial approximation.
- * @param {number} y Input value.
- * @returns {number} Refined approximation.
+ * @param x Initial approximation
+ * @param y Input value
+ * @returns Refined approximation
  */
-function refineResult(x: any, y: any) {
+function refineResult(x: number, y: number): number {
   const sqrtPiInv = 2 / Math.sqrt(Math.PI);
   for (let i = 0; i < 2; i++) {
     const error = erf(x) - y;

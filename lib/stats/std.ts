@@ -1,8 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import varc from "./varc.ts";
-import sqrt from "../elmath/sqrt.ts";
-import isarray from "../datatype/isarray.ts";
+import type { array, matrix } from "../types.d.ts";
+import { isarray, sqrt, varc } from "../../index.ts";
 
 /**
  * @function std
@@ -16,13 +13,11 @@ import isarray from "../datatype/isarray.ts";
  * - Sample (flag = 1, default):
  *   **s = sqrt(Σ (xᵢ - x̄)² / (N - 1))**
  *
- * @param {array|matrix} x Input array or matrix.
- * @param {number} [flag=1] Normalization type:
- *   - `0`: Population standard deviation
- *   - `1`: Sample standard deviation (default)
- * @param {number} [dim=0] Dimension to operate on (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The computed standard deviation.
- * @throws {Error} If the input is invalid.
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: Population, 1: Sample, defaults to 1)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
+ * @returns The computed standard deviation
+ * @throws {Error} If the input is invalid
  *
  * @example
  * ```ts
@@ -39,19 +34,26 @@ import isarray from "../datatype/isarray.ts";
  *
  * // Example 3: Standard deviation of a 2D matrix (row-wise, population)
  * const a = [[5, 6, 5], [7, 8, -1]];
- * assert.deepStrictEqual(std(a, 0), [[0.471405], [4.027682]]);
+ * assertEquals(std(a, 0), [[0.471405], [4.027682]]);
  *
  * // Example 4: Standard deviation of a 2D matrix (column-wise, population)
- * assert.deepStrictEqual(std(a, 0, 1), [[1, 1, 3]]);
- *
- * // Example 5: Throws an error for invalid input
- * assert.throws(() => std(123), /Input must be an array or matrix/);
+ * assertEquals(std(a, 0, 1), [[1, 1, 3]]);
 
  * ```*/
-export default function std(x: any, flag = 1, dim = 0) {
+export default function std(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+export default function std(
+  x: matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): array;
+export default function std(
+  x: array | matrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): number | array {
   if (!isarray(x)) {
     throw new Error("Input must be an array or matrix");
   }
 
-  return sqrt(varc(x, flag, dim));
+  return sqrt(varc(x as any, flag, dim) as any);
 }

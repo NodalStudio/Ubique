@@ -38,16 +38,13 @@ dayjs.extend(customParseFormat);
  * // Example 5: Convert a Unix timestamp with milliseconds to an array
  * assertEquals(datevec(1428236430579), [2015, 4, 5, 12, 20, 30, 579]);
  *
- * // Example 6: Convert a date string with time zone to an array
+ * // Example 6: Convert a date string with time zone to an array (converts to UTC)
  * assertEquals(datevec('2023-08-25T14:45:00+02:00', 'YYYY-MM-DDTHH:mm:ssZ'), [2023, 8, 25, 12, 45, 0, 0]);
  *
- * // Example 7: Convert a Unix timestamp to an array with milliseconds
- * assertEquals(datevec(1428236430579), [2015, 4, 5, 12, 20, 30, 579]);
- *
- * // Example 8: Convert a date string in UTC format to an array
+ * // Example 7: Convert a date string in UTC format to an array
  * assertEquals(datevec('2023-08-25T14:45:00Z', 'YYYY-MM-DDTHH:mm:ssZ'), [2023, 8, 25, 14, 45, 0, 0]);
  *
- * // Example 9: Convert an array of mixed Unix timestamps and date strings to an array of arrays
+ * // Example 8: Convert an array of mixed Unix timestamps and date strings to an array of arrays
  * assertEquals(datevec([1428236430, '2015-01-01 03:34:05'], 'YYYY-MM-DD HH:mm:ss'), [[2015, 4, 5, 12, 20, 30, 0], [2015, 1, 1, 3, 34, 5, 0]]);
 
  * ```*/

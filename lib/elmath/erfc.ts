@@ -1,5 +1,3 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
 /**
  * @function erfc
  * @summary Complementary error function
@@ -13,9 +11,9 @@
  *
  * This implementation provides an approximation with a high degree of accuracy.
  *
- * @param {number} x A real value.
- * @returns {number} The value of the complementary error function for the input x.
- * @throws {Error} If no arguments are provided.
+ * @param x A real value
+ * @returns The value of the complementary error function for the input x
+ * @throws {Error} If no arguments are provided
  *
  * @example
  * ```ts
@@ -25,23 +23,19 @@
  * assertEquals(erfc(0.5), 0.47950009227675744);
  *
  * // Example 2: Compute the complementary error function for a negative value
- * assertEquals(erfc(-1), 1.8427007929497148);
+ * assertEquals(erfc(-1), 1.8427007877600068);
  *
  * // Example 3: Compute the complementary error function for zero
  * assertEquals(erfc(0), 1);
  *
  * // Example 4: Compute the complementary error function for a large positive value
- * assertEquals(erfc(2), 0.004677734981047265);
+ * assertEquals(erfc(2), 0.004677734989334044);
  *
  * // Example 5: Compute the complementary error function for a large negative value
- * assertEquals(erfc(-2), 1.9953222650189527);
+ * assertEquals(erfc(-2), 1.995322265010666);
 
  * ```*/
-export default function erfc(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function erfc(x: number): number {
   if (x === 0) return 1;
 
   const z = Math.abs(x);

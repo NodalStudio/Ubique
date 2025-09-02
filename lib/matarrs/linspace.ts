@@ -11,28 +11,28 @@
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Generate 5 linearly spaced points between 1 and 10
- * assert.deepStrictEqual(linspace(1, 10, 5), [1, 3.25, 5.5, 7.75, 10]);
+ * assertEquals(linspace(1, 10, 5), [1, 3.25, 5.5, 7.75, 10]);
  *
  * // Example 2: Generate 3 linearly spaced points between -10 and 10
- * assert.deepStrictEqual(linspace(-10, 10, 3), [-10, 0, 10]);
+ * assertEquals(linspace(-10, 10, 3), [-10, 0, 10]);
  *
  * // Example 3: Generate 2 linearly spaced points between -5 and 5
- * assert.deepStrictEqual(linspace(-5, 5, 2), [-5, 5]);
+ * assertEquals(linspace(-5, 5, 2), [-5, 5]);
  *
  * // Example 4: Generate a single point (n = 1), should return only the upper bound
- * assert.deepStrictEqual(linspace(2, 5, 1), [5]);
+ * assertEquals(linspace(2, 5, 1), [5]);
  *
  * // Example 5: Generate 10 linearly spaced points between 0 and 1
- * assert.deepStrictEqual(
+ * assertEquals(
  *   linspace(0, 1),
  *   [0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777777, 0.8888888888888888, 1]
  * );
  *
  * // Example 6: Throw an error when fewer than 2 arguments are provided
- * assert.throws(() => linspace(1), {
+ * assertThrows(() => linspace(1), {
  *   name: 'Error',
  *   message: 'Not enough input arguments',
  * });

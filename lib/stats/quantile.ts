@@ -25,11 +25,17 @@ import { prctile } from "../../index.ts";
  * assertEquals(quantile(cat(0, x, y), 0.33), [[0.0118, -0.0242]]);
  * ```
  */
+export default function quantile(x: array, p: number, dim?: 0 | 1): number;
 export default function quantile(
-  x: numarraymatrix,
+  x: matrix,
   p: number,
-  dim: number = 0,
-): numarraymatrix {
+  dim?: 0 | 1,
+): array | matrix;
+export default function quantile(
+  x: array | matrix,
+  p: number,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   if (p < 0 || p > 1) {
     throw new Error(
       "p-th quantile must be a real value between 0 and 1 inclusive",
@@ -37,5 +43,5 @@ export default function quantile(
   }
 
   // Convert quantile (0-1) to percentile (0-100) and use prctile
-  return prctile(x, p * 100, dim);
+  return prctile(x, p * 100, dim) as number | array | matrix;
 }

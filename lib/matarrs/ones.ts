@@ -15,37 +15,26 @@ import ismatrix from "../datatype/ismatrix.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Create a 0x0 matrix
- * assert.deepStrictEqual(ones(0), []);
+ * assertEquals(ones(0), []);
  *
  * // Example 2: Create a 1x1 matrix
- * assert.deepStrictEqual(ones(1), [[1]]);
+ * assertEquals(ones(1), [[1]]);
  *
  * // Example 3: Create a 2x2 matrix
- * assert.deepStrictEqual(ones(2), [[1, 1], [1, 1]]);
+ * assertEquals(ones(2), [[1, 1], [1, 1]]);
  *
  * // Example 4: Create a 2x1 matrix
- * assert.deepStrictEqual(ones([2, 1]), [[1], [1]]);
+ * assertEquals(ones([2, 1]), [[1], [1]]);
  *
  * // Example 5: Create a 2x3 matrix
- * assert.deepStrictEqual(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
+ * assertEquals(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
 
- * ```*/
-export default function ones(...args: any[]) {
-  if (args.length === 0) {
-    throw new Error("not enough input arguments");
+ * ```
+ */
+export default function ones(rows: number, cols?: number) {
+  if (cols === undefined) {
+    cols = rows;
   }
-
-  let _args = args;
-  if (ismatrix(_args)) {
-    _args = _args[0];
-  }
-
-  if (_args.length === 1) {
-    _args = [_args[0], _args[0]];
-  }
-
-  const rows = _args[0];
-  const cols = _args[1];
 
   if (rows === 0 || cols === 0) {
     return [];

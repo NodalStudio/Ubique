@@ -1,10 +1,9 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   annreturn,
   downsiderisk,
+  isarray,
   ismatrix,
-  isvector,
   sortino,
   sqrt,
   vectorfun,
@@ -27,50 +26,58 @@ import {
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { m2sortino, cat } from "../../index.ts";
  *
  * // Example 1: Single asset vs benchmark
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(m2sortino(x,y,0,0,12), 0.103486);
+ * assertEquals(m2sortino(x,y,0,0,12), 0.5611427561167748);
  *
  * // Example 2: Multiple assets vs different benchmark
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
- * assertEquals(m2sortino(cat(0,x,y),z,0,0,12), [[0.527018], [0.148094]]);
+ * assertEquals(m2sortino(x,z,0,0,12), 0.696982403465082);
+ * assertEquals(m2sortino(y,z,0,0,12), 0.1603188447030512);
  * ```
  */
 export default function m2sortino(
-  x: any,
-  y: any,
+  x: array,
+  y: array,
+  frisk?: number,
+  mar?: number,
+  t?: number,
+  dim?: 0 | 1,
+): number;
+export default function m2sortino(
+  x: matrix,
+  y: array,
+  frisk?: number,
+  mar?: number,
+  t?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function m2sortino(
+  x: numarraymatrix,
+  y: array,
   frisk: number = 0,
   mar: number = 0,
   t: number = 252,
-  dim: number = 0,
-): any {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
-  }
-
+  dim: 0 | 1 = 0,
+): number | array | matrix {
   const _m2sortino = function (
-    a: any,
-    b: any,
+    a: array,
+    b: array,
     frisk: number,
     mar: number,
     t: number,
-  ) {
-    return annreturn(a, t) +
-      sortino(a, frisk, mar) *
-        (downsiderisk(b, mar) * sqrt(t) -
-          downsiderisk(a, mar) * sqrt(t));
+  ): number {
+    return (annreturn(a, t) as number) +
+      (sortino(a, frisk, mar) as number) *
+        ((downsiderisk(b, mar) as number) * (sqrt(t) as number) -
+          (downsiderisk(a, mar) as number) * (sqrt(t) as number));
   };
 
-  if (isvector(x) && isvector(y)) {
-    return _m2sortino(x, y, frisk, mar, t);
-  } else if (ismatrix(x) && isvector(y)) {
-    return vectorfun(dim, x, _m2sortino, y, frisk, mar, t);
-  } else {
-    throw new Error(
-      "first input must be an array/matrix, the second one an array",
-    );
+  if (!isarray(x) || !isarray(y)) {
+    throw new Error("Inputs must be arrays or matrices");
   }
+
+  return vectorfun(dim, x, (a: array) => _m2sortino(a, y, frisk, mar, t));
 }

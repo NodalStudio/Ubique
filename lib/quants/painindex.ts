@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { drawdown, isnumber, sum, vectorfun } from "../../index.ts";
 
 /**
@@ -16,30 +15,36 @@ import { drawdown, isnumber, sum, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { painindex, cat } from "../../index.ts";
  *
  * // Example 1: Single array of returns
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(painindex(x), 0.0023);
+ * assertEquals(painindex(x), 0.0023000000000000034);
  *
- * // Example 2: Matrix of returns
+ * // Example 2: Multiple arrays
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(painindex(cat(0,x,y)), [[0.0023], [0.042955]]);
+ * assertEquals(painindex(x), 0.0023000000000000034);
+ * assertEquals(painindex(y), 0.042955093457969766);
  * ```
  */
 export default function painindex(
-  x: any,
+  x: array,
+  mode?: string,
+  dim?: 0 | 1,
+): number;
+export default function painindex(
+  x: matrix,
+  mode?: string,
+  dim?: 0 | 1,
+): array | matrix;
+export default function painindex(
+  x: numarraymatrix,
   mode: string = "return",
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _painindex = function (a: any, mode: string) {
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _painindex = function (a: array, mode: string): number {
     const dd = drawdown(a, mode).dd;
     const n = a.length;
-    return sum(dd) / n;
+    return (sum(dd) as number) / n;
   };
 
   if (isnumber(x)) {

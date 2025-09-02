@@ -1,18 +1,14 @@
-/** @import { matrix } from '../types.d.ts' */
-import isnumber from "../datatype/isnumber.ts";
-import isvector from "../datatype/isvector.ts";
-import issquare from "../matarrs/issquare.ts";
-import lu from "../linalgebra/lu.ts";
-import ncols from "../matarrs/ncols.ts";
+import type { matrix } from "../types.d.ts";
+import { isnumber, issquare, isvector, lu, ncols } from "../../index.ts";
 
 /**
  * @function det
  * @summary Matrix determinant
  * @description Computes the determinant of a square matrix using LU decomposition.
  *
- * @param {matrix} x A square matrix.
- * @returns {number} The determinant of the matrix.
- * @throws {Error} If no input is provided, or if the input is not a square matrix.
+ * @param x A square matrix.
+ * @returns The determinant of the matrix.
+ * @throws If no input is provided, or if the input is not a square matrix.
  *
  * @example
  * ```ts
@@ -43,7 +39,7 @@ import ncols from "../matarrs/ncols.ts";
  * assertEquals(det([[-40.54, 34.02], [91.81, 57.47]]), -5453.21);
 
  * ```*/
-export default function det(x: any) {
+export default function det(x: matrix): number {
   if (!x) {
     throw new Error("Not enough input arguments");
   }
@@ -64,5 +60,10 @@ export default function det(x: any) {
     determinant *= LU[i][i];
   }
 
-  return Object.is(determinant, -0) ? 0 : determinant;
+  // Handle floating-point precision issues
+  if (Object.is(determinant, -0) || Math.abs(determinant) < 1e-15) {
+    return 0;
+  }
+
+  return determinant;
 }

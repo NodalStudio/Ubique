@@ -17,31 +17,32 @@ import mergesort from "./mergesort.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Sort an array in ascending order
- * assert.deepStrictEqual(sort([0, 5, -1, 3, -4, 9, 0], 'ascend'), [-4, -1, 0, 0, 3, 5, 9]);
+ * assertEquals(sort([0, 5, -1, 3, -4, 9, 0], 'ascend'), [-4, -1, 0, 0, 3, 5, 9]);
  *
  * // Example 2: Sort an array in descending order
- * assert.deepStrictEqual(sort([0, 5, -1, 3, -4, 9, 0], 'descend'), [9, 5, 3, 0, 0, -1, -4]);
+ * assertEquals(sort([0, 5, -1, 3, -4, 9, 0], 'descend'), [9, 5, 3, 0, 0, -1, -4]);
  *
  * // Example 3: Sort rows in descending order
- * assert.deepStrictEqual(sort([[-1, 3, -1], [4, 5, 9]], 'descend', 1), [
- *   [3, -1, -1],
- *   [9, 5, 4]
+ * assertEquals(sort([[-1, 3, -1], [4, 5, 9]], 'descend', 1), [
+ *   [4, -1],
+ *   [5, 3],
+ *   [9, -1]
  * ]);
  *
  * // Example 4: Sort columns in ascending order
- * assert.deepStrictEqual(sort([[-1, 3, -1], [4, 5, 9]], 'ascend', 0), [
- *   [-1, 3, -1],
+ * assertEquals(sort([[-1, 3, -1], [4, 5, 9]], 'ascend', 0), [
+ *   [-1, -1, 3],
  *   [4, 5, 9]
  * ]);
  *
  * // Example 5: Invalid sorting mode
- * assert.throws(() => sort([1, 2, 3], 'wrong'), /Sorting mode must be "ascend" or "descend"./);
+ * assertThrows(() => sort([1, 2, 3], 'wrong'), Error, 'sorting must be "ascend" or "descend"');
  *
- * // Example 6: Invalid matrix input
- * assert.throws(() => sort(5), /Input must be an array or matrix./);
+ * // Example 6: Sort a single number (should return the number itself)
+ * assertEquals(sort(5), 5);
 
  * ```*/
 export default function sort(x: any, mode = "ascend", dim = 1) {

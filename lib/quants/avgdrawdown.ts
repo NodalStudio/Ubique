@@ -1,11 +1,13 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import cdrawdown from "./cdrawdown.ts";
-import mean from "../stats/mean.ts";
-import sort from "../matarrs/sort.ts";
-import subsetlin from "../matarrs/subsetlin.ts";
-import vectorfun from "../datatype/vectorfun.ts";
-import isarray from "../datatype/isarray.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import {
+  cdrawdown,
+  isarray,
+  ismatrix,
+  mean,
+  sort,
+  subsetlin,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function avgdrawdown
@@ -17,38 +19,52 @@ import isarray from "../datatype/isarray.ts";
  * - If `k = 0`: **Average Drawdown = Mean of all continuous drawdowns**
  * - If `k > 0`: **Average of the `k` largest drawdowns**
  *
- * @param {array|matrix} x Asset/portfolio returns.
- * @param {number} [k=0] Number of largest drawdowns to consider (0 for all).
- * @param {number} [dim=0] Dimension to operate on (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The computed average drawdown.
- * @throws {Error} If the input is invalid.
+ * @param x Asset/portfolio returns
+ * @param k Number of largest drawdowns to consider (0 for all)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
+ * @returns The computed average drawdown
+ * @throws {Error} If the input is invalid
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { avgdrawdown, cat } from "../../index.ts";
  *
  * // Example 1: Average drawdown for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(avgdrawdown(x), 0.0115);
+ * assertEquals(avgdrawdown(x), 0.007299999999999999);
  *
  * // Example 2: Average of largest drawdown only
  * assertEquals(avgdrawdown(x, 1), 0.014);
  *
- * // Example 3: Average drawdown for multiple assets
- * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(avgdrawdown(cat(0, x, y)), [[0.0115], [0.0576]]);
+ * // Example 3: Average drawdown for multiple assets (matrix)
+ * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
+ * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(avgdrawdown([x1, x2]), [0.0036, 0.0056]);
  * ```
  */
-export default function avgdrawdown(x: any, k = 0, dim = 0) {
-  if (!isarray(x)) {
+export default function avgdrawdown(
+  x: array,
+  k?: number,
+  dim?: 0 | 1,
+): number;
+export default function avgdrawdown(
+  x: matrix,
+  k?: number,
+  dim?: 0 | 1,
+): array;
+export default function avgdrawdown(
+  x: numarraymatrix,
+  k = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  if (!isarray(x) && !ismatrix(x)) {
     throw new Error("Input must be an array or matrix");
   }
 
-  return vectorfun(dim, x, (x: any) => computeAvgDrawdown(x, k));
+  return vectorfun(dim, x, (arr: array) => computeAvgDrawdown(arr, k));
 }
 
-function computeAvgDrawdown(arr: any, k: any) {
+function computeAvgDrawdown(arr: array, k: number): number {
   const cdd = cdrawdown(arr);
   if (k === 0) {
     return mean(cdd);

@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   drawdown,
   isnumber,
@@ -16,43 +15,48 @@ import {
  * impact because the underperformance since the last peak is squared.
  * The formula is: sqrt(sum(dd^2) / n), where dd is the drawdown and n is the number of observations.
  *
- * @param x asset/portfolio returns
- * @param mode drawdown calculation. 'return','geometric' (def: 'return')
- * @param dim dimension 0: row, 1: column (def: 0)
- * @return Ulcer Index
+ * @param x Asset/portfolio returns
+ * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Ulcer Index
+ * @throws {Error} If input is a number (not supported)
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { ulcerindex } from "../../index.ts";
  *
  * // Example 1: Single array of returns
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(ulcerindex(x), 0.005263);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(ulcerindex(x), 0.005263078946776312);
  *
  * // Example 2: Matrix of returns with column dimension
- * var xt = [[0.003,0.026],[0.015,-0.009],[0.014,0.024],[0.015,0.066],[-0.014,0.039]];
- * assertEquals(ulcerindex(xt,'return',1), [[0.006261, 0.004025]]);
+ * const xt = [[0.003, 0.026], [0.015, -0.009], [0.014, 0.024], [0.015, 0.066], [-0.014, 0.039]];
+ * assertEquals(ulcerindex(xt, 'return', 1), [[0.006260990336999415], [0.004024922359499606]]);
+ *
+ * // Example 3: Ulcer index with geometric mode
+ * assertEquals(ulcerindex(x, 'geometric'), 0.005296364154061427);
  * ```
  */
 export default function ulcerindex(
-  x: any,
-  mode: string = "return",
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _uidx = function (a: any, mode: string) {
+  x: array,
+  mode?: "return" | "geometric",
+  dim?: 0 | 1,
+): number;
+export default function ulcerindex(
+  x: matrix,
+  mode?: "return" | "geometric",
+  dim?: 0 | 1,
+): array | matrix;
+export default function ulcerindex(
+  x: array | matrix,
+  mode: "return" | "geometric" = "return",
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _uidx = function (a: array, mode: string): number {
     const dd = drawdown(a, mode).dd;
     const n = a.length;
     return sqrt(sum(power(dd, 2)) / n);
   };
-
-  if (isnumber(x)) {
-    return NaN;
-  }
 
   return vectorfun(dim, x, _uidx, mode);
 }

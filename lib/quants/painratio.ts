@@ -1,9 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
-import isnumber from "../datatype/isnumber.ts";
-import annreturn from "./annreturn.ts";
-import painindex from "./painindex.ts";
-import vectorfun from "../datatype/vectorfun.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import { annreturn, isnumber, painindex, vectorfun } from "../../index.ts";
 
 /**
  * @function painratio
@@ -23,29 +19,44 @@ import vectorfun from "../datatype/vectorfun.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { painratio, cat } from "../../index.ts";
  *
  * // Example 1: Single array of returns
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(painratio(x,0,12), 101.044955);
+ * assertEquals(painratio(x,0,12), 101.04495520047377);
  *
- * // Example 2: Matrix of returns
+ * // Example 2: Multiple arrays
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(painratio(cat(0,x,y),0,12), [[101.044955], [3.235687]]);
+ * assertEquals(painratio(x,0,12), 101.04495520047377);
+ * assertEquals(painratio(y,0,12), 3.235687223114222);
  * ```
  */
 export default function painratio(
-  x: any,
+  x: array,
+  frisk?: number,
+  t?: number,
+  mode?: string,
+  dim?: 0 | 1,
+): number;
+export default function painratio(
+  x: matrix,
+  frisk?: number,
+  t?: number,
+  mode?: string,
+  dim?: 0 | 1,
+): array | matrix;
+export default function painratio(
+  x: numarraymatrix,
   frisk: number = 0,
   t: number = 252,
   mode: string = "geometric",
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _painratio = function (a: any, frisk: number, t: number, mode: string) {
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _painratio = function (
+    a: array,
+    frisk: number,
+    t: number,
+    mode: string,
+  ): number {
     const annualReturn = annreturn(a, t);
     return (annualReturn - frisk) / painindex(a, mode);
   };

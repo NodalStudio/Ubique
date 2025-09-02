@@ -23,7 +23,7 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(sub2ind([2, 3], [1, 2]), 5);
  *
  * // Example 2: Convert multiple 2D coordinates to linear indices
- * assert.deepStrictEqual(sub2ind([2, 3], [[0, 0], [1, 0], [0, 1]]), [0, 1, 2]);
+ * assertEquals(sub2ind([2, 3], [[0, 0], [1, 0], [0, 1]]), [0, 1, 2]);
  *
  * // Example 3: Convert index for a row vector
  * assertEquals(sub2ind([1, 3], [2, 0]), 2);

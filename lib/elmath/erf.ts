@@ -1,6 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import erfc from "./erfc.ts";
+import { erfc } from "../../index.ts";
 
 /**
  * @function erf
@@ -15,9 +13,9 @@ import erfc from "./erfc.ts";
  *
  * This implementation approximates the error function with a maximal error of \(1.2 \times 10^{-7}\).
  *
- * @param {number} x A real value.
- * @returns {number} The value of the error function for the input x.
- * @throws {Error} If no arguments are provided.
+ * @param x A real value
+ * @returns The value of the error function for the input x
+ * @throws {Error} If no arguments are provided
  *
  * @example
  * ```ts
@@ -27,21 +25,18 @@ import erfc from "./erfc.ts";
  * assertEquals(erf(0.5), 0.5204999077232426);
  *
  * // Example 2: Compute the error function for a negative value
- * assertEquals(erf(-1), -0.8427007929497149);
+ * assertEquals(erf(-1), -0.8427007877600068);
  *
  * // Example 3: Compute the error function for zero
  * assertEquals(erf(0), 0);
  *
  * // Example 4: Compute the error function for a large positive value
- * assertEquals(erf(2), 0.9953222650189527);
+ * assertEquals(erf(2), 0.995322265010666);
  *
  * // Example 5: Compute the error function for a large negative value
- * assertEquals(erf(-2), -0.9953222650189527);
+ * assertEquals(erf(-2), -0.9953222650106659);
 
  * ```*/
-export default function erf(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
+export default function erf(x: number): number {
   return 1 - erfc(x);
 }

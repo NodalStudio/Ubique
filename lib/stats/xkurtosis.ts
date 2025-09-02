@@ -25,12 +25,18 @@ import { arrayfun, isnumber, kurtosis } from "../../index.ts";
  * assertEquals(xkurtosis(cat(0, x, y)), [[0.037581], [-1.602358]]);
  * ```
  */
+export default function xkurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
 export default function xkurtosis(
-  x: numarraymatrix,
-  flag: number = 1,
-  dim: number = 0,
-): numarraymatrix {
-  const kurt = kurtosis(x, flag, dim);
+  x: matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): array | matrix;
+export default function xkurtosis(
+  x: array | matrix,
+  flag: 0 | 1 = 1,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const kurt = kurtosis(x, flag, dim) as number | array | matrix;
 
   if (isnumber(kurt)) {
     return (kurt as number) - 3;

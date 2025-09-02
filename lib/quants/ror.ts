@@ -1,5 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { clone, cumprod, isnumber, plus, vectorfun } from "../../index.ts";
 
 /**
@@ -16,35 +15,41 @@ import { clone, cumprod, isnumber, plus, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { ror, cat } from "../../index.ts";
  *
  * // Example 1: Simple rate of return on return series
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(ror(x), 0.187793);
+ * assertEquals(ror(x), 0.18779277315203946);
  *
  * // Example 2: Rate of return on cumulative value series
- * assertEquals(ror([100,101,99,98,97,102,103,104],'cum'), 0.04);
+ * assertEquals(ror([100,101,99,98,97,102,103,104],'cum'), 0.040000000000000036);
  *
- * // Example 3: Rate of return on matrix of return series
+ * // Example 3: Rate of return on multiple series
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(ror(cat(0,x,y),'ret'), [[0.187793], [0.125149]]);
+ * assertEquals(ror(x,'ret'), 0.18779277315203946);
+ * assertEquals(ror(y,'ret'), 0.12514883159358225);
  * ```
  */
 export default function ror(
-  x: any,
+  x: array,
+  mode?: string,
+  dim?: 0 | 1,
+): number;
+export default function ror(
+  x: matrix,
+  mode?: string,
+  dim?: 0 | 1,
+): array | matrix;
+export default function ror(
+  x: numarraymatrix,
   mode: string = "ret",
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _ror = function (a: any, mode: string) {
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _ror = function (a: array, mode: string): number {
     let eq;
     if (mode === "ret") {
-      eq = cumprod(plus(1, a));
+      eq = cumprod(plus(1, a)) as array;
     } else if (mode === "cum") {
-      eq = clone(a);
+      eq = clone(a) as array;
     } else {
       throw new Error("unknown value");
     }

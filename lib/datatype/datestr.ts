@@ -24,8 +24,8 @@ dayjs.extend(utc);
  * assertEquals(datestr([1419984000, 1422662400], 'DD-MMM-YY'), ['31-Dec-14', '31-Jan-15']);
  *
  * // Example 3: Convert a matrix of Unix timestamps to formatted date strings
- * assertEquals(datestr([[1419984000, 1422662400], [1423958400, 1425168000]], 'YY-MM-DD hh:mm:ss'),
- *   [['14-12-31 12:00:00', '15-01-31 12:00:00'], ['15-02-15 12:00:00', '15-03-01 12:00:00']]);
+ * assertEquals(datestr([[1419984000, 1422662400], [1423958400, 1425168000]], 'YY-MM-DD HH:mm:ss'),
+ *   [['14-12-31 00:00:00', '15-01-31 00:00:00'], ['15-02-15 00:00:00', '15-03-01 00:00:00']]);
  * ```
  */
 export default function datestr(

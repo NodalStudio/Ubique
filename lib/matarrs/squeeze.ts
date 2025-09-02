@@ -17,16 +17,16 @@ import size from "./size.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Squeeze deeply nested arrays
- * assert.deepStrictEqual(squeeze([[[[[8]]]]]), [[8]]);
+ * assertEquals(squeeze([[[[[8]]]]]), [[8]]);
  *
  * // Example 2: Squeeze nested arrays with multiple elements
- * assert.deepStrictEqual(squeeze([[[[3, 4, 5]]]]), [[3, 4, 5]]);
+ * assertEquals(squeeze([[[[3, 4, 5]]]]), [[3, 4, 5]]);
  *
  * // Example 3: Squeeze nested arrays with 2D content
- * assert.deepStrictEqual(squeeze([[[[[['31-12-2014', '31-01-2015'], ['15-02-2015', '01-03-2015']]]]]]), [
+ * assertEquals(squeeze([[[[[['31-12-2014', '31-01-2015'], ['15-02-2015', '01-03-2015']]]]]]), [
  *   ['31-12-2014', '31-01-2015'],
  *   ['15-02-2015', '01-03-2015']
  * ]);
@@ -38,7 +38,7 @@ import size from "./size.ts";
  * assertEquals(squeeze("hello"), "hello");
  *
  * // Example 6: Throw an error for no input arguments
- * assert.throws(() => { squeeze(); }, Error, 'Not enough input arguments');
+ * assertThrows(() => { squeeze(); }, Error, 'Not enough input arguments');
 
  * ```*/
 export default function squeeze(x: any) {

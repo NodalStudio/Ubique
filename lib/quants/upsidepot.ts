@@ -1,4 +1,4 @@
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { find, isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
@@ -14,26 +14,39 @@ import { find, isnumber, mean, vectorfun } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { upsidepot, cat } from "../../index.ts";
  *
  * // Example 1: Upside potential for a single asset
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(upsidepot(x), 0.02525);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(upsidepot(x), 0.025249999999999998);
  *
- * // Example 2: Upside potential for multiple assets
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(upsidepot(cat(0,x,y)), [[0.02525], [0.0598]]);
+ * // Example 2: Upside potential with custom MAR
+ * assertEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.065);
+ *
+ * // Example 3: Upside potential for matrix (row-wise)
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * const matrix = [x, y];
+ * assertEquals(upsidepot(matrix, 0, 0), [0.025249999999999998, 0.0598]);
  * ```
  */
-export default function upsidepot(x: any, mar: any = 0, dim: any = 0): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _upsidepot = function (a: any, mar: any) {
-    const idx = find(a, function (el: any) {
-      return el > mar;
-    });
+export default function upsidepot(
+  x: array,
+  mar?: number,
+  dim?: 0 | 1,
+): number;
+export default function upsidepot(
+  x: matrix,
+  mar?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function upsidepot(
+  x: numarraymatrix,
+  mar: number = 0,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _upsidepot = function (a: array, mar: number): number {
+    // Create boolean array for values above MAR
+    const aboveMar = a.map((el: number) => el > mar);
+    const idx = find(aboveMar);
 
     if (idx.length === 0) {
       return 0;
@@ -44,11 +57,11 @@ export default function upsidepot(x: any, mar: any = 0, dim: any = 0): any {
       upside[i] = a[idx[i]];
     }
 
-    return mean(upside);
+    return mean(upside) as number;
   };
 
   if (isnumber(x)) {
-    return x > mar ? x : 0;
+    return (x as number) > mar ? (x as number) : 0;
   }
 
   return vectorfun(dim, x, _upsidepot, mar);

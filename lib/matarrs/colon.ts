@@ -29,10 +29,6 @@
 
  * ```*/
 export default function colon(start: any, end: any, step = 1) {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
-  }
-
   if (step === 0 || (step > 0 && start > end) || (step < 0 && start < end)) {
     return [];
   }

@@ -25,11 +25,14 @@ import { isnumber, max, min, vectorfun } from "../../index.ts";
  * assertEquals(range([[5, 6, 5], [7, 8, -1]], 1), [[2, 2, 6]]);
  * ```
  */
+export default function range(x: number): number;
+export default function range(x: array, dim?: 0 | 1): number;
+export default function range(x: matrix, dim?: 0 | 1): array | matrix;
 export default function range(
-  x: numarraymatrix,
-  dim: number = 0,
-): numarraymatrix {
-  const _range = function (a: number[]) {
+  x: number | array | matrix,
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _range = function (a: array): number {
     return (max(a) as number) - (min(a) as number);
   };
 

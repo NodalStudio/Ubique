@@ -10,7 +10,6 @@ import { vectorfun } from "../../index.ts";
  * @param x The input array or matrix of values
  * @param dim The dimension to sum across. Use `0` for rows and `1` for columns (defaults to `0`)
  * @returns The sum of the elements
- * @throws {Error} If no arguments are provided
  *
  * @example
  * ```ts
@@ -35,10 +34,6 @@ export default function sum(
   x: array | matrix,
   dim: 0 | 1 = 0,
 ): number | array | matrix {
-  if (!x) {
-    throw new Error("Not enough input arguments");
-  }
-
   const _sum = (a: array): number =>
     a.reduce((acc: number, val: number) => acc + val, 0);
 

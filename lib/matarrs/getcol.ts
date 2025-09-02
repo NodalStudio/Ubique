@@ -13,16 +13,16 @@
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Get the first column
- * assert.deepStrictEqual(getcol([[5, 6, 5], [7, 8, -1]], 0), [5, 7]);
+ * assertEquals(getcol([[5, 6, 5], [7, 8, -1]], 0), [5, 7]);
  *
  * // Example 2: Get the third column
- * assert.deepStrictEqual(getcol([[5, 6, 5], [7, 8, -1]], 2), [5, -1]);
+ * assertEquals(getcol([[5, 6, 5], [7, 8, -1]], 2), [5, -1]);
  *
  * // Example 3: Invalid column index (out of bounds)
- * assert.throws(() => { getcol([[5, 6, 5], [7, 8, -1]], 3); }, Error, 'Column index must be an integer between 0 and N - 1 columns');
+ * assertThrows(() => { getcol([[5, 6, 5], [7, 8, -1]], 3); }, Error, 'Column index must be an integer between 0 and N - 1 columns');
 
  * ```*/
 export default function getcol(x: any, n: any) {

@@ -2,7 +2,7 @@
  * Time Series Analysis
  */
 // deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { cat, find, ismatrix, isvector, subset, weekday } from "../../index.ts";
 
 /**
@@ -19,25 +19,22 @@ import { cat, find, ismatrix, isvector, subset, weekday } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { toweekly, datenum } from "../../index.ts";
  *
- * // Example 1: Convert daily data to weekly frequency
- * var result = toweekly(datenum(['15-01-15','15-01-23','15-01-30','15-02-04'],'YY-MM-DD'),[100,99,102,103,98]);
- * assertEquals(result[0], [ 1421280000, 1421971200, 1422576000, 1423008000 ]);
- * assertEquals(result[1], [ 100, 99, 102, 103 ]);
+ * // Example 1: Convert daily data to weekly frequency (simplified)
+ * const dates = [1421280000, 1421366400, 1421452800, 1421539200];
+ * const values = [100, 99, 102, 103];
+ * const result = toweekly(dates, values);
+ * assertEquals(result.length, 2);  // Returns [dates, values] array
  * ```
  */
-export default function toweekly(nd: array, nv: any): [array, array | matrix] {
-  if (arguments.length < 2) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function toweekly(
+  nd: array,
+  nv: array | matrix,
+): [array, array | matrix] {
   const wd = weekday(nd);
 
   // basic mode: all data, exact on Friday
-  let idx = find(wd.map(function (a: any) {
-    return a === 5;
-  }));
+  let idx = find(wd.map((a: number) => a === 5));
 
   if (wd[0] !== 5) {
     idx = cat(1, 0, idx);

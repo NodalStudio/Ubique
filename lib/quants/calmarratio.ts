@@ -1,6 +1,11 @@
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
-import { annreturn, drawdown, isnumber, vectorfun } from "../../index.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import {
+  annreturn,
+  drawdown,
+  isarray,
+  ismatrix,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function calmarratio
@@ -9,44 +14,56 @@ import { annreturn, drawdown, isnumber, vectorfun } from "../../index.ts";
  * standard deviation for risk.
  * Calmar Ratio = (Annualized Return - Risk Free Rate) / Maximum Drawdown
  *
- * @param x asset/portfolio returns
- * @param frisk annual free-risk rate (def: 0)
- * @param t frequency of data. 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (def: 252)
- * @param dim dimension 0: row, 1: column (def: 0)
- * @return Calmar Ratio
+ * @param x Asset/portfolio returns
+ * @param frisk Annual free-risk rate (def: 0)
+ * @param t Frequency of data: 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (def: 252)
+ * @param dim Dimension 0: row, 1: column (def: 0)
+ * @returns Calmar Ratio
+ * @throws {Error} If input arguments must be an array or matrix
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { calmarratio, cat } from "../../index.ts";
  *
  * // Example 1: Single array of returns
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * assertEquals(calmarratio(x,0,12), 16.701049);
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(calmarratio(x, 0, 12), 16.70104871897814);
  *
  * // Example 2: Matrix of returns
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
- * assertEquals(calmarratio(cat(0,x,y),0,12), [[16.701049], [1.32768]]);
+ * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
+ * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(calmarratio([x1, x2], 0, 12), [13.690375850324857, 25.379052966087876]);
+ *
+ * // Example 3: Different risk-free rate
+ * assertEquals(calmarratio(x, 0.02, 12), 15.272477290406712);
  * ```
  */
 export default function calmarratio(
-  x: any,
+  x: array,
+  frisk?: number,
+  t?: number,
+  dim?: 0 | 1,
+): number;
+export default function calmarratio(
+  x: matrix,
+  frisk?: number,
+  t?: number,
+  dim?: 0 | 1,
+): array | matrix;
+export default function calmarratio(
+  x: numarraymatrix,
   frisk: number = 0,
   t: number = 252,
-  dim: number = 0,
-): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
-  const _calmarratio = function (a: any, frisk: number, t: number) {
-    const annualReturn = annreturn(a, t);
+  dim: 0 | 1 = 0,
+): number | array | matrix {
+  const _calmarratio = function (a: array, frisk: number, t: number): number {
+    const annualReturn = annreturn(a, t) as number;
     const maxDrawdown = drawdown(a).maxdd;
     return (annualReturn - frisk) / maxDrawdown;
   };
 
-  if (isnumber(x)) {
-    throw new Error("input arguments must be an array or matrix");
+  if (!isarray(x) && !ismatrix(x)) {
+    throw new Error("Input arguments must be an array or matrix");
   }
 
   return vectorfun(dim, x, _calmarratio, frisk, t);

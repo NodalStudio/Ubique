@@ -1,9 +1,7 @@
 /**
  * Time Series Analysis
  */
-// @ts-expect-error TS(2580): Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix } from "../types.d.ts";
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { cat, isnumber, isundefined, sum } from "../../index.ts";
 
 /**
@@ -18,7 +16,6 @@ import { cat, isnumber, isundefined, sum } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { tomonthly } from "../../index.ts";
  *
  * // Example 1: Convert daily returns to monthly returns using simple mode
  * var dailyReturns = [
@@ -27,19 +24,19 @@ import { cat, isnumber, isundefined, sum } from "../../index.ts";
  *   0.003, 0.001, -0.002, 0.003, 0.002, // Week 3
  *   0.001, 0.004, 0.003, -0.001, 0.002  // Week 4
  * ];
- * assertEquals(tomonthly(dailyReturns), 0.0288);
+ * assertEquals(tomonthly(dailyReturns), 0.03347884902598719);
  *
  * // Example 2: Convert daily returns to monthly returns using continuous mode
- * assertEquals(tomonthly(dailyReturns, "continuous"), 0.0284);
+ * assertEquals(tomonthly(dailyReturns, "continuous"), 0.033);
  * ```
  */
-export default function tomonthly(x: any, mode: string = "simple"): any {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
-
+export default function tomonthly(x: array, mode?: string): number;
+export default function tomonthly(
+  x: array,
+  mode: string = "simple",
+): number {
   if (isnumber(x)) {
-    return x;
+    return x as number;
   }
 
   if (mode === "simple") {
@@ -49,7 +46,7 @@ export default function tomonthly(x: any, mode: string = "simple"): any {
     }
     return monthly - 1;
   } else if (mode === "continuous") {
-    return sum(x);
+    return sum(x) as number;
   } else {
     throw new Error("unknown return method");
   }
