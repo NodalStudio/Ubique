@@ -1,5 +1,7 @@
 /** @import { array, matrix } from '../types.d.ts' */
 
+import { array } from "../types.d.ts";
+
 /**
  * @function trues
  * @summary Creates an array filled with `true` values.
@@ -30,18 +32,34 @@
  * assertEquals(trues(2,3), [[true, true, true], [true, true, true]]);
 
  * ```*/
-export default function trues(rows: any, cols: any) {
-  if (arguments.length === 1) {
-    cols = rows;
-  }
+export default function trues(n: number): boolean[][];
+export default function trues(dims: array): boolean[][];
+export default function trues(nrows: number, ncols: number): boolean[][];
+export default function trues(
+  nrowsOrDims: unknown,
+  ncols?: unknown,
+): boolean[][] {
+  let rows: number;
+  let cols: number;
 
-  if (Array.isArray(rows)) {
-    [rows, cols] = rows;
+  if (arguments.length === 1) {
+    if (Array.isArray(nrowsOrDims)) {
+      [rows, cols] = nrowsOrDims as number[];
+    } else {
+      rows = nrowsOrDims as number;
+      cols = rows;
+    }
+  } else {
+    rows = nrowsOrDims as number;
+    cols = ncols as number;
   }
 
   if (typeof rows !== "number" || typeof cols !== "number") {
     throw new Error("Invalid dimensions");
   }
 
-  return Array.from({ length: rows }, () => Array(cols).fill(true));
+  return Array.from(
+    { length: rows },
+    () => Array.from({ length: cols }, () => true),
+  );
 }

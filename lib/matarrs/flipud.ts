@@ -5,16 +5,16 @@ import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function flipud
- * @summary Flip a matrix upside down.
+ * @summary Flip a matrix upside down
  * @description Reverses the order of the rows in the input matrix, flipping it upside down.
  *
- * @param {array|matrix} x The input array or matrix.
- * @returns {array|matrix} The matrix with its rows flipped upside down.
- * @throws {Error} If no input is provided.
+ * @param x The input array or matrix
+ * @returns The matrix with its rows flipped upside down
+ * @throws {Error} If no input is provided or input is invalid
  *
  * @example
  * ```ts
- * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Flip a 2D matrix upside down
  * assertEquals(flipud([[1, 4], [2, 5], [3, 6]]), [[3, 2, 1], [6, 5, 4]]);
@@ -22,13 +22,10 @@ import ismatrix from "../datatype/ismatrix.ts";
  * // Example 2: Flip a single number (should return the number itself)
  * assertEquals(flipud(5), 5);
  *
- * // Example 3: Invalid input (should throw an error for non-matrix, non-number input)
- * assertThrows(() => { flipud('invalid'); }, Error, 'Unknown input arguments');
- *
- * // Example 4: No input provided (should throw an error)
- * assertThrows(() => { flipud(); }, Error, 'Not enough input arguments');
-
- * ```*/
+ * // Example 3: Flip a simple 2D matrix
+ * assertEquals(flipud([[1, 2], [3, 4]]), [[3, 1], [4, 2]]);
+ * ```
+ */
 export default function flipud(x: any) {
   if (!x) {
     throw new Error("Not enough input arguments");

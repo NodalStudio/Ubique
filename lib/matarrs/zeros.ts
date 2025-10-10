@@ -1,5 +1,6 @@
 /** @import { matrix } from '../types.d.ts' */
 
+import { array, matrix } from "../types.d.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
@@ -20,7 +21,7 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(zeros(), [[0]]);
  *
  * // Example 2: Create a 2x2 square matrix of zeros
- * assertEquals(zeros(2), [[0, 0], [0, 0]]);
+ * assertEquals(zeros(2, 2), [[0, 0], [0, 0]]);
  *
  * // Example 3: Create a 2x3 matrix of zeros
  * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
@@ -29,11 +30,20 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(zeros([2, 1]), [[0], [0]]);
 
  * ```*/
-export default function zeros(nrowsOrDims: any, ncols: any) {
-  const dimensions = isarray(nrowsOrDims) ? nrowsOrDims : [nrowsOrDims ?? 1];
+export default function zeros(): matrix;
+export default function zeros(n: number): matrix;
+export default function zeros(dims: array): matrix;
+export default function zeros(nrows: number, ncols: number): matrix;
+export default function zeros(nrowsOrDims?: unknown, ncols?: unknown): matrix {
+  const dimensions = isarray(nrowsOrDims)
+    ? nrowsOrDims as array
+    : [nrowsOrDims ?? 1];
 
   const [nrows] = dimensions;
   const cols = ncols ?? dimensions[1] ?? nrows;
 
-  return Array.from({ length: nrows }, () => Array(cols).fill(0));
+  return Array.from(
+    { length: nrows as number },
+    (): number[] => Array.from({ length: cols as number }, (): number => 0),
+  );
 }

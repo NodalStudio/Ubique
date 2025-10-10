@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function rand
@@ -7,13 +7,14 @@
  * - A single random number if no arguments are provided.
  * - A 2D array of random numbers if dimensions are provided.
  *
- * @param {...number|array<number>} args Variable input arguments (max 2).
- * @returns {number|array<number>} A random number or a matrix of random numbers.
- * @throws {Error} If invalid arguments are provided.
+ * @param args Variable input arguments (max 2)
+ * @returns A random number or a matrix of random numbers
+ * @throws {Error} If invalid arguments are provided
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
  *
  * // Example 1: Single random number
  * assertEquals(typeof rand(), 'number');
@@ -22,27 +23,31 @@
  * assertEquals(rand(0), []);
  *
  * // Example 3: 1x1 matrix
- * const result1x1 = rand(1);
+ * const result1x1 = rand(1) as matrix;
  * assertEquals(result1x1.length, 1);
  * assertEquals(result1x1[0].length, 1);
  *
  * // Example 4: 2x2 matrix
- * const result2x2 = rand(2);
+ * const result2x2 = rand(2) as matrix;
  * assertEquals(result2x2.length, 2);
  * assertEquals(result2x2[0].length, 2);
  *
  * // Example 5: 2x1 matrix
- * const result2x1 = rand([2, 1]);
+ * const result2x1 = rand([2, 1]) as matrix;
  * assertEquals(result2x1.length, 2);
  * assertEquals(result2x1[0].length, 1);
  *
  * // Example 6: 1x2 matrix
- * const result1x2 = rand(1, 2);
+ * const result1x2 = rand(1, 2) as matrix;
  * assertEquals(result1x2.length, 1);
  * assertEquals(result1x2[0].length, 2);
-
- * ```*/
-export default function rand(...args: any[]) {
+ * ```
+ */
+export default function rand(): number;
+export default function rand(n: number): matrix;
+export default function rand(dims: array): matrix;
+export default function rand(rows: number, cols: number): matrix;
+export default function rand(...args: unknown[]): number | matrix {
   if (args.length === 0) {
     return Math.random();
   } else if (args.length === 1) {

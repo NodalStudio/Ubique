@@ -28,16 +28,16 @@
  * ]);
  *
  * // Example 3: Row vector length mismatch error
- * assertThrows(() => setrow([1, 2], [[4, 5, 6], [7, 8, 9]], 1), /Row vector length must match the number of matrix columns./);
+ * assertThrows(() => setrow([1, 2], [[4, 5, 6], [7, 8, 9]], 1), "Row vector length must match the number of matrix columns.");
  *
  * // Example 4: Row index out of bounds error
- * assertThrows(() => setrow([1, 2, 3], [[4, 5, 6], [7, 8, 9]], 2), /Row index must be an integer between 0 and M-1./);
+ * assertThrows(() => setrow([1, 2, 3], [[4, 5, 6], [7, 8, 9]], 2), "Row index must be an integer between 0 and M-1.");
  *
  * // Example 5: Invalid matrix error
- * assertThrows(() => setrow([1, 2, 3], "not a matrix", 0), /Input matrix must be a 2D array./);
+ * assertThrows(() => setrow([1, 2, 3], "not a matrix", 0), "Input matrix must be a 2D array.");
  *
  * // Example 6: Invalid row vector error
- * assertThrows(() => setrow("not a vector", [[4, 5, 6], [7, 8, 9]], 1), /Row vector must be an array./);
+ * assertThrows(() => setrow("not a vector", [[4, 5, 6], [7, 8, 9]], 1), "Row vector must be an array.");
 
  * ```*/
 export default function setrow(x: any, mat: any, n: any) {

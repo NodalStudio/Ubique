@@ -1,3 +1,4 @@
+import { array, matrix } from "../types.d.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
@@ -31,7 +32,9 @@ import ismatrix from "../datatype/ismatrix.ts";
 
  * ```
  */
-export default function ones(rows: number, cols?: number) {
+export default function ones(n: number): matrix;
+export default function ones(nrows: number, ncols: number): matrix;
+export default function ones(rows: number, cols?: number): matrix {
   if (cols === undefined) {
     cols = rows;
   }
