@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, moment, vectorfun } from "../../index.ts";
+import { isnumber, moment, vectorfun } from "../../index.ts";
 
 /**
  * @function kurtosis
@@ -29,7 +29,7 @@ import { isarray, ismatrix, isnumber, moment, vectorfun } from "../../index.ts";
  * ```
  */
 export default function kurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
-export default function kurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+export default function kurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
 export default function kurtosis(
   x: numarraymatrix,
   flag: 0 | 1 = 1,

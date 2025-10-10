@@ -1,5 +1,11 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { arrayfun, isarray, ismatrix, isnumber, kurtosis } from "../../index.ts";
+import {
+  arrayfun,
+  isarray,
+  ismatrix,
+  isnumber,
+  kurtosis,
+} from "../../index.ts";
 
 /**
  * @function xkurtosis
@@ -28,17 +34,27 @@ import { arrayfun, isarray, ismatrix, isnumber, kurtosis } from "../../index.ts"
  * ```
  */
 export default function xkurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
-export default function xkurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+export default function xkurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
 export default function xkurtosis(
   x: numarraymatrix,
   flag: 0 | 1 = 1,
   dim: 0 | 1 = 0,
 ): numarraymatrix {
-  const kurt = kurtosis(x, flag, dim);
+  let kurt: numarraymatrix;
+  if (isarray(x)) {
+    kurt = kurtosis(x as array, flag, dim);
+  } else if (ismatrix(x)) {
+    kurt = kurtosis(x as matrix, flag, dim);
+  } else {
+    throw new Error("Invalid input type");
+  }
 
   if (isnumber(kurt)) {
     return kurt - 3;
   }
 
-  return arrayfun(kurt as array, (a: number) => a - 3) as numarraymatrix;
+  return arrayfun(
+    kurt as array | matrix,
+    (a: number) => a - 3,
+  ) as numarraymatrix;
 }

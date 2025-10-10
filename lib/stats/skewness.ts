@@ -29,7 +29,7 @@ import { isarray, ismatrix, isnumber, moment, vectorfun } from "../../index.ts";
  * ```
  */
 export default function skewness(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
-export default function skewness(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+export default function skewness(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
 export default function skewness(
   x: numarraymatrix,
   flag: 0 | 1 = 1,

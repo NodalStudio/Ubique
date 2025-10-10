@@ -1,5 +1,11 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, prctile, vectorfun } from "../../index.ts";
+import {
+  isarray,
+  ismatrix,
+  isnumber,
+  prctile,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function quartile

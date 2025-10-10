@@ -1,5 +1,15 @@
 import type { array } from "../types.d.ts";
-import { abs, isarray, ismatrix, isnumber, max, minus, power, sqrt, sum } from "../../index.ts";
+import {
+  abs,
+  isarray,
+  ismatrix,
+  isnumber,
+  max,
+  minus,
+  power,
+  sqrt,
+  sum,
+} from "../../index.ts";
 
 /**
  * @function pdist
