@@ -1,10 +1,5 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  mean,
-  varc,
-} from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { isarray, ismatrix, mean, varc } from "../../index.ts";
 
 /**
  * @function cov
@@ -34,12 +29,12 @@ import {
  * ```
  */
 export default function cov(x: array): number;
-export default function cov(x: array, flag: number): number;
-export default function cov(x: array, y: array, flag?: number): matrix;
-export default function cov(x: matrix, flag?: number): matrix;
+export default function cov(x: array, flag: 0 | 1): number;
+export default function cov(x: array, y: array, flag?: 0 | 1): matrix;
+export default function cov(x: matrix, flag?: 0 | 1): matrix;
 export default function cov(
-  x: numarraymatrix,
-  y?: numarraymatrix | number,
+  x: array | matrix,
+  y?: array | matrix | number,
   flag?: number,
 ): number | matrix {
   // Process arguments to handle optional parameters
@@ -60,7 +55,7 @@ export default function cov(
 
   // Case 1: Single vector - return variance
   if (actualY === undefined && isarray(x)) {
-    return varc(x as array, actualFlag);
+    return varc(x as array, actualFlag as 0 | 1);
   }
 
   // Case 2: Two vectors - calculate 2x2 covariance matrix
@@ -72,8 +67,8 @@ export default function cov(
       throw new Error("input dimension must agree");
     }
 
-    const varX = varc(flatX, actualFlag);
-    const varY = varc(flatY, actualFlag);
+    const varX = varc(flatX, actualFlag as 0 | 1);
+    const varY = varc(flatY, actualFlag as 0 | 1);
 
     // Calculate covariance between X and Y
     const meanX = mean(flatX);
@@ -103,12 +98,12 @@ export default function cov(
     // Calculate covariance between each pair of columns
     for (let i = 0; i < numCols; i++) {
       for (let j = 0; j < numCols; j++) {
-        const colI = matrix.map(row => row[i]);
-        const colJ = matrix.map(row => row[j]);
+        const colI = matrix.map((row) => row[i]);
+        const colJ = matrix.map((row) => row[j]);
 
         if (i === j) {
           // Variance on diagonal
-          result[i][j] = varc(colI, actualFlag);
+          result[i][j] = varc(colI, actualFlag as 0 | 1);
         } else {
           // Covariance off diagonal
           const meanI = mean(colI);

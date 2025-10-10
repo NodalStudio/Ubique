@@ -28,7 +28,7 @@ import { isarray, ismatrix, isnumber, mean, vectorfun } from "../../index.ts";
  * ```
  */
 export default function moment(x: array, k: number, dim?: 0 | 1): number;
-export default function moment(x: matrix, k: number, dim?: 0 | 1): matrix;
+export default function moment(x: matrix, k: number, dim?: 0 | 1): array;
 export default function moment(
   x: numarraymatrix,
   k: number,

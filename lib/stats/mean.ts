@@ -1,5 +1,13 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, numel, rdivide, size, sum } from "../../index.ts";
+import {
+  isarray,
+  ismatrix,
+  isnumber,
+  numel,
+  rdivide,
+  size,
+  sum,
+} from "../../index.ts";
 
 /**
  * @function mean
@@ -29,6 +37,7 @@ import { isarray, ismatrix, isnumber, numel, rdivide, size, sum } from "../../in
 export default function mean(x: number): number;
 export default function mean(x: array, dim?: 0 | 1): number;
 export default function mean(x: matrix, dim?: 0 | 1): array;
+export default function mean(x: array | matrix, dim?: 0 | 1): number | array;
 export default function mean(
   x: numarraymatrix,
   dim: 0 | 1 = 0,
@@ -41,5 +50,5 @@ export default function mean(
     return sum(x as array, dim) / numel(x as array);
   }
 
-  return rdivide(sum(x as matrix, dim), size(x as matrix)[1 - dim]);
+  return rdivide(sum(x as matrix, dim) as array, size(x as matrix)[1 - dim]);
 }

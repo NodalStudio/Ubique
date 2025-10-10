@@ -1,5 +1,13 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { arrayfun, isarray, ismatrix, isnumber, mean, minus, vectorfun } from "../../index.ts";
+import {
+  arrayfun,
+  isarray,
+  ismatrix,
+  isnumber,
+  mean,
+  minus,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function mad
@@ -22,15 +30,15 @@ import { arrayfun, isarray, ismatrix, isnumber, mean, minus, vectorfun } from ".
  * // Example 2: MAD with spread data
  * assertEquals(mad([1, 3, 5, 7, 9]), 2.4);
  *
- * // Example 3: Matrix MAD  
+ * // Example 3: Matrix MAD
  * assertEquals(mad([[1, 2], [3, 4]]), [0.5, 0.5]);
  * ```
  */
-export default function mad(x: array, dim?: number): number;
-export default function mad(x: matrix, dim?: number): matrix;
+export default function mad(x: array, dim?: 0 | 1): number;
+export default function mad(x: matrix, dim?: 0 | 1): array;
 export default function mad(
   x: numarraymatrix,
-  dim: number = 0,
+  dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _mad = function (a: number[]) {
     return mean(arrayfun(minus(a, mean(a)), Math.abs));

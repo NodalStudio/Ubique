@@ -28,12 +28,15 @@ import { isarray, ismatrix, isnumber, prctile } from "../../index.ts";
  * ```
  */
 export default function quantile(x: array, p: number, dim?: 0 | 1): number;
-export default function quantile(x: matrix, p: number, dim?: 0 | 1): matrix;
+export default function quantile(x: matrix, p: number, dim?: 0 | 1): array;
+export default function quantile(x: array, p: number, dim: 0 | 1): number;
+export default function quantile(x: matrix, p: number, dim: 0 | 1): array;
 export default function quantile(
-  x: numarraymatrix,
+  x: array | matrix,
   p: number,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+  dim?: 0 | 1,
+): number | array {
+  const actualDim = dim ?? 0;
   if (p < 0 || p > 1) {
     throw new Error(
       "p-th quantile must be a real value between 0 and 1 inclusive",
@@ -41,5 +44,13 @@ export default function quantile(
   }
 
   // Convert quantile (0-1) to percentile (0-100) and use prctile
-  return prctile(x, p * 100, dim) as numarraymatrix;
+  if (isarray(x)) {
+    return prctile(x, p * 100, actualDim);
+  }
+
+  if (ismatrix(x)) {
+    return prctile(x, p * 100, actualDim);
+  }
+
+  throw new Error("Invalid input type");
 }

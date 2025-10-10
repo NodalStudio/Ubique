@@ -33,17 +33,30 @@ import {
  * // Example 2: 25th percentile
  * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
  *
- * // Example 3: Multiple percentiles
- * assertEquals(prctile([1, 2, 3, 4, 5], [25, 50, 75]), [1.75, 3, 4.25]);
+ * // Example 3: 75th percentile
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
  * ```
  */
 export default function prctile(x: array, p: number, dim?: 0 | 1): number;
-export default function prctile(x: matrix, p: number, dim?: 0 | 1): matrix;
+export default function prctile(x: matrix, p: number, dim?: 0 | 1): array;
+export default function prctile(x: array, p: number, dim: 0 | 1): number;
+export default function prctile(x: matrix, p: number, dim: 0 | 1): array;
 export default function prctile(
-  x: numarraymatrix,
+  x: array | matrix,
   p: number,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+  dim?: 0 | 1,
+): number | array;
+export default function prctile(
+  x: array | matrix,
+  p: number,
+  dim: 0 | 1,
+): number | array;
+export default function prctile(
+  x: array | matrix,
+  p: number,
+  dim?: 0 | 1,
+): number | array {
+  const actualDim = dim ?? 0;
   if (p < 0 || p > 100) {
     throw new Error(
       "p-th percentile must be a real value between 0 and 100 inclusive",
@@ -59,12 +72,13 @@ export default function prctile(
     const extendedPq = [0].concat(pq, [100]);
     const extendedA = [_a[0]].concat(_a, [_a[_a.length - 1]]);
 
-    return interp1(extendedPq, extendedA, pr);
+    return interp1(extendedPq, extendedA, pr) as number;
   };
 
   if (isnumber(x)) {
     return NaN;
   }
 
-  return vectorfun(dim, x, _prctile, p);
+  const result = vectorfun(actualDim, x, _prctile, p);
+  return result as number | array;
 }

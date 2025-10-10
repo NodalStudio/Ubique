@@ -1,5 +1,11 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, prctile, vectorfun } from "../../index.ts";
+import {
+  isarray,
+  ismatrix,
+  isnumber,
+  prctile,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function iqr
@@ -19,18 +25,18 @@ import { isarray, ismatrix, isnumber, prctile, vectorfun } from "../../index.ts"
  * // Example 1: IQR of simple array
  * assertEquals(iqr([1, 2, 3, 4, 5]), 2.5);
  *
- * // Example 2: IQR with larger range  
+ * // Example 2: IQR with larger range
  * assertEquals(iqr([1, 2, 3, 4, 5, 6, 7, 8, 9]), 4.5);
  *
  * // Example 3: IQR of matrix
  * assertEquals(iqr([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
  */
-export default function iqr(x: array, dim?: number): number;
-export default function iqr(x: matrix, dim?: number): matrix;
+export default function iqr(x: array, dim?: 0 | 1): number;
+export default function iqr(x: matrix, dim?: 0 | 1): array;
 export default function iqr(
   x: numarraymatrix,
-  dim: number = 0,
+  dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _iqr = function (a: number[]) {
     return prctile(a, 75) - prctile(a, 25);
