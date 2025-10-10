@@ -29,10 +29,10 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertEquals(iscolumn([[1]]), true);
  *
  * // Example 6: Invalid input (not a matrix)
- * assertThrows(() => iscolumn(5), /Input must be a non-empty matrix/);
+ * assertThrows(() => iscolumn(5), "Input must be a non-empty matrix");
  *
  * // Example 7: Empty matrix (should throw an error)
- * assertThrows(() => iscolumn([]), /Input must be a non-empty matrix/);
+ * assertThrows(() => iscolumn([]), "Input must be a non-empty matrix");
 
  * ```*/
 export default function iscolumn(x: any) {

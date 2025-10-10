@@ -9,7 +9,7 @@ import { flatten } from "../../index.ts";
  * @param {} x The array or matrix to reshape.
  * @param {number} m Number of rows for the new matrix.
  * @param {number} n Number of columns for the new matrix.
- * @param {number} [flag=0] Flag (0: row-wise, 1: column-wise).
+ * @param {0|1} [flag=0] Flag (0: row-wise, 1: column-wise).
  * @returns {matrix} The reshaped matrix.
  * @throws {Error} If dimensions are invalid or inconsistent.
  *
@@ -40,7 +40,7 @@ export default function reshape(
   x: array | matrix,
   m: number,
   n: number,
-  flag: number = 0,
+  flag: 0 | 1 = 0,
 ): matrix {
   const matrix = toMatrix(x);
   const originalSize = matrix.length * matrix[0].length;

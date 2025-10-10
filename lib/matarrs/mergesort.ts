@@ -33,7 +33,7 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(mergesort([5]), [[5], [0]]);
  *
  * // Example 4: Invalid mode
- * assertThrows(() => mergesort([1, 2, 3], 'invalid'), /sorting must be "ascend" or "descend"/);
+ * assertThrows(() => mergesort([1, 2, 3], 'invalid'), "sorting must be \"ascend\" or \"descend\"");
  *
  * // Example 5: Empty array
  * assertEquals(mergesort([]), [[], []]);

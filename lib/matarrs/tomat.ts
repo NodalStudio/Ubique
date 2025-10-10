@@ -33,7 +33,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertEquals(tomat([[1, 2], [3, 4]]), [[1, 2], [3, 4]]);
  *
  * // Example 5: Invalid input (null)
- * assertThrows(() => tomat(null), /Invalid input argument./);
+ * assertThrows(() => tomat(null), "Invalid input argument.");
 
  * ```*/
 export default function tomat(x: any) {
