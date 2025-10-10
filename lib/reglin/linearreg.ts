@@ -14,17 +14,16 @@ import { sum, times } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { linearreg } from "../../index.ts";
  *
  * // Example 1: Basic linear regression
- * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
- * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ * const x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * const y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * const result = linearreg(y,x);
  * assertEquals(Math.round(result.beta * 1000) / 1000, 0.119);
  * assertEquals(Math.round(result.alpha * 1000) / 1000, 0.01);
  *
  * // Example 2: Linear regression with stronger correlation
- * var result2 = linearreg([100,101,99,102,105],[1,2,3,4,5]);
+ * const result2 = linearreg([100,101,99,102,105],[1,2,3,4,5]);
  * assertEquals(result2.beta, 1.1);
  * assertEquals(result2.alpha, 98.1);
  *

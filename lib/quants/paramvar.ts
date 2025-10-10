@@ -78,8 +78,8 @@ export default function paramvar(
     return _pvar(mu as number, sigma as number, p, amount, period);
   }
 
-  const temp = flatten(mu as array | matrix);
-  const sigmaArray = flatten(sigma as array | matrix);
+  const temp = flatten(mu as array | matrix) as array;
+  const sigmaArray = flatten(sigma as array | matrix) as array;
   const out = temp.map(function (el: number, idx: number) {
     return _pvar(el, sigmaArray[idx], p, amount, period);
   });
