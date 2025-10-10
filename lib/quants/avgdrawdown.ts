@@ -70,8 +70,10 @@ function computeAvgDrawdown(arr: array, k: number): number {
     return mean(cdd);
   }
   if (k > 0 && k <= cdd.length) {
-    const sortedCdd = sort(cdd, "descend");
-    return mean(subsetlin(sortedCdd, Array.from({ length: k }, (_, i) => i)));
+    const sortedCdd = sort(cdd, "descend") as array;
+    return mean(
+      subsetlin(sortedCdd, Array.from({ length: k }, (_, i) => i)) as array,
+    );
   }
   return NaN;
 }

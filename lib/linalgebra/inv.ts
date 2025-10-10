@@ -40,7 +40,6 @@ export default function inv(x: number | matrix): number | matrix {
   }
 
   const m = nrows(x);
-  // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
-  const I = eye(m);
+  const I = eye(m, m);
   return linsolve(x, I);
 }

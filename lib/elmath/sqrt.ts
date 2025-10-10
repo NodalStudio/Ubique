@@ -27,6 +27,9 @@ import { arrayfun, isnumber } from "../../index.ts";
 export default function sqrt(x: number): number;
 export default function sqrt(x: array): array;
 export default function sqrt(x: matrix): matrix;
+export default function sqrt(x: number | array): number | array;
+export default function sqrt(x: number | matrix): number | matrix;
+export default function sqrt(x: array | matrix): array | matrix;
 export default function sqrt(x: numarraymatrix): numarraymatrix {
   const computeSqrt = Math.sqrt;
   return isnumber(x) ? computeSqrt(x) : arrayfun(x, computeSqrt);

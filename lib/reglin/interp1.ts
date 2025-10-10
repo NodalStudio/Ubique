@@ -14,7 +14,6 @@ import { isnumber } from "../../index.ts";
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { interp1 } from "../../index.ts";
  *
  * // Example 1: Interpolate at specific points
  * var x = [1,2,3,4,5,6];
@@ -33,9 +32,6 @@ export default function interp1(
   y: array,
   xnew: number | array,
 ): number | array {
-  if (arguments.length === 0) {
-    throw new Error("not enough input arguments");
-  }
   if (x.length !== y.length) {
     throw new Error("input dimension mismatch");
   }

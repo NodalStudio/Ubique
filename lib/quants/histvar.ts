@@ -17,7 +17,7 @@ import { isnumber, quantile, vectorfun } from "../../index.ts";
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Daily VaR at 95% confidence level  
+ * // Example 1: Daily VaR at 95% confidence level
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(histvar(x, 0.95), 0.013999999999999999);
  *

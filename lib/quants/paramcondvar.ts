@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 import {
   flatten,
   iscolumn,
@@ -81,8 +81,8 @@ export default function paramcondvar(
     return _pcvar(mu as number, sigma as number, p, amount, period);
   }
 
-  const temp = flatten(mu as array | matrix);
-  const sigmaArray = flatten(sigma as array | matrix);
+  const temp = flatten(mu as array | matrix) as array;
+  const sigmaArray = flatten(sigma as array | matrix) as array;
   const out = temp.map(function (el: number, idx: number) {
     return _pcvar(el, sigmaArray[idx], p, amount, period);
   });

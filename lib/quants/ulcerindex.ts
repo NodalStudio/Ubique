@@ -31,7 +31,7 @@ import {
  *
  * // Example 2: Matrix of returns with column dimension
  * const xt = [[0.003, 0.026], [0.015, -0.009], [0.014, 0.024], [0.015, 0.066], [-0.014, 0.039]];
- * assertEquals(ulcerindex(xt, 'return', 1), [[0.006260990336999415], [0.004024922359499606]]);
+ * assertEquals(ulcerindex(xt, 'return', 1), [0.006260990336999415, 0.004024922359499606]);
  *
  * // Example 3: Ulcer index with geometric mode
  * assertEquals(ulcerindex(x, 'geometric'), 0.005296364154061427);

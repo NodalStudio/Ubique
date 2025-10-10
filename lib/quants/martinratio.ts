@@ -42,28 +42,28 @@ export default function martinratio(
   x: array,
   frisk?: number,
   t?: number,
-  mode?: string,
+  mode?: "return" | "geometric",
   dim?: 0 | 1,
 ): number;
 export default function martinratio(
   x: matrix,
   frisk?: number,
   t?: number,
-  mode?: string,
+  mode?: "return" | "geometric",
   dim?: 0 | 1,
 ): array | matrix;
 export default function martinratio(
   x: numarraymatrix,
   frisk: number = 0,
   t: number = 252,
-  mode: string = "return",
+  mode: "return" | "geometric" = "return",
   dim: 0 | 1 = 0,
 ): number | array | matrix {
   const _martinratio = function (
     a: array,
     frisk: number,
     t: number,
-    mode: string,
+    mode: "return" | "geometric",
   ): number {
     const annualReturn = annreturn(a, t);
     return (annualReturn - frisk) / ulcerindex(a, mode);
