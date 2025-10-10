@@ -49,7 +49,7 @@ export default function flipdim(x: any, dim = 1) {
   }
 
   if (ismatrix(x)) {
-    return vectorfun(1 - dim, x, flipArray);
+    return vectorfun((1 - dim) as 0 | 1, x, flipArray);
   }
 
   throw new Error("Unknown input arguments");

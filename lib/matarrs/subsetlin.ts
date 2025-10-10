@@ -1,5 +1,6 @@
 /** @import { array, matrix } from '../types.d.ts' */
 
+import { array, matrix } from "../types.d.ts";
 import flatten from "./flatten.ts";
 import squeeze from "./squeeze.ts";
 import arrayfun from "../datatype/arrayfun.ts";
@@ -41,7 +42,21 @@ import arrayfun from "../datatype/arrayfun.ts";
  * assertEquals(subsetlin(c, [[0,1], [1,2]]), [[5, 6], [6, 3]]);
 
  * ```*/
-export default function subsetlin(m: any, idx: any, flag = 0) {
+export default function subsetlin(
+  m: array,
+  idx: number | array | matrix,
+  flag?: 0 | 1,
+): array | matrix;
+export default function subsetlin(
+  m: matrix,
+  idx: number | array | matrix,
+  flag?: 0 | 1,
+): array | matrix;
+export default function subsetlin(
+  m: unknown,
+  idx: unknown,
+  flag: 0 | 1 = 0,
+): unknown {
   if (m === undefined) {
     throw new Error("Not enough input arguments.");
   }
@@ -49,8 +64,8 @@ export default function subsetlin(m: any, idx: any, flag = 0) {
     return m;
   }
 
-  const flatM = flatten(m, flag);
-  const indices = Array.isArray(idx) ? idx : [idx];
+  const flatM = flatten(m as array | matrix, flag);
+  const indices: number[] = Array.isArray(idx) ? idx : [idx as number];
 
   if (!Array.isArray(flatM)) {
     throw new Error("Input cannot be flattened to an array.");

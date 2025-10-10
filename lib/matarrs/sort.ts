@@ -64,5 +64,5 @@ export default function sort(x: any, mode = "ascend", dim = 1) {
     throw new Error("Input must be a number, an array or matrix.");
   }
 
-  return vectorfun(dim, x, _sort, mode);
+  return vectorfun(dim as 0 | 1, x, _sort, mode);
 }

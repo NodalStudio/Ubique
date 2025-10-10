@@ -6,18 +6,16 @@ import size from "./size.ts";
 
 /**
  * @function squeeze
- * @summary Removes singleton dimensions from arrays or matrices.
+ * @summary Removes singleton dimensions from arrays or matrices
  * @description This function simplifies the shape of an array or matrix by removing singleton dimensions (dimensions of size 1).
  * If the input is a number or a string, it returns the input as-is, since they don't have dimensions to squeeze.
  *
- * @param {any} x - The input to squeeze.
- * @returns {string|number|array|string[]|number[]|matrix} - The squeezed input with singleton dimensions removed.
- *
- * @throws {Error} - Throws an error if no input is provided.
+ * @param x The input to squeeze
+ * @returns The squeezed input with singleton dimensions removed
  *
  * @example
  * ```ts
- * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ * import { assertEquals } from "jsr:@std/assert";
  *
  * // Example 1: Squeeze deeply nested arrays
  * assertEquals(squeeze([[[[[8]]]]]), [[8]]);
@@ -36,11 +34,8 @@ import size from "./size.ts";
  *
  * // Example 5: Input is a string (no squeezing needed)
  * assertEquals(squeeze("hello"), "hello");
- *
- * // Example 6: Throw an error for no input arguments
- * assertThrows(() => { squeeze(); }, Error, 'Not enough input arguments');
-
- * ```*/
+ * ```
+ */
 export default function squeeze(x: any) {
   if (isnumber(x) || isstring(x)) {
     return x;

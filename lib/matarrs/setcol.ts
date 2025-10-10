@@ -34,16 +34,16 @@ import transpose from "./transpose.ts";
  * ]);
  *
  * // Example 3: Column vector length mismatch error
- * assertThrows(() => setcol([1, 2, 3], [[4, 5], [6, 7]], 1), /Column vector length must match the number of matrix rows./);
+ * assertThrows(() => setcol([1, 2, 3], [[4, 5], [6, 7]], 1), "Column vector length must match the number of matrix rows.");
  *
  * // Example 4: Column index out of bounds error
- * assertThrows(() => setcol([1, 2], [[4, 5], [6, 7]], 2), /Column index must be an integer between 0 and N-1./);
+ * assertThrows(() => setcol([1, 2], [[4, 5], [6, 7]], 2), "Column index must be an integer between 0 and N-1.");
  *
  * // Example 5: Invalid matrix error
- * assertThrows(() => setcol([1, 2], "not a matrix", 1), /Input matrix must be a 2D array./);
+ * assertThrows(() => setcol([1, 2], "not a matrix", 1), "Input matrix must be a 2D array.");
  *
  * // Example 6: Invalid column vector error
- * assertThrows(() => setcol("not a vector", [[4, 5], [6, 7]], 1), /Column vector must be an array./);
+ * assertThrows(() => setcol("not a vector", [[4, 5], [6, 7]], 1), "Column vector must be an array.");
 
  * ```*/
 export default function setcol(x: any, mat: any, n: any) {

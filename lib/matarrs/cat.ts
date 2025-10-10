@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
 import isarray from "../datatype/isarray.ts";
@@ -6,17 +6,16 @@ import ismatrix from "../datatype/ismatrix.ts";
 import nrows from "../matarrs/nrows.ts";
 import ncols from "../matarrs/ncols.ts";
 import clone from "../matarrs/clone.ts";
-import { array, matrix } from "../types.d.ts";
 
 /**
  * @function cat
- * @summary Concatenates arrays and matrices along the specified dimension.
+ * @summary Concatenates arrays and matrices along the specified dimension
  * @description Concatenates arrays and matrices along the specified dimension. Supports vertical (0) and horizontal (1) concatenation.
  *
- * @param dim The dimension along which to concatenate (0: rows, 1: columns).
- * @param args Variable arguments to concatenate.
- * @returns {array|matrix} The concatenated array or matrix.
- * @throws {Error} If not enough input arguments are provided or if dimensions do not match for concatenation.
+ * @param dim The dimension along which to concatenate (0: rows, 1: columns)
+ * @param args Variable arguments to concatenate
+ * @returns The concatenated array or matrix
+ * @throws {Error} If not enough input arguments are provided or if dimensions do not match for concatenation
  *
  * @example
  * ```ts
@@ -29,7 +28,8 @@ import { array, matrix } from "../types.d.ts";
  * assertEquals(cat(0, [5, 6, 3], [0.5, -3, 2.3]), [[5, 6, 3], [0.5, -3, 2.3]]);
  *
  * // Example 3: Vertical Concatenation (dim = 0) with matrix and array
- * assertEquals(cat(0, [[5, 6, 5], [7, 8, -1]], [5, 6, 3]), [[5, 6, 5], [7, 8, -1], [5, 6, 3]]);
+ * const result3 = cat(0, [[5, 6, 5], [7, 8, -1]], [5, 6, 3]);
+ * assertEquals(result3, [[5, 6, 5], [7, 8, -1], [5, 6, 3]]);
  *
  * // Example 4: Horizontal Concatenation (dim = 1) with numbers
  * assertEquals(cat(1, 1, 2, 3, 4), [[1, 2, 3, 4]]);
@@ -38,12 +38,13 @@ import { array, matrix } from "../types.d.ts";
  * assertEquals(cat(1, [5, 6, 3], [0.5, -3, 2.3]), [[5, 6, 3, 0.5, -3, 2.3]]);
  *
  * // Example 6: Horizontal Concatenation (dim = 1) with matrix and arrays
- * assertEquals(cat(1, [[2, 3, 4]], [5, 6, 3], [0.5, -3, 2.3]), [[2, 3, 4, 5, 6, 3, 0.5, -3, 2.3]]);
-
- * ```*/
+ * const result6 = cat(1, [[2, 3, 4]], [5, 6, 3], [0.5, -3, 2.3]);
+ * assertEquals(result6, [[2, 3, 4, 5, 6, 3, 0.5, -3, 2.3]]);
+ * ```
+ */
 export default function cat(
   dim: number,
-  ...args: array | matrix
+  ...args: (number | array | matrix)[]
 ): array | matrix {
   if (args.length === 0) {
     throw new Error("not enough input arguments");

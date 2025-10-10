@@ -28,7 +28,7 @@ import cat from "./cat.ts";
  * assertEquals(vertcat([[1],[2],[3]], [[4],[5],[6]]), [[1], [2], [3], [4], [5], [6]]);
  *
  * // Example 5: Invalid input (no arguments)
- * assertThrows(() => vertcat(), /Not enough input arguments./);
+ * assertThrows(() => vertcat(), "Not enough input arguments.");
 
  * ```*/
 export default function vertcat(...args: any[]) {
