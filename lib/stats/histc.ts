@@ -11,6 +11,12 @@ import {
   vectorfun,
 } from "../../index.ts";
 
+interface HistBin {
+  bins: number;
+  count: number;
+  freq: number;
+}
+
 /**
  * @function histc
  * @summary Histogram count
@@ -31,26 +37,28 @@ import {
  * // Example 1: Simple histogram with default bins
  * assertEquals(histc([1, 2, 3, 4, 5], 5).length, 6);
  *
- * // Example 2: Histogram with custom bin edges  
+ * // Example 2: Histogram with custom bin edges
  * assertEquals(histc([1, 5, 10], [0, 5, 10]).length, 3);
  *
  * // Example 3: Matrix histogram
  * assertEquals(histc([[1, 2], [3, 4]], 2).length, 2);
  * ```
  */
-export default function histc(x: array, bins?: number | array, dim?: number): array;
-export default function histc(x: matrix, bins?: number | array, dim?: number): matrix;
+export default function histc(
+  x: array,
+  bins?: number | array,
+  dim?: 0 | 1,
+): HistBin[];
+export default function histc(
+  x: matrix,
+  bins?: number | array,
+  dim?: 0 | 1,
+): HistBin[][];
 export default function histc(
   x: numarraymatrix,
   bins: number | array = 10,
-  dim: number = 0,
-): array | matrix {
-  interface HistBin {
-    bins: number;
-    count: number;
-    freq: number;
-  }
-
+  dim: 0 | 1 = 0,
+): HistBin[] | HistBin[][] {
   const _histc = function (a: number[], bins: number | array): HistBin[] {
     let y: number[] = [];
     const h: number[] = [];
@@ -82,7 +90,7 @@ export default function histc(
   };
 
   if (isnumber(x)) {
-    return NaN;
+    return [] as HistBin[];
   }
 
   return vectorfun(dim, x, _histc, bins);

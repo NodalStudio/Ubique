@@ -27,7 +27,7 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  * ```
  */
 export default function min(x: array, dim?: 0 | 1): number;
-export default function min(x: matrix, dim?: 0 | 1): matrix;
+export default function min(x: matrix, dim?: 0 | 1): array;
 export default function min(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

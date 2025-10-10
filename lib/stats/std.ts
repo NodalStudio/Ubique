@@ -23,20 +23,36 @@ import { isarray, ismatrix, isnumber, sqrt, varc } from "../../index.ts";
  * // Example 2: Population standard deviation
  * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
  *
- * // Example 3: Matrix standard deviation
- * assertEquals(std([[1, 2], [3, 4]]), [0.7071067811865476, 0.7071067811865476]);
+ * // Example 3: Matrix standard deviation along rows (default dim=0, flag=1)
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
  * ```
  */
 export default function std(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
 export default function std(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+export default function std(x: array, flag: 0 | 1, dim?: 0 | 1): number;
+export default function std(x: matrix, flag: 0 | 1, dim?: 0 | 1): matrix;
+export default function std(x: array, flag: 0 | 1, dim: 0 | 1): number;
+export default function std(x: matrix, flag: 0 | 1, dim: 0 | 1): matrix;
 export default function std(
-  x: numarraymatrix,
-  flag: 0 | 1 = 1,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+  x: array | matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): number | matrix {
+  const actualFlag = flag ?? 1;
+  const actualDim = dim ?? 0;
   if (isnumber(x)) {
     return NaN;
   }
 
-  return sqrt(varc(x, flag, dim) as numarraymatrix) as numarraymatrix;
+  if (isarray(x)) {
+    const variance = varc(x, actualFlag, actualDim);
+    return sqrt(variance);
+  }
+
+  if (ismatrix(x)) {
+    const variance = varc(x, actualFlag, actualDim);
+    return sqrt(variance);
+  }
+
+  throw new Error("Invalid input type");
 }

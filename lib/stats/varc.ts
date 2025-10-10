@@ -33,25 +33,63 @@ import {
  * // Example 2: Population variance
  * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
  *
- * // Example 3: Matrix variance
- * assertEquals(varc([[1, 2], [3, 4]]), [0.5, 0.5]);
+ * // Example 3: Matrix variance along rows (default dim=0, flag=1)
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
  * ```
  */
 export default function varc(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
 export default function varc(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+export default function varc(x: array, flag: 0 | 1, dim?: 0 | 1): number;
+export default function varc(x: matrix, flag: 0 | 1, dim?: 0 | 1): matrix;
+export default function varc(x: array, flag: 0 | 1, dim: 0 | 1): number;
+export default function varc(x: matrix, flag: 0 | 1, dim: 0 | 1): matrix;
 export default function varc(
-  x: numarraymatrix,
-  flag: 0 | 1 = 1,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+  x: array | matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): number | matrix;
+export default function varc(
+  x: array | matrix,
+  flag: 0 | 1,
+  dim?: 0 | 1,
+): number | matrix;
+export default function varc(
+  x: array | matrix,
+  flag: 0 | 1,
+  dim: 0 | 1,
+): number | matrix;
+export default function varc(
+  x: array | matrix,
+  flag?: 0 | 1,
+  dim?: 0 | 1,
+): number | matrix {
+  const actualFlag = flag ?? 1;
+  const actualDim = dim ?? 0;
   if (isnumber(x)) {
     return NaN;
   }
 
-  return vectorfun(dim, x, (arr: array) => computeVariance(arr, flag));
+  const result = vectorfun(
+    actualDim,
+    x,
+    (arr: array) => computeVariance(arr, actualFlag),
+  );
+
+  if (isarray(x)) {
+    return result as number;
+  }
+
+  if (ismatrix(x)) {
+    // vectorfun returns T[] for matrices, we need to reshape to matrix
+    return [result as number[]];
+  }
+
+  throw new Error("Invalid input type");
 }
 
 function computeVariance(arr: array, flag: 0 | 1): number {
   const mu = mean(arr);
-  return sum(power(abs(minus(arr, mu)), 2) as array) / (arr.length - flag);
+  const deviations = minus(arr, mu);
+  const squaredDeviations = power(abs(deviations), 2);
+  return sum(squaredDeviations) / (arr.length - flag);
 }

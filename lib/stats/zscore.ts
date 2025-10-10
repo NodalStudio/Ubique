@@ -1,5 +1,14 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, mean, minus, rdivide, std, vectorfun } from "../../index.ts";
+import {
+  isarray,
+  ismatrix,
+  isnumber,
+  mean,
+  minus,
+  rdivide,
+  std,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function zscore

@@ -27,7 +27,7 @@ import { isarray, ismatrix, isnumber, sort, vectorfun } from "../../index.ts";
  * ```
  */
 export default function mode(x: array, dim?: 0 | 1): number;
-export default function mode(x: matrix, dim?: 0 | 1): matrix;
+export default function mode(x: matrix, dim?: 0 | 1): array;
 export default function mode(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

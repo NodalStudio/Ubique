@@ -22,15 +22,15 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  * // Example 2: Array with negative values
  * assertEquals(max([-5, -1, -10]), -1);
  *
- * // Example 3: Matrix maximum along rows  
+ * // Example 3: Matrix maximum along rows
  * assertEquals(max([[1, 2], [3, 4]]), [2, 4]);
  * ```
  */
-export default function max(x: array, dim?: number): number;
-export default function max(x: matrix, dim?: number): matrix;
+export default function max(x: array, dim?: 0 | 1): number;
+export default function max(x: matrix, dim?: 0 | 1): array;
 export default function max(
   x: numarraymatrix,
-  dim: number = 0,
+  dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _max = function (a: number[]) {
     return Math.max.apply(null, a);

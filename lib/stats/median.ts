@@ -1,5 +1,12 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, max, sort, vectorfun } from "../../index.ts";
+import {
+  isarray,
+  ismatrix,
+  isnumber,
+  max,
+  sort,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * @function median
@@ -28,14 +35,14 @@ import { isarray, ismatrix, isnumber, max, sort, vectorfun } from "../../index.t
  */
 export default function median(x: number): number;
 export default function median(x: array, dim?: 0 | 1): number;
-export default function median(x: matrix, dim?: 0 | 1): matrix;
+export default function median(x: matrix, dim?: 0 | 1): array;
 export default function median(
   x: numarraymatrix,
   dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _median = function (a: array): number {
     const n = a.length - 1;
-    const idx = max(1, Math.floor(n / 2)) as number;
+    const idx = Math.max(1, Math.floor(n / 2));
     const _a = sort(a);
 
     if (n % 2 === 0) {

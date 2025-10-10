@@ -1,5 +1,14 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { cov, diag, isarray, ismatrix, rdivide, repmat, sqrt, transpose } from "../../index.ts";
+import {
+  cov,
+  diag,
+  isarray,
+  ismatrix,
+  rdivide,
+  repmat,
+  sqrt,
+  transpose,
+} from "../../index.ts";
 
 /**
  * @function corrcoef
@@ -38,8 +47,8 @@ export default function corrcoef(
   // Handle parameter parsing - y could be a flag value or second array
   let actualY: numarraymatrix | undefined;
   let actualFlag = flag;
-  
-  if (typeof y === 'number') {
+
+  if (typeof y === "number") {
     actualFlag = y;
     actualY = undefined;
   } else {
@@ -47,12 +56,35 @@ export default function corrcoef(
   }
 
   // Calculate covariance matrix
-  const covm = actualY !== undefined ? cov(x, actualY, actualFlag) : cov(x, actualFlag);
+  let covm: number | matrix;
+  if (actualY !== undefined) {
+    if (typeof x === "number" || typeof actualY === "number") {
+      throw new Error("Number inputs not supported for correlation");
+    }
+    if (isarray(x) && isarray(actualY)) {
+      covm = cov(x as array, actualY as array, actualFlag as 0 | 1);
+    } else if (ismatrix(x) && ismatrix(actualY)) {
+      throw new Error("Matrix-matrix covariance not implemented yet");
+    } else {
+      throw new Error("Mixed array-matrix input not supported");
+    }
+  } else {
+    if (typeof x === "number") {
+      throw new Error("Number inputs not supported for correlation");
+    }
+    if (isarray(x)) {
+      throw new Error("Single array correlation not meaningful");
+    } else if (ismatrix(x)) {
+      covm = cov(x as matrix, actualFlag as 0 | 1);
+    } else {
+      throw new Error("Invalid input type");
+    }
+  }
 
-  const sigma = transpose(sqrt(diag(covm)));
+  const sigma = transpose(sqrt(diag(covm as matrix)));
   const m = sigma.length;
 
-  let result = rdivide(covm, repmat(sigma, 1, m));
+  let result = rdivide(covm as matrix, repmat(sigma, 1, m));
   result = rdivide(result, repmat(transpose(sigma), m, 1));
 
   return result;
