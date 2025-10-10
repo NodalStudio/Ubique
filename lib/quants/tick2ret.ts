@@ -1,13 +1,5 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  isundefined,
-  log,
-  size,
-  zeros,
-} from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { isarray, isnumber, log, size, zeros } from "../../index.ts";
 
 /**
  * @function tick2ret
@@ -47,7 +39,7 @@ export default function tick2ret(
   dim?: 0 | 1,
 ): matrix;
 export default function tick2ret(
-  x: numarraymatrix,
+  x: array | matrix,
   mode: string = "simple",
   dim: 0 | 1 = 1,
 ): array | matrix {
@@ -80,7 +72,7 @@ export default function tick2ret(
       for (let i = 0; i < size(x)[1]; i++) {
         const tmp = [];
         for (let j = 0; j < size(x)[0]; j++) {
-          tmp.push(x[j][i]);
+          tmp.push((x as matrix)[j][i]);
         }
 
         const rt = _ret(tmp, mode);
@@ -90,7 +82,7 @@ export default function tick2ret(
       }
       return r;
     } else if (dim === 1) {
-      return _ret(x, mode);
+      return _ret(x as array, mode);
     }
   }
 
@@ -100,7 +92,7 @@ export default function tick2ret(
     for (let i = 0; i < size(x)[1]; i++) {
       const tmp = [];
       for (let j = 0; j < size(x)[0]; j++) {
-        tmp.push(x[j][i]);
+        tmp.push((x as matrix)[j][i]);
       }
 
       const rt = _ret(tmp, mode);
@@ -115,7 +107,7 @@ export default function tick2ret(
     for (let i = 0; i < size(x)[0]; i++) {
       const tmp = [];
       for (let j = 0; j < size(x)[1]; j++) {
-        tmp.push(x[i][j]);
+        tmp.push((x as matrix)[i][j]);
       }
 
       const rt = _ret(tmp, mode);
@@ -125,4 +117,7 @@ export default function tick2ret(
     }
     return r;
   }
+
+  // This should never be reached, but TypeScript requires it
+  throw new Error("Unexpected execution path");
 }

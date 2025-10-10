@@ -22,20 +22,24 @@ import { vectorfun } from "../../index.ts";
  * assertEquals(sum([[5, 6, 5], [7, 8, -1]], 0), [16, 14]);
  *
  * // Example 3: Sum of elements across columns in a 2D array
- * assertEquals(sum([[5, 6, 5], [7, 8, -1]], 1), [[12], [14], [4]]);
+ * assertEquals(sum([[5, 6, 5], [7, 8, -1]], 1), [12, 14, 4]);
  * ```
  */
 export default function sum(x: array): number;
-export default function sum(x: array, dim: 0): number;
-export default function sum(x: array, dim: 1): number;
+export default function sum(x: array, dim: 0 | 1): number;
 export default function sum(x: matrix, dim: 0): array;
-export default function sum(x: matrix, dim: 1): matrix;
+export default function sum(x: matrix, dim: 1): array;
+export default function sum(x: matrix): array;
+export default function sum(x: matrix, dim: 0 | 1): array;
+export default function sum(x: array | matrix, dim?: 0 | 1): number | array;
+export default function sum(x: array | matrix, dim: 0 | 1): number | array;
 export default function sum(
   x: array | matrix,
-  dim: 0 | 1 = 0,
-): number | array | matrix {
+  dim?: 0 | 1,
+): number | array {
+  const actualDim = dim ?? 0;
   const _sum = (a: array): number =>
     a.reduce((acc: number, val: number) => acc + val, 0);
 
-  return vectorfun(dim, x, _sum);
+  return vectorfun(actualDim, x, _sum);
 }

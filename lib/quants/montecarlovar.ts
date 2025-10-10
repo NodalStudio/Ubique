@@ -36,7 +36,7 @@ import {
  * // The following demonstrates the intended usage pattern:
  * // const mcVar = montecarlovar(x, 0.95, 1000);
  * // assertEquals(typeof mcVar, "number");
- * 
+ *
  * // For now, we'll just verify the function exists
  * assertEquals(typeof montecarlovar, "function");
  * ```
@@ -68,6 +68,13 @@ export default function montecarlovar(
   mode: string = "simple",
   dim: 0 | 1 = 0,
 ): number | array | matrix {
+  // Helper function to generate standard normal random variable using Box-Muller transform
+  const randn = (): number => {
+    const u1 = rand() as number;
+    const u2 = rand() as number;
+    return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  };
+
   const _mcvar = function (
     a: array,
     p: number,
@@ -84,15 +91,15 @@ export default function montecarlovar(
     const sigma = std(returns) as number;
 
     // Generate random returns based on normal distribution
-    const simReturns = zeros(nsim, 1) as array;
+    const simReturns = new Array(nsim).fill(0) as array;
     for (let i = 0; i < nsim; i++) {
-      // Generate random normal return
-      const z = rand(1, "normal") as number;
+      // Generate random normal return using Box-Muller transform
+      const z = randn();
       simReturns[i] = mu + sigma * z;
     }
 
     // Convert returns to prices for the specified period
-    const simPrices = zeros(nsim, 1) as array;
+    const simPrices = new Array(nsim).fill(0) as array;
     const lastPrice = a[a.length - 1];
 
     if (mode === "simple") {
@@ -106,7 +113,7 @@ export default function montecarlovar(
     }
 
     // Calculate VaR as the quantile of the simulated price distribution
-    const losses = zeros(nsim, 1) as array;
+    const losses = new Array(nsim).fill(0) as array;
     for (let i = 0; i < nsim; i++) {
       losses[i] = lastPrice - simPrices[i];
     }

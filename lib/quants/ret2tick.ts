@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 import { vectorfun } from "../../index.ts";
 
 /**
@@ -41,7 +41,7 @@ export default function ret2tick(
   dim?: 0 | 1,
 ): matrix;
 export default function ret2tick(
-  x: numarraymatrix,
+  x: array | matrix,
   mode: string = "simple",
   sval: number = 1,
   dim: 0 | 1 = 0,
