@@ -10,7 +10,7 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The divisor, can be a number, array, or matrix
  * @param y The dividend, can be a number, array, or matrix
  * @returns The result of element-wise left division y ./ x
- * @throws {Error} If the input dimensions do not agree or if no arguments are provided
+ * @throws If the input dimensions do not agree or if no arguments are provided
  *
  * @example
  * ```ts

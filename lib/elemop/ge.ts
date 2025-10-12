@@ -10,7 +10,7 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x First operand for comparison
  * @param y Second operand for comparison
  * @returns The result of the comparison
- * @throws {Error} If the input dimensions do not agree or if no arguments are provided
+ * @throws If the input dimensions do not agree or if no arguments are provided
  *
  * @example
  * ```ts

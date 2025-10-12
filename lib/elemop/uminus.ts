@@ -9,7 +9,7 @@ import { arrayfun } from "../../index.ts";
  *
  * @param x The input number, array, or matrix to be negated
  * @returns The negated value(s)
- * @throws {Error} If no input is provided
+ * @throws If no input is provided
  *
  * @example
  * ```ts

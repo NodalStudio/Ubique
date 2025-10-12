@@ -10,7 +10,7 @@ import { vectorfun } from "../../index.ts";
  * @param x The input array or matrix of values
  * @param dim The dimension along which to calculate, `1` for columns, `0` for rows (defaults to `1`)
  * @returns The differences between adjacent elements
- * @throws {Error} If no input is provided
+ * @throws If no input is provided
  *
  * @example
  * ```ts

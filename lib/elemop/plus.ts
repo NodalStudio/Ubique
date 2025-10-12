@@ -10,7 +10,7 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The first operand, can be a number, array, or matrix.
  * @param y The second operand, can be a number, array, or matrix.
  * @returns The result of adding `x` and `y`.
- * @throws {Error} If the input dimensions do not agree or if no arguments are provided.
+ * @throws If the input dimensions do not agree or if no arguments are provided.
  *
  * @example
  * ```ts
@@ -58,11 +58,11 @@ function handlePlusOperation(
   y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x)) {
-    return arrayfun(y, (val: number) => x as number + val);
+    return arrayfun(y, (val: number) => (x as number) + val);
   }
 
   if (isnumber(y)) {
-    return arrayfun(x, (val: number) => val + y as number);
+    return arrayfun(x, (val: number) => (val + y) as number);
   }
 
   if (isarray(x) && isarray(y)) {

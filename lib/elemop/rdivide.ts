@@ -18,7 +18,7 @@ import {
  * @param x The dividend
  * @param y The divisor
  * @returns The result of the division
- * @throws {Error} If insufficient arguments are provided or if the input sizes do not match
+ * @throws If insufficient arguments are provided or if the input sizes do not match
  *
  * @example
  * ```ts
