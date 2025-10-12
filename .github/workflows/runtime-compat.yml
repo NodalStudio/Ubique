@@ -1,4 +1,4 @@
-name: Runtime compatibility
+name: 🧪 Runtime Compatibility Tests
 
 on:
   pull_request:
@@ -42,8 +42,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: node
-      - run: npm install --no-save wrangler
-      - run: npx wrangler dev --test --modules test/runtime/worker-smoke.ts
+      - run: npm install --no-save vitest @cloudflare/vitest-pool-workers
+      - run: npx vitest run --pool=@cloudflare/vitest-pool-workers test/runtime/worker-smoke.ts
 
   browser:
     runs-on: ubuntu-latest
@@ -53,4 +53,5 @@ jobs:
         with:
           node-version: node
       - run: npm install --no-save vitest @vitest/browser playwright
-      - run: npx vitest run --browser --include test/runtime/browser-smoke.ts
+      - run: npx playwright install chromium
+      - run: npx vitest run --browser.enabled --browser.name=chromium --browser.headless test/runtime/browser-smoke.ts
