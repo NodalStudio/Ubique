@@ -3,17 +3,18 @@ import isarray from "../datatype/isarray.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 import vectorfun from "../datatype/vectorfun.ts";
 import mergesort from "./mergesort.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function sort
  * @summary Sorts an array or matrix in ascending or descending order.
  * @description If input is a 1D array, it is sorted normally. If input is a matrix, sorting can be done along rows or columns.
  *
- * @param {array|matrix} x The array or matrix to sort.
- * @param {string} [mode='ascend'] Sorting order: `'ascend'` or `'descend'`.
- * @param {number} [dim=1] Dimension along which to sort (0: rows, 1: columns).
- * @returns {array|matrix} The sorted array or matrix.
- * @throws {Error} If input is invalid.
+ * @param x The array or matrix to sort.
+ * @param mode Sorting order: `'ascend'` or `'descend'`. Defaults to `'ascend'`.
+ * @param dim Dimension along which to sort (0: rows, 1: columns). Defaults to 1.
+ * @returns The sorted array or matrix.
+ * @throws If input is invalid.
  *
  * @example
  * ```ts
@@ -45,12 +46,15 @@ import mergesort from "./mergesort.ts";
  * assertEquals(sort(5), 5);
 
  * ```*/
-export default function sort(x: any, mode = "ascend", dim = 1) {
-  if (!x) {
-    throw new Error("Not enough input arguments.");
-  }
-
-  const _sort = (a: any, mode: any) => mergesort(a, mode)[0];
+export default function sort(x: number, mode?: string, dim?: number): number;
+export default function sort(x: array, mode?: string, dim?: number): array;
+export default function sort(x: matrix, mode?: string, dim?: number): matrix;
+export default function sort(
+  x: unknown,
+  mode: string = "ascend",
+  dim: number = 1,
+): unknown {
+  const _sort = (a: array, mode: string): array => mergesort(a, mode)[0];
 
   if (isnumber(x)) {
     return x;

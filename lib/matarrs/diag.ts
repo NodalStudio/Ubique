@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 import nrows from "../matarrs/nrows.ts";
 import zeros from "../matarrs/zeros.ts";
@@ -9,10 +9,10 @@ import isarray from "../datatype/isarray.ts";
  * @summary Diagonal matrix creation and extraction of diagonals from a matrix.
  * @description For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
  *
- * @param {array|matrix} x Input array or matrix.
- * @param {number} [k=0] Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
- * @returns {array|matrix} Diagonal matrix or array of diagonal values.
- * @throws {Error} If the input is neither a vector nor a matrix.
+ * @param x Input array or matrix.
+ * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
+ * @returns Diagonal matrix or array of diagonal values.
+ * @throws If the input is neither a vector nor a matrix.
  *
  * @example
  * ```ts
@@ -40,20 +40,25 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2), [0]);
 
  * ```*/
-export default function diag(x: any, k = 0) {
+export default function diag(x: array): matrix;
+export default function diag(x: matrix): array;
+export default function diag(x: array, k: number): matrix;
+export default function diag(x: matrix, k: number): array;
+export default function diag(x: array | matrix, k = 0): array | matrix {
   const absK = Math.abs(k);
 
   if (isarray(x)) {
     // Create a diagonal matrix from a vector
     const n = x.length;
     const matrixSize = n + absK;
-    const out = zeros(matrixSize, matrixSize);
+    const out: matrix = zeros(matrixSize, matrixSize);
 
     for (let i = 0; i < n; i++) {
+      const value = x[i] as number; // Safe: isarray confirms 1D array of numbers
       if (k >= 0) {
-        out[i][i + absK] = x[i];
+        out[i][i + absK] = value;
       } else {
-        out[i + absK][i] = x[i];
+        out[i + absK][i] = value;
       }
     }
 
@@ -63,7 +68,7 @@ export default function diag(x: any, k = 0) {
   if (ismatrix(x)) {
     // Extract the k-th diagonal from a matrix
     const rows = nrows(x);
-    const out = [];
+    const out: array = [];
 
     for (let i = 0; i < rows - absK; i++) {
       if (k >= 0) {
@@ -76,5 +81,5 @@ export default function diag(x: any, k = 0) {
     return out;
   }
 
-  throw new Error("unknown input");
+  throw new TypeError("Expected array or matrix");
 }

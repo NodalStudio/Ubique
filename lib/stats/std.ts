@@ -1,5 +1,5 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, sqrt, varc } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
 
 /**
  * @function std
@@ -11,7 +11,7 @@ import { isarray, ismatrix, isnumber, sqrt, varc } from "../../index.ts";
  * @param flag Normalization type (0: population, 1: sample). Default is 1
  * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
  * @returns Computed standard deviation values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -40,19 +40,50 @@ export default function std(
 ): number | matrix {
   const actualFlag = flag ?? 1;
   const actualDim = dim ?? 0;
+
   if (isnumber(x)) {
     return NaN;
   }
 
+  const result = vectorfun(
+    actualDim,
+    x,
+    (arr: array) => computeStd(arr, actualFlag),
+  );
+
   if (isarray(x)) {
-    const variance = varc(x, actualFlag, actualDim);
-    return sqrt(variance);
+    return result as number;
   }
 
   if (ismatrix(x)) {
-    const variance = varc(x, actualFlag, actualDim);
-    return sqrt(variance);
+    // vectorfun returns T[] for matrices, we need to reshape to matrix
+    return [result as number[]];
   }
 
   throw new Error("Invalid input type");
+}
+
+/**
+ * Single-pass standard deviation using Welford's algorithm
+ * Numerically stable online computation of variance
+ */
+function computeStd(arr: array, flag: 0 | 1): number {
+  const n = arr.length;
+  if (n === 0) return NaN;
+  if (n === 1) return flag === 1 ? NaN : 0;
+
+  // Welford's algorithm for numerically stable variance
+  let mean = 0;
+  let m2 = 0;
+
+  for (let i = 0; i < n; i++) {
+    const x = arr[i];
+    const delta = x - mean;
+    mean += delta / (i + 1);
+    const delta2 = x - mean;
+    m2 += delta * delta2;
+  }
+
+  const variance = m2 / (n - flag);
+  return Math.sqrt(variance);
 }

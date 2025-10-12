@@ -1,17 +1,17 @@
-import { array, matrix } from "../types.d.ts";
-import { flatten } from "../../index.ts";
+import { flatten, isarray, ismatrix } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function reshape
  * @summary Reshape an array or matrix into a new matrix of given dimensions.
  * @description Rearranges elements of an array or matrix into a new shape while preserving order.
  *
- * @param {} x The array or matrix to reshape.
- * @param {number} m Number of rows for the new matrix.
- * @param {number} n Number of columns for the new matrix.
- * @param {0|1} [flag=0] Flag (0: row-wise, 1: column-wise).
- * @returns {matrix} The reshaped matrix.
- * @throws {Error} If dimensions are invalid or inconsistent.
+ * @param x The array or matrix to reshape.
+ * @param m Number of rows for the new matrix.
+ * @param n Number of columns for the new matrix.
+ * @param flag Flag (0: row-wise, 1: column-wise). Defaults to 0.
+ * @returns The reshaped matrix.
+ * @throws If dimensions are invalid or inconsistent.
  *
  * @example
  * ```ts
@@ -58,14 +58,14 @@ export default function reshape(
   );
 }
 
-function toMatrix(x: any) {
-  if (!Array.isArray(x)) {
-    return [[x]];
+function toMatrix(x: array | matrix): matrix {
+  if (ismatrix(x)) {
+    return x;
   }
 
-  if (!Array.isArray(x[0])) {
+  if (isarray(x)) {
     return [x];
   }
 
-  return x;
+  throw new Error("Input must be an array or matrix");
 }

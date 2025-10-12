@@ -10,7 +10,7 @@ import { isarray, ismatrix, vectorfun } from "../../index.ts";
  * @param x Asset/portfolio returns
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns The computed continuous drawdowns
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -29,14 +29,8 @@ import { isarray, ismatrix, vectorfun } from "../../index.ts";
  * const y = [-0.01, -0.02, 0.05, -0.03];
  * assertEquals(cdrawdown(y), [0.01, 0.03, 0.03, 0.03]);
  * ``` */
-export default function cdrawdown(
-  x: array,
-  dim?: 0 | 1,
-): array;
-export default function cdrawdown(
-  x: matrix,
-  dim?: 0 | 1,
-): array | matrix;
+export default function cdrawdown(x: array, dim?: 0 | 1): array;
+export default function cdrawdown(x: matrix, dim?: 0 | 1): array | matrix;
 export default function cdrawdown(
   x: numarraymatrix,
   dim: 0 | 1 = 0,
@@ -50,11 +44,14 @@ export default function cdrawdown(
 
 function computeContinuousDrawdown(returns: array): array {
   return returns.reduce(
-    ({
-      drawdowns,
-      drawdown,
-      max,
-    }: { drawdowns: array; drawdown: number; max: number }, value: number) => {
+    (
+      {
+        drawdowns,
+        drawdown,
+        max,
+      }: { drawdowns: array; drawdown: number; max: number },
+      value: number,
+    ) => {
       const newDrawdown = Math.min(drawdown + value, 0);
       const newMax = Math.min(max, newDrawdown);
 

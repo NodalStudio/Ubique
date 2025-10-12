@@ -1,13 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  arrayfun,
-  isarray,
-  ismatrix,
-  isnumber,
-  mean,
-  minus,
-  vectorfun,
-} from "../../index.ts";
+import { arrayfun, isnumber, mean, minus, vectorfun } from "../../index.ts";
 
 /**
  * @function mad
@@ -18,7 +10,7 @@ import {
  * @param x Input array or matrix
  * @param dim Dimension along which to compute MAD. Default is 0
  * @returns Mean absolute deviation values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -36,10 +28,7 @@ import {
  */
 export default function mad(x: array, dim?: 0 | 1): number;
 export default function mad(x: matrix, dim?: 0 | 1): array;
-export default function mad(
-  x: numarraymatrix,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+export default function mad(x: numarraymatrix, dim: 0 | 1 = 0): numarraymatrix {
   const _mad = function (a: number[]) {
     return mean(arrayfun(minus(a, mean(a)), Math.abs));
   };

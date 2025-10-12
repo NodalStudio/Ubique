@@ -1,12 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  max,
-  sort,
-  vectorfun,
-} from "../../index.ts";
+import { isarray, isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
  * @function median
@@ -17,7 +10,7 @@ import {
  * @param x Input number, array, or matrix
  * @param dim Dimension along which to compute median. Default is 0
  * @returns Median values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -27,7 +20,7 @@ import {
  * assertEquals(median([1, 2, 3]), 2);
  *
  * // Example 2: Even length array
- * assertEquals(median([1, 2, 3, 4]), 1.5);
+ * assertEquals(median([1, 2, 3, 4]), 2.5);
  *
  * // Example 3: Matrix median
  * assertEquals(median([[1, 2], [3, 4]]), [1.5, 3.5]);
@@ -41,19 +34,27 @@ export default function median(
   dim: 0 | 1 = 0,
 ): numarraymatrix {
   const _median = function (a: array): number {
-    const n = a.length - 1;
-    const idx = Math.max(1, Math.floor(n / 2));
-    const _a = sort(a);
-
-    if (n % 2 === 0) {
-      return _a[idx];
-    } else {
-      return (_a[idx - 1] + _a[idx]) / 2;
+    const length = a.length;
+    if (length === 0) {
+      throw new Error("Input cannot be empty");
     }
+
+    const sorted = sort(a);
+    const mid = Math.floor(length / 2);
+
+    if (length % 2 === 1) {
+      return sorted[mid];
+    }
+
+    return (sorted[mid - 1] + sorted[mid]) / 2;
   };
 
   if (isnumber(x)) {
     return x;
+  }
+
+  if (isarray(x)) {
+    return _median(x as array);
   }
 
   return vectorfun(dim, x, _median);

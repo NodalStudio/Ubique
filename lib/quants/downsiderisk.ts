@@ -21,7 +21,7 @@ import { find, isnumber, std, vectorfun } from "../../index.ts";
  * assertEquals(downsiderisk(x), 0.0035355339059327385);
  *
  * // Example 2: Downside risk with custom MAR
- * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865475);
+ * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
  *
  * // Example 3: Downside risk with higher MAR
  * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);

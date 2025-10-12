@@ -12,7 +12,7 @@ import { vectorfun } from "../../index.ts";
  * @param sval Starting value (defaults to 1)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Value series (prices)
- * @throws {Error} If unknown return method specified
+ * @throws If unknown return method specified
  *
  * @example
  * ```ts

@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, moment, vectorfun } from "../../index.ts";
+import { isnumber, moment, vectorfun } from "../../index.ts";
 
 /**
  * @function skewness
@@ -12,7 +12,7 @@ import { isarray, ismatrix, isnumber, moment, vectorfun } from "../../index.ts";
  * @param flag Bias correction flag (0 for bias correction, 1 for simple calculation). Default is 1
  * @param dim Dimension to compute along (0 for rows, 1 for columns). Default is 0
  * @returns Computed skewness values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -44,7 +44,7 @@ export default function skewness(
 
 function computeSkewness(arr: array, biasFlag: 0 | 1): number {
   const n = arr.length;
-  const mom3 = moment(arr, 3) as number / (moment(arr, 2) as number) ** 1.5;
+  const mom3 = (moment(arr, 3) as number) / (moment(arr, 2) as number) ** 1.5;
 
   return biasFlag === 1 ? mom3 : Math.sqrt((n - 1) / n) * (n / (n - 2)) * mom3;
 }

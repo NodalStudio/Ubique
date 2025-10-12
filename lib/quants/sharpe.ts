@@ -14,7 +14,7 @@ import { isarray, ismatrix, mean, std, vectorfun } from "../../index.ts";
  * @param frisk Annual risk-free rate (adjusted for the timeframe) (defaults to 0)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns The computed Sharpe Ratio
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -29,7 +29,7 @@ import { isarray, ismatrix, mean, std, vectorfun } from "../../index.ts";
  *
  * // Example 3: Sharpe Ratio for different asset
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(sharpe(y), 0.2385800784247263);
+ * assertEquals(sharpe(y), 0.23858007842472628);
  * ```
  */
 export default function sharpe(x: array, frisk?: number, dim?: 0 | 1): number;

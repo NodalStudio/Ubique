@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function repmat
@@ -6,11 +6,11 @@
  * @description Creates a new matrix by repeating the input value, array, or matrix in a tiled fashion.
  * If only two arguments are provided, `m` is used for both row and column replication.
  *
- * @param {number|boolean|array|matrix} x The value, array, or matrix to replicate.
- * @param {number} m Number of times to repeat along the rows.
- * @param {number} [n=m] Number of times to repeat along the columns.
- * @returns {matrix} The resulting replicated matrix.
- * @throws {Error} If insufficient arguments are provided.
+ * @param x The value, array, or matrix to replicate.
+ * @param m Number of times to repeat along the rows.
+ * @param n Number of times to repeat along the columns. Defaults to the value of `m` when omitted.
+ * @returns The resulting replicated matrix.
+ * @throws Error If `m` or `n` are non-positive.
  *
  * @example
  * ```ts
@@ -71,26 +71,61 @@
  * ]);
 
  * ```*/
-export default function repmat(x: any, m: any, n = m) {
-  const matrix = toMatrix(x);
-  const rows = matrix.length;
-  const cols = matrix[0].length;
+export default function repmat<T>(
+  x: matrix<T>,
+  m: number,
+  n?: number,
+): matrix<T>;
+export default function repmat<T>(
+  x: array<T>,
+  m: number,
+  n?: number,
+): matrix<T>;
+export default function repmat<T>(x: T, m: number, n?: number): matrix<T>;
+export default function repmat<T>(
+  x: T | array<T> | matrix<T>,
+  m: number,
+  n: number = m,
+): matrix<T> {
+  if (!Number.isInteger(m) || !Number.isInteger(n) || m <= 0 || n <= 0) {
+    throw new Error("Replication counts must be positive integers.");
+  }
+
+  const matrixValue = toMatrix(x);
+  const rows = matrixValue.length;
+  const cols = matrixValue[0]?.length ?? 0;
+
+  if (rows === 0 || cols === 0) {
+    return Array.from({ length: rows * m }, () => Array<T>(cols * n)) as matrix<
+      T
+    >;
+  }
 
   return Array.from(
     { length: rows * m },
     (_, i) =>
-      Array.from({ length: cols * n }, (_, j) => matrix[i % rows][j % cols]),
-  );
+      Array.from(
+        { length: cols * n },
+        (_, j) => matrixValue[i % rows][j % cols],
+      ),
+  ) as matrix<T>;
 }
 
-function toMatrix(x: any) {
+function toMatrix<T>(x: matrix<T>): matrix<T>;
+function toMatrix<T>(x: array<T>): matrix<T>;
+function toMatrix<T>(x: T): matrix<T>;
+function toMatrix<T>(x: T | array<T> | matrix<T>): matrix<T> {
   if (!Array.isArray(x)) {
-    return [[x]];
+    return [[x]] as matrix<T>;
   }
 
-  if (!Array.isArray(x[0])) {
-    return [x];
+  if (x.length === 0) {
+    return [[]] as matrix<T>;
   }
 
-  return x;
+  if (Array.isArray(x[0])) {
+    return x as matrix<T>;
+  }
+
+  return [x as array<T>] as matrix<T>;
 }

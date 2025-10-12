@@ -1,6 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
-import { array, matrix } from "../types.d.ts";
 import flatten from "./flatten.ts";
 import squeeze from "./squeeze.ts";
 import arrayfun from "../datatype/arrayfun.ts";
@@ -10,11 +9,11 @@ import arrayfun from "../datatype/arrayfun.ts";
  * @summary Extracts elements from an array or matrix based on linear indexing.
  * @description Extracts a subset of an array or matrix using linear indexing, either row-wise (default) or column-wise.
  *
- * @param {array|matrix} m The array or matrix of elements.
- * @param {number|array|matrix} idx Linear indexing values.
- * @param {number} [flag=0] Flag (0: row-wise, 1: column-wise).
- * @returns {number|array|matrix} The subset of `m` based on `idx`.
- * @throws {Error} If input arguments are missing.
+ * @param m The array or matrix of elements.
+ * @param idx Linear indexing values.
+ * @param flag Flag (0: row-wise, 1: column-wise). Defaults to 0.
+ * @returns The subset of `m` based on `idx`.
+ * @throws If input arguments are missing.
  *
  * @example
  * ```ts
@@ -57,13 +56,6 @@ export default function subsetlin(
   idx: unknown,
   flag: 0 | 1 = 0,
 ): unknown {
-  if (m === undefined) {
-    throw new Error("Not enough input arguments.");
-  }
-  if (idx === undefined) {
-    return m;
-  }
-
   const flatM = flatten(m as array | matrix, flag);
   const indices: number[] = Array.isArray(idx) ? idx : [idx as number];
 

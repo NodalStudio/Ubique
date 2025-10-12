@@ -28,7 +28,7 @@ import {
  * @param mode Return mode: 'geometric' or 'simple'
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns The computed Annualized Adjusted Sharpe Ratio
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -44,7 +44,7 @@ import {
  * // Example 3: Annualized adjusted Sharpe for multiple assets (matrix)
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328333, 5.030879310639437]);
+ * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328324, 5.030879310639437]);
  * ``` */
 export default function annadjsharpe(
   x: array,

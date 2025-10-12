@@ -12,7 +12,7 @@ import { isarray, ismatrix, linearreg, mean, vectorfun } from "../../index.ts";
  * @param frisk Risk-free rate (defaults to 0)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns The Treynor ratio
- * @throws {Error} If input is a number or insufficient arguments provided
+ * @throws If input is a number or insufficient arguments provided
  *
  * @example
  * ```ts

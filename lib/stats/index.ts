@@ -1,0 +1,23 @@
+// Statistical functions
+export { default as corrcoef } from "./corrcoef.ts";
+export { default as cov } from "./cov.ts";
+export { default as histc } from "./histc.ts";
+export { default as iqr } from "./iqr.ts";
+export { default as kurtosis } from "./kurtosis.ts";
+export { default as mad } from "./mad.ts";
+export { default as max } from "./max.ts";
+export { default as mean } from "./mean.ts";
+export { default as median } from "./median.ts";
+export { default as min } from "./min.ts";
+export { default as mode } from "./mode.ts";
+export { default as moment } from "./moment.ts";
+export { default as pdist } from "./pdist.ts";
+export { default as prctile } from "./prctile.ts";
+export { default as quantile } from "./quantile.ts";
+export { default as quartile } from "./quartile.ts";
+export { default as range } from "./range.ts";
+export { default as skewness } from "./skewness.ts";
+export { default as std } from "./std.ts";
+export { default as varc } from "./varc.ts";
+export { default as xkurtosis } from "./xkurtosis.ts";
+export { default as zscore } from "./zscore.ts";

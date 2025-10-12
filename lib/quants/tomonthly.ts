@@ -1,8 +1,8 @@
 /**
  * Time Series Analysis
  */
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { cat, isnumber, isundefined, sum } from "../../index.ts";
+import type { array } from "../types.d.ts";
+import { isnumber, sum } from "../../index.ts";
 
 /**
  * @function tomonthly

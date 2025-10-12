@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 import {
   flatten,
   iscolumn,

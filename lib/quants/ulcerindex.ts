@@ -1,12 +1,5 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  drawdown,
-  isnumber,
-  power,
-  sqrt,
-  sum,
-  vectorfun,
-} from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { drawdown, power, sqrt, sum, vectorfun } from "../../index.ts";
 
 /**
  * @function ulcerindex
@@ -19,7 +12,7 @@ import {
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Ulcer Index
- * @throws {Error} If input is a number (not supported)
+ * @throws If input is a number (not supported)
  *
  * @example
  * ```ts

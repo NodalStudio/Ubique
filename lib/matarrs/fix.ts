@@ -9,7 +9,7 @@ import arrayfun from "../datatype/arrayfun.ts";
  *
  * @param x The input number.
  * @returns The rounded value.
- * @throws {Error} If no input argument is provided.
+ * @throws If no input argument is provided.
  *
  * @example
  * ```ts

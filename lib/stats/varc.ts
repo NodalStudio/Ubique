@@ -1,4 +1,4 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 import {
   abs,
   isarray,
@@ -21,7 +21,7 @@ import {
  * @param flag Normalization type (0: population, 1: sample). Default is 1
  * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
  * @returns Computed variance values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -88,6 +88,13 @@ export default function varc(
 }
 
 function computeVariance(arr: array, flag: 0 | 1): number {
+  // WASM disabled - benchmarks show it's slower due to overhead
+  // TODO: Re-enable if we find a threshold where WASM is faster
+  // if (typeof variancewasm === "function" && arr.length > 10000) {
+  //   return variancewasm(new Float64Array(arr), flag);
+  // }
+
+  // JavaScript implementation
   const mu = mean(arr);
   const deviations = minus(arr, mu);
   const squaredDeviations = power(abs(deviations), 2);

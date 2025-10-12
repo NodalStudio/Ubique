@@ -9,7 +9,7 @@ import type { array, matrix } from "../types.d.ts";
  *
  * @param args Variable input arguments (max 2)
  * @returns A random number or a matrix of random numbers
- * @throws {Error} If invalid arguments are provided
+ * @throws If invalid arguments are provided
  *
  * @example
  * ```ts
@@ -71,10 +71,10 @@ export default function rand(...args: unknown[]): number | matrix {
   }
 }
 
-function rand_mat(rows: any, cols: any) {
-  const result = [];
+function rand_mat(rows: number, cols: number): matrix {
+  const result: matrix = [];
   for (let i = 0; i < rows; i++) {
-    const row = [];
+    const row: array = [];
     for (let j = 0; j < cols; j++) {
       row.push(Math.random());
     }

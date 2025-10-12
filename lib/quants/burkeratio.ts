@@ -23,7 +23,7 @@ import {
  * @param mode Calculation mode: 'simple' or 'modified'
  * @param dim Dimension: 0 (row-wise), 1 (column-wise)
  * @returns The computed Burke Ratio
- * @throws {Error} If an invalid mode is provided or if input arguments are invalid
+ * @throws If an invalid mode is provided or if input arguments are invalid
  *
  * @example
  * ```ts
@@ -72,6 +72,6 @@ export default function burkeratio(
     const dd = sqrt(sum(power(cdrawdown(a), 2)));
     return mode === "simple"
       ? (annRet - frisk) / dd
-      : ((annRet - frisk) / dd) * (sqrt(a.length));
+      : ((annRet - frisk) / dd) * sqrt(a.length);
   });
 }

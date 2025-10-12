@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * @function min
@@ -10,7 +10,7 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  * @param x Input array or matrix
  * @param dim Dimension along which to compute minimum. Default is 0
  * @returns Minimum values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -28,10 +28,7 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  */
 export default function min(x: array, dim?: 0 | 1): number;
 export default function min(x: matrix, dim?: 0 | 1): array;
-export default function min(
-  x: numarraymatrix,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+export default function min(x: numarraymatrix, dim: 0 | 1 = 0): numarraymatrix {
   const _min = function (a: number[]) {
     return Math.min.apply(null, a);
   };

@@ -17,7 +17,7 @@ import {
  * @param flag Normalization flag (0: bias correction, 1: simple). Default is 1
  * @param dim Dimension along which to compute excess kurtosis. Default is 0
  * @returns Excess kurtosis values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

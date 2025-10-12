@@ -1,18 +1,17 @@
-import { isarray, ismatrix } from "../../index.ts";
-import { array, matrix } from "../types.d.ts";
-import size from "./size.ts";
+import type { array, matrix } from "../types.d.ts";
 
-/** @import { array, matrix } from '../types.d.ts' */
+import { isarray, ismatrix } from "../../index.ts";
+import size from "./size.ts";
 
 /**
  * @function ncols
  * @summary Returns the number of columns in an array or matrix.
  * @description Returns the number of columns in a 1D array (treated as a row vector) or a 2D matrix.
  *
- * @param {array|matrix} x - Array or matrix of elements.
- * @returns {number} - The number of columns in the input.
- *
- * @throws {Error} - Throws an error if no input is provided or if the input is not an array.
+ * @param x Array or matrix of elements.
+ * @returns The number of columns in the input.
+
+ * @throws Throws an error if no input is provided or if the input is not an array.
  *
  * @example
  * ```ts
@@ -37,7 +36,7 @@ import size from "./size.ts";
  * assertEquals(ncols([[]]), 0); // 0
  *
  * // Example 7: Non-array input (should throw an error)
- * assertThrows(() => { ncols(5) }, Error, 'Input must be an array or matrix');
+ * assertThrows(() => { ncols(5 as unknown as number[]) }, Error, 'Input must be an array or matrix');
  *
  * // Example 8: 2D matrix with a single row
  * assertEquals(ncols([[1, 2, 3, 4]]), 4); // 4
@@ -49,7 +48,7 @@ import size from "./size.ts";
  * assertEquals(ncols([[1, 2], [3, 4]]), 2); // 2
 
  * ```*/
-export default function ncols(x: any) {
+export default function ncols(x: array | matrix): number {
   if (!x) {
     throw new Error("Not enough input arguments");
   }

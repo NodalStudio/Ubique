@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, linearreg, mean, vectorfun } from "../../index.ts";
+import { isarray, linearreg, mean, vectorfun } from "../../index.ts";
 
 /**
  * @function jensenalpha

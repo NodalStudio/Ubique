@@ -10,7 +10,7 @@ import { isarray, isnumber, log, size, zeros } from "../../index.ts";
  * @param mode Calculation mode: 'simple' (default) or 'continuous'
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 1)
  * @returns Returns array or matrix
- * @throws {Error} If input is not an array or matrix
+ * @throws If input is not an array or matrix
  *
  * @example
  * ```ts
@@ -28,16 +28,8 @@ import { isarray, isnumber, log, size, zeros } from "../../index.ts";
  * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
  * ```
  */
-export default function tick2ret(
-  x: array,
-  mode?: string,
-  dim?: 0 | 1,
-): array;
-export default function tick2ret(
-  x: matrix,
-  mode?: string,
-  dim?: 0 | 1,
-): matrix;
+export default function tick2ret(x: array, mode?: string, dim?: 0 | 1): array;
+export default function tick2ret(x: matrix, mode?: string, dim?: 0 | 1): matrix;
 export default function tick2ret(
   x: array | matrix,
   mode: string = "simple",
@@ -50,7 +42,7 @@ export default function tick2ret(
 
     if (mode === "simple") {
       for (let i = 0; i < n - 1; i++) {
-        r[i] = (a[i + 1] / a[i]) - 1;
+        r[i] = a[i + 1] / a[i] - 1;
       }
     } else if (mode === "continuous") {
       for (let i = 0; i < n - 1; i++) {

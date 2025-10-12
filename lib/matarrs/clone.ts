@@ -1,9 +1,8 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
 import isarray from "../datatype/isarray.ts";
 import ismatrix from "../datatype/ismatrix.ts";
-import { array, matrix, numarraymatrix } from "../types.d.ts";
 
 /**
  * @function clone
@@ -12,7 +11,7 @@ import { array, matrix, numarraymatrix } from "../types.d.ts";
  *
  * @param x Array or matrix to clone.
  * @returns A deep copy of the input array or matrix.
- * @throws {Error} If no input is provided.
+ * @throws If no input is provided.
  *
  * @example
  * ```ts

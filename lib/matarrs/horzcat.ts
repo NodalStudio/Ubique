@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import cat from "../matarrs/cat.ts";
 
@@ -7,9 +7,9 @@ import cat from "../matarrs/cat.ts";
  * @summary Concatenate arrays or matrices horizontally.
  * @description Concatenates arrays or matrices horizontally along columns.
  *
- * @param {...(array|matrix)} args Arrays or matrices to concatenate.
- * @returns {array|matrix} Concatenated result.
- * @throws {Error} If no input arguments are provided.
+ * @param args Arrays or matrices to concatenate.
+ * @returns Concatenated result.
+ * @throws If no input arguments are provided.
  *
  * @example
  * ```ts
@@ -25,7 +25,9 @@ import cat from "../matarrs/cat.ts";
  * assertThrows(() => { horzcat(); }, Error, 'Not enough input arguments');
 
  * ```*/
-export default function horzcat(...args: any[]) {
+export default function horzcat(
+  ...args: (number | array | matrix)[]
+): array | matrix {
   if (args.length === 0) {
     throw new Error("Not enough input arguments");
   }

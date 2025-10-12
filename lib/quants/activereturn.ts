@@ -12,7 +12,7 @@ import { annreturn, isarray, ismatrix, vectorfun } from "../../index.ts";
  * @param mode The mode of return calculation: 'geometric' or 'simple' (defaults to 'geometric')
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
  * @returns The computed active return
- * @throws {Error} If inputs are not valid arrays or matrices
+ * @throws If inputs are not valid arrays or matrices
  *
  * @example
  * ```ts
@@ -72,6 +72,5 @@ function computeActiveReturn(
   t: number,
   mode: string,
 ): number {
-  return (annreturn(a, t, mode)) -
-    (annreturn(benchmark, t, mode));
+  return annreturn(a, t, mode) - annreturn(benchmark, t, mode);
 }

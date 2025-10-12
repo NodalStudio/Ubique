@@ -1,13 +1,14 @@
 import size from "./size.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function length
  * @summary Gets the length of a vector or the largest array dimension.
  * @description Returns the length of a vector or the largest dimension of a 2D array (matrix).
  *
- * @param {array|matrix|any} x The input array, matrix, or element.
- * @returns {number} Returns the length of the vector or the largest dimension of the array/matrix.
- * @throws {Error} If no arguments are provided.
+ * @param x The input array, matrix, or element.
+ * @returns Returns the length of the vector or the largest dimension of the array/matrix.
+ * @throws If no arguments are provided.
  *
  * @example
  * ```ts
@@ -26,7 +27,9 @@ import size from "./size.ts";
  * assertEquals(length([]), 0);
 
  * ```*/
-export default function length(x: any) {
+export default function length(
+  x: string | number | array<string | number> | matrix<string | number>,
+): number {
   if (arguments.length === 0) {
     throw new Error("Not enough input arguments");
   }

@@ -31,7 +31,7 @@ interface DrawdownResult {
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Drawdown information object
- * @throws {Error} If input must be an array or matrix
+ * @throws If input must be an array or matrix
  *
  * @example
  * ```ts

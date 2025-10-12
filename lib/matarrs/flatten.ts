@@ -1,20 +1,19 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 import transpose from "./transpose.ts";
 import isarray from "../datatype/isarray.ts";
-import { array, matrix } from "../types.d.ts";
 
 /**
  * @function flatten
  * @summary Flatten a matrix into an array.
  * @description Flattens a matrix into a 1D array. The default concatenation is row-wise (dim = 0). If `dim = 1`, the concatenation is column-wise.
  *
- * @param {matrix} x The matrix to flatten.
- * @param {number} [dimParam=0] The dimension to flatten by. 0 = row-wise, 1 = column-wise. Defaults to 0.
- * @returns {array} The flattened 1D array.
- * @throws {Error} If no input is provided or if the input is not a matrix.
+ * @param x The matrix to flatten.
+ * @param dimParam The dimension to flatten by. 0 = row-wise, 1 = column-wise. Defaults to 0.
+ * @returns The flattened 1D array.
+ * @throws If no input is provided or if the input is not a matrix.
  *
  * @example
  * ```ts
@@ -44,8 +43,10 @@ export default function flatten(x: unknown, dim: 0 | 1 = 0): unknown {
   }
 
   if (ismatrix(x)) {
-    const matrixToFlatten = dim === 1 ? transpose(x) : x;
-    return [].concat(...matrixToFlatten);
+    const matrixToFlatten = dim === 1
+      ? (transpose(x) as matrix)
+      : (x as matrix);
+    return ([] as number[]).concat(...matrixToFlatten);
   }
 
   throw new Error("Unknown input arguments");

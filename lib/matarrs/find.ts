@@ -1,7 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
-import isarray from "../datatype/isarray.ts";
+import type { array, matrix } from "../types.d.ts";
 import ismatrix from "../datatype/ismatrix.ts";
-import { array } from "../types.d.ts";
 import flatten from "./flatten.ts";
 
 /**
@@ -9,9 +7,9 @@ import flatten from "./flatten.ts";
  * @summary Finds the indices of nonzero (true) elements in an array or matrix.
  * @description Given an input array or matrix, returns the indices of elements that are `true`. For a matrix, the indices are flattened row-wise.
  *
- * @param {array|matrix} x Input array or matrix.
- * @returns {array} An array of indices where the values are `true`.
- * @throws {Error} If no arguments are provided or if the input is not an array or matrix.
+ * @param x Input array or matrix.
+ * @returns An array of indices where the values are `true`.
+ * @throws If no arguments are provided or if the input is not an array or matrix.
  *
  * @example
  * ```ts
@@ -31,14 +29,16 @@ import flatten from "./flatten.ts";
  *
  * // Example 5: All true elements
  * find([true, true, true]); // [0, 1, 2]
+ * ```
+ */
+export default function find(
+  x: array<boolean | number> | matrix<boolean | number>,
+): array {
+  const flatX = (ismatrix(x) ? flatten(x) : x) as array<boolean | number>;
+  const indices: number[] = [];
 
- * ```*/
-export default function find(x: any) {
-  const flatX = (ismatrix(x) ? flatten(x) : x) as array;
-  const indices: any = [];
-
-  flatX.forEach((el: any, idx: any) => {
-    if (el === true) {
+  flatX.forEach((el: boolean | number, idx: number) => {
+    if (el === true || el) {
       indices.push(idx);
     }
   });

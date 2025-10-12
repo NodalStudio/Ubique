@@ -9,7 +9,7 @@ import { erfc } from "../../index.ts";
  *
  * @param y A real value in the range [2, 0]
  * @returns The value of the inverse complementary error function
- * @throws {Error} If the input is out of range
+ * @throws If the input is out of range
  *
  * @example
  * ```ts
@@ -37,7 +37,7 @@ export default function erfcinv(y: number): number {
   if (y <= 0) return Infinity;
 
   let z = 0;
-  const _y = (y < 1) ? y : 2 - y;
+  const _y = y < 1 ? y : 2 - y;
   const t = Math.sqrt(-2 * Math.log(_y / 2));
   let x = -0.70711 *
     ((2.30753 + t * 0.27061) / (1 + t * (0.99229 + t * 0.04481)) - t);
@@ -47,5 +47,5 @@ export default function erfcinv(y: number): number {
     x += z / (1.128379167095512 * Math.exp(-x * x) - x * z);
   }
 
-  return (y < 1) ? x : -x;
+  return y < 1 ? x : -x;
 }

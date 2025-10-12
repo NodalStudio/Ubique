@@ -1,5 +1,6 @@
 import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix, mean, varc } from "../../index.ts";
+import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
  * @function cov
@@ -12,7 +13,7 @@ import { isarray, ismatrix, mean, varc } from "../../index.ts";
  * @param y Optional second input array or matrix, or flag value (0 or 1)
  * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
  * @returns Covariance matrix or scalar variance
- * @throws {Error} When input dimensions do not agree
+ * @throws When input dimensions do not agree
  *
  * @example
  * ```ts
@@ -81,13 +82,35 @@ export default function cov(
     }
     covXY = covXY / (n - actualFlag);
 
-    return [[varX, covXY], [covXY, varY]];
+    return [
+      [varX, covXY],
+      [covXY, varY],
+    ];
   }
 
   // Case 3: Matrix input - calculate covariance matrix between columns
   if (ismatrix(x)) {
     const matrix = x as matrix;
+    const numRows = matrix.length;
     const numCols = matrix[0].length;
+
+    // Use WASM for all matrices (benchmarks show it's consistently faster)
+    if (typeof covwasm === "function") {
+      const flatData = new Float64Array(matrix.flat());
+      const flatResult = covwasm(flatData, numRows, numCols, actualFlag);
+
+      // Reshape flat result back to matrix
+      const result: matrix = [];
+      for (let i = 0; i < numCols; i++) {
+        result[i] = [];
+        for (let j = 0; j < numCols; j++) {
+          result[i][j] = flatResult[i * numCols + j];
+        }
+      }
+      return result;
+    }
+
+    // JavaScript fallback only if WASM not available
     const result: matrix = [];
 
     // Initialize result matrix

@@ -15,7 +15,7 @@ import { erfc } from "../../index.ts";
  *
  * @param x A real value
  * @returns The value of the error function for the input x
- * @throws {Error} If no arguments are provided
+ * @throws If no arguments are provided
  *
  * @example
  * ```ts

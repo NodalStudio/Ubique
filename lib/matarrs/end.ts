@@ -1,20 +1,20 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
 import ismatrix from "../datatype/ismatrix.ts";
+import isarray from "../datatype/isarray.ts";
 import nrows from "../matarrs/nrows.ts";
 import ncols from "../matarrs/ncols.ts";
-import isarray from "../datatype/isarray.ts";
 
 /**
  * @function end
  * @summary Returns the last index in an array or matrix.
  * @description Returns the last index of an array or matrix. For matrices, you can specify the dimension: -1 for both rows and columns, 0 for rows, and 1 for columns.
  *
- * @param {array|matrix} x Input array or matrix.
- * @param {number} [dim=-1] For matrix: -1 (both), 0 (rows), 1 (columns).
- * @returns {number|array} Last index or indices.
- * @throws {Error} If no arguments are provided or if the dimension is invalid.
+ * @param x Input array or matrix.
+ * @param dim For matrix: -1 (both), 0 (rows), 1 (columns). Defaults to -1.
+ * @returns Last index or indices.
+ * @throws If no arguments are provided or if the dimension is invalid.
  *
  * @example
  * ```ts
@@ -36,7 +36,10 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(end(5), 5);
 
  * ```*/
-export default function end(x: any, dim = -1) {
+export default function end(
+  x: number | array | matrix,
+  dim: number = -1,
+): number | array {
   if (x === undefined) {
     throw new Error("Not enough input arguments");
   }

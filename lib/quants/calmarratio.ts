@@ -19,7 +19,7 @@ import {
  * @param t Frequency of data: 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (def: 252)
  * @param dim Dimension 0: row, 1: column (def: 0)
  * @returns Calmar Ratio
- * @throws {Error} If input arguments must be an array or matrix
+ * @throws If input arguments must be an array or matrix
  *
  * @example
  * ```ts

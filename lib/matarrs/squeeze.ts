@@ -1,5 +1,3 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
 import isnumber from "../datatype/isnumber.ts";
 import isstring from "../datatype/isstring.ts";
 import size from "./size.ts";
@@ -36,15 +34,22 @@ import size from "./size.ts";
  * assertEquals(squeeze("hello"), "hello");
  * ```
  */
-export default function squeeze(x: any) {
-  if (isnumber(x) || isstring(x)) {
-    return x;
-  }
-  let _size = size(x);
-  while (_size.length > 2) {
-    x = x[0];
-    _size = size(x);
-  }
+type NestedArray<T> = T | NestedArray<T>[];
 
-  return x;
+export default function squeeze<T>(x: NestedArray<T>): NestedArray<T> {
+  if (isnumber(x) || isstring(x)) {
+    return x as NestedArray<T>;
+  }
+  return squeezeRec(x) as NestedArray<T>;
+}
+
+function squeezeRec(node: unknown): unknown {
+  if (!Array.isArray(node)) {
+    return node;
+  }
+  const _size = size(node);
+  if (_size.length <= 2) {
+    return node;
+  }
+  return squeezeRec(node[0]);
 }

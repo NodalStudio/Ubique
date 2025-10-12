@@ -6,11 +6,11 @@ import erfcinv from "../elmath/erfcinv.ts";
  * @description Returns the inverse CDF (quantile function) for a normal distribution with mean `mu` and standard deviation `sigma` at probability `p`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
- * @param {number} p The probability value in the range (0,1).
- * @param {number} [mu=0] The mean of the normal distribution.
- * @param {number} [sigma=1] The standard deviation of the normal distribution.
- * @returns {number} The inverse CDF (quantile).
- * @throws {Error} If `p` is not in the range (0,1) or `sigma` is not positive.
+ * @param p The probability value in the range (0,1).
+ * @param mu The mean of the normal distribution. Defaults to 0.
+ * @param sigma The standard deviation of the normal distribution. Defaults to 1.
+ * @returns The inverse CDF (quantile).
+ * @throws If `p` is not in the range (0,1) or `sigma` is not positive.
  *
  * @example
  * ```ts
@@ -32,7 +32,7 @@ import erfcinv from "../elmath/erfcinv.ts";
  * assertEquals(norminv(0.025, 0, 1), -1.9599639471668922);
  * ```
  */
-export default function norminv(p: any, mu = 0, sigma = 1) {
+export default function norminv(p: number, mu = 0, sigma = 1): number {
   if (p <= 0 || p >= 1) {
     throw new Error("Probability value must be in the range (0,1)");
   }

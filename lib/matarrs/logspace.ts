@@ -11,7 +11,7 @@ import linspace from "./linspace.ts";
  * @param b The upper bound (exponent)
  * @param n The number of points to generate
  * @returns An array of logarithmically spaced points
- * @throws {Error} If fewer than two arguments are provided
+ * @throws If fewer than two arguments are provided
  *
  * @example
  * ```ts

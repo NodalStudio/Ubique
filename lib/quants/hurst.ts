@@ -29,7 +29,7 @@ import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
  * assertEquals(hurst([0.05, 0.03, 0.08, -0.02]), 0.19397632085813782);
  *
  * // Example 3: Hurst exponent interpretation (0.5 = random walk)
- * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287469);
+ * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468);
  * ```
  */
 export default function hurst(

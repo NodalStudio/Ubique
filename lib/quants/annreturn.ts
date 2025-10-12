@@ -12,7 +12,7 @@ import { isarray, ismatrix, mean, prod, vectorfun } from "../../index.ts";
  * @param mode Return mode: 'geometric' (default) or 'simple'
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns The computed annualized return
- * @throws {Error} If the input is invalid or an unknown mode is specified
+ * @throws If the input is invalid or an unknown mode is specified
  *
  * @example
  * ```ts

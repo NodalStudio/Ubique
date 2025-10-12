@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 import isarray from "../datatype/isarray.ts";
 import rem from "../elemop/rem.ts";
 
@@ -7,10 +7,10 @@ import rem from "../elemop/rem.ts";
  * @summary Converts linear index to row and column subscripts.
  * @description Converts a linear index or array of linear indices into the equivalent row and column subscripts for a given matrix size. This allows converting a 1D index into 2D row/column positions.
  *
- * @param {array} size Size of the matrix as [rows, columns].
- * @param {number|array} index Linear index or array of indices [0...N-1].
- * @returns {array|matrix} The corresponding row and column subscripts.
- * @throws {Error} If no arguments are provided or if inputs are invalid.
+ * @param size Size of the matrix as [rows, columns].
+ * @param index Linear index or array of indices [0...N-1].
+ * @returns The corresponding row and column subscripts.
+ * @throws If no arguments are provided or if inputs are invalid.
  *
  * @example
  * ```ts
@@ -26,7 +26,10 @@ import rem from "../elemop/rem.ts";
  * assertEquals(ind2sub([3, 1], 2), [2, 0]);
 
  * ```*/
-export default function ind2sub(size: any, index: any) {
+export default function ind2sub(
+  size: array,
+  index: number | array,
+): array | matrix {
   if (!Array.isArray(size)) {
     throw new Error("size must be an array representing the matrix dimensions");
   }
@@ -34,15 +37,15 @@ export default function ind2sub(size: any, index: any) {
     throw new Error("Not enough input arguments");
   }
 
-  const _ind2sub = (siz: any, idx: any) => {
+  const _ind2sub = (siz: array, idx: number): array => {
     const row = rem(idx, siz[0]) as number;
     const col = (idx - row) / siz[0];
     return [row, col];
   };
 
   if (isarray(index)) {
-    return index.map((idx: any) => _ind2sub(size, idx));
+    return (index as array).map((idx: number) => _ind2sub(size, idx));
   }
 
-  return _ind2sub(size, index);
+  return _ind2sub(size, index as number);
 }

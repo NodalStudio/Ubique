@@ -1,11 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  prctile,
-  vectorfun,
-} from "../../index.ts";
+import { isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
  * @function quartile
@@ -16,7 +10,7 @@ import {
  * @param x Input array or matrix
  * @param dim Dimension along which to compute quartiles. Default is 0
  * @returns Array containing [Q1, Q2, Q3] values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

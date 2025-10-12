@@ -1,3 +1,4 @@
+import type { matrix } from "../types.d.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
@@ -5,9 +6,9 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @summary Checks if the input is a row vector.
  * @description Returns `true` if the input matrix is a row vector, meaning it has exactly one row and more than one column.
  *
- * @param {any} x The input matrix to check.
- * @returns {boolean} Returns `true` if `x` is a row vector, otherwise `false`.
- * @throws {Error} If the input is not a valid matrix or if no argument is provided.
+ * @param x The input matrix to check.
+ * @returns Returns `true` if `x` is a row vector, otherwise `false`.
+ * @throws If the input is not a valid matrix or if no argument is provided.
  *
  * @example
  * ```ts
@@ -35,7 +36,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertThrows(() => isrow([]), "Input must be a non-empty matrix");
 
  * ```*/
-export default function isrow(x: any) {
+export default function isrow(x: unknown): x is matrix {
   if (!x) {
     throw new Error("Not enough input arguments");
   }

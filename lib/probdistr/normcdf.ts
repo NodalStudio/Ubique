@@ -10,7 +10,7 @@ import { erf } from "../../index.ts";
  * @param mu The mean of the normal distribution (defaults to 0)
  * @param sigma The standard deviation of the normal distribution (defaults to 1)
  * @returns The cumulative probability for x
- * @throws {Error} If sigma is not a positive number
+ * @throws If sigma is not a positive number
  *
  * @example
  * ```ts
