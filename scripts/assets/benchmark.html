@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rubique Performance vs Math.js</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #3b82f6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --bg: #0f172a;
+        --bg-light: #1e293b;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --border: #334155;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg) 0%, #1a1f35 100%);
+        color: var(--text);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .start-btn {
+        background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        font-size: 1.25rem;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+      }
+
+      .start-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+      }
+
+      .start-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* Benchmark Test Card */
+      .test-card {
+        background: var(--bg-light);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border);
+        display: none;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .test-card.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .test-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .test-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .test-progress {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      /* Matrix Visualization */
+      .matrices-container {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+      }
+
+      .matrix-box {
+        text-align: center;
+      }
+
+      .matrix-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .matrix-canvas {
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        background: #000;
+      }
+
+      .operator {
+        font-size: 2rem;
+        color: var(--text-muted);
+      }
+
+      /* Computing Animation */
+      .computing {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        background: rgba(59, 130, 246, 0.08);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(59, 130, 246, 0.15);
+      }
+
+      .compute-progress {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .compute-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .compute-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .compute-meta {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .compute-bar-bg {
+        height: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .compute-bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: inherit;
+        transition: width 0.2s ease-out;
+      }
+
+      .compute-bar-fill.rubique {
+        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+      }
+
+      .compute-bar-fill.mathjs {
+        background: linear-gradient(90deg, #6b7280 0%, #9ca3af 100%);
+      }
+
+      .compute-subtext {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .compute-subtext strong {
+        color: var(--text);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Racing Bars */
+      .race-container {
+        margin: 2rem 0;
+      }
+
+      .race-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .race-label {
+        width: 100px;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .race-bar-container {
+        flex: 1;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        overflow: visible;
+        position: relative;
+      }
+
+      .race-bar {
+        height: 100%;
+        border-radius: 0.5rem;
+        transition: width 0.5s ease-out;
+        position: relative;
+      }
+
+      .race-time {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        font-size: 0.875rem;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      .race-bar.rubique {
+        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+      }
+
+      .race-bar.mathjs {
+        background: linear-gradient(90deg, #6b7280 0%, #9ca3af 100%);
+      }
+
+      .race-status {
+        width: 80px;
+        text-align: center;
+        font-size: 1.25rem;
+      }
+
+      /* Speedup Badge */
+      .speedup-badge {
+        text-align: center;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.2) 0%,
+          rgba(139, 92, 246, 0.2) 100%
+        );
+        border-radius: 0.75rem;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+      }
+
+      .speedup-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Results Summary */
+      .results-card {
+        background: var(--bg-light);
+        border-radius: 1rem;
+        padding: 3rem;
+        margin: 2rem 0;
+        text-align: center;
+        border: 1px solid var(--border);
+        display: none;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .results-card.active {
+        display: block;
+      }
+
+      .results-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+      }
+
+      .results-big-number {
+        font-size: 5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 1rem 0;
+        animation: countUp 1s ease-out;
+      }
+
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .results-subtitle {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .results-stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--success);
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+      }
+
+      .chart-container {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 0.75rem;
+      }
+
+      .run-again-btn {
+        background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+        color: white;
+        border: none;
+        padding: 0.875rem 2.5rem;
+        font-size: 1.125rem;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 2rem;
+        transition: transform 0.2s;
+      }
+
+      .run-again-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Overall Progress Bar */
+      .overall-progress {
+        background: var(--bg-light);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border);
+        display: none;
+      }
+
+      .overall-progress.active {
+        display: block;
+      }
+
+      .progress-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+      }
+
+      .progress-bar-bg {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+        border-radius: 1rem;
+        transition: width 0.3s ease;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+        .matrices-container {
+          flex-direction: column;
+        }
+        .results-big-number {
+          font-size: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="hero">
+        <h1>🚀 Rubique Performance vs Math.js</h1>
+        <p>Watch real-time matrix operations & benchmarks</p>
+        <button class="start-btn" id="startBtn" onclick="startBenchmark()">
+          ▶️ Start Demo
+        </button>
+      </div>
+
+      <!-- Overall Progress -->
+      <div class="overall-progress" id="overallProgress">
+        <div class="progress-label">
+          <span id="progressText">Starting benchmarks...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div
+            class="progress-bar-fill"
+            id="progressBar"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Test Card -->
+      <div class="test-card" id="testCard">
+        <div class="test-header">
+          <h2 class="test-title" id="testTitle">Test Name</h2>
+          <span class="test-progress" id="testProgress">0/12</span>
+        </div>
+
+        <!-- Matrix Visualization -->
+        <div class="matrices-container" id="matricesContainer">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Computing Progress -->
+        <div class="computing" id="computing">
+          <div class="compute-progress">
+            <div class="compute-row">
+              <div class="compute-header">
+                <span>Rubique</span>
+                <span class="compute-meta" id="rubiqueComputeMeta"
+                  >waiting…</span
+                >
+              </div>
+              <div class="compute-bar-bg">
+                <div
+                  class="compute-bar-fill rubique"
+                  id="rubiqueComputeBar"
+                ></div>
+              </div>
+              <div class="compute-subtext" id="rubiqueComputeSubtext">
+                Preparing benchmark…
+              </div>
+            </div>
+            <div class="compute-row">
+              <div class="compute-header">
+                <span>Math.js</span>
+                <span class="compute-meta" id="mathjsComputeMeta"
+                  >waiting…</span
+                >
+              </div>
+              <div class="compute-bar-bg">
+                <div
+                  class="compute-bar-fill mathjs"
+                  id="mathjsComputeBar"
+                ></div>
+              </div>
+              <div class="compute-subtext" id="mathjsComputeSubtext">
+                Waiting for Rubique to finish…
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Racing Bars -->
+        <div class="race-container" id="raceContainer" style="display: none">
+          <div class="race-row">
+            <div class="race-label">Rubique</div>
+            <div class="race-bar-container">
+              <div
+                class="race-bar rubique"
+                id="rubiqueBar"
+                style="width: 0%"
+              ></div>
+              <span class="race-time" id="rubiqueTime"></span>
+            </div>
+            <div class="race-status" id="rubiqueStatus"></div>
+          </div>
+          <div class="race-row">
+            <div class="race-label">Math.js</div>
+            <div class="race-bar-container">
+              <div
+                class="race-bar mathjs"
+                id="mathjsBar"
+                style="width: 0%"
+              ></div>
+              <span class="race-time" id="mathjsTime"></span>
+            </div>
+            <div class="race-status" id="mathjsStatus"></div>
+          </div>
+        </div>
+
+        <!-- Speedup Badge -->
+        <div class="speedup-badge" id="speedupBadge" style="display: none">
+          <div class="speedup-value" id="speedupValue">0x</div>
+          <div id="speedupLabel" style="color: var(--text-muted)">faster</div>
+        </div>
+      </div>
+
+      <!-- Results Summary -->
+      <div class="results-card" id="resultsCard">
+        <h2 class="results-title">🎉 Benchmark Complete!</h2>
+        <div class="results-big-number" id="avgSpeedup">0x</div>
+        <div class="results-subtitle">AVERAGE SPEEDUP</div>
+
+        <div class="results-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="wonTests">0/0</div>
+            <div class="stat-label">Tests Won</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="bestTest">-</div>
+            <div class="stat-label">Best Performance</div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="resultsChart"></canvas>
+        </div>
+
+        <button class="run-again-btn" onclick="location.reload()">
+          ↻ Run Again
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script type="module">
+      import * as mathjs from "https://cdn.jsdelivr.net/npm/mathjs@13.2.2/+esm";
+      import * as rubique from "https://esm.sh/jsr/@bemayer/rubique@1.0.2";
+
+      // Store libraries globally for easy access
+      window.mathjs = mathjs;
+      window.rubique = rubique;
+      window.rubiqueReady = true;
+
+      console.log("✅ Rubique and Math.js loaded successfully");
+    </script>
+
+    <script>
+      // Matrix Visualization Engine
+      function drawMatrix(canvas, matrix, label) {
+        const ctx = canvas.getContext("2d");
+        const rows = matrix.length;
+        const cols = matrix[0]?.length || 1;
+
+        // Determine display mode based on size
+        if (rows <= 10 && cols <= 10) {
+          // Show actual numbers
+          drawNumberMatrix(ctx, canvas, matrix);
+        } else if (rows <= 50 && cols <= 50) {
+          // Show full heatmap
+          drawHeatmap(ctx, canvas, matrix);
+        } else {
+          // Show corner preview
+          drawCornerPreview(ctx, canvas, matrix);
+        }
+      }
+
+      function drawNumberMatrix(ctx, canvas, matrix) {
+        const rows = matrix.length;
+        const cols = matrix[0].length;
+        const cellSize = Math.min(canvas.width / cols, canvas.height / rows);
+
+        canvas.width = cols * cellSize;
+        canvas.height = rows * cellSize;
+
+        ctx.fillStyle = "#1e293b";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = `${cellSize * 0.3}px monospace`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            const value = matrix[i][j];
+            const x = j * cellSize;
+            const y = i * cellSize;
+
+            // Draw cell border
+            ctx.strokeStyle = "#334155";
+            ctx.strokeRect(x, y, cellSize, cellSize);
+
+            // Draw value
+            ctx.fillStyle = getValueColor(value);
+            ctx.fillText(value.toFixed(1), x + cellSize / 2, y + cellSize / 2);
+          }
+        }
+      }
+
+      function drawHeatmap(ctx, canvas, matrix) {
+        const rows = matrix.length;
+        const cols = matrix[0].length;
+        const cellSize = Math.min(300 / cols, 300 / rows);
+
+        canvas.width = cols * cellSize;
+        canvas.height = rows * cellSize;
+
+        // Find min/max for color scaling
+        let min = Infinity,
+          max = -Infinity;
+        for (let row of matrix) {
+          for (let val of row) {
+            min = Math.min(min, val);
+            max = Math.max(max, val);
+          }
+        }
+
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            const value = matrix[i][j];
+            const normalized = (value - min) / (max - min);
+            const x = j * cellSize;
+            const y = i * cellSize;
+
+            ctx.fillStyle = getHeatmapColor(normalized);
+            ctx.fillRect(x, y, cellSize, cellSize);
+          }
+        }
+      }
+
+      function drawCornerPreview(ctx, canvas, matrix) {
+        const rows = matrix.length;
+        const cols = matrix[0].length;
+        const previewSize = 20; // Show 20x20 corner
+        const cellSize = 10;
+
+        canvas.width = previewSize * cellSize;
+        canvas.height = previewSize * cellSize;
+
+        ctx.fillStyle = "#1e293b";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Find min/max for first 20x20 section
+        let min = Infinity,
+          max = -Infinity;
+        for (let i = 0; i < Math.min(previewSize, rows); i++) {
+          for (let j = 0; j < Math.min(previewSize, cols); j++) {
+            min = Math.min(min, matrix[i][j]);
+            max = Math.max(max, matrix[i][j]);
+          }
+        }
+
+        // Draw corner heatmap
+        for (let i = 0; i < Math.min(previewSize, rows); i++) {
+          for (let j = 0; j < Math.min(previewSize, cols); j++) {
+            const value = matrix[i][j];
+            const normalized = (value - min) / (max - min);
+            const x = j * cellSize;
+            const y = i * cellSize;
+
+            ctx.fillStyle = getHeatmapColor(normalized);
+            ctx.fillRect(x, y, cellSize, cellSize);
+          }
+        }
+
+        // Draw dimension label
+        ctx.fillStyle = "#f1f5f9";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(`${rows}×${cols}`, canvas.width / 2, canvas.height + 20);
+      }
+
+      function getValueColor(value) {
+        // Simple color scheme for numbers
+        return value > 50 ? "#f59e0b" : value > 25 ? "#3b82f6" : "#8b5cf6";
+      }
+
+      function getHeatmapColor(normalized) {
+        // Blue -> Cyan -> Green -> Yellow -> Red
+        const hue = (1 - normalized) * 240; // 240 = blue, 0 = red
+        return `hsl(${hue}, 80%, 50%)`;
+      }
+
+      // Generate test data
+      function generateArray(size) {
+        return Array.from({ length: size }, () => Math.random() * 100);
+      }
+
+      function generateMatrix(rows, cols) {
+        return Array.from({ length: rows }, () => generateArray(cols));
+      }
+
+      // Generate well-conditioned square matrix for decomposition
+      function generateInvertibleMatrix(n) {
+        // Create a diagonally dominant matrix (guarantees invertibility)
+        const matrix = Array(n)
+          .fill(0)
+          .map(() => Array(n).fill(0));
+
+        for (let i = 0; i < n; i++) {
+          let rowSum = 0;
+          for (let j = 0; j < n; j++) {
+            if (i !== j) {
+              matrix[i][j] = Math.random() * 10;
+              rowSum += Math.abs(matrix[i][j]);
+            }
+          }
+          // Make diagonal element larger than sum of other elements in row
+          matrix[i][i] = rowSum + Math.random() * 10 + 10;
+        }
+
+        return matrix;
+      }
+
+      // Benchmark results storage
+      let allResults = [];
+      let currentTest = 0;
+
+      // Test configuration - Focus on impressive matrix operations
+      const tests = [
+        {
+          name: "Matrix Transpose (100×100)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 20,
+          sampleIterations: 2,
+          setup: () => {
+            const matrixA = generateMatrix(100, 100);
+            return {
+              matrixA,
+              args: [matrixA],
+            };
+          },
+          rubique: (matrix) => window.rubique.transpose(matrix),
+          mathjs: (matrix) => window.mathjs.transpose(matrix),
+        },
+        {
+          name: "Matrix Add (100×100)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 25,
+          sampleIterations: 2,
+          setup: () => {
+            const matrixA = generateMatrix(100, 100);
+            const matrixB = generateMatrix(100, 100);
+            return {
+              matrixA,
+              matrixB,
+              args: [matrixA, matrixB],
+            };
+          },
+          rubique: (a, b) => window.rubique.plus(a, b),
+          mathjs: (a, b) => window.mathjs.add(a, b),
+        },
+        {
+          name: "Matrix Multiply (10×10)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 60,
+          sampleIterations: 5,
+          setup: () => {
+            const matrixA = generateMatrix(10, 10);
+            const matrixB = generateMatrix(10, 10);
+            return {
+              matrixA,
+              matrixB,
+              args: [matrixA, matrixB],
+            };
+          },
+          rubique: (a, b) => window.rubique.mtimes(a, b),
+          mathjs: (a, b) => window.mathjs.multiply(a, b),
+        },
+        {
+          name: "Matrix Multiply (50×50)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 18,
+          sampleIterations: 2,
+          setup: () => {
+            const matrixA = generateMatrix(50, 50);
+            const matrixB = generateMatrix(50, 50);
+            return {
+              matrixA,
+              matrixB,
+              args: [matrixA, matrixB],
+            };
+          },
+          rubique: (a, b) => window.rubique.mtimes(a, b),
+          mathjs: (a, b) => window.mathjs.multiply(a, b),
+        },
+        {
+          name: "Matrix Multiply (100×100)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 8,
+          sampleIterations: 1,
+          setup: () => {
+            const matrixA = generateMatrix(100, 100);
+            const matrixB = generateMatrix(100, 100);
+            return {
+              matrixA,
+              matrixB,
+              args: [matrixA, matrixB],
+            };
+          },
+          rubique: (a, b) => window.rubique.mtimes(a, b),
+          mathjs: (a, b) => window.mathjs.multiply(a, b),
+        },
+        {
+          name: "Matrix Multiply (200×200)",
+          category: "Matrix Operations",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 2,
+          sampleIterations: 1,
+          setup: () => {
+            const matrixA = generateMatrix(200, 200);
+            const matrixB = generateMatrix(200, 200);
+            return {
+              matrixA,
+              matrixB,
+              args: [matrixA, matrixB],
+            };
+          },
+          rubique: (a, b) => window.rubique.mtimes(a, b),
+          mathjs: (a, b) => window.mathjs.multiply(a, b),
+        },
+        {
+          name: "Matrix Inverse (20×20)",
+          category: "Linear Algebra",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 6,
+          sampleIterations: 1,
+          setup: () => {
+            const matrixA = generateInvertibleMatrix(20);
+            return {
+              matrixA,
+              args: [matrixA],
+            };
+          },
+          rubique: (matrix) => window.rubique.inv(matrix),
+          mathjs: (matrix) => window.mathjs.inv(matrix),
+        },
+        {
+          name: "Determinant (20×20)",
+          category: "Linear Algebra",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 8,
+          sampleIterations: 2,
+          setup: () => {
+            const matrixA = generateMatrix(20, 20);
+            return {
+              matrixA,
+              args: [matrixA],
+            };
+          },
+          rubique: (matrix) => window.rubique.det(matrix),
+          mathjs: (matrix) => window.mathjs.det(matrix),
+        },
+        {
+          name: "Determinant (50×50)",
+          category: "Linear Algebra",
+          visualize: true,
+          targetDuration: 5000,
+          minIterations: 3,
+          sampleIterations: 1,
+          setup: () => {
+            const matrixA = generateMatrix(50, 50);
+            return {
+              matrixA,
+              args: [matrixA],
+            };
+          },
+          rubique: (matrix) => window.rubique.det(matrix),
+          mathjs: (matrix) => window.mathjs.det(matrix),
+        },
+      ];
+
+      const computeElements = {
+        rubique: {
+          bar: document.getElementById("rubiqueComputeBar"),
+          meta: document.getElementById("rubiqueComputeMeta"),
+          subtext: document.getElementById("rubiqueComputeSubtext"),
+        },
+        mathjs: {
+          bar: document.getElementById("mathjsComputeBar"),
+          meta: document.getElementById("mathjsComputeMeta"),
+          subtext: document.getElementById("mathjsComputeSubtext"),
+        },
+      };
+
+      function prepareComputeRows(iterations) {
+        const totalLabel = `${iterations} iteration${
+          iterations === 1 ? "" : "s"
+        }`;
+        computeElements.rubique.bar.style.width = "0%";
+        computeElements.mathjs.bar.style.width = "0%";
+        computeElements.rubique.meta.textContent = totalLabel;
+        computeElements.mathjs.meta.textContent = "waiting…";
+        computeElements.rubique.subtext.textContent = "Preparing benchmark…";
+        computeElements.mathjs.subtext.textContent =
+          "Waiting for Rubique to finish…";
+      }
+
+      function resetRace() {
+        const rubiqueBar = document.getElementById("rubiqueBar");
+        const mathjsBar = document.getElementById("mathjsBar");
+        const rubiqueTime = document.getElementById("rubiqueTime");
+        const mathjsTime = document.getElementById("mathjsTime");
+        const rubiqueStatus = document.getElementById("rubiqueStatus");
+        const mathjsStatus = document.getElementById("mathjsStatus");
+
+        rubiqueBar.style.width = "0%";
+        mathjsBar.style.width = "0%";
+        rubiqueTime.textContent = "";
+        mathjsTime.textContent = "";
+        rubiqueStatus.textContent = "";
+        mathjsStatus.textContent = "";
+      }
+
+      function startComputeRow(library, iterations) {
+        const row = computeElements[library];
+        row.bar.style.width = "0%";
+        row.meta.textContent = `0 / ${iterations} iterations`;
+        row.subtext.textContent = "Running…";
+      }
+
+      function updateComputeRow(library, iteration, total, elapsed) {
+        const row = computeElements[library];
+        const percent = Math.min((iteration / total) * 100, 100);
+        row.bar.style.width = `${percent}%`;
+        row.meta.textContent = `${iteration} / ${total} iterations`;
+        row.subtext.textContent = `Elapsed ${formatMillis(elapsed)}`;
+      }
+
+      function completeComputeRow(library, averageTime) {
+        const row = computeElements[library];
+        row.bar.style.width = "100%";
+        row.meta.textContent = "✅ Complete";
+        row.subtext.textContent = `Average ${averageTime.toFixed(
+          2
+        )} ms per iteration`;
+      }
+
+      function formatMillis(ms) {
+        if (ms >= 1000) {
+          return `${(ms / 1000).toFixed(2)} s`;
+        }
+        if (ms >= 100) {
+          return `${ms.toFixed(0)} ms`;
+        }
+        return `${ms.toFixed(1)} ms`;
+      }
+
+      async function calculateIterations(test) {
+        const target = test.targetDuration ?? 900;
+        const minIterations = test.minIterations ?? 3;
+        const sampleIterations = test.sampleIterations ?? 1;
+
+        const sampleDataRubique = test.setup();
+        const rubiqueSample = await benchmarkFunction(
+          test.rubique,
+          sampleDataRubique,
+          sampleIterations,
+          null,
+          { silent: true }
+        );
+
+        const sampleDataMath = test.setup();
+        const mathSample = await benchmarkFunction(
+          test.mathjs,
+          sampleDataMath,
+          sampleIterations,
+          null,
+          { silent: true }
+        );
+
+        const slowestPerIteration = Math.max(rubiqueSample, mathSample);
+        let iterations = Math.round(target / slowestPerIteration);
+        if (!Number.isFinite(iterations) || iterations < 1) {
+          iterations = minIterations;
+        }
+        iterations = Math.max(iterations, minIterations);
+        return iterations;
+      }
+
+      function getFunctionArgs(data) {
+        if (Array.isArray(data?.args)) {
+          return data.args;
+        }
+        if (data?.matrixA && data?.matrixB) {
+          return [data.matrixA, data.matrixB];
+        }
+        if (data?.matrixA) {
+          return [data.matrixA];
+        }
+        if (data?.data) {
+          return [data.data];
+        }
+        return [];
+      }
+
+      function nextFrame() {
+        return new Promise((resolve) => requestAnimationFrame(resolve));
+      }
+
+      // Main benchmark runner
+      async function startBenchmark() {
+        document.getElementById("startBtn").disabled = true;
+        document.getElementById("overallProgress").classList.add("active");
+        currentTest = 0;
+        allResults = [];
+
+        for (let i = 0; i < tests.length; i++) {
+          currentTest = i + 1;
+          await runTest(tests[i], i + 1, tests.length);
+        }
+
+        showResults();
+      }
+
+      async function runTest(test, index, total) {
+        const completedRatio = (index - 1) / total;
+        const progress = completedRatio * 100;
+        document.getElementById("progressBar").style.width = `${progress}%`;
+        document.getElementById("progressPercent").textContent = `${Math.round(
+          progress
+        )}%`;
+        document.getElementById(
+          "progressText"
+        ).textContent = `Running test ${index}/${total}: ${test.name}`;
+
+        document.getElementById("testCard").classList.add("active");
+        document.getElementById("testTitle").textContent = test.name;
+
+        const iterations = await calculateIterations(test);
+        document.getElementById(
+          "testProgress"
+        ).textContent = `${index}/${total} • ${iterations} iteration${
+          iterations === 1 ? "" : "s"
+        }`;
+
+        const testData = test.setup();
+
+        if (test.visualize && testData.matrixA) {
+          await visualizeMatrices(testData);
+        } else {
+          document.getElementById("matricesContainer").innerHTML = "";
+        }
+
+        document.getElementById("computing").style.display = "block";
+        document.getElementById("raceContainer").style.display = "none";
+        document.getElementById("speedupBadge").style.display = "none";
+        resetRace();
+
+        prepareComputeRows(iterations);
+        await sleep(200);
+
+        startComputeRow("rubique", iterations);
+        const rubiqueTime = await benchmarkFunction(
+          test.rubique,
+          testData,
+          iterations,
+          (iteration, totalIter, elapsed) =>
+            updateComputeRow("rubique", iteration, totalIter, elapsed)
+        );
+        completeComputeRow("rubique", rubiqueTime);
+
+        startComputeRow("mathjs", iterations);
+        const mathjsTime = await benchmarkFunction(
+          test.mathjs,
+          testData,
+          iterations,
+          (iteration, totalIter, elapsed) =>
+            updateComputeRow("mathjs", iteration, totalIter, elapsed)
+        );
+        completeComputeRow("mathjs", mathjsTime);
+
+        document.getElementById("computing").style.display = "none";
+        document.getElementById("raceContainer").style.display = "block";
+
+        const speedup = mathjsTime / rubiqueTime;
+
+        const completedProgress = (index / total) * 100;
+        document.getElementById(
+          "progressBar"
+        ).style.width = `${completedProgress}%`;
+        document.getElementById("progressPercent").textContent = `${Math.round(
+          completedProgress
+        )}%`;
+        document.getElementById(
+          "progressText"
+        ).textContent = `Completed test ${index}/${total}: ${test.name}`;
+
+        allResults.push({
+          name: test.name,
+          rubique: rubiqueTime,
+          mathjs: mathjsTime,
+          speedup,
+          iterations,
+        });
+
+        document.getElementById("speedupBadge").style.display = "block";
+
+        if (speedup >= 1) {
+          document.getElementById(
+            "speedupValue"
+          ).textContent = `${speedup.toFixed(1)}x`;
+          document.getElementById("speedupLabel").textContent = "faster";
+        } else {
+          const slowerFactor = 1 / speedup;
+          document.getElementById(
+            "speedupValue"
+          ).textContent = `${slowerFactor.toFixed(1)}x`;
+          document.getElementById("speedupLabel").textContent = "slower";
+        }
+
+        await nextFrame();
+        await animateRace(rubiqueTime, mathjsTime);
+
+        await sleep(1500);
+      }
+
+      async function visualizeMatrices(testData) {
+        const container = document.getElementById("matricesContainer");
+        container.innerHTML = "";
+
+        if (testData.matrixA) {
+          const boxA = createMatrixBox("Matrix A", testData.matrixA);
+          container.appendChild(boxA);
+        }
+
+        if (testData.matrixB) {
+          const operator = document.createElement("div");
+          operator.className = "operator";
+          operator.textContent = "×";
+          container.appendChild(operator);
+
+          const boxB = createMatrixBox("Matrix B", testData.matrixB);
+          container.appendChild(boxB);
+        }
+
+        await nextFrame();
+      }
+
+      function createMatrixBox(label, matrix) {
+        const box = document.createElement("div");
+        box.className = "matrix-box";
+
+        const labelEl = document.createElement("div");
+        labelEl.className = "matrix-label";
+        labelEl.textContent = label;
+        box.appendChild(labelEl);
+
+        const canvas = document.createElement("canvas");
+        canvas.className = "matrix-canvas";
+        box.appendChild(canvas);
+
+        drawMatrix(canvas, matrix, label);
+
+        return box;
+      }
+
+      async function benchmarkFunction(
+        fn,
+        data,
+        iterations,
+        onProgress,
+        options = {}
+      ) {
+        const args = getFunctionArgs(data);
+
+        const yieldInterval =
+          options.yieldInterval ?? Math.max(1, Math.floor(iterations / 20));
+
+        let elapsed = 0;
+
+        for (let i = 0; i < iterations; i++) {
+          const start = performance.now();
+          const result = fn(...args);
+          const end = performance.now();
+          elapsed += end - start;
+
+          if (onProgress && !options.silent) {
+            onProgress(i + 1, iterations, elapsed);
+          }
+
+          if (
+            !options.silent &&
+            iterations > 4 &&
+            (i + 1) % yieldInterval === 0
+          ) {
+            await nextFrame();
+          }
+        }
+
+        return elapsed / iterations;
+      }
+
+      async function animateRace(rubiqueTime, mathjsTime) {
+        const rubiqueFaster = rubiqueTime <= mathjsTime;
+        const fasterTime = rubiqueFaster ? rubiqueTime : mathjsTime;
+        const slowerTime = rubiqueFaster ? mathjsTime : rubiqueTime;
+        const relativeWidth = Math.max((fasterTime / slowerTime) * 100, 8);
+
+        document.getElementById("rubiqueBar").style.width = rubiqueFaster
+          ? `${relativeWidth}%`
+          : "100%";
+        document.getElementById("mathjsBar").style.width = rubiqueFaster
+          ? "100%"
+          : `${relativeWidth}%`;
+
+        await sleep(600);
+
+        // Show times
+        document.getElementById(
+          "rubiqueTime"
+        ).textContent = `${rubiqueTime.toFixed(2)}ms`;
+        document.getElementById(
+          "mathjsTime"
+        ).textContent = `${mathjsTime.toFixed(2)}ms`;
+
+        // Show status icons
+        document.getElementById("rubiqueStatus").textContent =
+          rubiqueTime < mathjsTime ? "✅" : "⏱️";
+        document.getElementById("mathjsStatus").textContent =
+          mathjsTime < rubiqueTime ? "✅" : "⏱️";
+      }
+
+      function showResults() {
+        // Hide test card and progress
+        document.getElementById("testCard").classList.remove("active");
+        document.getElementById("overallProgress").classList.remove("active");
+
+        // Show results
+        document.getElementById("resultsCard").classList.add("active");
+
+        // Calculate summary stats
+        const avgSpeedup =
+          allResults.reduce((sum, r) => sum + r.speedup, 0) / allResults.length;
+        const wonTests = allResults.filter((r) => r.speedup > 1).length;
+        const bestTest = allResults.reduce((best, r) =>
+          r.speedup > best.speedup ? r : best
+        );
+
+        // Animate big number
+        animateNumber(
+          document.getElementById("avgSpeedup"),
+          avgSpeedup,
+          1,
+          "x"
+        );
+        document.getElementById(
+          "wonTests"
+        ).textContent = `${wonTests}/${allResults.length}`;
+        document.getElementById("bestTest").textContent = `${
+          bestTest.name.split("(")[0]
+        } (${bestTest.speedup.toFixed(1)}x)`;
+
+        // Create chart
+        createChart();
+
+        // Update progress to 100%
+        document.getElementById("progressBar").style.width = "100%";
+        document.getElementById("progressPercent").textContent = "100%";
+        document.getElementById("progressText").textContent =
+          "Benchmarks complete!";
+      }
+
+      function animateNumber(element, target, decimals = 0, suffix = "") {
+        const duration = 1000;
+        const start = 0;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const current = start + (target - start) * easeOutCubic(progress);
+          element.textContent = current.toFixed(decimals) + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function createChart() {
+        const ctx = document.getElementById("resultsChart").getContext("2d");
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: allResults.map((r) => r.name),
+            datasets: [
+              {
+                label: "Speedup (x)",
+                data: allResults.map((r) => r.speedup),
+                backgroundColor: allResults.map((r) =>
+                  r.speedup > 1
+                    ? "rgba(16, 185, 129, 0.8)"
+                    : "rgba(239, 68, 68, 0.8)"
+                ),
+                borderColor: allResults.map((r) =>
+                  r.speedup > 1 ? "rgb(16, 185, 129)" : "rgb(239, 68, 68)"
+                ),
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                titleColor: "#f1f5f9",
+                bodyColor: "#f1f5f9",
+                borderColor: "#334155",
+                borderWidth: 1,
+                padding: 12,
+                displayColors: false,
+                callbacks: {
+                  label: function (context) {
+                    const result = allResults[context.dataIndex];
+                    return [
+                      `Speedup: ${result.speedup.toFixed(2)}x`,
+                      `Rubique: ${result.rubique.toFixed(2)}ms`,
+                      `Math.js: ${result.mathjs.toFixed(2)}ms`,
+                      `Iterations: ${result.iterations}`,
+                    ];
+                  },
+                },
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: "rgba(255, 255, 255, 0.1)",
+                },
+                ticks: {
+                  color: "#94a3b8",
+                  callback: function (value) {
+                    return value + "x";
+                  },
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  color: "#94a3b8",
+                  maxRotation: 45,
+                  minRotation: 45,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      // Expose startBenchmark globally
+      window.startBenchmark = startBenchmark;
+    </script>
+  </body>
+</html>
