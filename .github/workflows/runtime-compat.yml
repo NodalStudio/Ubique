@@ -1,0 +1,56 @@
+name: Runtime compatibility
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  deno:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: canary
+      - run: deno task build
+      - run: deno task test:runtime:deno
+
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: canary
+      - run: npm install --no-save dayjs
+      - run: npm exec --yes tsx test/runtime/node-smoke.ts
+
+  bun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun test/runtime/bun-smoke.ts
+
+  workers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: canary
+      - run: npm install --no-save wrangler
+      - run: npx wrangler dev --test --modules test/runtime/worker-smoke.ts
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: canary
+      - run: npm install --no-save vitest @vitest/browser playwright
+      - run: npx vitest run --browser --include test/runtime/browser-smoke.ts
