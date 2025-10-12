@@ -14,7 +14,7 @@ jobs:
         with:
           deno-version: canary
       - run: deno task build
-      - run: deno task test:runtime:deno
+      - run: deno task test
 
   node:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v5
         with:
-          node-version: canary
+          node-version: node
       - run: npm install --no-save dayjs
       - run: npm exec --yes tsx test/runtime/node-smoke.ts
 
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v5
         with:
-          node-version: canary
+          node-version: node
       - run: npm install --no-save wrangler
       - run: npx wrangler dev --test --modules test/runtime/worker-smoke.ts
 
@@ -51,6 +51,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v5
         with:
-          node-version: canary
+          node-version: node
       - run: npm install --no-save vitest @vitest/browser playwright
       - run: npx vitest run --browser --include test/runtime/browser-smoke.ts
