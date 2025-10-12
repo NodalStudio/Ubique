@@ -1,14 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  mean,
-  minus,
-  rdivide,
-  std,
-  vectorfun,
-} from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * @function zscore
@@ -20,7 +11,7 @@ import {
  * @param flag Normalization value (0: population, 1: sample). Default is 1
  * @param dim Dimension along which to compute z-scores. Default is 0
  * @returns Standardized z-score values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -43,13 +34,42 @@ export default function zscore(
   flag: 0 | 1 = 1,
   dim: 0 | 1 = 0,
 ): numarraymatrix {
-  const _zscore = function (a: array, normFlag: 0 | 1): array {
-    return rdivide(minus(a, mean(a)), std(a, normFlag)) as array;
-  };
-
   if (isnumber(x)) {
-    return NaN as any;
+    return NaN;
   }
 
-  return vectorfun(dim, x, _zscore, flag);
+  return vectorfun(dim, x, (arr: array) => computeZscore(arr, flag), flag);
+}
+
+/**
+ * Single-pass z-score calculation using Welford's algorithm
+ * Numerically stable computation of mean and std, then standardizes
+ */
+function computeZscore(arr: array, flag: 0 | 1): array {
+  const n = arr.length;
+  if (n === 0) return [];
+  if (n === 1) return [0];
+
+  // Welford's algorithm for numerically stable variance
+  let mean = 0;
+  let m2 = 0;
+
+  for (let i = 0; i < n; i++) {
+    const x = arr[i];
+    const delta = x - mean;
+    mean += delta / (i + 1);
+    const delta2 = x - mean;
+    m2 += delta * delta2;
+  }
+
+  const variance = m2 / (n - flag);
+  const stdDev = Math.sqrt(variance);
+
+  // Standardize: (x - mean) / std
+  if (stdDev === 0) {
+    // All values are the same
+    return arr.map(() => 0);
+  }
+
+  return arr.map((val) => (val - mean) / stdDev);
 }

@@ -3,7 +3,6 @@ import {
   annreturn,
   downsiderisk,
   isarray,
-  ismatrix,
   sortino,
   sqrt,
   vectorfun,

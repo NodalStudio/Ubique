@@ -11,7 +11,7 @@ import { isarray, ismatrix, vectorfun } from "../../index.ts";
  * @param t Array of corresponding time periods
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns Compound Annual Growth Rate
- * @throws {Error} If input is a number (not supported)
+ * @throws If input is a number (not supported)
  *
  * @example
  * ```ts

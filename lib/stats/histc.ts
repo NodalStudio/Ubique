@@ -1,8 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import {
   colon,
-  isarray,
-  ismatrix,
   isnumber,
   max,
   min,
@@ -28,7 +26,7 @@ interface HistBin {
  * @param bins Number of bins or array of bin edges. Default is 10
  * @param dim Dimension along which to compute histogram. Default is 0
  * @returns Array of objects with bins, count, and freq properties
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

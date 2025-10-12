@@ -1,9 +1,7 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 import {
   colon,
   interp1,
-  isarray,
-  ismatrix,
   isnumber,
   rdivide,
   sort,
@@ -21,7 +19,7 @@ import {
  * @param p Percentile value in range [0,100]
  * @param dim Dimension along which to compute percentiles. Default is 0
  * @returns Percentile values
- * @throws {Error} When percentile is outside valid range [0,100]
+ * @throws When percentile is outside valid range [0,100]
  *
  * @example
  * ```ts

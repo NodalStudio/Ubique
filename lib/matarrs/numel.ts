@@ -1,16 +1,15 @@
-import { array, matrix } from "../types.d.ts";
-import size from "../matarrs/size.ts";
+import type { array, matrix } from "../types.d.ts";
 
-/** @import { array, matrix } from '../types.d.ts' */
+import size from "../matarrs/size.ts";
 
 /**
  * @function numel
  * @summary Number of elements in an array or matrix
  * @description Computes the total number of elements in an array or matrix.
  *
- * @param {array|matrix} x The array or matrix to evaluate.
- * @returns {number} The total number of elements in the array or matrix.
- * @throws {Error} If no input is provided.
+ * @param x The array or matrix to evaluate.
+ * @returns The total number of elements in the array or matrix.
+ * @throws If no input is provided.
  *
  * @example
  * ```ts
@@ -29,7 +28,7 @@ import size from "../matarrs/size.ts";
  * assertEquals(numel([]), 0);
 
  * ```*/
-export default function numel(x: array | matrix) {
+export default function numel(x: array | matrix): number {
   const [rows, cols] = size(x);
   return rows * cols;
 }

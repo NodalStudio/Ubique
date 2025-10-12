@@ -1,9 +1,6 @@
-import isarray from "../datatype/isarray.ts";
-import ismatrix from "../datatype/ismatrix.ts";
-import { array, matrix } from "../types.d.ts";
-import size from "./size.ts";
+import type { array, matrix } from "../types.d.ts";
 
-/** @import { array, matrix } from '../types.d.ts' */
+import size from "./size.ts";
 
 /**
  * @function nrows
@@ -13,7 +10,7 @@ import size from "./size.ts";
  * @param x Array or matrix of elements.
  * @returns The number of rows in the input.
  *
- * @throws {Error} - Throws an error if no input is provided or if the input is not an array.
+ * @throws Throws an error if no input is provided or if the input is not an array.
  *
  * @example
  * ```ts

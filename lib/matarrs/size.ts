@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array } from "../types.d.ts";
 
 import isnull from "../datatype/isnull.ts";
 import isundefined from "../datatype/isundefined.ts";
@@ -12,9 +12,9 @@ import isarray from "../datatype/isarray.ts";
  * @description Determines the size of an N-dimensional array, where a number is treated as a 1x1 array,
  * a 1-D array as 1xN, and a matrix as MxN. It handles strings by returning their length as 1xN.
  *
- * @param {string|number|array|matrix} x The input whose size is to be determined.
- * @returns {array} An array of dimensions representing the size of the input.
- * @throws {Error} If no input is provided or if the input type is unknown.
+ * @param x The input whose size is to be determined.
+ * @returns An array of dimensions representing the size of the input.
+ * @throws If no input is provided or if the input type is unknown.
  *
  * @example
  * ```ts
@@ -42,7 +42,7 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(size([]), [0, 0]);
 
  * ```*/
-export default function size(x: any) {
+export default function size(x: unknown): array {
   if (isundefined(x)) {
     throw new Error("Not enough input arguments");
   }
@@ -59,18 +59,26 @@ export default function size(x: any) {
     return [1, 1];
   }
 
-  if (isarray(x)) {
-    return x.length ? [1, x.length] : [0, 0];
+  if (Array.isArray(x)) {
+    if (isarray(x)) {
+      return x.length ? [1, x.length] : [0, 0];
+    }
+
+    const dimensions = getDimensions(x);
+    return dimensions;
   }
 
-  const dimensions = [];
-  let size = x.length;
+  throw new Error("Unknown input type");
+}
 
-  while (!isundefined(size) && !isstring(x)) {
-    dimensions.push(size);
-    x = x[0];
-    size = x?.length;
+function getDimensions(node: unknown): number[] {
+  if (!Array.isArray(node)) {
+    return [];
   }
-
-  return dimensions;
+  const len = node.length;
+  if (len === 0) {
+    return [0];
+  }
+  const sub = getDimensions(node[0]);
+  return [len, ...sub];
 }

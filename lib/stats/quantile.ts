@@ -1,5 +1,5 @@
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, prctile } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { isarray, ismatrix, prctile } from "../../index.ts";
 
 /**
  * @function quantile
@@ -11,7 +11,7 @@ import { isarray, ismatrix, isnumber, prctile } from "../../index.ts";
  * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
  * @param dim Dimension along which to compute quantiles. Default is 0
  * @returns Quantile values
- * @throws {Error} When quantile is outside valid range [0,1]
+ * @throws When quantile is outside valid range [0,1]
  *
  * @example
  * ```ts

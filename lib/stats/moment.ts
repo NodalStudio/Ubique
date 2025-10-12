@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, mean, vectorfun } from "../../index.ts";
+import { isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
  * @function moment
@@ -11,7 +11,7 @@ import { isarray, ismatrix, isnumber, mean, vectorfun } from "../../index.ts";
  * @param k Order of the moment to compute
  * @param dim Dimension to compute along (0 for rows, 1 for columns). Default is 0
  * @returns Central moment values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

@@ -1,9 +1,8 @@
 /**
  * Time Series Analysis
  */
-// deno-lint-ignore-file no-explicit-any
-import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { cat, find, ismatrix, isvector, subset, weekday } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
+import { cat, find, isvector, subset, weekday } from "../../index.ts";
 
 /**
  * @function toweekly
@@ -37,21 +36,39 @@ export default function toweekly(
   let idx = find(wd.map((a: number) => a === 5));
 
   if (wd[0] !== 5) {
-    idx = cat(1, 0, idx);
+    idx = cat(1, 0, idx) as array;
   }
 
   if (wd[wd.length - 1] !== 5) {
-    idx = cat(1, idx, nd.length - 1)[0];
+    const result = cat(1, idx, nd.length - 1) as array | matrix;
+    idx = Array.isArray(result[0]) ? (result as matrix)[0] : (result as array);
   }
 
-  let newv;
-  if (isvector(nv)) {
-    newv = subset(nv, idx);
+  const indices = idx as array;
+
+  let newv: array | matrix;
+  if (isOneDArray(nv)) {
+    newv = indices.map((position: number) => nv[position]);
+  } else if (isvector(nv)) {
+    newv = subset(nv, indices) as array | matrix;
+  } else {
+    // Must be a matrix
+    newv = subset(nv, indices, ":") as array | matrix;
   }
 
-  if (ismatrix(nv)) {
-    newv = subset(nv, idx, ":");
+  const newDates = indices.map((position: number) => nd[position]);
+
+  return [newDates, newv];
+}
+
+function isOneDArray(value: array | matrix): value is array {
+  if (!Array.isArray(value)) {
+    return false;
   }
 
-  return [subset(nd, idx), newv];
+  if (value.length === 0) {
+    return true;
+  }
+
+  return !Array.isArray(value[0]);
 }

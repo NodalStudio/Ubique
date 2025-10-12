@@ -118,11 +118,13 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  * // lu() throws: "Not enough input arguments"
 
  * ```*/
-export default function lu(x: any) {
-  if (arguments.length === 0) {
-    throw new Error("Not enough input arguments");
-  }
-
+export default function lu(x: matrix): {
+  LU: matrix;
+  L: matrix;
+  U: matrix;
+  P: array;
+  S: number;
+} {
   const m = nrows(x); // Number of rows
   const n = ncols(x); // Number of columns
   const A = clone(x); // Clone the input matrix to avoid mutating it
@@ -167,12 +169,12 @@ export default function lu(x: any) {
 
 /**
  * Swaps two rows in a matrix.
- * @param {matrix} A The matrix.
- * @param {number} row1 The index of the first row.
- * @param {number} row2 The index of the second row.
- * @param {number} n The number of columns.
+ * @param A The matrix.
+ * @param row1 The index of the first row.
+ * @param row2 The index of the second row.
+ * @param n The number of columns.
  */
-function swapRows(A: any, row1: any, row2: any, n: any) {
+function swapRows(A: matrix, row1: number, row2: number, n: number): void {
   for (let k = 0; k < n; k++) {
     const temp = A[row1][k];
     A[row1][k] = A[row2][k];
@@ -182,10 +184,10 @@ function swapRows(A: any, row1: any, row2: any, n: any) {
 
 /**
  * Extracts the lower triangular matrix from the LU matrix.
- * @param {matrix} LU The LU matrix.
- * @returns {matrix} The lower triangular matrix.
+ * @param LU The LU matrix.
+ * @returns The lower triangular matrix.
  */
-function extractLowerTriangular(LU: any) {
+function extractLowerTriangular(LU: matrix): matrix {
   const m = nrows(LU);
   const n = ncols(LU);
   const L = zeros(m, n);
@@ -199,10 +201,10 @@ function extractLowerTriangular(LU: any) {
 
 /**
  * Extracts the upper triangular matrix from the LU matrix.
- * @param {matrix} LU The LU matrix.
- * @returns {matrix} The upper triangular matrix.
+ * @param LU The LU matrix.
+ * @returns The upper triangular matrix.
  */
-function extractUpperTriangular(LU: any) {
+function extractUpperTriangular(LU: matrix): matrix {
   const m = nrows(LU);
   const n = ncols(LU);
   const U = zeros(m, n);

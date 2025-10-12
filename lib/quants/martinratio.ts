@@ -1,11 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  annreturn,
-  isarray,
-  ismatrix,
-  ulcerindex,
-  vectorfun,
-} from "../../index.ts";
+import { annreturn, isarray, ulcerindex, vectorfun } from "../../index.ts";
 
 /**
  * @function martinratio
@@ -19,7 +13,7 @@ import {
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Martin Ratio
- * @throws {Error} If input is not an array or matrix
+ * @throws If input is not an array or matrix
  *
  * @example
  * ```ts

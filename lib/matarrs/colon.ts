@@ -1,15 +1,15 @@
-/** @import { array } from '../types.d.ts' */
+import type { array } from "../types.d.ts";
 
 /**
  * @function colon
  * @summary Generates an array of numbers from start to end with a specified step.
  * @description Creates an array of numbers starting from `start`, ending at `end`, and incrementing by `step`. If `step` is not provided, it defaults to 1.
  *
- * @param {number} start The starting value of the array.
- * @param {number} end The ending value of the array.
- * @param {number} [step=1] The step value between elements.
- * @returns {array} An array of numbers from `start` to `end` with a step of `step`.
- * @throws {Error} If less than 2 arguments are provided.
+ * @param start The starting value of the array.
+ * @param end The ending value of the array.
+ * @param step The step value between elements. Defaults to 1.
+ * @returns An array of numbers from `start` to `end` with a step of `step`.
+ * @throws If fewer than two arguments are provided.
  *
  * @example
  * ```ts
@@ -28,13 +28,13 @@
  * assertEquals(colon(-7, 14, 2), [-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13]);
 
  * ```*/
-export default function colon(start: any, end: any, step = 1) {
+export default function colon(start: number, end: number, step = 1): array {
   if (step === 0 || (step > 0 && start > end) || (step < 0 && start < end)) {
     return [];
   }
 
   const result = [];
-  for (let i = start; (step > 0 ? i <= end : i >= end); i += step) {
+  for (let i = start; step > 0 ? i <= end : i >= end; i += step) {
     result.push(i);
   }
 

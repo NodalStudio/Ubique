@@ -1,15 +1,15 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function getrow
  * @summary Get a row of a matrix.
  * @description Retrieves a specific row from a 2D matrix. If the input is not a matrix or if the row index is invalid, an error is thrown.
  *
- * @param {matrix} x - The input matrix (2D array) from which to retrieve the row.
- * @param {number} n - The row index to retrieve (0-based index).
- * @returns {array} - An array representing the specified row of the matrix.
- *
- * @throws {Error} - Throws an error if the input is not a matrix or if the row index is out of bounds.
+ * @param x The input matrix (2D array) from which to retrieve the row.
+ * @param n The row index to retrieve (0-based index).
+ * @returns An array representing the specified row of the matrix.
+
+ * @throws Throws an error if the input is not a matrix or if the row index is out of bounds.
  *
  * @example
  * ```ts
@@ -25,7 +25,7 @@
  * assertThrows(() => { getrow([[5, 6, 5], [7, 8, -1]], 2); }, Error, 'Row index must be an integer between 0 and N - 1 rows');
 
  * ```*/
-export default function getrow(x: any, n: any) {
+export default function getrow(x: matrix, n: number): array {
   if (!x || n === undefined) {
     throw new Error("Not enough input arguments");
   }

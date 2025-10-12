@@ -1,15 +1,15 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function getcol
  * @summary Get a column of a matrix.
  * @description Retrieves a specific column from a 2D matrix. If the input is not a matrix or if the column index is invalid, an error is thrown.
  *
- * @param {matrix} x The input matrix (2D array) from which to retrieve the column.
- * @param {number} n The column index to retrieve (0-based index).
- * @returns {array} An array representing the specified column of the matrix.
- *
- * @throws {Error} Throws an error if the input is not a matrix or if the column index is out of bounds.
+ * @param x The input matrix (2D array) from which to retrieve the column.
+ * @param n The column index to retrieve (0-based index).
+ * @returns An array representing the specified column of the matrix.
+
+ * @throws Throws an error if the input is not a matrix or if the column index is out of bounds.
  *
  * @example
  * ```ts
@@ -25,7 +25,7 @@
  * assertThrows(() => { getcol([[5, 6, 5], [7, 8, -1]], 3); }, Error, 'Column index must be an integer between 0 and N - 1 columns');
 
  * ```*/
-export default function getcol(x: any, n: any) {
+export default function getcol(x: matrix, n: number): array {
   if (!x || n === undefined) {
     throw new Error("Not enough input arguments");
   }

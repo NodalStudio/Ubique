@@ -8,7 +8,7 @@ import { arrayfun, isnumber } from "../../index.ts";
  *
  * @param x The input value(s)
  * @returns The natural logarithm of the input value(s)
- * @throws {Error} If no arguments are provided
+ * @throws If no arguments are provided
  *
  * @example
  * ```ts

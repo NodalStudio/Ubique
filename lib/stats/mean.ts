@@ -1,13 +1,6 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  numel,
-  rdivide,
-  size,
-  sum,
-} from "../../index.ts";
+import { isarray, isnumber, numel, rdivide, size, sum } from "../../index.ts";
+import { meanwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
  * @function mean
@@ -18,7 +11,7 @@ import {
  * @param x Input array, matrix, or number
  * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
  * @returns Mean values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -47,7 +40,12 @@ export default function mean(
   }
 
   if (isarray(x)) {
-    return sum(x as array, dim) / numel(x as array);
+    const arr = x as array;
+    // Use WASM for all arrays (benchmarks show it's consistently faster)
+    if (typeof meanwasm === "function") {
+      return meanwasm(new Float64Array(arr));
+    }
+    return sum(arr, dim) / numel(arr);
   }
 
   return rdivide(sum(x as matrix, dim) as array, size(x as matrix)[1 - dim]);

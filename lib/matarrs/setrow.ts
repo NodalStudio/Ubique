@@ -1,15 +1,15 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function setrow
  * @summary Set a row of a matrix.
  * @description Replaces the values of row `n` in a matrix with a given row vector.
  *
- * @param {array|vector} x Row vector (1xN) to insert.
- * @param {matrix} mat Matrix (MxN) in which to set the row.
- * @param {number} n Row index (0-based).
- * @returns {matrix} A new matrix with the updated row.
- * @throws {Error} If inputs are invalid.
+ * @param x Row vector (1xN) to insert.
+ * @param mat Matrix (MxN) in which to set the row.
+ * @param n Row index (0-based).
+ * @returns A new matrix with the updated row.
+ * @throws When the row index is out of bounds or the vector length mismatches the number of columns.
  *
  * @example
  * ```ts
@@ -32,38 +32,22 @@
  *
  * // Example 4: Row index out of bounds error
  * assertThrows(() => setrow([1, 2, 3], [[4, 5, 6], [7, 8, 9]], 2), "Row index must be an integer between 0 and M-1.");
- *
- * // Example 5: Invalid matrix error
- * assertThrows(() => setrow([1, 2, 3], "not a matrix", 0), "Input matrix must be a 2D array.");
- *
- * // Example 6: Invalid row vector error
- * assertThrows(() => setrow("not a vector", [[4, 5, 6], [7, 8, 9]], 1), "Row vector must be an array.");
-
- * ```*/
-export default function setrow(x: any, mat: any, n: any) {
-  if (!Array.isArray(mat) || !Array.isArray(mat[0])) {
-    throw new Error("Input matrix must be a 2D array.");
-  }
-  if (!Array.isArray(x)) {
-    throw new Error("Row vector must be an array.");
-  }
+ * ```
+ */
+export default function setrow(x: array, mat: matrix, n: number): matrix {
   if (!Number.isInteger(n) || n < 0 || n >= mat.length) {
     throw new Error("Row index must be an integer between 0 and M-1.");
   }
 
-  const rowVector = toRowVector(x);
-  if (rowVector.length !== mat[0].length) {
+  const columnCount = mat[0]?.length ?? 0;
+
+  if (x.length !== columnCount) {
     throw new Error(
       "Row vector length must match the number of matrix columns.",
     );
   }
 
-  return mat.map((row, i) => (i === n ? rowVector : row));
-}
+  const replacementRow = [...x];
 
-function toRowVector(x: any) {
-  if (!Array.isArray(x)) {
-    throw new Error("Input must be an array.");
-  }
-  return Array.isArray(x[0]) ? x.flat() : x;
+  return mat.map((row, i) => (i === n ? replacementRow : row));
 }

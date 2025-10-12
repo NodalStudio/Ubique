@@ -9,7 +9,7 @@ import { erf } from "../../index.ts";
  *
  * @param y A real value in the range [-1, 1]
  * @returns The value of the inverse error function
- * @throws {Error} If the input is out of range
+ * @throws If the input is out of range
  *
  * @example
  * ```ts
@@ -64,7 +64,8 @@ function calculateX(z: number): number {
     c2 = 3.429567803,
     c3 = -1.624906493,
     c4 = -1.970840454;
-  const c5 = 1.637067800, c6 = 3.543889200;
+  const c5 = 1.6370678,
+    c6 = 3.5438892;
   const numerator = ((c1 * z + c2) * z + c3) * z + c4;
   const denominator = (c5 * z + c6) * z + 1;
   return numerator / denominator;
@@ -88,7 +89,7 @@ function calculateCentral(z: number, y: number): number {
     c8 = -2.118377725;
   const numerator = ((c1 * z + c2) * z + c3) * z + c4;
   const denominator = (((c5 * z + c6) * z + c7) * z + c8) * z + 1;
-  return y * numerator / denominator;
+  return (y * numerator) / denominator;
 }
 
 /**

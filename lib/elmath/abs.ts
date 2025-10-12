@@ -8,7 +8,7 @@ import { arrayfun } from "../../index.ts";
  *
  * @param x The number, array, or matrix to compute the absolute value for
  * @returns The absolute value(s)
- * @throws {Error} If no arguments are provided
+ * @throws If no arguments are provided
  *
  * @example
  * ```ts

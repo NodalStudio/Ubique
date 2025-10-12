@@ -3,10 +3,10 @@
  * @summary Checks if the input is a square matrix.
  * @description Returns `true` if the input matrix has the same number of rows and columns, otherwise returns `false`.
  *
- * @param {array} x - The input matrix to check.
- * @returns {boolean} - Returns `true` if `x` is a square matrix, otherwise `false`.
- *
- * @throws {Error} - Throws an error if no arguments are provided or if the input is not a valid matrix.
+ * @param x The input matrix to check.
+ * @returns Returns `true` if `x` is a square matrix, otherwise `false`.
+
+ * @throws Throws an error if no arguments are provided or if the input is not a valid matrix.
  *
  * @example
  * ```ts
@@ -31,7 +31,7 @@
  * assertThrows(() => { issquare(123) }, Error);
 
  * ```*/
-export default function issquare(x: any) {
+export default function issquare(x: unknown): boolean {
   if (!x) {
     throw new Error("Not enough input arguments");
   }

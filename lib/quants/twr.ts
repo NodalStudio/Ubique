@@ -10,7 +10,7 @@ import { prod } from "../../index.ts";
  * @param mv Array of market values at each time period
  * @param cf Array of external cash flows (inflows/outflows) or a single number applied to all periods (defaults to 0)
  * @returns Time-weighted return
- * @throws {Error} If market values and cash flows arrays have different lengths
+ * @throws If market values and cash flows arrays have different lengths
  *
  * @example
  * ```ts

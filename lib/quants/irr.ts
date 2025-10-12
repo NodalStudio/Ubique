@@ -12,7 +12,7 @@ import { colon } from "../../index.ts";
  * @param cd Total number of calendar days in the measurement period (defaults to 1)
  * @param guess Initial estimate for what the internal rate of return will be (defaults to 0.1)
  * @returns Internal rate of return
- * @throws {Error} If insufficient arguments or convergence fails
+ * @throws If insufficient arguments or convergence fails
  *
  * @example
  * ```ts
@@ -58,23 +58,17 @@ export default function irr(
   ): number {
     let npv = 0;
     for (let i = 0; i < cf.length; i++) {
-      npv -= cfd[i] / cd * cf[i] / Math.pow(1 + guess, cfd[i] / cd);
+      npv -= ((cfd[i] / cd) * cf[i]) / Math.pow(1 + guess, cfd[i] / cd);
     }
     return npv;
   };
 
-  // Set defaults if not provided
-  if (!cfd) {
-    cfd = colon(0, cf.length - 1, 1);
-  }
-  if (!cd) {
-    cd = 1;
-  }
-  if (!guess) {
-    guess = 0.1;
-  }
+  // Ensure all parameters have values with proper types
+  const cfdValue: array = cfd ?? colon(0, cf.length - 1, 1);
+  const cdValue: number = cd ?? 1;
+  const guessValue: number = guess ?? 0.1;
 
-  let rate = guess;
+  let rate = guessValue;
   const maxeps = 1e-6;
   const maxiter = 50;
   let newrate = 0;
@@ -84,12 +78,12 @@ export default function irr(
   let cntv = true;
 
   do {
-    npv = _npv(cf, cfd, cd, rate);
-    newrate = rate - npv / _npvd(cf, cfd, cd, rate);
+    npv = _npv(cf, cfdValue, cdValue, rate);
+    newrate = rate - npv / _npvd(cf, cfdValue, cdValue, rate);
     epsrate = Math.abs(newrate - rate);
     rate = newrate;
-    cntv = (epsrate > maxeps) && (Math.abs(npv) > maxeps);
-  } while (cntv && (cnt++ < maxiter));
+    cntv = epsrate > maxeps && Math.abs(npv) > maxeps;
+  } while (cntv && cnt++ < maxiter);
 
   if (cntv) {
     throw new Error("IRR calculation failed to converge");
