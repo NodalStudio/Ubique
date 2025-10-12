@@ -18,7 +18,7 @@ import {
  * @param x The dividend
  * @param y The divisor
  * @returns The result of the division
- * @throws {Error} If the input dimensions are incompatible or if Y is not a square matrix when required
+ * @throws If the input dimensions are incompatible or if Y is not a square matrix when required
  *
  * @example
  * ```ts
@@ -62,7 +62,7 @@ export default function mrdivide(
   }
 
   if (issquare(y)) {
-    if (ncols(x) !== nrows(y)) {
+    if (ncols(x as array | matrix) !== nrows(y as array | matrix)) {
       throw new Error("matrix dimensions mismatch");
     }
     return mtimes(x as matrix, inv(y as matrix));

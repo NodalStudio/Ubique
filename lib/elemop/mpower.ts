@@ -10,7 +10,7 @@ import { isnumber, issquare, mtimes } from "../../index.ts";
  * @param x The base matrix (must be square)
  * @param y The exponent (must be a scalar)
  * @returns The resulting matrix after exponentiation
- * @throws {Error} If the input is not a square matrix or the exponent is not a scalar
+ * @throws If the input is not a square matrix or the exponent is not a scalar
  *
  * @example
  * ```ts

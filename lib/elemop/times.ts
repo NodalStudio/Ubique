@@ -10,7 +10,7 @@ import { arrayfun, getrow, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The first operand
  * @param y The second operand
  * @returns The result of element-wise multiplication
- * @throws {Error} If no arguments are provided or if the input dimensions do not match
+ * @throws If no arguments are provided or if the input dimensions do not match
  *
  * @example
  * ```ts
@@ -60,14 +60,14 @@ export default function times(
  * @param x The first operand
  * @param y The second operand
  * @returns The result of the multiplication
- * @throws {Error} If the input arguments are not valid
+ * @throws If the input arguments are not valid
  */
 function handleNumberMultiplication(
   x: numarraymatrix,
   y: numarraymatrix,
 ): numarraymatrix {
   if (isnumber(x)) {
-    return arrayfun(y, (v: number) => x as number * v);
+    return arrayfun(y, (v: number) => (x as number) * v);
   }
 
   if (isnumber(y)) {

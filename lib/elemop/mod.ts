@@ -10,7 +10,7 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The dividend
  * @param y The divisor
  * @returns The modulus after division
- * @throws {Error} If fewer than two arguments are provided
+ * @throws If fewer than two arguments are provided
  *
  * @example
  * ```ts

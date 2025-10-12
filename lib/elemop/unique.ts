@@ -8,7 +8,7 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
  * @param x The input array or matrix of values
  * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
  * @returns The unique values, or a matrix containing the unique values and their indices
- * @throws {Error} If no input is provided or the flag is invalid
+ * @throws If no input is provided or the flag is invalid
  *
  * @example
  * ```ts
@@ -38,7 +38,7 @@ export default function unique(
   flag: 0 | 1 = 0,
 ): array | matrix {
   const flatX = Array.isArray(x)
-    ? (Array.isArray(x[0]) ? (x as matrix).flat() : x as array)
+    ? Array.isArray(x[0]) ? (x as matrix).flat() : (x as array)
     : [x];
   const sorted = flatX
     .map((value: number, index: number) => [value, index])

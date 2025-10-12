@@ -10,7 +10,7 @@ import { fix, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The dividend
  * @param y The divisor
  * @returns The remainder after division
- * @throws {Error} If no arguments are provided
+ * @throws If no arguments are provided
  *
  * @example
  * ```ts
@@ -35,10 +35,6 @@ export default function rem(
   x: numarraymatrix,
   y: numarraymatrix,
 ): numarraymatrix {
-  if (arguments.length === 0) {
-    throw new Error("Not enough input arguments");
-  }
-
   if (isnumber(x) && isnumber(y)) {
     const n = fix(x / y);
     return x - n * y;

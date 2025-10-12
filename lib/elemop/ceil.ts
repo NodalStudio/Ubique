@@ -10,7 +10,7 @@ import { arrayfun } from "../../index.ts";
  * @param x Value(s) to be rounded
  * @param n Number of decimal places to round to (defaults to 0)
  * @returns The rounded value(s)
- * @throws {Error} If no input is provided
+ * @throws If no input is provided
  *
  * @example
  * ```ts

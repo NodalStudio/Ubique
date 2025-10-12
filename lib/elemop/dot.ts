@@ -10,7 +10,7 @@ import { size, sum, times } from "../../index.ts";
  * @param x First array for dot product
  * @param y Second array for dot product
  * @returns The dot product of the two arrays
- * @throws {Error} If inputs are not arrays, arrays are not of the same size, or if no arguments are provided
+ * @throws If inputs are not arrays, arrays are not of the same size, or if no arguments are provided
  *
  * @example
  * ```ts
