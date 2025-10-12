@@ -14,7 +14,6 @@ algebra, statistics, time series analysis, and computational finance.
 - [Performance Highlights](#performance-highlights)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -32,7 +31,7 @@ solutions.
 
 - **Modern Syntax & Tooling:** Written in TypeScript and running on Deno for
   improved development experience, security, and performance.
-- **Efficient Linear Algebra:** Uses Rust’s [nalgebra](https://nalgebra.org/)
+- **Efficient Linear Algebra:** Uses Rust's [nalgebra](https://nalgebra.org/)
   compiled to WebAssembly to accelerate matrix operations.
 - **Comprehensive Functionality:** Provides a full suite of operations for
   vectors and matrices, including elementary operations, statistics, time series
@@ -43,29 +42,77 @@ solutions.
 
 ## Performance Highlights
 
-Rubique demonstrates substantial performance gains in matrix multiplication.
-Here’s a sample benchmark comparing Rubique’s custom matrix multiplication
-against a traditional JavaScript library (e.g., math.js):
+Rubique demonstrates exceptional performance gains across multiple operations compared to math.js:
 
-| Matrix Size | rubique (ms) | math.js (ms) | Faster (%) |
-| ----------- | ------------ | ------------ | ---------- |
-| 10x10       | 0.07         | 0.32         | 77.38      |
-| 100x100     | 4.03         | 11.02        | 63.44      |
-| 1000x1000   | 1089.51      | 42508.00     | 97.44      |
+### Matrix Operations
+- **Matrix Multiply (500x500):** 20.82x faster
+- **Matrix Add (100x100):** 17.90x faster
+- **Transpose (100x100):** 12.88x faster
 
-_These results highlight Rubique's potential in handling heavy matrix operations
-efficiently._
+### Statistical Functions
+- **Sum (n=10000):** 20.38x faster
+- **Standard Deviation (n=1000):** 3.19x faster
+- **Mean (n=10000):** 2.42x faster
+
+### Interactive Benchmark
+
+Want to see these performance gains in action?
+
+- **Browser:** Check out our **[interactive benchmark page](https://bemayer.github.io/rubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
+- **CLI:** Run `deno task benchmark` for a comprehensive terminal-based benchmark suite with colored output and detailed results.
 
 ## Installation
 
-Ensure you have [Deno](https://deno.land/) installed, then import Rubique
-directly into your project:
+### For Deno
 
-```ts
-import * as rubique from "https://github.com/bemayer/rubique/mod.ts";
+Rubique is published on [JSR (JavaScript Registry)](https://jsr.io/@bemayer/rubique):
+
+```bash
+deno add @bemayer/rubique
 ```
 
-Alternatively, you can clone the repository:
+Or import directly:
+
+```ts
+import * as rubique from "jsr:@bemayer/rubique";
+```
+
+### For Node.js / npm
+
+**Option 1: Using JSR auto-generated package**
+```bash
+npm install @jsr/bemayer__rubique
+```
+
+```ts
+import * as rubique from "@jsr/bemayer__rubique";
+```
+
+**Option 2: Using JSR specifier (Node.js 20.6+)**
+```bash
+npm install jsr:@bemayer/rubique
+```
+
+```ts
+import * as rubique from "@bemayer/rubique";
+```
+
+### For browsers
+
+Use the esm.sh CDN to load Rubique directly in the browser:
+
+```html
+<script type="module">
+  import * as rubique from 'https://esm.sh/jsr/@bemayer/rubique@1.0.0';
+
+  const matrix = rubique.inv([[1, 2], [3, 4]]);
+  console.log(matrix);
+</script>
+```
+
+### For development
+
+Clone the repository to contribute or explore the source code:
 
 ```bash
 git clone https://github.com/bemayer/rubique.git
@@ -77,7 +124,11 @@ cd rubique
 Below is a quick example demonstrating matrix multiplication with Rubique:
 
 ```ts
-import * as rubique from "https://github.com/bemayer/rubique/mod.ts";
+// Deno
+import * as rubique from "jsr:@bemayer/rubique";
+
+// Node.js
+// import * as rubique from "@jsr/bemayer__rubique";
 
 const A = rubique.matrix([
   [1, 2],
@@ -100,20 +151,6 @@ console.log(C);
 
 Rubique’s API is designed to be intuitive, closely mirroring familiar operations
 from Ubique and MATLAB-like environments.
-
-## Roadmap
-
-Rubique is an ongoing project with a clear vision for continuous improvement.
-Planned enhancements include:
-
-- [ ] **Documentation Tests:** Add all tests to the `@example` sections to
-      leverage Deno’s documentation testing.
-- [ ] **Enhanced WebAssembly Usage:** Generalize the use of WebAssembly for
-      heavy matrix operations to further boost performance.
-- [ ] **Refactoring:** Complete the refactoring of the `quants` function to
-      ensure consistency and reliability.
-- [ ] **Type Improvements:** Clean up type definitions to avoid the overuse of
-      `any` and ensure robust TypeScript support.
 
 ## Contributing
 
