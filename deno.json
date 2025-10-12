@@ -1,6 +1,6 @@
 {
   "name": "@bemayer/rubique",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
   "license": "MIT",
   "compilerOptions": {
