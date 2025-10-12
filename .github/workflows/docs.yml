@@ -1,0 +1,35 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Generate documentation
+        run: deno task docs
+
+      - name: Create .nojekyll
+        run: touch docs/.nojekyll
+
+      - name: Commit and push docs
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add docs/
+          git commit -m "📝 Auto-generate documentation" || echo "No changes to commit"
+          git push
