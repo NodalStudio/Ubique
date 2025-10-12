@@ -108,6 +108,34 @@ async function fixDocAssets(
   return filesUpdated;
 }
 
+async function fixDocLinks(
+  options: FixDocAssetsOptions = {}
+): Promise<number> {
+  const docsRootArg = options.root ?? "./docs";
+  const docsRoot = resolve(Deno.cwd(), docsRootArg);
+  let filesUpdated = 0;
+
+  for await (const filePath of walkHtml(docsRoot)) {
+    const original = await Deno.readTextFile(filePath);
+
+    // Replace all backslashes in href attributes with forward slashes
+    const updated = original.replace(
+      /href="([^"]*?)"/g,
+      (_match, path) => {
+        const normalized = path.replace(/\\/g, "/");
+        return `href="${normalized}"`;
+      }
+    );
+
+    if (updated !== original) {
+      await Deno.writeTextFile(filePath, updated);
+      filesUpdated += 1;
+    }
+  }
+
+  return filesUpdated;
+}
+
 function extractFirstSentence(value: string): string {
   const trimmed = value.trim();
   if (trimmed === "") return "";
@@ -210,10 +238,12 @@ await Deno.writeTextFile(targetCssUrl, `${normalized}${cssAppendTrimmed}\n`);
 
 await Deno.copyFile(benchmarkHtmlUrl, targetBenchmarkUrl);
 
-const updated = await fixDocAssets({ root: docsOutput });
+const assetsUpdated = await fixDocAssets({ root: docsOutput });
+const linksUpdated = await fixDocLinks({ root: docsOutput });
 const searchIndexUrl = new URL("../docs/search_index.js", import.meta.url);
 const trimmed = await trimSearchIndexDocs(searchIndexUrl);
 console.log(
-  `Documentation built successfully. Normalized asset paths in ${updated} HTML file(s).` +
+  `Documentation built successfully. Normalized asset paths in ${assetsUpdated} HTML file(s), ` +
+    `fixed links in ${linksUpdated} HTML file(s).` +
     (trimmed ? " Trimmed search index summaries." : "")
 );
