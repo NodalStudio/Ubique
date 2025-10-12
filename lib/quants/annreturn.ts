@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, mean, prod, vectorfun } from "../../index.ts";
 
 /**
- * @function annreturn
- * @summary Computes the annualized return
- * @description Calculates the annualized return of an asset or portfolio over a period.
+ * Computes the annualized return.
+ *
+ * Calculates the annualized return of an asset or portfolio over a period.
  * It supports both geometric (compounded) and simple (arithmetic) return modes.
  *
  * @param x Asset/portfolio returns

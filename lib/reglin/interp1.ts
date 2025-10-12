@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { isnumber } from "../../index.ts";
 
 /**
- * @function interp1
- * @summary Linear interpolation
- * @description Linear interpolation. Returns the 1-D value of Y, given Xi query points.
+ * Linear interpolation.
+ *
+ * Linear interpolation. Returns the 1-D value of Y, given Xi query points.
  *
  * @param x sample points (must be sorted in ascending order)
  * @param y corresponding values of sample points
@@ -74,7 +74,7 @@ export default function interp1(
 }
 
 /**
- * Find the segment index where value falls
+ * Find the segment index where value falls.
  */
 function findSegment(arr: array, value: number): number {
   let low = 0;

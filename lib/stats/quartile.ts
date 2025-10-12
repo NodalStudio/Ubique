@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
- * @function quartile
- * @summary Quartiles of a sample
- * @description Calculates the three quartiles (Q1, Q2, Q3) which divide the data into four equal parts.
+ * Quartiles of a sample.
+ *
+ * Calculates the three quartiles (Q1, Q2, Q3) which divide the data into four equal parts.
  * Q1 is the 25th percentile, Q2 is the median (50th percentile), and Q3 is the 75th percentile.
  *
  * @param x Input array or matrix

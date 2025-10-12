@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { kurtosis, skewness } from "../../index.ts";
 
 /**
- * @function jbtest
- * @summary Performs the Jarque-Bera test for normality.
- * @description Tests the null hypothesis that the input data follows a normal distribution with an unknown mean and variance.
+ * Performs the Jarque-Bera test for normality.
+ *
+ * Tests the null hypothesis that the input data follows a normal distribution with an unknown mean and variance.
  * The test statistic combines skewness and excess kurtosis.
  *
  * @param x The dataset (array of values).

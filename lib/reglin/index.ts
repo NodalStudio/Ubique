@@ -1,6 +1,7 @@
 /**
  * @module reglin
- * @description Regression and interpolation functions
+ *
+ * Regression and interpolation functions.
  *
  * This module provides utilities for:
  * - Linear regression (linearreg)

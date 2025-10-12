@@ -10,9 +10,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function paramvar
- * @summary Parametric Value-At-Risk
- * @description Parametric Value-At-Risk assuming returns are normally distributed.
+ * Parametric Value-At-Risk.
+ *
+ * Parametric Value-At-Risk assuming returns are normally distributed.
  * It can work with numbers, arrays, row vectors, and column vectors.
  *
  * @param mu mean value (def: 0)

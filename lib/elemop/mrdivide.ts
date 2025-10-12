@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function mrdivide
- * @summary Matrix right division X / Y
- * @description Performs matrix right division X / Y. If X is MxN and Y is NxN, it returns a matrix MxN. The operation multiplies X with the inverse of Y. Y must be a square matrix.
+ * Matrix right division X / Y.
+ *
+ * Performs matrix right division X / Y. If X is MxN and Y is NxN, it returns a matrix MxN. The operation multiplies X with the inverse of Y. Y must be a square matrix.
  *
  * @param x The dividend
  * @param y The divisor

@@ -9,9 +9,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function m2sortino
- * @summary M-squared for Sortino
- * @description M2 calculated for Downside risk instead of Total Risk.
+ * M-squared for Sortino.
+ *
+ * M2 calculated for Downside risk instead of Total Risk.
  * It represents the portfolio return adjusted for downside risk relative to the benchmark.
  *
  * @param x asset/portfolio values

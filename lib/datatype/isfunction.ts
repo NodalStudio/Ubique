@@ -1,7 +1,7 @@
 /**
- * @function isfunction
- * @summary Checks if the input is a function.
- * @description Returns `true` if the input is of type `function`.
+ * Checks if the input is a function.
+ *
+ * Returns `true` if the input is of type `function`.
  *
  * @param x The input to check.
  * @returns Returns `true` if `x` is a function.

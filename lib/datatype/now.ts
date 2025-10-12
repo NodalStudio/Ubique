@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 
 /**
- * @function now
- * @summary Current date and time as a Unix timestamp.
- * @description Returns the current date and time as a Unix timestamp (seconds since the Unix epoch).
+ * Current date and time as a Unix timestamp.
+ *
+ * Returns the current date and time as a Unix timestamp (seconds since the Unix epoch).
  *
  * @returns The current Unix timestamp.
  *

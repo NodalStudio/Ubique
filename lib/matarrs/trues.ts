@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function trues
- * @summary Creates an array filled with `true` values.
- * @description Generates an array or matrix of all `true` values based on the input dimensions.
+ * Creates an array filled with `true` values.
+ *
+ * Generates an array or matrix of all `true` values based on the input dimensions.
  *              Accepts one or two numeric arguments, or an array specifying the dimensions.
  *
  * @param args Variable input arguments (max 2).

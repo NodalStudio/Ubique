@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, max, min, vectorfun } from "../../index.ts";
 
 /**
- * @function range
- * @summary Range of values
- * @description Calculates the range (difference between maximum and minimum values)
+ * Range of values.
+ *
+ * Calculates the range (difference between maximum and minimum values)
  * of an array or matrix. Provides a measure of data spread or variability.
  *
  * @param x Input number, array, or matrix

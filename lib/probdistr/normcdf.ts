@@ -1,9 +1,9 @@
 import { erf } from "../../index.ts";
 
 /**
- * @function normcdf
- * @summary Computes the cumulative distribution function (CDF) of a normal distribution.
- * @description Calculates the probability that a normally distributed random variable with mean `mu` and standard deviation `sigma` is less than or equal to `x`.
+ * Computes the cumulative distribution function (CDF) of a normal distribution.
+ *
+ * Calculates the probability that a normally distributed random variable with mean `mu` and standard deviation `sigma` is less than or equal to `x`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
  * @param x The value at which to evaluate the CDF

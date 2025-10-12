@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function isarray
- * @summary Checks if the input is a 1D array.
- * @description Returns `true` if the input is a 1D array (not a 2D array/matrix).
+ * Checks if the input is a 1D array.
+ *
+ * Returns `true` if the input is a 1D array (not a 2D array/matrix).
  *
  * @param x The input to check.
  * @returns Returns `true` if `x` is a 1D array, otherwise `false`.

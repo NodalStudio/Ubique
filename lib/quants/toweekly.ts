@@ -1,13 +1,13 @@
 /**
- * Time Series Analysis
+ * Time Series Analysis.
  */
 import type { array, matrix } from "../types.d.ts";
 import { cat, find, isvector, subset, weekday } from "../../index.ts";
 
 /**
- * @function toweekly
- * @summary Convert a time series to a weekly frequency
- * @description Convert a time series to a weekly frequency. Default: all days
+ * Convert a time series to a weekly frequency.
+ *
+ * Convert a time series to a weekly frequency. Default: all days
  * in the range. Example: daily dates [Wed,...Fri,...Mon,...Fri,...Thu] will become
  * [Wed,...,Fri...,Fri...,Thu]
  *

@@ -16,9 +16,9 @@ interface HistBin {
 }
 
 /**
- * @function histc
- * @summary Histogram count
- * @description Counts the number of values in x that fall between the elements in the bins array.
+ * Histogram count.
+ *
+ * Counts the number of values in x that fall between the elements in the bins array.
  * Values outside the range in bins are not counted. Returns an array of objects with bin edges,
  * counts, and frequencies.
  *

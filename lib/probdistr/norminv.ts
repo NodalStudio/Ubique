@@ -1,9 +1,9 @@
 import erfcinv from "../elmath/erfcinv.ts";
 
 /**
- * @function norminv
- * @summary Computes the inverse of the normal cumulative distribution function (CDF).
- * @description Returns the inverse CDF (quantile function) for a normal distribution with mean `mu` and standard deviation `sigma` at probability `p`.
+ * Computes the inverse of the normal cumulative distribution function (CDF).
+ *
+ * Returns the inverse CDF (quantile function) for a normal distribution with mean `mu` and standard deviation `sigma` at probability `p`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
  * @param p The probability value in the range (0,1).

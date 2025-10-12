@@ -2,9 +2,9 @@ import size from "./size.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function length
- * @summary Gets the length of a vector or the largest array dimension.
- * @description Returns the length of a vector or the largest dimension of a 2D array (matrix).
+ * Gets the length of a vector or the largest array dimension.
+ *
+ * Returns the length of a vector or the largest dimension of a 2D array (matrix).
  *
  * @param x The input array, matrix, or element.
  * @returns Returns the length of the vector or the largest dimension of the array/matrix.

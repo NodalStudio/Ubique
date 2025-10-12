@@ -3,9 +3,9 @@ import isarray from "../datatype/isarray.ts";
 import rem from "../elemop/rem.ts";
 
 /**
- * @function ind2sub
- * @summary Converts linear index to row and column subscripts.
- * @description Converts a linear index or array of linear indices into the equivalent row and column subscripts for a given matrix size. This allows converting a 1D index into 2D row/column positions.
+ * Converts linear index to row and column subscripts.
+ *
+ * Converts a linear index or array of linear indices into the equivalent row and column subscripts for a given matrix size. This allows converting a 1D index into 2D row/column positions.
  *
  * @param size Size of the matrix as [rows, columns].
  * @param index Linear index or array of indices [0...N-1].

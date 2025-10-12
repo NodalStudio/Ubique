@@ -1,7 +1,8 @@
 // Element-wise operations
 /**
  * @module elemop
- * @description Element-wise operations on arrays and matrices
+ *
+ * Element-wise operations on arrays and matrices.
  *
  * This module provides utilities for:
  * - Arithmetic operations (plus, minus, times, divide, power, etc.)

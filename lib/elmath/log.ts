@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isnumber } from "../../index.ts";
 
 /**
- * @function log
- * @summary Computes the natural logarithm (base e).
- * @description Computes the natural logarithm (base e) for each element in a number, array, or matrix.
+ * Computes the natural logarithm (base e).
+ *
+ * Computes the natural logarithm (base e) for each element in a number, array, or matrix.
  *
  * @param x The input value(s)
  * @returns The natural logarithm of the input value(s)

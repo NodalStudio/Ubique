@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
- * @function iqr
- * @summary Interquartile range
- * @description Calculates the interquartile range (difference between 75th and 25th percentiles)
+ * Interquartile range.
+ *
+ * Calculates the interquartile range (difference between 75th and 25th percentiles)
  * of arrays or matrices. For matrices, operates along specified dimension.
  *
  * @param x Input array or matrix

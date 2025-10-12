@@ -1,9 +1,9 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
 /**
- * @function unique
- * @summary Unique values in an array or matrix
- * @description Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
  *
  * @param x The input array or matrix of values
  * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)

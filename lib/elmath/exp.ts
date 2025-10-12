@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isnumber } from "../../index.ts";
 
 /**
- * @function exp
- * @summary Computes the exponential value.
- * @description Computes the exponential value for each element in a number, array, or matrix.
+ * Computes the exponential value.
+ *
+ * Computes the exponential value for each element in a number, array, or matrix.
  *
  * @param x The input value(s)
  * @returns The exponential of the input value(s)

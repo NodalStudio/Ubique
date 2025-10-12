@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, quantile, vectorfun } from "../../index.ts";
 
 /**
- * @function histvar
- * @summary Historical Value-At-Risk
- * @description Univariate historical simulation. Single asset
+ * Historical Value-At-Risk.
+ *
+ * Univariate historical simulation. Single asset
  *
  * @param x array or matrix of values
  * @param p confidence level in the range [0,1] (def: 0.95)

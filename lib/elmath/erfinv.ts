@@ -1,9 +1,9 @@
 import { erf } from "../../index.ts";
 
 /**
- * @function erfinv
- * @summary Inverse error function
- * @description Computes the inverse of the error function.
+ * Inverse error function.
+ *
+ * Computes the inverse of the error function.
  *
  * The inverse error function satisfies \( y = \text{erf}(x) \), for \( -1 \leq y \leq 1 \) and \( -\infty \leq x \leq \infty \).
  *
@@ -54,8 +54,7 @@ export default function erfinv(y: number): number {
 }
 
 /**
- * @function calculateX
- * @description Helper function to calculate the initial approximation for the inverse error function.
+ * Helper function to calculate the initial approximation for the inverse error function.
  * @param z Intermediate value based on the input
  * @returns Initial approximation
  */
@@ -72,8 +71,7 @@ function calculateX(z: number): number {
 }
 
 /**
- * @function calculateCentral
- * @description Helper function to calculate the initial approximation for values close to 0.
+ * Helper function to calculate the initial approximation for values close to 0.
  * @param z Square of the input value
  * @param y Input value
  * @returns Initial approximation
@@ -93,8 +91,7 @@ function calculateCentral(z: number, y: number): number {
 }
 
 /**
- * @function refineResult
- * @description Refines the initial approximation using the Newton-Raphson method.
+ * Refines the initial approximation using the Newton-Raphson method.
  * @param x Initial approximation
  * @param y Input value
  * @returns Refined approximation

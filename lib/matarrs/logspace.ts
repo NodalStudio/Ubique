@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import linspace from "./linspace.ts";
 
 /**
- * @function logspace
- * @summary Create logarithmically spaced arrays
- * @description Generates an array of logarithmically spaced points between 10^a and 10^b (inclusive).
+ * Create logarithmically spaced arrays.
+ *
+ * Generates an array of logarithmically spaced points between 10^a and 10^b (inclusive).
  * If the number of points `n` is not provided, it defaults to 10.
  *
  * @param a The lower bound (exponent)

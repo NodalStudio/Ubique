@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import cat from "./cat.ts";
 
 /**
- * @function vertcat
- * @summary Concatenates arrays or matrices vertically.
- * @description Combines multiple arrays or matrices by stacking them vertically.
+ * Concatenates arrays or matrices vertically.
+ *
+ * Combines multiple arrays or matrices by stacking them vertically.
  *
  * @param args Variable arguments (args1, args2, ...).
  * @returns The vertically concatenated matrix.

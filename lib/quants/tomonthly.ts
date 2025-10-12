@@ -1,13 +1,13 @@
 /**
- * Time Series Analysis
+ * Time Series Analysis.
  */
 import type { array } from "../types.d.ts";
 import { isnumber, sum } from "../../index.ts";
 
 /**
- * @function tomonthly
- * @summary Convert a return series to a monthly series
- * @description Convert a return series to a monthly series (e.g. from daily to monthly)
+ * Convert a return series to a monthly series.
+ *
+ * Convert a return series to a monthly series (e.g. from daily to monthly)
  *
  * @param x array of values
  * @param mode calculation mode: 'simple' (default) or 'continuous'

@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function getrow
- * @summary Get a row of a matrix.
- * @description Retrieves a specific row from a 2D matrix. If the input is not a matrix or if the row index is invalid, an error is thrown.
+ * Get a row of a matrix.
+ *
+ * Retrieves a specific row from a 2D matrix. If the input is not a matrix or if the row index is invalid, an error is thrown.
  *
  * @param x The input matrix (2D array) from which to retrieve the row.
  * @param n The row index to retrieve (0-based index).

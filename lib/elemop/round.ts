@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun } from "../../index.ts";
 
 /**
- * @function round
- * @summary Round to nearest integer
- * @description Rounds each element in `x` to the nearest integer or specified number of decimal places. Handles numbers, arrays, and matrices element-wise.
+ * Round to nearest integer.
+ *
+ * Rounds each element in `x` to the nearest integer or specified number of decimal places. Handles numbers, arrays, and matrices element-wise.
  *
  * @param x The value(s) to be rounded
  * @param n The number of decimal places to round to (default is 0)

@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import { vectorfun } from "../../index.ts";
 
 /**
- * @function sum
- * @summary Sum of array elements
- * @description Computes the sum of array or matrix elements. If a matrix is provided, the sum can be calculated across rows or columns based on the specified dimension.
+ * Sum of array elements.
+ *
+ * Computes the sum of array or matrix elements. If a matrix is provided, the sum can be calculated across rows or columns based on the specified dimension.
  *
  * @param x The input array or matrix of values
  * @param dim The dimension to sum across. Use `0` for rows and `1` for columns (defaults to `0`)

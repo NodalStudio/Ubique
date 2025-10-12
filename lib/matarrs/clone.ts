@@ -5,9 +5,9 @@ import isarray from "../datatype/isarray.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
- * @function clone
- * @summary Create a clone of the input array or matrix.
- * @description Creates a deep copy of the input array or matrix. If the input is a number, it simply returns that number.
+ * Create a clone of the input array or matrix.
+ *
+ * Creates a deep copy of the input array or matrix. If the input is a number, it simply returns that number.
  *
  * @param x Array or matrix to clone.
  * @returns A deep copy of the input array or matrix.

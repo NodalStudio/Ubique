@@ -12,9 +12,9 @@ import transpose from "../matarrs/transpose.ts";
 import getcol from "../matarrs/getcol.ts";
 
 /**
- * @function linsolve
- * @summary Solve a linear system of equations Ax = b.
- * @description Solves the linear system of equations Ax = b using LU factorization with row pivoting.
+ * Solve a linear system of equations Ax = b.
+ *
+ * Solves the linear system of equations Ax = b using LU factorization with row pivoting.
  *
  * @param A A square matrix.
  * @param b A vector or matrix.

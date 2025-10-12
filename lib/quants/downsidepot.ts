@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
- * @function downsidepot
- * @summary Downside Potential
- * @description Measure of the average deviation below a minimum acceptable return threshold
+ * Downside Potential.
+ *
+ * Measure of the average deviation below a minimum acceptable return threshold
  *
  * @param x array or matrix of values
  * @param mar minimum acceptable return (def: 0)

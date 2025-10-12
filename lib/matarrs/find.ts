@@ -3,9 +3,9 @@ import ismatrix from "../datatype/ismatrix.ts";
 import flatten from "./flatten.ts";
 
 /**
- * @function find
- * @summary Finds the indices of nonzero (true) elements in an array or matrix.
- * @description Given an input array or matrix, returns the indices of elements that are `true`. For a matrix, the indices are flattened row-wise.
+ * Finds the indices of nonzero (true) elements in an array or matrix.
+ *
+ * Given an input array or matrix, returns the indices of elements that are `true`. For a matrix, the indices are flattened row-wise.
  *
  * @param x Input array or matrix.
  * @returns An array of indices where the values are `true`.

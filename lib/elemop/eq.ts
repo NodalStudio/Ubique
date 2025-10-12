@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function eq
- * @summary Checks for equality between two values or arrays.
- * @description Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
  *
  * @param x Left-hand side value(s) for comparison.
  * @param y Right-hand side value(s) for comparison.
@@ -53,7 +53,7 @@ export default function eq(
 }
 
 /**
- * Handle equality comparison for different input types
+ * Handle equality comparison for different input types.
  */
 function handleEqualityComparison(
   x: numarraymatrix,
@@ -103,7 +103,7 @@ function handleEqualityComparison(
 }
 
 /**
- * Element-wise comparison of two arrays
+ * Element-wise comparison of two arrays.
  */
 function elementwiseArrayComparison(x: array, y: array): array<boolean> {
   if (x.length !== y.length) {
@@ -113,7 +113,7 @@ function elementwiseArrayComparison(x: array, y: array): array<boolean> {
 }
 
 /**
- * Element-wise comparison of two matrices
+ * Element-wise comparison of two matrices.
  */
 function elementwiseMatrixComparison(x: matrix, y: matrix): matrix<boolean> {
   if (x.length !== y.length || x[0].length !== y[0].length) {

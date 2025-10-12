@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isnumber, mean, minus, vectorfun } from "../../index.ts";
 
 /**
- * @function mad
- * @summary Mean absolute deviation
- * @description Calculates the mean absolute deviation of values from their mean.
+ * Mean absolute deviation.
+ *
+ * Calculates the mean absolute deviation of values from their mean.
  * MAD is the average of absolute deviations from the mean, providing a measure of variability.
  *
  * @param x Input array or matrix

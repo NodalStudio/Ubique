@@ -1,9 +1,9 @@
 import { isnumber } from "../../index.ts";
 
 /**
- * @function isinteger
- * @summary Checks if the input is an integer.
- * @description Returns `true` if the input is a number and is an integer (i.e., has no fractional part).
+ * Checks if the input is an integer.
+ *
+ * Returns `true` if the input is a number and is an integer (i.e., has no fractional part).
  *
  * @param x The input to check.
  * @returns Returns `true` if `x` is an integer.

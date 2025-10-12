@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { drawdown, isnumber, sum, vectorfun } from "../../index.ts";
 
 /**
- * @function painindex
- * @summary Pain Index
- * @description Mean value of the drawdowns, similar to Ulcer Index.
+ * Pain Index.
+ *
+ * Mean value of the drawdowns, similar to Ulcer Index.
  * It measures the depth, duration, and frequency of losses.
  *
  * @param x asset/portfolio returns

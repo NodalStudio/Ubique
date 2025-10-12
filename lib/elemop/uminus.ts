@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun } from "../../index.ts";
 
 /**
- * @function uminus
- * @summary Unary minus -X
- * @description Applies unary minus to a number, array, or matrix, effectively negating all elements.
+ * Unary minus -X.
+ *
+ * Applies unary minus to a number, array, or matrix, effectively negating all elements.
  *
  * @param x The input number, array, or matrix to be negated
  * @returns The negated value(s)

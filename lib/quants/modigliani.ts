@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, mean, sharpe, std, vectorfun } from "../../index.ts";
 
 /**
- * @function modigliani
- * @summary Modigliani-Modigliani measure (M2)
- * @description The Modigliani-Modigliani measure (M2) is a risk-adjusted performance
+ * Modigliani-Modigliani measure (M2).
+ *
+ * The Modigliani-Modigliani measure (M2) is a risk-adjusted performance
  * measure that represents the return a portfolio would have achieved if it had taken
  * the same risk as the benchmark.
  *

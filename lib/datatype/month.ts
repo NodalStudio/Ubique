@@ -4,9 +4,9 @@ import { arrayfun } from "../../index.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function month
- * @summary Extracts the month from a Unix timestamp.
- * @description Returns a number representing the month for each element in `x`. Months are 0-indexed, where January is 0 and December is 11.
+ * Extracts the month from a Unix timestamp.
+ *
+ * Returns a number representing the month for each element in `x`. Months are 0-indexed, where January is 0 and December is 11.
  *
  * @param x A Unix timestamp or an array/matrix of Unix timestamps.
  * @returns The month(s) corresponding to the input timestamp(s).

@@ -4,9 +4,9 @@ import zeros from "./zeros.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function eye
- * @summary Identity matrix
- * @description Creates an identity matrix with the specified dimensions. If a single number is provided, it creates a square identity matrix.
+ * Identity matrix.
+ *
+ * Creates an identity matrix with the specified dimensions. If a single number is provided, it creates a square identity matrix.
  *
  * @param dimOrRows The number of rows, or an array specifying both dimensions.
  * @param cols The number of columns (optional if the first argument is an array).

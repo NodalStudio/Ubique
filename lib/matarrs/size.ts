@@ -7,9 +7,9 @@ import isnumber from "../datatype/isnumber.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function size
- * @summary Size of an N-D array
- * @description Determines the size of an N-dimensional array, where a number is treated as a 1x1 array,
+ * Size of an N-D array.
+ *
+ * Determines the size of an N-dimensional array, where a number is treated as a 1x1 array,
  * a 1-D array as 1xN, and a matrix as MxN. It handles strings by returning their length as 1xN.
  *
  * @param x The input whose size is to be determined.

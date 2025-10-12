@@ -1,7 +1,7 @@
 /**
- * @function randchar
- * @summary Generates a random alphanumeric string.
- * @description Generates a random string of specified length using the provided character set. If no character set is provided, the default set includes uppercase and lowercase letters and digits.
+ * Generates a random alphanumeric string.
+ *
+ * Generates a random string of specified length using the provided character set. If no character set is provided, the default set includes uppercase and lowercase letters and digits.
  *
  * @param n The number of characters to generate. Defaults to 6 if not provided.
  * @param strset The character set to use for generating the random string.

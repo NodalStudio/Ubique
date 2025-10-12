@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { fix, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function rem
- * @summary Remainder after division
- * @description Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
  *
  * @param x The dividend
  * @param y The divisor

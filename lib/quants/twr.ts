@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { prod } from "../../index.ts";
 
 /**
- * @function twr
- * @summary True Time-weighted return
- * @description True Time-weighted return measures the returns of the assets irrespective of the amount invested.
+ * True Time-weighted return.
+ *
+ * True Time-weighted return measures the returns of the assets irrespective of the amount invested.
  * It eliminates the impact of cash flows, focusing solely on the performance of the investments themselves.
  *
  * @param mv Array of market values at each time period

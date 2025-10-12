@@ -1,9 +1,9 @@
 import { erfc } from "../../index.ts";
 
 /**
- * @function erf
- * @summary Error function
- * @description Calculates the error function, which is commonly used in probability, statistics, and partial differential equations describing diffusion.
+ * Error function.
+ *
+ * Calculates the error function, which is commonly used in probability, statistics, and partial differential equations describing diffusion.
  *
  * The error function is defined as:
  *

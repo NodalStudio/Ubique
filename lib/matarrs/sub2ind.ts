@@ -5,9 +5,9 @@ import numel from "./numel.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function sub2ind
- * @summary Converts 2D subscripts to linear indices.
- * @description Converts 2D coordinates `[X, Y]` into linear indices based on the given matrix size.
+ * Converts 2D subscripts to linear indices.
+ *
+ * Converts 2D coordinates `[X, Y]` into linear indices based on the given matrix size.
  *
  * @param size The size of the matrix.
  * @param index X, Y coordinates in the range `[0...N-1]`.

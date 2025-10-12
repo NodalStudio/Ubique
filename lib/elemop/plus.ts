@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function plus
- * @summary Addition X + Y
- * @description Adds two numbers, arrays, or matrices element-wise. Handles mixed inputs of scalars, arrays, and matrices.
+ * Addition X + Y.
+ *
+ * Adds two numbers, arrays, or matrices element-wise. Handles mixed inputs of scalars, arrays, and matrices.
  *
  * @param x The first operand, can be a number, array, or matrix.
  * @param y The second operand, can be a number, array, or matrix.
@@ -51,7 +51,7 @@ export default function plus(
 }
 
 /**
- * Handle addition where at least one operand is not a number
+ * Handle addition where at least one operand is not a number.
  */
 function handlePlusOperation(
   x: numarraymatrix,
@@ -77,7 +77,7 @@ function handlePlusOperation(
 }
 
 /**
- * Element-wise addition of two arrays
+ * Element-wise addition of two arrays.
  */
 function elementwiseArrayAddition(x: array, y: array): array {
   if (x.length !== y.length) {
@@ -87,7 +87,7 @@ function elementwiseArrayAddition(x: array, y: array): array {
 }
 
 /**
- * Element-wise addition of two matrices
+ * Element-wise addition of two matrices.
  */
 function elementwiseMatrixAddition(x: matrix, y: matrix): matrix {
   if (x.length !== y.length || x[0].length !== y[0].length) {

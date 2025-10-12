@@ -12,9 +12,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function varc
- * @summary Computes the variance
- * @description Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
  * Supports both population (N) and sample (N-1) normalizations.
  *
  * @param x Input array or matrix

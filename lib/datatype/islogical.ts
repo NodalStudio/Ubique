@@ -1,7 +1,7 @@
 /**
- * @function islogical
- * @summary Checks if the input is a boolean.
- * @description Returns `true` if the input is of type `boolean`.
+ * Checks if the input is a boolean.
+ *
+ * Returns `true` if the input is of type `boolean`.
  *
  * @param x - The input to check.
  * @returns Returns `true` if `x` is a boolean.

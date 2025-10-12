@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function mldivide
- * @summary Matrix left division X \ Y
- * @description Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y.
+ *
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)

@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, moment, vectorfun } from "../../index.ts";
 
 /**
- * @function skewness
- * @summary Computes the skewness of a dataset
- * @description Measures the asymmetry of the probability distribution. Positive skew
+ * Computes the skewness of a dataset.
+ *
+ * Measures the asymmetry of the probability distribution. Positive skew
  * indicates a longer tail on the right, negative skew indicates a longer tail on the left.
  * Zero skew indicates symmetric distribution.
  *

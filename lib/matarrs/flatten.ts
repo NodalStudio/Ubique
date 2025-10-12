@@ -6,9 +6,9 @@ import transpose from "./transpose.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function flatten
- * @summary Flatten a matrix into an array.
- * @description Flattens a matrix into a 1D array. The default concatenation is row-wise (dim = 0). If `dim = 1`, the concatenation is column-wise.
+ * Flatten a matrix into an array.
+ *
+ * Flattens a matrix into a 1D array. The default concatenation is row-wise (dim = 0). If `dim = 1`, the concatenation is column-wise.
  *
  * @param x The matrix to flatten.
  * @param dimParam The dimension to flatten by. 0 = row-wise, 1 = column-wise. Defaults to 0.

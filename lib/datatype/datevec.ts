@@ -9,9 +9,9 @@ dayjs.extend(toArray);
 dayjs.extend(customParseFormat);
 
 /**
- * @function datevec
- * @summary Convert date and time to an array of components.
- * @description Converts a given date and time to an array of components such as year, month, day, hour, minute, second, and millisecond.
+ * Convert date and time to an array of components.
+ *
+ * Converts a given date and time to an array of components such as year, month, day, hour, minute, second, and millisecond.
  * The function supports both date strings and Unix timestamps as input. Input is restricted to either a single value or an array (1D array).
  *
  * @param d The date input, which can be a string, Unix timestamp, or an array of such values.

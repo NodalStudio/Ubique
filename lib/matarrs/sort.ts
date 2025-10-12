@@ -6,9 +6,9 @@ import mergesort from "./mergesort.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function sort
- * @summary Sorts an array or matrix in ascending or descending order.
- * @description If input is a 1D array, it is sorted normally. If input is a matrix, sorting can be done along rows or columns.
+ * Sorts an array or matrix in ascending or descending order.
+ *
+ * If input is a 1D array, it is sorted normally. If input is a matrix, sorting can be done along rows or columns.
  *
  * @param x The array or matrix to sort.
  * @param mode Sorting order: `'ascend'` or `'descend'`. Defaults to `'ascend'`.

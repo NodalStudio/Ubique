@@ -3,9 +3,9 @@ import { array, matrix, numarraymatrix } from "../types.d.ts";
 import arrayfun from "../datatype/arrayfun.ts";
 
 /**
- * @function fix
- * @summary Rounds numbers toward zero.
- * @description Rounds numbers toward zero. This operation is element-wise for arrays and matrices.
+ * Rounds numbers toward zero.
+ *
+ * Rounds numbers toward zero. This operation is element-wise for arrays and matrices.
  *
  * @param x The input number.
  * @returns The rounded value.

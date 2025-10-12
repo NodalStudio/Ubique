@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { find, isnumber, mean, quantile, vectorfun } from "../../index.ts";
 
 /**
- * @function histcondvar
- * @summary Historical Conditional Value-At-Risk (CVaR)
- * @description Univariate historical simulation for Conditional Value-At-Risk.
+ * Historical Conditional Value-At-Risk (CVaR).
+ *
+ * Univariate historical simulation for Conditional Value-At-Risk.
  * Also known as Expected Shortfall (ES) or Expected Tail Loss (ETL).
  * The CVaR is the expected loss exceeding the VaR.
  *

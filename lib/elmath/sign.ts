@@ -1,7 +1,7 @@
 /**
- * @function sign
- * @summary Computes the sign of a number.
- * @description Computes the sign of each element in a number, array, or matrix.
+ * Computes the sign of a number.
+ *
+ * Computes the sign of each element in a number, array, or matrix.
  * Returns 1 for positive numbers, -1 for negative numbers, and 0 for zero.
  *
  * @param x The input value(s).

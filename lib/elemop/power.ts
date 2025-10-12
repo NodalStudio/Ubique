@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function power
- * @summary Element-wise power X .^ Y
- * @description Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
  *
  * @param x The base, can be a number, array, or matrix
  * @param y The exponent, can be a number, array, or matrix
@@ -48,7 +48,7 @@ export default function power(
 }
 
 /**
- * Handle power operation where at least one operand is not a number
+ * Handle power operation where at least one operand is not a number.
  */
 function handlePowerOperation(
   x: numarraymatrix,
@@ -74,7 +74,7 @@ function handlePowerOperation(
 }
 
 /**
- * Element-wise power of two arrays
+ * Element-wise power of two arrays.
  */
 function elementwiseArrayPower(x: array, y: array): array {
   if (x.length !== y.length) {
@@ -84,7 +84,7 @@ function elementwiseArrayPower(x: array, y: array): array {
 }
 
 /**
- * Element-wise power of two matrices
+ * Element-wise power of two matrices.
  */
 function elementwiseMatrixPower(x: matrix, y: matrix): matrix {
   if (x.length !== y.length || x[0].length !== y[0].length) {

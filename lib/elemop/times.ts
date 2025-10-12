@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, getrow, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function times
- * @summary Element-wise multiplication of arrays, matrices, or numbers
- * @description Performs element-by-element multiplication. X and Y must have the same dimensions unless one is a number.
+ * Element-wise multiplication of arrays, matrices, or numbers.
+ *
+ * Performs element-by-element multiplication. X and Y must have the same dimensions unless one is a number.
  *
  * @param x The first operand
  * @param y The second operand
@@ -55,8 +55,7 @@ export default function times(
 }
 
 /**
- * @function handleNumberMultiplication
- * @description Handles the multiplication when at least one of the operands is a number
+ * Handles the multiplication when at least one of the operands is a number.
  * @param x The first operand
  * @param y The second operand
  * @returns The result of the multiplication
@@ -86,8 +85,7 @@ function handleNumberMultiplication(
 }
 
 /**
- * @function elementwiseArrayMultiplication
- * @description Handles element-wise multiplication for arrays
+ * Handles element-wise multiplication for arrays.
  * @param x The first array
  * @param y The second array
  * @returns The result of the element-wise multiplication
@@ -100,8 +98,7 @@ function elementwiseArrayMultiplication(x: array, y: array): array {
 }
 
 /**
- * @function elementwiseMatrixMultiplication
- * @description Handles element-wise multiplication for matrices
+ * Handles element-wise multiplication for matrices.
  * @param x The first matrix
  * @param y The second matrix
  * @returns The result of the element-wise multiplication

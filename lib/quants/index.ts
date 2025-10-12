@@ -1,6 +1,7 @@
 /**
  * @module quants
- * @description Quantitative finance and portfolio analytics functions
+ *
+ * Quantitative finance and portfolio analytics functions.
  *
  * This module provides utilities for:
  * - Performance metrics (Sharpe, Sortino, Treynor, Jensen alpha, etc.)

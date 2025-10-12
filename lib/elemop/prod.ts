@@ -3,7 +3,7 @@ import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix } from "../../index.ts";
 
 /**
- * Product of array elements
+ * Product of array elements.
  *
  * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
  *

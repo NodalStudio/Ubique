@@ -1,7 +1,7 @@
 /**
- * @function isnumber
- * @summary True for number
- * @description Returns `true` if the input is a number or `NaN`, otherwise `false`.
+ * True for number.
+ *
+ * Returns `true` if the input is a number or `NaN`, otherwise `false`.
  *
  * @param x The element to check.
  * @returns Returns `true` if `x` is a number or `NaN`.

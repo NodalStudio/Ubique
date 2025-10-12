@@ -1,7 +1,7 @@
 /**
- * @function erfc
- * @summary Complementary error function
- * @description Calculates the complementary error function, which is widely used in probability, statistics, and partial differential equations.
+ * Complementary error function.
+ *
+ * Calculates the complementary error function, which is widely used in probability, statistics, and partial differential equations.
  *
  * The complementary error function is defined as:
  *

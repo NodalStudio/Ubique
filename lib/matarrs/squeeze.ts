@@ -3,9 +3,9 @@ import isstring from "../datatype/isstring.ts";
 import size from "./size.ts";
 
 /**
- * @function squeeze
- * @summary Removes singleton dimensions from arrays or matrices
- * @description This function simplifies the shape of an array or matrix by removing singleton dimensions (dimensions of size 1).
+ * Removes singleton dimensions from arrays or matrices.
+ *
+ * This function simplifies the shape of an array or matrix by removing singleton dimensions (dimensions of size 1).
  * If the input is a number or a string, it returns the input as-is, since they don't have dimensions to squeeze.
  *
  * @param x The input to squeeze

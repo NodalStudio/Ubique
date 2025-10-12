@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { downsidepot, isnumber, upsidepot, vectorfun } from "../../index.ts";
 
 /**
- * @function omegaratio
- * @summary Omega Ratio
- * @description The Omega ratio is a measure of risk-return performance that divides
+ * Omega Ratio.
+ *
+ * The Omega ratio is a measure of risk-return performance that divides
  * the upside potential (gains) by the downside risk (losses) relative to a
  * minimum acceptable return threshold.
  *

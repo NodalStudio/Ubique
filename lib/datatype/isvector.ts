@@ -2,9 +2,9 @@ import type { matrix } from "../types.d.ts";
 import { iscolumn, ismatrix, isrow } from "../../index.ts";
 
 /**
- * @function isvector
- * @summary Checks if the input is a vector.
- * @description Returns `true` if the input is a vector. A vector is defined as a matrix with either one row or one column.
+ * Checks if the input is a vector.
+ *
+ * Returns `true` if the input is a vector. A vector is defined as a matrix with either one row or one column.
  *
  * @param x The matrix to check.
  * @returns Returns `true` if `x` is a vector, otherwise `false`.

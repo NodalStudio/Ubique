@@ -4,9 +4,9 @@ import { isarray, ismatrix } from "../../index.ts";
 import size from "./size.ts";
 
 /**
- * @function ncols
- * @summary Returns the number of columns in an array or matrix.
- * @description Returns the number of columns in a 1D array (treated as a row vector) or a 2D matrix.
+ * Returns the number of columns in an array or matrix.
+ *
+ * Returns the number of columns in a 1D array (treated as a row vector) or a 2D matrix.
  *
  * @param x Array or matrix of elements.
  * @returns The number of columns in the input.

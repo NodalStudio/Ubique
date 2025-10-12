@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function falses
- * @summary Creates an array or matrix filled with `false`.
- * @description Generates an array or matrix filled with the boolean value `false`. It accepts up to two dimensions.
+ * Creates an array or matrix filled with `false`.
+ *
+ * Generates an array or matrix filled with the boolean value `false`. It accepts up to two dimensions.
  *
  * @param args Variable input arguments (max 2). If a single value is provided, a square matrix is created.
  * @returns An array or matrix of `false` values.

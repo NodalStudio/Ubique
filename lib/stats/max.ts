@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
- * @function max
- * @summary Largest element in array
- * @description Computes the largest element in an array or matrix. For arrays, returns a single value.
+ * Largest element in array.
+ *
+ * Computes the largest element in an array or matrix. For arrays, returns a single value.
  * For matrices, returns the maximum along the specified dimension.
  *
  * @param x Input array or matrix

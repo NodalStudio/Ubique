@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { find, isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
- * @function upsidepot
- * @summary Upside Potential
- * @description Average of positive returns, higher than a target return (MAR)
+ * Upside Potential.
+ *
+ * Average of positive returns, higher than a target return (MAR)
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)

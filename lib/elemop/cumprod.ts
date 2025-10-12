@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import { vectorfun } from "../../index.ts";
 
 /**
- * @function cumprod
- * @summary Cumulative product of array elements
- * @description Computes the cumulative product of elements in an array or matrix along a specified dimension.
+ * Cumulative product of array elements.
+ *
+ * Computes the cumulative product of elements in an array or matrix along a specified dimension.
  *
  * @param x The input array or matrix of values
  * @param dim The dimension along which to calculate, `1` for columns, `0` for rows (defaults to `1`)

@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { annreturn, isarray, ismatrix, vectorfun } from "../../index.ts";
 
 /**
- * @function activereturn
- * @summary Computes the active return
- * @description Calculates the active return, which is the difference between the annualized return of an asset/portfolio and the annualized return of a benchmark.
+ * Computes the active return.
+ *
+ * Calculates the active return, which is the difference between the annualized return of an asset/portfolio and the annualized return of a benchmark.
  *
  * @param x Asset/portfolio returns
  * @param y Benchmark returns
@@ -64,7 +64,7 @@ export default function activereturn(
 }
 
 /**
- * Computes active return for a single array
+ * Computes active return for a single array.
  */
 function computeActiveReturn(
   a: array,

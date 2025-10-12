@@ -4,9 +4,9 @@ import isnumber from "../datatype/isnumber.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
- * @function flipud
- * @summary Flip a matrix upside down
- * @description Reverses the order of the rows in the input matrix, flipping it upside down.
+ * Flip a matrix upside down.
+ *
+ * Reverses the order of the rows in the input matrix, flipping it upside down.
  *
  * @param x The input array or matrix
  * @returns The matrix with its rows flipped upside down

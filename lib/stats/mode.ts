@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
- * @function mode
- * @summary Most frequent value in an array
- * @description Finds the most frequently occurring value in an array or matrix.
+ * Most frequent value in an array.
+ *
+ * Finds the most frequently occurring value in an array or matrix.
  * In case of ties, returns the first value that achieves the maximum frequency.
  *
  * @param x Input array or matrix

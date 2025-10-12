@@ -3,9 +3,9 @@ import { isarray, isnumber, numel, rdivide, size, sum } from "../../index.ts";
 import { meanwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
- * @function mean
- * @summary Average value of array or matrix
- * @description Computes the average (arithmetic mean) of values in an array or matrix.
+ * Average value of array or matrix.
+ *
+ * Computes the average (arithmetic mean) of values in an array or matrix.
  * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
  *
  * @param x Input array, matrix, or number

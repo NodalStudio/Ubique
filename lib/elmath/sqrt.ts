@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isnumber } from "../../index.ts";
 
 /**
- * @function sqrt
- * @summary Computes the square root of a number, array, or matrix.
- * @description Computes the square root of each element in a number, array, or matrix. Returns NaN for negative values.
+ * Computes the square root of a number, array, or matrix.
+ *
+ * Computes the square root of each element in a number, array, or matrix. Returns NaN for negative values.
  *
  * @param x The input value(s)
  * @returns The square root of the input value(s)

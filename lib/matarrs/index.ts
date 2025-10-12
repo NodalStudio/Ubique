@@ -1,6 +1,7 @@
 /**
  * @module matarrs
- * @description Matrix and array creation, manipulation, and transformation functions
+ *
+ * Matrix and array creation, manipulation, and transformation functions.
  *
  * This module provides utilities for:
  * - Matrix creation (zeros, ones, eye, rand, linspace, logspace, etc.)

@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { abs, max, minus, power, sqrt, sum } from "../../index.ts";
 
 /**
- * @function pdist
- * @summary Pairwise distance between two sets of observations
- * @description Computes various distance metrics between two arrays including
+ * Pairwise distance between two sets of observations.
+ *
+ * Computes various distance metrics between two arrays including
  * Euclidean, Manhattan, Chebyshev, and Hamming distances.
  *
  * @param x First input array

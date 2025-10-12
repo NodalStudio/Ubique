@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import { cumsum, mean, minus, vectorfun } from "../../index.ts";
 
 /**
- * @function cumdev
- * @summary Cumulative mean deviation
- * @description Computes the cumulative mean deviation of an array or matrix along a specified dimension.
+ * Cumulative mean deviation.
+ *
+ * Computes the cumulative mean deviation of an array or matrix along a specified dimension.
  *
  * @param x The input array or matrix of values.
  * @param dim The dimension along which to calculate, `1` for columns, `0` for rows (defaults to `1`).

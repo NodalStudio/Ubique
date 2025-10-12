@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, vectorfun } from "../../index.ts";
 
 /**
- * @function cagr
- * @summary Compound Annual Growth Rate
- * @description Calculates the Compound Annual Growth Rate (CAGR) which represents the mean annual growth rate
+ * Compound Annual Growth Rate.
+ *
+ * Calculates the Compound Annual Growth Rate (CAGR) which represents the mean annual growth rate
  * of an investment over a specified time period longer than one year.
  *
  * @param x Array of asset values over time

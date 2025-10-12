@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { clone, ncols, nrows, zeros } from "../../index.ts";
 
 /**
- * @function lu
- * @summary LU decomposition with partial pivoting.
- * @description Performs LU decomposition of the input matrix `x` using the Doolittle algorithm with partial pivoting.
+ * LU decomposition with partial pivoting.
+ *
+ * Performs LU decomposition of the input matrix `x` using the Doolittle algorithm with partial pivoting.
  * Returns the combined LU matrix, lower triangular matrix `L`, upper triangular matrix `U`, pivot vector `P`, and pivot sign `S`.
  *
  * @param x The input matrix.

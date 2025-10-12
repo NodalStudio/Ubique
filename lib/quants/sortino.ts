@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
- * @function sortino
- * @summary Sortino Ratio
- * @description Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
+ * Sortino Ratio.
+ *
+ * Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
  * instead of standard deviation. It measures the return of an investment relative to the risk of negative returns.
  *
  * @param x Asset/portfolio returns

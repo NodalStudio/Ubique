@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { colon } from "../../index.ts";
 
 /**
- * @function irr
- * @summary Internal rate of return on an investment based on a series of periodic cash flows
- * @description Calculates the internal rate of return on an investment
+ * Internal rate of return on an investment based on a series of periodic cash flows.
+ *
+ * Calculates the internal rate of return on an investment
  * based on a series of regularly/irregularly periodic cash flows.
  *
  * @param cf Cash flows associated with the investment. Must contain at least one negative and one positive cash flow

@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { annreturn, cdrawdown, isnumber, max, vectorfun } from "../../index.ts";
 
 /**
- * @function sterlingratio
- * @summary Sterling Ratio
- * @description A risk-adjusted performance measure like Calmar ratio but the denominator is
+ * Sterling Ratio.
+ *
+ * A risk-adjusted performance measure like Calmar ratio but the denominator is
  * the largest consecutive drawdown (excluded the 10% excess in the original formula).
  * Sterling Ratio = (Annualized Return - Risk Free Rate) / Largest Drawdown
  *

@@ -2,9 +2,9 @@ import { flatten, isarray, ismatrix } from "../../index.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function reshape
- * @summary Reshape an array or matrix into a new matrix of given dimensions.
- * @description Rearranges elements of an array or matrix into a new shape while preserving order.
+ * Reshape an array or matrix into a new matrix of given dimensions.
+ *
+ * Rearranges elements of an array or matrix into a new shape while preserving order.
  *
  * @param x The array or matrix to reshape.
  * @param m Number of rows for the new matrix.

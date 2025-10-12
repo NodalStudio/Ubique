@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { drawdown, power, sqrt, sum, vectorfun } from "../../index.ts";
 
 /**
- * @function ulcerindex
- * @summary Ulcer Index
- * @description Ulcer Index of Peter G. Martin (1987). The impact of long, deep drawdowns will have significant
+ * Ulcer Index.
+ *
+ * Ulcer Index of Peter G. Martin (1987). The impact of long, deep drawdowns will have significant
  * impact because the underperformance since the last peak is squared.
  * The formula is: sqrt(sum(dd^2) / n), where dd is the drawdown and n is the number of observations.
  *
