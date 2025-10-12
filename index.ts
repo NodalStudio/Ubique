@@ -1,4 +1,64 @@
-// Auto-generated index.ts
+/**
+ * @module rubique
+ * @description High-performance mathematical and quantitative library for JavaScript and TypeScript
+ *
+ * Rubique is a modern reimplementation combining JavaScript, TypeScript, and Rust-powered WebAssembly
+ * for exceptional performance in numerical computations. The library provides:
+ *
+ * ## Core Modules
+ *
+ * ### Data Types (`datatype`)
+ * Type checking, assertions, and data manipulation functions (isarray, ismatrix, arrayfun, vectorfun, etc.)
+ *
+ * ### Element Operations (`elemop`)
+ * Element-wise operations on arrays and matrices (plus, times, power, cumsum, etc.)
+ *
+ * ### Elementary Math (`elmath`)
+ * Mathematical functions (exp, log, sqrt, erf, abs, sign, etc.)
+ *
+ * ### Linear Algebra (`linalgebra`)
+ * Matrix operations (inv, det, lu, linsolve)
+ *
+ * ### Matrix Arrays (`matarrs`)
+ * Matrix creation and manipulation (zeros, ones, eye, reshape, transpose, etc.)
+ *
+ * ### Probability Distributions (`probdistr`)
+ * Statistical distributions and tests (normcdf, normpdf, norminv, jbtest)
+ *
+ * ### Quantitative Finance (`quants`)
+ * Portfolio analytics and risk metrics (Sharpe, Sortino, drawdown, VaR, etc.)
+ *
+ * ### Regression and Interpolation (`reglin`)
+ * Regression and interpolation functions (linearreg, interp1)
+ *
+ * ### Statistics (`stats`)
+ * Descriptive statistics (mean, std, median, corrcoef, etc.)
+ *
+ * ## Performance
+ *
+ * Rubique leverages Rust's nalgebra library compiled to WebAssembly for accelerated linear algebra operations,
+ * achieving significant speedups (up to 20x) compared to traditional JavaScript implementations.
+ *
+ * @example
+ * ```ts
+ * import * as rubique from "jsr:@bemayer/rubique";
+ *
+ * // Matrix operations
+ * const A = rubique.eye(3);
+ * const B = rubique.ones(3, 3);
+ * const C = rubique.plus(A, B);
+ *
+ * // Statistics
+ * const data = [1, 2, 3, 4, 5];
+ * const avg = rubique.mean(data);
+ * const stdDev = rubique.std(data);
+ *
+ * // Quantitative finance
+ * const returns = [0.01, -0.02, 0.03, 0.01];
+ * const sharpeRatio = rubique.sharpe(returns, 0.001);
+ * ```
+ */
+
 import arrayfun from './lib/datatype/arrayfun.ts';
 import assertArray from './lib/datatype/assertArray.ts';
 import assertDimension from './lib/datatype/assertDimension.ts';

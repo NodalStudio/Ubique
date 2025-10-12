@@ -1,4 +1,16 @@
 // Element-wise operations
+/**
+ * @module elemop
+ * @description Element-wise operations on arrays and matrices
+ *
+ * This module provides utilities for:
+ * - Arithmetic operations (plus, minus, times, divide, power, etc.)
+ * - Comparison operations (eq, ne, gt, ge, lt, le)
+ * - Cumulative operations (cumsum, cumprod, cummax, cummin, cumdev)
+ * - Rounding operations (ceil, floor, round, mod, rem)
+ * - Other operations (dot, diff, prod, sum, unique)
+ */
+
 export { default as ceil } from "./ceil.ts";
 export { default as cumdev } from "./cumdev.ts";
 export { default as cummax } from "./cummax.ts";

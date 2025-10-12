@@ -1,3 +1,15 @@
+/**
+ * @module datatype
+ * @description Data type checking, assertion, and manipulation functions
+ *
+ * This module provides utilities for:
+ * - Type checking (isarray, ismatrix, isvector, etc.)
+ * - Type assertions (assertArray, assertMatrix, etc.)
+ * - Array/vector operations (arrayfun, vectorfun)
+ * - Date/time utilities (datenum, datestr, now, etc.)
+ * - String utilities (randchar, strfind)
+ */
+
 // Type checking functions
 export { default as isarray } from "./isarray.ts";
 export { default as isempty } from "./isempty.ts";

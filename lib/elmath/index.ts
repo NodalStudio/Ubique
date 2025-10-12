@@ -1,4 +1,13 @@
-// Elementary mathematical functions
+/**
+ * @module elmath
+ * @description Elementary mathematical functions
+ *
+ * This module provides utilities for:
+ * - Exponential and logarithmic functions (exp, log, sqrt)
+ * - Absolute value and sign (abs, sign)
+ * - Error functions (erf, erfc, erfinv, erfcinv)
+ */
+
 export { default as abs } from "./abs.ts";
 export { default as erf } from "./erf.ts";
 export { default as erfc } from "./erfc.ts";

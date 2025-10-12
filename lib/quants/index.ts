@@ -1,4 +1,16 @@
-// Quantitative finance functions
+/**
+ * @module quants
+ * @description Quantitative finance and portfolio analytics functions
+ *
+ * This module provides utilities for:
+ * - Performance metrics (Sharpe, Sortino, Treynor, Jensen alpha, etc.)
+ * - Risk metrics (drawdown, VaR, tracking error, downside risk, etc.)
+ * - Return calculations (CAGR, TWR, IRR, annualized returns, etc.)
+ * - Portfolio metrics (information ratio, active return, etc.)
+ * - Time-series conversion (toweekly, tomonthly, ret2tick, tick2ret)
+ * - Statistical measures (Hurst exponent, etc.)
+ */
+
 export { default as activereturn } from "./activereturn.ts";
 export { default as adjsharpe } from "./adjsharpe.ts";
 export { default as annadjsharpe } from "./annadjsharpe.ts";

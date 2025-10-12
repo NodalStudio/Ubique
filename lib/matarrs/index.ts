@@ -1,4 +1,18 @@
-// Matrix and array manipulation
+/**
+ * @module matarrs
+ * @description Matrix and array creation, manipulation, and transformation functions
+ *
+ * This module provides utilities for:
+ * - Matrix creation (zeros, ones, eye, rand, linspace, logspace, etc.)
+ * - Matrix manipulation (reshape, transpose, flip, squeeze, repmat, etc.)
+ * - Matrix querying (size, length, ndims, nrows, ncols, numel, etc.)
+ * - Matrix access (getcol, getrow, setcol, setrow, subset, diag, etc.)
+ * - Matrix concatenation (cat, horzcat, vertcat)
+ * - Index conversion (sub2ind, ind2sub, find)
+ * - Matrix properties (iscolumn, isrow, issquare)
+ * - Sorting and cloning (sort, mergesort, clone)
+ */
+
 export { default as cat } from "./cat.ts";
 export { default as clone } from "./clone.ts";
 export { default as colon } from "./colon.ts";

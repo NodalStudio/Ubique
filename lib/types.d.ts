@@ -24,6 +24,17 @@ export type array<T = number> = T[];
  */
 export type matrix<T = number> = T[][];
 
+/**
+ * @type numarraymatrix
+ * @summary Union type for numeric, array, or matrix values
+ * @description Represents a value that can be a scalar number, a 1D array, or a 2D matrix.
+ * This type is commonly used in functions that accept flexible input types.
+ *
+ * @example
+ * const scalar: numarraymatrix = 5;
+ * const vector: numarraymatrix = [1, 2, 3];
+ * const matrix: numarraymatrix = [[1, 2], [3, 4]];
+ */
 export type numarraymatrix<T = number> = T | array<T> | matrix<T>;
 
 /**
