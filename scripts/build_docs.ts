@@ -108,6 +108,83 @@ async function fixDocAssets(
   return filesUpdated;
 }
 
+function extractFirstSentence(value: string): string {
+  const trimmed = value.trim();
+  if (trimmed === "") return "";
+  const punctuationIndex = trimmed.search(/[.!?]/);
+  if (punctuationIndex === -1) {
+    return trimmed;
+  }
+  return trimmed.slice(0, punctuationIndex + 1).trim();
+}
+
+async function trimSearchIndexDocs(fileUrl: URL): Promise<boolean> {
+  const content = await Deno.readTextFile(fileUrl);
+  const prefix = "window.DENO_DOC_SEARCH_INDEX";
+  const prefixIndex = content.indexOf(prefix);
+  if (prefixIndex === -1) {
+    console.warn("Unable to locate DENO_DOC_SEARCH_INDEX payload.");
+    return false;
+  }
+
+  const equalsIndex = content.indexOf("=", prefixIndex + prefix.length);
+  if (equalsIndex === -1) {
+    console.warn("Malformed search index assignment.");
+    return false;
+  }
+
+  const jsonStart = content.indexOf("{", equalsIndex);
+  if (jsonStart === -1) {
+    console.warn("Unable to locate search index JSON start.");
+    return false;
+  }
+
+  const assignmentEnd = content.indexOf("};", jsonStart);
+  if (assignmentEnd === -1) {
+    console.warn("Unable to locate search index JSON end.");
+    return false;
+  }
+
+  const jsonPayload = content.slice(jsonStart, assignmentEnd + 1);
+
+  let data;
+
+  try {
+    data = JSON.parse(jsonPayload);
+  } catch (error) {
+    console.warn("Failed to parse search index JSON:", error);
+    return false;
+  }
+
+  if (!Array.isArray(data?.nodes)) {
+    console.warn("Unexpected search index format: missing nodes array.");
+    return false;
+  }
+
+  let changed = false;
+
+  for (const node of data.nodes) {
+    if (typeof node.doc === "string" && node.doc.length > 0) {
+      const summary = extractFirstSentence(node.doc);
+      if (summary !== node.doc) {
+        node.doc = summary;
+        changed = true;
+      }
+    }
+  }
+
+  if (!changed) return false;
+
+  const updatedPayload = JSON.stringify(data);
+  const updatedContent =
+    content.slice(0, jsonStart) +
+    updatedPayload +
+    content.slice(assignmentEnd + 1);
+
+  await Deno.writeTextFile(fileUrl, updatedContent);
+  return true;
+}
+
 const assetsDirUrl = new URL("../scripts/assets/", import.meta.url);
 
 const landingScriptUrl = new URL("./landing_script.js", assetsDirUrl);
@@ -134,6 +211,9 @@ await Deno.writeTextFile(targetCssUrl, `${normalized}${cssAppendTrimmed}\n`);
 await Deno.copyFile(benchmarkHtmlUrl, targetBenchmarkUrl);
 
 const updated = await fixDocAssets({ root: docsOutput });
+const searchIndexUrl = new URL("../docs/search_index.js", import.meta.url);
+const trimmed = await trimSearchIndexDocs(searchIndexUrl);
 console.log(
-  `Documentation built successfully. Normalized asset paths in ${updated} HTML file(s).`
+  `Documentation built successfully. Normalized asset paths in ${updated} HTML file(s).` +
+    (trimmed ? " Trimmed search index summaries." : "")
 );
