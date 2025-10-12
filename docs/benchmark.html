@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rubique Performance Benchmark</title>
+    <title>Rubique Performance vs Math.js</title>
     <style>
       * {
         margin: 0;
@@ -471,7 +471,7 @@
     <div class="container">
       <!-- Hero Section -->
       <div class="hero">
-        <h1>🚀 Rubique Performance</h1>
+        <h1>🚀 Rubique Performance vs Math.js</h1>
         <p>Watch real-time matrix operations & benchmarks</p>
         <button class="start-btn" id="startBtn" onclick="startBenchmark()">
           ▶️ Start Demo
@@ -527,7 +527,7 @@
             </div>
             <div class="compute-row">
               <div class="compute-header">
-                <span>math.js</span>
+                <span>Math.js</span>
                 <span class="compute-meta" id="mathjsComputeMeta"
                   >waiting…</span
                 >
@@ -560,7 +560,7 @@
             <div class="race-status" id="rubiqueStatus"></div>
           </div>
           <div class="race-row">
-            <div class="race-label">math.js</div>
+            <div class="race-label">Math.js</div>
             <div class="race-bar-container">
               <div
                 class="race-bar mathjs"
@@ -617,7 +617,7 @@
       window.rubique = rubique;
       window.rubiqueReady = true;
 
-      console.log("✅ Rubique and math.js loaded successfully");
+      console.log("✅ Rubique and Math.js loaded successfully");
     </script>
 
     <script>
@@ -797,9 +797,8 @@
           name: "Matrix Transpose (100×100)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 800,
+          targetDuration: 5000,
           minIterations: 20,
-          maxIterations: 250,
           sampleIterations: 2,
           setup: () => {
             const matrixA = generateMatrix(100, 100);
@@ -815,9 +814,8 @@
           name: "Matrix Add (100×100)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 800,
+          targetDuration: 5000,
           minIterations: 25,
-          maxIterations: 250,
           sampleIterations: 2,
           setup: () => {
             const matrixA = generateMatrix(100, 100);
@@ -835,9 +833,8 @@
           name: "Matrix Multiply (10×10)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 800,
+          targetDuration: 5000,
           minIterations: 60,
-          maxIterations: 400,
           sampleIterations: 5,
           setup: () => {
             const matrixA = generateMatrix(10, 10);
@@ -855,9 +852,8 @@
           name: "Matrix Multiply (50×50)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 900,
+          targetDuration: 5000,
           minIterations: 18,
-          maxIterations: 120,
           sampleIterations: 2,
           setup: () => {
             const matrixA = generateMatrix(50, 50);
@@ -875,9 +871,8 @@
           name: "Matrix Multiply (100×100)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 1000,
+          targetDuration: 5000,
           minIterations: 8,
-          maxIterations: 60,
           sampleIterations: 1,
           setup: () => {
             const matrixA = generateMatrix(100, 100);
@@ -895,9 +890,8 @@
           name: "Matrix Multiply (200×200)",
           category: "Matrix Operations",
           visualize: true,
-          targetDuration: 1100,
+          targetDuration: 5000,
           minIterations: 2,
-          maxIterations: 10,
           sampleIterations: 1,
           setup: () => {
             const matrixA = generateMatrix(200, 200);
@@ -915,9 +909,8 @@
           name: "Matrix Inverse (20×20)",
           category: "Linear Algebra",
           visualize: true,
-          targetDuration: 900,
+          targetDuration: 5000,
           minIterations: 6,
-          maxIterations: 60,
           sampleIterations: 1,
           setup: () => {
             const matrixA = generateInvertibleMatrix(20);
@@ -933,9 +926,8 @@
           name: "Determinant (20×20)",
           category: "Linear Algebra",
           visualize: true,
-          targetDuration: 800,
+          targetDuration: 5000,
           minIterations: 8,
-          maxIterations: 120,
           sampleIterations: 2,
           setup: () => {
             const matrixA = generateMatrix(20, 20);
@@ -951,9 +943,8 @@
           name: "Determinant (50×50)",
           category: "Linear Algebra",
           visualize: true,
-          targetDuration: 1000,
+          targetDuration: 5000,
           minIterations: 3,
-          maxIterations: 30,
           sampleIterations: 1,
           setup: () => {
             const matrixA = generateMatrix(50, 50);
@@ -964,26 +955,6 @@
           },
           rubique: (matrix) => window.rubique.det(matrix),
           mathjs: (matrix) => window.mathjs.det(matrix),
-        },
-        {
-          name: "Matrix Multiply (250×250)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 1200,
-          minIterations: 1,
-          maxIterations: 4,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(250, 250);
-            const matrixB = generateMatrix(250, 250);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
         },
       ];
 
@@ -1011,6 +982,22 @@
         computeElements.rubique.subtext.textContent = "Preparing benchmark…";
         computeElements.mathjs.subtext.textContent =
           "Waiting for Rubique to finish…";
+      }
+
+      function resetRace() {
+        const rubiqueBar = document.getElementById("rubiqueBar");
+        const mathjsBar = document.getElementById("mathjsBar");
+        const rubiqueTime = document.getElementById("rubiqueTime");
+        const mathjsTime = document.getElementById("mathjsTime");
+        const rubiqueStatus = document.getElementById("rubiqueStatus");
+        const mathjsStatus = document.getElementById("mathjsStatus");
+
+        rubiqueBar.style.width = "0%";
+        mathjsBar.style.width = "0%";
+        rubiqueTime.textContent = "";
+        mathjsTime.textContent = "";
+        rubiqueStatus.textContent = "";
+        mathjsStatus.textContent = "";
       }
 
       function startComputeRow(library, iterations) {
@@ -1050,7 +1037,6 @@
       async function calculateIterations(test) {
         const target = test.targetDuration ?? 900;
         const minIterations = test.minIterations ?? 3;
-        const maxIterations = test.maxIterations ?? 200;
         const sampleIterations = test.sampleIterations ?? 1;
 
         const sampleDataRubique = test.setup();
@@ -1077,7 +1063,6 @@
           iterations = minIterations;
         }
         iterations = Math.max(iterations, minIterations);
-        iterations = Math.min(iterations, maxIterations);
         return iterations;
       }
 
@@ -1148,6 +1133,7 @@
         document.getElementById("computing").style.display = "block";
         document.getElementById("raceContainer").style.display = "none";
         document.getElementById("speedupBadge").style.display = "none";
+        resetRace();
 
         prepareComputeRows(iterations);
         await sleep(200);
@@ -1175,9 +1161,27 @@
         document.getElementById("computing").style.display = "none";
         document.getElementById("raceContainer").style.display = "block";
 
-        await animateRace(rubiqueTime, mathjsTime);
-
         const speedup = mathjsTime / rubiqueTime;
+
+        const completedProgress = (index / total) * 100;
+        document.getElementById(
+          "progressBar"
+        ).style.width = `${completedProgress}%`;
+        document.getElementById("progressPercent").textContent = `${Math.round(
+          completedProgress
+        )}%`;
+        document.getElementById(
+          "progressText"
+        ).textContent = `Completed test ${index}/${total}: ${test.name}`;
+
+        allResults.push({
+          name: test.name,
+          rubique: rubiqueTime,
+          mathjs: mathjsTime,
+          speedup,
+          iterations,
+        });
+
         document.getElementById("speedupBadge").style.display = "block";
 
         if (speedup >= 1) {
@@ -1193,24 +1197,8 @@
           document.getElementById("speedupLabel").textContent = "slower";
         }
 
-        allResults.push({
-          name: test.name,
-          rubique: rubiqueTime,
-          mathjs: mathjsTime,
-          speedup,
-          iterations,
-        });
-
-        const completedProgress = (index / total) * 100;
-        document.getElementById(
-          "progressBar"
-        ).style.width = `${completedProgress}%`;
-        document.getElementById("progressPercent").textContent = `${Math.round(
-          completedProgress
-        )}%`;
-        document.getElementById(
-          "progressText"
-        ).textContent = `Completed test ${index}/${total}: ${test.name}`;
+        await nextFrame();
+        await animateRace(rubiqueTime, mathjsTime);
 
         await sleep(1500);
       }
@@ -1234,7 +1222,7 @@
           container.appendChild(boxB);
         }
 
-        await sleep(300);
+        await nextFrame();
       }
 
       function createMatrixBox(label, matrix) {
@@ -1428,7 +1416,7 @@
                     return [
                       `Speedup: ${result.speedup.toFixed(2)}x`,
                       `Rubique: ${result.rubique.toFixed(2)}ms`,
-                      `math.js: ${result.mathjs.toFixed(2)}ms`,
+                      `Math.js: ${result.mathjs.toFixed(2)}ms`,
                       `Iterations: ${result.iterations}`,
                     ];
                   },

@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="doc-current-file" content="stats\corrcoef.ts">
-  <link rel="stylesheet" href="..&#x2F;..&#x2F;styles.css">
-  <link rel="stylesheet" href="..&#x2F;..&#x2F;page.css">
-  <link id="ddocResetStylesheet" rel="stylesheet" href="..&#x2F;..&#x2F;reset.css"><link href="../../comrak.css" rel="stylesheet" /><link href="../../prism.css" rel="stylesheet" /><script src="../../prism.js"></script><script src="..&#x2F;..&#x2F;script.js" defer></script>
-  <script src="..&#x2F;..&#x2F;darkmode_toggle.js"></script><script src="..&#x2F;..&#x2F;search_index.js" defer></script>
-    <script src="..&#x2F;..&#x2F;fuse.js" defer></script>
-    <script src="..&#x2F;..&#x2F;search.js" defer></script></head>
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../../../page.css">
+  <link id="ddocResetStylesheet" rel="stylesheet" href="../../../reset.css"><link href="../../../comrak.css" rel="stylesheet" /><link href="../../../prism.css" rel="stylesheet" /><script src="../../../prism.js"></script><script src="../../../script.js" defer></script>
+  <script src="../../../darkmode_toggle.js"></script><script src="../../../search_index.js" defer></script>
+    <script src="../../../fuse.js" defer></script>
+    <script src="../../../search.js" defer></script></head>
 <body>
 <div class="ddoc">
 <div><nav id="topnav">
@@ -210,24 +210,170 @@ Examples</h2></div><div class="space-y-8"><div class="anchorable"><a href="#exam
 </div></h3>
   <div><div class="markdown"><pre class="highlight"><code class="language-ts">import { assertEquals } from &quot;jsr:@std/assert&quot;;
 
-// Example 1: Correlation coefficient is a matrix function
-assertEquals(typeof corrcoef, &quot;function&quot;);
+// Example 1: Perfect positive correlation between identical arrays
+assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+  [1, 1],
+  [1, 1],
+]);
 
-// Example 2: Corrcoef accepts array inputs
-assertEquals(Array.isArray([[1, 2], [2, 4]]), true);
+// Example 2: Perfect negative correlation between reversed arrays
+assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+  [1, -1],
+  [-1, 1],
+]);
 
-// Example 3: Function has appropriate signature
-assertEquals(corrcoef.length, 2);
+// Example 3: Zero correlation between orthogonal sequences
+assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+  [1, 0],
+  [0, 1],
+]);
+
+// Example 4: Explicit sample flag matches the default behaviour
+assertEquals(
+  corrcoef([2, 4, 6, 8], [1, 2, 3, 4]),
+  corrcoef([2, 4, 6, 8], [1, 2, 3, 4], 1),
+);
+
+// Example 5: Population flag (0) is supported for array inputs
+assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+  [1, -1],
+  [-1, 1],
+]);
+
+// Example 6: Matrix input with linearly related columns
+assertEquals(corrcoef([
+  [1, 2, -1],
+  [2, 4, -2],
+  [3, 6, -3],
+]), [
+  [1, 1, -1],
+  [1, 1, -1],
+  [-1, -1, 1],
+]);
+
+// Example 7: Matrix input with independent columns
+assertEquals(corrcoef([
+  [1, 1, -1],
+  [-1, 1, 1],
+  [1, -1, 1],
+  [-1, -1, -1],
+]), [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+]);
+
+// Example 8: Symmetry for swapped array inputs
+assertEquals(
+  corrcoef([1, 2, 3, 4], [4, 3, 2, 1]),
+  corrcoef([4, 3, 2, 1], [1, 2, 3, 4]),
+);
+
+// Example 9: Population flag also works for matrix inputs
+assertEquals(corrcoef([
+  [1, 1, -1],
+  [-1, 1, 1],
+  [1, -1, 1],
+  [-1, -1, -1],
+], 0), [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+]);
+
+// Example 10: Matrix correlation handles alternating columns
+assertEquals(corrcoef([
+  [1, 0],
+  [0, 1],
+  [1, 0],
+  [0, 1],
+]), [
+  [1, -1],
+  [-1, 1],
+]);
 </code><button class="copyButton" data-copy="import { assertEquals } from &quot;jsr:@std/assert&quot;;
 
-// Example 1: Correlation coefficient is a matrix function
-assertEquals(typeof corrcoef, &quot;function&quot;);
+// Example 1: Perfect positive correlation between identical arrays
+assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+  [1, 1],
+  [1, 1],
+]);
 
-// Example 2: Corrcoef accepts array inputs
-assertEquals(Array.isArray([[1, 2], [2, 4]]), true);
+// Example 2: Perfect negative correlation between reversed arrays
+assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+  [1, -1],
+  [-1, 1],
+]);
 
-// Example 3: Function has appropriate signature
-assertEquals(corrcoef.length, 2);
+// Example 3: Zero correlation between orthogonal sequences
+assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+  [1, 0],
+  [0, 1],
+]);
+
+// Example 4: Explicit sample flag matches the default behaviour
+assertEquals(
+  corrcoef([2, 4, 6, 8], [1, 2, 3, 4]),
+  corrcoef([2, 4, 6, 8], [1, 2, 3, 4], 1),
+);
+
+// Example 5: Population flag (0) is supported for array inputs
+assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+  [1, -1],
+  [-1, 1],
+]);
+
+// Example 6: Matrix input with linearly related columns
+assertEquals(corrcoef([
+  [1, 2, -1],
+  [2, 4, -2],
+  [3, 6, -3],
+]), [
+  [1, 1, -1],
+  [1, 1, -1],
+  [-1, -1, 1],
+]);
+
+// Example 7: Matrix input with independent columns
+assertEquals(corrcoef([
+  [1, 1, -1],
+  [-1, 1, 1],
+  [1, -1, 1],
+  [-1, -1, -1],
+]), [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+]);
+
+// Example 8: Symmetry for swapped array inputs
+assertEquals(
+  corrcoef([1, 2, 3, 4], [4, 3, 2, 1]),
+  corrcoef([4, 3, 2, 1], [1, 2, 3, 4]),
+);
+
+// Example 9: Population flag also works for matrix inputs
+assertEquals(corrcoef([
+  [1, 1, -1],
+  [-1, 1, 1],
+  [1, -1, 1],
+  [-1, -1, -1],
+], 0), [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+]);
+
+// Example 10: Matrix correlation handles alternating columns
+assertEquals(corrcoef([
+  [1, 0],
+  [0, 1],
+  [1, 0],
+  [0, 1],
+]), [
+  [1, -1],
+  [-1, 1],
+]);
 "><svg
   class="copy"
   width="15"
