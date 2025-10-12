@@ -3,7 +3,9 @@
   "specifiers": {
     "jsr:@std/assert@*": "1.0.11",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "npm:dayjs@1.11.13": "1.11.13"
+    "npm:dayjs@1.11.13": "1.11.13",
+    "npm:mathjs@*": "13.2.2",
+    "npm:mathjs@13.2.2": "13.2.2"
   },
   "jsr": {
     "@std/assert@1.0.11": {
@@ -17,11 +19,54 @@
     }
   },
   "npm": {
+    "@babel/runtime@7.28.4": {
+      "integrity": "sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ=="
+    },
+    "complex.js@2.4.2": {
+      "integrity": "sha512-qtx7HRhPGSCBtGiST4/WGHuW+zeaND/6Ld+db6PbrulIB1i2Ev/2UPiqcmpQNPSyfBKraC0EOvOKCB5dGZKt3g=="
+    },
     "dayjs@1.11.13": {
       "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg=="
+    },
+    "decimal.js@10.6.0": {
+      "integrity": "sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg=="
+    },
+    "escape-latex@1.2.0": {
+      "integrity": "sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw=="
+    },
+    "fraction.js@4.3.7": {
+      "integrity": "sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew=="
+    },
+    "javascript-natural-sort@0.7.1": {
+      "integrity": "sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw=="
+    },
+    "mathjs@13.2.2": {
+      "integrity": "sha512-tBNMmwNsLMjD7xGHSF9IEuuzNVG8xPDgshDBY1eQ5ZS1HQr5O+bY8eG2peZYSkIsw79y2QcPkGMcQL5ZqtLu5A==",
+      "dependencies": [
+        "@babel/runtime",
+        "complex.js",
+        "decimal.js",
+        "escape-latex",
+        "fraction.js",
+        "javascript-natural-sort",
+        "seedrandom",
+        "tiny-emitter",
+        "typed-function"
+      ],
+      "bin": true
+    },
+    "seedrandom@3.0.5": {
+      "integrity": "sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg=="
+    },
+    "tiny-emitter@2.1.0": {
+      "integrity": "sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q=="
+    },
+    "typed-function@4.2.1": {
+      "integrity": "sha512-EGjWssW7Tsk4DGfE+5yluuljS1OGYWiI1J6e8puZz9nTMM51Oug8CD5Zo4gWMsOhq5BI+1bF+rWTm4Vbj3ivRA=="
     }
   },
   "redirects": {
+    "https://deno.land/std/encoding/base64.ts": "https://deno.land/std@0.224.0/encoding/base64.ts",
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.224.0/path/mod.ts",
     "https://esm.sh/dayjs": "https://esm.sh/dayjs@1.11.13",
     "https://esm.sh/dayjs/plugin/arraySupport": "https://esm.sh/dayjs@1.11.13/plugin/arraySupport",
@@ -34,6 +79,8 @@
   "remote": {
     "https://deno.land/std@0.224.0/assert/assert.ts": "09d30564c09de846855b7b071e62b5974b001bb72a4b797958fe0660e7849834",
     "https://deno.land/std@0.224.0/assert/assertion_error.ts": "ba8752bd27ebc51f723702fac2f54d3e94447598f54264a6653d6413738a8917",
+    "https://deno.land/std@0.224.0/encoding/_util.ts": "beacef316c1255da9bc8e95afb1fa56ed69baef919c88dc06ae6cb7a6103d376",
+    "https://deno.land/std@0.224.0/encoding/base64.ts": "dd59695391584c8ffc5a296ba82bcdba6dd8a84d41a6a539fbee8e5075286eaf",
     "https://deno.land/std@0.224.0/path/_common/assert_path.ts": "dbdd757a465b690b2cc72fc5fb7698c51507dec6bfafce4ca500c46b76ff7bd8",
     "https://deno.land/std@0.224.0/path/_common/basename.ts": "569744855bc8445f3a56087fd2aed56bdad39da971a8d92b138c9913aecc5fa2",
     "https://deno.land/std@0.224.0/path/_common/common.ts": "ef73c2860694775fe8ffcbcdd387f9f97c7a656febf0daa8c73b56f4d8a7bd4c",
@@ -111,6 +158,8 @@
     "https://deno.land/std@0.224.0/path/windows/resolve.ts": "8dae1dadfed9d46ff46cc337c9525c0c7d959fb400a6308f34595c45bdca1972",
     "https://deno.land/std@0.224.0/path/windows/to_file_url.ts": "40e560ee4854fe5a3d4d12976cef2f4e8914125c81b11f1108e127934ced502e",
     "https://deno.land/std@0.224.0/path/windows/to_namespaced_path.ts": "4ffa4fb6fae321448d5fe810b3ca741d84df4d7897e61ee29be961a6aac89a4c",
+    "https://esm.sh/@jsr/bemayer__rubique@1.0.0/denonext/bemayer__rubique.mjs": "108510e515967072f4ccb07d6efc74663ab9792818f04727ea2daadeb9a85eb7",
+    "https://esm.sh/@jsr/bemayer__rubique@1.0.0/denonext/rs_lib/pkg/rs_lib.mjs": "f8ba927a8c24cbd98740f18340955ff86c727fcc187522a65021b57f80c24ced",
     "https://esm.sh/dayjs@1.11.10": "ee76df45dea7bec0217949e9d6d04dbff2d33587bd12648439dceeabe7b3c9f4",
     "https://esm.sh/dayjs@1.11.10/denonext/dayjs.mjs": "cf7ef73255d09f28113556f1cfb3f99298f1e2bcfe2e8f6af8e83fe1d8d7cbdb",
     "https://esm.sh/dayjs@1.11.13": "89c34b8b3f7b970708114b4d264c9430c30eb0c2eab1419410c77ffefa18fe2c",
@@ -125,6 +174,7 @@
     "https://esm.sh/dayjs@1.11.13/plugin/isoWeek": "0cb3ed993c6b720b652f966a784e924c5ed572c01804fe267281d7a3a52a6431",
     "https://esm.sh/dayjs@1.11.13/plugin/toArray": "baf8e58a446fa30b7d2611ccab0170798674c391e492067e161b9d5a336de02b",
     "https://esm.sh/dayjs@1.11.13/plugin/utc": "2e41a0673e6e7c7c962983f1680911ef6feb27ded6007bc7705787ac1b2637b7",
+    "https://esm.sh/jsr/@bemayer/rubique@1.0.0": "81f8a8ca5fd5f106abada83f0520db7e9ea9f1b0a7ab5386b80c37da8f1f4ceb",
     "https://esm.sh/mathjs@14.6.0": "43de1d85b1358b55b87e5bf6735eb3ed088b39188135295435fbe34a654063cd"
   },
   "workspace": {
