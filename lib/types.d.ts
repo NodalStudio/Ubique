@@ -41,7 +41,7 @@ export type numarraymatrix<T = number> = T | array<T> | matrix<T>;
  * @type Dimension
  * @summary Dimension parameter for matrix operations
  * @description Specifies the dimension along which to perform operations:
- * - 0: operate along rows (column-wise results)
+ * - 0: operate along rows (column-wise results).
  * - 1: operate along columns (row-wise results)
  */
 export type Dimension = 0 | 1;
@@ -50,7 +50,7 @@ export type Dimension = 0 | 1;
  * @type NormalizationFlag
  * @summary Normalization flag for statistical calculations
  * @description Specifies the normalization method:
- * - 0: population normalization (divide by N)
+ * - 0: population normalization (divide by N).
  * - 1: sample normalization (divide by N-1)
  */
 export type NormalizationFlag = 0 | 1;

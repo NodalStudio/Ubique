@@ -8,9 +8,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function xkurtosis
- * @summary Excess kurtosis
- * @description Calculates the excess kurtosis (kurtosis - 3) which measures the "tailedness"
+ * Excess kurtosis.
+ *
+ * Calculates the excess kurtosis (kurtosis - 3) which measures the "tailedness"
  * relative to a normal distribution. Zero excess kurtosis indicates normal-like tails.
  *
  * @param x Input array or matrix

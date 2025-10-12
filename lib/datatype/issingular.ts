@@ -1,9 +1,9 @@
 import { ismatrix, issquare, ncols } from "../../index.ts";
 
 /**
- * @function issingular
- * @summary Checks if a matrix is singular (non-invertible).
- * @description Returns `true` if the input is a singular matrix. A matrix is singular if it is square and its determinant is zero, which occurs when any of the diagonal elements is zero.
+ * Checks if a matrix is singular (non-invertible).
+ *
+ * Returns `true` if the input is a singular matrix. A matrix is singular if it is square and its determinant is zero, which occurs when any of the diagonal elements is zero.
  *
  * @param x The matrix to check.
  * @returns Returns `true` if the matrix is singular, otherwise `false`.

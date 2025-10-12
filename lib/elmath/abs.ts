@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun } from "../../index.ts";
 
 /**
- * @function abs
- * @summary Absolute value
- * @description Returns the absolute value of a number, or applies the absolute value function element-wise to arrays or matrices.
+ * Absolute value.
+ *
+ * Returns the absolute value of a number, or applies the absolute value function element-wise to arrays or matrices.
  *
  * @param x The number, array, or matrix to compute the absolute value for
  * @returns The absolute value(s)

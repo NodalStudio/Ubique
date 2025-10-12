@@ -11,9 +11,9 @@ import isarray from "../datatype/isarray.ts";
 import isundefined from "../datatype/isundefined.ts";
 
 /**
- * @function subset
- * @summary Extract a subset of an array or matrix based on row and column indices.
- * @description Extracts a subset from an array or matrix based on specified row and column indices.
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
  * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
  *
  * @param m The input array or matrix.
@@ -92,8 +92,7 @@ export default function subset(
 }
 
 /**
- * @function handleArraySubset
- * @description Handles subset extraction for arrays (1D).
+ * Handles subset extraction for arrays (1D).
  * @param array The input array.
  * @param indices The indices to extract.
  * @returns The extracted subset.
@@ -118,8 +117,7 @@ function handleArraySubset(
 }
 
 /**
- * @function handleMatrixSubset
- * @description Handles subset extraction for matrices (2D).
+ * Handles subset extraction for matrices (2D).
  * @param matrix The input matrix.
  * @param rows The row indices or ':' for all rows.
  * @param cols The column indices or ':' for all columns.

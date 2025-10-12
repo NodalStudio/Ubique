@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, vectorfun } from "../../index.ts";
 
 /**
- * @function cdrawdown
- * @summary Computes the Continuous Drawdown
- * @description Computes continuous drawdowns for an asset/portfolio.
+ * Computes the Continuous Drawdown.
+ *
+ * Computes continuous drawdowns for an asset/portfolio.
  * A drawdown occurs when returns are negative in a sequence.
  *
  * @param x Asset/portfolio returns

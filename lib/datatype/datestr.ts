@@ -7,9 +7,9 @@ import type { array, matrix } from "../types.d.ts";
 dayjs.extend(utc);
 
 /**
- * @function datestr
- * @summary Convert Unix timestamp to string format
- * @description Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
+ * Convert Unix timestamp to string format.
+ *
+ * Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
  * Can handle individual numbers, arrays, and matrices of Unix timestamps.
  *
  * @example

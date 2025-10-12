@@ -3,9 +3,9 @@ import { eye, isnumber, issquare, linsolve, nrows } from "../../index.ts";
 import { invwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
- * @function inv
- * @summary Computes the inverse of a square matrix.
- * @description Returns the inverse of a square matrix. If the input is a single number, it returns the reciprocal of that number.
+ * Computes the inverse of a square matrix.
+ *
+ * Returns the inverse of a square matrix. If the input is a single number, it returns the reciprocal of that number.
  *
  * @param x A square matrix or a number.
  * @returns The inverse of the matrix or the reciprocal of the number.

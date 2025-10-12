@@ -1,7 +1,7 @@
 /**
- * @function isnull
- * @summary True for null values
- * @description Returns `true` if the input is `null`, otherwise `false`.
+ * True for null values.
+ *
+ * Returns `true` if the input is `null`, otherwise `false`.
  *
  * @param x The element to check.
  * @returns Returns `true` if `x` is `null`.

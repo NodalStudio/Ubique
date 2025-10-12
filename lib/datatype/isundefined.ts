@@ -1,7 +1,7 @@
 /**
- * @function isundefined
- * @summary Checks if the input is undefined.
- * @description Returns `true` if the input is strictly equal to `undefined`, otherwise returns `false`.
+ * Checks if the input is undefined.
+ *
+ * Returns `true` if the input is strictly equal to `undefined`, otherwise returns `false`.
  *
  * @param x The element to check.
  * @returns Returns `true` if `x` is `undefined`, otherwise `false`.

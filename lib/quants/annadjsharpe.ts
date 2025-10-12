@@ -10,9 +10,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function annadjsharpe
- * @summary Computes the Annualized Adjusted Sharpe Ratio
- * @description The Adjusted Sharpe Ratio accounts for skewness and kurtosis with a penalty factor
+ * Computes the Annualized Adjusted Sharpe Ratio.
+ *
+ * The Adjusted Sharpe Ratio accounts for skewness and kurtosis with a penalty factor
  * for negative skewness and excess kurtosis.
  *
  * **Formula:**

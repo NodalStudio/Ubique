@@ -1,7 +1,7 @@
 /**
- * @function isscalar
- * @summary Checks if the input is a scalar value.
- * @description Returns `true` if the input is a scalar, meaning it is either a single number, an array with one element, or a matrix with one element.
+ * Checks if the input is a scalar value.
+ *
+ * Returns `true` if the input is a scalar, meaning it is either a single number, an array with one element, or a matrix with one element.
  *
  * @param x The input to check.
  * @returns Returns `true` if `x` is a scalar, otherwise `false`.

@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { annreturn, isnumber, painindex, vectorfun } from "../../index.ts";
 
 /**
- * @function painratio
- * @summary Pain Ratio
- * @description A risk-adjusted measure with free risk and Pain index.
+ * Pain Ratio.
+ *
+ * A risk-adjusted measure with free risk and Pain index.
  * Pain Ratio = (Portfolio Return - RiskFree) / Pain Index
  *
  * It measures how much return is earned for each unit of pain (drawdown) experienced.

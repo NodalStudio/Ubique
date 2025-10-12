@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix } from "../../index.ts";
 
 /**
- * @function arrayfun
- * @summary Applies a function to each element of a array or matrix.
- * @description This function applies the provided function to each element of a array or matrix.
+ * Applies a function to each element of a array or matrix.
+ *
+ * This function applies the provided function to each element of a array or matrix.
  * The first argument is the input array or matrix, the second is the function to apply, followed by any additional parameters required by the function.
  *
  * @param x The input array, matrix, or single value to which the function will be applied.

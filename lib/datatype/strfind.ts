@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function strfind
- * @summary Finds all occurrences of a substring within a string.
- * @description Returns an array of indices where the search pattern is found within the string. If the pattern's length is greater than the string's length, or if the inputs are invalid, an error is thrown.
+ * Finds all occurrences of a substring within a string.
+ *
+ * Returns an array of indices where the search pattern is found within the string. If the pattern's length is greater than the string's length, or if the inputs are invalid, an error is thrown.
  *
  * @param str The string to be searched.
  * @param pattern The search pattern.

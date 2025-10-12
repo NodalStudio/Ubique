@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function setrow
- * @summary Set a row of a matrix.
- * @description Replaces the values of row `n` in a matrix with a given row vector.
+ * Set a row of a matrix.
+ *
+ * Replaces the values of row `n` in a matrix with a given row vector.
  *
  * @param x Row vector (1xN) to insert.
  * @param mat Matrix (MxN) in which to set the row.

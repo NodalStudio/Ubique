@@ -1,9 +1,9 @@
 import type { matrix } from "../types.d.ts";
 
 /**
- * @function ismatrix
- * @summary True for matrix (2D array with consistent row lengths)
- * @description Returns `true` if the input is a 2D array (array of arrays) where all subarrays have the same length.
+ * True for matrix (2D array with consistent row lengths).
+ *
+ * Returns `true` if the input is a 2D array (array of arrays) where all subarrays have the same length.
  *
  * @param x The input to check.
  * @returns Returns `true` if `x` is a valid matrix.

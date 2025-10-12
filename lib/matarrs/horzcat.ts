@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import cat from "../matarrs/cat.ts";
 
 /**
- * @function horzcat
- * @summary Concatenate arrays or matrices horizontally.
- * @description Concatenates arrays or matrices horizontally along columns.
+ * Concatenate arrays or matrices horizontally.
+ *
+ * Concatenates arrays or matrices horizontally along columns.
  *
  * @param args Arrays or matrices to concatenate.
  * @returns Concatenated result.

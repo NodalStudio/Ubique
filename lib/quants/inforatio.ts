@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, mean, minus, std, vectorfun } from "../../index.ts";
 
 /**
- * @function inforatio
- * @summary Information Ratio
- * @description Measures portfolio returns in excess of a benchmark relative to the
+ * Information Ratio.
+ *
+ * Measures portfolio returns in excess of a benchmark relative to the
  * volatility of those excess returns. The information ratio measures the skill of
  * an asset manager to generate excess returns relative to a benchmark.
  *

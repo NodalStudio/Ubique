@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function ldivide
- * @summary Left array division X .\ Y
- * @description Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
  *
  * @param x The divisor, can be a number, array, or matrix
  * @param y The dividend, can be a number, array, or matrix
@@ -48,7 +48,7 @@ export default function ldivide(
 }
 
 /**
- * Handle left division where at least one operand is not a number
+ * Handle left division where at least one operand is not a number.
  */
 function handleLeftDivision(
   x: numarraymatrix,
@@ -74,7 +74,7 @@ function handleLeftDivision(
 }
 
 /**
- * Element-wise division of two arrays
+ * Element-wise division of two arrays.
  */
 function elementwiseArrayDivision(x: array, y: array): array {
   if (x.length !== y.length) {
@@ -84,7 +84,7 @@ function elementwiseArrayDivision(x: array, y: array): array {
 }
 
 /**
- * Element-wise division of two matrices
+ * Element-wise division of two matrices.
  */
 function elementwiseMatrixDivision(x: matrix, y: matrix): matrix {
   if (x.length !== y.length || x[0].length !== y[0].length) {

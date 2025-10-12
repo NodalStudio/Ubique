@@ -4,9 +4,9 @@ import ncols from "./ncols.ts";
 import transpose from "./transpose.ts";
 
 /**
- * @function setcol
- * @summary Set a column of a matrix.
- * @description Replaces the values of column `n` in a matrix with a given column vector.
+ * Set a column of a matrix.
+ *
+ * Replaces the values of column `n` in a matrix with a given column vector.
  *
  * @param x Column vector (Mx1) to insert.
  * @param mat Matrix (MxN) in which to set the column.

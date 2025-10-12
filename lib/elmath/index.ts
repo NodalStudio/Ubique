@@ -1,6 +1,7 @@
 /**
  * @module elmath
- * @description Elementary mathematical functions
+ *
+ * Elementary mathematical functions.
  *
  * This module provides utilities for:
  * - Exponential and logarithmic functions (exp, log, sqrt)

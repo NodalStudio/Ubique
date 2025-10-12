@@ -10,9 +10,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function avgdrawdown
- * @summary Computes the Average Drawdown
- * @description Computes the average drawdown of an asset/portfolio.
+ * Computes the Average Drawdown.
+ *
+ * Computes the average drawdown of an asset/portfolio.
  * If `k` is greater than 0, it calculates the average of the `k` largest drawdowns.
  *
  * **Formula:**

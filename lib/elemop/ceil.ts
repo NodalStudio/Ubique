@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun } from "../../index.ts";
 
 /**
- * @function ceil
- * @summary Round toward positive infinity
- * @description Rounds the input value(s) toward positive infinity, optionally to a specified number of decimal places.
+ * Round toward positive infinity.
+ *
+ * Rounds the input value(s) toward positive infinity, optionally to a specified number of decimal places.
  *
  * @param x Value(s) to be rounded
  * @param n Number of decimal places to round to (defaults to 0)

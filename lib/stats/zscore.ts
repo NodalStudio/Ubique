@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
- * @function zscore
- * @summary Standardized Z score
- * @description Calculates standardized z-scores by subtracting the mean and dividing by
+ * Standardized Z score.
+ *
+ * Calculates standardized z-scores by subtracting the mean and dividing by
  * the standard deviation. Results have mean 0 and standard deviation 1.
  *
  * @param x Input array or matrix
@@ -42,7 +42,7 @@ export default function zscore(
 }
 
 /**
- * Single-pass z-score calculation using Welford's algorithm
+ * Single-pass z-score calculation using Welford's algorithm.
  * Numerically stable computation of mean and std, then standardizes
  */
 function computeZscore(arr: array, flag: 0 | 1): array {

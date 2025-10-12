@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import size from "../matarrs/size.ts";
 
 /**
- * @function numel
- * @summary Number of elements in an array or matrix
- * @description Computes the total number of elements in an array or matrix.
+ * Number of elements in an array or matrix.
+ *
+ * Computes the total number of elements in an array or matrix.
  *
  * @param x The array or matrix to evaluate.
  * @returns The total number of elements in the array or matrix.

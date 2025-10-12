@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function corrcoef
- * @summary Correlation coefficients of arrays
- * @description Calculates the correlation coefficients between arrays or matrices. Returns
+ * Correlation coefficients of arrays.
+ *
+ * Calculates the correlation coefficients between arrays or matrices. Returns
  * the sample correlation coefficient matrix for matrix input, or the correlation matrix
  * between two input arrays/matrices.
  *

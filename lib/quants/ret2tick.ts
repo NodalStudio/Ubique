@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { vectorfun } from "../../index.ts";
 
 /**
- * @function ret2tick
- * @summary Convert a return series to a value series with a start value
- * @description Converts a return series to a value series (prices) given a starting value.
+ * Convert a return series to a value series with a start value.
+ *
+ * Converts a return series to a value series (prices) given a starting value.
  * Can handle both simple and continuous (log) returns.
  *
  * @param x Array of returns

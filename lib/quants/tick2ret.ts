@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { isarray, isnumber, log, size, zeros } from "../../index.ts";
 
 /**
- * @function tick2ret
- * @summary Convert price series to returns
- * @description Convert a price series to continuous or discrete returns
+ * Convert price series to returns.
+ *
+ * Convert a price series to continuous or discrete returns
  *
  * @param x Array of values (prices)
  * @param mode Calculation mode: 'simple' (default) or 'continuous'

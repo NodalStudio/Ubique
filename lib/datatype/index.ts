@@ -1,10 +1,11 @@
 /**
  * @module datatype
- * @description Data type checking, assertion, and manipulation functions
+ *
+ * Data type checking, assertion, and manipulation functions.
  *
  * This module provides utilities for:
  * - Type checking (isarray, ismatrix, isvector, etc.)
- * - Type assertions (assertArray, assertMatrix, etc.)
+ * - Type assertions (assertarray, assertmatrix, etc.)
  * - Array/vector operations (arrayfun, vectorfun)
  * - Date/time utilities (datenum, datestr, now, etc.)
  * - String utilities (randchar, strfind)
@@ -26,11 +27,11 @@ export { default as isundefined } from "./isundefined.ts";
 export { default as isvector } from "./isvector.ts";
 
 // Type assertion functions
-export { default as assertArray } from "./assertArray.ts";
-export { default as assertDimension } from "./assertDimension.ts";
-export { default as assertMatrix } from "./assertMatrix.ts";
-export { default as assertNormalizationFlag } from "./assertNormalizationFlag.ts";
-export { default as assertNumber } from "./assertNumber.ts";
+export { default as assertarray } from "./assertarray.ts";
+export { default as assertdimension } from "./assertdimension.ts";
+export { default as assertmatrix } from "./assertmatrix.ts";
+export { default as assertnormalizationflag } from "./assertnormalizationflag.ts";
+export { default as assertnumber } from "./assertnumber.ts";
 
 // Array and data manipulation functions
 export { default as arrayfun } from "./arrayfun.ts";

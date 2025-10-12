@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function minus
- * @summary Subtraction X - Y
- * @description Subtracts two numbers, arrays, or matrices element-wise. Handles mixed inputs of scalars, arrays, and matrices.
+ * Subtraction X - Y.
+ *
+ * Subtracts two numbers, arrays, or matrices element-wise. Handles mixed inputs of scalars, arrays, and matrices.
  *
  * @param x The first operand, can be a number, array, or matrix.
  * @param y The second operand, can be a number, array, or matrix.
@@ -51,7 +51,7 @@ export default function minus(
 }
 
 /**
- * Handle subtraction where at least one operand is not a number
+ * Handle subtraction where at least one operand is not a number.
  */
 function handleMinusOperation(
   x: numarraymatrix,
@@ -77,7 +77,7 @@ function handleMinusOperation(
 }
 
 /**
- * Element-wise subtraction of two arrays
+ * Element-wise subtraction of two arrays.
  */
 function elementwiseArraySubtraction(x: array, y: array): array {
   if (x.length !== y.length) {
@@ -87,7 +87,7 @@ function elementwiseArraySubtraction(x: array, y: array): array {
 }
 
 /**
- * Element-wise subtraction of two matrices
+ * Element-wise subtraction of two matrices.
  */
 function elementwiseMatrixSubtraction(x: matrix, y: matrix): matrix {
   if (x.length !== y.length || x[0].length !== y[0].length) {

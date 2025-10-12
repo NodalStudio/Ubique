@@ -1,6 +1,7 @@
 /**
  * @module linalgebra
- * @description Linear algebra operations
+ *
+ * Linear algebra operations.
  *
  * This module provides utilities for:
  * - Matrix decomposition (LU decomposition)

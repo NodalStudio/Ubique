@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function burkeratio
- * @summary Computes the Burke Ratio
- * @description The Burke Ratio is a risk-adjusted performance metric that accounts for drawdowns.
+ * Computes the Burke Ratio.
+ *
+ * The Burke Ratio is a risk-adjusted performance metric that accounts for drawdowns.
  * In 'simple' mode, it calculates the excess return over the risk-free rate divided by the square root
  * of the sum of squared drawdowns. In 'modified' mode, the result is scaled by the square root of the number of data points.
  *

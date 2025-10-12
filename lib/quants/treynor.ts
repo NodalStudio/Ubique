@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, linearreg, mean, vectorfun } from "../../index.ts";
 
 /**
- * @function treynor
- * @summary Treynor Ratio
- * @description Computes the Treynor ratio, a risk-adjusted performance measure that uses beta
+ * Treynor Ratio.
+ *
+ * Computes the Treynor ratio, a risk-adjusted performance measure that uses beta
  * (systematic risk) instead of standard deviation. It measures excess return per unit of systematic risk.
  *
  * @param x Asset/portfolio returns

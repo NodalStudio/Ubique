@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function getcol
- * @summary Get a column of a matrix.
- * @description Retrieves a specific column from a 2D matrix. If the input is not a matrix or if the column index is invalid, an error is thrown.
+ * Get a column of a matrix.
+ *
+ * Retrieves a specific column from a 2D matrix. If the input is not a matrix or if the column index is invalid, an error is thrown.
  *
  * @param x The input matrix (2D array) from which to retrieve the column.
  * @param n The column index to retrieve (0-based index).

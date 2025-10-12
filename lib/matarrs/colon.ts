@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function colon
- * @summary Generates an array of numbers from start to end with a specified step.
- * @description Creates an array of numbers starting from `start`, ending at `end`, and incrementing by `step`. If `step` is not provided, it defaults to 1.
+ * Generates an array of numbers from start to end with a specified step.
+ *
+ * Creates an array of numbers starting from `start`, ending at `end`, and incrementing by `step`. If `step` is not provided, it defaults to 1.
  *
  * @param start The starting value of the array.
  * @param end The ending value of the array.

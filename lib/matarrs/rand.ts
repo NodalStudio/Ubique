@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function rand
- * @summary Uniformly distributed pseudorandom numbers
- * @description Generates uniformly distributed pseudorandom numbers. It can return:
+ * Uniformly distributed pseudorandom numbers.
+ *
+ * Generates uniformly distributed pseudorandom numbers. It can return:
  * - A single random number if no arguments are provided.
  * - A 2D array of random numbers if dimensions are provided.
  *

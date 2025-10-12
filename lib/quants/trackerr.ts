@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, minus, std, vectorfun } from "../../index.ts";
 
 /**
- * @function trackerr
- * @summary Tracking Error (ex-post)
- * @description Ex-post tracking error, which measures the standard deviation of the difference
+ * Tracking Error (ex-post).
+ *
+ * Ex-post tracking error, which measures the standard deviation of the difference
  * between portfolio returns and benchmark returns.
  *
  * @param x Portfolio/asset returns

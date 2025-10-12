@@ -1,13 +1,13 @@
 /**
- * Time Series Analysis
+ * Time Series Analysis.
  */
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
 
 /**
- * @function hurst
- * @summary Hurst index/exponent
- * @description It's a useful statistic for detecting if a time series is mean reverting (anti-persistent), totally random or persistent.
+ * Hurst index/exponent.
+ *
+ * It's a useful statistic for detecting if a time series is mean reverting (anti-persistent), totally random or persistent.
  * A value in the range [0.5) indicates mean-reverting (anti-persistent)
  * A value of 0.5 indicate a random walk
  * A value H in the range (0.5,1] indicates momentum (persistent)

@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function montecarlovar
- * @summary Monte Carlo Value-At-Risk
- * @description Monte Carlo simulation for VaR calculation
+ * Monte Carlo Value-At-Risk.
+ *
+ * Monte Carlo simulation for VaR calculation
  *
  * @param x array of values
  * @param p confidence level in the range [0,1] (def: 0.95)

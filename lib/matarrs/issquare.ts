@@ -1,7 +1,7 @@
 /**
- * @function issquare
- * @summary Checks if the input is a square matrix.
- * @description Returns `true` if the input matrix has the same number of rows and columns, otherwise returns `false`.
+ * Checks if the input is a square matrix.
+ *
+ * Returns `true` if the input matrix has the same number of rows and columns, otherwise returns `false`.
  *
  * @param x The input matrix to check.
  * @returns Returns `true` if `x` is a square matrix, otherwise `false`.

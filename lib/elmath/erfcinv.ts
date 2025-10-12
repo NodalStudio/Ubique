@@ -1,9 +1,9 @@
 import { erfc } from "../../index.ts";
 
 /**
- * @function erfcinv
- * @summary Inverse complementary error function
- * @description Computes the inverse of the complementary error function.
+ * Inverse complementary error function.
+ *
+ * Computes the inverse of the complementary error function.
  *
  * It satisfies \( y = \text{erfc}(x) \) for \( 2 \geq y \geq 0 \) with \( -\infty \leq x \leq \infty \).
  *

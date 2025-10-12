@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, std, vectorfun } from "../../index.ts";
 
 /**
- * @function annrisk
- * @summary Computes the Annualized Risk (Standard Deviation)
- * @description Computes the annualized standard deviation of asset or portfolio returns.
+ * Computes the Annualized Risk (Standard Deviation).
+ *
+ * Computes the annualized standard deviation of asset or portfolio returns.
  * Standard deviation is scaled based on the frequency of the data.
  *
  * **Formula:**

@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import size from "./size.ts";
 
 /**
- * @function nrows
- * @summary Returns the number of rows in an array or matrix.
- * @description Returns the number of rows in a 1D array (treated as a row vector) or a 2D matrix.
+ * Returns the number of rows in an array or matrix.
+ *
+ * Returns the number of rows in a 1D array (treated as a row vector) or a 2D matrix.
  *
  * @param x Array or matrix of elements.
  * @returns The number of rows in the input.

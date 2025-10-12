@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix, prctile } from "../../index.ts";
 
 /**
- * @function quantile
- * @summary Quantiles of a sample
- * @description Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles of a sample.
+ *
+ * Calculates the p-th quantile of values in an array or matrix.
  * Quantiles are values that divide the data into equal probability intervals.
  *
  * @param x Input array or matrix

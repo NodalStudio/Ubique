@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import { vectorfun } from "../../index.ts";
 
 /**
- * @function diff
- * @summary Differences between adjacent elements
- * @description Computes the differences between adjacent elements in an array or along a specified dimension of a matrix.
+ * Differences between adjacent elements.
+ *
+ * Computes the differences between adjacent elements in an array or along a specified dimension of a matrix.
  *
  * @param x The input array or matrix of values
  * @param dim The dimension along which to calculate, `1` for columns, `0` for rows (defaults to `1`)

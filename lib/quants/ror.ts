@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { clone, cumprod, isnumber, plus, vectorfun } from "../../index.ts";
 
 /**
- * @function ror
- * @summary Simple Rate of Return
- * @description Simple rate of return calculated from the last and the first value of
+ * Simple Rate of Return.
+ *
+ * Simple rate of return calculated from the last and the first value of
  * an array of numbers. Can work with return series or cumulative value series.
  *
  * @param x array or matrix of returns or values

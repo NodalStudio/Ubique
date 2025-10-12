@@ -3,9 +3,9 @@ import type { matrix } from "../types.d.ts";
 import { isnumber, issquare, mtimes } from "../../index.ts";
 
 /**
- * @function mpower
- * @summary Matrix power X ^ Y
- * @description Raises a square matrix X to the power of a scalar exponent Y.
+ * Matrix power X ^ Y.
+ *
+ * Raises a square matrix X to the power of a scalar exponent Y.
  *
  * @param x The base matrix (must be square)
  * @param y The exponent (must be a scalar)

@@ -5,9 +5,9 @@ import zeros from "../matarrs/zeros.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function diag
- * @summary Diagonal matrix creation and extraction of diagonals from a matrix.
- * @description For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
+ * Diagonal matrix creation and extraction of diagonals from a matrix.
+ *
+ * For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
  *
  * @param x Input array or matrix.
  * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
