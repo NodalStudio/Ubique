@@ -1,3 +1,4 @@
+import type { matrix } from "../types.d.ts";
 import { iscolumn, ismatrix, isrow } from "../../index.ts";
 
 /**
@@ -28,7 +29,7 @@ import { iscolumn, ismatrix, isrow } from "../../index.ts";
  * assertEquals(isvector([]), false);
 
  * ```*/
-export default function isvector(x: unknown): boolean {
+export default function isvector(x: unknown): x is matrix {
   if (ismatrix(x)) {
     return iscolumn(x) || isrow(x);
   }

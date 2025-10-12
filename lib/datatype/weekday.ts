@@ -1,13 +1,12 @@
-import { array, matrix } from "../types.d.ts";
-
-import dayjs from "https://esm.sh/dayjs";
-import utc from "https://esm.sh/dayjs/plugin/utc";
-import isoWeek from "https://esm.sh/dayjs/plugin/isoWeek";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import isoWeek from "dayjs/plugin/isoWeek.js";
 
 dayjs.extend(utc);
 dayjs.extend(isoWeek);
 
 import { arrayfun } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function weekday

@@ -1,4 +1,4 @@
-import dayjs from "https://esm.sh/dayjs";
+import dayjs from "dayjs";
 
 /**
  * @function now
@@ -17,6 +17,6 @@ import dayjs from "https://esm.sh/dayjs";
  * // Current timestamp should be positive
  * assertEquals(currentTimestamp > 0, true);
  * ``` */
-export default function now() {
+export default function now(): number {
   return dayjs().unix();
 }
