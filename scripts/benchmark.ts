@@ -1,5 +1,5 @@
 /**
- * Unified Rubique Benchmark Suite
+ * Unified Rubique Benchmark Suite.
  * Comprehensive performance comparison against math.js
  *
  * Run with: deno task benchmark
