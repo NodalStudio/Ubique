@@ -1,8 +1,11 @@
 {
   "name": "@bemayer/rubique",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
   "license": "MIT",
+  "compilerOptions": {
+    "strict": true
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bemayer/rubique.git"
@@ -31,15 +34,13 @@
     }
   ],
   "tasks": {
-    "index": "deno run --allow-read --allow-write ./scripts/generate-index.ts",
-    "build": "deno run -A build.ts",
-    "build:wasm": "deno run --allow-run ./scripts/build-wasm.ts",
-    "build:all": "deno task index && deno task build && deno task build:wasm && deno task types",
     "test": "deno fmt --check lib && deno test --doc lib",
-    "lint": "deno lint --rules-exclude=no-explicit-any",
-    "lint:fix": "deno fmt && deno lint --rules-exclude=no-explicit-any --fix",
-    "benchmark": "deno run --allow-run ./scripts/benchmark.ts",
-    "wasmbuild": "deno run -A jsr:@deno/wasmbuild --out ./rs_lib/pkg"
+    "lint": "deno lint lib",
+    "lint:fix": "deno fmt lib && deno lint --fix lib",
+    "build": "deno run -A jsr:@deno/wasmbuild --out ./rs_lib/pkg --inline",
+    "docs": "deno doc --html --name=Rubique --output=./docs lib/",
+    "benchmark": "deno run --allow-write ./scripts/benchmark.ts",
+    "deploy": "deno task build && deno task test && deno task lint:fix && deno publish --allow-dirty"
   },
   "lint": {
     "rules": {
@@ -52,6 +53,27 @@
     "dayjs": "npm:dayjs@1.11.13"
   },
   "exports": {
-    "./": "./index.ts"
+    ".": "./index.ts"
+  },
+  "publish": {
+    "include": [
+      "index.ts",
+      "lib/**/*.ts",
+      "rs_lib/pkg/*.js",
+      "rs_lib/pkg/*.ts",
+      "rs_lib/pkg/*.wasm",
+      "README.md",
+      "LICENSE"
+    ],
+    "exclude": [
+      "scripts/",
+      "docs/",
+      "target/",
+      "rs_lib/src/",
+      "rs_lib/Cargo.toml",
+      "*.md",
+      "!README.md",
+      "!LICENSE"
+    ]
   }
 }
