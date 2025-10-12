@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>assertNormalizationFlag - datatype\index.ts - Rubique documentation</title>
+  <title>assertnormalizationflag - datatype\index.ts - Rubique documentation</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="doc-current-file" content="datatype\index.ts">
@@ -43,7 +43,7 @@
     fill="currentColor"
   />
 </svg>
-</span><ul><li>assertNormalizationFlag</li></ul></ul>
+</span><ul><li>assertnormalizationflag</li></ul></ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -107,14 +107,14 @@
     </div>
   </div>
 </nav>
-<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_assertNormalizationFlag"><article>
+<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_assertnormalizationflag"><article>
       <div class="symbolTitle">
         <div>
           <div class="text-2xl leading-none break-all">
-            <span class="text-Function">function</span>&nbsp;<span class="font-bold">assertNormalizationFlag</span>
+            <span class="text-Function">function</span>&nbsp;<span class="font-bold">assertnormalizationflag</span>
           </div></div><a
   class="sourceButton"
-  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertNormalizationFlag.ts"><svg
+  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertnormalizationflag.ts"><svg
   width="14"
   height="14"
   viewBox="0 0 14 14"
@@ -137,8 +137,8 @@
   />
 </svg>
 </a>
-</div><div><div class="mt-3 space-y-8"><div class="scroll-mt-16" id="function_assertNormalizationFlag_0">
-      <code class="anchorable text-base break-words"><a href="#function_assertNormalizationFlag_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><div><div class="mt-3 space-y-8"><div class="scroll-mt-16" id="function_assertnormalizationflag_0">
+      <code class="anchorable text-base break-words"><a href="#function_assertnormalizationflag_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -160,8 +160,10 @@
   </defs>
 </svg>
 </a>
-<span class="font-bold">assertNormalizationFlag</span><span class="font-medium">(<span><span>flag<span>: <span>unknown</span></span></span></span>)<span>: <span>asserts </span>flag is <span>NormalizationFlag</span></span> </span>
-      </code><div class="space-y-7" id=""><section class="section"  id="examples"><div>
+<span class="font-bold">assertnormalizationflag</span><span class="font-medium">(<span><span>flag<span>: <span>unknown</span></span></span></span>)<span>: <span>asserts </span>flag is <span>NormalizationFlag</span></span> </span>
+      </code><div class="space-y-7" id=""><div class="markdown"><p>Asserts that a value is a valid normalization flag (0 or 1).</p>
+<p>Throws a TypeError if the input is not 0 or 1. Uses TypeScript's type assertion to narrow the type.</p>
+</div><section class="section"  id="examples"><div>
       <h2 class="anchorable mb-1"><a href="#examples" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
@@ -211,23 +213,23 @@ Examples</h2></div><div class="space-y-8"><div class="anchorable"><a href="#exam
   <div><div class="markdown"><pre class="highlight"><code class="language-ts">import { assertThrows } from &quot;jsr:@std/assert&quot;;
 
 // Example 1: Valid flag 0 (population)
-assertNormalizationFlag(0); // No error
+assertnormalizationflag(0); // No error
 
 // Example 2: Valid flag 1 (sample)
-assertNormalizationFlag(1); // No error
+assertnormalizationflag(1); // No error
 
 // Example 3: Invalid flag throws error
-assertThrows(() =&gt; assertNormalizationFlag(2), TypeError, &quot;Expected normalization flag 0 or 1, got 2&quot;);
+assertThrows(() =&gt; assertnormalizationflag(2), TypeError, &quot;Expected normalization flag 0 or 1, got 2&quot;);
 </code><button class="copyButton" data-copy="import { assertThrows } from &quot;jsr:@std/assert&quot;;
 
 // Example 1: Valid flag 0 (population)
-assertNormalizationFlag(0); // No error
+assertnormalizationflag(0); // No error
 
 // Example 2: Valid flag 1 (sample)
-assertNormalizationFlag(1); // No error
+assertnormalizationflag(1); // No error
 
 // Example 3: Invalid flag throws error
-assertThrows(() =&gt; assertNormalizationFlag(2), TypeError, &quot;Expected normalization flag 0 or 1, got 2&quot;);
+assertThrows(() =&gt; assertnormalizationflag(2), TypeError, &quot;Expected normalization flag 0 or 1, got 2&quot;);
 "><svg
   class="copy"
   width="15"
@@ -314,7 +316,7 @@ Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry" id=
       </code>
     </div><a
   class="sourceButton"
-  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertNormalizationFlag.ts"><svg
+  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertnormalizationflag.ts"><svg
   width="14"
   height="14"
   viewBox="0 0 14 14"
@@ -363,14 +365,14 @@ Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry" id=
   </defs>
 </svg>
 </a>
-Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertNormalizationFlag_0_return">
+Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertnormalizationflag_0_return">
 
   <div class="docEntryHeader">
     <div><code><span class="font-medium text-stone-500 dark:text-stone-200"><span>asserts </span>flag is <span>NormalizationFlag</span></span>
       </code>
     </div><a
   class="sourceButton"
-  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertNormalizationFlag.ts"><svg
+  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertnormalizationflag.ts"><svg
   width="14"
   height="14"
   viewBox="0 0 14 14"
@@ -418,14 +420,14 @@ Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function
   </defs>
 </svg>
 </a>
-Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertNormalizationFlag_0_throws_0">
+Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertnormalizationflag_0_throws_0">
 
   <div class="docEntryHeader">
     <div><code><span class="font-medium text-stone-500 dark:text-stone-200"></span>
       </code>
     </div><a
   class="sourceButton"
-  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertNormalizationFlag.ts"><svg
+  href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertnormalizationflag.ts"><svg
   width="14"
   height="14"
   viewBox="0 0 14 14"
@@ -457,8 +459,8 @@ Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_asse
     </article></main>
 <div class="toc">
     <div><div class="usageContent">
-    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code class="language-typescript">import assertNormalizationFlag from &quot;datatype\index.ts&quot;;
-</code><button class="copyButton" data-copy="import assertNormalizationFlag from &quot;datatype\index.ts&quot;;
+    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code class="language-typescript">import assertnormalizationflag from &quot;datatype\index.ts&quot;;
+</code><button class="copyButton" data-copy="import assertnormalizationflag from &quot;datatype\index.ts&quot;;
 "><svg
   class="copy"
   width="15"

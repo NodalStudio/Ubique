@@ -161,7 +161,18 @@
 </svg>
 </a>
 <span class="font-bold">adjsharpe</span><span class="font-medium">(<div class="ml-4"><div><span>x<span>: <a href="../.././types.d.ts/~/array.html" class="link">array</a></span></span>,</div><div><span>frisk?<span>: <span>number</span></span></span>,</div><div><span>dim?<span>: <span><span>0</span><span> | </span><span>1</span></span></span></span>,</div></div>)<span>: <span>number</span></span> </span>
-      </code><div class="space-y-7" id=""><section class="section"  id="examples"><div>
+      </code><div class="space-y-7" id=""><div class="markdown"><p>Computes the Adjusted Sharpe Ratio.</p>
+<p>The Adjusted Sharpe Ratio accounts for skewness and kurtosis with a penalty factor
+for negative skewness and excess kurtosis.</p>
+<p>Adjusted Sharpe Ratio formula:
+<strong>ASR = SR × [1 + (S / 6) × SR - ((K - 3) / 24) × SR²]</strong>
+where:</p>
+<ul>
+<li><code>SR</code> = Sharpe Ratio</li>
+<li><code>S</code> = Skewness</li>
+<li><code>K</code> = Kurtosis</li>
+</ul>
+</div><section class="section"  id="examples"><div>
       <h2 class="anchorable mb-1"><a href="#examples" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
