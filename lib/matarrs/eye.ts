@@ -1,6 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
-import { array, matrix } from "../types.d.ts";
 import zeros from "./zeros.ts";
 import isarray from "../datatype/isarray.ts";
 
@@ -9,10 +8,10 @@ import isarray from "../datatype/isarray.ts";
  * @summary Identity matrix
  * @description Creates an identity matrix with the specified dimensions. If a single number is provided, it creates a square identity matrix.
  *
- * @param {number|array} dimOrRows The number of rows, or an array specifying both dimensions.
- * @param {number} [cols] The number of columns (optional if the first argument is an array).
- * @returns {matrix} The identity matrix of the specified dimensions.
- * @throws {Error} If no input arguments are provided.
+ * @param dimOrRows The number of rows, or an array specifying both dimensions.
+ * @param cols The number of columns (optional if the first argument is an array).
+ * @returns The identity matrix of the specified dimensions.
+ * @throws If no input arguments are provided.
  *
  * @example
  * ```ts

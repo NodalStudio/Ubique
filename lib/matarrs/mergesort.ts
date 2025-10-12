@@ -1,5 +1,6 @@
 import colon from "./colon.ts";
 import isarray from "../datatype/isarray.ts";
+import type { array } from "../types.d.ts";
 
 /**
  * @function mergesort
@@ -8,10 +9,10 @@ import isarray from "../datatype/isarray.ts";
  * sorts each half, and then merges them back together in the desired order.
  * It returns the sorted values along with their original indexes.
  *
- * @param {array<number>} x Array of elements to sort.
- * @param {string} [mode='ascend'] Sorting direction: `"ascend"` (default) or `"descend"`.
- * @returns {array<array<number>>} A 2D array: the first row contains sorted values, the second row contains the original indexes.
- * @throws {Error} If no arguments are provided or the mode is invalid.
+ * @param x Array of elements to sort.
+ * @param mode Sorting direction: `"ascend"` (default) or `"descend"`.
+ * @returns A 2D array: the first row contains sorted values, the second row contains the original indexes.
+ * @throws If no arguments are provided or the mode is invalid.
  *
  * @example
  * ```ts
@@ -45,58 +46,73 @@ import isarray from "../datatype/isarray.ts";
  * ]);
 
  * ```*/
-// @ts-expect-error TS(7023): 'mergesort' implicitly has return type 'any' becau... Remove this comment to see the full error message
-export default function mergesort(x: any, mode = "ascend") {
-  if (isarray(x)) {
-    x = [x, colon(0, x.length - 1)];
-  }
+export default function mergesort(
+  x: array | [array, array],
+  mode: string = "ascend",
+): [array, array] {
+  const sortingPair: [array, array] = isarray(x)
+    ? [x as array, colon(0, (x as array).length - 1)]
+    : x;
 
-  const len = x[0].length;
+  const len = sortingPair[0].length;
   if (len < 2) {
-    return x;
+    return sortingPair;
   }
 
   const cx = Math.floor(len / 2);
-  const sx = x[0].slice(0, cx);
-  const sxi = x[1].slice(0, cx);
-  const dx = x[0].slice(cx);
-  const dxi = x[1].slice(cx);
-  const _sx = [sx, sxi];
-  const _dx = [dx, dxi];
+  const sx = sortingPair[0].slice(0, cx);
+  const sxi = sortingPair[1].slice(0, cx);
+  const dx = sortingPair[0].slice(cx);
+  const dxi = sortingPair[1].slice(cx);
+  const left: [array, array] = [sx, sxi];
+  const right: [array, array] = [dx, dxi];
 
-  const merge = (sxarr: any, dxarr: any, mode: any) => {
-    const sorted = [];
-    const idx = [];
-    while (sxarr[0].length && dxarr[0].length) {
-      let compare;
-      if (mode === "ascend") {
-        compare = sxarr[0][0] <= dxarr[0][0];
-      } else if (mode === "descend") {
-        compare = sxarr[0][0] >= dxarr[0][0];
-      } else {
-        throw new Error('sorting must be "ascend" or "descend"');
+  const merge = (
+    sxarr: [array, array],
+    dxarr: [array, array],
+    currentMode: string,
+  ): [array, array] => {
+    const sorted: array = [];
+    const idx: array = [];
+
+    const take = (pair: [array, array], context: string): void => {
+      const value = pair[0].shift();
+      const index = pair[1].shift();
+      if (value === undefined || index === undefined) {
+        throw new Error(`Unexpected empty ${context} during merge`);
       }
-      if (compare) {
-        sorted.push(sxarr[0].shift());
-        idx.push(sxarr[1].shift());
+      sorted.push(value);
+      idx.push(index);
+    };
+
+    const compare = (a: number, b: number): boolean => {
+      if (currentMode === "ascend") {
+        return a <= b;
+      }
+      if (currentMode === "descend") {
+        return a >= b;
+      }
+      throw new Error('sorting must be "ascend" or "descend"');
+    };
+
+    while (sxarr[0].length && dxarr[0].length) {
+      if (compare(sxarr[0][0], dxarr[0][0])) {
+        take(sxarr, "left pair");
       } else {
-        sorted.push(dxarr[0].shift());
-        idx.push(dxarr[1].shift());
+        take(dxarr, "right pair");
       }
     }
 
     while (sxarr[0].length) {
-      sorted.push(sxarr[0].shift());
-      idx.push(sxarr[1].shift());
+      take(sxarr, "left remainder");
     }
 
     while (dxarr[0].length) {
-      sorted.push(dxarr[0].shift());
-      idx.push(dxarr[1].shift());
+      take(dxarr, "right remainder");
     }
 
     return [sorted, idx];
   };
 
-  return merge(mergesort(_sx, mode), mergesort(_dx, mode), mode);
+  return merge(mergesort(left, mode), mergesort(right, mode), mode);
 }

@@ -1,8 +1,8 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
-import ismatrix from "../datatype/ismatrix.ts";
 import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
 import clone from "./clone.ts";
 import vectorfun from "../datatype/vectorfun.ts";
 
@@ -11,10 +11,10 @@ import vectorfun from "../datatype/vectorfun.ts";
  * @summary Flip the order of elements in an array or matrix.
  * @description Flips the order of elements in an array or matrix along a specified dimension. Default dimension is 1 (columns).
  *
- * @param {array|matrix} x The array or matrix to flip.
- * @param {number} [dim=1] The dimension to apply the flip (0 = rows, 1 = columns). Defaults to 1.
- * @returns {array|matrix} The array or matrix with flipped elements.
- * @throws {Error} If no input is provided.
+ * @param x The array or matrix to flip.
+ * @param dim The dimension to apply the flip (0 = rows, 1 = columns). Defaults to 1.
+ * @returns The array or matrix with flipped elements.
+ * @throws If no input is provided.
  *
  * @example
  * ```ts
@@ -33,23 +33,27 @@ import vectorfun from "../datatype/vectorfun.ts";
  * assertEquals(flipdim([[5, 6, 5], [7, 8, -1]], 0), [[7, 5], [8, 6], [-1, 5]]);
 
  * ```*/
-export default function flipdim(x: any, dim = 1) {
+export default function flipdim(
+  x: number | array | matrix,
+  dim: number = 1,
+): number | array | matrix {
   if (!x) {
     throw new Error("Not enough input arguments");
   }
 
-  const flipArray = (arr: any) => clone(arr.reverse());
+  const flipArray = (arr: array) => clone(arr.reverse());
 
   if (isnumber(x)) {
     return x;
   }
 
   if (isarray(x)) {
-    return dim === 1 ? flipArray(x) : x;
+    const arr = x as array;
+    return dim === 1 ? flipArray(arr) : arr;
   }
 
   if (ismatrix(x)) {
-    return vectorfun((1 - dim) as 0 | 1, x, flipArray);
+    return vectorfun((1 - dim) as 0 | 1, x, flipArray as (arr: array) => array);
   }
 
   throw new Error("Unknown input arguments");

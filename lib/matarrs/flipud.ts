@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { matrix } from "../types.d.ts";
 import flipdim from "./flipdim.ts";
 import isnumber from "../datatype/isnumber.ts";
 import ismatrix from "../datatype/ismatrix.ts";
@@ -10,7 +10,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  *
  * @param x The input array or matrix
  * @returns The matrix with its rows flipped upside down
- * @throws {Error} If no input is provided or input is invalid
+ * @throws If no input is provided or input is invalid
  *
  * @example
  * ```ts
@@ -26,7 +26,7 @@ import ismatrix from "../datatype/ismatrix.ts";
  * assertEquals(flipud([[1, 2], [3, 4]]), [[3, 1], [4, 2]]);
  * ```
  */
-export default function flipud(x: any) {
+export default function flipud(x: number | matrix): number | matrix {
   if (!x) {
     throw new Error("Not enough input arguments");
   }
@@ -36,7 +36,7 @@ export default function flipud(x: any) {
   }
 
   if (ismatrix(x)) {
-    return flipdim(x, 0); // Flip rows (upside down)
+    return flipdim(x, 0) as matrix; // Flip rows (upside down)
   }
 
   throw new Error("Unknown input arguments");

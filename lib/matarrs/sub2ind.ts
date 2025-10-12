@@ -1,5 +1,6 @@
+import type { array, matrix } from "../types.d.ts";
+
 import getcol from "./getcol.ts";
-import squeeze from "./squeeze.ts";
 import numel from "./numel.ts";
 import isarray from "../datatype/isarray.ts";
 
@@ -8,10 +9,10 @@ import isarray from "../datatype/isarray.ts";
  * @summary Converts 2D subscripts to linear indices.
  * @description Converts 2D coordinates `[X, Y]` into linear indices based on the given matrix size.
  *
- * @param {array|matrix} size The size of the matrix.
- * @param {array|matrix} index X, Y coordinates in the range `[0...N-1]`.
- * @returns {number|array} The computed linear index or an array of indices.
- * @throws {Error} If input arguments are missing or invalid.
+ * @param size The size of the matrix.
+ * @param index X, Y coordinates in the range `[0...N-1]`.
+ * @returns The computed linear index or an array of indices.
+ * @throws If input arguments are missing or invalid.
  *
  * @example
  * ```ts
@@ -29,15 +30,16 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(sub2ind([1, 3], [2, 0]), 2);
 
  * ```*/
-export default function sub2ind(size: any, index: any) {
-  if (!size || !index) {
-    throw new Error("Not enough input arguments.");
-  }
-
-  const indexArray = isarray(index) ? [index] : index;
+export default function sub2ind(
+  size: array,
+  index: array | matrix,
+): number | array {
+  const indexArray: matrix = isarray(index)
+    ? [index as array]
+    : (index as matrix);
   const x = getcol(indexArray, 0);
   const y = getcol(indexArray, 1);
   const indices = x.map((xi, i) => xi + y[i] * size[0]);
 
-  return numel(indices) === 1 ? squeeze(indices)[0] : squeeze(indices);
+  return numel(indices) === 1 ? indices[0] : indices;
 }

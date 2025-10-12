@@ -12,7 +12,7 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  * @param flag Bias correction flag (0 for bias correction, 1 for simple calculation). Default is 1
  * @param dim Dimension to compute along (0 for rows, 1 for columns). Default is 0
  * @returns Computed kurtosis values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -37,11 +37,11 @@ export default function kurtosis(
 ): numarraymatrix {
   const computeKurtosis = (arr: array, biasFlag: 0 | 1): number => {
     const n = arr.length;
-    const mom4 = moment(arr, 4) as number / (moment(arr, 2) as number) ** 2;
+    const mom4 = (moment(arr, 4) as number) / (moment(arr, 2) as number) ** 2;
 
     return biasFlag === 1
       ? mom4
-      : ((n + 1) * mom4 - 3 * (n - 1)) * (n - 1) / ((n - 2) * (n - 3)) + 3;
+      : (((n + 1) * mom4 - 3 * (n - 1)) * (n - 1)) / ((n - 2) * (n - 3)) + 3;
   };
 
   if (isnumber(x)) {

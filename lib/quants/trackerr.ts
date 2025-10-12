@@ -11,7 +11,7 @@ import { isarray, ismatrix, minus, std, vectorfun } from "../../index.ts";
  * @param y Benchmark returns
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Tracking error value(s)
- * @throws {Error} If input is a number or insufficient arguments provided
+ * @throws If input is a number or insufficient arguments provided
  *
  * @example
  * ```ts
@@ -24,17 +24,13 @@ import { isarray, ismatrix, minus, std, vectorfun } from "../../index.ts";
  *
  * // Example 2: Different portfolio tracking error
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(trackerr(y, z), 0.05862166834882815);
+ * assertEquals(trackerr(y, z), 0.058621668348828156);
  *
  * // Example 3: Tracking error with different assets
  * assertEquals(trackerr([0.05, 0.03, 0.08], [0.04, 0.025, 0.075]), 0.0028867513459481294);
  * ```
  */
-export default function trackerr(
-  x: array,
-  y: array,
-  dim?: 0 | 1,
-): number;
+export default function trackerr(x: array, y: array, dim?: 0 | 1): number;
 export default function trackerr(
   x: matrix,
   y: array,

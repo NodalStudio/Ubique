@@ -12,7 +12,7 @@ import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
  * @param mar Minimum acceptable return threshold (defaults to 0)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
  * @returns Sortino Ratio
- * @throws {Error} If input is a number (not supported)
+ * @throws If input is a number (not supported)
  *
  * @example
  * ```ts

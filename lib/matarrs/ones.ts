@@ -1,5 +1,4 @@
-import { array, matrix } from "../types.d.ts";
-import ismatrix from "../datatype/ismatrix.ts";
+import type { matrix } from "../types.d.ts";
 
 /**
  * @function ones
@@ -7,9 +6,9 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @description Creates a matrix or array filled with ones based on the provided dimensions.
  * Accepts up to two arguments for dimensions or a single array defining the dimensions.
  *
- * @param {...number|array<number>} args Variable input arguments (max 2).
- * @returns {array|matrix} A matrix or array filled with ones.
- * @throws {Error} If no arguments are provided.
+ * @param args Variable input arguments (max 2).
+ * @returns A matrix or array filled with ones.
+ * @throws If no arguments are provided.
  *
  * @example
  * ```ts

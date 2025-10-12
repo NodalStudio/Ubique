@@ -1,5 +1,6 @@
-import type { array, matrix } from "../types.d.ts";
+import type { matrix } from "../types.d.ts";
 import { eye, isnumber, issquare, linsolve, nrows } from "../../index.ts";
+import { invwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
  * @function inv
@@ -39,7 +40,30 @@ export default function inv(x: number | matrix): number | matrix {
     throw new Error("matrix must be square");
   }
 
-  const m = nrows(x);
-  const I = eye(m, m);
-  return linsolve(x, I);
+  const n = nrows(x);
+
+  // Use WASM for larger matrices (> 10x10) where overhead is justified
+  if (typeof invwasm === "function" && n > 10) {
+    const flatX = new Float64Array(x.flat());
+    const flatResult = invwasm(flatX, n);
+
+    // Check for singular matrix (NaN values)
+    if (isNaN(flatResult[0])) {
+      throw new Error("Matrix is singular and cannot be inverted");
+    }
+
+    // Reshape flat result back to matrix
+    const result: matrix = [];
+    for (let i = 0; i < n; i++) {
+      result[i] = [];
+      for (let j = 0; j < n; j++) {
+        result[i][j] = flatResult[i * n + j];
+      }
+    }
+    return result;
+  }
+
+  // JavaScript fallback for small matrices
+  const I = eye(n, n);
+  return linsolve(x, I) as matrix;
 }

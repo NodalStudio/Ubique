@@ -23,7 +23,7 @@ import {
  * @param k Number of largest drawdowns to consider (0 for all)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns The computed average drawdown
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -42,16 +42,8 @@ import {
  * assertEquals(avgdrawdown([x1, x2]), [0.0036, 0.0056]);
  * ```
  */
-export default function avgdrawdown(
-  x: array,
-  k?: number,
-  dim?: 0 | 1,
-): number;
-export default function avgdrawdown(
-  x: matrix,
-  k?: number,
-  dim?: 0 | 1,
-): array;
+export default function avgdrawdown(x: array, k?: number, dim?: 0 | 1): number;
+export default function avgdrawdown(x: matrix, k?: number, dim?: 0 | 1): array;
 export default function avgdrawdown(
   x: numarraymatrix,
   k = 0,
@@ -72,7 +64,10 @@ function computeAvgDrawdown(arr: array, k: number): number {
   if (k > 0 && k <= cdd.length) {
     const sortedCdd = sort(cdd, "descend") as array;
     return mean(
-      subsetlin(sortedCdd, Array.from({ length: k }, (_, i) => i)) as array,
+      subsetlin(
+        sortedCdd,
+        Array.from({ length: k }, (_, i) => i),
+      ) as array,
     );
   }
   return NaN;

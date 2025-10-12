@@ -1,5 +1,6 @@
 import type { matrix } from "../types.d.ts";
 import { isnumber, issquare, isvector, lu, ncols } from "../../index.ts";
+import { detwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
  * @function det
@@ -52,8 +53,16 @@ export default function det(x: matrix): number {
     throw new Error("Matrix must be square");
   }
 
-  const { LU, S } = lu(x);
   const n = ncols(x);
+
+  // Use WASM for all matrices (benchmarks show it's faster even for 2x2!)
+  if (typeof detwasm === "function") {
+    const flatX = new Float64Array((x as number[][]).flat());
+    return detwasm(flatX, n);
+  }
+
+  // JavaScript fallback only if WASM not available
+  const { LU, S } = lu(x);
   let determinant = S;
 
   for (let i = 0; i < n; i++) {

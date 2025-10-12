@@ -1,17 +1,18 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
+
 import flipdim from "./flipdim.ts";
 import isnumber from "../datatype/isnumber.ts";
-import ismatrix from "../datatype/ismatrix.ts";
 import isarray from "../datatype/isarray.ts";
+import ismatrix from "../datatype/ismatrix.ts";
 
 /**
  * @function fliplr
  * @summary Flip a matrix left to right.
  * @description Reverses the order of the columns in the input matrix, flipping it left to right.
  *
- * @param {array|matrix} x The input array or matrix.
- * @returns {array|matrix} The matrix with its columns flipped left to right.
- * @throws {Error} If no input is provided.
+ * @param x The input array or matrix.
+ * @returns The matrix with its columns flipped left to right.
+ * @throws If no input is provided.
  *
  * @example
  * ```ts
@@ -24,7 +25,9 @@ import isarray from "../datatype/isarray.ts";
  * assertEquals(fliplr([1, 2, 3]), [1, 2, 3]);
 
  * ```*/
-export default function fliplr(x: any) {
+export default function fliplr(
+  x: number | array | matrix,
+): number | array | matrix {
   if (!x) {
     throw new Error("Not enough input arguments");
   }

@@ -1,6 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
-
-import { array } from "../types.d.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function trues
@@ -8,9 +6,9 @@ import { array } from "../types.d.ts";
  * @description Generates an array or matrix of all `true` values based on the input dimensions.
  *              Accepts one or two numeric arguments, or an array specifying the dimensions.
  *
- * @param {number|array|...} args Variable input arguments (max 2).
- * @returns {matrix<boolean>} A matrix filled with `true` values.
- * @throws {Error} If no arguments are provided.
+ * @param args Variable input arguments (max 2).
+ * @returns A matrix filled with `true` values.
+ * @throws If no arguments are provided.
  *
  * @example
  * ```ts
@@ -32,13 +30,13 @@ import { array } from "../types.d.ts";
  * assertEquals(trues(2,3), [[true, true, true], [true, true, true]]);
 
  * ```*/
-export default function trues(n: number): boolean[][];
-export default function trues(dims: array): boolean[][];
-export default function trues(nrows: number, ncols: number): boolean[][];
+export default function trues(n: number): matrix<boolean>;
+export default function trues(dims: array): matrix<boolean>;
+export default function trues(nrows: number, ncols: number): matrix<boolean>;
 export default function trues(
   nrowsOrDims: unknown,
   ncols?: unknown,
-): boolean[][] {
+): matrix<boolean> {
   let rows: number;
   let cols: number;
 

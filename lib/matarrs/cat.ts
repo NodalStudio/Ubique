@@ -15,7 +15,7 @@ import clone from "../matarrs/clone.ts";
  * @param dim The dimension along which to concatenate (0: rows, 1: columns)
  * @param args Variable arguments to concatenate
  * @returns The concatenated array or matrix
- * @throws {Error} If not enough input arguments are provided or if dimensions do not match for concatenation
+ * @throws If not enough input arguments are provided or if dimensions do not match for concatenation
  *
  * @example
  * ```ts
@@ -62,10 +62,10 @@ export default function cat(
 /**
  * @function normalize
  * @description Normalizes the input arguments into a 2D matrix form for easier concatenation.
- * @param {number|array|matrix} arg The argument to normalize.
- * @returns {matrix} The normalized 2D matrix.
+ * @param arg The argument to normalize.
+ * @returns The normalized 2D matrix.
  */
-function normalize(arg: any) {
+function normalize(arg: number | array | matrix): matrix {
   if (isnumber(arg)) {
     return [[arg]];
   }
@@ -75,16 +75,16 @@ function normalize(arg: any) {
   if (ismatrix(arg)) {
     return arg;
   }
-  throw new Error("unknown input argument");
+  throw new TypeError(`Invalid input type: ${typeof arg}`);
 }
 
 /**
  * @function verticalConcat
  * @description Concatenates matrices vertically (along rows).
- * @param {array} args The list of matrices to concatenate vertically.
- * @returns {matrix} The vertically concatenated matrix.
+ * @param args The list of matrices to concatenate vertically.
+ * @returns The vertically concatenated matrix.
  */
-function verticalConcat(args: any) {
+function verticalConcat(args: matrix[]): matrix {
   const result: matrix = [];
   const numCols = ncols(args[0]);
 

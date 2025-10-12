@@ -1,12 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  max,
-  min,
-  vectorfun,
-} from "../../index.ts";
+import { isnumber, max, min, vectorfun } from "../../index.ts";
 
 /**
  * @function range
@@ -17,7 +10,7 @@ import {
  * @param x Input number, array, or matrix
  * @param dim Dimension along which to compute range. Default is 0
  * @returns Range values (max - min)
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

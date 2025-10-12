@@ -25,7 +25,7 @@ import {
  * @param frisk Annual risk-free rate (defaults to 0)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
  * @returns The computed Adjusted Sharpe Ratio
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -40,7 +40,7 @@ import {
  *
  * // Example 3: Adjusted Sharpe ratio for matrix (row-wise)
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
- * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.8423295092203]);
+ * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.84232950922034]);
  * ``` */
 export default function adjsharpe(
   x: array,

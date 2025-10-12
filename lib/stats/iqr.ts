@@ -1,11 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import {
-  isarray,
-  ismatrix,
-  isnumber,
-  prctile,
-  vectorfun,
-} from "../../index.ts";
+import { isnumber, prctile, vectorfun } from "../../index.ts";
 
 /**
  * @function iqr
@@ -16,7 +10,7 @@ import {
  * @param x Input array or matrix
  * @param dim Dimension along which to compute IQR. Default is 0
  * @returns Interquartile range values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts
@@ -34,10 +28,7 @@ import {
  */
 export default function iqr(x: array, dim?: 0 | 1): number;
 export default function iqr(x: matrix, dim?: 0 | 1): array;
-export default function iqr(
-  x: numarraymatrix,
-  dim: 0 | 1 = 0,
-): numarraymatrix {
+export default function iqr(x: numarraymatrix, dim: 0 | 1 = 0): numarraymatrix {
   const _iqr = function (a: number[]) {
     return prctile(a, 75) - prctile(a, 25);
   };

@@ -9,7 +9,6 @@ import type { array } from "../types.d.ts";
  * @param b The upper bound
  * @param n The number of points to generate. Defaults to 10 if not provided
  * @returns An array of `n` linearly spaced points between `a` and `b`
- * @throws {Error} If fewer than 2 arguments are provided
  *
  * @example
  * ```ts
@@ -35,10 +34,6 @@ import type { array } from "../types.d.ts";
  * ```
  */
 export default function linspace(a: number, b: number, n = 10): array {
-  if (arguments.length < 2) {
-    throw new Error("Not enough input arguments");
-  }
-
   if (n <= 1) {
     return [b];
   }

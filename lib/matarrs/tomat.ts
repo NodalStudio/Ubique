@@ -1,4 +1,4 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import isnumber from "../datatype/isnumber.ts";
 import islogical from "../datatype/islogical.ts";
@@ -12,9 +12,9 @@ import ismatrix from "../datatype/ismatrix.ts";
  *              If input is a vector, it is converted into a single-row matrix.
  *              If input is already a matrix, it remains unchanged.
  *
- * @param {number|array|boolean} x The input value.
- * @returns {matrix} A matrix representation of the input.
- * @throws {Error} If the input is invalid.
+ * @param x The input value.
+ * @returns A matrix representation of the input.
+ * @throws If the input is invalid.
  *
  * @example
  * ```ts
@@ -31,22 +31,17 @@ import ismatrix from "../datatype/ismatrix.ts";
  *
  * // Example 4: Convert an already formatted matrix
  * assertEquals(tomat([[1, 2], [3, 4]]), [[1, 2], [3, 4]]);
- *
- * // Example 5: Invalid input (null)
- * assertThrows(() => tomat(null), "Invalid input argument.");
 
  * ```*/
-export default function tomat(x: any) {
-  if (x === undefined) {
-    throw new Error("Not enough input arguments.");
-  }
-
+export default function tomat(
+  x: number | boolean | array | matrix,
+): matrix<number | boolean> | matrix {
   if (isnumber(x) || islogical(x)) {
-    return [[x]];
+    return [[x as number | boolean]] as matrix<number | boolean>;
   }
 
   if (isarray(x)) {
-    return [x];
+    return [x] as matrix;
   }
 
   if (ismatrix(x)) {

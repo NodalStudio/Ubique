@@ -1,15 +1,5 @@
 import type { array } from "../types.d.ts";
-import {
-  abs,
-  isarray,
-  ismatrix,
-  isnumber,
-  max,
-  minus,
-  power,
-  sqrt,
-  sum,
-} from "../../index.ts";
+import { abs, max, minus, power, sqrt, sum } from "../../index.ts";
 
 /**
  * @function pdist
@@ -21,7 +11,7 @@ import {
  * @param y Second input array
  * @param mode Distance method ('euclidean', 'manhattan', 'chebychev', 'hamming'). Default is 'euclidean'
  * @returns Distance value
- * @throws {Error} When arrays have different lengths or invalid method specified
+ * @throws When arrays have different lengths or invalid method specified
  *
  * @example
  * ```ts
@@ -56,7 +46,7 @@ export default function pdist(
     case "chebychev":
       return max(abs(minus(x, y))) as number;
 
-    case "hamming":
+    case "hamming": {
       let distance = 0;
       for (let i = 0; i < x.length; i++) {
         if (x[i] !== y[i]) {
@@ -64,6 +54,7 @@ export default function pdist(
         }
       }
       return distance;
+    }
 
     default:
       throw new Error(

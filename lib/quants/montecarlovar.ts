@@ -8,7 +8,6 @@ import {
   std,
   tick2ret,
   vectorfun,
-  zeros,
 } from "../../index.ts";
 
 /**

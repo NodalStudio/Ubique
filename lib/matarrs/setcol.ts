@@ -1,8 +1,5 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
-import ismatrix from "../datatype/ismatrix.ts";
-import isarray from "../datatype/isarray.ts";
-import isinteger from "../datatype/isinteger.ts";
 import ncols from "./ncols.ts";
 import transpose from "./transpose.ts";
 
@@ -11,11 +8,11 @@ import transpose from "./transpose.ts";
  * @summary Set a column of a matrix.
  * @description Replaces the values of column `n` in a matrix with a given column vector.
  *
- * @param {array|vector} x Column vector (Mx1) to insert.
- * @param {matrix} mat Matrix (MxN) in which to set the column.
- * @param {number} n Column index (0-based).
- * @returns {matrix} A new matrix with the updated column.
- * @throws {Error} If inputs are invalid.
+ * @param x Column vector (Mx1) to insert.
+ * @param mat Matrix (MxN) in which to set the column.
+ * @param n Column index (0-based).
+ * @returns A new matrix with the updated column.
+ * @throws When the column index is out of bounds or the vector length mismatches the number of rows.
  *
  * @example
  * ```ts
@@ -38,34 +35,22 @@ import transpose from "./transpose.ts";
  *
  * // Example 4: Column index out of bounds error
  * assertThrows(() => setcol([1, 2], [[4, 5], [6, 7]], 2), "Column index must be an integer between 0 and N-1.");
- *
- * // Example 5: Invalid matrix error
- * assertThrows(() => setcol([1, 2], "not a matrix", 1), "Input matrix must be a 2D array.");
- *
- * // Example 6: Invalid column vector error
- * assertThrows(() => setcol("not a vector", [[4, 5], [6, 7]], 1), "Column vector must be an array.");
-
- * ```*/
-export default function setcol(x: any, mat: any, n: any) {
-  if (!ismatrix(mat)) {
-    throw new Error("Input matrix must be a 2D array.");
-  }
-  if (!isarray(x)) {
-    throw new Error("Column vector must be an array.");
-  }
-  if (!isinteger(n) || n < 0 || n >= ncols(mat)) {
+ * ```
+ */
+export default function setcol(x: array, mat: matrix, n: number): matrix {
+  if (!Number.isInteger(n) || n < 0 || n >= ncols(mat)) {
     throw new Error("Column index must be an integer between 0 and N-1.");
   }
 
-  const x_t = transpose(x);
+  const columnVector = transpose(x);
 
-  if (x_t.length !== mat.length) {
+  if (columnVector.length !== mat.length) {
     throw new Error(
       "Column vector length must match the number of matrix rows.",
     );
   }
 
-  return mat.map((row: any, i: any) =>
-    row.map((val: any, j: any) => (j === n ? x_t[i][0] : val))
+  return mat.map((row: array, i: number) =>
+    row.map((val: number, j: number) => (j === n ? columnVector[i][0] : val))
   );
 }

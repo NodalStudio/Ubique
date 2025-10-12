@@ -1,43 +1,41 @@
-/** @import { array, matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
 import nrows from "../matarrs/nrows.ts";
 import ncols from "../matarrs/ncols.ts";
 import issquare from "../matarrs/issquare.ts";
 import isarray from "../datatype/isarray.ts";
-import ismatrix from "../datatype/ismatrix.ts";
 import lu from "./lu.ts";
 import issingular from "../datatype/issingular.ts";
 import subset from "../matarrs/subset.ts";
 import colon from "../matarrs/colon.ts";
 import transpose from "../matarrs/transpose.ts";
 import getcol from "../matarrs/getcol.ts";
-import { matrix } from "../types.d.ts";
 
 /**
  * @function linsolve
  * @summary Solve a linear system of equations Ax = b.
  * @description Solves the linear system of equations Ax = b using LU factorization with row pivoting.
  *
- * @param {matrix} A A square matrix.
- * @param {array|matrix} b A vector or matrix.
- * @returns {array|matrix} The solution to the linear system.
- * @throws {Error} If not enough input arguments are provided.
- * @throws {Error} If matrix dimensions do not agree.
- * @throws {Error} If the matrix is not square.
- * @throws {Error} If the matrix is singular.
+ * @param A A square matrix.
+ * @param b A vector or matrix.
+ * @returns The solution to the linear system.
+ * @throws If not enough input arguments are provided.
+ * @throws If matrix dimensions do not agree.
+ * @throws If the matrix is not square.
+ * @throws If the matrix is singular.
  *
  * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { transpose, eye } from "../../index.ts";
+ * import { eye } from "../../index.ts";
  *
  * // Example 1: Solve a linear system with a vector
- * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], transpose([5, 6, 3])),
+ * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], [5, 6, 3]),
  *   [5.846153846153846, -2.3846153846153846, -1.5384615384615385]);
  *
  * // Example 2: Solve a linear system with a matrix
  * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], [[4], [-6], [7]]),
- *   [1, 2, -0.9999999999999999]);
+ *   [[1], [2], [-0.9999999999999999]]);
  *
  * // Example 3: Solve a linear system with an identity matrix
  * assertEquals(linsolve([[1, 1, -1], [1, -2, 3], [2, 3, 1]], eye(3, 3)),
@@ -46,21 +44,17 @@ import { matrix } from "../types.d.ts";
  *    [-0.5384615384615384, 0.07692307692307691, 0.23076923076923078]]);
 
  * ```*/
-export default function linsolve(A: any, b: any) {
-  if (arguments.length < 2) {
-    throw new Error("Not enough input arguments");
-  }
-
+export default function linsolve(A: matrix, b: array | matrix): array | matrix {
   if (!issquare(A)) {
     throw new Error("Matrix must be square");
   }
 
-  if (isarray(b)) {
-    // Convert vector `b` into a column matrix
-    b = transpose(b);
-  }
+  const wasVector = isarray(b);
+  const matrixB: matrix = wasVector
+    ? (transpose(b as array) as matrix)
+    : (b as matrix);
 
-  if (nrows(A) !== nrows(b)) {
+  if (nrows(A) !== nrows(matrixB)) {
     throw new Error("Matrix dimensions must agree");
   }
 
@@ -74,9 +68,7 @@ export default function linsolve(A: any, b: any) {
   const P = lud.P;
 
   // Handle `b` permutation
-  const permutedB = ismatrix(b)
-    ? subset(b, P, colon(0, ncols(b) - 1))
-    : subset(b, P);
+  const permutedB = subset(matrixB, P, colon(0, ncols(matrixB) - 1)) as matrix;
 
   // Solve for each column of `b`
   const result: matrix = [];
@@ -87,16 +79,16 @@ export default function linsolve(A: any, b: any) {
   }
 
   // Return as flat array if input `b` was a vector, otherwise return as a matrix
-  return ncols(b) === 1 ? result.flat() : transpose(result);
+  return wasVector ? result.flat() : (transpose(result) as matrix);
 }
 
 /**
  * Helper function to solve a linear system given LU decomposition.
- * @param {matrix} LU The LU matrix from LU decomposition.
- * @param {array} b The vector to solve for.
- * @returns {array} The solution vector.
+ * @param LU The LU matrix from LU decomposition.
+ * @param b The vector to solve for.
+ * @returns The solution vector.
  */
-function solve(LU: any, b: any) {
+function solve(LU: matrix, b: array): array {
   const n = nrows(LU);
   const x = [...b];
 

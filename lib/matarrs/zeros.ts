@@ -1,6 +1,5 @@
-/** @import { matrix } from '../types.d.ts' */
+import type { array, matrix } from "../types.d.ts";
 
-import { array, matrix } from "../types.d.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
@@ -8,10 +7,10 @@ import isarray from "../datatype/isarray.ts";
  * @summary Create an array or matrix of all zeros.
  * @description Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
  *
- * @param {number|array} [nrowsOrDims=1] The number of rows or an array specifying both dimensions. Defaults to 1.
- * @param {number} [ncols=1] The number of columns (optional if the first argument is an array).
- * @returns {matrix} A matrix of zeros with the specified dimensions.
- * @throws {Error} If invalid input arguments are provided.
+ * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
+ * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.
+ * @returns A matrix of zeros with the specified dimensions.
+ * @throws If invalid input arguments are provided.
  *
  * @example
  * ```ts
@@ -36,7 +35,7 @@ export default function zeros(dims: array): matrix;
 export default function zeros(nrows: number, ncols: number): matrix;
 export default function zeros(nrowsOrDims?: unknown, ncols?: unknown): matrix {
   const dimensions = isarray(nrowsOrDims)
-    ? nrowsOrDims as array
+    ? (nrowsOrDims as array)
     : [nrowsOrDims ?? 1];
 
   const [nrows] = dimensions;

@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, ismatrix, isnumber, sort, vectorfun } from "../../index.ts";
+import { isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
  * @function mode
@@ -10,7 +10,7 @@ import { isarray, ismatrix, isnumber, sort, vectorfun } from "../../index.ts";
  * @param x Input array or matrix
  * @param dim Dimension along which to compute mode. Default is 0
  * @returns Most frequent values
- * @throws {Error} When input is invalid
+ * @throws When input is invalid
  *
  * @example
  * ```ts

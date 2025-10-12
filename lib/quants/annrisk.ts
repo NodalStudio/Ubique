@@ -14,7 +14,7 @@ import { isarray, ismatrix, std, vectorfun } from "../../index.ts";
  * @param t Frequency of data points in a year: 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (default)
  * @param dim Dimension to operate on (0: row-wise, 1: column-wise)
  * @returns The computed annualized risk (standard deviation)
- * @throws {Error} If the input is invalid
+ * @throws If the input is invalid
  *
  * @example
  * ```ts
@@ -30,14 +30,10 @@ import { isarray, ismatrix, std, vectorfun } from "../../index.ts";
  * // Example 3: Annualized risk for multiple assets (matrix)
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annrisk([x1, x2], 12), [0.04604780125043973, 0.10238163897887159]);
+ * assertEquals(annrisk([x1, x2], 12), [0.046047801250439745, 0.10238163897887159]);
  * ```
  */
-export default function annrisk(
-  x: array,
-  t?: number,
-  dim?: 0 | 1,
-): number;
+export default function annrisk(x: array, t?: number, dim?: 0 | 1): number;
 export default function annrisk(
   x: matrix,
   t?: number,

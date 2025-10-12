@@ -1,14 +1,15 @@
+import type { array, matrix, numarraymatrix } from "../types.d.ts";
+
 import cat from "./cat.ts";
 
 /**
  * @function vertcat
  * @summary Concatenates arrays or matrices vertically.
  * @description Combines multiple arrays or matrices by stacking them vertically.
- *              Supports multiple input arguments.
  *
- * @param {...(array|matrix|number)} args Variable arguments (args1, args2, ...).
- * @returns {array|matrix} The vertically concatenated matrix.
- * @throws {Error} If no arguments are provided.
+ * @param args Variable arguments (args1, args2, ...).
+ * @returns The vertically concatenated matrix.
+ * @throws If no arguments are provided.
  *
  * @example
  * ```ts
@@ -31,10 +32,8 @@ import cat from "./cat.ts";
  * assertThrows(() => vertcat(), "Not enough input arguments.");
 
  * ```*/
-export default function vertcat(...args: any[]) {
-  if (args.length === 0) {
-    throw new Error("Not enough input arguments.");
-  }
-
+export default function vertcat(
+  ...args: (numarraymatrix)[]
+): array | matrix {
   return cat(0, ...args);
 }
