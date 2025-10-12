@@ -1,4 +1,20 @@
-// Statistical functions
+/**
+ * @module stats
+ * @description Statistical analysis and descriptive statistics functions
+ *
+ * This module provides utilities for:
+ * - Central tendency (mean, median, mode)
+ * - Dispersion (std, varc, range, iqr, mad)
+ * - Distribution shape (skewness, kurtosis, xkurtosis)
+ * - Relationships (corrcoef, cov)
+ * - Quantiles (quantile, quartile, prctile)
+ * - Extremes (min, max)
+ * - Standardization (zscore)
+ * - Distance (pdist)
+ * - Histogram (histc)
+ * - Moments (moment)
+ */
+
 export { default as corrcoef } from "./corrcoef.ts";
 export { default as cov } from "./cov.ts";
 export { default as histc } from "./histc.ts";
