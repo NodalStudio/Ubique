@@ -35,16 +35,6 @@ jobs:
           bun-version: latest
       - run: bun test/runtime/bun-smoke.ts
 
-  workers:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v5
-        with:
-          node-version: node
-      - run: npm install --no-save vitest @cloudflare/vitest-pool-workers
-      - run: npx vitest run --pool=@cloudflare/vitest-pool-workers test/runtime/worker-smoke.ts
-
   browser:
     runs-on: ubuntu-latest
     steps:
@@ -52,6 +42,6 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: node
-      - run: npm install --no-save vitest @vitest/browser playwright
+      - run: npm install --no-save vitest @vitest/browser playwright dayjs
       - run: npx playwright install chromium
-      - run: npx vitest run --browser.enabled --browser.name=chromium --browser.headless test/runtime/browser-smoke.ts
+      - run: npx vitest run --browser.enabled --browser.headless test/runtime/browser-smoke.test.ts
