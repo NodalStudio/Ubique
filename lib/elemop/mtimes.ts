@@ -11,7 +11,7 @@ import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
  * @param x The first operand, can be a number, array (treated as column vector), or matrix
  * @param y The second operand, can be a number, array (treated as column vector), or matrix
  * @returns The result of matrix multiplication of x and y
- * @throws {Error} If matrix dimensions do not agree for multiplication or if no arguments are provided
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
  * @example
  * ```ts
@@ -122,12 +122,35 @@ function matrixMultiplication(x: matrix, y: matrix): matrix {
     throw new Error("Matrix dimensions must agree");
   }
 
+  const rowsX = x.length;
+  const colsX = x[0].length;
+  const colsY = y[0].length;
+
+  // Use WASM for all matrices (benchmarks show it's faster even for small ones!)
+  if (typeof timeswasm === "function") {
+    const flatX = new Float64Array(x.flat());
+    const flatY = new Float64Array(y.flat());
+
+    const flatResult = timeswasm(flatX, flatY, rowsX, colsX, colsY);
+
+    // Reshape flat result back to matrix
+    const result: matrix = [];
+    for (let i = 0; i < rowsX; i++) {
+      result[i] = [];
+      for (let j = 0; j < colsY; j++) {
+        result[i][j] = flatResult[i * colsY + j];
+      }
+    }
+    return result;
+  }
+
+  // JavaScript fallback only if WASM not available
   const result: matrix = [];
-  for (let i = 0; i < x.length; i++) {
+  for (let i = 0; i < rowsX; i++) {
     result[i] = [];
-    for (let j = 0; j < y[0].length; j++) {
+    for (let j = 0; j < colsY; j++) {
       let sum = 0;
-      for (let k = 0; k < y.length; k++) {
+      for (let k = 0; k < colsX; k++) {
         sum += x[i][k] * y[k][j];
       }
       result[i][j] = sum;
@@ -163,45 +186,5 @@ function vectorMatrixMultiplication(x: array, y: matrix): array {
       result[j] += x[i] * y[i][j];
     }
   }
-  return result;
-}
-
-/**
- * Fallback implementation of matrix multiplication
- */
-function multiplyMatrices(a: number[][], b: number[][]): number[][] {
-  // Use WASM implementation if available for large matrices
-  if (typeof timeswasm === "function" && a.length > 2 && b[0].length > 2) {
-    const rowsA = a.length;
-    const colsA = a[0].length;
-    const colsB = b[0].length;
-    const flatA = new Float64Array(a.flat());
-    const flatB = new Float64Array(b.flat());
-
-    const result = timeswasm(flatA, flatB, rowsA, colsA, colsB);
-
-    return Array.from(
-      { length: rowsA },
-      (_, i) => Array.from({ length: colsB }, (_, j) => result[i * colsB + j]),
-    );
-  }
-
-  // Standard JavaScript implementation
-  const result: number[][] = [];
-  const m = a.length;
-  const n = b[0].length;
-  const p = b.length;
-
-  for (let i = 0; i < m; i++) {
-    result[i] = [];
-    for (let j = 0; j < n; j++) {
-      let sum = 0;
-      for (let k = 0; k < p; k++) {
-        sum += a[i][k] * b[k][j];
-      }
-      result[i][j] = sum;
-    }
-  }
-
   return result;
 }

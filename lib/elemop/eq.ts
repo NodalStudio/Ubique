@@ -10,7 +10,7 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x Left-hand side value(s) for comparison.
  * @param y Right-hand side value(s) for comparison.
  * @returns The result of the equality comparison.
- * @throws {Error} If fewer than two arguments are provided.
+ * @throws If fewer than two arguments are provided.
  *
  * @example
  * ```ts

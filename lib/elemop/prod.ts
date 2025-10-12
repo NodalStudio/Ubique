@@ -10,7 +10,7 @@ import { isarray, ismatrix } from "../../index.ts";
  * @param x The input array or matrix of values
  * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
  * @returns The product of the array elements, or an array of products if a matrix is provided
- * @throws {Error} If no input arguments are provided
+ * @throws If no input arguments are provided
  *
  * @example
  * ```ts

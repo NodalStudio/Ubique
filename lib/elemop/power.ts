@@ -10,7 +10,7 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @param x The base, can be a number, array, or matrix
  * @param y The exponent, can be a number, array, or matrix
  * @returns The result of element-wise exponentiation x .^ y
- * @throws {Error} If the input dimensions do not agree or if no arguments are provided
+ * @throws If the input dimensions do not agree or if no arguments are provided
  *
  * @example
  * ```ts

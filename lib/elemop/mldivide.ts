@@ -18,7 +18,7 @@ import {
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
  * @returns The result of the division
- * @throws {Error} If insufficient arguments are provided or if the matrix dimensions do not match
+ * @throws If insufficient arguments are provided or if the matrix dimensions do not match
  *
  * @example
  * ```ts
