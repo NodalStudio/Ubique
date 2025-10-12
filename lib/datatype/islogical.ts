@@ -6,7 +6,7 @@
  * @param x - The input to check.
  * @returns Returns `true` if `x` is a boolean.
  *
- * @throws {Error} - Throws an error if no argument is provided.
+ * @throws Throws an error if no argument is provided.
  *
  * @example
  * ```ts
@@ -25,7 +25,6 @@
  * assertEquals(islogical("true"), false);
 
  * ```*/
-// deno-lint-ignore no-explicit-any
-export default function islogical(x: any) {
+export default function islogical(x: unknown): x is boolean {
   return typeof x === "boolean";
 }

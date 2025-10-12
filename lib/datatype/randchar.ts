@@ -28,7 +28,7 @@
 export default function randchar(
   n = 6,
   strset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-) {
+): string {
   return [...Array(n)].map(() =>
     strset[Math.floor(Math.random() * strset.length)]
   ).join("");

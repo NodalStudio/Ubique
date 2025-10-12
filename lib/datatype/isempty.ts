@@ -1,6 +1,5 @@
-import { array, matrix } from "../types.d.ts";
-
 import { isarray, ismatrix } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function isempty

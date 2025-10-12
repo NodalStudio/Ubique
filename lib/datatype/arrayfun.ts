@@ -1,15 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
 import type { array, matrix } from "../types.d.ts";
-
 import { isarray, ismatrix } from "../../index.ts";
-
-type MapReturnType<X, U> = X extends matrix<any> ? matrix<U>
-  : X extends array<any> ? array<U>
-  : U;
-
-type ElementType<X> = X extends matrix<infer E> ? E
-  : X extends array<infer E> ? E
-  : X;
 
 /**
  * @function arrayfun
@@ -55,22 +45,43 @@ type ElementType<X> = X extends matrix<infer E> ? E
  * );
  * ```
  */
-export default function arrayfun<X, U>(
-  x: X,
-  fun: (element: ElementType<X>, ...args: any[]) => U,
-  ...funArgs: any[]
-): MapReturnType<X, U> {
+export default function arrayfun<T, A extends unknown[], U>(
+  x: matrix<T>,
+  fun: (element: T, ...args: A) => U,
+  ...funArgs: A
+): matrix<U>;
+export default function arrayfun<T, A extends unknown[], U>(
+  x: array<T>,
+  fun: (element: T, ...args: A) => U,
+  ...funArgs: A
+): array<U>;
+export default function arrayfun<T, A extends unknown[], U>(
+  x: T,
+  fun: (element: T, ...args: A) => U,
+  ...funArgs: A
+): U;
+export default function arrayfun<T, A extends unknown[], U>(
+  x: T | array<T> | matrix<T>,
+  fun: (element: T, ...args: A) => U,
+  ...funArgs: A
+): U | array<U> | matrix<U>;
+
+export default function arrayfun<T, A extends unknown[], U>(
+  x: matrix<T> | array<T> | T,
+  fun: (element: T, ...args: A) => U,
+  ...funArgs: A
+): matrix<U> | array<U> | U {
   if (ismatrix(x)) {
-    return x.map((row) =>
-      row.map((element) => fun(element as ElementType<X>, ...funArgs))
-    ) as MapReturnType<X, U>;
+    return (x as matrix<T>).map((row) =>
+      row.map((element) => fun(element, ...funArgs))
+    ) as matrix<U>;
   }
 
   if (isarray(x)) {
-    return x.map((element) =>
-      fun(element as ElementType<X>, ...funArgs)
-    ) as MapReturnType<X, U>;
+    return (x as array<T>).map((element) => fun(element, ...funArgs)) as array<
+      U
+    >;
   }
 
-  return fun(x as ElementType<X>, ...funArgs) as MapReturnType<X, U>;
+  return fun(x as T, ...funArgs);
 }

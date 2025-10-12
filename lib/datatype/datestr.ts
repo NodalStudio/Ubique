@@ -1,9 +1,8 @@
-import { array, matrix } from "../types.d.ts";
-
-import dayjs from "https://esm.sh/dayjs";
-import utc from "https://esm.sh/dayjs/plugin/utc";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
 
 import { arrayfun } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
 
 dayjs.extend(utc);
 
