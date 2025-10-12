@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, mean, vectorfun } from "../../index.ts";
 
 /**
- * @function moment
- * @summary Computes the central moment of a dataset
- * @description Computes the k-th central moment of a dataset around the mean. The first moment
+ * Computes the central moment of a dataset.
+ *
+ * Computes the k-th central moment of a dataset around the mean. The first moment
  * is always zero, the second moment equals variance, and higher moments describe shape.
  *
  * @param x Input array or matrix

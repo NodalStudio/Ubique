@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, mean, std, vectorfun } from "../../index.ts";
 
 /**
- * @function sharpe
- * @summary Computes the Sharpe Ratio
- * @description Calculates the Sharpe Ratio for an asset or portfolio given its returns and a risk-free rate.
+ * Computes the Sharpe Ratio.
+ *
+ * Calculates the Sharpe Ratio for an asset or portfolio given its returns and a risk-free rate.
  * The risk-free rate should be adjusted to match the timeframe of the returns.
  *
  * The Sharpe Ratio formula:

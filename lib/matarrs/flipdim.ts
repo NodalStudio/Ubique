@@ -7,9 +7,9 @@ import clone from "./clone.ts";
 import vectorfun from "../datatype/vectorfun.ts";
 
 /**
- * @function flipdim
- * @summary Flip the order of elements in an array or matrix.
- * @description Flips the order of elements in an array or matrix along a specified dimension. Default dimension is 1 (columns).
+ * Flip the order of elements in an array or matrix.
+ *
+ * Flips the order of elements in an array or matrix along a specified dimension. Default dimension is 1 (columns).
  *
  * @param x The array or matrix to flip.
  * @param dim The dimension to apply the flip (0 = rows, 1 = columns). Defaults to 1.

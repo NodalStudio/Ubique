@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { find, isnumber, std, vectorfun } from "../../index.ts";
 
 /**
- * @function downsiderisk
- * @summary Downside Risk
- * @description  Downside risk is the semi-standard deviation of returns below a
+ * Downside Risk.
+ *
+ * Downside risk is the semi-standard deviation of returns below a
  * Minimum Acceptable Return (MAR)
  *
  * @param x array of values

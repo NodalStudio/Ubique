@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function transpose
- * @summary Transpose a matrix or array.
- * @description Transposes the given matrix or array. If the input is a 1D array, it is treated as a row vector and the result is a column vector. If the input is a matrix, the rows and columns are swapped.
+ * Transpose a matrix or array.
+ *
+ * Transposes the given matrix or array. If the input is a 1D array, it is treated as a row vector and the result is a column vector. If the input is a matrix, the rows and columns are swapped.
  *
  * @param x The input array or matrix to transpose.
  * @returns The transposed matrix.

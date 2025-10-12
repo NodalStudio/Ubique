@@ -8,9 +8,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function calmarratio
- * @summary Calmar Ratio
- * @description A risk-adjusted measure like Sharpe ratio that uses maximum drawdown instead of
+ * Calmar Ratio.
+ *
+ * A risk-adjusted measure like Sharpe ratio that uses maximum drawdown instead of
  * standard deviation for risk.
  * Calmar Ratio = (Annualized Return - Risk Free Rate) / Maximum Drawdown
  *

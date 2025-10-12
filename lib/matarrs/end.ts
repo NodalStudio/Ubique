@@ -7,9 +7,9 @@ import nrows from "../matarrs/nrows.ts";
 import ncols from "../matarrs/ncols.ts";
 
 /**
- * @function end
- * @summary Returns the last index in an array or matrix.
- * @description Returns the last index of an array or matrix. For matrices, you can specify the dimension: -1 for both rows and columns, 0 for rows, and 1 for columns.
+ * Returns the last index in an array or matrix.
+ *
+ * Returns the last index of an array or matrix. For matrices, you can specify the dimension: -1 for both rows and columns, 0 for rows, and 1 for columns.
  *
  * @param x Input array or matrix.
  * @param dim For matrix: -1 (both), 0 (rows), 1 (columns). Defaults to -1.

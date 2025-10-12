@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function gt
- * @summary Greater than comparison X > Y
- * @description Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
  *
  * @param x First operand for comparison
  * @param y Second operand for comparison
@@ -85,7 +85,7 @@ export default function gt(
 }
 
 /**
- * Element-wise comparison of two arrays
+ * Element-wise comparison of two arrays.
  */
 function elementwiseArrayComparison(x: array, y: array): boolean[] {
   if (x.length !== y.length) {
@@ -95,7 +95,7 @@ function elementwiseArrayComparison(x: array, y: array): boolean[] {
 }
 
 /**
- * Element-wise comparison of two matrices
+ * Element-wise comparison of two matrices.
  */
 function elementwiseMatrixComparison(x: matrix, y: matrix): boolean[][] {
   if (x.length !== y.length || x[0].length !== y[0].length) {

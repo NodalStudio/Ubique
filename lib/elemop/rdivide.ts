@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function rdivide
- * @summary Right array division X. / Y
- * @description Divides each element of X by the corresponding element of Y. Inputs X and Y must have the same size.
+ * Right array division X. / Y.
+ *
+ * Divides each element of X by the corresponding element of Y. Inputs X and Y must have the same size.
  *
  * @param x The dividend
  * @param y The divisor
@@ -78,8 +78,7 @@ export default function rdivide(
 }
 
 /**
- * @function divideNumber
- * @description Divides a number by an array or matrix, or two numbers
+ * Divides a number by an array or matrix, or two numbers.
  * @param x The dividend
  * @param y The divisor
  * @returns The result of the division
@@ -103,8 +102,7 @@ function divideNumber(x: number, y: numarraymatrix): numarraymatrix {
 }
 
 /**
- * @function divideByNumber
- * @description Divides an array or matrix by a number
+ * Divides an array or matrix by a number.
  * @param x The dividend
  * @param y The divisor
  * @returns The result of the division
@@ -124,8 +122,7 @@ function divideByNumber(x: array | matrix, y: number): array | matrix {
 }
 
 /**
- * @function elementWiseArrayDivision
- * @description Performs element-wise division of two arrays
+ * Performs element-wise division of two arrays.
  * @param x The first array
  * @param y The second array
  * @returns The result of element-wise division
@@ -138,8 +135,7 @@ function elementWiseArrayDivision(x: array, y: array): array {
 }
 
 /**
- * @function elementWiseMatrixDivision
- * @description Performs element-wise division of two matrices
+ * Performs element-wise division of two matrices.
  * @param x The first matrix
  * @param y The second matrix
  * @returns The result of element-wise division

@@ -3,9 +3,9 @@ import type { array } from "../types.d.ts";
 import { size, sum, times } from "../../index.ts";
 
 /**
- * @function dot
- * @summary Computes the dot product of two arrays
- * @description Takes two arrays of equal length and computes their dot product (sum of element-wise products).
+ * Computes the dot product of two arrays.
+ *
+ * Takes two arrays of equal length and computes their dot product (sum of element-wise products).
  *
  * @param x First array for dot product
  * @param y Second array for dot product

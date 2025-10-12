@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 
 /**
- * @function today
- * @summary Gets the current date as a Unix timestamp.
- * @description Returns the Unix timestamp for the start of the current day (00:00:00).
+ * Gets the current date as a Unix timestamp.
+ *
+ * Returns the Unix timestamp for the start of the current day (00:00:00).
  *
  * @returns The Unix timestamp for the current date.
  *

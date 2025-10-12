@@ -16,9 +16,9 @@ interface DrawdownResult {
 }
 
 /**
- * @function drawdown
- * @summary Drawdown
- * @description Calculates drawdown from peak, which represents any continuous losing return period.
+ * Drawdown.
+ *
+ * Calculates drawdown from peak, which represents any continuous losing return period.
  * Returns drawdown array, recovery index, maximum drawdown, and maximum drawdown recovery period.
  *
  * Returns an object with:

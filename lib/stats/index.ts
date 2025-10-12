@@ -1,6 +1,7 @@
 /**
  * @module stats
- * @description Statistical analysis and descriptive statistics functions
+ *
+ * Statistical analysis and descriptive statistics functions.
  *
  * This module provides utilities for:
  * - Central tendency (mean, median, mode)

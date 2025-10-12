@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function linspace
- * @summary Create linearly spaced arrays
- * @description Creates an array of `n` linearly spaced points between `a` and `b`, inclusive.
+ * Create linearly spaced arrays.
+ *
+ * Creates an array of `n` linearly spaced points between `a` and `b`, inclusive.
  *
  * @param a The lower bound
  * @param b The upper bound

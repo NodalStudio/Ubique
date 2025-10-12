@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { annreturn, isarray, ulcerindex, vectorfun } from "../../index.ts";
 
 /**
- * @function martinratio
- * @summary Martin Ratio
- * @description A risk-adjusted performance measure that uses the Ulcer Index to adjust for risk.
+ * Martin Ratio.
+ *
+ * A risk-adjusted performance measure that uses the Ulcer Index to adjust for risk.
  * Martin Ratio = (Portfolio Return - RiskFree) / Ulcer Index
  *
  * @param x Asset/portfolio returns

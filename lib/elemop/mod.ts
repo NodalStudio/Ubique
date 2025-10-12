@@ -3,9 +3,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
 
 /**
- * @function mod
- * @summary Modulus after division
- * @description Computes the modulus after division. This operation is element-wise for matrices and arrays.
+ * Modulus after division.
+ *
+ * Computes the modulus after division. This operation is element-wise for matrices and arrays.
  *
  * @param x The dividend
  * @param y The divisor

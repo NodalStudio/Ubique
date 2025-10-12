@@ -10,9 +10,9 @@ dayjs.extend(arraySupport);
 dayjs.extend(customParseFormat);
 
 /**
- * @function datenum
- * @summary Convert date and time to a serial date number (Unix)
- * @description Converts a given date and time to a Unix timestamp (serial date number). The function supports both date strings with a format and numeric arrays representing components of date and time.
+ * Convert date and time to a serial date number (Unix).
+ *
+ * Converts a given date and time to a Unix timestamp (serial date number). The function supports both date strings with a format and numeric arrays representing components of date and time.
  *
  * @param d The date input, which can be a single value or an array of date components.
  * @param fmt The format string to parse the date if the input is a date string.

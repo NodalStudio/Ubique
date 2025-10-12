@@ -4,9 +4,9 @@ import length from "./length.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function ndims
- * @summary Number of array dimensions
- * @description Calculates the number of dimensions of an array or matrix by determining the length of the size array.
+ * Number of array dimensions.
+ *
+ * Calculates the number of dimensions of an array or matrix by determining the length of the size array.
  *
  * @param x Array or matrix of elements.
  * @returns The number of dimensions of the array.

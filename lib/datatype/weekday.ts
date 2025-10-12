@@ -9,9 +9,9 @@ import { arrayfun } from "../../index.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function weekday
- * @summary Gets the ISO weekday for a given Unix timestamp.
- * @description Returns a number representing the ISO weekday (1 = Monday, 7 = Sunday) for each element in `x`.
+ * Gets the ISO weekday for a given Unix timestamp.
+ *
+ * Returns a number representing the ISO weekday (1 = Monday, 7 = Sunday) for each element in `x`.
  *
  * @param x Unix timestamp(s) to convert to the ISO weekday.
  * @returns The corresponding ISO weekday(s).

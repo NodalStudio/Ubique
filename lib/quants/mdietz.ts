@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function mdietz
- * @summary Modified Dietz Return
- * @description Compute the Modified Dietz Return. It takes into account the timing
+ * Modified Dietz Return.
+ *
+ * Compute the Modified Dietz Return. It takes into account the timing
  * of the cash flows, weighting them by the time they were held in the portfolio.
  *
  * @param ev ending value

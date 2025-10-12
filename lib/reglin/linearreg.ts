@@ -2,9 +2,9 @@ import type { array } from "../types.d.ts";
 import { sum, times } from "../../index.ts";
 
 /**
- * @function linearreg
- * @summary Linear regression of Y on X
- * @description Performs linear regression and returns an object with regression coefficients,
+ * Linear regression of Y on X.
+ *
+ * Performs linear regression and returns an object with regression coefficients,
  * R-squared value, and a prediction function.
  *
  * @param y array of dependent variable values

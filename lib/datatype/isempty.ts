@@ -2,9 +2,9 @@ import { isarray, ismatrix } from "../../index.ts";
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function isempty
- * @summary Checks if an array or matrix is empty.
- * @description Returns `true` if the input is an empty array or an empty matrix.
+ * Checks if an array or matrix is empty.
+ *
+ * Returns `true` if the input is an empty array or an empty matrix.
  *
  * @param x The input array or matrix to check.
  * @returns Returns `true` if `x` is empty, otherwise `false`.

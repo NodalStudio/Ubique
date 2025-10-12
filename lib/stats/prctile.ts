@@ -10,9 +10,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function prctile
- * @summary Percentiles of a sample
- * @description Calculates the p-th percentile of values in an array or matrix.
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
  * Uses linear interpolation between data points for accurate percentile calculation.
  *
  * @param x Input array or matrix

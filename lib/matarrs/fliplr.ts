@@ -6,9 +6,9 @@ import isarray from "../datatype/isarray.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
- * @function fliplr
- * @summary Flip a matrix left to right.
- * @description Reverses the order of the columns in the input matrix, flipping it left to right.
+ * Flip a matrix left to right.
+ *
+ * Reverses the order of the columns in the input matrix, flipping it left to right.
  *
  * @param x The input array or matrix.
  * @returns The matrix with its columns flipped left to right.

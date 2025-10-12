@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
 /**
- * @function percpos
- * @summary Percentage of positive values in array or matrix
- * @description Calculates the percentage of positive (non-negative) values in an array or matrix.
+ * Percentage of positive values in array or matrix.
+ *
+ * Calculates the percentage of positive (non-negative) values in an array or matrix.
  * This is a common metric to assess the consistency of returns.
  *
  * @param x array of elements

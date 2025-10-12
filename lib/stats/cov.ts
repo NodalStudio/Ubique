@@ -3,9 +3,9 @@ import { isarray, ismatrix, mean, varc } from "../../index.ts";
 import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
- * @function cov
- * @summary Covariance matrix
- * @description Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * Covariance matrix.
+ *
+ * Calculates the covariance matrix between arrays or matrices. For a single vector,
  * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
  * returns the covariance matrix between columns.
  *

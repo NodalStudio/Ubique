@@ -5,9 +5,9 @@ import squeeze from "./squeeze.ts";
 import arrayfun from "../datatype/arrayfun.ts";
 
 /**
- * @function subsetlin
- * @summary Extracts elements from an array or matrix based on linear indexing.
- * @description Extracts a subset of an array or matrix using linear indexing, either row-wise (default) or column-wise.
+ * Extracts elements from an array or matrix based on linear indexing.
+ *
+ * Extracts a subset of an array or matrix using linear indexing, either row-wise (default) or column-wise.
  *
  * @param m The array or matrix of elements.
  * @param idx Linear indexing values.

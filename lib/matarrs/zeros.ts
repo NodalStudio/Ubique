@@ -3,9 +3,9 @@ import type { array, matrix } from "../types.d.ts";
 import isarray from "../datatype/isarray.ts";
 
 /**
- * @function zeros
- * @summary Create an array or matrix of all zeros.
- * @description Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
+ * Create an array or matrix of all zeros.
+ *
+ * Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
  *
  * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
  * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.

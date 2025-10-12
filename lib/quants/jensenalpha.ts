@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, linearreg, mean, vectorfun } from "../../index.ts";
 
 /**
- * @function jensenalpha
- * @summary Jensen alpha
- * @description Ex-post alpha calculated with regression line. Free-risk is the average free-risk
+ * Jensen alpha.
+ *
+ * Ex-post alpha calculated with regression line. Free-risk is the average free-risk
  * for the timeframe selected. Jensen alpha measures the excess return of a portfolio over the
  * theoretical expected return based on the portfolio's beta and CAPM model.
  *

@@ -3,9 +3,9 @@ import { isnumber, issquare, isvector, lu, ncols } from "../../index.ts";
 import { detwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
- * @function det
- * @summary Matrix determinant
- * @description Computes the determinant of a square matrix using LU decomposition.
+ * Matrix determinant.
+ *
+ * Computes the determinant of a square matrix using LU decomposition.
  *
  * @param x A square matrix.
  * @returns The determinant of the matrix.

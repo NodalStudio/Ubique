@@ -1,7 +1,7 @@
 /**
- * @function normpdf
- * @summary Computes the probability density function (PDF) of a normal distribution.
- * @description Returns the PDF of the normal distribution with mean `mu` and standard deviation `sigma`, evaluated at `x`.
+ * Computes the probability density function (PDF) of a normal distribution.
+ *
+ * Returns the PDF of the normal distribution with mean `mu` and standard deviation `sigma`, evaluated at `x`.
  * If `mu` and `sigma` are not provided, it defaults to the standard normal distribution (mu = 0, sigma = 1).
  *
  * @param x The value at which to evaluate the PDF

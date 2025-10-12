@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isarray, isnumber, sort, vectorfun } from "../../index.ts";
 
 /**
- * @function median
- * @summary Median value of array
- * @description Computes the median (middle value) of an array or matrix. For even-length arrays,
+ * Median value of array.
+ *
+ * Computes the median (middle value) of an array or matrix. For even-length arrays,
  * returns the average of the two middle values. For matrices, operates along specified dimension.
  *
  * @param x Input number, array, or matrix

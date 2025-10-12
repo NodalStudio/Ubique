@@ -2,9 +2,9 @@ import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
 
 /**
- * @function std
- * @summary Computes the standard deviation
- * @description Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
  * Supports both population (N) and sample (N-1) normalizations.
  *
  * @param x Input array or matrix
@@ -64,7 +64,7 @@ export default function std(
 }
 
 /**
- * Single-pass standard deviation using Welford's algorithm
+ * Single-pass standard deviation using Welford's algorithm.
  * Numerically stable online computation of variance
  */
 function computeStd(arr: array, flag: 0 | 1): number {

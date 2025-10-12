@@ -2,9 +2,9 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, moment, vectorfun } from "../../index.ts";
 
 /**
- * @function kurtosis
- * @summary Computes the kurtosis of a dataset
- * @description Kurtosis measures the "tailedness" of a probability distribution.
+ * Computes the kurtosis of a dataset.
+ *
+ * Kurtosis measures the "tailedness" of a probability distribution.
  * A higher kurtosis indicates heavier tails, while a lower kurtosis suggests lighter tails.
  * Default is the sample kurtosis (excess kurtosis relative to normal distribution).
  *

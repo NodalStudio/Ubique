@@ -1,9 +1,9 @@
 import type { array } from "../types.d.ts";
 
 /**
- * @function clock
- * @summary Retrieves the current date and time as a date vector.
- * @description Returns the current date and time as an array with the following elements:
+ * Retrieves the current date and time as a date vector.
+ *
+ * Returns the current date and time as an array with the following elements:
  * [year, month, day, hour, minute, seconds, milliseconds]. Note that the month is adjusted to be 1-based (January is 1, December is 12).
  *
  * @returns  An array representing the current date and time: [year, month, day, hour, minute, seconds, milliseconds].

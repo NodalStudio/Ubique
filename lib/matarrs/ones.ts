@@ -1,9 +1,9 @@
 import type { matrix } from "../types.d.ts";
 
 /**
- * @function ones
- * @summary Create an array of all ones
- * @description Creates a matrix or array filled with ones based on the provided dimensions.
+ * Create an array of all ones.
+ *
+ * Creates a matrix or array filled with ones based on the provided dimensions.
  * Accepts up to two arguments for dimensions or a single array defining the dimensions.
  *
  * @param args Variable input arguments (max 2).

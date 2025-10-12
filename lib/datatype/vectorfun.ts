@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function vectorfun
- * @summary Applies a function to each vector column or row of a matrix.
- * @description This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
+ * Applies a function to each vector column or row of a matrix.
+ *
+ * This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
  * For arrays: applies function directly and returns the result.
  * For matrices: applies function to each row/column and returns array of results.
  *

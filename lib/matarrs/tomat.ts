@@ -6,9 +6,9 @@ import isarray from "../datatype/isarray.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
- * @function tomat
- * @summary Converts a number, boolean, or array into a matrix.
- * @description If input is a number or boolean, it is converted into a 1x1 matrix.
+ * Converts a number, boolean, or array into a matrix.
+ *
+ * If input is a number or boolean, it is converted into a 1x1 matrix.
  *              If input is a vector, it is converted into a single-row matrix.
  *              If input is already a matrix, it remains unchanged.
  *

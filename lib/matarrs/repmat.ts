@@ -1,9 +1,9 @@
 import type { array, matrix } from "../types.d.ts";
 
 /**
- * @function repmat
- * @summary Replicate and tile an array or matrix
- * @description Creates a new matrix by repeating the input value, array, or matrix in a tiled fashion.
+ * Replicate and tile an array or matrix.
+ *
+ * Creates a new matrix by repeating the input value, array, or matrix in a tiled fashion.
  * If only two arguments are provided, `m` is used for both row and column replication.
  *
  * @param x The value, array, or matrix to replicate.

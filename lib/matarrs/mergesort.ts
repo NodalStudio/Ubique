@@ -3,9 +3,9 @@ import isarray from "../datatype/isarray.ts";
 import type { array } from "../types.d.ts";
 
 /**
- * @function mergesort
- * @summary Sort array in ascending or descending order
- * @description Mergesort is a divide-and-conquer algorithm that recursively splits an array into halves,
+ * Sort array in ascending or descending order.
+ *
+ * Mergesort is a divide-and-conquer algorithm that recursively splits an array into halves,
  * sorts each half, and then merges them back together in the desired order.
  * It returns the sorted values along with their original indexes.
  *

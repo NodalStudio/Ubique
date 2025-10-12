@@ -1,6 +1,7 @@
 /**
  * @module probdistr
- * @description Probability distributions and statistical tests
+ *
+ * Probability distributions and statistical tests.
  *
  * This module provides utilities for:
  * - Normal distribution functions (normcdf, normpdf, norminv)

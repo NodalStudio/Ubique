@@ -2,9 +2,9 @@ import type { matrix } from "../types.d.ts";
 import ismatrix from "../datatype/ismatrix.ts";
 
 /**
- * @function iscolumn
- * @summary Checks if the input is a column vector.
- * @description Returns `true` if the input matrix is a column vector, meaning it has more than one row and exactly one column.
+ * Checks if the input is a column vector.
+ *
+ * Returns `true` if the input matrix is a column vector, meaning it has more than one row and exactly one column.
  *
  * @param x The input matrix to check.
  * @returns Returns `true` if `x` is a column vector, otherwise `false`.

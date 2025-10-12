@@ -4,9 +4,9 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
 import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
- * @function mtimes
- * @summary Matrix multiplication
- * @description Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
  *
  * @param x The first operand, can be a number, array (treated as column vector), or matrix
  * @param y The second operand, can be a number, array (treated as column vector), or matrix
@@ -51,7 +51,7 @@ export default function mtimes(
 }
 
 /**
- * Handle matrix multiplication where at least one operand is not a number
+ * Handle matrix multiplication where at least one operand is not a number.
  */
 function handleMatrixMultiplication(
   x: numarraymatrix,
@@ -85,7 +85,7 @@ function handleMatrixMultiplication(
 }
 
 /**
- * Multiply a scalar by an array or matrix
+ * Multiply a scalar by an array or matrix.
  */
 function scalarMultiplication(
   scalar: number,
@@ -105,7 +105,7 @@ function scalarMultiplication(
 }
 
 /**
- * Multiply two vectors (dot product)
+ * Multiply two vectors (dot product).
  */
 function vectorMultiplication(x: array, y: array): number {
   if (x.length !== y.length) {
@@ -115,7 +115,7 @@ function vectorMultiplication(x: array, y: array): number {
 }
 
 /**
- * Multiply two matrices
+ * Multiply two matrices.
  */
 function matrixMultiplication(x: matrix, y: matrix): matrix {
   if (x[0].length !== y.length) {
@@ -160,7 +160,7 @@ function matrixMultiplication(x: matrix, y: matrix): matrix {
 }
 
 /**
- * Multiply a matrix by a vector
+ * Multiply a matrix by a vector.
  */
 function matrixVectorMultiplication(x: matrix, y: array): array {
   if (x[0].length !== y.length) {
@@ -173,7 +173,7 @@ function matrixVectorMultiplication(x: matrix, y: array): array {
 }
 
 /**
- * Multiply a vector by a matrix
+ * Multiply a vector by a matrix.
  */
 function vectorMatrixMultiplication(x: array, y: matrix): array {
   if (x.length !== y.length) {

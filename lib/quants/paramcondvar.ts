@@ -11,9 +11,9 @@ import {
 } from "../../index.ts";
 
 /**
- * @function paramcondvar
- * @summary Parametric Conditional Value-At-Risk
- * @description Parametric Conditional Value-At-Risk measures the expected loss
+ * Parametric Conditional Value-At-Risk.
+ *
+ * Parametric Conditional Value-At-Risk measures the expected loss
  * exceeding the VaR. Also known as Expected Shortfall (ES) or Expected Tail Loss (ETL).
  * It is more sensitive to the shape of the loss distribution in the tails.
  *

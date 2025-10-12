@@ -8,9 +8,9 @@ import ncols from "../matarrs/ncols.ts";
 import clone from "../matarrs/clone.ts";
 
 /**
- * @function cat
- * @summary Concatenates arrays and matrices along the specified dimension
- * @description Concatenates arrays and matrices along the specified dimension. Supports vertical (0) and horizontal (1) concatenation.
+ * Concatenates arrays and matrices along the specified dimension.
+ *
+ * Concatenates arrays and matrices along the specified dimension. Supports vertical (0) and horizontal (1) concatenation.
  *
  * @param dim The dimension along which to concatenate (0: rows, 1: columns)
  * @param args Variable arguments to concatenate
@@ -60,8 +60,7 @@ export default function cat(
 }
 
 /**
- * @function normalize
- * @description Normalizes the input arguments into a 2D matrix form for easier concatenation.
+ * Normalizes the input arguments into a 2D matrix form for easier concatenation.
  * @param arg The argument to normalize.
  * @returns The normalized 2D matrix.
  */
@@ -79,8 +78,7 @@ function normalize(arg: number | array | matrix): matrix {
 }
 
 /**
- * @function verticalConcat
- * @description Concatenates matrices vertically (along rows).
+ * Concatenates matrices vertically (along rows).
  * @param args The list of matrices to concatenate vertically.
  * @returns The vertically concatenated matrix.
  */
@@ -100,8 +98,7 @@ function verticalConcat(args: matrix[]): matrix {
 }
 
 /**
- * @function horizontalConcat
- * @description Concatenates matrices horizontally (along columns).
+ * Concatenates matrices horizontally (along columns).
  * @param args The list of matrices to concatenate horizontally.
  * @returns The horizontally concatenated matrix.
  */
