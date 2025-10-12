@@ -1,11 +1,11 @@
-import dayjs from "https://esm.sh/dayjs";
+import dayjs from "dayjs";
 
 /**
  * @function today
  * @summary Gets the current date as a Unix timestamp.
  * @description Returns the Unix timestamp for the start of the current day (00:00:00).
  *
- * @returns {number} The Unix timestamp for the current date.
+ * @returns The Unix timestamp for the current date.
  *
  * @example
  * ```ts
@@ -18,6 +18,6 @@ import dayjs from "https://esm.sh/dayjs";
  * // Should match the start of today
  * assertEquals(todayTimestamp, dayjs().startOf('day').unix());
  * ``` */
-export default function today() {
+export default function today(): number {
   return dayjs().startOf("day").unix();
 }

@@ -1,8 +1,7 @@
-import { array, matrix } from "../types.d.ts";
-
-import dayjs from "https://esm.sh/dayjs";
+import dayjs from "dayjs";
 
 import { arrayfun } from "../../index.ts";
+import type { array, matrix } from "../types.d.ts";
 
 /**
  * @function month

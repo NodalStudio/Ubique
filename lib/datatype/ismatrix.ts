@@ -1,14 +1,12 @@
 import type { matrix } from "../types.d.ts";
 
-import { isarray } from "../../index.ts";
-
 /**
  * @function ismatrix
  * @summary True for matrix (2D array with consistent row lengths)
  * @description Returns `true` if the input is a 2D array (array of arrays) where all subarrays have the same length.
  *
- * @param {unknown} x The input to check.
- * @returns {boolean} Returns `true` if `x` is a valid matrix.
+ * @param x The input to check.
+ * @returns Returns `true` if `x` is a valid matrix.
  *
  * @example
  * ```ts
@@ -33,7 +31,10 @@ import { isarray } from "../../index.ts";
  * assertEquals(ismatrix([[]]), true);
  * ```
  */
-export default function ismatrix(x: unknown): x is matrix<any> {
-  return Array.isArray(x) && x.length > 0 &&
-    x.every((row) => Array.isArray(row) && row.length === x[0].length);
+export default function ismatrix(x: unknown): x is matrix {
+  return (
+    Array.isArray(x) &&
+    x.length > 0 &&
+    x.every((row) => Array.isArray(row) && row.length === x[0].length)
+  );
 }

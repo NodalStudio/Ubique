@@ -1,4 +1,4 @@
-import { array } from "../types.d.ts";
+import type { array } from "../types.d.ts";
 
 /**
  * @function isarray

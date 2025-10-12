@@ -42,7 +42,6 @@ import {
  * ```
  */
 
-// Overloads for union types (most common pattern)
 export default function vectorfun<T>(
   dim: 0 | 1,
   x: array | matrix,
@@ -73,7 +72,6 @@ export default function vectorfun<T, A1, A2, A3>(
   arg3: A3,
 ): T | T[];
 
-// General implementation
 export default function vectorfun<T>(
   dim: 0 | 1,
   x: array | matrix,

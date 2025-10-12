@@ -9,7 +9,7 @@ import type { array } from "../types.d.ts";
  * @param pattern The search pattern.
  * @returns An array of indices where the pattern occurs in the string.
  *
- * @throws {Error} If the input arguments are invalid or the pattern is longer than the string.
+ * @throws If the input arguments are invalid or the pattern is longer than the string.
  *
  * @example
  * ```ts
