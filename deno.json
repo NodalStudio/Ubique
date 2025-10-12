@@ -38,7 +38,7 @@
     "lint": "deno lint lib",
     "lint:fix": "deno fmt lib && deno lint --fix lib",
     "build": "deno run -A jsr:@deno/wasmbuild --out ./rs_lib/pkg --inline",
-    "docs": "deno doc --html --name=Rubique --output=./docs lib/",
+    "docs": "deno run -A ./scripts/build_docs.ts",
     "benchmark": "deno run --allow-write ./scripts/benchmark.ts",
     "deploy": "deno task build && deno task test && deno task lint:fix && deno publish --allow-dirty"
   },
