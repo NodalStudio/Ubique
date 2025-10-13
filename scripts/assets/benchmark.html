@@ -90,12 +90,6 @@
         padding: 2rem;
         margin-bottom: 2rem;
         border: 1px solid var(--border);
-        display: none;
-        animation: slideIn 0.5s ease-out;
-      }
-
-      .test-card.active {
-        display: block;
       }
 
       @keyframes slideIn {
@@ -324,21 +318,13 @@
         background: var(--bg-light);
         border-radius: 1rem;
         padding: 3rem;
-        margin: 2rem 0;
         text-align: center;
         border: 1px solid var(--border);
-        display: none;
-        animation: slideIn 0.5s ease-out;
-      }
-
-      .results-card.active {
-        display: block;
       }
 
       .results-title {
         font-size: 2.5rem;
         font-weight: 700;
-        margin-bottom: 2rem;
       }
 
       .results-big-number {
@@ -348,7 +334,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin: 1rem 0;
         animation: countUp 1s ease-out;
       }
 
@@ -366,15 +351,14 @@
       .results-subtitle {
         font-size: 1.5rem;
         color: var(--text-muted);
-        margin-bottom: 2rem;
       }
 
       .results-stats {
         display: flex;
         justify-content: center;
         gap: 3rem;
-        margin: 2rem 0;
         flex-wrap: wrap;
+        margin: 1rem;
       }
 
       .stat-item {
@@ -394,8 +378,8 @@
       }
 
       .chart-container {
-        margin: 3rem 0;
-        padding: 2rem;
+        margin: 1rem;
+        padding: 2.5rem;
         background: rgba(0, 0, 0, 0.2);
         border-radius: 0.75rem;
       }
@@ -409,7 +393,7 @@
         border-radius: 0.75rem;
         cursor: pointer;
         font-weight: 600;
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         transition: transform 0.2s;
       }
 
@@ -424,11 +408,6 @@
         padding: 1.5rem;
         margin-bottom: 2rem;
         border: 1px solid var(--border);
-        display: none;
-      }
-
-      .overall-progress.active {
-        display: block;
       }
 
       .progress-label {
@@ -453,10 +432,122 @@
         transition: width 0.3s ease;
       }
 
+      /* Slide System */
+      .slide {
+        display: none;
+        animation: slideIn 0.6s ease-out;
+        width: 100%;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+      }
+
+      .slide.exiting {
+        animation: slideOut 0.6s ease-out;
+      }
+
+      /* Intro Slide - Enhanced */
+      .intro-slide {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        min-height: 85vh;
+        text-align: center;
+      }
+
+      .intro-slide.active {
+        display: flex;
+      }
+
+      .intro-content {
+        padding: 3rem 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .intro-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+      }
+
+      .intro-content p {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        margin-bottom: 3rem;
+        line-height: 1.6;
+      }
+
+      /* Tests Slide - Centered */
+      .slide#testsSlide {
+        display: none;
+        min-height: 85vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide#testsSlide.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .slide#testsSlide .overall-progress,
+      .slide#testsSlide .test-card {
+        width: 80%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Results Slide - Centered */
+      .slide#resultsSlide {
+        display: none;
+        min-height: 85vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide#resultsSlide.active {
+        display: flex;
+        flex-direction: column;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
-        .hero h1 {
+        .hero h1,
+        .intro-content h1 {
           font-size: 2rem;
+        }
+        .intro-content p {
+          font-size: 1.125rem;
         }
         .matrices-container {
           flex-direction: column;
@@ -469,141 +560,149 @@
   </head>
   <body>
     <div class="container">
-      <!-- Hero Section -->
-      <div class="hero">
-        <h1>🚀 Rubique Performance vs Math.js</h1>
-        <p>Watch real-time matrix operations & benchmarks</p>
-        <button class="start-btn" id="startBtn" onclick="startBenchmark()">
-          ▶️ Start Demo
-        </button>
-      </div>
-
-      <!-- Overall Progress -->
-      <div class="overall-progress" id="overallProgress">
-        <div class="progress-label">
-          <span id="progressText">Starting benchmarks...</span>
-          <span id="progressPercent">0%</span>
-        </div>
-        <div class="progress-bar-bg">
-          <div
-            class="progress-bar-fill"
-            id="progressBar"
-            style="width: 0%"
-          ></div>
+      <!-- Slide 1: Intro -->
+      <div class="slide active intro-slide" id="introSlide">
+        <div class="intro-content">
+          <h1>🚀 Rubique Performance vs Math.js</h1>
+          <p>Watch real-time matrix operations & benchmarks</p>
+          <button class="start-btn" id="startBtn" onclick="startBenchmark()">
+            ▶️ Start Demo
+          </button>
         </div>
       </div>
 
-      <!-- Test Card -->
-      <div class="test-card" id="testCard">
-        <div class="test-header">
-          <h2 class="test-title" id="testTitle">Test Name</h2>
-          <span class="test-progress" id="testProgress">0/12</span>
+      <!-- Slide 2: Tests -->
+      <div class="slide" id="testsSlide">
+        <!-- Overall Progress -->
+        <div class="overall-progress active" id="overallProgress">
+          <div class="progress-label">
+            <span id="progressText">Starting benchmarks...</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div
+              class="progress-bar-fill"
+              id="progressBar"
+              style="width: 0%"
+            ></div>
+          </div>
         </div>
 
-        <!-- Matrix Visualization -->
-        <div class="matrices-container" id="matricesContainer">
-          <!-- Dynamically populated -->
-        </div>
+        <!-- Test Card -->
+        <div class="test-card active" id="testCard">
+          <div class="test-header">
+            <h2 class="test-title" id="testTitle">Test Name</h2>
+            <span class="test-progress" id="testProgress">0/12</span>
+          </div>
 
-        <!-- Computing Progress -->
-        <div class="computing" id="computing">
-          <div class="compute-progress">
-            <div class="compute-row">
-              <div class="compute-header">
-                <span>Rubique</span>
-                <span class="compute-meta" id="rubiqueComputeMeta"
-                  >waiting…</span
-                >
+          <!-- Matrix Visualization -->
+          <div class="matrices-container" id="matricesContainer">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Computing Progress -->
+          <div class="computing" id="computing">
+            <div class="compute-progress">
+              <div class="compute-row">
+                <div class="compute-header">
+                  <span>Rubique</span>
+                  <span class="compute-meta" id="rubiqueComputeMeta"
+                    >waiting…</span
+                  >
+                </div>
+                <div class="compute-bar-bg">
+                  <div
+                    class="compute-bar-fill rubique"
+                    id="rubiqueComputeBar"
+                  ></div>
+                </div>
+                <div class="compute-subtext" id="rubiqueComputeSubtext">
+                  Preparing benchmark…
+                </div>
               </div>
-              <div class="compute-bar-bg">
+              <div class="compute-row">
+                <div class="compute-header">
+                  <span>Math.js</span>
+                  <span class="compute-meta" id="mathjsComputeMeta"
+                    >waiting…</span
+                  >
+                </div>
+                <div class="compute-bar-bg">
+                  <div
+                    class="compute-bar-fill mathjs"
+                    id="mathjsComputeBar"
+                  ></div>
+                </div>
+                <div class="compute-subtext" id="mathjsComputeSubtext">
+                  Waiting for Rubique to finish…
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Racing Bars -->
+          <div class="race-container" id="raceContainer" style="display: none">
+            <div class="race-row">
+              <div class="race-label">Rubique</div>
+              <div class="race-bar-container">
                 <div
-                  class="compute-bar-fill rubique"
-                  id="rubiqueComputeBar"
+                  class="race-bar rubique"
+                  id="rubiqueBar"
+                  style="width: 0%"
                 ></div>
+                <span class="race-time" id="rubiqueTime"></span>
               </div>
-              <div class="compute-subtext" id="rubiqueComputeSubtext">
-                Preparing benchmark…
-              </div>
+              <div class="race-status" id="rubiqueStatus"></div>
             </div>
-            <div class="compute-row">
-              <div class="compute-header">
-                <span>Math.js</span>
-                <span class="compute-meta" id="mathjsComputeMeta"
-                  >waiting…</span
-                >
-              </div>
-              <div class="compute-bar-bg">
+            <div class="race-row">
+              <div class="race-label">Math.js</div>
+              <div class="race-bar-container">
                 <div
-                  class="compute-bar-fill mathjs"
-                  id="mathjsComputeBar"
+                  class="race-bar mathjs"
+                  id="mathjsBar"
+                  style="width: 0%"
                 ></div>
+                <span class="race-time" id="mathjsTime"></span>
               </div>
-              <div class="compute-subtext" id="mathjsComputeSubtext">
-                Waiting for Rubique to finish…
-              </div>
+              <div class="race-status" id="mathjsStatus"></div>
             </div>
           </div>
-        </div>
 
-        <!-- Racing Bars -->
-        <div class="race-container" id="raceContainer" style="display: none">
-          <div class="race-row">
-            <div class="race-label">Rubique</div>
-            <div class="race-bar-container">
-              <div
-                class="race-bar rubique"
-                id="rubiqueBar"
-                style="width: 0%"
-              ></div>
-              <span class="race-time" id="rubiqueTime"></span>
-            </div>
-            <div class="race-status" id="rubiqueStatus"></div>
+          <!-- Speedup Badge -->
+          <div class="speedup-badge" id="speedupBadge" style="display: none">
+            <div class="speedup-value" id="speedupValue">0x</div>
+            <div id="speedupLabel" style="color: var(--text-muted)">faster</div>
           </div>
-          <div class="race-row">
-            <div class="race-label">Math.js</div>
-            <div class="race-bar-container">
-              <div
-                class="race-bar mathjs"
-                id="mathjsBar"
-                style="width: 0%"
-              ></div>
-              <span class="race-time" id="mathjsTime"></span>
-            </div>
-            <div class="race-status" id="mathjsStatus"></div>
-          </div>
-        </div>
-
-        <!-- Speedup Badge -->
-        <div class="speedup-badge" id="speedupBadge" style="display: none">
-          <div class="speedup-value" id="speedupValue">0x</div>
-          <div id="speedupLabel" style="color: var(--text-muted)">faster</div>
         </div>
       </div>
 
-      <!-- Results Summary -->
-      <div class="results-card" id="resultsCard">
-        <h2 class="results-title">🎉 Benchmark Complete!</h2>
-        <div class="results-big-number" id="avgSpeedup">0x</div>
-        <div class="results-subtitle">AVERAGE SPEEDUP</div>
+      <!-- Slide 3: Results -->
+      <div class="slide" id="resultsSlide">
+        <!-- Results Summary -->
+        <div class="results-card active" id="resultsCard">
+          <h2 class="results-title">🎉 Benchmark Complete!</h2>
+          <div class="results-big-number" id="avgSpeedup">0x</div>
+          <div class="results-subtitle">AVERAGE SPEEDUP</div>
 
-        <div class="results-stats">
-          <div class="stat-item">
-            <div class="stat-value" id="wonTests">0/0</div>
-            <div class="stat-label">Tests Won</div>
+          <div class="results-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="wonTests">0/0</div>
+              <div class="stat-label">Tests Won</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="bestTest">-</div>
+              <div class="stat-label">Best Performance</div>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-value" id="bestTest">-</div>
-            <div class="stat-label">Best Performance</div>
+
+          <div class="chart-container">
+            <canvas id="resultsChart"></canvas>
           </div>
-        </div>
 
-        <div class="chart-container">
-          <canvas id="resultsChart"></canvas>
+          <button class="run-again-btn" onclick="location.reload()">
+            ↻ Run Again
+          </button>
         </div>
-
-        <button class="run-again-btn" onclick="location.reload()">
-          ↻ Run Again
-        </button>
       </div>
     </div>
 
@@ -621,6 +720,27 @@
     </script>
 
     <script>
+      // Slide Management
+      let currentSlide = "introSlide";
+
+      function transitionToSlide(slideId) {
+        return new Promise((resolve) => {
+          const oldSlide = document.getElementById(currentSlide);
+          const newSlide = document.getElementById(slideId);
+
+          // Add exiting animation to current slide
+          oldSlide.classList.add("exiting");
+
+          // After exit animation completes, switch slides
+          setTimeout(() => {
+            oldSlide.classList.remove("active", "exiting");
+            newSlide.classList.add("active");
+            currentSlide = slideId;
+            resolve();
+          }, 600); // Match animation duration
+        });
+      }
+
       // Matrix Visualization Engine
       function drawMatrix(canvas, matrix, label) {
         const ctx = canvas.getContext("2d");
@@ -1089,7 +1209,10 @@
       // Main benchmark runner
       async function startBenchmark() {
         document.getElementById("startBtn").disabled = true;
-        document.getElementById("overallProgress").classList.add("active");
+
+        // Transition to tests slide
+        await transitionToSlide("testsSlide");
+
         currentTest = 0;
         allResults = [];
 
@@ -1098,6 +1221,8 @@
           await runTest(tests[i], i + 1, tests.length);
         }
 
+        // Transition to results slide
+        await transitionToSlide("resultsSlide");
         showResults();
       }
 
@@ -1112,7 +1237,6 @@
           "progressText"
         ).textContent = `Running test ${index}/${total}: ${test.name}`;
 
-        document.getElementById("testCard").classList.add("active");
         document.getElementById("testTitle").textContent = test.name;
 
         const iterations = await calculateIterations(test);
@@ -1310,13 +1434,6 @@
       }
 
       function showResults() {
-        // Hide test card and progress
-        document.getElementById("testCard").classList.remove("active");
-        document.getElementById("overallProgress").classList.remove("active");
-
-        // Show results
-        document.getElementById("resultsCard").classList.add("active");
-
         // Calculate summary stats
         const avgSpeedup =
           allResults.reduce((sum, r) => sum + r.speedup, 0) / allResults.length;
@@ -1398,6 +1515,7 @@
           options: {
             responsive: true,
             maintainAspectRatio: true,
+            aspectRatio: 1.8,
             plugins: {
               legend: {
                 display: false,
@@ -1444,6 +1562,10 @@
                   color: "#94a3b8",
                   maxRotation: 45,
                   minRotation: 45,
+                  autoSkip: false,
+                  font: {
+                    size: 11,
+                  },
                 },
               },
             },
