@@ -14,16 +14,16 @@ import ismatrix from "./ismatrix.ts";
  * import { assertThrows } from "jsr:@std/assert";
  *
  * // Example 1: Valid matrix
- * assertmatrixx([[1, 2], [3, 4]]); // No error
+ * assertmatrix([[1, 2], [3, 4]]); // No error
  *
  * // Example 2: Invalid input throws error
- * assertThrows(() => assertmatrixx([1, 2, 3]), TypeError, "Expected matrix");
+ * assertThrows(() => assertmatrix([1, 2, 3]), TypeError, "Expected matrix");
  *
  * // Example 3: Number throws error
- * assertThrows(() => assertmatrixx(5), TypeError, "Expected matrix");
+ * assertThrows(() => assertmatrix(5), TypeError, "Expected matrix");
  * ```
  */
-export default function assertmatrixx(x: unknown): asserts x is matrix {
+export default function assertmatrix(x: unknown): asserts x is matrix {
   if (!ismatrix(x)) {
     throw new TypeError(`Expected matrix, got ${typeof x}`);
   }
