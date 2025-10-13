@@ -14,21 +14,39 @@ import { isarray, ismatrix } from "../../index.ts";
  *
  * @throws If the input arguments are not valid.
  *
- * @example
+ * @example Apply Math.log to each element of an array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * import { sign, strfind } from "../../index.ts";
  *
- * // Example 1: Apply Math.log to each element of an array
  * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * ```
  *
- * // Example 2: Apply a custom sign function to an array
+ * @example Apply a custom sign function to an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(arrayfun([1.4, 0, -10], sign), [1, 0, -1]);
+ * ```
  *
- * // Example 3: Apply Math.pow to each element of a matrix
+ * @example Apply Math.pow to each element of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(arrayfun([[5, 6], [1, 3]], Math.pow, 3), [[125, 216], [1, 27]]);
  *
- * // Example 4: Find substring 'cat' in each element of a nested string array
+ * ```
+ * @example Apply a custom sign function to each element of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { sign } from "../../index.ts";
+ *
+ * assertEquals(arrayfun([[1.4, 0, -10], [2, -3, 4]], sign), [[1, 0, -1], [1, -1, 1]]);
+ * ```
+ * @example Find substring 'cat' in each element of a nested string array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { strfind } from "../../index.ts";
+ *
  * assertEquals(
  *   arrayfun(
  *    [
