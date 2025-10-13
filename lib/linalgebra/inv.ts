@@ -28,7 +28,8 @@ import { invwasm } from "../../rs_lib/pkg/rs_lib.js";
  * // Example 3: Inverse of a number
  * assertEquals(inv(4), 0.25);
 
- * ```*/
+ * ```
+ */
 export default function inv(x: number): number;
 export default function inv(x: matrix): matrix;
 export default function inv(x: number | matrix): number | matrix {
