@@ -39,8 +39,7 @@ export default function erfcinv(y: number): number {
   let z = 0;
   const _y = y < 1 ? y : 2 - y;
   const t = Math.sqrt(-2 * Math.log(_y / 2));
-  let x =
-    -0.70711 *
+  let x = -0.70711 *
     ((2.30753 + t * 0.27061) / (1 + t * (0.99229 + t * 0.04481)) - t);
 
   for (let i = 0; i < 2; i++) {
