@@ -7,11 +7,13 @@ import { erfc } from "../../index.ts";
  *
  * The error function is defined as:
  *
- * \[
- * \text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} dt
- * \]
+ * ```
+ *           2     x
+ * erf(x) = ───  ∫  e^(-t²) dt
+ *          √π    0
+ * ```
  *
- * This implementation approximates the error function with a maximal error of \(1.2 \times 10^{-7}\).
+ * This implementation approximates the error function with a maximal error of 1.2 × 10⁻⁷.
  *
  * @param x A real value
  * @returns The value of the error function for the input x

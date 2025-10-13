@@ -108,9 +108,7 @@ async function fixDocAssets(
   return filesUpdated;
 }
 
-async function fixDocLinks(
-  options: FixDocAssetsOptions = {}
-): Promise<number> {
+async function fixDocLinks(options: FixDocAssetsOptions = {}): Promise<number> {
   const docsRootArg = options.root ?? "./docs";
   const docsRoot = resolve(Deno.cwd(), docsRootArg);
   let filesUpdated = 0;
@@ -119,13 +117,61 @@ async function fixDocLinks(
     const original = await Deno.readTextFile(filePath);
 
     // Replace all backslashes in href attributes with forward slashes
-    const updated = original.replace(
-      /href="([^"]*?)"/g,
-      (_match, path) => {
-        const normalized = path.replace(/\\/g, "/");
-        return `href="${normalized}"`;
+    const updated = original.replace(/href="([^"]*?)"/g, (_match, path) => {
+      const normalized = path.replace(/\\/g, "/");
+      return `href="${normalized}"`;
+    });
+
+    if (updated !== original) {
+      await Deno.writeTextFile(filePath, updated);
+      filesUpdated += 1;
+    }
+  }
+
+  return filesUpdated;
+}
+
+/**
+ * Hides the top navigation bar by adding CSS (except on index.html)
+ * On index.html, hides the .toc sidebar instead
+ */
+async function hideTopNav(options: FixDocAssetsOptions = {}): Promise<number> {
+  const docsRootArg = options.root ?? "./docs";
+  const docsRoot = resolve(Deno.cwd(), docsRootArg);
+  let filesUpdated = 0;
+
+  for await (const filePath of walkHtml(docsRoot)) {
+    const original = await Deno.readTextFile(filePath);
+    let updated = original;
+
+    // Check if this is index.html
+    const isIndexPage =
+      filePath.endsWith("index.html") ||
+      filePath.endsWith("index.html".replace(/\//g, "\\"));
+
+    if (isIndexPage) {
+      // On index.html, hide the .toc sidebar instead of topnav
+      if (!updated.includes(".toc { display: none; }")) {
+        updated = updated.replace(
+          /<\/head>/,
+          `  <style>
+    .toc { display: none; }
+  </style>
+</head>`
+        );
       }
-    );
+    } else {
+      // On other pages, hide the topnav
+      if (!updated.includes("#topnav { display: none; }")) {
+        updated = updated.replace(
+          /<\/head>/,
+          `  <style>
+    #topnav { display: none; }
+  </style>
+</head>`
+        );
+      }
+    }
 
     if (updated !== original) {
       await Deno.writeTextFile(filePath, updated);
@@ -240,10 +286,12 @@ await Deno.copyFile(benchmarkHtmlUrl, targetBenchmarkUrl);
 
 const assetsUpdated = await fixDocAssets({ root: docsOutput });
 const linksUpdated = await fixDocLinks({ root: docsOutput });
+const topNavHidden = await hideTopNav({ root: docsOutput });
 const searchIndexUrl = new URL("../docs/search_index.js", import.meta.url);
 const trimmed = await trimSearchIndexDocs(searchIndexUrl);
 console.log(
   `Documentation built successfully. Normalized asset paths in ${assetsUpdated} HTML file(s), ` +
     `fixed links in ${linksUpdated} HTML file(s).` +
+    (topNavHidden ? ` Hidden top navigation in ${topNavHidden} file(s).` : "") +
     (trimmed ? " Trimmed search index summaries." : "")
 );

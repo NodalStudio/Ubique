@@ -14,28 +14,28 @@ import { isarray, ismatrix } from "../../index.ts";
  *
  * @throws If the input arguments are not valid.
  *
- * @example Apply Math.log to each element of an array
+ * @example Apply `Math.log` to each element of an array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
  * ```
  *
- * @example Apply a custom sign function to an array
+ * @example Apply the `sign` function to an array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * assertEquals(arrayfun([1.4, 0, -10], sign), [1, 0, -1]);
  * ```
  *
- * @example Apply Math.pow to each element of a matrix
+ * @example Apply `Math.pow` to each element of a matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
  * assertEquals(arrayfun([[5, 6], [1, 3]], Math.pow, 3), [[125, 216], [1, 27]]);
  *
  * ```
- * @example Apply a custom sign function to each element of a matrix
+ * @example Apply the `sign` function to each element of a matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  * import { sign } from "../../index.ts";
