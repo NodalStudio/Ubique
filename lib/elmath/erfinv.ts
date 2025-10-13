@@ -5,7 +5,7 @@ import { erf } from "../../index.ts";
  *
  * Computes the inverse of the error function.
  *
- * The inverse error function satisfies \( y = \text{erf}(x) \), for \( -1 \leq y \leq 1 \) and \( -\infty \leq x \leq \infty \).
+ * The inverse error function satisfies `y = erf(x)`, for `-1 ≤ y ≤ 1` and `-∞ ≤ x ≤ ∞`.
  *
  * @param y A real value in the range [-1, 1]
  * @returns The value of the inverse error function

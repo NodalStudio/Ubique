@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>assertmatrixx - datatype\index.ts - Rubique documentation</title>
+  <title>assertmatrix - datatype\index.ts - Rubique documentation</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="doc-current-file" content="datatype\index.ts">
@@ -10,7 +10,10 @@
   <link id="ddocResetStylesheet" rel="stylesheet" href="../../../reset.css"><link href="../../../comrak.css" rel="stylesheet" /><link href="../../../prism.css" rel="stylesheet" /><script src="../../../prism.js"></script><script src="../../../script.js" defer></script>
   <script src="../../../darkmode_toggle.js"></script><script src="../../../search_index.js" defer></script>
     <script src="../../../fuse.js" defer></script>
-    <script src="../../../search.js" defer></script></head>
+    <script src="../../../search.js" defer></script>  <style>
+    #topnav { display: none; }
+  </style>
+</head>
 <body>
 <div class="ddoc">
 <div><nav id="topnav">
@@ -43,7 +46,7 @@
     fill="currentColor"
   />
 </svg>
-</span><ul><li>assertmatrixx</li></ul></ul>
+</span><ul><li>assertmatrix</li></ul></ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -107,11 +110,11 @@
     </div>
   </div>
 </nav>
-<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_assertmatrixx"><article>
+<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_assertmatrix"><article>
       <div class="symbolTitle">
         <div>
           <div class="text-2xl leading-none break-all">
-            <span class="text-Function">function</span>&nbsp;<span class="font-bold">assertmatrixx</span>
+            <span class="text-Function">function</span>&nbsp;<span class="font-bold">assertmatrix</span>
           </div></div><a
   class="sourceButton"
   href="file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;mayer&#x2F;Documents&#x2F;rubique&#x2F;lib&#x2F;datatype&#x2F;assertmatrix.ts"><svg
@@ -137,8 +140,8 @@
   />
 </svg>
 </a>
-</div><div><div class="mt-3 space-y-8"><div class="scroll-mt-16" id="function_assertmatrixx_0">
-      <code class="anchorable text-base break-words"><a href="#function_assertmatrixx_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><div><div class="mt-3 space-y-8"><div class="scroll-mt-16" id="function_assertmatrix_0">
+      <code class="anchorable text-base break-words"><a href="#function_assertmatrix_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -160,7 +163,7 @@
   </defs>
 </svg>
 </a>
-<span class="font-bold">assertmatrixx</span><span class="font-medium">(<span><span>x<span>: <span>unknown</span></span></span></span>)<span>: <span>asserts </span>x is <span>matrix</span></span> </span>
+<span class="font-bold">assertmatrix</span><span class="font-medium">(<span><span>x<span>: <span>unknown</span></span></span></span>)<span>: <span>asserts </span>x is <span>matrix</span></span> </span>
       </code><div class="space-y-7" id=""><div class="markdown"><p>Asserts that a value is a 2D matrix.</p>
 <p>Throws a TypeError if the input is not a 2D matrix. Uses TypeScript's type assertion to narrow the type.</p>
 </div><section class="section"  id="examples"><div>
@@ -213,23 +216,23 @@ Examples</h2></div><div class="space-y-8"><div class="anchorable"><a href="#exam
   <div><div class="markdown"><pre class="highlight"><code class="language-ts">import { assertThrows } from &quot;jsr:@std/assert&quot;;
 
 // Example 1: Valid matrix
-assertmatrixx([[1, 2], [3, 4]]); // No error
+assertmatrix([[1, 2], [3, 4]]); // No error
 
 // Example 2: Invalid input throws error
-assertThrows(() =&gt; assertmatrixx([1, 2, 3]), TypeError, &quot;Expected matrix&quot;);
+assertThrows(() =&gt; assertmatrix([1, 2, 3]), TypeError, &quot;Expected matrix&quot;);
 
 // Example 3: Number throws error
-assertThrows(() =&gt; assertmatrixx(5), TypeError, &quot;Expected matrix&quot;);
+assertThrows(() =&gt; assertmatrix(5), TypeError, &quot;Expected matrix&quot;);
 </code><button class="copyButton" data-copy="import { assertThrows } from &quot;jsr:@std/assert&quot;;
 
 // Example 1: Valid matrix
-assertmatrixx([[1, 2], [3, 4]]); // No error
+assertmatrix([[1, 2], [3, 4]]); // No error
 
 // Example 2: Invalid input throws error
-assertThrows(() =&gt; assertmatrixx([1, 2, 3]), TypeError, &quot;Expected matrix&quot;);
+assertThrows(() =&gt; assertmatrix([1, 2, 3]), TypeError, &quot;Expected matrix&quot;);
 
 // Example 3: Number throws error
-assertThrows(() =&gt; assertmatrixx(5), TypeError, &quot;Expected matrix&quot;);
+assertThrows(() =&gt; assertmatrix(5), TypeError, &quot;Expected matrix&quot;);
 "><svg
   class="copy"
   width="15"
@@ -287,10 +290,10 @@ assertThrows(() =&gt; assertmatrixx(5), TypeError, &quot;Expected matrix&quot;);
   </defs>
 </svg>
 </a>
-Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry" id="function_assertmatrixx_0_parameter_x">
+Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry" id="function_assertmatrix_0_parameter_x">
 
   <div class="docEntryHeader">
-    <div><code><a href="#function_assertmatrixx_0_parameter_x" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+    <div><code><a href="#function_assertmatrix_0_parameter_x" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -365,7 +368,7 @@ Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry" id=
   </defs>
 </svg>
 </a>
-Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertmatrixx_0_return">
+Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertmatrix_0_return">
 
   <div class="docEntryHeader">
     <div><code><span class="font-medium text-stone-500 dark:text-stone-200"><span>asserts </span>x is <span>matrix</span></span>
@@ -420,7 +423,7 @@ Return Type</h2></div><div class="space-y-8"><div class=" docEntry" id="function
   </defs>
 </svg>
 </a>
-Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertmatrixx_0_throws_0">
+Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_assertmatrix_0_throws_0">
 
   <div class="docEntryHeader">
     <div><code><span class="font-medium text-stone-500 dark:text-stone-200"></span>
@@ -459,8 +462,8 @@ Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_asse
     </article></main>
 <div class="toc">
     <div><div class="usageContent">
-    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code class="language-typescript">import assertmatrixx from &quot;datatype\index.ts&quot;;
-</code><button class="copyButton" data-copy="import assertmatrixx from &quot;datatype\index.ts&quot;;
+    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code class="language-typescript">import assertmatrix from &quot;datatype\index.ts&quot;;
+</code><button class="copyButton" data-copy="import assertmatrix from &quot;datatype\index.ts&quot;;
 "><svg
   class="copy"
   width="15"
@@ -493,7 +496,7 @@ Throws</h2></div><div class="space-y-8"><div class=" docEntry" id="function_asse
 </svg>
 </button><code></code></pre>
 </div></div><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><a href="#examples" title="Examples">Examples</a></li><li><ul><li><a href="#example_0" title="Example 1">Example 1</a></li></ul></li><li><a href="#parameters" title="Parameters">Parameters</a></li><li><ul><li><a href="#function_assertmatrixx_0_parameter_x" title="x">x</a></li></ul></li><li><a href="#return-type" title="Return Type">Return Type</a></li><li><a href="#throws" title="Throws">Throws</a></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><a href="#examples" title="Examples">Examples</a></li><li><ul><li><a href="#example_0" title="Example 1">Example 1</a></li></ul></li><li><a href="#parameters" title="Parameters">Parameters</a></li><li><ul><li><a href="#function_assertmatrix_0_parameter_x" title="x">x</a></li></ul></li><li><a href="#return-type" title="Return Type">Return Type</a></li><li><a href="#throws" title="Throws">Throws</a></li></ul></nav></div>
   </div></div>
 </div>
 </div>

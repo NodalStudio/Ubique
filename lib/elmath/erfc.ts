@@ -5,9 +5,11 @@
  *
  * The complementary error function is defined as:
  *
- * \[
- * \text{erfc}(x) = \frac{2}{\sqrt{\pi}} \int_x^{\infty} e^{-t^2} dt = 1 - \text{erf}(x)
- * \]
+ * ```
+ *            2     ∞
+ * erfc(x) = ───  ∫  e^(-t²) dt  =  1 - erf(x)
+ *           √π    x
+ * ```
  *
  * This implementation provides an approximation with a high degree of accuracy.
  *
