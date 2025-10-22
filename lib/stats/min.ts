@@ -12,17 +12,26 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @returns Minimum values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple array minimum
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple array minimum
  * assertEquals(min([3, 1, 2]), 1);
  *
- * // Example 2: Array with negative values
+ * ```
+ *
+ * @example Array with negative values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(min([5, -1, 10]), -1);
  *
- * // Example 3: Matrix minimum along rows
+ * ```
+ *
+ * @example Matrix minimum along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(min([[1, 2], [3, 4]]), [1, 3]);
  * ```
  */

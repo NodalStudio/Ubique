@@ -13,17 +13,26 @@ import { meanwasm } from "../../rs_lib/pkg/rs_lib.js";
  * @returns Mean values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple array mean
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple array mean
  * assertEquals(mean([1, 2, 3]), 2);
  *
- * // Example 2: Array with decimals
+ * ```
+ *
+ * @example Array with decimals
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
  *
- * // Example 3: Matrix mean along rows
+ * ```
+ *
+ * @example Matrix mean along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
  * ```
  */

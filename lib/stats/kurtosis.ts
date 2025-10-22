@@ -14,17 +14,26 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  * @returns Computed kurtosis values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple array kurtosis
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple array kurtosis
  * assertEquals(kurtosis([1, 2, 3, 4, 5]), 1.7);
  *
- * // Example 2: Normal distribution approximation
+ * ```
+ *
+ * @example Normal distribution approximation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75);
  *
- * // Example 3: Matrix kurtosis
+ * ```
+ *
+ * @example Matrix kurtosis
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(kurtosis([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
  */

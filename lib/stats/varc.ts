@@ -23,17 +23,26 @@ import {
  * @returns Computed variance values
  * @throws When input is invalid
  *
- * @example
+ * @example Sample variance
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sample variance
  * assertEquals(varc([1, 2, 3]), 1);
  *
- * // Example 2: Population variance
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
  *
- * // Example 3: Matrix variance along rows (default dim=0, flag=1)
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
  * ```
  */

@@ -11,26 +11,46 @@ import { erfc } from "../../index.ts";
  * @returns The value of the inverse complementary error function
  * @throws If the input is out of range
  *
- * @example
+ * @example Compute the inverse complementary error function for a value less than 1
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the inverse complementary error function for a value less than 1
  * assertEquals(erfcinv(1.5), -0.476936236121904);
  *
- * // Example 2: Compute the inverse complementary error function for a value greater than 1
+ * ```
+ *
+ * @example Compute the inverse complementary error function for a value greater than 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfcinv(0.5), 0.476936236121904);
  *
- * // Example 3: Compute the inverse complementary error function for 1
+ * ```
+ *
+ * @example Compute the inverse complementary error function for 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfcinv(1), 0);
  *
- * // Example 4: Compute the inverse complementary error function for 2 (should return negative infinity)
+ * ```
+ *
+ * @example Compute the inverse complementary error function for 2 (should return negative infinity)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfcinv(2), -Infinity);
  *
- * // Example 5: Compute the inverse complementary error function for 0 (should return positive infinity)
+ * ```
+ *
+ * @example Compute the inverse complementary error function for 0 (should return positive infinity)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfcinv(0), Infinity);
-
- * ```*/
+ *
+ * ```
+ */
 export default function erfcinv(y: number): number {
   if (y >= 2) return -Infinity;
   if (y === 1) return 0;

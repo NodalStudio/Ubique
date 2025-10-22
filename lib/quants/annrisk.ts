@@ -16,18 +16,29 @@ import { isarray, ismatrix, std, vectorfun } from "../../index.ts";
  * @returns The computed annualized risk (standard deviation)
  * @throws If the input is invalid
  *
- * @example
+ * @example Annualized risk for a single asset (monthly data)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Annualized risk for a single asset (monthly data)
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annrisk(x, 12), 0.08047276972160623);
  *
- * // Example 2: Annualized risk with daily frequency
+ * ```
+ *
+ * @example Annualized risk with daily frequency
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(annrisk(x, 252), 0.368772558632011);
  *
- * // Example 3: Annualized risk for multiple assets (matrix)
+ * ```
+ *
+ * @example Annualized risk for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annrisk([x1, x2], 12), [0.046047801250439745, 0.10238163897887159]);

@@ -6,32 +6,62 @@
  * @param x The input to check.
  * @returns Returns `true` if `x` is a scalar, otherwise `false`.
  *
- * @example
+ * @example Single number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single number
  * assertEquals(isscalar(2), true);
  *
- * // Example 2: Array with one element
+ * ```
+ *
+ * @example Array with one element
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([2]), true);
  *
- * // Example 3: Matrix with one element
+ * ```
+ *
+ * @example Matrix with one element
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([[2]]), true);
  *
- * // Example 4: Array with multiple elements
+ * ```
+ *
+ * @example Array with multiple elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([1, 2, 3]), false);
  *
- * // Example 5: Matrix with multiple elements
+ * ```
+ *
+ * @example Matrix with multiple elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([[1, 2], [3, 4]]), false);
  *
- * // Example 6: Empty array (not a scalar)
+ * ```
+ *
+ * @example Empty array (not a scalar)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([]), false);
  *
- * // Example 7: Empty matrix (not a scalar)
+ * ```
+ *
+ * @example Empty matrix (not a scalar)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isscalar([[]]), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function isscalar(x: unknown): boolean {
   if (typeof x === "number") {
     return true;

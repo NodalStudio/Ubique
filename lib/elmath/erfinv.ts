@@ -11,26 +11,46 @@ import { erf } from "../../index.ts";
  * @returns The value of the inverse error function
  * @throws If the input is out of range
  *
- * @example
+ * @example Compute the inverse error function for a positive value
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the inverse error function for a positive value
  * assertEquals(erfinv(0.1), 0.08885596505119556);
  *
- * // Example 2: Compute the inverse error function for a negative value
+ * ```
+ *
+ * @example Compute the inverse error function for a negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfinv(-0.5), -0.47693623612190483);
  *
- * // Example 3: Compute the inverse error function for 0 (should return 0)
+ * ```
+ *
+ * @example Compute the inverse error function for 0 (should return 0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfinv(0), 0);
  *
- * // Example 4: Compute the inverse error function for 1 (should return positive infinity)
+ * ```
+ *
+ * @example Compute the inverse error function for 1 (should return positive infinity)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfinv(1), Infinity);
  *
- * // Example 5: Compute the inverse error function for -1 (should return negative infinity)
+ * ```
+ *
+ * @example Compute the inverse error function for -1 (should return negative infinity)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfinv(-1), -Infinity);
-
- * ```*/
+ *
+ * ```
+ */
 export default function erfinv(y: number): number {
   if (y <= -1) return -Infinity;
   if (y >= 1) return Infinity;

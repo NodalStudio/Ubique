@@ -12,17 +12,26 @@ import { isnumber, prctile, vectorfun } from "../../index.ts";
  * @returns Interquartile range values
  * @throws When input is invalid
  *
- * @example
+ * @example IQR of simple array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: IQR of simple array
  * assertEquals(iqr([1, 2, 3, 4, 5]), 2.5);
  *
- * // Example 2: IQR with larger range
+ * ```
+ *
+ * @example IQR with larger range
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(iqr([1, 2, 3, 4, 5, 6, 7, 8, 9]), 4.5);
  *
- * // Example 3: IQR of matrix
+ * ```
+ *
+ * @example IQR of matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(iqr([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
  */

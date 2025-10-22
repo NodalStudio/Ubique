@@ -10,23 +10,38 @@ import { ismatrix, issquare, ncols } from "../../index.ts";
  *
  * @throws Throws an error if the input is not a matrix or not a square matrix.
  *
- * @example
+ * @example Non-singular square matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Non-singular square matrix
  * assertEquals(issingular([[2, 6], [1, 3]]), false);
  *
- * // Example 2: Singular square matrix (diagonal element is zero)
+ * ```
+ *
+ * @example Singular square matrix (diagonal element is zero)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(issingular([[0, 6], [1, 3]]), true);
  *
- * // Example 3: Not a matrix (single number input)
+ * ```
+ *
+ * @example Not a matrix (single number input)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { issingular(5) }, Error, 'input must be a matrix');
  *
- * // Example 4: Non-square matrix
+ * ```
+ *
+ * @example Non-square matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { issingular([[1, 2, 3], [4, 5, 6]]) }, Error, 'input must be a square matrix');
-
- * ```*/
+ *
+ * ```
+ */
 export default function issingular(x: unknown): boolean {
   if (!ismatrix(x)) {
     throw new Error("input must be a matrix");

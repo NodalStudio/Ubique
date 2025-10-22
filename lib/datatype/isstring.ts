@@ -6,19 +6,29 @@
  * @param x The element to check.
  * @returns Returns `true` if `x` is a string, otherwise `false`.
  *
- * @example
+ * @example Input is a string
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Input is a string
  * assertEquals(isstring('test'), true);
  *
- * // Example 2: Input is a number
+ * ```
+ *
+ * @example Input is a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isstring(123), false);
  *
- * // Example 3: Input is an object
+ * ```
+ *
+ * @example Input is an object
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isstring({ key: 'value' }), false);
- * ``` */
+ * ```
+ */
 export default function isstring(x: unknown): x is string {
   return typeof x === "string";
 }

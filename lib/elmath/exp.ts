@@ -10,23 +10,33 @@ import { arrayfun, isnumber } from "../../index.ts";
  * @returns The exponential of the input value(s)
  * @throws If no arguments are provided
  *
- * @example
+ * @example Exponential of a single number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Exponential of a single number
  * assertEquals(exp(6), 403.4287934927351);
  *
- * // Example 2: Exponential of an array of numbers
+ * ```
+ *
+ * @example Exponential of an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(exp([5, 6, 3]), [148.4131591025766, 403.4287934927351, 20.085536923187668]);
  *
- * // Example 3: Exponential of a matrix of numbers
+ * ```
+ *
+ * @example Exponential of a matrix of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(exp([[5, 6, 5], [7, 8, -1]]), [
  *   [148.4131591025766, 403.4287934927351, 148.4131591025766],
  *   [1096.6331584284585, 2980.9579870417282, 0.36787944117144233]
  * ]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function exp(x: number): number;
 export default function exp(x: array): array;
 export default function exp(x: matrix): matrix;

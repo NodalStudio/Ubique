@@ -9,17 +9,26 @@ import ismatrix from "./ismatrix.ts";
  * @param x The value to check
  * @throws If x is not a 2D matrix
  *
- * @example
+ * @example Valid matrix
  * ```ts
  * import { assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid matrix
  * assertmatrix([[1, 2], [3, 4]]); // No error
  *
- * // Example 2: Invalid input throws error
+ * ```
+ *
+ * @example Invalid input throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertmatrix([1, 2, 3]), TypeError, "Expected matrix");
  *
- * // Example 3: Number throws error
+ * ```
+ *
+ * @example Number throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertmatrix(5), TypeError, "Expected matrix");
  * ```
  */

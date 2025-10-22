@@ -19,17 +19,26 @@ import {
  * @returns Excess kurtosis values
  * @throws When input is invalid
  *
- * @example
+ * @example Normal-like distribution
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Normal-like distribution
  * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
  *
- * // Example 2: Heavy-tailed distribution
+ * ```
+ *
+ * @example Heavy-tailed distribution
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
  *
- * // Example 3: Matrix excess kurtosis
+ * ```
+ *
+ * @example Matrix excess kurtosis
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
  * ```
  */

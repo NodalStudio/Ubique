@@ -6,26 +6,46 @@
  * @param x The element to check.
  * @returns Returns `true` if `x` is a number or `NaN`.
  *
- * @example
+ * @example Input is a number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Input is a number
  * assertEquals(isnumber(5), true);
  *
- * // Example 2: Input is `NaN`
+ * ```
+ *
+ * @example Input is `NaN`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnumber(NaN), true);
  *
- * // Example 3: Input is a string representing a number (not a number)
+ * ```
+ *
+ * @example Input is a string representing a number (not a number)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnumber('5'), false);
  *
- * // Example 4: Input is `undefined`
+ * ```
+ *
+ * @example Input is `undefined`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnumber(undefined), false);
  *
- * // Example 5: Input is `null`
+ * ```
+ *
+ * @example Input is `null`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnumber(null), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function isnumber(x: unknown): x is number {
   return typeof x === "number";
 }

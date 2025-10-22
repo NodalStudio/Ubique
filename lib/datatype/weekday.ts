@@ -16,17 +16,26 @@ import type { array, matrix } from "../types.d.ts";
  * @param x Unix timestamp(s) to convert to the ISO weekday.
  * @returns The corresponding ISO weekday(s).
  *
- * @example
+ * @example Single Unix timestamp
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single Unix timestamp
  * assertEquals(weekday(1426636800), 3); // (Wednesday)
  *
- * // Example 2: Array of Unix timestamps
+ * ```
+ *
+ * @example Array of Unix timestamps
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(weekday([1424908800, 1426636800]), [4, 3]); // (Thursday, Wednesday)
  *
- * // Example 3: Matrix of Unix timestamps
+ * ```
+ *
+ * @example Matrix of Unix timestamps
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(weekday([[1424908800, 1426636800], [1427328000, 1429315200]]), [[4, 3], [4, 6]]); // (Thursday, Wednesday, Thursday, Saturday)
  * ```
  */

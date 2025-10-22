@@ -12,17 +12,26 @@ import { vectorfun } from "../../index.ts";
  * @returns The cumulative product of the input values
  * @throws If no input is provided
  *
- * @example
+ * @example Cumulative product of a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Cumulative product of a 1D array
  * assertEquals(cumprod([5, 6, 3]), [5, 30, 90]);
  *
- * // Example 2: Cumulative product of a matrix along columns (dim=1)
+ * ```
+ *
+ * @example Cumulative product of a matrix along columns (dim=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumprod([[5, 6, 5], [7, 8, -1]], 1), [[5, 35], [6, 48], [5, -5]]);
  *
- * // Example 3: Cumulative product of a matrix along rows (dim=0)
+ * ```
+ *
+ * @example Cumulative product of a matrix along rows (dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumprod([[5, 6, 5], [7, 8, -1]], 0), [[5, 30, 150], [7, 56, -56]]);
  * ```
  */

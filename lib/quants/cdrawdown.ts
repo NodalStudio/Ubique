@@ -12,23 +12,33 @@ import { isarray, ismatrix, vectorfun } from "../../index.ts";
  * @returns The computed continuous drawdowns
  * @throws If the input is invalid
  *
- * @example
+ * @example Continuous drawdown for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Continuous drawdown for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(cdrawdown(x), [0, 0, 0, 0.009, 0.009, 0.009, 0.009, 0.009, 0.014, 0.014]);
  *
- * // Example 2: Continuous drawdown for multiple assets (matrix)
+ * ```
+ *
+ * @example Continuous drawdown for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(cdrawdown([x1, x2]), [[0, 0, 0, 0.009, 0.009], [0, 0, 0, 0.014, 0.014]]);
  *
- * // Example 3: Continuous drawdown with more negative returns
+ * ```
+ *
+ * @example Continuous drawdown with more negative returns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const y = [-0.01, -0.02, 0.05, -0.03];
  * assertEquals(cdrawdown(y), [0.01, 0.03, 0.03, 0.03]);
- * ``` */
+ * ```
+ */
 export default function cdrawdown(x: array, dim?: 0 | 1): array;
 export default function cdrawdown(x: matrix, dim?: 0 | 1): array | matrix;
 export default function cdrawdown(

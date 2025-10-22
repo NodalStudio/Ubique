@@ -11,19 +11,34 @@ import { isnumber } from "../../index.ts";
  * @param xnew new query points for interpolation
  * @return Interpolated values
  *
- * @example
+ * @example Interpolate at specific points
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Interpolate at specific points
  * var x = [1,2,3,4,5,6];
  * var y = [2,4,6,8,10,12];
  * assertEquals(interp1(x,y,[2,4,6]), [4, 8, 12]);
  *
- * // Example 2: Interpolate at a single point
+ * ```
+ *
+ * @example Interpolate at a single point
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [1,2,3,4,5,6];
+ * var y = [2,4,6,8,10,12];
+ *
  * assertEquals(interp1(x,y,3), 6);
  *
- * // Example 3: Interpolate between points
+ * ```
+ *
+ * @example Interpolate between points
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [1,2,3,4,5,6];
+ * var y = [2,4,6,8,10,12];
+ *
  * assertEquals(interp1(x,y,3.5), 7);
  * ```
  */

@@ -12,17 +12,26 @@ import { isnumber, prctile, vectorfun } from "../../index.ts";
  * @returns Array containing [Q1, Q2, Q3] values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple quartiles
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple quartiles
  * assertEquals(quartile([1, 2, 3, 4, 5]), [1.75, 3, 4.25]);
  *
- * // Example 2: Even number of elements
+ * ```
+ *
+ * @example Even number of elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(quartile([1, 2, 3, 4]), [1.5, 2.5, 3.5]);
  *
- * // Example 3: Quartiles provide Q1, Q2 (median), Q3
+ * ```
+ *
+ * @example Quartiles provide Q1, Q2 (median), Q3
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(quartile([10, 20, 30, 40]), [15, 25, 35]);
  * ```
  */

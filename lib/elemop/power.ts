@@ -12,20 +12,34 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of element-wise exponentiation x .^ y
  * @throws If the input dimensions do not agree or if no arguments are provided
  *
- * @example
+ * @example Power of two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Power of two numbers
  * assertEquals(power(2, 3), 8);
  *
- * // Example 2: Element-wise power of arrays
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
  *
- * // Example 3: Array to scalar power
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
  *
- * // Example 4: Element-wise power of matrices
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
  * ```
  */

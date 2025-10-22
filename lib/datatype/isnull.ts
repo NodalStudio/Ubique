@@ -6,23 +6,38 @@
  * @param x The element to check.
  * @returns Returns `true` if `x` is `null`.
  *
- * @example
+ * @example Input is `null`
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Input is `null`
  * assertEquals(isnull(null), true);
  *
- * // Example 2: Input is `undefined`
+ * ```
+ *
+ * @example Input is `undefined`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnull(undefined), false);
  *
- * // Example 3: Input is a number (not `null`)
+ * ```
+ *
+ * @example Input is a number (not `null`)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnull(0), false);
  *
- * // Example 4: Input is an empty string (not `null`)
+ * ```
+ *
+ * @example Input is an empty string (not `null`)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isnull(''), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function isnull(x: unknown): boolean {
   return x === null;
 }

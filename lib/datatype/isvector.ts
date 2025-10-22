@@ -9,26 +9,46 @@ import { iscolumn, ismatrix, isrow } from "../../index.ts";
  * @param x The matrix to check.
  * @returns Returns `true` if `x` is a vector, otherwise `false`.
  *
- * @example
+ * @example A row vector
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: A row vector
  * assertEquals(isvector([[5, 6, 7]]), true);
  *
- * // Example 2: A column vector
+ * ```
+ *
+ * @example A column vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isvector([[5], [6], [7]]), true);
  *
- * // Example 3: A matrix with more than one row and column
+ * ```
+ *
+ * @example A matrix with more than one row and column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isvector([[1, 2], [3, 4]]), false);
  *
- * // Example 4: Not a matrix (invalid input)
+ * ```
+ *
+ * @example Not a matrix (invalid input)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isvector(123), false);
  *
- * // Example 5: Empty matrix
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isvector([]), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function isvector(x: unknown): x is matrix {
   if (ismatrix(x)) {
     return iscolumn(x) || isrow(x);

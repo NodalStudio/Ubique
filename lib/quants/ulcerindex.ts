@@ -14,19 +14,30 @@ import { drawdown, power, sqrt, sum, vectorfun } from "../../index.ts";
  * @returns Ulcer Index
  * @throws If input is a number (not supported)
  *
- * @example
+ * @example Single array of returns
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single array of returns
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(ulcerindex(x), 0.005263078946776312);
  *
- * // Example 2: Matrix of returns with column dimension
+ * ```
+ *
+ * @example Matrix of returns with column dimension
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const xt = [[0.003, 0.026], [0.015, -0.009], [0.014, 0.024], [0.015, 0.066], [-0.014, 0.039]];
  * assertEquals(ulcerindex(xt, 'return', 1), [0.006260990336999415, 0.004024922359499606]);
  *
- * // Example 3: Ulcer index with geometric mode
+ * ```
+ *
+ * @example Ulcer index with geometric mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(ulcerindex(x, 'geometric'), 0.005296364154061427);
  * ```
  */

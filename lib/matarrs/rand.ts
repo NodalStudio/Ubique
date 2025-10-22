@@ -11,33 +11,62 @@ import type { array, matrix } from "../types.d.ts";
  * @returns A random number or a matrix of random numbers
  * @throws If invalid arguments are provided
  *
- * @example
+ * @example Single random number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  * import type { matrix } from "../types.d.ts";
  *
- * // Example 1: Single random number
  * assertEquals(typeof rand(), 'number');
  *
- * // Example 2: Empty matrix
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
  * assertEquals(rand(0), []);
  *
- * // Example 3: 1x1 matrix
+ * ```
+ *
+ * @example 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
  * const result1x1 = rand(1) as matrix;
  * assertEquals(result1x1.length, 1);
  * assertEquals(result1x1[0].length, 1);
  *
- * // Example 4: 2x2 matrix
+ * ```
+ *
+ * @example 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
  * const result2x2 = rand(2) as matrix;
  * assertEquals(result2x2.length, 2);
  * assertEquals(result2x2[0].length, 2);
  *
- * // Example 5: 2x1 matrix
+ * ```
+ *
+ * @example 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
  * const result2x1 = rand([2, 1]) as matrix;
  * assertEquals(result2x1.length, 2);
  * assertEquals(result2x1[0].length, 1);
  *
- * // Example 6: 1x2 matrix
+ * ```
+ *
+ * @example 1x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
  * const result1x2 = rand(1, 2) as matrix;
  * assertEquals(result1x2.length, 1);
  * assertEquals(result1x2[0].length, 2);

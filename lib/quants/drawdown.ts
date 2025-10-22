@@ -33,12 +33,11 @@ interface DrawdownResult {
  * @returns Drawdown information object
  * @throws If input must be an array or matrix
  *
- * @example
+ * @example Calculate drawdown metrics for a return series
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  * import { drawdown } from "../../index.ts";
  *
- * // Example 1: Calculate drawdown metrics for a return series
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * const result = drawdown(x);
  * assertEquals(result.dd, [0, 0, 0, 0.00900000000000004, 0, 0, 0, 0, 0.013999999999999995, 0]);
@@ -46,10 +45,26 @@ interface DrawdownResult {
  * assertEquals(result.maxdd, 0.013999999999999995);
  * assertEquals(result.maxddrecov, [8, 9]);
  *
- * // Example 2: Drawdown with geometric mode
+ * ```
+ *
+ * @example Drawdown with geometric mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(drawdown(x, "geometric").maxdd, 0.014098924379501637);
  *
- * // Example 3: Drawdown for multiple assets
+ * ```
+ *
+ * @example Drawdown for multiple assets
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals((drawdown([x, y]) as any).length, 2);
  * ```

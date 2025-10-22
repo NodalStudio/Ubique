@@ -11,18 +11,27 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Downside Potential
  *
- * @example
+ * @example Downside potential with default MAR
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Downside potential with default MAR
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(downsidepot(x), 0.0023);
  *
- * // Example 2: Downside potential with custom MAR
+ * ```
+ *
+ * @example Downside potential with custom MAR
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(downsidepot([0.05, 0.03, 0.08, -0.02], 0.02), 0.01);
  *
- * // Example 3: Downside potential for matrix (row-wise)
+ * ```
+ *
+ * @example Downside potential for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
  * assertEquals(downsidepot(matrix, 0, 0), [0, 0.005, 0]);
  * ```

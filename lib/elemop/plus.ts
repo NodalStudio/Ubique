@@ -12,23 +12,42 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of adding `x` and `y`.
  * @throws If the input dimensions do not agree or if no arguments are provided.
  *
- * @example
+ * @example Add two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Add two numbers
  * assertEquals(plus(5, 6), 11);
  *
- * // Example 2: Add two arrays element-wise
+ * ```
+ *
+ * @example Add two arrays element-wise
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(plus([5, 6, 4], [3, -1, 0]), [8, 5, 4]);
  *
- * // Example 3: Add a number to each element of an array
+ * ```
+ *
+ * @example Add a number to each element of an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(plus([5, 6, 4], 10), [15, 16, 14]);
  *
- * // Example 4: Add a number to each element of a matrix
+ * ```
+ *
+ * @example Add a number to each element of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(plus(10, [[5, 6], [3, 4]]), [[15, 16], [13, 14]]);
  *
- * // Example 5: Add two matrices element-wise
+ * ```
+ *
+ * @example Add two matrices element-wise
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(plus([[5, 6], [3, 4]], [[2, 3], [1, 2]]), [[7, 9], [4, 6]]);
  * ```
  */

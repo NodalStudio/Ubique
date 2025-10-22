@@ -12,17 +12,26 @@ import { isnumber, sort, vectorfun } from "../../index.ts";
  * @returns Most frequent values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple mode
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple mode
  * assertEquals(mode([1, 2, 2, 3]), 2);
  *
- * // Example 2: Mode with multiple values
+ * ```
+ *
+ * @example Mode with multiple values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mode([1, 1, 2, 2, 2]), 2);
  *
- * // Example 3: Matrix mode
+ * ```
+ *
+ * @example Matrix mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mode([[1, 1, 2], [3, 3, 4]]), [1, 3]);
  * ```
  */

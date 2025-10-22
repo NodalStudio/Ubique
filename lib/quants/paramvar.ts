@@ -22,17 +22,26 @@ import {
  * @param period time horizon (def: 1)
  * @return Parametric Value-At-Risk
  *
- * @example
+ * @example VaR with default parameters
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: VaR with default parameters
  * assertEquals(paramvar(0, 1), 1.6448536127562643);
  *
- * // Example 2: VaR with arrays
+ * ```
+ *
+ * @example VaR with arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
  *
- * // Example 3: Parametric VaR for a single asset
+ * ```
+ *
+ * @example Parametric VaR for a single asset
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
  * ```
  */

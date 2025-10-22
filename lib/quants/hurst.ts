@@ -17,18 +17,27 @@ import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Hurst exponent
  *
- * @example
+ * @example Hurst exponent for a single time series
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Hurst exponent for a single time series
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(hurst(x), 0.3440590389509703);
  *
- * // Example 2: Hurst exponent for different data
+ * ```
+ *
+ * @example Hurst exponent for different data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(hurst([0.05, 0.03, 0.08, -0.02]), 0.19397632085813782);
  *
- * // Example 3: Hurst exponent interpretation (0.5 = random walk)
+ * ```
+ *
+ * @example Hurst exponent interpretation (0.5 = random walk)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468);
  * ```
  */

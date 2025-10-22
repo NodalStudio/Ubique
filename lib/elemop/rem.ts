@@ -12,17 +12,26 @@ import { fix, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The remainder after division
  * @throws If no arguments are provided
  *
- * @example
+ * @example Remainder of a vector divided by a scalar
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Remainder of a vector divided by a scalar
  * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
  *
- * // Example 2: Remainder of two vectors
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
  *
- * // Example 3: Remainder of two matrices
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
  * ```
  */

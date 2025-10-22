@@ -10,23 +10,42 @@ import type { array } from "../types.d.ts";
  * @param n The number of points to generate. Defaults to 10 if not provided
  * @returns An array of `n` linearly spaced points between `a` and `b`
  *
- * @example
+ * @example Generate 5 linearly spaced points between 1 and 10
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Generate 5 linearly spaced points between 1 and 10
  * assertEquals(linspace(1, 10, 5), [1, 3.25, 5.5, 7.75, 10]);
  *
- * // Example 2: Generate 3 linearly spaced points between -10 and 10
+ * ```
+ *
+ * @example Generate 3 linearly spaced points between -10 and 10
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(linspace(-10, 10, 3), [-10, 0, 10]);
  *
- * // Example 3: Generate 2 linearly spaced points between -5 and 5
+ * ```
+ *
+ * @example Generate 2 linearly spaced points between -5 and 5
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(linspace(-5, 5, 2), [-5, 5]);
  *
- * // Example 4: Generate a single point (n = 1), should return only the upper bound
+ * ```
+ *
+ * @example Generate a single point (n = 1), should return only the upper bound
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(linspace(2, 5, 1), [5]);
  *
- * // Example 5: Generate 10 linearly spaced points between 0 and 1
+ * ```
+ *
+ * @example Generate 10 linearly spaced points between 0 and 1
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(
  *   linspace(0, 1),
  *   [0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777777, 0.8888888888888888, 1]

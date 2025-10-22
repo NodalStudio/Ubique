@@ -21,26 +21,68 @@ import arrayfun from "../datatype/arrayfun.ts";
  *
  * const a = [[5,6,5],[7,8,-1]];
  * const c = [5,6,3];
+ * ```
  *
- * // Example 1: Extract a single element
+ * @example Extract a single element
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5,6,5],[7,8,-1]];
+ *
  * assertEquals(subsetlin(a, 1), [6]);
  *
- * // Example 2: Subset by rows
+ * ```
+ *
+ * @example Subset by rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5,6,5],[7,8,-1]];
+ *
  * assertEquals(subsetlin(a, [0,1,2,3]), [5, 6, 5, 7]);
  *
- * // Example 3: Subset by columns
+ * ```
+ *
+ * @example Subset by columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5,6,5],[7,8,-1]];
+ *
  * assertEquals(subsetlin(a, [0,1,2,3], 1), [5, 7, 6, 8]);
  *
- * // Example 4: Extract a 2D subset (column-wise)
+ * ```
+ *
+ * @example Extract a 2D subset (column-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5,6,5],[7,8,-1]];
+ *
  * assertEquals(subsetlin(a, [[0,1,2], [2,3,4]], 1), [[5, 7, 6], [6, 8, 5]]);
  *
- * // Example 5: Subset a vector
+ * ```
+ *
+ * @example Subset a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5,6,3];
+ *
  * assertEquals(subsetlin(c, [0,1]), [5, 6]);
  *
- * // Example 6: Extract a 2D subset from a vector
+ * ```
+ *
+ * @example Extract a 2D subset from a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5,6,3];
+ *
  * assertEquals(subsetlin(c, [[0,1], [1,2]]), [[5, 6], [6, 3]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function subsetlin(
   m: array,
   idx: number | array | matrix,

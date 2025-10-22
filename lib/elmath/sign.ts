@@ -8,34 +8,70 @@
  * @returns The sign of the input value(s).
  * @throws If no arguments are provided.
  *
- * @example
+ * @example Sign of a single number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
  *
- * // Example 1: Sign of a single number
  * assertEquals(sign(-0.5), -1);
  *
- * // Example 2: Sign of a positive number
+ * ```
+ *
+ * @example Sign of a positive number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(sign(42), 1);
  *
- * // Example 3: Sign of zero
+ * ```
+ *
+ * @example Sign of zero
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(sign(0), 0);
  *
- * // Example 4: Sign with special values
+ * ```
+ *
+ * @example Sign with special values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(sign(Infinity), 1);
  * assertEquals(sign(-Infinity), -1);
  *
- * // Example 5: Sign with very small numbers
+ * ```
+ *
+ * @example Sign with very small numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(sign(0.000001), 1);
  * assertEquals(sign(-0.000001), -1);
  *
- * // Example 6: Using with arrayfun for arrays
+ * ```
+ *
+ * @example Using with arrayfun for arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
  * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(arrayfun([5, 0, -3], sign), [1, 0, -1]);
  *
- * // Example 7: Using with arrayfun for matrices
+ * ```
+ *
+ * @example Using with arrayfun for matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { arrayfun } from "../../index.ts";
+ *
  * assertEquals(arrayfun([[2, -1], [0, 4]], sign), [[1, -1], [0, 1]]);
- * ``` */
+ * ```
+ */
 export default function sign(x: number): number {
   if (x > 0) return 1;
   if (x < 0) return -1;

@@ -28,17 +28,26 @@ interface HistBin {
  * @returns Array of objects with bins, count, and freq properties
  * @throws When input is invalid
  *
- * @example
+ * @example Simple histogram with default bins
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple histogram with default bins
  * assertEquals(histc([1, 2, 3, 4, 5], 5).length, 6);
  *
- * // Example 2: Histogram with custom bin edges
+ * ```
+ *
+ * @example Histogram with custom bin edges
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(histc([1, 5, 10], [0, 5, 10]).length, 3);
  *
- * // Example 3: Matrix histogram
+ * ```
+ *
+ * @example Matrix histogram
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(histc([[1, 2], [3, 4]], 2).length, 2);
  * ```
  */

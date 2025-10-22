@@ -11,23 +11,38 @@ import size from "../matarrs/size.ts";
  * @returns The total number of elements in the array or matrix.
  * @throws If no input is provided.
  *
- * @example
+ * @example Number of elements in a vector
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Number of elements in a vector
  * assertEquals(numel([3, 5, 6]), 3);
  *
- * // Example 2: Number of elements in a matrix
+ * ```
+ *
+ * @example Number of elements in a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(numel([[3, 2, 7], [4, 5, 6]]), 6);
  *
- * // Example 3: Number of elements in a 1x1 matrix
+ * ```
+ *
+ * @example Number of elements in a 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(numel([[42]]), 1);
  *
- * // Example 4: Number of elements in an empty array
+ * ```
+ *
+ * @example Number of elements in an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(numel([]), 0);
-
- * ```*/
+ *
+ * ```
+ */
 export default function numel(x: array | matrix): number {
   const [rows, cols] = size(x);
   return rows * cols;

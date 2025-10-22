@@ -12,19 +12,28 @@ import { prod } from "../../index.ts";
  * @returns Time-weighted return
  * @throws If market values and cash flows arrays have different lengths
  *
- * @example
+ * @example Calculate true time-weighted return with market values and cash flows
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Calculate true time-weighted return with market values and cash flows
  * const mv = [250000, 255000, 257000, 288000, 293000, 285000];
  * const cf = [0, 0, 25000, 0, -10000, 0];
  * assertEquals(twr(mv, cf), 0.07564769566198049);
  *
- * // Example 2: TWR with no cash flows (default behavior)
+ * ```
+ *
+ * @example TWR with no cash flows (default behavior)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(twr([100, 110, 120]), 0.19999999999999996);
  *
- * // Example 3: TWR with uniform cash flow
+ * ```
+ *
+ * @example TWR with uniform cash flow
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(twr([100, 110, 120], 5), 0.0931677018633541);
  * ```
  */

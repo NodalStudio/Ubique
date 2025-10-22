@@ -15,20 +15,33 @@ import { annreturn, isarray, ulcerindex, vectorfun } from "../../index.ts";
  * @returns Martin Ratio
  * @throws If input is not an array or matrix
  *
- * @example
+ * @example Martin ratio for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Martin ratio for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(martinratio(x, 0, 12), 44.42545597931942);
  *
- * // Example 2: Martin ratio for multiple assets
+ * ```
+ *
+ * @example Martin ratio for multiple assets
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(martinratio(x, 0, 12), 44.42545597931942);
  * assertEquals(martinratio(y, 0, 12), 2.438364078885411);
  *
- * // Example 3: Martin ratio with geometric mode
+ * ```
+ *
+ * @example Martin ratio with geometric mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(martinratio(x, 0.02, 12, "geometric"), 40.3700870722293);
  * ```
  */

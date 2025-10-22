@@ -11,23 +11,42 @@ import flatten from "./flatten.ts";
  * @returns An array of indices where the values are `true`.
  * @throws If no arguments are provided or if the input is not an array or matrix.
  *
- * @example
+ * @example Find indices of true elements in a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Find indices of true elements in a 1D array
  * find([0.3, -0.4, 0.5, 0.9].map(a => a > 0)); // [0, 2, 3]
  *
- * // Example 2: Find indices of true elements in a 2D matrix
+ * ```
+ *
+ * @example Find indices of true elements in a 2D matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * find([[true, true], [false, true]]); // [0, 1, 3]
  *
- * // Example 3: Empty input
+ * ```
+ *
+ * @example Empty input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * find([]); // []
  *
- * // Example 4: No true elements
+ * ```
+ *
+ * @example No true elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * find([false, false, false]); // []
  *
- * // Example 5: All true elements
+ * ```
+ *
+ * @example All true elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * find([true, true, true]); // [0, 1, 2]
  * ```
  */

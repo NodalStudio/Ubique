@@ -6,19 +6,29 @@
  * @param x The element to check.
  * @returns Returns `true` if `x` is `undefined`, otherwise `false`.
  *
- * @example
+ * @example Input is undefined
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Input is undefined
  * assertEquals(isundefined(undefined), true);
  *
- * // Example 2: Input is defined (null)
+ * ```
+ *
+ * @example Input is defined (null)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isundefined(null), false);
  *
- * // Example 3: Input is defined (string)
+ * ```
+ *
+ * @example Input is defined (string)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isundefined('test'), false);
- * ``` */
+ * ```
+ */
 export default function isundefined(x: unknown): x is undefined {
   return x === undefined;
 }

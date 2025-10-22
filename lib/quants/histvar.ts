@@ -13,18 +13,29 @@ import { isnumber, quantile, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return The calculated Historical Value-At-Risk
  *
- * @example
+ * @example Daily VaR at 95% confidence level
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Daily VaR at 95% confidence level
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(histvar(x, 0.95), 0.013999999999999999);
  *
- * // Example 2: VaR with custom amount
+ * ```
+ *
+ * @example VaR with custom amount
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(histvar(x, 0.99, 100000), 1400);
  *
- * // Example 3: VaR with different confidence level
+ * ```
+ *
+ * @example VaR with different confidence level
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(histvar([0.1, -0.2, 0.05, -0.1], 0.75), 0.15);
  * ```
  */

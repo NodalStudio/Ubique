@@ -27,21 +27,31 @@ import {
  * @returns The computed Adjusted Sharpe Ratio
  * @throws If the input is invalid
  *
- * @example
+ * @example Adjusted Sharpe ratio for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Adjusted Sharpe ratio for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(adjsharpe(x), 0.8309256847278014);
  *
- * // Example 2: Adjusted Sharpe ratio with risk-free rate
+ * ```
+ *
+ * @example Adjusted Sharpe ratio with risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(adjsharpe([0.05, 0.03, 0.08, -0.02], 0.02), 0.3510454044056545);
  *
- * // Example 3: Adjusted Sharpe ratio for matrix (row-wise)
+ * ```
+ *
+ * @example Adjusted Sharpe ratio for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
  * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.84232950922034]);
- * ``` */
+ * ```
+ */
 export default function adjsharpe(
   x: array,
   frisk?: number,

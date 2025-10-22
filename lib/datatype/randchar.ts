@@ -7,24 +7,34 @@
  * @param strset The character set to use for generating the random string.
  * @returns A randomly generated string of length `n`.
  *
- * @example
+ * @example Generate a random string of 12 characters from a custom set
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Generate a random string of 12 characters from a custom set
  * const result1 = randchar(12, 'ABCD!-|/%&$1234567890');
  * assertEquals(result1.length, 12);
  * assertEquals(result1.split('').every(char => 'ABCD!-|/%&$1234567890'.includes(char)), true);
  *
- * // Example 2: Generate a random string of 16 characters from a different custom set
+ * ```
+ *
+ * @example Generate a random string of 16 characters from a different custom set
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const result2 = randchar(16, 'ABCDEFGHILMNOPQRSTUVZ-1234567890');
  * assertEquals(result2.length, 16);
  * assertEquals(result2.split('').every(char => 'ABCDEFGHILMNOPQRSTUVZ-1234567890'.includes(char)), true);
  *
- * // Example 3: Generate a random string of 8 characters using the default set
+ * ```
+ *
+ * @example Generate a random string of 8 characters using the default set
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const result3 = randchar(8);
  * assertEquals(result3.length, 8);
- * ``` */
+ * ```
+ */
 export default function randchar(
   n = 6,
   strset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",

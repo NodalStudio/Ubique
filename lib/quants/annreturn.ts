@@ -14,18 +14,29 @@ import { isarray, ismatrix, mean, prod, vectorfun } from "../../index.ts";
  * @returns The computed annualized return
  * @throws If the input is invalid or an unknown mode is specified
  *
- * @example
+ * @example Annualized return for a single asset (geometric)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Annualized return for a single asset (geometric)
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annreturn(x, 12), 0.2338146820656939);
  *
- * // Example 2: Annualized return with simple (arithmetic) mode
+ * ```
+ *
+ * @example Annualized return with simple (arithmetic) mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(annreturn(x, 12, 'simple'), 0.2148);
  *
- * // Example 3: Annualized return for multiple assets (matrix)
+ * ```
+ *
+ * @example Annualized return for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annreturn([x1, x2], 12), [0.12321338265292425, 0.3553067415252329]);

@@ -12,17 +12,26 @@ import { isnumber, max, min, vectorfun } from "../../index.ts";
  * @returns Range values (max - min)
  * @throws When input is invalid
  *
- * @example
+ * @example Simple range
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple range
  * assertEquals(range([1, 5, 3]), 4);
  *
- * // Example 2: Range with negative values
+ * ```
+ *
+ * @example Range with negative values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(range([-2, 0, 3]), 5);
  *
- * // Example 3: Matrix range along rows (default dim=0)
+ * ```
+ *
+ * @example Matrix range along rows (default dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(range([[1, 4], [2, 8]]), [3, 6]);
  * ```
  */

@@ -10,32 +10,62 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns Returns `true` if `x` is a column vector, otherwise `false`.
  * @throws If the input is not a valid matrix or if no argument is provided.
  *
- * @example
+ * @example Valid column vector
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid column vector
  * assertEquals(iscolumn([[2], [2]]), true);
  *
- * // Example 2: Row vector (not a column vector)
+ * ```
+ *
+ * @example Row vector (not a column vector)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(iscolumn([[2, 2]]), false);
  *
- * // Example 3: Column vector with multiple rows
+ * ```
+ *
+ * @example Column vector with multiple rows
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(iscolumn([[1], [2], [3]]), true);
  *
- * // Example 4: Square matrix (not a column vector)
+ * ```
+ *
+ * @example Square matrix (not a column vector)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(iscolumn([[1, 2], [3, 4]]), false);
  *
- * // Example 5: Single-element column vector
+ * ```
+ *
+ * @example Single-element column vector
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(iscolumn([[1]]), true);
  *
- * // Example 6: Invalid input (not a matrix)
+ * ```
+ *
+ * @example Invalid input (not a matrix)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => iscolumn(5), "Input must be a non-empty matrix");
  *
- * // Example 7: Empty matrix (should throw an error)
+ * ```
+ *
+ * @example Empty matrix (should throw an error)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => iscolumn([]), "Input must be a non-empty matrix");
-
- * ```*/
+ *
+ * ```
+ */
 export default function iscolumn(x: unknown): x is matrix {
   if (!x) {
     throw new Error("Not enough input arguments");

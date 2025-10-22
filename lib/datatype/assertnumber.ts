@@ -8,17 +8,26 @@ import isnumber from "./isnumber.ts";
  * @param x The value to check
  * @throws If x is not a number
  *
- * @example
+ * @example Valid number
  * ```ts
  * import { assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid number
  * assertnumber(5); // No error
  *
- * // Example 2: Invalid input throws error
+ * ```
+ *
+ * @example Invalid input throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertnumber("5"), TypeError, "Expected number, got string");
  *
- * // Example 3: NaN is a valid number
+ * ```
+ *
+ * @example NaN is a valid number
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertnumber(NaN); // No error
  * ```
  */

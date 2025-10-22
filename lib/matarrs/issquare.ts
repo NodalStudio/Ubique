@@ -8,29 +8,54 @@
 
  * @throws Throws an error if no arguments are provided or if the input is not a valid matrix.
  *
- * @example
+ * @example Valid square matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid square matrix
  * assertEquals(issquare([[9, 5], [6, 1]]), true);
  *
- * // Example 2: Non-square matrix (more rows than columns)
+ * ```
+ *
+ * @example Non-square matrix (more rows than columns)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(issquare([[9, 5], [6, 1], [7, 8]]), false);
  *
- * // Example 3: Non-square matrix (more columns than rows)
+ * ```
+ *
+ * @example Non-square matrix (more columns than rows)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(issquare([[9, 5, 3], [6, 1, 7]]), false);
  *
- * // Example 4: Single element (1x1 matrix)
+ * ```
+ *
+ * @example Single element (1x1 matrix)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(issquare([[9]]), true);
  *
- * // Example 5: Empty matrix (should throw an error)
+ * ```
+ *
+ * @example Empty matrix (should throw an error)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { issquare([]) }, Error);
  *
- * // Example 6: Invalid input (not a matrix)
+ * ```
+ *
+ * @example Invalid input (not a matrix)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { issquare(123) }, Error);
-
- * ```*/
+ *
+ * ```
+ */
 export default function issquare(x: unknown): boolean {
   if (!x) {
     throw new Error("Not enough input arguments");

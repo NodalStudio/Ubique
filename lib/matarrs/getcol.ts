@@ -11,20 +11,30 @@ import type { array, matrix } from "../types.d.ts";
 
  * @throws Throws an error if the input is not a matrix or if the column index is out of bounds.
  *
- * @example
+ * @example Get the first column
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Get the first column
  * assertEquals(getcol([[5, 6, 5], [7, 8, -1]], 0), [5, 7]);
  *
- * // Example 2: Get the third column
+ * ```
+ *
+ * @example Get the third column
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(getcol([[5, 6, 5], [7, 8, -1]], 2), [5, -1]);
  *
- * // Example 3: Invalid column index (out of bounds)
+ * ```
+ *
+ * @example Invalid column index (out of bounds)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { getcol([[5, 6, 5], [7, 8, -1]], 3); }, Error, 'Column index must be an integer between 0 and N - 1 columns');
-
- * ```*/
+ *
+ * ```
+ */
 export default function getcol(x: matrix, n: number): array {
   if (!x || n === undefined) {
     throw new Error("Not enough input arguments");

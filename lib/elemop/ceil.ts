@@ -12,20 +12,34 @@ import { arrayfun } from "../../index.ts";
  * @returns The rounded value(s)
  * @throws If no input is provided
  *
- * @example
+ * @example Round a number (Math.PI) to 12 decimal places
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Round a number (Math.PI) to 12 decimal places
  * assertEquals(ceil(Math.PI, 12), 3.141592653590);
  *
- * // Example 2: Round a number (3.78) toward positive infinity
+ * ```
+ *
+ * @example Round a number (3.78) toward positive infinity
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ceil(3.78), 4);
  *
- * // Example 3: Round an array of numbers
+ * ```
+ *
+ * @example Round an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ceil([4.51, -1.4]), [5, -1]);
  *
- * // Example 4: Round a matrix of numbers to 2 decimal places
+ * ```
+ *
+ * @example Round a matrix of numbers to 2 decimal places
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ceil([[4.5134, -1.4345], [3.7809, 0.0134]], 2), [[4.52, -1.43], [3.79, 0.02]]);
  * ```
  */

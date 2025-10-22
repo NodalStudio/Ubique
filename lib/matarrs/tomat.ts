@@ -16,23 +16,38 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns A matrix representation of the input.
  * @throws If the input is invalid.
  *
- * @example
+ * @example Convert a number to a matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Convert a number to a matrix
  * assertEquals(tomat(5), [[5]]);
  *
- * // Example 2: Convert a boolean to a matrix
+ * ```
+ *
+ * @example Convert a boolean to a matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(tomat(true), [[true]]);
  *
- * // Example 3: Convert a row vector to a matrix
+ * ```
+ *
+ * @example Convert a row vector to a matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(tomat([5, 6, 3]), [[5, 6, 3]]);
  *
- * // Example 4: Convert an already formatted matrix
+ * ```
+ *
+ * @example Convert an already formatted matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(tomat([[1, 2], [3, 4]]), [[1, 2], [3, 4]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function tomat(
   x: number | boolean | array | matrix,
 ): matrix<number | boolean> | matrix {

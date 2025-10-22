@@ -14,15 +14,21 @@ import { annreturn, cdrawdown, isnumber, max, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Sterling Ratio
  *
- * @example
+ * @example Single asset sterling ratio
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single asset sterling ratio
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
  *
- * // Example 2: Multiple assets sterling ratios
+ * ```
+ *
+ * @example Multiple assets sterling ratios
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
  * assertEquals(sterlingratio(y,0,12), 1.3190010333058182);

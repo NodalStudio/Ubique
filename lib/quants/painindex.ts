@@ -12,15 +12,21 @@ import { drawdown, isnumber, sum, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Pain Index
  *
- * @example
+ * @example Single array of returns
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single array of returns
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * assertEquals(painindex(x), 0.0023000000000000034);
  *
- * // Example 2: Multiple arrays
+ * ```
+ *
+ * @example Multiple arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painindex(x), 0.0023000000000000034);
  * assertEquals(painindex(y), 0.042955093457969766);

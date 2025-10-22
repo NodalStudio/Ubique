@@ -21,17 +21,26 @@ import {
  * @returns Percentile values
  * @throws When percentile is outside valid range [0,100]
  *
- * @example
+ * @example 50th percentile (median)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: 50th percentile (median)
  * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
  *
- * // Example 2: 25th percentile
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
  *
- * // Example 3: 75th percentile
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
  * ```
  */

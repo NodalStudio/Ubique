@@ -10,23 +10,38 @@ import { isnumber } from "../../index.ts";
  *
  * @throws If the number of input arguments is not 1.
  *
- * @example
+ * @example An integer
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: An integer
  * assertEquals(isinteger(5), true);
  *
- * // Example 2: A non-integer number
+ * ```
+ *
+ * @example A non-integer number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isinteger(5.5), false);
  *
- * // Example 3: Not a number (string)
+ * ```
+ *
+ * @example Not a number (string)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isinteger("5"), false);
  *
- * // Example 4: Not a number (null)
+ * ```
+ *
+ * @example Not a number (null)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isinteger(null), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function isinteger(x: unknown): boolean {
   return isnumber(x) && Math.round(x) === x;
 }

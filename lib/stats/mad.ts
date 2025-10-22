@@ -12,17 +12,26 @@ import { arrayfun, isnumber, mean, minus, vectorfun } from "../../index.ts";
  * @returns Mean absolute deviation values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple MAD calculation
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple MAD calculation
  * assertEquals(mad([1, 2, 3, 4, 5]), 1.2);
  *
- * // Example 2: MAD with spread data
+ * ```
+ *
+ * @example MAD with spread data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mad([1, 3, 5, 7, 9]), 2.4);
  *
- * // Example 3: Matrix MAD
+ * ```
+ *
+ * @example Matrix MAD
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mad([[1, 2], [3, 4]]), [0.5, 0.5]);
  * ```
  */

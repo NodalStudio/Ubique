@@ -10,25 +10,44 @@ import type { matrix } from "../types.d.ts";
  * @returns A matrix or array filled with ones.
  * @throws If no arguments are provided.
  *
- * @example
+ * @example Create a 0x0 matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Create a 0x0 matrix
  * assertEquals(ones(0), []);
  *
- * // Example 2: Create a 1x1 matrix
+ * ```
+ *
+ * @example Create a 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ones(1), [[1]]);
  *
- * // Example 3: Create a 2x2 matrix
+ * ```
+ *
+ * @example Create a 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ones(2), [[1, 1], [1, 1]]);
  *
- * // Example 4: Create a 2x1 matrix
+ * ```
+ *
+ * @example Create a 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ones(2, 1), [[1], [1]]);
  *
- * // Example 5: Create a 2x3 matrix
+ * ```
+ *
+ * @example Create a 2x3 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
-
+ *
  * ```
  */
 export default function ones(n: number): matrix;

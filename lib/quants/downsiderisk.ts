@@ -12,18 +12,27 @@ import { find, isnumber, std, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Downside Risk
  *
- * @example
+ * @example Downside risk with default MAR
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Downside risk with default MAR
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(downsiderisk(x), 0.0035355339059327385);
  *
- * // Example 2: Downside risk with custom MAR
+ * ```
+ *
+ * @example Downside risk with custom MAR
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
  *
- * // Example 3: Downside risk with higher MAR
+ * ```
+ *
+ * @example Downside risk with higher MAR
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
  * ```
  */

@@ -13,20 +13,34 @@ import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
- * @example
+ * @example Multiply two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Multiply two numbers
  * assertEquals(mtimes(2, 3), 6);
  *
- * // Example 2: Multiply matrix by scalar
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
  *
- * // Example 3: Multiply two matrices
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
  *
- * // Example 4: Multiply matrix by column vector (array)
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
  * ```
  */
