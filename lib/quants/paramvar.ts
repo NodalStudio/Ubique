@@ -52,6 +52,42 @@ export default function paramvar(
   amount?: number,
   period?: number,
 ): number;
+/**
+ * Parametric Value-At-Risk.
+ *
+ * Parametric Value-At-Risk assuming returns are normally distributed.
+ * It can work with numbers, arrays, row vectors, and column vectors.
+ *
+ * @param mu mean value (def: 0)
+ * @param sigma standard deviation (def: 1)
+ * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param amount portfolio/asset amount (def: 1)
+ * @param period time horizon (def: 1)
+ * @return Parametric Value-At-Risk
+ *
+ * @example VaR with default parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ *
+ * ```
+ *
+ * @example VaR with arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ *
+ * ```
+ *
+ * @example Parametric VaR for a single asset
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * ```
+ */
 export default function paramvar(
   mu: array,
   sigma: array,
@@ -59,6 +95,42 @@ export default function paramvar(
   amount?: number,
   period?: number,
 ): array;
+/**
+ * Parametric Value-At-Risk.
+ *
+ * Parametric Value-At-Risk assuming returns are normally distributed.
+ * It can work with numbers, arrays, row vectors, and column vectors.
+ *
+ * @param mu mean value (def: 0)
+ * @param sigma standard deviation (def: 1)
+ * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param amount portfolio/asset amount (def: 1)
+ * @param period time horizon (def: 1)
+ * @return Parametric Value-At-Risk
+ *
+ * @example VaR with default parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ *
+ * ```
+ *
+ * @example VaR with arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ *
+ * ```
+ *
+ * @example Parametric VaR for a single asset
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * ```
+ */
 export default function paramvar(
   mu: matrix,
   sigma: matrix,
@@ -66,6 +138,42 @@ export default function paramvar(
   amount?: number,
   period?: number,
 ): array | matrix;
+/**
+ * Parametric Value-At-Risk.
+ *
+ * Parametric Value-At-Risk assuming returns are normally distributed.
+ * It can work with numbers, arrays, row vectors, and column vectors.
+ *
+ * @param mu mean value (def: 0)
+ * @param sigma standard deviation (def: 1)
+ * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param amount portfolio/asset amount (def: 1)
+ * @param period time horizon (def: 1)
+ * @return Parametric Value-At-Risk
+ *
+ * @example VaR with default parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ *
+ * ```
+ *
+ * @example VaR with arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ *
+ * ```
+ *
+ * @example Parametric VaR for a single asset
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * ```
+ */
 export default function paramvar(
   mu: number | array | matrix,
   sigma: number | array | matrix,

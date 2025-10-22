@@ -37,9 +37,145 @@ import { meanwasm } from "../../rs_lib/pkg/rs_lib.js";
  * ```
  */
 export default function mean(x: number): number;
+/**
+ * Average value of array or matrix.
+ *
+ * Computes the average (arithmetic mean) of values in an array or matrix.
+ * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
+ *
+ * @param x Input array, matrix, or number
+ * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
+ * @returns Mean values
+ * @throws When input is invalid
+ *
+ * @example Simple array mean
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Array with decimals
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
+ *
+ * ```
+ *
+ * @example Matrix mean along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
+ * ```
+ */
 export default function mean(x: array, dim?: 0 | 1): number;
+/**
+ * Average value of array or matrix.
+ *
+ * Computes the average (arithmetic mean) of values in an array or matrix.
+ * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
+ *
+ * @param x Input array, matrix, or number
+ * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
+ * @returns Mean values
+ * @throws When input is invalid
+ *
+ * @example Simple array mean
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Array with decimals
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
+ *
+ * ```
+ *
+ * @example Matrix mean along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
+ * ```
+ */
 export default function mean(x: matrix, dim?: 0 | 1): array;
+/**
+ * Average value of array or matrix.
+ *
+ * Computes the average (arithmetic mean) of values in an array or matrix.
+ * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
+ *
+ * @param x Input array, matrix, or number
+ * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
+ * @returns Mean values
+ * @throws When input is invalid
+ *
+ * @example Simple array mean
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Array with decimals
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
+ *
+ * ```
+ *
+ * @example Matrix mean along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
+ * ```
+ */
 export default function mean(x: array | matrix, dim?: 0 | 1): number | array;
+/**
+ * Average value of array or matrix.
+ *
+ * Computes the average (arithmetic mean) of values in an array or matrix.
+ * For arrays, returns a single mean value. For matrices, computes mean along specified dimension.
+ *
+ * @param x Input array, matrix, or number
+ * @param dim Dimension along which to calculate (0: rows, 1: columns). Default is 0
+ * @returns Mean values
+ * @throws When input is invalid
+ *
+ * @example Simple array mean
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Array with decimals
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([1.5, 2.5, 3.5]), 2.5);
+ *
+ * ```
+ *
+ * @example Matrix mean along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mean([[1, 2], [3, 4]]), [1.5, 3.5]);
+ * ```
+ */
 export default function mean(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

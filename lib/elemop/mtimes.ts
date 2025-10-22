@@ -45,14 +45,383 @@ import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
  * ```
  */
 export default function mtimes(x: number, y: number): number;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: number, y: array): array;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: array, y: number): array;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: array, y: array): number;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: number, y: matrix): matrix;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: matrix, y: number): matrix;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: matrix, y: array): array;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: array, y: matrix): array;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(x: matrix, y: matrix): matrix;
+/**
+ * Matrix multiplication.
+ *
+ * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ *
+ * @param x The first operand, can be a number, array (treated as column vector), or matrix
+ * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @returns The result of matrix multiplication of x and y
+ * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
+ *
+ * @example Multiply two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes(2, 3), 6);
+ *
+ * ```
+ *
+ * @example Multiply matrix by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]]);
+ *
+ * ```
+ *
+ * @example Multiply two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]]);
+ *
+ * ```
+ *
+ * @example Multiply matrix by column vector (array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mtimes([[1, 2], [3, 4]], [5, 6]), [17, 39]);
+ * ```
+ */
 export default function mtimes(
   x: numarraymatrix,
   y: numarraymatrix,

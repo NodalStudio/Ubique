@@ -47,26 +47,341 @@ import {
  * ```
  */
 export default function varc(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(x: array, flag: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(x: matrix, flag: 0 | 1, dim?: 0 | 1): matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(x: array, flag: 0 | 1, dim: 0 | 1): number;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(x: matrix, flag: 0 | 1, dim: 0 | 1): matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(
   x: array | matrix,
   flag?: 0 | 1,
   dim?: 0 | 1,
 ): number | matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(
   x: array | matrix,
   flag: 0 | 1,
   dim?: 0 | 1,
 ): number | matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(
   x: array | matrix,
   flag: 0 | 1,
   dim: 0 | 1,
 ): number | matrix;
+/**
+ * Computes the variance.
+ *
+ * Computes the variance (average squared deviation from mean) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed variance values
+ * @throws When input is invalid
+ *
+ * @example Sample variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population variance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Matrix variance along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(varc([[1, 2], [3, 4]]), [[0.5, 0.5]]);
+ * ```
+ */
 export default function varc(
   x: array | matrix,
   flag?: 0 | 1,

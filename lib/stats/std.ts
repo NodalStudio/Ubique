@@ -37,11 +37,221 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  * ```
  */
 export default function std(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(x: matrix, flag?: 0 | 1, dim?: 0 | 1): matrix;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(x: array, flag: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(x: matrix, flag: 0 | 1, dim?: 0 | 1): matrix;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(x: array, flag: 0 | 1, dim: 0 | 1): number;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(x: matrix, flag: 0 | 1, dim: 0 | 1): matrix;
+/**
+ * Computes the standard deviation.
+ *
+ * Computes the standard deviation (square root of variance) for arrays or matrices.
+ * Supports both population (N) and sample (N-1) normalizations.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization type (0: population, 1: sample). Default is 1
+ * @param dim Dimension to operate on (0: rows, 1: columns). Default is 0
+ * @returns Computed standard deviation values
+ * @throws When input is invalid
+ *
+ * @example Sample standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
+ *
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
+ *
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
+ * ```
+ */
 export default function std(
   x: array | matrix,
   flag?: 0 | 1,

@@ -44,12 +44,299 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function power(x: number, y: number): number;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: number, y: array): array;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: array, y: number): array;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: array, y: array): array;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: number, y: matrix): matrix;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: matrix, y: number): matrix;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(x: matrix, y: matrix): matrix;
+/**
+ * Element-wise power X .^ Y.
+ *
+ * Raises each element of X to the corresponding power in Y. For scalar inputs, performs standard exponentiation.
+ *
+ * @param x The base, can be a number, array, or matrix
+ * @param y The exponent, can be a number, array, or matrix
+ * @returns The result of element-wise exponentiation x .^ y
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Power of two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power(2, 3), 8);
+ *
+ * ```
+ *
+ * @example Element-wise power of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], [2, 2, 2]), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Array to scalar power
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([2, 3, 4], 2), [4, 9, 16]);
+ *
+ * ```
+ *
+ * @example Element-wise power of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(power([[2, 3], [4, 5]], [[2, 2], [2, 2]]), [[4, 9], [16, 25]]);
+ * ```
+ */
 export default function power(
   x: numarraymatrix,
   y: numarraymatrix,

@@ -27,11 +27,53 @@ export default function inforatio(
   y: array,
   dim?: 0 | 1,
 ): number;
+/**
+ * Information Ratio.
+ *
+ * Measures portfolio returns in excess of a benchmark relative to the
+ * volatility of those excess returns. The information ratio measures the skill of
+ * an asset manager to generate excess returns relative to a benchmark.
+ *
+ * @param x asset/portfolio returns
+ * @param y benchmark returns
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return Information Ratio
+ *
+ * @example Information ratio between a single asset and benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ * assertEquals(inforatio(x,y), 0.09369148584852913);
+ * ```
+ */
 export default function inforatio(
   x: matrix,
   y: array,
   dim?: 0 | 1,
 ): array | matrix;
+/**
+ * Information Ratio.
+ *
+ * Measures portfolio returns in excess of a benchmark relative to the
+ * volatility of those excess returns. The information ratio measures the skill of
+ * an asset manager to generate excess returns relative to a benchmark.
+ *
+ * @param x asset/portfolio returns
+ * @param y benchmark returns
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return Information Ratio
+ *
+ * @example Information ratio between a single asset and benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ * assertEquals(inforatio(x,y), 0.09369148584852913);
+ * ```
+ */
 export default function inforatio(
   x: numarraymatrix,
   y: array,

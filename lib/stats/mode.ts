@@ -36,7 +36,75 @@ import { isnumber, sort, vectorfun } from "../../index.ts";
  * ```
  */
 export default function mode(x: array, dim?: 0 | 1): number;
+/**
+ * Most frequent value in an array.
+ *
+ * Finds the most frequently occurring value in an array or matrix.
+ * In case of ties, returns the first value that achieves the maximum frequency.
+ *
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute mode. Default is 0
+ * @returns Most frequent values
+ * @throws When input is invalid
+ *
+ * @example Simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([1, 2, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Mode with multiple values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([1, 1, 2, 2, 2]), 2);
+ *
+ * ```
+ *
+ * @example Matrix mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([[1, 1, 2], [3, 3, 4]]), [1, 3]);
+ * ```
+ */
 export default function mode(x: matrix, dim?: 0 | 1): array;
+/**
+ * Most frequent value in an array.
+ *
+ * Finds the most frequently occurring value in an array or matrix.
+ * In case of ties, returns the first value that achieves the maximum frequency.
+ *
+ * @param x Input array or matrix
+ * @param dim Dimension along which to compute mode. Default is 0
+ * @returns Most frequent values
+ * @throws When input is invalid
+ *
+ * @example Simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([1, 2, 2, 3]), 2);
+ *
+ * ```
+ *
+ * @example Mode with multiple values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([1, 1, 2, 2, 2]), 2);
+ *
+ * ```
+ *
+ * @example Matrix mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(mode([[1, 1, 2], [3, 3, 4]]), [1, 3]);
+ * ```
+ */
 export default function mode(
   x: numarraymatrix,
   dim: 0 | 1 = 0,

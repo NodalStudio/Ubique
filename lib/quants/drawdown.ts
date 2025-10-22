@@ -74,11 +74,119 @@ export default function drawdown(
   mode?: string,
   dim?: 0 | 1,
 ): DrawdownResult;
+/**
+ * Drawdown.
+ *
+ * Calculates drawdown from peak, which represents any continuous losing return period.
+ * Returns drawdown array, recovery index, maximum drawdown, and maximum drawdown recovery period.
+ *
+ * Returns an object with:
+ * - dd (drawdown array)
+ * - ddrecov (drawdown recovery index)
+ * - maxdd (max drawdown)
+ * - maxddrecov (max drawdown recovery period): [start period, end period]
+ *
+ * @param x Asset/portfolio returns
+ * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Drawdown information object
+ * @throws If input must be an array or matrix
+ *
+ * @example Calculate drawdown metrics for a return series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const result = drawdown(x);
+ * assertEquals(result.dd, [0, 0, 0, 0.00900000000000004, 0, 0, 0, 0, 0.013999999999999995, 0]);
+ * assertEquals(result.ddrecov, [0, 0, 0, 4, 0, 0, 0, 0, 9, 0]);
+ * assertEquals(result.maxdd, 0.013999999999999995);
+ * assertEquals(result.maxddrecov, [8, 9]);
+ *
+ * ```
+ *
+ * @example Drawdown with geometric mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(drawdown(x, "geometric").maxdd, 0.014098924379501637);
+ *
+ * ```
+ *
+ * @example Drawdown for multiple assets
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals((drawdown([x, y]) as any).length, 2);
+ * ```
+ */
 export default function drawdown(
   x: matrix,
   mode?: string,
   dim?: 0 | 1,
 ): DrawdownResult[];
+/**
+ * Drawdown.
+ *
+ * Calculates drawdown from peak, which represents any continuous losing return period.
+ * Returns drawdown array, recovery index, maximum drawdown, and maximum drawdown recovery period.
+ *
+ * Returns an object with:
+ * - dd (drawdown array)
+ * - ddrecov (drawdown recovery index)
+ * - maxdd (max drawdown)
+ * - maxddrecov (max drawdown recovery period): [start period, end period]
+ *
+ * @param x Asset/portfolio returns
+ * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Drawdown information object
+ * @throws If input must be an array or matrix
+ *
+ * @example Calculate drawdown metrics for a return series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const result = drawdown(x);
+ * assertEquals(result.dd, [0, 0, 0, 0.00900000000000004, 0, 0, 0, 0, 0.013999999999999995, 0]);
+ * assertEquals(result.ddrecov, [0, 0, 0, 4, 0, 0, 0, 0, 9, 0]);
+ * assertEquals(result.maxdd, 0.013999999999999995);
+ * assertEquals(result.maxddrecov, [8, 9]);
+ *
+ * ```
+ *
+ * @example Drawdown with geometric mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(drawdown(x, "geometric").maxdd, 0.014098924379501637);
+ *
+ * ```
+ *
+ * @example Drawdown for multiple assets
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import { drawdown } from "../../index.ts";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals((drawdown([x, y]) as any).length, 2);
+ * ```
+ */
 export default function drawdown(
   x: numarraymatrix,
   mode: string = "return",

@@ -48,6 +48,46 @@ export default function activereturn(
   mode?: string,
   dim?: 0 | 1,
 ): number;
+/**
+ * Computes the active return.
+ *
+ * Calculates the active return, which is the difference between the annualized return of an asset/portfolio and the annualized return of a benchmark.
+ *
+ * @param x Asset/portfolio returns
+ * @param y Benchmark returns
+ * @param t Frequency of data points in a year (1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily, defaults to 252)
+ * @param mode The mode of return calculation: 'geometric' or 'simple' (defaults to 'geometric')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
+ * @returns The computed active return
+ * @throws If inputs are not valid arrays or matrices
+ *
+ * @example Compute active return for a single portfolio and benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals(activereturn(x, y, 12), 0.0887245684020539);
+ *
+ * ```
+ *
+ * @example Compute active return with simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(activereturn([0.05, 0.03, 0.08, -0.02], [0.04, 0.02, 0.06, -0.01], 12, "simple"), 0.09000000000000002);
+ *
+ * ```
+ *
+ * @example Compute active return for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
+ * const benchmark = [0.005, 0.015, 0.025];
+ * assertEquals(activereturn(matrix, benchmark, 12), [0.0002900781816017606, -0.07097748818797567, 0.500494477969688]);
+ * ```
+ */
 export default function activereturn(
   x: matrix,
   y: array,
@@ -55,6 +95,46 @@ export default function activereturn(
   mode?: string,
   dim?: 0 | 1,
 ): array | matrix;
+/**
+ * Computes the active return.
+ *
+ * Calculates the active return, which is the difference between the annualized return of an asset/portfolio and the annualized return of a benchmark.
+ *
+ * @param x Asset/portfolio returns
+ * @param y Benchmark returns
+ * @param t Frequency of data points in a year (1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily, defaults to 252)
+ * @param mode The mode of return calculation: 'geometric' or 'simple' (defaults to 'geometric')
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise, defaults to 0)
+ * @returns The computed active return
+ * @throws If inputs are not valid arrays or matrices
+ *
+ * @example Compute active return for a single portfolio and benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals(activereturn(x, y, 12), 0.0887245684020539);
+ *
+ * ```
+ *
+ * @example Compute active return with simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(activereturn([0.05, 0.03, 0.08, -0.02], [0.04, 0.02, 0.06, -0.01], 12, "simple"), 0.09000000000000002);
+ *
+ * ```
+ *
+ * @example Compute active return for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
+ * const benchmark = [0.005, 0.015, 0.025];
+ * assertEquals(activereturn(matrix, benchmark, 12), [0.0002900781816017606, -0.07097748818797567, 0.500494477969688]);
+ * ```
+ */
 export default function activereturn(
   x: numarraymatrix,
   y: array,

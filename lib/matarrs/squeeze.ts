@@ -2,6 +2,8 @@ import isnumber from "../datatype/isnumber.ts";
 import isstring from "../datatype/isstring.ts";
 import size from "./size.ts";
 
+type NestedArray<T> = T | NestedArray<T>[];
+
 /**
  * Removes singleton dimensions from arrays or matrices.
  *
@@ -53,8 +55,6 @@ import size from "./size.ts";
  * assertEquals(squeeze("hello"), "hello");
  * ```
  */
-type NestedArray<T> = T | NestedArray<T>[];
-
 export default function squeeze<T>(x: NestedArray<T>): NestedArray<T> {
   if (isnumber(x) || isstring(x)) {
     return x as NestedArray<T>;

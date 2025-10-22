@@ -40,7 +40,83 @@ import { isarray, isnumber, log, size, zeros } from "../../index.ts";
  * ```
  */
 export default function tick2ret(x: array, mode?: string, dim?: 0 | 1): array;
+/**
+ * Convert price series to returns.
+ *
+ * Convert a price series to continuous or discrete returns
+ *
+ * @param x Array of values (prices)
+ * @param mode Calculation mode: 'simple' (default) or 'continuous'
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 1)
+ * @returns Returns array or matrix
+ * @throws If input is not an array or matrix
+ *
+ * @example Simple returns from price series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [1, 3, 2, 5];
+ * assertEquals(tick2ret(x), [2, -0.33333333333333337, 1.5]);
+ *
+ * ```
+ *
+ * @example Continuous (log) returns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [1, 3, 2, 5];
+ *
+ * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
+ *
+ * ```
+ *
+ * @example Continuous returns for different price series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const y = [0.5, 1.5, 2.5, 3.5];
+ * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
+ * ```
+ */
 export default function tick2ret(x: matrix, mode?: string, dim?: 0 | 1): matrix;
+/**
+ * Convert price series to returns.
+ *
+ * Convert a price series to continuous or discrete returns
+ *
+ * @param x Array of values (prices)
+ * @param mode Calculation mode: 'simple' (default) or 'continuous'
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 1)
+ * @returns Returns array or matrix
+ * @throws If input is not an array or matrix
+ *
+ * @example Simple returns from price series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [1, 3, 2, 5];
+ * assertEquals(tick2ret(x), [2, -0.33333333333333337, 1.5]);
+ *
+ * ```
+ *
+ * @example Continuous (log) returns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [1, 3, 2, 5];
+ *
+ * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
+ *
+ * ```
+ *
+ * @example Continuous returns for different price series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const y = [0.5, 1.5, 2.5, 3.5];
+ * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
+ * ```
+ */
 export default function tick2ret(
   x: array | matrix,
   mode: string = "simple",

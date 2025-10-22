@@ -60,6 +60,49 @@ export default function burkeratio(
   mode?: "simple" | "modified",
   dim?: 0 | 1,
 ): number;
+/**
+ * Computes the Burke Ratio.
+ *
+ * The Burke Ratio is a risk-adjusted performance metric that accounts for drawdowns.
+ * In 'simple' mode, it calculates the excess return over the risk-free rate divided by the square root
+ * of the sum of squared drawdowns. In 'modified' mode, the result is scaled by the square root of the number of data points.
+ *
+ * @param x Asset or portfolio returns
+ * @param frisk Annual risk-free rate
+ * @param t Frequency: 252 (daily), 52 (weekly), 12 (monthly), 4 (quarterly)
+ * @param mode Calculation mode: 'simple' or 'modified'
+ * @param dim Dimension: 0 (row-wise), 1 (column-wise)
+ * @returns The computed Burke Ratio
+ * @throws If an invalid mode is provided or if input arguments are invalid
+ *
+ * @example Burke ratio for a single asset with simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(burkeratio(x, 0, 12), 8.282140961596584);
+ *
+ * ```
+ *
+ * @example Burke ratio with modified mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(burkeratio(x, 0, 12, "modified"), 26.190429341222337);
+ *
+ * ```
+ *
+ * @example Burke ratio for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
+ * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(burkeratio([x1, x2], 0, 12), [9.680557600757295, 17.94570045241343]);
+ * ```
+ */
 export default function burkeratio(
   x: matrix,
   frisk?: number,
@@ -67,6 +110,49 @@ export default function burkeratio(
   mode?: "simple" | "modified",
   dim?: 0 | 1,
 ): array;
+/**
+ * Computes the Burke Ratio.
+ *
+ * The Burke Ratio is a risk-adjusted performance metric that accounts for drawdowns.
+ * In 'simple' mode, it calculates the excess return over the risk-free rate divided by the square root
+ * of the sum of squared drawdowns. In 'modified' mode, the result is scaled by the square root of the number of data points.
+ *
+ * @param x Asset or portfolio returns
+ * @param frisk Annual risk-free rate
+ * @param t Frequency: 252 (daily), 52 (weekly), 12 (monthly), 4 (quarterly)
+ * @param mode Calculation mode: 'simple' or 'modified'
+ * @param dim Dimension: 0 (row-wise), 1 (column-wise)
+ * @returns The computed Burke Ratio
+ * @throws If an invalid mode is provided or if input arguments are invalid
+ *
+ * @example Burke ratio for a single asset with simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(burkeratio(x, 0, 12), 8.282140961596584);
+ *
+ * ```
+ *
+ * @example Burke ratio with modified mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(burkeratio(x, 0, 12, "modified"), 26.190429341222337);
+ *
+ * ```
+ *
+ * @example Burke ratio for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
+ * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(burkeratio([x1, x2], 0, 12), [9.680557600757295, 17.94570045241343]);
+ * ```
+ */
 export default function burkeratio(
   x: numarraymatrix,
   frisk = 0,

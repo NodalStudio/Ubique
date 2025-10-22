@@ -46,6 +46,44 @@ export default function histvar(
   period?: number,
   dim?: 0 | 1,
 ): number;
+/**
+ * Historical Value-At-Risk.
+ *
+ * Univariate historical simulation. Single asset
+ *
+ * @param x array or matrix of values
+ * @param p confidence level in the range [0,1] (def: 0.95)
+ * @param amount amount (def: 1)
+ * @param period time horizon (def: 1)
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return The calculated Historical Value-At-Risk
+ *
+ * @example Daily VaR at 95% confidence level
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(histvar(x, 0.95), 0.013999999999999999);
+ *
+ * ```
+ *
+ * @example VaR with custom amount
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(histvar(x, 0.99, 100000), 1400);
+ *
+ * ```
+ *
+ * @example VaR with different confidence level
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histvar([0.1, -0.2, 0.05, -0.1], 0.75), 0.15);
+ * ```
+ */
 export default function histvar(
   x: matrix,
   p?: number,
@@ -53,6 +91,44 @@ export default function histvar(
   period?: number,
   dim?: 0 | 1,
 ): array | matrix;
+/**
+ * Historical Value-At-Risk.
+ *
+ * Univariate historical simulation. Single asset
+ *
+ * @param x array or matrix of values
+ * @param p confidence level in the range [0,1] (def: 0.95)
+ * @param amount amount (def: 1)
+ * @param period time horizon (def: 1)
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return The calculated Historical Value-At-Risk
+ *
+ * @example Daily VaR at 95% confidence level
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * assertEquals(histvar(x, 0.95), 0.013999999999999999);
+ *
+ * ```
+ *
+ * @example VaR with custom amount
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
+ * assertEquals(histvar(x, 0.99, 100000), 1400);
+ *
+ * ```
+ *
+ * @example VaR with different confidence level
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histvar([0.1, -0.2, 0.05, -0.1], 0.75), 0.15);
+ * ```
+ */
 export default function histvar(
   x: numarraymatrix,
   p: number = 0.95,

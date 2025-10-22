@@ -40,14 +40,104 @@ export default function datestr(
   d: number,
   fmt?: string,
 ): string;
+/**
+ * Convert Unix timestamp to string format.
+ *
+ * Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
+ * Can handle individual numbers, arrays, and matrices of Unix timestamps.
+ *
+ * @example Convert a single Unix timestamp to a date string
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr(1419984000), '2014-12-31');
+ *
+ * ```
+ *
+ * @example Convert an array of Unix timestamps to date strings with custom format
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([1419984000, 1422662400], 'DD-MMM-YY'), ['31-Dec-14', '31-Jan-15']);
+ *
+ * ```
+ *
+ * @example Convert a matrix of Unix timestamps to formatted date strings
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([[1419984000, 1422662400], [1423958400, 1425168000]], 'YY-MM-DD HH:mm:ss'),
+ *   [['14-12-31 00:00:00', '15-01-31 00:00:00'], ['15-02-15 00:00:00', '15-03-01 00:00:00']]);
+ * ```
+ */
 export default function datestr(
   d: array<number>,
   fmt?: string,
 ): array<string>;
+/**
+ * Convert Unix timestamp to string format.
+ *
+ * Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
+ * Can handle individual numbers, arrays, and matrices of Unix timestamps.
+ *
+ * @example Convert a single Unix timestamp to a date string
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr(1419984000), '2014-12-31');
+ *
+ * ```
+ *
+ * @example Convert an array of Unix timestamps to date strings with custom format
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([1419984000, 1422662400], 'DD-MMM-YY'), ['31-Dec-14', '31-Jan-15']);
+ *
+ * ```
+ *
+ * @example Convert a matrix of Unix timestamps to formatted date strings
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([[1419984000, 1422662400], [1423958400, 1425168000]], 'YY-MM-DD HH:mm:ss'),
+ *   [['14-12-31 00:00:00', '15-01-31 00:00:00'], ['15-02-15 00:00:00', '15-03-01 00:00:00']]);
+ * ```
+ */
 export default function datestr(
   d: matrix<number>,
   fmt?: string,
 ): matrix<string>;
+/**
+ * Convert Unix timestamp to string format.
+ *
+ * Converts a Unix timestamp (in seconds) to a formatted date string using `dayjs`.
+ * Can handle individual numbers, arrays, and matrices of Unix timestamps.
+ *
+ * @example Convert a single Unix timestamp to a date string
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr(1419984000), '2014-12-31');
+ *
+ * ```
+ *
+ * @example Convert an array of Unix timestamps to date strings with custom format
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([1419984000, 1422662400], 'DD-MMM-YY'), ['31-Dec-14', '31-Jan-15']);
+ *
+ * ```
+ *
+ * @example Convert a matrix of Unix timestamps to formatted date strings
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(datestr([[1419984000, 1422662400], [1423958400, 1425168000]], 'YY-MM-DD HH:mm:ss'),
+ *   [['14-12-31 00:00:00', '15-01-31 00:00:00'], ['15-02-15 00:00:00', '15-03-01 00:00:00']]);
+ * ```
+ */
 export default function datestr(
   d: number | array<number> | matrix<number>,
   fmt: string = "YYYY-MM-DD",

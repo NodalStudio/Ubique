@@ -36,10 +36,175 @@ import { fix, isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function rem(x: number, y: number): number;
+/**
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ *
+ * @param x The dividend
+ * @param y The divisor
+ * @returns The remainder after division
+ * @throws If no arguments are provided
+ *
+ * @example Remainder of a vector divided by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
+ *
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
+ *
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
+ * ```
+ */
 export default function rem(x: array, y: number): array;
+/**
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ *
+ * @param x The dividend
+ * @param y The divisor
+ * @returns The remainder after division
+ * @throws If no arguments are provided
+ *
+ * @example Remainder of a vector divided by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
+ *
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
+ *
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
+ * ```
+ */
 export default function rem(x: matrix, y: number): matrix;
+/**
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ *
+ * @param x The dividend
+ * @param y The divisor
+ * @returns The remainder after division
+ * @throws If no arguments are provided
+ *
+ * @example Remainder of a vector divided by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
+ *
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
+ *
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
+ * ```
+ */
 export default function rem(x: array, y: array): array;
+/**
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ *
+ * @param x The dividend
+ * @param y The divisor
+ * @returns The remainder after division
+ * @throws If no arguments are provided
+ *
+ * @example Remainder of a vector divided by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
+ *
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
+ *
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
+ * ```
+ */
 export default function rem(x: matrix, y: matrix): matrix;
+/**
+ * Remainder after division.
+ *
+ * Computes the remainder after division for each element of `x` divided by the corresponding element of `y`. Works element-wise for arrays and matrices.
+ *
+ * @param x The dividend
+ * @param y The divisor
+ * @returns The remainder after division
+ * @throws If no arguments are provided
+ *
+ * @example Remainder of a vector divided by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], 2.2), [2, -0.39999999999999947]);
+ *
+ * ```
+ *
+ * @example Remainder of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([13, -7], [5, 6]), [3, -1]);
+ *
+ * ```
+ *
+ * @example Remainder of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(rem([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[0, 0, 0], [3, 3, -1]]);
+ * ```
+ */
 export default function rem(
   x: numarraymatrix,
   y: numarraymatrix,

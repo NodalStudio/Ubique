@@ -43,7 +43,77 @@ import {
  * ```
  */
 export default function xkurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Excess kurtosis.
+ *
+ * Calculates the excess kurtosis (kurtosis - 3) which measures the "tailedness"
+ * relative to a normal distribution. Zero excess kurtosis indicates normal-like tails.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization flag (0: bias correction, 1: simple). Default is 1
+ * @param dim Dimension along which to compute excess kurtosis. Default is 0
+ * @returns Excess kurtosis values
+ * @throws When input is invalid
+ *
+ * @example Normal-like distribution
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
+ *
+ * ```
+ *
+ * @example Heavy-tailed distribution
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
+ *
+ * ```
+ *
+ * @example Matrix excess kurtosis
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
+ * ```
+ */
 export default function xkurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
+/**
+ * Excess kurtosis.
+ *
+ * Calculates the excess kurtosis (kurtosis - 3) which measures the "tailedness"
+ * relative to a normal distribution. Zero excess kurtosis indicates normal-like tails.
+ *
+ * @param x Input array or matrix
+ * @param flag Normalization flag (0: bias correction, 1: simple). Default is 1
+ * @param dim Dimension along which to compute excess kurtosis. Default is 0
+ * @returns Excess kurtosis values
+ * @throws When input is invalid
+ *
+ * @example Normal-like distribution
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
+ *
+ * ```
+ *
+ * @example Heavy-tailed distribution
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
+ *
+ * ```
+ *
+ * @example Matrix excess kurtosis
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
+ * ```
+ */
 export default function xkurtosis(
   x: numarraymatrix,
   flag: 0 | 1 = 1,

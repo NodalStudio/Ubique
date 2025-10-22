@@ -64,13 +64,66 @@ import {
  * assertEquals(result, []);
  * ```
  */
-
 export default function vectorfun<T>(
   dim: 0 | 1,
   x: array | matrix,
   fun: (vector: array) => T,
 ): T | T[];
 
+/**
+ * Applies a function to each vector column or row of a matrix.
+ *
+ * This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
+ * For arrays: applies function directly and returns the result.
+ * For matrices: applies function to each row/column and returns array of results.
+ *
+ * @example Apply function along rows of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], mean), [5.333333333333333, 4.666666666666667]);
+ *
+ * ```
+ *
+ * @example Apply function along columns of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ *
+ * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], mean), [6, 7, 2]);
+ *
+ * ```
+ *
+ * @example Applying function on a single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const sum = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0);
+ * assertEquals(vectorfun(0, [1, 2, 3, 4], sum), 10);
+ *
+ * ```
+ *
+ * @example Apply function without additional arguments
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ * assertEquals(vectorfun(0, [[1, 3, 5], [2, 4, 6]], max), [5, 6]);
+ *
+ * ```
+ *
+ * @example Apply function on an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ *
+ * const result = vectorfun(0, [] as number[], max);
+ * assertEquals(result, []);
+ * ```
+ */
 export default function vectorfun<T, A1>(
   dim: 0 | 1,
   x: array | matrix,
@@ -78,6 +131,60 @@ export default function vectorfun<T, A1>(
   arg1: A1,
 ): T | T[];
 
+/**
+ * Applies a function to each vector column or row of a matrix.
+ *
+ * This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
+ * For arrays: applies function directly and returns the result.
+ * For matrices: applies function to each row/column and returns array of results.
+ *
+ * @example Apply function along rows of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], mean), [5.333333333333333, 4.666666666666667]);
+ *
+ * ```
+ *
+ * @example Apply function along columns of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ *
+ * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], mean), [6, 7, 2]);
+ *
+ * ```
+ *
+ * @example Applying function on a single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const sum = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0);
+ * assertEquals(vectorfun(0, [1, 2, 3, 4], sum), 10);
+ *
+ * ```
+ *
+ * @example Apply function without additional arguments
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ * assertEquals(vectorfun(0, [[1, 3, 5], [2, 4, 6]], max), [5, 6]);
+ *
+ * ```
+ *
+ * @example Apply function on an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ *
+ * const result = vectorfun(0, [] as number[], max);
+ * assertEquals(result, []);
+ * ```
+ */
 export default function vectorfun<T, A1, A2>(
   dim: 0 | 1,
   x: array | matrix,
@@ -86,6 +193,60 @@ export default function vectorfun<T, A1, A2>(
   arg2: A2,
 ): T | T[];
 
+/**
+ * Applies a function to each vector column or row of a matrix.
+ *
+ * This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
+ * For arrays: applies function directly and returns the result.
+ * For matrices: applies function to each row/column and returns array of results.
+ *
+ * @example Apply function along rows of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], mean), [5.333333333333333, 4.666666666666667]);
+ *
+ * ```
+ *
+ * @example Apply function along columns of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ *
+ * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], mean), [6, 7, 2]);
+ *
+ * ```
+ *
+ * @example Applying function on a single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const sum = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0);
+ * assertEquals(vectorfun(0, [1, 2, 3, 4], sum), 10);
+ *
+ * ```
+ *
+ * @example Apply function without additional arguments
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ * assertEquals(vectorfun(0, [[1, 3, 5], [2, 4, 6]], max), [5, 6]);
+ *
+ * ```
+ *
+ * @example Apply function on an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ *
+ * const result = vectorfun(0, [] as number[], max);
+ * assertEquals(result, []);
+ * ```
+ */
 export default function vectorfun<T, A1, A2, A3>(
   dim: 0 | 1,
   x: array | matrix,
@@ -95,6 +256,60 @@ export default function vectorfun<T, A1, A2, A3>(
   arg3: A3,
 ): T | T[];
 
+/**
+ * Applies a function to each vector column or row of a matrix.
+ *
+ * This function applies a given function to each vector (column or row) of a matrix based on the specified dimension.
+ * For arrays: applies function directly and returns the result.
+ * For matrices: applies function to each row/column and returns array of results.
+ *
+ * @example Apply function along rows of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ * assertEquals(vectorfun(0, [[5, 6, 5], [7, 8, -1]], mean), [5.333333333333333, 4.666666666666667]);
+ *
+ * ```
+ *
+ * @example Apply function along columns of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const mean = (a: number[]): number => a.reduce((sum, num) => sum + num, 0) / a.length;
+ *
+ * assertEquals(vectorfun(1, [[5, 6, 5], [7, 8, -1]], mean), [6, 7, 2]);
+ *
+ * ```
+ *
+ * @example Applying function on a single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const sum = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0);
+ * assertEquals(vectorfun(0, [1, 2, 3, 4], sum), 10);
+ *
+ * ```
+ *
+ * @example Apply function without additional arguments
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ * assertEquals(vectorfun(0, [[1, 3, 5], [2, 4, 6]], max), [5, 6]);
+ *
+ * ```
+ *
+ * @example Apply function on an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const max = (arr: number[]): number => Math.max(...arr);
+ *
+ * const result = vectorfun(0, [] as number[], max);
+ * assertEquals(result, []);
+ * ```
+ */
 export default function vectorfun<T>(
   dim: 0 | 1,
   x: array | matrix,

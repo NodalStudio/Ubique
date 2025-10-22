@@ -43,12 +43,84 @@ export default function ret2tick(
   sval?: number,
   dim?: 0 | 1,
 ): array;
+/**
+ * Convert a return series to a value series with a start value.
+ *
+ * Converts a return series to a value series (prices) given a starting value.
+ * Can handle both simple and continuous (log) returns.
+ *
+ * @param x Array of returns
+ * @param mode Method to compute values: 'simple' or 'continuous' (defaults to 'simple')
+ * @param sval Starting value (defaults to 1)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Value series (prices)
+ * @throws If unknown return method specified
+ *
+ * @example Converting returns to prices with a custom start value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([0.5, -0.5, 1.0], 'simple', 100), [100, 150, 75, 150]);
+ *
+ * ```
+ *
+ * @example Converting returns to prices with continuous method
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([0.1, -0.05, 0.2], 'continuous', 100), [100, 110.51709180756477, 105.12710963760242, 128.40254166877418]);
+ *
+ * ```
+ *
+ * @example Converting matrix of returns to prices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([[0.1, 0.2], [0.05, -0.1]], 'simple', 100), [[100, 110.00000000000001, 132], [100, 105, 94.5]]);
+ * ```
+ */
 export default function ret2tick(
   x: matrix,
   mode?: string,
   sval?: number,
   dim?: 0 | 1,
 ): matrix;
+/**
+ * Convert a return series to a value series with a start value.
+ *
+ * Converts a return series to a value series (prices) given a starting value.
+ * Can handle both simple and continuous (log) returns.
+ *
+ * @param x Array of returns
+ * @param mode Method to compute values: 'simple' or 'continuous' (defaults to 'simple')
+ * @param sval Starting value (defaults to 1)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns Value series (prices)
+ * @throws If unknown return method specified
+ *
+ * @example Converting returns to prices with a custom start value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([0.5, -0.5, 1.0], 'simple', 100), [100, 150, 75, 150]);
+ *
+ * ```
+ *
+ * @example Converting returns to prices with continuous method
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([0.1, -0.05, 0.2], 'continuous', 100), [100, 110.51709180756477, 105.12710963760242, 128.40254166877418]);
+ *
+ * ```
+ *
+ * @example Converting matrix of returns to prices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ret2tick([[0.1, 0.2], [0.05, -0.1]], 'simple', 100), [[100, 110.00000000000001, 132], [100, 105, 94.5]]);
+ * ```
+ */
 export default function ret2tick(
   x: array | matrix,
   mode: string = "simple",

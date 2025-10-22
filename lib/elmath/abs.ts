@@ -35,8 +35,110 @@ import { arrayfun } from "../../index.ts";
  * ```
  */
 export default function abs(x: number): number;
+
+/**
+ * Absolute value.
+ *
+ * Returns the absolute value of a number, or applies the absolute value function element-wise to arrays or matrices.
+ *
+ * @param x The number, array, or matrix to compute the absolute value for
+ * @returns The absolute value(s)
+ * @throws If no arguments are provided
+ *
+ * @example Compute the absolute value of a single number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs(-0.5), 0.5);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([0.1, -0.5]), [0.1, 0.5]);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([[5, -2], [-3, 4]]), [[5, 2], [3, 4]]);
+ *
+ * ```
+ */
 export default function abs(x: array): array;
+
+/**
+ * Absolute value.
+ *
+ * Returns the absolute value of a number, or applies the absolute value function element-wise to arrays or matrices.
+ *
+ * @param x The number, array, or matrix to compute the absolute value for
+ * @returns The absolute value(s)
+ * @throws If no arguments are provided
+ *
+ * @example Compute the absolute value of a single number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs(-0.5), 0.5);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([0.1, -0.5]), [0.1, 0.5]);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([[5, -2], [-3, 4]]), [[5, 2], [3, 4]]);
+ *
+ * ```
+ */
 export default function abs(x: matrix): matrix;
+
+/**
+ * Absolute value.
+ *
+ * Returns the absolute value of a number, or applies the absolute value function element-wise to arrays or matrices.
+ *
+ * @param x The number, array, or matrix to compute the absolute value for
+ * @returns The absolute value(s)
+ * @throws If no arguments are provided
+ *
+ * @example Compute the absolute value of a single number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs(-0.5), 0.5);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([0.1, -0.5]), [0.1, 0.5]);
+ *
+ * ```
+ *
+ * @example Compute the absolute value of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(abs([[5, -2], [-3, 4]]), [[5, 2], [3, 4]]);
+ *
+ * ```
+ */
 export default function abs(x: numarraymatrix): numarraymatrix {
   return arrayfun(x, Math.abs);
 }

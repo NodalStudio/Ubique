@@ -155,7 +155,295 @@ import {
  * ```
  */
 export default function corrcoef(x: array, y: array, flag?: number): matrix;
+/**
+ * Correlation coefficients of arrays.
+ *
+ * Calculates the correlation coefficients between arrays or matrices. Returns
+ * the sample correlation coefficient matrix for matrix input, or the correlation matrix
+ * between two input arrays/matrices.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Matrix of correlation coefficients
+ * @throws When input dimensions are incompatible
+ *
+ * @example Perfect positive correlation between identical arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+ *   [1, 1],
+ *   [1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Perfect negative correlation between reversed arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Zero correlation between orthogonal sequences
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+ *   [1, 0],
+ *   [0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Explicit sample flag matches the default behaviour
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(
+ *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4]),
+ *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4], 1),
+ * );
+ *
+ * ```
+ *
+ * @example Population flag (0) is supported for array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix input with linearly related columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 2, -1],
+ *   [2, 4, -2],
+ *   [3, 6, -3],
+ * ]), [
+ *   [1, 1, -1],
+ *   [1, 1, -1],
+ *   [-1, -1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix input with independent columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 1, -1],
+ *   [-1, 1, 1],
+ *   [1, -1, 1],
+ *   [-1, -1, -1],
+ * ]), [
+ *   [1, 0, 0],
+ *   [0, 1, 0],
+ *   [0, 0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Symmetry for swapped array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(
+ *   corrcoef([1, 2, 3, 4], [4, 3, 2, 1]),
+ *   corrcoef([4, 3, 2, 1], [1, 2, 3, 4]),
+ * );
+ *
+ * ```
+ *
+ * @example Population flag also works for matrix inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 1, -1],
+ *   [-1, 1, 1],
+ *   [1, -1, 1],
+ *   [-1, -1, -1],
+ * ], 0), [
+ *   [1, 0, 0],
+ *   [0, 1, 0],
+ *   [0, 0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix correlation handles alternating columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 0],
+ *   [0, 1],
+ *   [1, 0],
+ *   [0, 1],
+ * ]), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ * ```
+ */
 export default function corrcoef(x: matrix, flag?: number): matrix;
+/**
+ * Correlation coefficients of arrays.
+ *
+ * Calculates the correlation coefficients between arrays or matrices. Returns
+ * the sample correlation coefficient matrix for matrix input, or the correlation matrix
+ * between two input arrays/matrices.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Matrix of correlation coefficients
+ * @throws When input dimensions are incompatible
+ *
+ * @example Perfect positive correlation between identical arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+ *   [1, 1],
+ *   [1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Perfect negative correlation between reversed arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Zero correlation between orthogonal sequences
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+ *   [1, 0],
+ *   [0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Explicit sample flag matches the default behaviour
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(
+ *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4]),
+ *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4], 1),
+ * );
+ *
+ * ```
+ *
+ * @example Population flag (0) is supported for array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix input with linearly related columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 2, -1],
+ *   [2, 4, -2],
+ *   [3, 6, -3],
+ * ]), [
+ *   [1, 1, -1],
+ *   [1, 1, -1],
+ *   [-1, -1, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix input with independent columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 1, -1],
+ *   [-1, 1, 1],
+ *   [1, -1, 1],
+ *   [-1, -1, -1],
+ * ]), [
+ *   [1, 0, 0],
+ *   [0, 1, 0],
+ *   [0, 0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Symmetry for swapped array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(
+ *   corrcoef([1, 2, 3, 4], [4, 3, 2, 1]),
+ *   corrcoef([4, 3, 2, 1], [1, 2, 3, 4]),
+ * );
+ *
+ * ```
+ *
+ * @example Population flag also works for matrix inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 1, -1],
+ *   [-1, 1, 1],
+ *   [1, -1, 1],
+ *   [-1, -1, -1],
+ * ], 0), [
+ *   [1, 0, 0],
+ *   [0, 1, 0],
+ *   [0, 0, 1],
+ * ]);
+ *
+ * ```
+ *
+ * @example Matrix correlation handles alternating columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(corrcoef([
+ *   [1, 0],
+ *   [0, 1],
+ *   [1, 0],
+ *   [0, 1],
+ * ]), [
+ *   [1, -1],
+ *   [-1, 1],
+ * ]);
+ * ```
+ */
 export default function corrcoef(
   x: numarraymatrix,
   y?: numarraymatrix | number,

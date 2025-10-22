@@ -37,9 +37,149 @@ import { isarray, ismatrix, prctile } from "../../index.ts";
  * ```
  */
 export default function quantile(x: array, p: number, dim?: 0 | 1): number;
+/**
+ * Quantiles of a sample.
+ *
+ * Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles are values that divide the data into equal probability intervals.
+ *
+ * @param x Input array or matrix
+ * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
+ * @param dim Dimension along which to compute quantiles. Default is 0
+ * @returns Quantile values
+ * @throws When quantile is outside valid range [0,1]
+ *
+ * @example Median (0.5 quantile)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4, 5], 0.5), 3);
+ *
+ * ```
+ *
+ * @example First quartile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4], 0.25), 1.5);
+ *
+ * ```
+ *
+ * @example Matrix quantiles
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([[1, 2], [3, 4]], 0.5), [1.5, 3.5]);
+ * ```
+ */
 export default function quantile(x: matrix, p: number, dim?: 0 | 1): array;
+/**
+ * Quantiles of a sample.
+ *
+ * Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles are values that divide the data into equal probability intervals.
+ *
+ * @param x Input array or matrix
+ * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
+ * @param dim Dimension along which to compute quantiles. Default is 0
+ * @returns Quantile values
+ * @throws When quantile is outside valid range [0,1]
+ *
+ * @example Median (0.5 quantile)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4, 5], 0.5), 3);
+ *
+ * ```
+ *
+ * @example First quartile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4], 0.25), 1.5);
+ *
+ * ```
+ *
+ * @example Matrix quantiles
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([[1, 2], [3, 4]], 0.5), [1.5, 3.5]);
+ * ```
+ */
 export default function quantile(x: array, p: number, dim: 0 | 1): number;
+/**
+ * Quantiles of a sample.
+ *
+ * Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles are values that divide the data into equal probability intervals.
+ *
+ * @param x Input array or matrix
+ * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
+ * @param dim Dimension along which to compute quantiles. Default is 0
+ * @returns Quantile values
+ * @throws When quantile is outside valid range [0,1]
+ *
+ * @example Median (0.5 quantile)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4, 5], 0.5), 3);
+ *
+ * ```
+ *
+ * @example First quartile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4], 0.25), 1.5);
+ *
+ * ```
+ *
+ * @example Matrix quantiles
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([[1, 2], [3, 4]], 0.5), [1.5, 3.5]);
+ * ```
+ */
 export default function quantile(x: matrix, p: number, dim: 0 | 1): array;
+/**
+ * Quantiles of a sample.
+ *
+ * Calculates the p-th quantile of values in an array or matrix.
+ * Quantiles are values that divide the data into equal probability intervals.
+ *
+ * @param x Input array or matrix
+ * @param p Quantile value in range [0,1] (0.5 = median, 0.25 = first quartile)
+ * @param dim Dimension along which to compute quantiles. Default is 0
+ * @returns Quantile values
+ * @throws When quantile is outside valid range [0,1]
+ *
+ * @example Median (0.5 quantile)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4, 5], 0.5), 3);
+ *
+ * ```
+ *
+ * @example First quartile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([1, 2, 3, 4], 0.25), 1.5);
+ *
+ * ```
+ *
+ * @example Matrix quantiles
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(quantile([[1, 2], [3, 4]], 0.5), [1.5, 3.5]);
+ * ```
+ */
 export default function quantile(
   x: array | matrix,
   p: number,

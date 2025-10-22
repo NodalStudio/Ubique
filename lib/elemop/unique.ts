@@ -42,11 +42,257 @@ import type { array, matrix, numarraymatrix } from "../types.d.ts";
  * ```
  */
 export default function unique(x: array): array;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(x: array, flag: 0): array;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(x: array, flag: 1): matrix;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(x: matrix): array;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(x: matrix, flag: 0): array;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(x: matrix, flag: 1): matrix;
+/**
+ * Unique values in an array or matrix.
+ *
+ * Returns the unique values from an array or matrix. Optionally, returns the unique values along with their original indices.
+ *
+ * @param x The input array or matrix of values
+ * @param flag If `1`, returns both unique values and their indices; if `0`, returns only unique values (default is 0)
+ * @returns The unique values, or a matrix containing the unique values and their indices
+ * @throws If no input is provided or the flag is invalid
+ *
+ * @example Unique values from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5]), [-12, -3, 0, 1, 2, 3, 4, 5, 9]);
+ *
+ * ```
+ *
+ * @example Unique values and their indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([9, -3, 2, -12, 0, 1, 0, 1, 2, 3, 4, 5], 1), [[-12, -3, 0, 1, 2, 3, 4, 5, 9], [3, 1, 4, 5, 2, 9, 10, 11, 0]]);
+ *
+ * ```
+ *
+ * @example Unique values from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]]), [3, 4, 5, 6]);
+ *
+ * ```
+ *
+ * @example Unique values and indices from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(unique([[5, 4], [5, 3], [6, 3]], 1), [[3, 4, 5, 6], [3, 1, 0, 4]]);
+ * ```
+ */
 export default function unique(
   x: numarraymatrix,
   flag: 0 | 1 = 0,

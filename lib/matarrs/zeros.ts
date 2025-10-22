@@ -45,9 +45,177 @@ import isarray from "../datatype/isarray.ts";
  * ```
  */
 export default function zeros(): matrix;
+/**
+ * Create an array or matrix of all zeros.
+ *
+ * Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
+ *
+ * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
+ * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.
+ * @returns A matrix of zeros with the specified dimensions.
+ * @throws If invalid input arguments are provided.
+ *
+ * @example Create a 1x1 matrix of zeros (default behavior)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(), [[0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 square matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 2), [[0, 0], [0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix of zeros using array input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros([2, 1]), [[0], [0]]);
+ *
+ * ```
+ */
 export default function zeros(n: number): matrix;
+/**
+ * Create an array or matrix of all zeros.
+ *
+ * Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
+ *
+ * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
+ * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.
+ * @returns A matrix of zeros with the specified dimensions.
+ * @throws If invalid input arguments are provided.
+ *
+ * @example Create a 1x1 matrix of zeros (default behavior)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(), [[0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 square matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 2), [[0, 0], [0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix of zeros using array input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros([2, 1]), [[0], [0]]);
+ *
+ * ```
+ */
 export default function zeros(dims: array): matrix;
+/**
+ * Create an array or matrix of all zeros.
+ *
+ * Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
+ *
+ * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
+ * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.
+ * @returns A matrix of zeros with the specified dimensions.
+ * @throws If invalid input arguments are provided.
+ *
+ * @example Create a 1x1 matrix of zeros (default behavior)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(), [[0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 square matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 2), [[0, 0], [0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix of zeros using array input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros([2, 1]), [[0], [0]]);
+ *
+ * ```
+ */
 export default function zeros(nrows: number, ncols: number): matrix;
+/**
+ * Create an array or matrix of all zeros.
+ *
+ * Creates an array or matrix filled with zeros based on the specified dimensions. If no arguments are provided, it defaults to a 1x1 matrix.
+ *
+ * @param nrowsOrDims The number of rows or an array specifying both dimensions. Defaults to 1.
+ * @param ncols The number of columns (optional if the first argument is an array). Defaults to 1.
+ * @returns A matrix of zeros with the specified dimensions.
+ * @throws If invalid input arguments are provided.
+ *
+ * @example Create a 1x1 matrix of zeros (default behavior)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(), [[0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 square matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 2), [[0, 0], [0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix of zeros
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros(2, 3), [[0, 0, 0], [0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix of zeros using array input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(zeros([2, 1]), [[0], [0]]);
+ *
+ * ```
+ */
 export default function zeros(nrowsOrDims?: unknown, ncols?: unknown): matrix {
   const dimensions = isarray(nrowsOrDims)
     ? (nrowsOrDims as array)

@@ -68,12 +68,467 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function le(x: number, y: number): boolean;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: number, y: array): array<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: array, y: number): array<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: array, y: array): array<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: number, y: matrix): matrix<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: matrix, y: number): matrix<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(x: matrix, y: matrix): matrix<boolean>;
+/**
+ * Less than or equal comparison X <= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are less than or equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, 5), true);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [5, 6, 3]), [true, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le(5, [[5, 6], [3, 5]]), [[true, true], [false, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], 5), [true, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [3, 5]], 5), [[true, false], [true, true]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(le([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [true, true]]);
+ * ```
+ */
 export default function le(
   x: numarraymatrix,
   y: numarraymatrix,

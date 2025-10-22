@@ -68,12 +68,467 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function eq(x: number, y: number): boolean;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: number, y: array): array<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: array, y: number): array<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: array, y: array): array<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: number, y: matrix): matrix<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: matrix, y: number): matrix<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(x: matrix, y: matrix): matrix<boolean>;
+/**
+ * Checks for equality between two values or arrays.
+ *
+ * Compares two inputs, which can be numbers, arrays, or matrices, and returns true where the elements are equal.
+ *
+ * @param x Left-hand side value(s) for comparison.
+ * @param y Right-hand side value(s) for comparison.
+ * @returns The result of the equality comparison.
+ * @throws If fewer than two arguments are provided.
+ *
+ * @example Equality comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, 5), true);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
+ * ```
+ */
 export default function eq(
   x: numarraymatrix,
   y: numarraymatrix,
