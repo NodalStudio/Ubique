@@ -80,5 +80,16 @@
       "node_modules/",
       "vitest.config.ts"
     ]
+  },
+  "fmt": {
+    "include": ["lib/", "index.ts", "scripts/", "test/", "deno.json"],
+    "exclude": [
+      "rs_lib/pkg/",
+      "target/",
+      "node_modules/",
+      "docs/",
+      "dist/",
+      "scripts/assets/"
+    ]
   }
 }
