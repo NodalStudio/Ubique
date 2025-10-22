@@ -12,29 +12,58 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of the equality comparison.
  * @throws If fewer than two arguments are provided.
  *
- * @example
+ * @example Equality comparison between two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Equality comparison between two numbers
  * assertEquals(eq(5, 5), true);
  *
- * // Example 2: Equality comparison between a number and an array
+ * ```
+ *
+ * @example Equality comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq(5, [5, 6, 3]), [true, false, false]);
  *
- * // Example 3: Equality comparison between a number and a matrix
+ * ```
+ *
+ * @example Equality comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq(5, [[5, 6], [3, 5]]), [[true, false], [false, true]]);
  *
- * // Example 4: Equality comparison between an array and a number
+ * ```
+ *
+ * @example Equality comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq([5, 6, 3], 5), [true, false, false]);
  *
- * // Example 5: Equality comparison between a matrix and a number
+ * ```
+ *
+ * @example Equality comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq([[5, 6], [3, 5]], 5), [[true, false], [false, true]]);
  *
- * // Example 6: Equality comparison between two arrays
+ * ```
+ *
+ * @example Equality comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq([5, 6, 3], [2, 6, 0]), [false, true, false]);
  *
- * // Example 7: Equality comparison between two matrices
+ * ```
+ *
+ * @example Equality comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eq([[5, 6], [-1, 2]], [[5, 6], [3, 5]]), [[true, true], [false, false]]);
  * ```
  */

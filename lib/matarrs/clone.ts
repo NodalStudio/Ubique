@@ -13,20 +13,30 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns A deep copy of the input array or matrix.
  * @throws If no input is provided.
  *
- * @example
+ * @example Clone a matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Clone a matrix
  * assertEquals(clone([[-1, 3, -1], [4, 5, 9]]), [[-1, 3, -1], [4, 5, 9]]);
  *
- * // Example 2: Clone an array
+ * ```
+ *
+ * @example Clone an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(clone([5, 6, 3]), [5, 6, 3]);
  *
- * // Example 3: Clone a single number
+ * ```
+ *
+ * @example Clone a single number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(clone(5), 5);
-
- * ```*/
+ *
+ * ```
+ */
 export default function clone<T extends numarraymatrix>(x: T): T {
   if (isnumber(x)) {
     return x;

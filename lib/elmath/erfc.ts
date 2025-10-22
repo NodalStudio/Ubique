@@ -17,26 +17,46 @@
  * @returns The value of the complementary error function for the input x
  * @throws If no arguments are provided
  *
- * @example
+ * @example Compute the complementary error function for a single value
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the complementary error function for a single value
  * assertEquals(erfc(0.5), 0.47950009227675744);
  *
- * // Example 2: Compute the complementary error function for a negative value
+ * ```
+ *
+ * @example Compute the complementary error function for a negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfc(-1), 1.8427007877600068);
  *
- * // Example 3: Compute the complementary error function for zero
+ * ```
+ *
+ * @example Compute the complementary error function for zero
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfc(0), 1);
  *
- * // Example 4: Compute the complementary error function for a large positive value
+ * ```
+ *
+ * @example Compute the complementary error function for a large positive value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfc(2), 0.004677734989334044);
  *
- * // Example 5: Compute the complementary error function for a large negative value
+ * ```
+ *
+ * @example Compute the complementary error function for a large negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erfc(-2), 1.995322265010666);
-
- * ```*/
+ *
+ * ```
+ */
 export default function erfc(x: number): number {
   if (x === 0) return 1;
 

@@ -11,17 +11,26 @@ import { vectorfun } from "../../index.ts";
  * @param dim The dimension to sum across. Use `0` for rows and `1` for columns (defaults to `0`)
  * @returns The sum of the elements
  *
- * @example
+ * @example Sum of elements in a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sum of elements in a 1D array
  * assertEquals(sum([5, 6, 3]), 14);
  *
- * // Example 2: Sum of elements across rows in a 2D array
+ * ```
+ *
+ * @example Sum of elements across rows in a 2D array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sum([[5, 6, 5], [7, 8, -1]], 0), [16, 14]);
  *
- * // Example 3: Sum of elements across columns in a 2D array
+ * ```
+ *
+ * @example Sum of elements across columns in a 2D array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sum([[5, 6, 5], [7, 8, -1]], 1), [12, 14, 4]);
  * ```
  */

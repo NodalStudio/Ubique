@@ -11,11 +11,10 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  * @returns Object containing LU decomposition results
  * @throws If no input arguments are provided.
  *
- * @example
+ * @example LU decomposition of a 2x2 square matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: LU decomposition of a 2x2 square matrix
  * assertEquals(lu([[3, 2], [5, 2]]), {
  *   LU: [
  *     [5, 2],
@@ -33,7 +32,12 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   S: -1
  * });
  *
- * // Example 2: LU decomposition of a 3x3 square matrix
+ * ```
+ *
+ * @example LU decomposition of a 3x3 square matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(lu([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), {
  *   LU: [
  *     [2, 3, 1],
@@ -54,7 +58,12 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   S: -1
  * });
  *
- * // Example 3: LU decomposition of a 2x3 rectangular matrix
+ * ```
+ *
+ * @example LU decomposition of a 2x3 rectangular matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(lu([[5, 6, 5], [7, 8, -1]]), {
  *   LU: [
  *     [7, 8, -1],
@@ -72,7 +81,12 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   S: -1
  * });
  *
- * // Example 4: LU decomposition of a singular 3x3 matrix
+ * ```
+ *
+ * @example LU decomposition of a singular 3x3 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(lu([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), {
  *   LU: [
  *     [7, 8, 9],
@@ -93,7 +107,12 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   S: 1
  * });
  *
- * // Example 5: LU decomposition of a 3x2 rectangular matrix
+ * ```
+ *
+ * @example LU decomposition of a 3x2 rectangular matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(lu([[1, 2], [3, 4], [5, 6]]), {
  *   LU: [
  *     [5, 6],
@@ -114,10 +133,16 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   S: 1
  * });
  *
- * // Example 6: Error when input is not provided
+ * ```
+ *
+ * @example Error when input is not provided
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * // lu() throws: "Not enough input arguments"
-
- * ```*/
+ *
+ * ```
+ */
 export default function lu(x: matrix): {
   LU: matrix;
   L: matrix;

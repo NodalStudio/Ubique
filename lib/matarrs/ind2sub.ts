@@ -12,20 +12,30 @@ import rem from "../elemop/rem.ts";
  * @returns The corresponding row and column subscripts.
  * @throws If no arguments are provided or if inputs are invalid.
  *
- * @example
+ * @example Convert linear index 5 to subscripts in a 2x3 matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Convert linear index 5 to subscripts in a 2x3 matrix
  * assertEquals(ind2sub([2, 3], 5), [1, 2]);
  *
- * // Example 2: Convert multiple linear indices to subscripts
+ * ```
+ *
+ * @example Convert multiple linear indices to subscripts
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ind2sub([2, 3], [0, 1, 2]), [[0, 0], [1, 0], [0, 1]]);
  *
- * // Example 3: Convert linear index to subscripts in a vector (3x1 matrix)
+ * ```
+ *
+ * @example Convert linear index to subscripts in a vector (3x1 matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ind2sub([3, 1], 2), [2, 0]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function ind2sub(
   size: array,
   index: number | array,

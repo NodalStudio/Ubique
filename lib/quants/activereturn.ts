@@ -14,19 +14,28 @@ import { annreturn, isarray, ismatrix, vectorfun } from "../../index.ts";
  * @returns The computed active return
  * @throws If inputs are not valid arrays or matrices
  *
- * @example
+ * @example Compute active return for a single portfolio and benchmark
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute active return for a single portfolio and benchmark
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(activereturn(x, y, 12), 0.0887245684020539);
  *
- * // Example 2: Compute active return with simple mode
+ * ```
+ *
+ * @example Compute active return with simple mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(activereturn([0.05, 0.03, 0.08, -0.02], [0.04, 0.02, 0.06, -0.01], 12, "simple"), 0.09000000000000002);
  *
- * // Example 3: Compute active return for matrix (row-wise)
+ * ```
+ *
+ * @example Compute active return for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
  * const benchmark = [0.005, 0.015, 0.025];
  * assertEquals(activereturn(matrix, benchmark, 12), [0.0002900781816017606, -0.07097748818797567, 0.500494477969688]);

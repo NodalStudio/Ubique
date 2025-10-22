@@ -24,6 +24,7 @@ import { isarray, ismatrix } from "../../index.ts";
  * @example Apply the `sign` function to an array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
+ * import { sign } from "../../index.ts";
  *
  * assertEquals(arrayfun([1.4, 0, -10], sign), [1, 0, -1]);
  * ```

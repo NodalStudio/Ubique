@@ -10,26 +10,46 @@ import type { array, matrix } from "../types.d.ts";
  * @returns A matrix filled with `true` values.
  * @throws If no arguments are provided.
  *
- * @example
+ * @example Create an empty array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Create an empty array
  * assertEquals(trues(0), []);
  *
- * // Example 2: Create a 1x1 matrix of `true`
+ * ```
+ *
+ * @example Create a 1x1 matrix of `true`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(trues(1), [[true]]);
  *
- * // Example 3: Create a 2x2 matrix of `true`
+ * ```
+ *
+ * @example Create a 2x2 matrix of `true`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(trues(2), [[true, true], [true, true]]);
  *
- * // Example 4: Create a 2x1 matrix of `true`
+ * ```
+ *
+ * @example Create a 2x1 matrix of `true`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(trues([2,1]), [[true], [true]]);
  *
- * // Example 5: Create a 2x3 matrix of `true`
+ * ```
+ *
+ * @example Create a 2x3 matrix of `true`
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(trues(2,3), [[true, true, true], [true, true, true]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function trues(n: number): matrix<boolean>;
 export default function trues(dims: array): matrix<boolean>;
 export default function trues(nrows: number, ncols: number): matrix<boolean>;

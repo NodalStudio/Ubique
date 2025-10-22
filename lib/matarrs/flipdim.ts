@@ -16,23 +16,38 @@ import vectorfun from "../datatype/vectorfun.ts";
  * @returns The array or matrix with flipped elements.
  * @throws If no input is provided.
  *
- * @example
+ * @example Flip a 1D array (dim = 1)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Flip a 1D array (dim = 1)
  * assertEquals(flipdim([5, 6, 3], 1), [3, 6, 5]);
  *
- * // Example 2: Flip a 1D array with no dimension specified (no change)
+ * ```
+ *
+ * @example Flip a 1D array with no dimension specified (no change)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flipdim([5, 6, 3], 0), [5, 6, 3]);
  *
- * // Example 3: Flip a 2D matrix along columns (dim = 1)
+ * ```
+ *
+ * @example Flip a 2D matrix along columns (dim = 1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flipdim([[5, 6, 5], [7, 8, -1]]), [[5, 6, 5], [-1, 8, 7]]);
  *
- * // Example 4: Flip a 2D matrix along rows (dim = 0)
+ * ```
+ *
+ * @example Flip a 2D matrix along rows (dim = 0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flipdim([[5, 6, 5], [7, 8, -1]], 0), [[7, 5], [8, 6], [-1, 5]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function flipdim(
   x: number | array | matrix,
   dim: number = 1,

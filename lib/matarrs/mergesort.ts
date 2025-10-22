@@ -14,38 +14,63 @@ import type { array } from "../types.d.ts";
  * @returns A 2D array: the first row contains sorted values, the second row contains the original indexes.
  * @throws If no arguments are provided or the mode is invalid.
  *
- * @example
+ * @example Sort an array in ascending order with indexes
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Sort an array in ascending order with indexes
  * assertEquals(mergesort([9, -3, 2, -12, 0, 1]), [
  *   [-12, -3, 0, 1, 2, 9],
  *   [3, 1, 4, 5, 2, 0],
  * ]);
  *
- * // Example 2: Sort an array in descending order with indexes
+ * ```
+ *
+ * @example Sort an array in descending order with indexes
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(mergesort([9, -3, 2, -12, 0, 1], 'descend'), [
  *   [9, 2, 1, 0, -3, -12],
  *   [0, 2, 5, 4, 1, 3],
  * ]);
  *
- * // Example 3: Sort an array of length 1
+ * ```
+ *
+ * @example Sort an array of length 1
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(mergesort([5]), [[5], [0]]);
  *
- * // Example 4: Invalid mode
+ * ```
+ *
+ * @example Invalid mode
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => mergesort([1, 2, 3], 'invalid'), "sorting must be \"ascend\" or \"descend\"");
  *
- * // Example 5: Empty array
+ * ```
+ *
+ * @example Empty array
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(mergesort([]), [[], []]);
  *
- * // Example 6: Array with repeated values
+ * ```
+ *
+ * @example Array with repeated values
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(mergesort([3, 1, 3, 2, 3]), [
  *   [1, 2, 3, 3, 3],
  *   [1, 3, 0, 2, 4],
  * ]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function mergesort(
   x: array | [array, array],
   mode: string = "ascend",

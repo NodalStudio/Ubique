@@ -11,18 +11,29 @@ import { find, isnumber, mean, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Upside Potential
  *
- * @example
+ * @example Upside potential for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Upside potential for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(upsidepot(x), 0.025249999999999998);
  *
- * // Example 2: Upside potential with custom MAR
+ * ```
+ *
+ * @example Upside potential with custom MAR
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.065);
  *
- * // Example 3: Upside potential for matrix (row-wise)
+ * ```
+ *
+ * @example Upside potential for matrix (row-wise)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * const matrix = [x, y];
  * assertEquals(upsidepot(matrix, 0, 0), [0.025249999999999998, 0.0598]);

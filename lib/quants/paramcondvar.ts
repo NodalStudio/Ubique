@@ -24,17 +24,26 @@ import {
  * @param period time horizon (def: 1)
  * @return Parametric Conditional Value-At-Risk
  *
- * @example
+ * @example Parametric daily CVaR with mean and std
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Parametric daily CVaR with mean and std
  * assertEquals(paramcondvar(0.0179, 0.023230487630602065), 0.030017825479120894);
  *
- * // Example 2: Parametric CVaR with additional parameters
+ * ```
+ *
+ * @example Parametric CVaR with additional parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(paramcondvar(0.0179, 0.023230487630602065, 0.99, 100000, 10), 19578.980844416896);
  *
- * // Example 3: Different asset parameters
+ * ```
+ *
+ * @example Different asset parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(paramcondvar(0.01125, 0.04727061065899899, 0.99, 100000, 10), 39840.35893323986);
  * ```
  */

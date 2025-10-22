@@ -8,23 +8,42 @@ import type { array } from "../types.d.ts";
  * @param x The input to check.
  * @returns Returns `true` if `x` is a 1D array, otherwise `false`.
  *
- * @example
+ * @example A valid 1D array of numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: A valid 1D array of numbers
  * assertEquals(isarray([1.4, 2.3, 3]), true);
  *
- * // Example 2: An array with mixed types (still an array)
+ * ```
+ *
+ * @example An array with mixed types (still an array)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isarray([1, "a", {}]), true);
  *
- * // Example 3: An empty array
+ * ```
+ *
+ * @example An empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isarray([]), true);
  *
- * // Example 4: Not an array (single number)
+ * ```
+ *
+ * @example Not an array (single number)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isarray(123), false);
  *
- * // Example 5: A 2D array (array of arrays)
+ * ```
+ *
+ * @example A 2D array (array of arrays)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isarray([[1], [2], [3]]), false);
  * ```
  */

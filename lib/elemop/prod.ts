@@ -12,17 +12,26 @@ import { isarray, ismatrix } from "../../index.ts";
  * @returns The product of the array elements, or an array of products if a matrix is provided
  * @throws If no input arguments are provided
  *
- * @example
+ * @example Product of a vector
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Product of a vector
  * assertEquals(prod([5, 6, 3]), 90);
  *
- * // Example 2: Product of matrix elements along rows
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
  *
- * // Example 3: Product of matrix elements along columns
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
  * ```
  */

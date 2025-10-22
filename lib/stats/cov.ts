@@ -15,17 +15,26 @@ import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
  * @returns Covariance matrix or scalar variance
  * @throws When input dimensions do not agree
  *
- * @example
+ * @example Sample covariance (variance) of single array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sample covariance (variance) of single array
  * assertEquals(cov([1, 2, 3]), 1);
  *
- * // Example 2: Population covariance with flag=0
+ * ```
+ *
+ * @example Population covariance with flag=0
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
  *
- * // Example 3: Covariance matrix from 2x2 data matrix
+ * ```
+ *
+ * @example Covariance matrix from 2x2 data matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
  * ```
  */

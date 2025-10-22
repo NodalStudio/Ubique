@@ -12,17 +12,26 @@ import { vectorfun } from "../../index.ts";
  * @returns The cumulative maximum of the input values
  * @throws If no input is provided
  *
- * @example
+ * @example Cumulative maximum of a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Cumulative maximum of a 1D array
  * assertEquals(cummax([5, 6, 3]), [5, 6, 6]);
  *
- * // Example 2: Cumulative maximum of a matrix along columns (dim=1)
+ * ```
+ *
+ * @example Cumulative maximum of a matrix along columns (dim=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cummax([[5, 6, 5], [7, 8, -1]]), [[5, 7], [6, 8], [5, 5]]);
  *
- * // Example 3: Cumulative maximum of a matrix along rows (dim=0)
+ * ```
+ *
+ * @example Cumulative maximum of a matrix along rows (dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cummax([[5, 6, 5], [7, 8, -1]], 0), [[5, 6, 6], [7, 8, 8]]);
  * ```
  */

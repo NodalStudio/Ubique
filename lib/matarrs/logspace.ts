@@ -13,17 +13,21 @@ import linspace from "./linspace.ts";
  * @returns An array of logarithmically spaced points
  * @throws If fewer than two arguments are provided
  *
- * @example
+ * @example Logarithmically spaced points from 10^0 to 10^1 with 5 points
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Logarithmically spaced points from 10^0 to 10^1 with 5 points
  * assertEquals(
  *   logspace(0, 1, 5),
  *   [1, 1.7782794100389228, 3.1622776601683795, 5.623413251903491, 10]
  * );
  *
- * // Example 2: Default 10 points from 10^0 to 10^2
+ * ```
+ *
+ * @example Default 10 points from 10^0 to 10^2
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(
  *   logspace(0, 2),
  *   [
@@ -33,13 +37,28 @@ import linspace from "./linspace.ts";
  *   ]
  * );
  *
- * // Example 3: Single point (start and end are the same)
+ * ```
+ *
+ * @example Single point (start and end are the same)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(logspace(1, 1, 1), [10]);
  *
- * // Example 4: Logarithmically spaced points from 10^-1 to 10^1
+ * ```
+ *
+ * @example Logarithmically spaced points from 10^-1 to 10^1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(logspace(-1, 1, 3), [0.1, 1, 10]);
  *
- * // Example 5: Logarithmically spaced points from 10^3 to 10^4 with 4 points
+ * ```
+ *
+ * @example Logarithmically spaced points from 10^3 to 10^4 with 4 points
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(
  *   logspace(3, 4, 4),
  *   [1000, 2154.4346900318847, 4641.588833612777, 10000]

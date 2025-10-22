@@ -10,23 +10,42 @@
  * @returns The probability density function value at x
  * @throws If sigma is not a positive number
  *
- * @example
+ * @example Compute the standard normal PDF at x = 1
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the standard normal PDF at x = 1
  * assertEquals(normpdf(1), 0.24197072451914337);
  *
- * // Example 2: Compute normal PDF with custom mean and standard deviation
+ * ```
+ *
+ * @example Compute normal PDF with custom mean and standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normpdf(0, 10, 2), 7.433597573671488e-7);
  *
- * // Example 3: Compute normal PDF at the mean (should be maximum)
+ * ```
+ *
+ * @example Compute normal PDF at the mean (should be maximum)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normpdf(5, 5, 1), 0.3989422804014327);
  *
- * // Example 4: Compute normal PDF for a large value (should be small)
+ * ```
+ *
+ * @example Compute normal PDF for a large value (should be small)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normpdf(100, 50, 10), 1.486719514734298e-7);
  *
- * // Example 5: Compute normal PDF for a negative value
+ * ```
+ *
+ * @example Compute normal PDF for a negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normpdf(-1, 0, 1), 0.24197072451914337);
  * ```
  */

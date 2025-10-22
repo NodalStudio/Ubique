@@ -25,18 +25,29 @@ import {
  * @returns The computed Burke Ratio
  * @throws If an invalid mode is provided or if input arguments are invalid
  *
- * @example
+ * @example Burke ratio for a single asset with simple mode
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Burke ratio for a single asset with simple mode
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(burkeratio(x, 0, 12), 8.282140961596584);
  *
- * // Example 2: Burke ratio with modified mode
+ * ```
+ *
+ * @example Burke ratio with modified mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(burkeratio(x, 0, 12, "modified"), 26.190429341222337);
  *
- * // Example 3: Burke ratio for multiple assets (matrix)
+ * ```
+ *
+ * @example Burke ratio for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(burkeratio([x1, x2], 0, 12), [9.680557600757295, 17.94570045241343]);

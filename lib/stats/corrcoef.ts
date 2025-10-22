@@ -23,41 +23,65 @@ import {
  * @returns Matrix of correlation coefficients
  * @throws When input dimensions are incompatible
  *
- * @example
+ * @example Perfect positive correlation between identical arrays
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Perfect positive correlation between identical arrays
  * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
  *   [1, 1],
  *   [1, 1],
  * ]);
  *
- * // Example 2: Perfect negative correlation between reversed arrays
+ * ```
+ *
+ * @example Perfect negative correlation between reversed arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
  *   [1, -1],
  *   [-1, 1],
  * ]);
  *
- * // Example 3: Zero correlation between orthogonal sequences
+ * ```
+ *
+ * @example Zero correlation between orthogonal sequences
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
  *   [1, 0],
  *   [0, 1],
  * ]);
  *
- * // Example 4: Explicit sample flag matches the default behaviour
+ * ```
+ *
+ * @example Explicit sample flag matches the default behaviour
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(
  *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4]),
  *   corrcoef([2, 4, 6, 8], [1, 2, 3, 4], 1),
  * );
  *
- * // Example 5: Population flag (0) is supported for array inputs
+ * ```
+ *
+ * @example Population flag (0) is supported for array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
  *   [1, -1],
  *   [-1, 1],
  * ]);
  *
- * // Example 6: Matrix input with linearly related columns
+ * ```
+ *
+ * @example Matrix input with linearly related columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([
  *   [1, 2, -1],
  *   [2, 4, -2],
@@ -68,7 +92,12 @@ import {
  *   [-1, -1, 1],
  * ]);
  *
- * // Example 7: Matrix input with independent columns
+ * ```
+ *
+ * @example Matrix input with independent columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
@@ -80,13 +109,23 @@ import {
  *   [0, 0, 1],
  * ]);
  *
- * // Example 8: Symmetry for swapped array inputs
+ * ```
+ *
+ * @example Symmetry for swapped array inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(
  *   corrcoef([1, 2, 3, 4], [4, 3, 2, 1]),
  *   corrcoef([4, 3, 2, 1], [1, 2, 3, 4]),
  * );
  *
- * // Example 9: Population flag also works for matrix inputs
+ * ```
+ *
+ * @example Population flag also works for matrix inputs
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
@@ -98,7 +137,12 @@ import {
  *   [0, 0, 1],
  * ]);
  *
- * // Example 10: Matrix correlation handles alternating columns
+ * ```
+ *
+ * @example Matrix correlation handles alternating columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(corrcoef([
  *   [1, 0],
  *   [0, 1],

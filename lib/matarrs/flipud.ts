@@ -12,17 +12,26 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns The matrix with its rows flipped upside down
  * @throws If no input is provided or input is invalid
  *
- * @example
+ * @example Flip a 2D matrix upside down
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Flip a 2D matrix upside down
  * assertEquals(flipud([[1, 4], [2, 5], [3, 6]]), [[3, 2, 1], [6, 5, 4]]);
  *
- * // Example 2: Flip a single number (should return the number itself)
+ * ```
+ *
+ * @example Flip a single number (should return the number itself)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flipud(5), 5);
  *
- * // Example 3: Flip a simple 2D matrix
+ * ```
+ *
+ * @example Flip a simple 2D matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flipud([[1, 2], [3, 4]]), [[3, 1], [4, 2]]);
  * ```
  */

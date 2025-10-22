@@ -22,34 +22,74 @@ import isundefined from "../datatype/isundefined.ts";
  * @returns The extracted subset of the array or matrix.
  * @throws If the input arguments are invalid.
  *
- * @example
+ * @example Extract a single element from an array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Extract a single element from an array
  * const c = [5, 6, 3];
  * assertEquals(subset(c, 1), 6);
  *
- * // Example 2: Extract multiple elements from an array
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
  * assertEquals(subset(c, [1, 2]), [6, 3]);
  *
- * // Example 3: Extract the last element from an array
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
  * assertEquals(subset(c, c.length - 1), 3);
  *
- * // Example 4: Extract a single element from a matrix
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const a = [[5, 6, 5], [7, 8, -1]];
  * assertEquals(subset(a, 0, 1), [[6]]);
  *
- * // Example 5: Extract a submatrix
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
  * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
  *
- * // Example 6: Extract an entire row
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
  * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
  *
- * // Example 7: Extract an entire column
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
  * assertEquals(subset(a, ':', 0), [[5], [7]]);
-
- * ```*/
+ *
+ * ```
+ */
 // No index - return as-is
 export default function subset(m: array): array;
 export default function subset(m: matrix): matrix;

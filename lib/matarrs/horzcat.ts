@@ -11,20 +11,30 @@ import cat from "../matarrs/cat.ts";
  * @returns Concatenated result.
  * @throws If no input arguments are provided.
  *
- * @example
+ * @example Concatenate two 2x3 matrices
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Concatenate two 2x3 matrices
  * assertEquals(horzcat([[5, 6, 5], [7, 8, -1]], [[-1, 3, -1], [4, 5, 9]]), [[5, 6, 5, -1, 3, -1], [7, 8, -1, 4, 5, 9]]);
  *
- * // Example 2: Concatenate numbers into a 1x3 matrix
+ * ```
+ *
+ * @example Concatenate numbers into a 1x3 matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(horzcat(5, 6, 7), [[5, 6, 7]]);
  *
- * // Example 3: Invalid input (no arguments)
+ * ```
+ *
+ * @example Invalid input (no arguments)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => { horzcat(); }, Error, 'Not enough input arguments');
-
- * ```*/
+ *
+ * ```
+ */
 export default function horzcat(
   ...args: (number | array | matrix)[]
 ): array | matrix {

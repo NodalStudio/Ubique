@@ -8,17 +8,26 @@ import type { NormalizationFlag } from "../types.d.ts";
  * @param flag The value to check
  * @throws If flag is not 0 or 1
  *
- * @example
+ * @example Valid flag 0 (population)
  * ```ts
  * import { assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid flag 0 (population)
  * assertnormalizationflag(0); // No error
  *
- * // Example 2: Valid flag 1 (sample)
+ * ```
+ *
+ * @example Valid flag 1 (sample)
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertnormalizationflag(1); // No error
  *
- * // Example 3: Invalid flag throws error
+ * ```
+ *
+ * @example Invalid flag throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertnormalizationflag(2), TypeError, "Expected normalization flag 0 or 1, got 2");
  * ```
  */

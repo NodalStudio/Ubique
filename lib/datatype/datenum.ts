@@ -18,19 +18,28 @@ dayjs.extend(customParseFormat);
  * @param fmt The format string to parse the date if the input is a date string.
  * @returns The Unix timestamp or an array of Unix timestamps.
  *
- * @example
+ * @example Convert a date string to a Unix timestamp
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Convert a date string to a Unix timestamp
  * assertEquals(datenum('31-12-2014', 'DD-MM-YYYY'), 1419984000);
  *
- * // Example 2: Convert an array of date strings to an array of Unix timestamps
+ * ```
+ *
+ * @example Convert an array of date strings to an array of Unix timestamps
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(datenum(['31-12-2014', '31-01-2015'], 'DD-MM-YYYY'), [1419984000, 1422662400]);
  *
- * // Example 3: Convert an array of date components to a Unix timestamp
+ * ```
+ *
+ * @example Convert an array of date components to a Unix timestamp
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(datenum([2015, 4, 5, 12, 20, 30, 0]), 1428236430);
-
+ *
  * ```
  */
 export default function datenum(

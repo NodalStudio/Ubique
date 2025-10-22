@@ -14,16 +14,23 @@ import { isarray, mean, sharpe, std, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Modigliani-Modigliani measure
  *
- * @example
+ * @example Modigliani measure for a single asset vs benchmark
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Modigliani measure for a single asset vs benchmark
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(modigliani(x,y), 0.04069406485838784);
  *
- * // Example 2: Modigliani measure for multiple assets vs benchmark
+ * ```
+ *
+ * @example Modigliani measure for multiple assets vs benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ *
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
  * assertEquals(modigliani(x,z), 0.042584556714225126);
  * assertEquals(modigliani(y,z), 0.013185348194299146);

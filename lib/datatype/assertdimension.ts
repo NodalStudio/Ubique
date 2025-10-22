@@ -8,17 +8,26 @@ import type { Dimension } from "../types.d.ts";
  * @param dim The value to check
  * @throws If dim is not 0 or 1
  *
- * @example
+ * @example Valid dimension 0
  * ```ts
  * import { assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid dimension 0
  * assertdimension(0); // No error
  *
- * // Example 2: Valid dimension 1
+ * ```
+ *
+ * @example Valid dimension 1
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertdimension(1); // No error
  *
- * // Example 3: Invalid dimension throws error
+ * ```
+ *
+ * @example Invalid dimension throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertdimension(2), TypeError, "Expected dimension 0 or 1, got 2");
  * ```
  */

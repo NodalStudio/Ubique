@@ -14,17 +14,26 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  * @returns Computed skewness values
  * @throws When input is invalid
  *
- * @example
+ * @example Right-skewed data
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Right-skewed data
  * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
  *
- * // Example 2: Symmetric data
+ * ```
+ *
+ * @example Symmetric data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
  *
- * // Example 3: Matrix skewness
+ * ```
+ *
+ * @example Matrix skewness
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
  * ```
  */

@@ -13,11 +13,10 @@ import { isnumber, sum } from "../../index.ts";
  * @param mode calculation mode: 'simple' (default) or 'continuous'
  * @return monthly series
  *
- * @example
+ * @example Convert daily returns to monthly returns using simple mode
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Convert daily returns to monthly returns using simple mode
  * var dailyReturns = [
  *   0.001, 0.002, -0.001, 0.004, 0.005, // Week 1
  *   0.002, -0.003, 0.001, 0.002, 0.004, // Week 2
@@ -26,7 +25,18 @@ import { isnumber, sum } from "../../index.ts";
  * ];
  * assertEquals(tomonthly(dailyReturns), 0.03347884902598719);
  *
- * // Example 2: Convert daily returns to monthly returns using continuous mode
+ * ```
+ *
+ * @example Convert daily returns to monthly returns using continuous mode
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var dailyReturns = [
+ *   0.001, 0.002, -0.001, 0.004, 0.005, // Week 1
+ *   0.002, -0.003, 0.001, 0.002, 0.004, // Week 2
+ *   0.003, 0.001, -0.002, 0.003, 0.002, // Week 3
+ *   0.001, 0.004, 0.003, -0.001, 0.002  // Week 4
+ * ];
  * assertEquals(tomonthly(dailyReturns, "continuous"), 0.033);
  * ```
  */

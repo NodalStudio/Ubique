@@ -16,26 +16,46 @@ import ncols from "../matarrs/ncols.ts";
  * @returns Last index or indices.
  * @throws If no arguments are provided or if the dimension is invalid.
  *
- * @example
+ * @example Last index of a vector
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Last index of a vector
  * assertEquals(end([5, 6, 3]), 2);
  *
- * // Example 2: Last indices of a matrix
+ * ```
+ *
+ * @example Last indices of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(end([[4, 5, 0], [-1, 2, -3]]), [1, 2]);
  *
- * // Example 3: Last row index of a matrix
+ * ```
+ *
+ * @example Last row index of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(end([[4, 5, 0], [-1, 2, -3]], 0), 1);
  *
- * // Example 4: Last column index of a matrix
+ * ```
+ *
+ * @example Last column index of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(end([[4, 5, 0], [-1, 2, -3]], 1), 2);
  *
- * // Example 5: Last index of a number (returns the number itself)
+ * ```
+ *
+ * @example Last index of a number (returns the number itself)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(end(5), 5);
-
- * ```*/
+ *
+ * ```
+ */
 export default function end(
   x: number | array | matrix,
   dim: number = -1,

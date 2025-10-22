@@ -19,17 +19,32 @@ import isarray from "../datatype/isarray.ts";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * var a = [[5,6,5],[7,8,-1]];
+ * ```
  *
- * // Example 1: Convert single 2D coordinate to linear index
+ * @example Convert single 2D coordinate to linear index
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sub2ind([2, 3], [1, 2]), 5);
  *
- * // Example 2: Convert multiple 2D coordinates to linear indices
+ * ```
+ *
+ * @example Convert multiple 2D coordinates to linear indices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sub2ind([2, 3], [[0, 0], [1, 0], [0, 1]]), [0, 1, 2]);
  *
- * // Example 3: Convert index for a row vector
+ * ```
+ *
+ * @example Convert index for a row vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sub2ind([1, 3], [2, 0]), 2);
-
- * ```*/
+ *
+ * ```
+ */
 export default function sub2ind(
   size: array,
   index: array | matrix,

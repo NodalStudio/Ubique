@@ -24,11 +24,10 @@ import {
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Monte Carlo Value-At-Risk
  *
- * @example
+ * @example Monte Carlo VaR for single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Monte Carlo VaR for single asset
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  *
  * // Note: This function currently has implementation issues with the random number generator

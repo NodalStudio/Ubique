@@ -14,16 +14,23 @@ import { isarray, linearreg, mean, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Jensen alpha value
  *
- * @example
+ * @example Single asset vs benchmark
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single asset vs benchmark
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(jensenalpha(x,y), 0.01760907323602524);
  *
- * // Example 2: Multiple assets vs benchmark
+ * ```
+ *
+ * @example Multiple assets vs benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ *
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
  * assertEquals(jensenalpha(x,z), 0.02077158416670001);
  * assertEquals(jensenalpha(y,z), 0.006256147026618015);

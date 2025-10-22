@@ -16,32 +16,62 @@ import isarray from "../datatype/isarray.ts";
  * @returns An array of dimensions representing the size of the input.
  * @throws If no input is provided or if the input type is unknown.
  *
- * @example
+ * @example Size of a 4D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Size of a 4D array
  * assertEquals(size([[[[5, 6, 5], [7, 8, -1]]]]), [1, 1, 2, 3]);
  *
- * // Example 2: Size of a 2D matrix
+ * ```
+ *
+ * @example Size of a 2D matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size([[3, 2, 7], [4, 5, 6]]), [2, 3]);
  *
- * // Example 3: Size of a 1D array
+ * ```
+ *
+ * @example Size of a 1D array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size([5, 4, 4]), [1, 3]);
  *
- * // Example 4: Size of a scalar
+ * ```
+ *
+ * @example Size of a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size(5), [1, 1]);
  *
- * // Example 5: Size of a string
+ * ```
+ *
+ * @example Size of a string
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size('ubique'), [1, 6]);
  *
- * // Example 6: Size of a 1x2 array of strings
+ * ```
+ *
+ * @example Size of a 1x2 array of strings
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size([['first', 'second']]), [1, 2]);
  *
- * // Example 7: Size of an empty array
+ * ```
+ *
+ * @example Size of an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(size([]), [0, 0]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function size(x: unknown): array {
   if (isundefined(x)) {
     throw new Error("Not enough input arguments");

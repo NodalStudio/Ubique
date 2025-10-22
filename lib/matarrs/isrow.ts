@@ -10,32 +10,62 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns Returns `true` if `x` is a row vector, otherwise `false`.
  * @throws If the input is not a valid matrix or if no argument is provided.
  *
- * @example
+ * @example Valid row vector
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid row vector
  * assertEquals(isrow([[2, 2]]), true);
  *
- * // Example 2: Column vector (not a row vector)
+ * ```
+ *
+ * @example Column vector (not a row vector)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(isrow([[2], [2]]), false);
  *
- * // Example 3: Row vector with multiple columns
+ * ```
+ *
+ * @example Row vector with multiple columns
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(isrow([[1, 2, 3]]), true);
  *
- * // Example 4: Square matrix (not a row vector)
+ * ```
+ *
+ * @example Square matrix (not a row vector)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(isrow([[1, 2], [3, 4]]), false);
  *
- * // Example 5: Single-element row vector
+ * ```
+ *
+ * @example Single-element row vector
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(isrow([[1]]), true);
  *
- * // Example 6: Invalid input (not a matrix)
+ * ```
+ *
+ * @example Invalid input (not a matrix)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => isrow(5), "Input must be a non-empty matrix");
  *
- * // Example 7: Empty matrix (should throw an error)
+ * ```
+ *
+ * @example Empty matrix (should throw an error)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => isrow([]), "Input must be a non-empty matrix");
-
- * ```*/
+ *
+ * ```
+ */
 export default function isrow(x: unknown): x is matrix {
   if (!x) {
     throw new Error("Not enough input arguments");

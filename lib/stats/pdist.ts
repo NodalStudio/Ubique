@@ -13,17 +13,26 @@ import { abs, max, minus, power, sqrt, sum } from "../../index.ts";
  * @returns Distance value
  * @throws When arrays have different lengths or invalid method specified
  *
- * @example
+ * @example Euclidean distance
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Euclidean distance
  * assertEquals(pdist([0, 0], [3, 4], 'euclidean'), 5);
  *
- * // Example 2: Manhattan distance
+ * ```
+ *
+ * @example Manhattan distance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(pdist([1, 1], [4, 5], 'manhattan'), 7);
  *
- * // Example 3: Chebyshev distance
+ * ```
+ *
+ * @example Chebyshev distance
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(pdist([1, 2], [4, 6], 'chebychev'), 4);
  * ```
  */

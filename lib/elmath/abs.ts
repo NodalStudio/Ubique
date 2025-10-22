@@ -10,20 +10,30 @@ import { arrayfun } from "../../index.ts";
  * @returns The absolute value(s)
  * @throws If no arguments are provided
  *
- * @example
+ * @example Compute the absolute value of a single number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the absolute value of a single number
  * assertEquals(abs(-0.5), 0.5);
  *
- * // Example 2: Compute the absolute value of an array of numbers
+ * ```
+ *
+ * @example Compute the absolute value of an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(abs([0.1, -0.5]), [0.1, 0.5]);
  *
- * // Example 3: Compute the absolute value of a matrix
+ * ```
+ *
+ * @example Compute the absolute value of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(abs([[5, -2], [-3, 4]]), [[5, 2], [3, 4]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function abs(x: number): number;
 export default function abs(x: array): array;
 export default function abs(x: matrix): matrix;

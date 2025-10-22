@@ -14,18 +14,27 @@ import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
  * @returns Sortino Ratio
  * @throws If input is a number (not supported)
  *
- * @example
+ * @example Sortino ratio for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sortino ratio for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(sortino(x), 5.062884553295679);
  *
- * // Example 2: Sortino ratio with custom MAR
+ * ```
+ *
+ * @example Sortino ratio with custom MAR
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.5303300858899106);
  *
- * // Example 3: Sortino ratio with no downside
+ * ```
+ *
+ * @example Sortino ratio with no downside
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(sortino([0.01, 0.02, 0.03], 0), Infinity);
  * ```
  */

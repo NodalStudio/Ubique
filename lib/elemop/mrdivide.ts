@@ -20,24 +20,43 @@ import {
  * @returns The result of the division
  * @throws If the input dimensions are incompatible or if Y is not a square matrix when required
  *
- * @example
+ * @example Scalar division (5/6)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Scalar division (5/6)
  * assertEquals(mrdivide(5, 6), 0.8333333333333334);
  *
- * // Example 2: Array divided by scalar ([5,6,3]/6)
+ * ```
+ *
+ * @example Array divided by scalar ([5,6,3]/6)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mrdivide([5, 6, 3], 6), [0.8333333333333334, 1, 0.5]);
  *
- * // Example 3: Matrix divided by scalar ([[9,5],[6,1]]/5)
+ * ```
+ *
+ * @example Matrix divided by scalar ([[9,5],[6,1]]/5)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mrdivide([[9, 5], [6, 1]], 5), [[1.8, 1], [1.2, 0.2]]);
  *
- * // Example 4: Matrix right division with square matrix ([[9,5],[6,1]]/[[3,2],[5,2]])
+ * ```
+ *
+ * @example Matrix right division with square matrix ([[9,5],[6,1]]/[[3,2],[5,2]])
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mrdivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]),
  *   [[1.75, 0.7500000000000004], [-1.75, 2.25]]);
  *
- * // Example 5: Matrix right division with non-square matrices
+ * ```
+ *
+ * @example Matrix right division with non-square matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * // [[5,6,5],[7,8,-1]] / [[1,1,-1],[1,-2,3],[2,3,1]]
  * assertEquals(mrdivide([[5, 6, 5], [7, 8, -1]], [[1, 1, -1], [1, -2, 3], [2, 3, 1]]),
  *   [[-0.7692307692307696, 0.5384615384615385, 2.615384615384615],
