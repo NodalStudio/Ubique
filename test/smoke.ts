@@ -1,8 +1,8 @@
-import * as rubique from "../../index.ts";
+import * as rubique from "../index.ts";
 import type {
   array as RubiqueArray,
   matrix as RubiqueMatrix,
-} from "../../lib/types.d.ts";
+} from "../lib/types.d.ts";
 
 type Matrix = RubiqueMatrix<number>;
 
@@ -58,20 +58,22 @@ function deepEquals(actual: unknown, expected: unknown): boolean {
 function assertDeepEquals(
   actual: unknown,
   expected: unknown,
-  message: string
+  message: string,
 ): void {
   assert(
     deepEquals(actual, expected),
-    `${message} (expected ${JSON.stringify(
-      expected
-    )}, received ${JSON.stringify(actual)})`
+    `${message} (expected ${
+      JSON.stringify(
+        expected,
+      )
+    }, received ${JSON.stringify(actual)})`,
   );
 }
 
 function assertMatrixClose(
   actual: Matrix,
   expected: Matrix,
-  message: string
+  message: string,
 ): void {
   assert(Array.isArray(actual), `${message} (expected a matrix)`);
   assert(Array.isArray(expected), `${message} (expected comparison matrix)`);
@@ -80,7 +82,7 @@ function assertMatrixClose(
     assert(Array.isArray(row), `${message} (row ${i} is not an array)`);
     assert(
       row.length === expected[i].length,
-      `${message} (col mismatch row ${i})`
+      `${message} (col mismatch row ${i})`,
     );
     row.forEach((value, j) => {
       approxEqual(value, expected[i][j], `${message} [${i}, ${j}]`);
@@ -120,7 +122,7 @@ const tests: Assertion[] = [
       assertMatrixClose(
         inverse,
         expected,
-        "inverse should match expected values"
+        "inverse should match expected values",
       );
     },
   },
@@ -151,7 +153,7 @@ const tests: Assertion[] = [
       assertDeepEquals(
         vector,
         expected,
-        "linspace should produce 5 evenly spaced points"
+        "linspace should produce 5 evenly spaced points",
       );
     },
   },
@@ -170,7 +172,7 @@ const tests: Assertion[] = [
       assertDeepEquals(
         index,
         1,
-        "month should return 1 for February (0-indexed)"
+        "month should return 1 for February (0-indexed)",
       );
     },
   },
@@ -184,13 +186,13 @@ const tests: Assertion[] = [
       approxEqual(
         q1 as number,
         15,
-        "quantile(0.25) should match first quartile"
+        "quantile(0.25) should match first quartile",
       );
       approxEqual(q2 as number, 37.5, "quantile(0.5) should match median");
       approxEqual(
         q3 as number,
         40,
-        "quantile(0.75) should match third quartile"
+        "quantile(0.75) should match third quartile",
       );
     },
   },
