@@ -1,3 +1,0 @@
-(function () {
-  window.DENO_DOC_SEARCH_INDEX = {"kind":"search","nodes":[{"id":"namespace_erf","kind":[{"char":"f","kind":"Function","title":"Function"}],"name":"erf","file":".","doc":"Error function.Calculates the error function, which is commonly used in probability, statistics, and partial differential equations describing diffusion.The error function is defined as:This implementation approximates the error function with a maximal error of 1.2 × 10⁻⁷.","url":"././~/erf.html","deprecated":false}]};
-})()
