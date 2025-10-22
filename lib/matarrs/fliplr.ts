@@ -14,17 +14,22 @@ import ismatrix from "../datatype/ismatrix.ts";
  * @returns The matrix with its columns flipped left to right.
  * @throws If no input is provided.
  *
- * @example
+ * @example Flip a 2D matrix left to right
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Flip a 2D matrix left to right
  * assertEquals(fliplr([[1, 4], [2, 5], [3, 6]]), [[4, 1], [5, 2], [6, 3]]);
  *
- * // Example 2: Flip a 1D array (no change)
+ * ```
+ *
+ * @example Flip a 1D array (no change)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(fliplr([1, 2, 3]), [1, 2, 3]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function fliplr(
   x: number | array | matrix,
 ): number | array | matrix {

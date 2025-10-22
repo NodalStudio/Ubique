@@ -11,17 +11,26 @@ import arrayfun from "../datatype/arrayfun.ts";
  * @returns The rounded value.
  * @throws If no input argument is provided.
  *
- * @example
+ * @example Round a single number toward zero
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Round a single number toward zero
  * assertEquals(fix(3.78), 3);
  *
- * // Example 2: Round an array of numbers toward zero
+ * ```
+ *
+ * @example Round an array of numbers toward zero
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(fix([4.51, -1.4]), [4, -1]);
  *
- * // Example 3: Round a matrix of numbers toward zero
+ * ```
+ *
+ * @example Round a matrix of numbers toward zero
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(fix([[4.51, -1.4], [3.78, 0.01]]), [[4, -1], [3, 0]]);
  * ```
  */

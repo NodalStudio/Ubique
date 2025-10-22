@@ -13,26 +13,46 @@ import isarray from "../datatype/isarray.ts";
  * @returns The identity matrix of the specified dimensions.
  * @throws If no input arguments are provided.
  *
- * @example
+ * @example Create a 0x0 matrix (empty matrix)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Create a 0x0 matrix (empty matrix)
  * assertEquals(eye(0, 0), []);
  *
- * // Example 2: Create a 1x1 identity matrix
+ * ```
+ *
+ * @example Create a 1x1 identity matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eye(1, 1), [[1]]);
  *
- * // Example 3: Create a 2x2 identity matrix
+ * ```
+ *
+ * @example Create a 2x2 identity matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eye(2, 2), [[1, 0], [0, 1]]);
  *
- * // Example 4: Create a 2x1 identity matrix
+ * ```
+ *
+ * @example Create a 2x1 identity matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eye([2, 1]), [[1], [0]]);
  *
- * // Example 5: Create a 2x3 identity matrix
+ * ```
+ *
+ * @example Create a 2x3 identity matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(eye(2, 3), [[1, 0, 0], [0, 1, 0]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function eye(n: number): matrix;
 export default function eye(dims: array): matrix;
 export default function eye(nrows: number, ncols: number): matrix;

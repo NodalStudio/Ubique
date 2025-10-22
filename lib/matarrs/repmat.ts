@@ -12,30 +12,44 @@ import type { array, matrix } from "../types.d.ts";
  * @returns The resulting replicated matrix.
  * @throws Error If `m` or `n` are non-positive.
  *
- * @example
+ * @example Replicate a scalar value into a 3x3 matrix
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Replicate a scalar value into a 3x3 matrix
  * assertEquals(repmat(10, 3), [
  *   [10, 10, 10],
  *   [10, 10, 10],
  *   [10, 10, 10]
  * ]);
  *
- * // Example 2: Replicate a scalar into a 3x2 matrix
+ * ```
+ *
+ * @example Replicate a scalar into a 3x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat(0.5, 3, 2), [
  *   [0.5, 0.5],
  *   [0.5, 0.5],
  *   [0.5, 0.5]
  * ]);
  *
- * // Example 3: Replicate a row vector
+ * ```
+ *
+ * @example Replicate a row vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat([5, 6, 3], 1, 2), [
  *   [5, 6, 3, 5, 6, 3]
  * ]);
  *
- * // Example 4: Replicate a 2x2 matrix
+ * ```
+ *
+ * @example Replicate a 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat([[9, 5], [6, 1]], 2), [
  *   [9, 5, 9, 5],
  *   [6, 1, 6, 1],
@@ -43,7 +57,12 @@ import type { array, matrix } from "../types.d.ts";
  *   [6, 1, 6, 1]
  * ]);
  *
- * // Example 5: Replicate a column vector
+ * ```
+ *
+ * @example Replicate a column vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat([[2], [3]], 2, 3), [
  *   [2, 2, 2],
  *   [3, 3, 3],
@@ -51,26 +70,42 @@ import type { array, matrix } from "../types.d.ts";
  *   [3, 3, 3]
  * ]);
  *
- * // Example 6: Single-element matrix repeated
+ * ```
+ *
+ * @example Single-element matrix repeated
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat([[7]], 2, 2), [
  *   [7, 7],
  *   [7, 7]
  * ]);
  *
- * // Example 7: Boolean replication
+ * ```
+ *
+ * @example Boolean replication
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat(true, 2, 2), [
  *   [true, true],
  *   [true, true]
  * ]);
  *
- * // Example 8: Replicating a single-element array
+ * ```
+ *
+ * @example Replicating a single-element array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(repmat([4], 3, 2), [
  *   [4, 4],
  *   [4, 4],
  *   [4, 4]
  * ]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function repmat<T>(
   x: matrix<T>,
   m: number,

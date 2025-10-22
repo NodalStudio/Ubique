@@ -11,19 +11,28 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Percentage of positive values
  *
- * @example
+ * @example Percentage of positive values in a single array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Percentage of positive values in a single array
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(percpos(x), 0.8);
  *
- * // Example 2: Percentage of positive values in different array
+ * ```
+ *
+ * @example Percentage of positive values in different array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(percpos(y), 0.5);
  *
- * // Example 3: Percentage of positive values with threshold
+ * ```
+ *
+ * @example Percentage of positive values with threshold
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(percpos([0.05, 0.03, -0.02, 0.08]), 0.75);
  * ```
  */

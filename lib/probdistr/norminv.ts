@@ -12,23 +12,42 @@ import erfcinv from "../elmath/erfcinv.ts";
  * @returns The inverse CDF (quantile).
  * @throws If `p` is not in the range (0,1) or `sigma` is not positive.
  *
- * @example
+ * @example Compute the inverse CDF for standard normal distribution
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the inverse CDF for standard normal distribution
  * assertEquals(norminv(0.05), -1.6448536127562647);
  *
- * // Example 2: Compute inverse CDF with custom mean and standard deviation
+ * ```
+ *
+ * @example Compute inverse CDF with custom mean and standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(norminv(0.01, 10, 2),  5.347304312449656);
  *
- * // Example 3: Compute inverse CDF at median (should return mean)
+ * ```
+ *
+ * @example Compute inverse CDF at median (should return mean)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(norminv(0.5, 5, 1), 5);
  *
- * // Example 4: Compute inverse CDF for a high probability (should be positive)
+ * ```
+ *
+ * @example Compute inverse CDF for a high probability (should be positive)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(norminv(0.975, 0, 1), 1.9599639471668915);
  *
- * // Example 5: Compute inverse CDF for a low probability (should be negative)
+ * ```
+ *
+ * @example Compute inverse CDF for a low probability (should be negative)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(norminv(0.025, 0, 1), -1.9599639471668922);
  * ```
  */

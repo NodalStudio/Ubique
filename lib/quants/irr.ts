@@ -14,20 +14,34 @@ import { colon } from "../../index.ts";
  * @returns Internal rate of return
  * @throws If insufficient arguments or convergence fails
  *
- * @example
+ * @example Simple IRR with regular cash flows
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple IRR with regular cash flows
  * assertEquals(irr([250000, 25000, -10000, -285000]), 0.024712563094781776);
  *
- * // Example 2: Simple IRR with time periods
+ * ```
+ *
+ * @example Simple IRR with time periods
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(irr([74.2, 37.1, -104.4], [0, 1, 2], 2), -0.07410820570460687);
  *
- * // Example 3: Modified IRR with irregular time periods
+ * ```
+ *
+ * @example Modified IRR with irregular time periods
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(irr([250000, 25000, -10000, -285000], [0, 45, 69, 90], 90), 0.07692283872311291);
  *
- * // Example 4: Modified IRR with different calendar days
+ * ```
+ *
+ * @example Modified IRR with different calendar days
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(irr([74.2, 37.1, -104.4], [0, 14, 31], 31), -0.07271456460699813);
  * ```
  */

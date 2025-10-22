@@ -12,17 +12,26 @@ import { isnumber, vectorfun } from "../../index.ts";
  * @returns Maximum values
  * @throws When input is invalid
  *
- * @example
+ * @example Simple array maximum
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple array maximum
  * assertEquals(max([1, 3, 2]), 3);
  *
- * // Example 2: Array with negative values
+ * ```
+ *
+ * @example Array with negative values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(max([-5, -1, -10]), -1);
  *
- * // Example 3: Matrix maximum along rows
+ * ```
+ *
+ * @example Matrix maximum along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(max([[1, 2], [3, 4]]), [2, 4]);
  * ```
  */

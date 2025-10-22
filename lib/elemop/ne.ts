@@ -12,29 +12,58 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of the comparison
  * @throws If the input dimensions do not agree or if no arguments are provided
  *
- * @example
+ * @example Compare two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compare two numbers
  * assertEquals(ne(5, 5), false);
  *
- * // Example 2: Compare a number with an array
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
  *
- * // Example 3: Compare a number with a matrix
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
  *
- * // Example 4: Compare an array with a number
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
  *
- * // Example 5: Compare a matrix with a number
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
  *
- * // Example 6: Compare two arrays
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
  *
- * // Example 7: Compare two matrices
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
  * ```
  */

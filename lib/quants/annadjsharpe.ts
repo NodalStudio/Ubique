@@ -30,22 +30,34 @@ import {
  * @returns The computed Annualized Adjusted Sharpe Ratio
  * @throws If the input is invalid
  *
- * @example
+ * @example Annualized adjusted Sharpe ratio for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Annualized adjusted Sharpe ratio for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annadjsharpe(x, 0, 12), 3.735901391809159);
  *
- * // Example 2: Annualized adjusted Sharpe with different parameters
+ * ```
+ *
+ * @example Annualized adjusted Sharpe with different parameters
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116);
  *
- * // Example 3: Annualized adjusted Sharpe for multiple assets (matrix)
+ * ```
+ *
+ * @example Annualized adjusted Sharpe for multiple assets (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328324, 5.030879310639437]);
- * ``` */
+ * ```
+ */
 export default function annadjsharpe(
   x: array,
   frisk?: number,

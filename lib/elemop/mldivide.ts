@@ -20,20 +20,34 @@ import {
  * @returns The result of the division
  * @throws If insufficient arguments are provided or if the matrix dimensions do not match
  *
- * @example
+ * @example Divide two scalars
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Divide two scalars
  * assertEquals(mldivide(5, 6), 6 / 5);
  *
- * // Example 2: Matrix left division
+ * ```
+ *
+ * @example Matrix left division
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
  *
- * // Example 3: Scalar left divides a matrix
+ * ```
+ *
+ * @example Scalar left divides a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mldivide(5, [[9, 5], [6, 1]]), [[9 / 5, 5 / 5], [6 / 5, 1 / 5]]);
  *
- * // Example 4: Matrix left division with non-square matrix
+ * ```
+ *
+ * @example Matrix left division with non-square matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
  *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
  * ```

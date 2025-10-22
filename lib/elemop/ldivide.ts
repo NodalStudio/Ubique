@@ -12,20 +12,34 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of element-wise left division y ./ x
  * @throws If the input dimensions do not agree or if no arguments are provided
  *
- * @example
+ * @example Divide two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Divide two numbers
  * assertEquals(ldivide(2, 6), 3);
  *
- * // Example 2: Element-wise division of arrays
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
  *
- * // Example 3: Divide array by scalar
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
  *
- * // Example 4: Element-wise division of matrices
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
  * ```
  */

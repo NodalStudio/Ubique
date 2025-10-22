@@ -12,17 +12,26 @@ import { vectorfun } from "../../index.ts";
  * @returns The differences between adjacent elements
  * @throws If no input is provided
  *
- * @example
+ * @example Differences in a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Differences in a 1D array
  * assertEquals(diff([5, 6, 3]), [1, -3]);
  *
- * // Example 2: Differences in a matrix along columns (dim=1)
+ * ```
+ *
+ * @example Differences in a matrix along columns (dim=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(diff([[5, 6, 5], [7, 8, -1]], 1), [[2], [2], [-6]]);
  *
- * // Example 3: Differences in a matrix along rows (dim=0)
+ * ```
+ *
+ * @example Differences in a matrix along rows (dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(diff([[5, 6, 5], [7, 8, -1]], 0), [[1, -1], [1, -9]]);
  * ```
  */

@@ -13,17 +13,26 @@ import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
  * @returns Computed standard deviation values
  * @throws When input is invalid
  *
- * @example
+ * @example Sample standard deviation
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sample standard deviation
  * assertEquals(std([1, 2, 3, 4, 5]), 1.5811388300841898);
  *
- * // Example 2: Population standard deviation
+ * ```
+ *
+ * @example Population standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(std([1, 2, 3, 4, 5], 0), 1.4142135623730951);
  *
- * // Example 3: Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```
+ *
+ * @example Matrix standard deviation along rows (default dim=0, flag=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(std([[1, 2], [3, 4]]), [[0.7071067811865476, 0.7071067811865476]]);
  * ```
  */

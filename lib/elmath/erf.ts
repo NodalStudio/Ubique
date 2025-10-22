@@ -19,26 +19,46 @@ import { erfc } from "../../index.ts";
  * @returns The value of the error function for the input x
  * @throws If no arguments are provided
  *
- * @example
+ * @example Compute the error function for a single value
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute the error function for a single value
  * assertEquals(erf(0.5), 0.5204999077232426);
  *
- * // Example 2: Compute the error function for a negative value
+ * ```
+ *
+ * @example Compute the error function for a negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erf(-1), -0.8427007877600068);
  *
- * // Example 3: Compute the error function for zero
+ * ```
+ *
+ * @example Compute the error function for zero
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erf(0), 0);
  *
- * // Example 4: Compute the error function for a large positive value
+ * ```
+ *
+ * @example Compute the error function for a large positive value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erf(2), 0.995322265010666);
  *
- * // Example 5: Compute the error function for a large negative value
+ * ```
+ *
+ * @example Compute the error function for a large negative value
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(erf(-2), -0.9953222650106659);
-
- * ```*/
+ *
+ * ```
+ */
 export default function erf(x: number): number {
   return 1 - erfc(x);
 }

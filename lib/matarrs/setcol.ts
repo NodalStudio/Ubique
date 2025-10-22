@@ -14,26 +14,40 @@ import transpose from "./transpose.ts";
  * @returns A new matrix with the updated column.
  * @throws When the column index is out of bounds or the vector length mismatches the number of rows.
  *
- * @example
+ * @example Replace the first column of a matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Replace the first column of a matrix
  * assertEquals(setcol([2, 0], [[5, 6, 5], [7, 8, -1]], 0), [
  *   [2, 6, 5],
  *   [0, 8, -1]
  * ]);
  *
- * // Example 2: Replace the third column of a matrix
+ * ```
+ *
+ * @example Replace the third column of a matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(setcol([9, 21], [[5, 6, 5], [7, 8, -1]], 2), [
  *   [5, 6, 9],
  *   [7, 8, 21]
  * ]);
  *
- * // Example 3: Column vector length mismatch error
+ * ```
+ *
+ * @example Column vector length mismatch error
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => setcol([1, 2, 3], [[4, 5], [6, 7]], 1), "Column vector length must match the number of matrix rows.");
  *
- * // Example 4: Column index out of bounds error
+ * ```
+ *
+ * @example Column index out of bounds error
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => setcol([1, 2], [[4, 5], [6, 7]], 2), "Column index must be an integer between 0 and N-1.");
  * ```
  */

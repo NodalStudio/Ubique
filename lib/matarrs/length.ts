@@ -10,23 +10,38 @@ import type { array, matrix } from "../types.d.ts";
  * @returns Returns the length of the vector or the largest dimension of the array/matrix.
  * @throws If no arguments are provided.
  *
- * @example
+ * @example Length of a 1D array (vector)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Length of a 1D array (vector)
  * assertEquals(length([3, 5, 6]), 3);
  *
- * // Example 2: Length of a single element (should be 1)
+ * ```
+ *
+ * @example Length of a single element (should be 1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(length(5), 1);
  *
- * // Example 3: Length of a 2D array (matrix)
+ * ```
+ *
+ * @example Length of a 2D array (matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(length([[5, 4], [-1, 2]]), 2);
  *
- * // Example 4: Empty array (should be 0)
+ * ```
+ *
+ * @example Empty array (should be 0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(length([]), 0);
-
- * ```*/
+ *
+ * ```
+ */
 export default function length(
   x: string | number | array<string | number> | matrix<string | number>,
 ): number {

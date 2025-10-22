@@ -20,30 +20,56 @@ import {
  * @returns The result of the division
  * @throws If insufficient arguments are provided or if the input sizes do not match
  *
- * @example
+ * @example Divide two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Divide two numbers
  * assertEquals(rdivide(5, 6), 0.8333333333333334);
  *
- * // Example 2: Divide a matrix by a scalar
+ * ```
+ *
+ * @example Divide a matrix by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const a = [[5, 6, 5], [7, 8, -1]];
  * assertEquals(rdivide(a, 3), [[1.6666666666666667, 2, 1.6666666666666667],
  *  [2.3333333333333335, 2.6666666666666665, -0.3333333333333333]]);
  *
- * // Example 3: Divide a scalar by a vector
+ * ```
+ *
+ * @example Divide a scalar by a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(rdivide(3, [-1, -2, -3]), [-3, -1.5, -1]);
  *
- * // Example 4: Element-wise division of two vectors
+ * ```
+ *
+ * @example Element-wise division of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(rdivide([5, 6, 7], [-1, -2, -3]), [-5, -3, -2.3333333333333335]);
  *
- * // Example 5: Element-wise division of two matrices
+ * ```
+ *
+ * @example Element-wise division of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const e = [[9, 5], [6, 1]];
  * const f = [[3, 2], [5, 2]];
  * assertEquals(rdivide(e, f), [[3, 2.5], [1.2, 0.5]]);
  *
- * // Example 6: Divide a matrix by a scalar
+ * ```
+ *
+ * @example Divide a matrix by a scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const e = [[9, 5], [6, 1]];
+ *
  * assertEquals(rdivide(e, 3), [[3, 1.6666666666666667], [2, 0.3333333333333333]]);
  * ```
  */

@@ -14,17 +14,26 @@ import { vectorfun } from "../../index.ts";
  * @returns Value series (prices)
  * @throws If unknown return method specified
  *
- * @example
+ * @example Converting returns to prices with a custom start value
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Converting returns to prices with a custom start value
  * assertEquals(ret2tick([0.5, -0.5, 1.0], 'simple', 100), [100, 150, 75, 150]);
  *
- * // Example 2: Converting returns to prices with continuous method
+ * ```
+ *
+ * @example Converting returns to prices with continuous method
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ret2tick([0.1, -0.05, 0.2], 'continuous', 100), [100, 110.51709180756477, 105.12710963760242, 128.40254166877418]);
  *
- * // Example 3: Converting matrix of returns to prices
+ * ```
+ *
+ * @example Converting matrix of returns to prices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ret2tick([[0.1, 0.2], [0.05, -0.1]], 'simple', 100), [[100, 110.00000000000001, 132], [100, 105, 94.5]]);
  * ```
  */

@@ -13,11 +13,10 @@ import { isarray, mean, minus, std, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Information Ratio
  *
- * @example
+ * @example Information ratio between a single asset and benchmark
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Information ratio between a single asset and benchmark
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(inforatio(x,y), 0.09369148584852913);

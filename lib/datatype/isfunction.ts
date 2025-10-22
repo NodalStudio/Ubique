@@ -8,23 +8,38 @@
  *
  * @throws Throws an error if no argument is provided.
  *
- * @example
+ * @example Inline function
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Inline function
  * assertEquals(isfunction(function() { return console.log("Hello"); }), true, 'Inline function should return true');
  *
- * // Example 2: Built-in function
+ * ```
+ *
+ * @example Built-in function
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isfunction(Math.log), true, 'Built-in function should return true');
  *
- * // Example 3: Not a function (number)
+ * ```
+ *
+ * @example Not a function (number)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isfunction(42), false, 'Number should return false');
  *
- * // Example 4: Not a function (string)
+ * ```
+ *
+ * @example Not a function (string)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isfunction("hello"), false, 'String should return false');
-
- * ```*/
+ *
+ * ```
+ */
 export default function isfunction(x: unknown): boolean {
   return typeof x === "function";
 }

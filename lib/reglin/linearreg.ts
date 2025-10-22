@@ -11,23 +11,34 @@ import { sum, times } from "../../index.ts";
  * @param x array of independent variable values
  * @return Object with beta (slope), alpha (intercept), rsq (R-squared), and prediction function
  *
- * @example
+ * @example Basic linear regression
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Basic linear regression
  * const x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * const y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * const result = linearreg(y,x);
  * assertEquals(Math.round(result.beta * 1000) / 1000, 0.119);
  * assertEquals(Math.round(result.alpha * 1000) / 1000, 0.01);
  *
- * // Example 2: Linear regression with stronger correlation
+ * ```
+ *
+ * @example Linear regression with stronger correlation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const result2 = linearreg([100,101,99,102,105],[1,2,3,4,5]);
  * assertEquals(result2.beta, 1.1);
  * assertEquals(result2.alpha, 98.1);
  *
- * // Example 3: Using the prediction function
+ * ```
+ *
+ * @example Using the prediction function
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const result2 = linearreg([100,101,99,102,105],[1,2,3,4,5]);
+ *
  * assertEquals(Math.round(result2.fun(6) * 10) / 10, 104.7);
  * ```
  */

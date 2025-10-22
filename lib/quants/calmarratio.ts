@@ -21,20 +21,31 @@ import {
  * @returns Calmar Ratio
  * @throws If input arguments must be an array or matrix
  *
- * @example
+ * @example Single array of returns
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Single array of returns
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(calmarratio(x, 0, 12), 16.70104871897814);
  *
- * // Example 2: Matrix of returns
+ * ```
+ *
+ * @example Matrix of returns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(calmarratio([x1, x2], 0, 12), [13.690375850324857, 25.379052966087876]);
  *
- * // Example 3: Different risk-free rate
+ * ```
+ *
+ * @example Different risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(calmarratio(x, 0.02, 12), 15.272477290406712);
  * ```
  */

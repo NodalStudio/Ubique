@@ -12,11 +12,10 @@ import type { array } from "../types.d.ts";
  * @param cfd cash flow dates array as fraction of the total period
  * @return Modified Dietz Return
  *
- * @example
+ * @example Calculate Modified Dietz Return with multiple cash flows
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Calculate Modified Dietz Return with multiple cash flows
  * var bv = 100000; // beginning value
  * var ev = 110000; // ending value
  * var cf1 = 10000; //cash flow 1 (inflow)

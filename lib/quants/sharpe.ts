@@ -16,18 +16,29 @@ import { isarray, ismatrix, mean, std, vectorfun } from "../../index.ts";
  * @returns The computed Sharpe Ratio
  * @throws If the input is invalid
  *
- * @example
+ * @example Sharpe Ratio for a single asset
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Sharpe Ratio for a single asset
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * assertEquals(sharpe(x, 0.02 / 12), 0.6987943426529188);
  *
- * // Example 2: Sharpe Ratio with zero risk-free rate
+ * ```
+ *
+ * @example Sharpe Ratio with zero risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ *
  * assertEquals(sharpe(x), 0.7705391416932597);
  *
- * // Example 3: Sharpe Ratio for different asset
+ * ```
+ *
+ * @example Sharpe Ratio for different asset
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(sharpe(y), 0.23858007842472628);
  * ```

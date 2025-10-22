@@ -8,23 +8,38 @@
  *
  * @throws Throws an error if no argument is provided.
  *
- * @example
+ * @example Boolean true
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Boolean true
  * assertEquals(islogical(true), true);
  *
- * // Example 2: Boolean false
+ * ```
+ *
+ * @example Boolean false
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(islogical(false), true);
  *
- * // Example 3: Not a boolean (number)
+ * ```
+ *
+ * @example Not a boolean (number)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(islogical(1), false);
  *
- * // Example 4: Not a boolean (string)
+ * ```
+ *
+ * @example Not a boolean (string)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(islogical("true"), false);
-
- * ```*/
+ *
+ * ```
+ */
 export default function islogical(x: unknown): x is boolean {
   return typeof x === "boolean";
 }

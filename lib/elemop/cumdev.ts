@@ -12,43 +12,77 @@ import { cumsum, mean, minus, vectorfun } from "../../index.ts";
  * @returns The cumulative mean deviation.
  * @throws If no input is provided.
  *
- * @example
+ * @example Cumulative mean deviation of a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Cumulative mean deviation of a 1D array
  * assertEquals(cumdev([5, 6, 3]), [0.33333333333333304, 1.666666666666666, -8.881784197001252e-16]);
  *
- * // Example 2: Cumulative mean deviation of a single-element array
+ * ```
+ *
+ * @example Cumulative mean deviation of a single-element array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([10]), [0]);
  *
- * // Example 3: Cumulative mean deviation of a matrix along rows (dim=0)
+ * ```
+ *
+ * @example Cumulative mean deviation of a matrix along rows (dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([[-1, 3, -1], [4, 5, 9]], 0), [
  *   [-1.3333333333333333, 1.3333333333333333, 0],
  *   [-2, -3, 0]
  * ]);
  *
- * // Example 4: Cumulative mean deviation of a matrix along columns (dim=1)
+ * ```
+ *
+ * @example Cumulative mean deviation of a matrix along columns (dim=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([[-1, 3, -1], [4, 5, 9]]), [
  *   [-2.5, 0],
  *   [-1, 0],
  *   [-5, 0],
  * ]);
  *
- * // Example 5: Cumulative mean deviation of an empty array
+ * ```
+ *
+ * @example Cumulative mean deviation of an empty array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([]), []);
  *
- * // Example 6: Cumulative mean deviation of an empty matrix
+ * ```
+ *
+ * @example Cumulative mean deviation of an empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([[]]), []);
  *
- * // Example 7: Cumulative mean deviation of a matrix with identical values
+ * ```
+ *
+ * @example Cumulative mean deviation of a matrix with identical values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([[2, 2, 2], [2, 2, 2]]), [
  *   [0, 0],
  *   [0, 0],
  *   [0, 0],
  * ]);
  *
- * // Example 8: Cumulative mean deviation with negative values
+ * ```
+ *
+ * @example Cumulative mean deviation with negative values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cumdev([[-5, -10, -15], [0, 5, 10]], 0), [
  *   [5, 5, 0],
  *   [-5, -5, 0],

@@ -12,23 +12,42 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of subtracting `y` from `x`.
  * @throws If the input dimensions do not agree or if no arguments are provided.
  *
- * @example
+ * @example Subtract two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Subtract two numbers
  * assertEquals(minus(5, 3), 2);
  *
- * // Example 2: Subtract two arrays element-wise
+ * ```
+ *
+ * @example Subtract two arrays element-wise
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(minus([5, 6, 4], [3, 1, 2]), [2, 5, 2]);
  *
- * // Example 3: Subtract a number from each element of an array
+ * ```
+ *
+ * @example Subtract a number from each element of an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(minus([15, 16, 14], 10), [5, 6, 4]);
  *
- * // Example 4: Subtract a number from each element of a matrix
+ * ```
+ *
+ * @example Subtract a number from each element of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(minus([[15, 16], [13, 14]], 10), [[5, 6], [3, 4]]);
  *
- * // Example 5: Subtract two matrices element-wise
+ * ```
+ *
+ * @example Subtract two matrices element-wise
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(minus([[7, 9], [4, 6]], [[2, 3], [1, 2]]), [[5, 6], [3, 4]]);
  * ```
  */

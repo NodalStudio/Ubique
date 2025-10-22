@@ -13,29 +13,54 @@ import type { array, matrix } from "../types.d.ts";
  * @returns The reshaped matrix.
  * @throws If dimensions are invalid or inconsistent.
  *
- * @example
+ * @example Reshape a row vector into a column vector
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Reshape a row vector into a column vector
  * assertEquals(reshape([5, 6, 3], 3, 1), [[5], [6], [3]]);
  *
- * // Example 2: Reshape a column vector into a row vector
+ * ```
+ *
+ * @example Reshape a column vector into a row vector
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(reshape([5, 6, 3], 1, 3), [[5, 6, 3]]);
  *
- * // Example 3: Reshape a 2x3 matrix into a 3x2 matrix (row-wise)
+ * ```
+ *
+ * @example Reshape a 2x3 matrix into a 3x2 matrix (row-wise)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(reshape([[-1, 3, -1], [4, 5, 9]], 3, 2), [[-1, 3], [-1, 4], [5, 9]]);
  *
- * // Example 4: Reshape a 2x3 matrix into a 3x2 matrix (column-wise)
+ * ```
+ *
+ * @example Reshape a 2x3 matrix into a 3x2 matrix (column-wise)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(reshape([[-1, 3, -1], [4, 5, 9]], 3, 2, 1), [[-1, 4], [3, 5], [-1, 9]]);
  *
- * // Example 5: Reshape into a single-column matrix
+ * ```
+ *
+ * @example Reshape into a single-column matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(reshape([[-1, 3, -1], [4, 5, 9]], 6, 1), [[-1], [3], [-1], [4], [5], [9]]);
  *
- * // Example 6: Reshape into a single-column matrix (column-wise)
+ * ```
+ *
+ * @example Reshape into a single-column matrix (column-wise)
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(reshape([[-1, 3, -1], [4, 5, 9]], 6, 1, 1), [[-1], [4], [3], [5], [-1], [9]]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function reshape(
   x: array | matrix,
   m: number,

@@ -11,26 +11,45 @@ import size from "./size.ts";
  * @param x The input to squeeze
  * @returns The squeezed input with singleton dimensions removed
  *
- * @example
+ * @example Squeeze deeply nested arrays
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Squeeze deeply nested arrays
  * assertEquals(squeeze([[[[[8]]]]]), [[8]]);
  *
- * // Example 2: Squeeze nested arrays with multiple elements
+ * ```
+ *
+ * @example Squeeze nested arrays with multiple elements
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(squeeze([[[[3, 4, 5]]]]), [[3, 4, 5]]);
  *
- * // Example 3: Squeeze nested arrays with 2D content
+ * ```
+ *
+ * @example Squeeze nested arrays with 2D content
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(squeeze([[[[[['31-12-2014', '31-01-2015'], ['15-02-2015', '01-03-2015']]]]]]), [
  *   ['31-12-2014', '31-01-2015'],
  *   ['15-02-2015', '01-03-2015']
  * ]);
  *
- * // Example 4: Input is a number (no squeezing needed)
+ * ```
+ *
+ * @example Input is a number (no squeezing needed)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(squeeze(42), 42);
  *
- * // Example 5: Input is a string (no squeezing needed)
+ * ```
+ *
+ * @example Input is a string (no squeezing needed)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(squeeze("hello"), "hello");
  * ```
  */

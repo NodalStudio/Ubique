@@ -12,17 +12,26 @@ import { vectorfun } from "../../index.ts";
  * @returns The cumulative minimum of the input values
  * @throws If no input is provided
  *
- * @example
+ * @example Cumulative minimum of a 1D array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Cumulative minimum of a 1D array
  * assertEquals(cummin([5, 6, 3]), [5, 5, 3]);
  *
- * // Example 2: Cumulative minimum of a matrix along columns (dim=1)
+ * ```
+ *
+ * @example Cumulative minimum of a matrix along columns (dim=1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cummin([[5, 6, 5], [7, 8, -1]], 1), [[5, 5], [6, 6], [5, -1]]);
  *
- * // Example 3: Cumulative minimum of a matrix along rows (dim=0)
+ * ```
+ *
+ * @example Cumulative minimum of a matrix along rows (dim=0)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(cummin([[5, 6, 5], [7, 8, -1]], 0), [[5, 5, 5], [7, 7, -1]]);
  * ```
  */

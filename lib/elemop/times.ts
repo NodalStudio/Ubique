@@ -12,23 +12,42 @@ import { arrayfun, getrow, isarray, ismatrix, isnumber } from "../../index.ts";
  * @returns The result of element-wise multiplication
  * @throws If no arguments are provided or if the input dimensions do not match
  *
- * @example
+ * @example Multiply two numbers
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Multiply two numbers
  * assertEquals(times(5, 6), 30);
  *
- * // Example 2: Element-wise multiplication of two vectors
+ * ```
+ *
+ * @example Element-wise multiplication of two vectors
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(times([5, 6, 4], [3, -1, 0]), [15, -6, 0]);
  *
- * // Example 3: Multiply a number with each element of an array
+ * ```
+ *
+ * @example Multiply a number with each element of an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(times([5, 6, 4], 10), [50, 60, 40]);
  *
- * // Example 4: Element-wise multiplication of two matrices
+ * ```
+ *
+ * @example Element-wise multiplication of two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(times([[5, 6], [3, 4]], [[2, 3], [1, 2]]), [[10, 18], [3, 8]]);
  *
- * // Example 5: Multiply a number with each element of a matrix
+ * ```
+ *
+ * @example Multiply a number with each element of a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(times(2, [[1, 2], [3, 4]]), [[2, 4], [6, 8]]);
  * ```
  */

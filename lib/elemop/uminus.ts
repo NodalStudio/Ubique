@@ -11,17 +11,26 @@ import { arrayfun } from "../../index.ts";
  * @returns The negated value(s)
  * @throws If no input is provided
  *
- * @example
+ * @example Unary minus on a single number
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Unary minus on a single number
  * assertEquals(uminus(-5), 5);
  *
- * // Example 2: Unary minus on an array of numbers
+ * ```
+ *
+ * @example Unary minus on an array of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(uminus([5, 6]), [-5, -6]);
  *
- * // Example 3: Unary minus on a matrix of numbers
+ * ```
+ *
+ * @example Unary minus on a matrix of numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(uminus([[5, 6], [-1, -3]]), [[-5, -6], [1, 3]]);
  * ```
  */

@@ -13,17 +13,26 @@ import { isnumber, mean, vectorfun } from "../../index.ts";
  * @returns Central moment values
  * @throws When input is invalid
  *
- * @example
+ * @example Second moment (variance)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Second moment (variance)
  * assertEquals(moment([1, 2, 3, 4, 5], 2), 2);
  *
- * // Example 2: First moment (always zero)
+ * ```
+ *
+ * @example First moment (always zero)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(moment([1, 2, 3], 1), 0);
  *
- * // Example 3: Matrix moments
+ * ```
+ *
+ * @example Matrix moments
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(moment([[1, 2], [3, 4]], 2), [0.25, 0.25]);
  * ```
  */

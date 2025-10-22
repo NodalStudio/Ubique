@@ -11,26 +11,40 @@ import type { array, matrix } from "../types.d.ts";
  * @returns A new matrix with the updated row.
  * @throws When the row index is out of bounds or the vector length mismatches the number of columns.
  *
- * @example
+ * @example Replace the first row of a matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Replace the first row of a matrix
  * assertEquals(setrow([2, 0, -2], [[5, 6, 5], [7, 8, -1]], 0), [
  *   [2, 0, -2],
  *   [7, 8, -1]
  * ]);
  *
- * // Example 2: Replace the second row of a matrix
+ * ```
+ *
+ * @example Replace the second row of a matrix
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertEquals(setrow([9, 21, 57], [[5, 6, 5], [7, 8, -1]], 1), [
  *   [5, 6, 5],
  *   [9, 21, 57]
  * ]);
  *
- * // Example 3: Row vector length mismatch error
+ * ```
+ *
+ * @example Row vector length mismatch error
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => setrow([1, 2], [[4, 5, 6], [7, 8, 9]], 1), "Row vector length must match the number of matrix columns.");
  *
- * // Example 4: Row index out of bounds error
+ * ```
+ *
+ * @example Row index out of bounds error
+ * ```ts
+ * import { assertEquals, assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => setrow([1, 2, 3], [[4, 5, 6], [7, 8, 9]], 2), "Row index must be an integer between 0 and M-1.");
  * ```
  */

@@ -12,18 +12,29 @@ import { isarray, isnumber, log, size, zeros } from "../../index.ts";
  * @returns Returns array or matrix
  * @throws If input is not an array or matrix
  *
- * @example
+ * @example Simple returns from price series
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple returns from price series
  * const x = [1, 3, 2, 5];
  * assertEquals(tick2ret(x), [2, -0.33333333333333337, 1.5]);
  *
- * // Example 2: Continuous (log) returns
+ * ```
+ *
+ * @example Continuous (log) returns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [1, 3, 2, 5];
+ *
  * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
  *
- * // Example 3: Continuous returns for different price series
+ * ```
+ *
+ * @example Continuous returns for different price series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const y = [0.5, 1.5, 2.5, 3.5];
  * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
  * ```

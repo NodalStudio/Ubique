@@ -12,17 +12,26 @@ import { isarray, isnumber, sort, vectorfun } from "../../index.ts";
  * @returns Median values
  * @throws When input is invalid
  *
- * @example
+ * @example Odd length array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Odd length array
  * assertEquals(median([1, 2, 3]), 2);
  *
- * // Example 2: Even length array
+ * ```
+ *
+ * @example Even length array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(median([1, 2, 3, 4]), 2.5);
  *
- * // Example 3: Matrix median
+ * ```
+ *
+ * @example Matrix median
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(median([[1, 2], [3, 4]]), [1.5, 3.5]);
  * ```
  */

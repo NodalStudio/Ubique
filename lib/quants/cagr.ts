@@ -13,19 +13,31 @@ import { isarray, ismatrix, vectorfun } from "../../index.ts";
  * @returns Compound Annual Growth Rate
  * @throws If input is a number (not supported)
  *
- * @example
+ * @example CAGR for a single asset over time
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: CAGR for a single asset over time
  * const sp500 = [676.53, 902.40, 1378.43, 1769.30, 2206.45, 2643.85, 2679.63];
  * const dates = [1998, 2000, 2005, 2010, 2015, 2020, 2022];
  * assertEquals(cagr(sp500, dates), 0.05902892931364878);
  *
- * // Example 2: CAGR for multiple assets with the same time series
+ * ```
+ *
+ * @example CAGR for multiple assets with the same time series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const dates = [1998, 2000, 2005, 2010, 2015, 2020, 2022];
+ * const sp500 = [676.53, 902.40, 1378.43, 1769.30, 2206.45, 2643.85, 2679.63];
+ *
  * assertEquals(cagr([sp500, sp500], dates), [0.05902892931364878, 0.05902892931364878]);
  *
- * // Example 3: CAGR with different time periods
+ * ```
+ *
+ * @example CAGR with different time periods
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * const portfolio = [1000, 1200, 1500, 1800];
  * const years = [2020, 2021, 2022, 2023];
  * assertEquals(cagr(portfolio, years), 0.21644039911467994);

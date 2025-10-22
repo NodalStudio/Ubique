@@ -8,26 +8,50 @@ import type { matrix } from "../types.d.ts";
  * @param x The input to check.
  * @returns Returns `true` if `x` is a valid matrix.
  *
- * @example
+ * @example Valid matrix with one row
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Valid matrix with one row
  * assertEquals(ismatrix([[1, 3, 4]]), true);
  *
- * // Example 2: Valid matrix with multiple rows
+ * ```
+ *
+ * @example Valid matrix with multiple rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ismatrix([[1], [3], [4]]), true);
  *
- * // Example 3: Invalid matrix due to varying row lengths
+ * ```
+ *
+ * @example Invalid matrix due to varying row lengths
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ismatrix([[1, 2], [3, 4, 5]]), false);
  *
- * // Example 4: Valid matrix with mixed element types
+ * ```
+ *
+ * @example Valid matrix with mixed element types
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ismatrix([[1, 2], [3, '4']]), true);
  *
- * // Example 5: Empty array (not a matrix)
+ * ```
+ *
+ * @example Empty array (not a matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ismatrix([]), false);
  *
- * // Example 6: Empty matrix with one empty row
+ * ```
+ *
+ * @example Empty matrix with one empty row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ismatrix([[]]), true);
  * ```
  */

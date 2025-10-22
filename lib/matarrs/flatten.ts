@@ -15,20 +15,30 @@ import isarray from "../datatype/isarray.ts";
  * @returns The flattened 1D array.
  * @throws If no input is provided or if the input is not a matrix.
  *
- * @example
+ * @example Flatten a 2x2 matrix (row-wise by default)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Flatten a 2x2 matrix (row-wise by default)
  * assertEquals(flatten([[5, 6], [7, 8]]), [5, 6, 7, 8]);
  *
- * // Example 2: Flatten a 3x3 matrix by rows
+ * ```
+ *
+ * @example Flatten a 3x3 matrix by rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), [1, 1, -1, 1, -2, 3, 2, 3, 1]);
  *
- * // Example 3: Flatten a 3x3 matrix by columns (dim = 1)
+ * ```
+ *
+ * @example Flatten a 3x3 matrix by columns (dim = 1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(flatten([[1, 1, -1], [1, -2, 3], [2, 3, 1]], 1), [1, 1, 2, 1, -2, 3, -1, 3, 1]);
-
- * ```*/
+ *
+ * ```
+ */
 export default function flatten(x: number): number;
 export default function flatten(x: array): array;
 export default function flatten(x: matrix, dim: 0 | 1): array;

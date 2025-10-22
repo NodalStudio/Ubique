@@ -12,18 +12,29 @@ import { clone, cumprod, isnumber, plus, vectorfun } from "../../index.ts";
  * @param dim dimension 0: row, 1: column (def: 0)
  * @return Simple Rate of Return
  *
- * @example
+ * @example Simple rate of return on return series
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Simple rate of return on return series
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * assertEquals(ror(x), 0.18779277315203946);
  *
- * // Example 2: Rate of return on cumulative value series
+ * ```
+ *
+ * @example Rate of return on cumulative value series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(ror([100,101,99,98,97,102,103,104],'cum'), 0.040000000000000036);
  *
- * // Example 3: Rate of return on multiple series
+ * ```
+ *
+ * @example Rate of return on multiple series
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(ror(x,'ret'), 0.18779277315203946);
  * assertEquals(ror(y,'ret'), 0.12514883159358225);

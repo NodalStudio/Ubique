@@ -12,23 +12,42 @@ import { erf } from "../../index.ts";
  * @returns The cumulative probability for x
  * @throws If sigma is not a positive number
  *
- * @example
+ * @example Compute standard normal CDF at x = 2
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Compute standard normal CDF at x = 2
  * assertEquals(normcdf(2), 0.9772498701098755);
  *
- * // Example 2: Compute normal CDF with custom mean and standard deviation
+ * ```
+ *
+ * @example Compute normal CDF with custom mean and standard deviation
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normcdf(0, 1, 2), 0.30853751691860176);
  *
- * // Example 3: Compute normal CDF at the mean (should be close to 0.5)
+ * ```
+ *
+ * @example Compute normal CDF at the mean (should be close to 0.5)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normcdf(10, 10, 3), 0.5);
  *
- * // Example 4: Compute normal CDF for negative values
+ * ```
+ *
+ * @example Compute normal CDF for negative values
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normcdf(-1.5, 0, 1), 0.06680720195906442);
  *
- * // Example 5: Compute normal CDF for a very large value (should be close to 1)
+ * ```
+ *
+ * @example Compute normal CDF for a very large value (should be close to 1)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(normcdf(100, 50, 10), 0.9999997133484314);
  * ```
  */

@@ -15,11 +15,10 @@ import { cat, find, isvector, subset, weekday } from "../../index.ts";
  * @param nv array or matrix of values
  * @return matrix of weekly dates and values
  *
- * @example
+ * @example Convert daily data to weekly frequency (simplified)
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Convert daily data to weekly frequency (simplified)
  * const dates = [1421280000, 1421366400, 1421452800, 1421539200];
  * const values = [100, 99, 102, 103];
  * const result = toweekly(dates, values);

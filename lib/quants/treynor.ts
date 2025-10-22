@@ -14,21 +14,36 @@ import { isarray, ismatrix, linearreg, mean, vectorfun } from "../../index.ts";
  * @returns The Treynor ratio
  * @throws If input is a number or insufficient arguments provided
  *
- * @example
+ * @example Treynor ratio for a single asset against benchmark
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Treynor ratio for a single asset against benchmark
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
  * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
  *
- * // Example 2: Treynor ratio for multiple assets against benchmark
+ * ```
+ *
+ * @example Treynor ratio for multiple assets against benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
  * assertEquals(treynor(y, z, 0.01/12), 0.029862503769903546);
  *
- * // Example 3: Treynor ratio with zero risk-free rate
+ * ```
+ *
+ * @example Treynor ratio with zero risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
  * assertEquals(treynor(x, z), -0.10035923840992064);
  * ```
  */

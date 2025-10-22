@@ -9,23 +9,42 @@ import type { array, matrix } from "../types.d.ts";
  * @param x The input array or matrix to check.
  * @returns Returns `true` if `x` is empty, otherwise `false`.
  *
- * @example
+ * @example An empty array
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: An empty array
  * assertEquals(isempty([]), true);
  *
- * // Example 2: A 2D array with an empty first row (considered empty matrix)
+ * ```
+ *
+ * @example A 2D array with an empty first row (considered empty matrix)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isempty([[]]), true);
  *
- * // Example 3: A non-empty 1D array
+ * ```
+ *
+ * @example A non-empty 1D array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isempty([1, 2, 3]), false);
  *
- * // Example 4: A non-empty 2D array
+ * ```
+ *
+ * @example A non-empty 2D array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isempty([[1, 2], [3, 4]]), false);
  *
- * // Example 5: A non-array input
+ * ```
+ *
+ * @example A non-array input
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(isempty(123), false);
  * ```
  */

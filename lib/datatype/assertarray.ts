@@ -9,17 +9,26 @@ import isarray from "./isarray.ts";
  * @param x The value to check
  * @throws If x is not a 1D array
  *
- * @example
+ * @example Valid array
  * ```ts
  * import { assertThrows } from "jsr:@std/assert";
  *
- * // Example 1: Valid array
  * assertarray([1, 2, 3]); // No error
  *
- * // Example 2: Invalid input throws error
+ * ```
+ *
+ * @example Invalid input throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertarray(5), TypeError, "Expected array");
  *
- * // Example 3: Matrix (2D array) throws error
+ * ```
+ *
+ * @example Matrix (2D array) throws error
+ * ```ts
+ * import { assertThrows } from "jsr:@std/assert";
+ *
  * assertThrows(() => assertarray([[1, 2], [3, 4]]), TypeError, "Expected array");
  * ```
  */

@@ -11,22 +11,37 @@ import type { array } from "../types.d.ts";
  *
  * @throws If the input arguments are invalid or the pattern is longer than the string.
  *
- * @example
+ * @example Basic usage with multiple occurrences
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
- * // Example 1: Basic usage with multiple occurrences
  * assertEquals(strfind('find indices in the string', 'in'), [1, 5, 13, 23]);
  *
- * // Example 2: Pattern appears only once
+ * ```
+ *
+ * @example Pattern appears only once
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(strfind('hello world', 'world'), [6]);
  *
- * // Example 3: Pattern does not appear
+ * ```
+ *
+ * @example Pattern does not appear
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(strfind('hello world', 'notfound'), []);
  *
- * // Example 4: Pattern is longer than the string
+ * ```
+ *
+ * @example Pattern is longer than the string
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
  * assertEquals(strfind('short', 'longpattern'), []);
- * ``` */
+ * ```
+ */
 export default function strfind(str: string, pattern: string): array {
   if (pattern.length > str.length) {
     return [];
