@@ -68,12 +68,467 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function ne(x: number, y: number): boolean;
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: number, y: array): boolean[];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: array, y: number): boolean[];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: array, y: array): boolean[];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: number, y: matrix): boolean[][];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: matrix, y: number): boolean[][];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(x: matrix, y: matrix): boolean[][];
+/**
+ * Not equal comparison X ~= Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are not equal to corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Compare two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, 5), false);
+ *
+ * ```
+ *
+ * @example Compare a number with an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [5, 6, 3]), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a number with a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne(5, [[5, 6], [3, 5]]), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare an array with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], 5), [false, true, true]);
+ *
+ * ```
+ *
+ * @example Compare a matrix with a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], 5), [[false, true], [true, false]]);
+ *
+ * ```
+ *
+ * @example Compare two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([5, 6, 3], [5, 6, 4]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Compare two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ne([[5, 6], [3, 5]], [[5, 7], [3, 5]]), [[false, true], [false, false]]);
+ * ```
+ */
 export default function ne(
   x: numarraymatrix,
   y: numarraymatrix,

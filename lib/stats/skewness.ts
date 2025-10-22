@@ -38,7 +38,79 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  * ```
  */
 export default function skewness(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
+/**
+ * Computes the skewness of a dataset.
+ *
+ * Measures the asymmetry of the probability distribution. Positive skew
+ * indicates a longer tail on the right, negative skew indicates a longer tail on the left.
+ * Zero skew indicates symmetric distribution.
+ *
+ * @param x Input array or matrix
+ * @param flag Bias correction flag (0 for bias correction, 1 for simple calculation). Default is 1
+ * @param dim Dimension to compute along (0 for rows, 1 for columns). Default is 0
+ * @returns Computed skewness values
+ * @throws When input is invalid
+ *
+ * @example Right-skewed data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
+ *
+ * ```
+ *
+ * @example Symmetric data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
+ *
+ * ```
+ *
+ * @example Matrix skewness
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
+ * ```
+ */
 export default function skewness(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
+/**
+ * Computes the skewness of a dataset.
+ *
+ * Measures the asymmetry of the probability distribution. Positive skew
+ * indicates a longer tail on the right, negative skew indicates a longer tail on the left.
+ * Zero skew indicates symmetric distribution.
+ *
+ * @param x Input array or matrix
+ * @param flag Bias correction flag (0 for bias correction, 1 for simple calculation). Default is 1
+ * @param dim Dimension to compute along (0 for rows, 1 for columns). Default is 0
+ * @returns Computed skewness values
+ * @throws When input is invalid
+ *
+ * @example Right-skewed data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
+ *
+ * ```
+ *
+ * @example Symmetric data
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
+ *
+ * ```
+ *
+ * @example Matrix skewness
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
+ * ```
+ */
 export default function skewness(
   x: numarraymatrix,
   flag: 0 | 1 = 1,

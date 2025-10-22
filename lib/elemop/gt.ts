@@ -68,12 +68,467 @@ import { isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function gt(x: number, y: number): boolean;
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: number, y: array): boolean[];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: array, y: number): boolean[];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: array, y: array): boolean[];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: number, y: matrix): boolean[][];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: matrix, y: number): boolean[][];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(x: matrix, y: matrix): boolean[][];
+/**
+ * Greater than comparison X > Y.
+ *
+ * Compares two inputs element-wise, returning true where elements in X are greater than corresponding elements in Y.
+ *
+ * @param x First operand for comparison
+ * @param y Second operand for comparison
+ * @returns The result of the comparison
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Comparison between two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, 5), false);
+ *
+ * ```
+ *
+ * @example Comparison between a number and an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [5, 6, 3]), [false, false, true]);
+ *
+ * ```
+ *
+ * @example Comparison between a number and a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt(5, [[5, 6], [3, 5]]), [[false, false], [true, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between an array and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], 5), [false, true, false]);
+ *
+ * ```
+ *
+ * @example Comparison between a matrix and a number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], 5), [[false, true], [false, false]]);
+ *
+ * ```
+ *
+ * @example Comparison between two arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([5, 6, 3], [4, 6, 3]), [true, false, false]);
+ *
+ * ```
+ *
+ * @example Comparison between two matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(gt([[5, 6], [3, 5]], [[4, 6], [3, 4]]), [[true, false], [false, true]]);
+ * ```
+ */
 export default function gt(
   x: numarraymatrix,
   y: numarraymatrix,

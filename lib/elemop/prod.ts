@@ -36,10 +36,175 @@ import { isarray, ismatrix } from "../../index.ts";
  * ```
  */
 export default function prod(x: array): number;
+/**
+ * Product of array elements.
+ *
+ * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
+ *
+ * @param x The input array or matrix of values
+ * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
+ * @returns The product of the array elements, or an array of products if a matrix is provided
+ * @throws If no input arguments are provided
+ *
+ * @example Product of a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([5, 6, 3]), 90);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
+ * ```
+ */
 export default function prod(x: array, dim: 0): number;
+/**
+ * Product of array elements.
+ *
+ * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
+ *
+ * @param x The input array or matrix of values
+ * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
+ * @returns The product of the array elements, or an array of products if a matrix is provided
+ * @throws If no input arguments are provided
+ *
+ * @example Product of a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([5, 6, 3]), 90);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
+ * ```
+ */
 export default function prod(x: array, dim: 1): number;
+/**
+ * Product of array elements.
+ *
+ * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
+ *
+ * @param x The input array or matrix of values
+ * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
+ * @returns The product of the array elements, or an array of products if a matrix is provided
+ * @throws If no input arguments are provided
+ *
+ * @example Product of a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([5, 6, 3]), 90);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
+ * ```
+ */
 export default function prod(x: matrix, dim: 0): array;
+/**
+ * Product of array elements.
+ *
+ * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
+ *
+ * @param x The input array or matrix of values
+ * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
+ * @returns The product of the array elements, or an array of products if a matrix is provided
+ * @throws If no input arguments are provided
+ *
+ * @example Product of a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([5, 6, 3]), 90);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
+ * ```
+ */
 export default function prod(x: matrix, dim: 1): array;
+/**
+ * Product of array elements.
+ *
+ * Computes the product of elements in an array or matrix. Optionally, computes the product along a specified dimension.
+ *
+ * @param x The input array or matrix of values
+ * @param dim The dimension to operate along, 1 for columns, 0 for rows (default is 1)
+ * @returns The product of the array elements, or an array of products if a matrix is provided
+ * @throws If no input arguments are provided
+ *
+ * @example Product of a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([5, 6, 3]), 90);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along rows
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 0), [150, -56]);
+ *
+ * ```
+ *
+ * @example Product of matrix elements along columns
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prod([[5, 6, 5], [7, 8, -1]], 1), [35, 48, -5]);
+ * ```
+ */
 export default function prod(
   x: array | matrix,
   dim: 0 | 1 = 1,

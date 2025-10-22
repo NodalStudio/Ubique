@@ -56,11 +56,83 @@ export default function histc(
   bins?: number | array,
   dim?: 0 | 1,
 ): HistBin[];
+/**
+ * Histogram count.
+ *
+ * Counts the number of values in x that fall between the elements in the bins array.
+ * Values outside the range in bins are not counted. Returns an array of objects with bin edges,
+ * counts, and frequencies.
+ *
+ * @param x Input array or matrix
+ * @param bins Number of bins or array of bin edges. Default is 10
+ * @param dim Dimension along which to compute histogram. Default is 0
+ * @returns Array of objects with bins, count, and freq properties
+ * @throws When input is invalid
+ *
+ * @example Simple histogram with default bins
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([1, 2, 3, 4, 5], 5).length, 6);
+ *
+ * ```
+ *
+ * @example Histogram with custom bin edges
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([1, 5, 10], [0, 5, 10]).length, 3);
+ *
+ * ```
+ *
+ * @example Matrix histogram
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([[1, 2], [3, 4]], 2).length, 2);
+ * ```
+ */
 export default function histc(
   x: matrix,
   bins?: number | array,
   dim?: 0 | 1,
 ): HistBin[][];
+/**
+ * Histogram count.
+ *
+ * Counts the number of values in x that fall between the elements in the bins array.
+ * Values outside the range in bins are not counted. Returns an array of objects with bin edges,
+ * counts, and frequencies.
+ *
+ * @param x Input array or matrix
+ * @param bins Number of bins or array of bin edges. Default is 10
+ * @param dim Dimension along which to compute histogram. Default is 0
+ * @returns Array of objects with bins, count, and freq properties
+ * @throws When input is invalid
+ *
+ * @example Simple histogram with default bins
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([1, 2, 3, 4, 5], 5).length, 6);
+ *
+ * ```
+ *
+ * @example Histogram with custom bin edges
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([1, 5, 10], [0, 5, 10]).length, 3);
+ *
+ * ```
+ *
+ * @example Matrix histogram
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(histc([[1, 2], [3, 4]], 2).length, 2);
+ * ```
+ */
 export default function histc(
   x: numarraymatrix,
   bins: number | array = 10,

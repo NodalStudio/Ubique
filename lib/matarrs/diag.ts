@@ -71,9 +71,273 @@ import isarray from "../datatype/isarray.ts";
  * ```
  */
 export default function diag(x: array): matrix;
+/**
+ * Diagonal matrix creation and extraction of diagonals from a matrix.
+ *
+ * For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
+ *
+ * @param x Input array or matrix.
+ * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
+ * @returns Diagonal matrix or array of diagonal values.
+ * @throws If the input is neither a vector nor a matrix.
+ *
+ * @example Create a diagonal matrix from a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3]), [[5, 0, 0], [0, 6, 0], [0, 0, -3]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], 1), [[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = -1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], -1), [[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]]);
+ *
+ * ```
+ *
+ * @example Extract the main diagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]]), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first superdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]], 1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first subdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]], -1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract a diagonal out of bounds (diagonal 2)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2), [0]);
+ *
+ * ```
+ */
 export default function diag(x: matrix): array;
+/**
+ * Diagonal matrix creation and extraction of diagonals from a matrix.
+ *
+ * For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
+ *
+ * @param x Input array or matrix.
+ * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
+ * @returns Diagonal matrix or array of diagonal values.
+ * @throws If the input is neither a vector nor a matrix.
+ *
+ * @example Create a diagonal matrix from a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3]), [[5, 0, 0], [0, 6, 0], [0, 0, -3]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], 1), [[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = -1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], -1), [[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]]);
+ *
+ * ```
+ *
+ * @example Extract the main diagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]]), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first superdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]], 1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first subdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]], -1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract a diagonal out of bounds (diagonal 2)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2), [0]);
+ *
+ * ```
+ */
 export default function diag(x: array, k: number): matrix;
+/**
+ * Diagonal matrix creation and extraction of diagonals from a matrix.
+ *
+ * For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
+ *
+ * @param x Input array or matrix.
+ * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
+ * @returns Diagonal matrix or array of diagonal values.
+ * @throws If the input is neither a vector nor a matrix.
+ *
+ * @example Create a diagonal matrix from a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3]), [[5, 0, 0], [0, 6, 0], [0, 0, -3]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], 1), [[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = -1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], -1), [[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]]);
+ *
+ * ```
+ *
+ * @example Extract the main diagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]]), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first superdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]], 1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first subdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]], -1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract a diagonal out of bounds (diagonal 2)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2), [0]);
+ *
+ * ```
+ */
 export default function diag(x: matrix, k: number): array;
+/**
+ * Diagonal matrix creation and extraction of diagonals from a matrix.
+ *
+ * For an input vector, creates a diagonal matrix. For a matrix input, extracts the k-th diagonal (0: main diagonal, k > 0: above main diagonal, k < 0: below main diagonal).
+ *
+ * @param x Input array or matrix.
+ * @param k Index of the diagonal (0: main diagonal, k > 0 above, k < 0 below). Defaults to 0.
+ * @returns Diagonal matrix or array of diagonal values.
+ * @throws If the input is neither a vector nor a matrix.
+ *
+ * @example Create a diagonal matrix from a vector
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3]), [[5, 0, 0], [0, 6, 0], [0, 0, -3]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = 1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], 1), [[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]]);
+ *
+ * ```
+ *
+ * @example Create a diagonal matrix with k = -1
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([5, 6, -3], -1), [[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]]);
+ *
+ * ```
+ *
+ * @example Extract the main diagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]]), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first superdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 5, 0, 0], [0, 0, 6, 0], [0, 0, 0, -3], [0, 0, 0, 0]], 1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract the first subdiagonal from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[0, 0, 0, 0], [5, 0, 0, 0], [0, 6, 0, 0], [0, 0, -3, 0]], -1), [5, 6, -3]);
+ *
+ * ```
+ *
+ * @example Extract a diagonal out of bounds (diagonal 2)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(diag([[5, 0, 0], [0, 6, 0], [0, 0, -3]], 2), [0]);
+ *
+ * ```
+ */
 export default function diag(x: array | matrix, k = 0): array | matrix {
   const absK = Math.abs(k);
 

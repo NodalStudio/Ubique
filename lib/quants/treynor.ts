@@ -53,12 +53,104 @@ export default function treynor(
   frisk?: number,
   dim?: 0 | 1,
 ): number;
+/**
+ * Treynor Ratio.
+ *
+ * Computes the Treynor ratio, a risk-adjusted performance measure that uses beta
+ * (systematic risk) instead of standard deviation. It measures excess return per unit of systematic risk.
+ *
+ * @param x Asset/portfolio returns
+ * @param y Benchmark/market returns
+ * @param frisk Risk-free rate (defaults to 0)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns The Treynor ratio
+ * @throws If input is a number or insufficient arguments provided
+ *
+ * @example Treynor ratio for a single asset against benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
+ *
+ * ```
+ *
+ * @example Treynor ratio for multiple assets against benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
+ * assertEquals(treynor(y, z, 0.01/12), 0.029862503769903546);
+ *
+ * ```
+ *
+ * @example Treynor ratio with zero risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
+ * assertEquals(treynor(x, z), -0.10035923840992064);
+ * ```
+ */
 export default function treynor(
   x: matrix,
   y: array,
   frisk?: number,
   dim?: 0 | 1,
 ): array | matrix;
+/**
+ * Treynor Ratio.
+ *
+ * Computes the Treynor ratio, a risk-adjusted performance measure that uses beta
+ * (systematic risk) instead of standard deviation. It measures excess return per unit of systematic risk.
+ *
+ * @param x Asset/portfolio returns
+ * @param y Benchmark/market returns
+ * @param frisk Risk-free rate (defaults to 0)
+ * @param dim Dimension to operate on (0: row-wise, 1: column-wise) (defaults to 0)
+ * @returns The Treynor ratio
+ * @throws If input is a number or insufficient arguments provided
+ *
+ * @example Treynor ratio for a single asset against benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
+ *
+ * ```
+ *
+ * @example Treynor ratio for multiple assets against benchmark
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
+ * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
+ * assertEquals(treynor(x, z, 0.01/12), -0.09568702060685172);
+ * assertEquals(treynor(y, z, 0.01/12), 0.029862503769903546);
+ *
+ * ```
+ *
+ * @example Treynor ratio with zero risk-free rate
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
+ * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
+ *
+ * assertEquals(treynor(x, z), -0.10035923840992064);
+ * ```
+ */
 export default function treynor(
   x: numarraymatrix,
   y: array,
