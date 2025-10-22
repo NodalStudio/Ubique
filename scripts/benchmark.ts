@@ -141,22 +141,22 @@ function arraysEqual(a: unknown, b: unknown, tolerance = 1e-9): boolean {
 // Print utilities
 function printHeader(title: string) {
   console.log(
-    "\n" + colors.bright + colors.cyan + "=".repeat(90) + colors.reset
+    "\n" + colors.bright + colors.cyan + "=".repeat(90) + colors.reset,
   );
   console.log(
     colors.bright +
       colors.cyan +
       title.padStart((90 + title.length) / 2) +
-      colors.reset
+      colors.reset,
   );
   console.log(
-    colors.bright + colors.cyan + "=".repeat(90) + colors.reset + "\n"
+    colors.bright + colors.cyan + "=".repeat(90) + colors.reset + "\n",
   );
 }
 
 function printSectionHeader(title: string, emoji: string) {
   console.log(
-    colors.bright + colors.magenta + `\n${emoji} ${title}` + colors.reset
+    colors.bright + colors.magenta + `\n${emoji} ${title}` + colors.reset,
   );
   console.log(colors.dim + "─".repeat(90) + colors.reset);
 }
@@ -175,18 +175,17 @@ function printTableHeader() {
 
 function printTestResult(result: BenchmarkResult) {
   const speedupColor = result.speedup >= 1 ? colors.green : colors.red;
-  const speedupText =
-    result.speedup >= 1
-      ? `${result.speedup.toFixed(2)}x faster`
-      : `${(1 / result.speedup).toFixed(2)}x slower`;
+  const speedupText = result.speedup >= 1
+    ? `${result.speedup.toFixed(2)}x faster`
+    : `${(1 / result.speedup).toFixed(2)}x slower`;
 
   const statusIcon = result.correct ? "✅" : "❌";
 
   const row = [
     result.name.padEnd(30),
     colors.cyan +
-      `${result.rubiqueTime.toFixed(2)}ms`.padEnd(12) +
-      colors.reset,
+    `${result.rubiqueTime.toFixed(2)}ms`.padEnd(12) +
+    colors.reset,
     colors.dim + `${result.mathjsTime.toFixed(2)}ms`.padEnd(12) + colors.reset,
     speedupColor + speedupText.padEnd(15) + colors.reset,
     statusIcon,
@@ -208,7 +207,7 @@ function printProgress(current: number, total: number, testName: string) {
       colors.reset +
       colors.dim +
       ` - ${testName}` +
-      colors.reset
+      colors.reset,
   );
 }
 
@@ -216,8 +215,8 @@ function printSummary(results: BenchmarkResult[]) {
   console.log("\n");
   printHeader("📊 BENCHMARK SUMMARY");
 
-  const avgSpeedup =
-    results.reduce((sum, r) => sum + r.speedup, 0) / results.length;
+  const avgSpeedup = results.reduce((sum, r) => sum + r.speedup, 0) /
+    results.length;
   const wonTests = results.filter((r) => r.speedup > 1).length;
   const lostTests = results.filter((r) => r.speedup < 1).length;
   const allCorrect = results.every((r) => r.correct);
@@ -231,37 +230,37 @@ function printSummary(results: BenchmarkResult[]) {
   // Summary stats
   console.log(colors.bright + "Overall Performance:" + colors.reset);
   console.log(
-    `  ${colors.green}Average Speedup:${colors.reset} ${
-      colors.bright
-    }${avgSpeedup.toFixed(2)}x${colors.reset}`
+    `  ${colors.green}Average Speedup:${colors.reset} ${colors.bright}${
+      avgSpeedup.toFixed(2)
+    }x${colors.reset}`,
   );
   console.log(
-    `  ${colors.green}Tests Won:${colors.reset} ${wonTests}/${results.length} ${
-      colors.dim
-    }(${((wonTests / results.length) * 100).toFixed(1)}%)${colors.reset}`
+    `  ${colors.green}Tests Won:${colors.reset} ${wonTests}/${results.length} ${colors.dim}(${
+      ((wonTests / results.length) * 100).toFixed(1)
+    }%)${colors.reset}`,
   );
   console.log(
-    `  ${colors.red}Tests Lost:${colors.reset} ${lostTests}/${results.length}`
+    `  ${colors.red}Tests Lost:${colors.reset} ${lostTests}/${results.length}`,
   );
   console.log(
     `  ${colors.cyan}Correctness:${colors.reset} ${
       allCorrect
         ? colors.green + "✅ All tests passed"
         : colors.red + "❌ Some tests failed"
-    }${colors.reset}`
+    }${colors.reset}`,
   );
 
   console.log(colors.bright + "\nHighlights:" + colors.reset);
   console.log(
-    `  ${colors.green}🏆 Best:${colors.reset} ${bestTest.name} ${
-      colors.bright
-    }(${bestTest.speedup.toFixed(2)}x)${colors.reset}`
+    `  ${colors.green}🏆 Best:${colors.reset} ${bestTest.name} ${colors.bright}(${
+      bestTest.speedup.toFixed(2)
+    }x)${colors.reset}`,
   );
   if (worstTest.speedup < 1) {
     console.log(
-      `  ${colors.red}⚠️  Slowest:${colors.reset} ${worstTest.name} ${
-        colors.dim
-      }(${(1 / worstTest.speedup).toFixed(2)}x slower)${colors.reset}`
+      `  ${colors.red}⚠️  Slowest:${colors.reset} ${worstTest.name} ${colors.dim}(${
+        (1 / worstTest.speedup).toFixed(2)
+      }x slower)${colors.reset}`,
     );
   }
 
@@ -270,17 +269,14 @@ function printSummary(results: BenchmarkResult[]) {
   const categories = [...new Set(results.map((r) => r.category))];
   for (const category of categories) {
     const categoryResults = results.filter((r) => r.category === category);
-    const categoryAvg =
-      categoryResults.reduce((sum, r) => sum + r.speedup, 0) /
+    const categoryAvg = categoryResults.reduce((sum, r) => sum + r.speedup, 0) /
       categoryResults.length;
     const categoryWon = categoryResults.filter((r) => r.speedup > 1).length;
 
     console.log(
-      `  ${category.padEnd(20)} ${colors.cyan}${categoryAvg.toFixed(2)}x${
-        colors.reset
-      } ${colors.dim}(${categoryWon}/${categoryResults.length} won)${
-        colors.reset
-      }`
+      `  ${category.padEnd(20)} ${colors.cyan}${
+        categoryAvg.toFixed(2)
+      }x${colors.reset} ${colors.dim}(${categoryWon}/${categoryResults.length} won)${colors.reset}`,
     );
   }
 
@@ -293,7 +289,7 @@ function runBenchmarks() {
 
   printHeader("🚀 RUBIQUE vs math.js BENCHMARK SUITE");
   console.log(
-    colors.dim + "Running comprehensive performance tests...\n" + colors.reset
+    colors.dim + "Running comprehensive performance tests...\n" + colors.reset,
   );
 
   // Define all tests
@@ -353,7 +349,7 @@ function runBenchmarks() {
       mathjs: (data: number[]) => mathjs.median(data),
       iterations: 100,
     },
-        {
+    {
       category: "Statistics",
       name: "Correlation (n=10,000)",
       inputType: "arrayPair",
@@ -500,7 +496,7 @@ function runBenchmarks() {
 
   const runTypedTest = <TInput, TType extends InputType>(
     test: BaseBenchmarkTest<TInput, TType>,
-    index: number
+    index: number,
   ) => {
     if (test.category !== currentCategory) {
       if (index > 0) printTableHeader();
@@ -514,11 +510,11 @@ function runBenchmarks() {
     const testData = test.setup();
     const rubiqueTime = benchmarkFunction(
       () => test.rubique(testData),
-      test.iterations
+      test.iterations,
     );
     const mathjsTime = benchmarkFunction(
       () => test.mathjs(testData),
-      test.iterations
+      test.iterations,
     );
 
     const rubiqueResult = test.rubique(testData);
@@ -546,22 +542,22 @@ function runBenchmarks() {
       case "array":
         return runTypedTest(
           test as BaseBenchmarkTest<number[], "array">,
-          index
+          index,
         );
       case "arrayPair":
         return runTypedTest(
           test as BaseBenchmarkTest<ArrayPair, "arrayPair">,
-          index
+          index,
         );
       case "matrix":
         return runTypedTest(
           test as BaseBenchmarkTest<number[][], "matrix">,
-          index
+          index,
         );
       case "matrixPair":
         return runTypedTest(
           test as BaseBenchmarkTest<MatrixPair, "matrixPair">,
-          index
+          index,
         );
       default: {
         const exhaustiveCheck: never = test;
@@ -582,14 +578,14 @@ function runBenchmarks() {
   console.log(
     colors.dim +
       "\n💾 Saving results to benchmark-unified-results.json..." +
-      colors.reset
+      colors.reset,
   );
   Deno.writeTextFileSync(
     "benchmark-unified-results.json",
-    JSON.stringify(results, null, 2)
+    JSON.stringify(results, null, 2),
   );
   console.log(
-    colors.green + "✅ Results saved successfully!" + colors.reset + "\n"
+    colors.green + "✅ Results saved successfully!" + colors.reset + "\n",
   );
 
   return results;

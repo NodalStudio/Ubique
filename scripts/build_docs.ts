@@ -73,7 +73,7 @@ type FixDocAssetsOptions = {
 };
 
 async function fixDocAssets(
-  options: FixDocAssetsOptions = {}
+  options: FixDocAssetsOptions = {},
 ): Promise<number> {
   const docsRootArg = options.root ?? "./docs";
   const docsRoot = resolve(Deno.cwd(), docsRootArg);
@@ -90,7 +90,7 @@ async function fixDocAssets(
     for (const asset of assets) {
       const pattern = new RegExp(
         `(href|src)="([^"]*?)${escapeRegExp(asset)}"`,
-        "g"
+        "g",
       );
       const replacementPath = prefix === "." ? asset : `${prefix}/${asset}`;
       updated = updated.replace(pattern, (_match, attr, _currentPath) => {
@@ -145,8 +145,7 @@ async function hideTopNav(options: FixDocAssetsOptions = {}): Promise<number> {
     let updated = original;
 
     // Check if this is index.html
-    const isIndexPage =
-      filePath.endsWith("index.html") ||
+    const isIndexPage = filePath.endsWith("index.html") ||
       filePath.endsWith("index.html".replace(/\//g, "\\"));
 
     if (isIndexPage) {
@@ -157,7 +156,7 @@ async function hideTopNav(options: FixDocAssetsOptions = {}): Promise<number> {
           `  <style>
     .toc { display: none; }
   </style>
-</head>`
+</head>`,
         );
       }
     } else {
@@ -168,7 +167,7 @@ async function hideTopNav(options: FixDocAssetsOptions = {}): Promise<number> {
           `  <style>
     #topnav { display: none; }
   </style>
-</head>`
+</head>`,
         );
       }
     }
@@ -250,8 +249,7 @@ async function trimSearchIndexDocs(fileUrl: URL): Promise<boolean> {
   if (!changed) return false;
 
   const updatedPayload = JSON.stringify(data);
-  const updatedContent =
-    content.slice(0, jsonStart) +
+  const updatedContent = content.slice(0, jsonStart) +
     updatedPayload +
     content.slice(assignmentEnd + 1);
 
@@ -293,5 +291,5 @@ console.log(
   `Documentation built successfully. Normalized asset paths in ${assetsUpdated} HTML file(s), ` +
     `fixed links in ${linksUpdated} HTML file(s).` +
     (topNavHidden ? ` Hidden top navigation in ${topNavHidden} file(s).` : "") +
-    (trimmed ? " Trimmed search index summaries." : "")
+    (trimmed ? " Trimmed search index summaries." : ""),
 );
