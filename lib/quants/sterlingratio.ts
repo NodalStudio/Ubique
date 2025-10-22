@@ -40,12 +40,78 @@ export default function sterlingratio(
   t?: number,
   dim?: 0 | 1,
 ): number;
+/**
+ * Sterling Ratio.
+ *
+ * A risk-adjusted performance measure like Calmar ratio but the denominator is
+ * the largest consecutive drawdown (excluded the 10% excess in the original formula).
+ * Sterling Ratio = (Annualized Return - Risk Free Rate) / Largest Drawdown
+ *
+ * @param x asset/portfolio returns
+ * @param frisk annual free-risk rate (def: 0)
+ * @param t frequency of data. 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (def: 252)
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return Sterling Ratio
+ *
+ * @example Single asset sterling ratio
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
+ *
+ * ```
+ *
+ * @example Multiple assets sterling ratios
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ *
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
+ * assertEquals(sterlingratio(y,0,12), 1.3190010333058182);
+ * ```
+ */
 export default function sterlingratio(
   x: matrix,
   frisk?: number,
   t?: number,
   dim?: 0 | 1,
 ): array | matrix;
+/**
+ * Sterling Ratio.
+ *
+ * A risk-adjusted performance measure like Calmar ratio but the denominator is
+ * the largest consecutive drawdown (excluded the 10% excess in the original formula).
+ * Sterling Ratio = (Annualized Return - Risk Free Rate) / Largest Drawdown
+ *
+ * @param x asset/portfolio returns
+ * @param frisk annual free-risk rate (def: 0)
+ * @param t frequency of data. 1: yearly, 4: quarterly, 12: monthly, 52: weekly, 252: daily (def: 252)
+ * @param dim dimension 0: row, 1: column (def: 0)
+ * @return Sterling Ratio
+ *
+ * @example Single asset sterling ratio
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
+ *
+ * ```
+ *
+ * @example Multiple assets sterling ratios
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
+ *
+ * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
+ * assertEquals(sterlingratio(x,0,12), 16.701048718978136);
+ * assertEquals(sterlingratio(y,0,12), 1.3190010333058182);
+ * ```
+ */
 export default function sterlingratio(
   x: numarraymatrix,
   frisk: number = 0,

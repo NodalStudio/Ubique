@@ -39,9 +39,153 @@ import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
  * ```
  */
 export default function cov(x: array): number;
+/**
+ * Covariance matrix.
+ *
+ * Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
+ * returns the covariance matrix between columns.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix, or flag value (0 or 1)
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Covariance matrix or scalar variance
+ * @throws When input dimensions do not agree
+ *
+ * @example Sample covariance (variance) of single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population covariance with flag=0
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Covariance matrix from 2x2 data matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
+ * ```
+ */
 export default function cov(x: array, flag: 0 | 1): number;
+/**
+ * Covariance matrix.
+ *
+ * Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
+ * returns the covariance matrix between columns.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix, or flag value (0 or 1)
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Covariance matrix or scalar variance
+ * @throws When input dimensions do not agree
+ *
+ * @example Sample covariance (variance) of single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population covariance with flag=0
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Covariance matrix from 2x2 data matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
+ * ```
+ */
 export default function cov(x: array, y: array, flag?: 0 | 1): matrix;
+/**
+ * Covariance matrix.
+ *
+ * Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
+ * returns the covariance matrix between columns.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix, or flag value (0 or 1)
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Covariance matrix or scalar variance
+ * @throws When input dimensions do not agree
+ *
+ * @example Sample covariance (variance) of single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population covariance with flag=0
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Covariance matrix from 2x2 data matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
+ * ```
+ */
 export default function cov(x: matrix, flag?: 0 | 1): matrix;
+/**
+ * Covariance matrix.
+ *
+ * Calculates the covariance matrix between arrays or matrices. For a single vector,
+ * returns the variance. For two vectors, returns the 2x2 covariance matrix. For a matrix,
+ * returns the covariance matrix between columns.
+ *
+ * @param x Input array or matrix
+ * @param y Optional second input array or matrix, or flag value (0 or 1)
+ * @param flag Optional Bessel's correction (0: population, 1: sample). Default is 1
+ * @returns Covariance matrix or scalar variance
+ * @throws When input dimensions do not agree
+ *
+ * @example Sample covariance (variance) of single array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3]), 1);
+ *
+ * ```
+ *
+ * @example Population covariance with flag=0
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([1, 2, 3], 0), 0.6666666666666666);
+ *
+ * ```
+ *
+ * @example Covariance matrix from 2x2 data matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(cov([[1, 2], [3, 4]]), [[2, 2], [2, 2]]);
+ * ```
+ */
 export default function cov(
   x: array | matrix,
   y?: array | matrix | number,

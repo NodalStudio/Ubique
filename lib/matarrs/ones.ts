@@ -51,7 +51,107 @@ import type { matrix } from "../types.d.ts";
  * ```
  */
 export default function ones(n: number): matrix;
+/**
+ * Create an array of all ones.
+ *
+ * Creates a matrix or array filled with ones based on the provided dimensions.
+ * Accepts up to two arguments for dimensions or a single array defining the dimensions.
+ *
+ * @param args Variable input arguments (max 2).
+ * @returns A matrix or array filled with ones.
+ * @throws If no arguments are provided.
+ *
+ * @example Create a 0x0 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(0), []);
+ *
+ * ```
+ *
+ * @example Create a 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(1), [[1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2), [[1, 1], [1, 1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2, 1), [[1], [1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
+ *
+ * ```
+ */
 export default function ones(nrows: number, ncols: number): matrix;
+/**
+ * Create an array of all ones.
+ *
+ * Creates a matrix or array filled with ones based on the provided dimensions.
+ * Accepts up to two arguments for dimensions or a single array defining the dimensions.
+ *
+ * @param args Variable input arguments (max 2).
+ * @returns A matrix or array filled with ones.
+ * @throws If no arguments are provided.
+ *
+ * @example Create a 0x0 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(0), []);
+ *
+ * ```
+ *
+ * @example Create a 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(1), [[1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2), [[1, 1], [1, 1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2, 1), [[1], [1]]);
+ *
+ * ```
+ *
+ * @example Create a 2x3 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ones(2, 3), [[1, 1, 1], [1, 1, 1]]);
+ *
+ * ```
+ */
 export default function ones(rows: number, cols?: number): matrix {
   if (cols === undefined) {
     cols = rows;

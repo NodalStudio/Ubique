@@ -45,19 +45,229 @@ import {
  * ```
  */
 export default function prctile(x: array, p: number, dim?: 0 | 1): number;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(x: matrix, p: number, dim?: 0 | 1): array;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(x: array, p: number, dim: 0 | 1): number;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(x: matrix, p: number, dim: 0 | 1): array;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(
   x: array | matrix,
   p: number,
   dim?: 0 | 1,
 ): number | array;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(
   x: array | matrix,
   p: number,
   dim: 0 | 1,
 ): number | array;
+/**
+ * Percentiles of a sample.
+ *
+ * Calculates the p-th percentile of values in an array or matrix.
+ * Uses linear interpolation between data points for accurate percentile calculation.
+ *
+ * @param x Input array or matrix
+ * @param p Percentile value in range [0,100]
+ * @param dim Dimension along which to compute percentiles. Default is 0
+ * @returns Percentile values
+ * @throws When percentile is outside valid range [0,100]
+ *
+ * @example 50th percentile (median)
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 50), 3);
+ *
+ * ```
+ *
+ * @example 25th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4], 25), 1.5);
+ *
+ * ```
+ *
+ * @example 75th percentile
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(prctile([1, 2, 3, 4, 5], 75), 4.25);
+ * ```
+ */
 export default function prctile(
   x: array | matrix,
   p: number,

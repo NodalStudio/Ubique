@@ -73,9 +73,297 @@ import type { array, matrix } from "../types.d.ts";
  * ```
  */
 export default function rand(): number;
+/**
+ * Uniformly distributed pseudorandom numbers.
+ *
+ * Generates uniformly distributed pseudorandom numbers. It can return:
+ * - A single random number if no arguments are provided.
+ * - A 2D array of random numbers if dimensions are provided.
+ *
+ * @param args Variable input arguments (max 2)
+ * @returns A random number or a matrix of random numbers
+ * @throws If invalid arguments are provided
+ *
+ * @example Single random number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(typeof rand(), 'number');
+ *
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(rand(0), []);
+ *
+ * ```
+ *
+ * @example 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x1 = rand(1) as matrix;
+ * assertEquals(result1x1.length, 1);
+ * assertEquals(result1x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x2 = rand(2) as matrix;
+ * assertEquals(result2x2.length, 2);
+ * assertEquals(result2x2[0].length, 2);
+ *
+ * ```
+ *
+ * @example 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x1 = rand([2, 1]) as matrix;
+ * assertEquals(result2x1.length, 2);
+ * assertEquals(result2x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 1x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x2 = rand(1, 2) as matrix;
+ * assertEquals(result1x2.length, 1);
+ * assertEquals(result1x2[0].length, 2);
+ * ```
+ */
 export default function rand(n: number): matrix;
+/**
+ * Uniformly distributed pseudorandom numbers.
+ *
+ * Generates uniformly distributed pseudorandom numbers. It can return:
+ * - A single random number if no arguments are provided.
+ * - A 2D array of random numbers if dimensions are provided.
+ *
+ * @param args Variable input arguments (max 2)
+ * @returns A random number or a matrix of random numbers
+ * @throws If invalid arguments are provided
+ *
+ * @example Single random number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(typeof rand(), 'number');
+ *
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(rand(0), []);
+ *
+ * ```
+ *
+ * @example 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x1 = rand(1) as matrix;
+ * assertEquals(result1x1.length, 1);
+ * assertEquals(result1x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x2 = rand(2) as matrix;
+ * assertEquals(result2x2.length, 2);
+ * assertEquals(result2x2[0].length, 2);
+ *
+ * ```
+ *
+ * @example 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x1 = rand([2, 1]) as matrix;
+ * assertEquals(result2x1.length, 2);
+ * assertEquals(result2x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 1x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x2 = rand(1, 2) as matrix;
+ * assertEquals(result1x2.length, 1);
+ * assertEquals(result1x2[0].length, 2);
+ * ```
+ */
 export default function rand(dims: array): matrix;
+/**
+ * Uniformly distributed pseudorandom numbers.
+ *
+ * Generates uniformly distributed pseudorandom numbers. It can return:
+ * - A single random number if no arguments are provided.
+ * - A 2D array of random numbers if dimensions are provided.
+ *
+ * @param args Variable input arguments (max 2)
+ * @returns A random number or a matrix of random numbers
+ * @throws If invalid arguments are provided
+ *
+ * @example Single random number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(typeof rand(), 'number');
+ *
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(rand(0), []);
+ *
+ * ```
+ *
+ * @example 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x1 = rand(1) as matrix;
+ * assertEquals(result1x1.length, 1);
+ * assertEquals(result1x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x2 = rand(2) as matrix;
+ * assertEquals(result2x2.length, 2);
+ * assertEquals(result2x2[0].length, 2);
+ *
+ * ```
+ *
+ * @example 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x1 = rand([2, 1]) as matrix;
+ * assertEquals(result2x1.length, 2);
+ * assertEquals(result2x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 1x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x2 = rand(1, 2) as matrix;
+ * assertEquals(result1x2.length, 1);
+ * assertEquals(result1x2[0].length, 2);
+ * ```
+ */
 export default function rand(rows: number, cols: number): matrix;
+/**
+ * Uniformly distributed pseudorandom numbers.
+ *
+ * Generates uniformly distributed pseudorandom numbers. It can return:
+ * - A single random number if no arguments are provided.
+ * - A 2D array of random numbers if dimensions are provided.
+ *
+ * @param args Variable input arguments (max 2)
+ * @returns A random number or a matrix of random numbers
+ * @throws If invalid arguments are provided
+ *
+ * @example Single random number
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(typeof rand(), 'number');
+ *
+ * ```
+ *
+ * @example Empty matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * assertEquals(rand(0), []);
+ *
+ * ```
+ *
+ * @example 1x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x1 = rand(1) as matrix;
+ * assertEquals(result1x1.length, 1);
+ * assertEquals(result1x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 2x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x2 = rand(2) as matrix;
+ * assertEquals(result2x2.length, 2);
+ * assertEquals(result2x2[0].length, 2);
+ *
+ * ```
+ *
+ * @example 2x1 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result2x1 = rand([2, 1]) as matrix;
+ * assertEquals(result2x1.length, 2);
+ * assertEquals(result2x1[0].length, 1);
+ *
+ * ```
+ *
+ * @example 1x2 matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ * import type { matrix } from "../types.d.ts";
+ *
+ * const result1x2 = rand(1, 2) as matrix;
+ * assertEquals(result1x2.length, 1);
+ * assertEquals(result1x2[0].length, 2);
+ * ```
+ */
 export default function rand(...args: unknown[]): number | matrix {
   if (args.length === 0) {
     return Math.random();

@@ -92,15 +92,335 @@ import isundefined from "../datatype/isundefined.ts";
  */
 // No index - return as-is
 export default function subset(m: array): array;
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(m: matrix): matrix;
 
 // Array subsetting - single element
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(m: array, r: number): number;
 
 // Array subsetting - multiple elements
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(m: array, r: array): array;
 
 // Matrix subsetting - returns matrix or array after squeeze
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(
   m: matrix,
   r: number | array | string,
@@ -108,6 +428,86 @@ export default function subset(
 ): array | matrix;
 
 // Union type overload for when type is not narrowed
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(
   m: array | matrix,
   r?: number | array | string,
@@ -115,6 +515,86 @@ export default function subset(
 ): number | array | matrix;
 
 // Implementation signature
+/**
+ * Extract a subset of an array or matrix based on row and column indices.
+ *
+ * Extracts a subset from an array or matrix based on specified row and column indices.
+ * If the indices are not provided, the entire array or matrix is returned. Use ':' to select all rows or columns.
+ *
+ * @param m The input array or matrix.
+ * @param r The row index or ':' for all rows.
+ * @param c The column index or ':' for all columns.
+ * @returns The extracted subset of the array or matrix.
+ * @throws If the input arguments are invalid.
+ *
+ * @example Extract a single element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ * assertEquals(subset(c, 1), 6);
+ *
+ * ```
+ *
+ * @example Extract multiple elements from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, [1, 2]), [6, 3]);
+ *
+ * ```
+ *
+ * @example Extract the last element from an array
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const c = [5, 6, 3];
+ *
+ * assertEquals(subset(c, c.length - 1), 3);
+ *
+ * ```
+ *
+ * @example Extract a single element from a matrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ * assertEquals(subset(a, 0, 1), [[6]]);
+ *
+ * ```
+ *
+ * @example Extract a submatrix
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, [0, 1], [1, 2]), [[6, 5], [8, -1]]);
+ *
+ * ```
+ *
+ * @example Extract an entire row
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, 0, ':'), [[5, 6, 5]]);
+ *
+ * ```
+ *
+ * @example Extract an entire column
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * const a = [[5, 6, 5], [7, 8, -1]];
+ *
+ * assertEquals(subset(a, ':', 0), [[5], [7]]);
+ *
+ * ```
+ */
 export default function subset(
   m: array | matrix,
   r?: number | array | string,

@@ -44,12 +44,299 @@ import { arrayfun, isarray, ismatrix, isnumber } from "../../index.ts";
  * ```
  */
 export default function ldivide(x: number, y: number): number;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: number, y: array): array;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: array, y: number): array;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: array, y: array): array;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: number, y: matrix): matrix;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: matrix, y: number): matrix;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(x: matrix, y: matrix): matrix;
+/**
+ * Left array division X .\ Y.
+ *
+ * Performs element-wise left division of arrays or matrices. For scalar inputs, performs standard division.
+ *
+ * @param x The divisor, can be a number, array, or matrix
+ * @param y The dividend, can be a number, array, or matrix
+ * @returns The result of element-wise left division y ./ x
+ * @throws If the input dimensions do not agree or if no arguments are provided
+ *
+ * @example Divide two numbers
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, 6), 3);
+ *
+ * ```
+ *
+ * @example Element-wise division of arrays
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([2, 4, 8], [6, 8, 16]), [3, 2, 2]);
+ *
+ * ```
+ *
+ * @example Divide array by scalar
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide(2, [6, 8, 10]), [3, 4, 5]);
+ *
+ * ```
+ *
+ * @example Element-wise division of matrices
+ * ```ts
+ * import { assertEquals } from "jsr:@std/assert";
+ *
+ * assertEquals(ldivide([[2, 4], [6, 8]], [[6, 8], [12, 16]]), [[3, 2], [2, 2]]);
+ * ```
+ */
 export default function ldivide(
   x: numarraymatrix,
   y: numarraymatrix,
