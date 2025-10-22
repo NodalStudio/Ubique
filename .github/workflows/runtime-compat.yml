@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: node
       - run: npm install --no-save dayjs
-      - run: npm exec --yes tsx test/runtime/node-smoke.ts
+      - run: npm exec --yes tsx test/node-smoke.ts
 
   bun:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun test/runtime/bun-smoke.ts
+      - run: bun test/bun-smoke.ts
 
   browser:
     runs-on: ubuntu-latest
@@ -44,4 +44,4 @@ jobs:
           node-version: node
       - run: npm install --no-save vitest @vitest/browser playwright dayjs
       - run: npx playwright install chromium
-      - run: npx vitest run --browser.enabled --browser.headless test/runtime/browser-smoke.test.ts
+      - run: npx vitest run --browser.enabled --browser.headless test/browser-smoke.test.ts
