@@ -42,6 +42,6 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: node
-      - run: npm install --no-save vitest @vitest/browser playwright dayjs
+      - run: npm install --no-save vitest @vitest/browser-playwright dayjs
       - run: npx playwright install chromium
       - run: npx vitest run --browser.enabled --browser.headless test/browser-smoke.test.ts
