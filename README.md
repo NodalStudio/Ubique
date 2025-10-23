@@ -58,43 +58,43 @@ Rubique demonstrates exceptional performance gains across multiple operations co
 
 Want to see these performance gains in action?
 
-- **Browser:** Check out our **[interactive benchmark page](https://bemayer.github.io/rubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
+- **Browser:** Check out our **[interactive benchmark page](https://nodalstudio.github.io/Rubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
 - **CLI:** Run `deno task benchmark` for a comprehensive terminal-based benchmark suite with colored output and detailed results.
 
 ## Installation
 
 ### For Deno
 
-Rubique is published on [JSR (JavaScript Registry)](https://jsr.io/@bemayer/rubique):
+Rubique is published on [JSR (JavaScript Registry)](https://jsr.io/@nodalstudio/rubique):
 
 ```bash
-deno add @bemayer/rubique
+deno add @nodalstudio/rubique
 ```
 
 Or import directly:
 
 ```ts
-import * as rubique from "jsr:@bemayer/rubique";
+import * as rubique from "jsr:@nodalstudio/rubique";
 ```
 
 ### For Node.js / npm
 
 **Option 1: Using JSR auto-generated package**
 ```bash
-npm install @jsr/bemayer__rubique
+npm install @jsr/nodalstudio__rubique
 ```
 
 ```ts
-import * as rubique from "@jsr/bemayer__rubique";
+import * as rubique from "@jsr/nodalstudio__rubique";
 ```
 
 **Option 2: Using JSR specifier (Node.js 20.6+)**
 ```bash
-npm install jsr:@bemayer/rubique
+npm install jsr:@nodalstudio/rubique
 ```
 
 ```ts
-import * as rubique from "@bemayer/rubique";
+import * as rubique from "@nodalstudio/rubique";
 ```
 
 ### For browsers
@@ -103,7 +103,7 @@ Use the esm.sh CDN to load Rubique directly in the browser:
 
 ```html
 <script type="module">
-  import * as rubique from 'https://esm.sh/jsr/@bemayer/rubique@1.0.0';
+  import * as rubique from 'https://esm.sh/jsr/@nodalstudio/rubique@1.0.0';
 
   const matrix = rubique.inv([[1, 2], [3, 4]]);
   console.log(matrix);
@@ -115,7 +115,7 @@ Use the esm.sh CDN to load Rubique directly in the browser:
 Clone the repository to contribute or explore the source code:
 
 ```bash
-git clone https://github.com/bemayer/rubique.git
+git clone https://github.com/NodalStudio/Rubique.git
 cd rubique
 ```
 
@@ -125,10 +125,10 @@ Below is a quick example demonstrating matrix multiplication with Rubique:
 
 ```ts
 // Deno
-import * as rubique from "jsr:@bemayer/rubique";
+import * as rubique from "jsr:@nodalstudio/rubique";
 
 // Node.js
-// import * as rubique from "@jsr/bemayer__rubique";
+// import * as rubique from "@jsr/nodalstudio__rubique";
 
 const A = rubique.matrix([
   [1, 2],
@@ -156,7 +156,7 @@ from Ubique and MATLAB-like environments.
 
 Contributions are welcome and encouraged! If you have ideas or improvements,
 please fork the repository and submit a pull request. For issues or feature
-requests, use the [GitHub Issues](https://github.com/bemayer/rubique/issues)
+requests, use the [GitHub Issues](https://github.com/nodalstudio/rubique/issues)
 page.
 
 ## License
