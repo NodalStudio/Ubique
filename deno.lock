@@ -1,0 +1,16 @@
+{
+  "version": "5",
+  "specifiers": {
+    "npm:dayjs@1.11.13": "1.11.13"
+  },
+  "npm": {
+    "dayjs@1.11.13": {
+      "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:dayjs@1.11.13"
+    ]
+  }
+}
