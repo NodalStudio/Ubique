@@ -9,7 +9,7 @@ const docsOutput = "./docs";
 const docArgs = [
   "doc",
   "--html",
-  "--name=Rubique",
+  "--name=Ubique",
   `--output=${docsOutput}`,
   "lib/",
 ];
@@ -271,7 +271,7 @@ await Deno.writeTextFile(targetScriptUrl, scriptOverride);
 
 const cssAppend = await Deno.readTextFile(landingCssUrl);
 const cssAppendTrimmed = cssAppend.trim();
-const landingCssMarker = "/* rubique landing overrides */";
+const landingCssMarker = "/* ubique landing overrides */";
 const pageCss = await Deno.readTextFile(targetCssUrl);
 
 const escapedMarker = landingCssMarker.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");

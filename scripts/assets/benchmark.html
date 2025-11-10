@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rubique Performance vs Math.js</title>
+    <title>Ubique Performance vs Math.js</title>
     <style>
       * {
         margin: 0;
@@ -563,7 +563,7 @@
       <!-- Slide 1: Intro -->
       <div class="slide active intro-slide" id="introSlide">
         <div class="intro-content">
-          <h1>🚀 Rubique Performance vs Math.js</h1>
+          <h1>🚀 Ubique Performance vs Math.js</h1>
           <p>Watch real-time matrix operations & benchmarks</p>
           <button class="start-btn" id="startBtn" onclick="startBenchmark()">
             ▶️ Start Demo
@@ -605,7 +605,7 @@
             <div class="compute-progress">
               <div class="compute-row">
                 <div class="compute-header">
-                  <span>Rubique</span>
+                  <span>Ubique</span>
                   <span class="compute-meta" id="rubiqueComputeMeta"
                     >waiting…</span
                   >
@@ -634,7 +634,7 @@
                   ></div>
                 </div>
                 <div class="compute-subtext" id="mathjsComputeSubtext">
-                  Waiting for Rubique to finish…
+                  Waiting for Ubique to finish…
                 </div>
               </div>
             </div>
@@ -643,7 +643,7 @@
           <!-- Racing Bars -->
           <div class="race-container" id="raceContainer" style="display: none">
             <div class="race-row">
-              <div class="race-label">Rubique</div>
+              <div class="race-label">Ubique</div>
               <div class="race-bar-container">
                 <div
                   class="race-bar rubique"
@@ -716,7 +716,7 @@
       window.rubique = rubique;
       window.rubiqueReady = true;
 
-      console.log("✅ Rubique and Math.js loaded successfully");
+      console.log("✅ Ubique and Math.js loaded successfully");
     </script>
 
     <script>
@@ -1101,7 +1101,7 @@
         computeElements.mathjs.meta.textContent = "waiting…";
         computeElements.rubique.subtext.textContent = "Preparing benchmark…";
         computeElements.mathjs.subtext.textContent =
-          "Waiting for Rubique to finish…";
+          "Waiting for Ubique to finish…";
       }
 
       function resetRace() {
@@ -1159,10 +1159,10 @@
         const minIterations = test.minIterations ?? 3;
         const sampleIterations = test.sampleIterations ?? 1;
 
-        const sampleDataRubique = test.setup();
+        const sampleDataUbique = test.setup();
         const rubiqueSample = await benchmarkFunction(
           test.rubique,
-          sampleDataRubique,
+          sampleDataUbique,
           sampleIterations,
           null,
           { silent: true }
@@ -1533,7 +1533,7 @@
                     const result = allResults[context.dataIndex];
                     return [
                       `Speedup: ${result.speedup.toFixed(2)}x`,
-                      `Rubique: ${result.rubique.toFixed(2)}ms`,
+                      `Ubique: ${result.rubique.toFixed(2)}ms`,
                       `Math.js: ${result.mathjs.toFixed(2)}ms`,
                       `Iterations: ${result.iterations}`,
                     ];

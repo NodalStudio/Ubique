@@ -1,8 +1,8 @@
 /**
- * @module rubique
+ * @module ubique
  * @description High-performance mathematical and quantitative library for JavaScript and TypeScript
  *
- * Rubique is a modern reimplementation combining JavaScript, TypeScript, and Rust-powered WebAssembly.
+ * Ubique is a modern mathematical library combining JavaScript, TypeScript, and Rust-powered WebAssembly
  * for exceptional performance in numerical computations. The library provides:
  *
  * ## Core Modules
@@ -36,26 +36,26 @@
  *
  * ## Performance
  *
- * Rubique leverages Rust's nalgebra library compiled to WebAssembly for accelerated linear algebra operations,
+ * Ubique leverages Rust's nalgebra library compiled to WebAssembly for accelerated linear algebra operations,
  * achieving significant speedups (up to 20x) compared to traditional JavaScript implementations.
  *
  * @example
  * ```ts
- * import * as rubique from "jsr:@bemayer/rubique";
+ * import * as ubique from "jsr:@nodalstudio/ubique";
  *
  * // Matrix operations
- * const A = rubique.eye(3);
- * const B = rubique.ones(3, 3);
- * const C = rubique.plus(A, B);
+ * const A = ubique.eye(3);
+ * const B = ubique.ones(3, 3);
+ * const C = ubique.plus(A, B);
  *
  * // Statistics
  * const data = [1, 2, 3, 4, 5];
- * const avg = rubique.mean(data);
- * const stdDev = rubique.std(data);
+ * const avg = ubique.mean(data);
+ * const stdDev = ubique.std(data);
  *
  * // Quantitative finance
  * const returns = [0.01, -0.02, 0.03, 0.01];
- * const sharpeRatio = rubique.sharpe(returns, 0.001);
+ * const sharpeRatio = ubique.sharpe(returns, 0.001);
  * ```
  */
 
