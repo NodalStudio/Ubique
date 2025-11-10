@@ -1,11 +1,14 @@
-# Rubique
+# Ubique
 
-Rubique is a modern reimplementation of the Ubique mathematical and quantitative
-library. Built with contemporary JavaScript, TypeScript, and Deno, Rubique
-delivers high-performance numerical computations by leveraging Rust’s
-[nalgebra](https://nalgebra.org/) library compiled to WebAssembly. The library
-provides a comprehensive suite of functions for vectors, matrices, linear
-algebra, statistics, time series analysis, and computational finance.
+Ubique is a modern mathematical and quantitative library built with contemporary
+JavaScript, TypeScript, and Deno. It delivers high-performance numerical
+computations by leveraging Rust's [nalgebra](https://nalgebra.org/) library
+compiled to WebAssembly. The library provides a comprehensive suite of functions
+for vectors, matrices, linear algebra, statistics, time series analysis, and
+computational finance.
+
+**Version 1.0** represents a complete rewrite of the [original Ubique library](https://github.com/maxto/ubique),
+bringing significant improvements in performance, modern tooling, and developer experience.
 
 ## Table of Contents
 
@@ -19,9 +22,9 @@ algebra, statistics, time series analysis, and computational finance.
 
 ## Overview
 
-Rubique is designed for modern web and server-side applications requiring robust
+Ubique is designed for modern web and server-side applications requiring robust
 and efficient mathematical operations. By integrating WebAssembly for heavy
-linear algebra tasks and using Deno as its runtime, Rubique offers a secure and
+linear algebra tasks and using Deno as its runtime, Ubique offers a secure and
 developer-friendly environment. The library supports vectors, matrices, linear
 algebra, statistics, time series analysis, and computational finance—all while
 maintaining exceptional performance compared to traditional JavaScript
@@ -37,12 +40,12 @@ solutions.
   vectors and matrices, including elementary operations, statistics, time series
   analysis, and financial computations.
 - **High Performance:** Benchmarks show significant speed improvements over
-  traditional JavaScript libraries, making Rubique ideal for
+  traditional JavaScript libraries, making Ubique ideal for
   computation-intensive applications.
 
 ## Performance Highlights
 
-Rubique demonstrates exceptional performance gains across multiple operations compared to math.js:
+Ubique demonstrates exceptional performance gains across multiple operations compared to math.js:
 
 ### Matrix Operations
 - **Matrix Multiply (500x500):** 20.82x faster
@@ -58,54 +61,54 @@ Rubique demonstrates exceptional performance gains across multiple operations co
 
 Want to see these performance gains in action?
 
-- **Browser:** Check out our **[interactive benchmark page](https://nodalstudio.github.io/Rubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
+- **Browser:** Check out our **[interactive benchmark page](https://nodalstudio.github.io/Ubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
 - **CLI:** Run `deno task benchmark` for a comprehensive terminal-based benchmark suite with colored output and detailed results.
 
 ## Installation
 
 ### For Deno
 
-Rubique is published on [JSR (JavaScript Registry)](https://jsr.io/@nodalstudio/rubique):
+Ubique is published on [JSR (JavaScript Registry)](https://jsr.io/@nodalstudio/ubique):
 
 ```bash
-deno add @nodalstudio/rubique
+deno add @nodalstudio/ubique
 ```
 
 Or import directly:
 
 ```ts
-import * as rubique from "jsr:@nodalstudio/rubique";
+import * as ubique from "jsr:@nodalstudio/ubique";
 ```
 
 ### For Node.js / npm
 
 **Option 1: Using JSR auto-generated package**
 ```bash
-npm install @jsr/nodalstudio__rubique
+npm install @jsr/nodalstudio__ubique
 ```
 
 ```ts
-import * as rubique from "@jsr/nodalstudio__rubique";
+import * as ubique from "@jsr/nodalstudio__ubique";
 ```
 
 **Option 2: Using JSR specifier (Node.js 20.6+)**
 ```bash
-npm install jsr:@nodalstudio/rubique
+npm install jsr:@nodalstudio/ubique
 ```
 
 ```ts
-import * as rubique from "@nodalstudio/rubique";
+import * as ubique from "@nodalstudio/ubique";
 ```
 
 ### For browsers
 
-Use the esm.sh CDN to load Rubique directly in the browser:
+Use the esm.sh CDN to load Ubique directly in the browser:
 
 ```html
 <script type="module">
-  import * as rubique from 'https://esm.sh/jsr/@nodalstudio/rubique@1.0.0';
+  import * as ubique from 'https://esm.sh/jsr/@nodalstudio/ubique@1.0.0';
 
-  const matrix = rubique.inv([[1, 2], [3, 4]]);
+  const matrix = ubique.inv([[1, 2], [3, 4]]);
   console.log(matrix);
 </script>
 ```
@@ -115,32 +118,32 @@ Use the esm.sh CDN to load Rubique directly in the browser:
 Clone the repository to contribute or explore the source code:
 
 ```bash
-git clone https://github.com/NodalStudio/Rubique.git
-cd rubique
+git clone https://github.com/NodalStudio/Ubique.git
+cd ubique
 ```
 
 ## Usage
 
-Below is a quick example demonstrating matrix multiplication with Rubique:
+Below is a quick example demonstrating matrix multiplication with Ubique:
 
 ```ts
 // Deno
-import * as rubique from "jsr:@nodalstudio/rubique";
+import * as ubique from "jsr:@nodalstudio/ubique";
 
 // Node.js
-// import * as rubique from "@jsr/nodalstudio__rubique";
+// import * as ubique from "@jsr/nodalstudio__ubique";
 
-const A = rubique.matrix([
+const A = ubique.matrix([
   [1, 2],
   [3, 4],
 ]);
 
-const B = rubique.matrix([
+const B = ubique.matrix([
   [5, 6],
   [7, 8],
 ]);
 
-const C = rubique.multiply(A, B);
+const C = ubique.multiply(A, B);
 console.log(C);
 // Expected Output:
 // [
@@ -149,17 +152,17 @@ console.log(C);
 // ]
 ```
 
-Rubique’s API is designed to be intuitive, closely mirroring familiar operations
-from Ubique and MATLAB-like environments.
+Ubique's API is designed to be intuitive, closely mirroring familiar operations
+from MATLAB-like environments.
 
 ## Contributing
 
 Contributions are welcome and encouraged! If you have ideas or improvements,
 please fork the repository and submit a pull request. For issues or feature
-requests, use the [GitHub Issues](https://github.com/nodalstudio/rubique/issues)
+requests, use the [GitHub Issues](https://github.com/nodalstudio/ubique/issues)
 page.
 
 ## License
 
-Rubique is released under the MIT License. See the [LICENSE](LICENSE) file for
+Ubique is released under the MIT License. See the [LICENSE](LICENSE) file for
 more details.

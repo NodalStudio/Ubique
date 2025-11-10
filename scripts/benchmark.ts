@@ -1,5 +1,5 @@
 /**
- * Unified Rubique Benchmark Suite.
+ * Unified Ubique Benchmark Suite.
  * Comprehensive performance comparison against math.js
  *
  * Run with: deno task benchmark
@@ -164,7 +164,7 @@ function printSectionHeader(title: string, emoji: string) {
 function printTableHeader() {
   const headers = [
     "Test".padEnd(30),
-    "Rubique".padEnd(12),
+    "Ubique".padEnd(12),
     "math.js".padEnd(12),
     "Speedup".padEnd(15),
     "Status".padEnd(8),

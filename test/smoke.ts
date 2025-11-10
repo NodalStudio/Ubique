@@ -1,10 +1,10 @@
-import * as rubique from "../index.ts";
+import * as ubique from "../index.ts";
 import type {
-  array as RubiqueArray,
-  matrix as RubiqueMatrix,
+  array as UbiqueArray,
+  matrix as UbiqueMatrix,
 } from "../lib/types.d.ts";
 
-type Matrix = RubiqueMatrix<number>;
+type Matrix = UbiqueMatrix<number>;
 
 type Assertion = {
   name: string;
@@ -94,16 +94,16 @@ const tests: Assertion[] = [
   {
     name: "sum computes scalar totals",
     run: () => {
-      const numbers: RubiqueArray<number> = [1, 2, 3, 4];
-      const total = rubique.sum(numbers);
+      const numbers: UbiqueArray<number> = [1, 2, 3, 4];
+      const total = ubique.sum(numbers);
       assertDeepEquals(total, 10, "sum should add numbers");
     },
   },
   {
     name: "mean computes averages",
     run: () => {
-      const numbers: RubiqueArray<number> = [1, 2, 3, 4];
-      const average = rubique.mean(numbers);
+      const numbers: UbiqueArray<number> = [1, 2, 3, 4];
+      const average = ubique.mean(numbers);
       approxEqual(average as number, 2.5, "mean should compute average");
     },
   },
@@ -114,7 +114,7 @@ const tests: Assertion[] = [
         [1, 2],
         [3, 4],
       ];
-      const inverse = rubique.inv(matrix) as Matrix;
+      const inverse = ubique.inv(matrix) as Matrix;
       const expected: Matrix = [
         [-2, 1],
         [1.5, -0.5],
@@ -137,7 +137,7 @@ const tests: Assertion[] = [
         [2, 0],
         [1, 2],
       ];
-      const product = rubique.mtimes(left, right) as Matrix;
+      const product = ubique.mtimes(left, right) as Matrix;
       const expected: Matrix = [
         [4, 4],
         [10, 8],
@@ -148,8 +148,8 @@ const tests: Assertion[] = [
   {
     name: "linspace generates evenly spaced vectors",
     run: () => {
-      const vector = rubique.linspace(0, 1, 5);
-      const expected: RubiqueArray<number> = [0, 0.25, 0.5, 0.75, 1];
+      const vector = ubique.linspace(0, 1, 5);
+      const expected: UbiqueArray<number> = [0, 0.25, 0.5, 0.75, 1];
       assertDeepEquals(
         vector,
         expected,
@@ -160,7 +160,7 @@ const tests: Assertion[] = [
   {
     name: "dot produces scalar product",
     run: () => {
-      const result = rubique.dot([1, 3, -5], [4, -2, -1]);
+      const result = ubique.dot([1, 3, -5], [4, -2, -1]);
       assertDeepEquals(result, 3, "dot product should be 3");
     },
   },
@@ -168,7 +168,7 @@ const tests: Assertion[] = [
     name: "dateutil handles month index",
     run: () => {
       const timestamp = Math.floor(Date.parse("2024-02-10T00:00:00Z") / 1000);
-      const index = rubique.month(timestamp);
+      const index = ubique.month(timestamp);
       assertDeepEquals(
         index,
         1,
@@ -179,10 +179,10 @@ const tests: Assertion[] = [
   {
     name: "stats.quantile computes quartiles",
     run: () => {
-      const values: RubiqueArray<number> = [7, 15, 36, 39, 40, 41];
-      const q1 = rubique.quantile(values, 0.25);
-      const q2 = rubique.quantile(values, 0.5);
-      const q3 = rubique.quantile(values, 0.75);
+      const values: UbiqueArray<number> = [7, 15, 36, 39, 40, 41];
+      const q1 = ubique.quantile(values, 0.25);
+      const q2 = ubique.quantile(values, 0.5);
+      const q3 = ubique.quantile(values, 0.75);
       approxEqual(
         q1 as number,
         15,
