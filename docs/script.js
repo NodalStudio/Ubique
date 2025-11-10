@@ -110,7 +110,7 @@ function buildIndexMenu() {
   hero.className = "landingHero";
 
   const title = document.createElement("h1");
-  title.textContent = "Rubique API reference";
+  title.textContent = "Ubique API reference";
   hero.appendChild(title);
 
   const subtitle = document.createElement("p");
@@ -172,7 +172,7 @@ function injectBenchmarkLink() {
   link.href = "./benchmark.html";
   link.className = "docBenchmarkLink";
   link.dataset.docBenchmarkLink = "true";
-  link.setAttribute("aria-label", "Open the Rubique benchmark demo");
+  link.setAttribute("aria-label", "Open the Ubique benchmark demo");
 
   const icon = document.createElement("span");
   icon.className = "docBenchmarkIcon";
