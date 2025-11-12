@@ -1,5 +1,12 @@
 # Ubique
 
+[![JSR](https://jsr.io/badges/@nodalstudio/ubique)](https://jsr.io/@nodalstudio/ubique)
+[![JSR Score](https://jsr.io/badges/@nodalstudio/ubique/score)](https://jsr.io/@nodalstudio/ubique)
+[![npm version](https://img.shields.io/npm/v/ubique.svg)](https://www.npmjs.com/package/ubique)
+[![npm downloads](https://img.shields.io/npm/d18m/ubique)](https://www.npmjs.com/package/ubique)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/NodalStudio/Ubique.svg)](https://github.com/NodalStudio/Ubique/stargazers)
+
 Ubique is a modern mathematical and quantitative library built with contemporary
 JavaScript, TypeScript, and Deno. It delivers high-performance numerical
 computations by leveraging Rust's [nalgebra](https://nalgebra.org/) library
@@ -27,7 +34,7 @@ and efficient mathematical operations. By integrating WebAssembly for heavy
 linear algebra tasks and using Deno as its runtime, Ubique offers a secure and
 developer-friendly environment. The library supports vectors, matrices, linear
 algebra, statistics, time series analysis, and computational finance—all while
-maintaining exceptional performance compared to traditional JavaScript
+maintaining good performance compared to traditional JavaScript
 solutions.
 
 ## Key Features
@@ -45,17 +52,17 @@ solutions.
 
 ## Performance Highlights
 
-Ubique demonstrates exceptional performance gains across multiple operations compared to math.js:
+Ubique demonstrates exceptional performance gains across multiple operations compared to math.js (benchmarked on Mac mini M1):
 
 ### Matrix Operations
-- **Matrix Multiply (500x500):** 20.82x faster
-- **Matrix Add (100x100):** 17.90x faster
-- **Transpose (100x100):** 12.88x faster
+- **Matrix Multiply (500x500):** 13.05x faster
+- **Matrix Add (100x100):** 6.61x faster
+- **Transpose (100x100):** 4.63x faster
 
-### Statistical Functions
-- **Sum (n=10000):** 20.38x faster
-- **Standard Deviation (n=1000):** 3.19x faster
-- **Mean (n=10000):** 2.42x faster
+### Linear Algebra
+- **Determinant (50x50):** 26.04x faster
+- **Matrix Inverse (20x20):** 7.53x faster
+- **Determinant (20x20):** 12.27x faster
 
 ### Interactive Benchmark
 
