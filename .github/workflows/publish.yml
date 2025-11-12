@@ -1,4 +1,4 @@
-name: 🚀 Publish to JSR
+name: 🚀 Publish to JSR + npm
 
 on:
   push:
@@ -22,6 +22,12 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -41,3 +47,18 @@ jobs:
 
       - name: Publish to JSR
         run: deno publish --allow-dirty
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Build npm package
+        run: deno task build:npm ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Test npm package
+        run: deno task test:npm
+
+      - name: Publish to npm
+        run: |
+          cd npm
+          npm publish --provenance --access public
