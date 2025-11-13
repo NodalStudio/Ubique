@@ -140,17 +140,17 @@ import * as ubique from "jsr:@nodalstudio/ubique";
 // Node.js
 // import * as ubique from "@jsr/nodalstudio__ubique";
 
-const A = ubique.matrix([
+const A = [
   [1, 2],
   [3, 4],
-]);
+];
 
-const B = ubique.matrix([
+const B = [
   [5, 6],
   [7, 8],
-]);
+];
 
-const C = ubique.multiply(A, B);
+const C = ubique.mtimes(A, B);
 console.log(C);
 // Expected Output:
 // [

@@ -98,15 +98,15 @@ pnpm add ubique
 ```typescript
 import * as ubique from "ubique";
 
-const A = ubique.matrix([
+const A = [
   [1, 2],
   [3, 4],
-]);
+];
 
-const B = ubique.matrix([
+const B = [
   [5, 6],
   [7, 8],
-]);
+];
 
 const C = ubique.mtimes(A, B);
 console.log(C);
@@ -122,10 +122,10 @@ console.log(C);
 ```javascript
 const ubique = require("ubique");
 
-const A = ubique.matrix([
+const A = [
   [1, 2],
   [3, 4],
-]);
+];
 
 const inverse = ubique.inv(A);
 console.log(inverse);
@@ -163,7 +163,10 @@ const A_inv = inv(A);
 const detA = det(A);
 
 // LU decomposition
-const [L, U, P] = lu(A);
+const luResult = lu(A);
+const L = luResult.L;
+const U = luResult.U;
+const P = luResult.P;
 
 // Solve linear system Ax = b
 const b = [5, 6];
@@ -192,17 +195,21 @@ const covariance = cov(x, y);
 #### Quantitative Finance
 
 ```typescript
-import { sharpe, sortino, maxdrawdown, cagr, histvar } from "ubique";
+import { sharpe, sortino, drawdown, cagr, histvar } from "ubique";
 
 const returns = [0.01, 0.02, -0.01, 0.03, -0.02];
 
 // Risk metrics
 const sharpeRatio = sharpe(returns);
 const sortinoRatio = sortino(returns);
-const maxDD = maxdrawdown(returns);
+const ddResult = drawdown(returns);
+const maxDD = ddResult.maxdd;
 
 // Performance metrics
-const annualReturn = cagr(returns);
+// Note: cagr requires price data and time array
+const prices = [100, 101, 103, 102, 105.06, 102.96];
+const time = [0, 1, 2, 3, 4, 5];
+const annualReturn = cagr(prices, time);
 
 // Risk measures
 const var95 = histvar(returns, 0.95);
@@ -236,7 +243,7 @@ const A = [
   [4, 5, 6],
 ];
 const At = transpose(A); // Transpose
-const B = reshape(A, [3, 2]); // Reshape
+const B = reshape(A, 3, 2); // Reshape to 3x2
 const d = diag(I); // Extract diagonal
 
 // Aggregations
