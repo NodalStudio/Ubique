@@ -1035,8 +1035,6 @@ function renderSummary() {
   });
 }
 
-document.getElementById('replay-btn').addEventListener('click', () => location.reload());
-
 async function runOneTest(test, fig, _index) {
   const trace = createTrace(fig.querySelector('[data-role="trace"]'));
   trace.reset();
@@ -1309,6 +1307,7 @@ foot.append(
 summarySection.appendChild(foot);
 
 const replay = el('button', { class: 'replay', id: 'replay-btn', text: '↻ Repeat experiment' });
+replay.addEventListener('click', () => location.reload());
 summarySection.appendChild(replay);
 
 // Legacy code IIFE (bails on new scaffold)
