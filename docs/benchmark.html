@@ -83,19 +83,54 @@
 }
 #page-header .begin {
   display: inline-block;
-  margin-top: 1.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ubique);
+  margin-top: 2.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.85rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--paper);
+  background: var(--ubique);
   text-decoration: none;
-  border-bottom: 1px solid var(--ubique);
-  padding-bottom: 2px;
+  padding: 0.75rem 2.25rem;
   cursor: pointer;
+  border-bottom: none;
+  box-shadow: 0 2px 0 var(--ink);
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
-#page-header .begin:hover { color: var(--ink); border-bottom-color: var(--ink); }
-#page-header .begin[disabled] { opacity: 0.4; cursor: default; pointer-events: none; }
+#page-header .begin:hover {
+  color: var(--paper);
+  background: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+#page-header .begin:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 var(--ink);
+}
+#page-header .begin[disabled] { opacity: 0.35; cursor: default; pointer-events: none; }
+
+/* Hide test figures, source, and summary until benchmarks start */
+body:not(.benchmarks-started) #tests #tests-list,
+body:not(.benchmarks-started) #source,
+body:not(.benchmarks-started) #summary {
+  display: none;
+}
+body:not(.benchmarks-started) #tests::after {
+  content: "Click Begin to populate";
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+/* Hide the em-rules around the now-hidden sections too */
+body:not(.benchmarks-started) #tests + .rule-em,
+body:not(.benchmarks-started) #explore + .rule-em,
+body:not(.benchmarks-started) #source + .rule-em {
+  display: none;
+}
 
 #environment table {
   width: 100%;
@@ -483,6 +518,11 @@ function getFunctionArgs(data) {
 }
 
 function nextFrame() {
+  // requestAnimationFrame is heavily throttled in background tabs; fall back to setTimeout
+  // so benchmarks still progress when the tab loses focus.
+  if (document.visibilityState === 'hidden') {
+    return new Promise((resolve) => setTimeout(resolve, 0));
+  }
   return new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
@@ -841,16 +881,31 @@ function createTrace(host) {
     }
   }
 
+  // Throttle redraws — rebuilding a 500-segment SVG path on every addPoint
+  // is O(n²) and freezes the renderer for fast operations.
+  let redrawScheduled = false;
+  function scheduleRedraw() {
+    if (redrawScheduled) return;
+    redrawScheduled = true;
+    const cb = () => { redrawScheduled = false; redraw(); };
+    if (document.visibilityState === 'hidden') setTimeout(cb, 16);
+    else requestAnimationFrame(cb);
+  }
+
   return {
     addPoint(lib, ops) {
       channels[lib].points.push(ops);
       if (ops > maxOps) maxOps = ops;
-      redraw();
+      scheduleRedraw();
     },
     reset() {
       channels.ubique.points = [];
       channels.mathjs.points = [];
       maxOps = 1;
+      redraw();
+    },
+    flush() {
+      redrawScheduled = false;
       redraw();
     },
   };
@@ -863,14 +918,17 @@ async function runTimedIterations(fn, data, totalIter, warmup, onIterTime) {
   for (let i = 0; i < warmup; i++) fn(...args);
 
   const times = [];
+  let lastYield = performance.now();
   for (let i = 0; i < totalIter; i++) {
     const start = performance.now();
     fn(...args);
     const dt = performance.now() - start;
     times.push(dt);
     if (onIterTime) onIterTime(i, dt);
-    if (totalIter > 8 && (i + 1) % Math.max(1, Math.floor(totalIter / 20)) === 0) {
+    // Yield whenever we've been on the main thread for >50ms, regardless of iter count.
+    if (performance.now() - lastYield > 50) {
       await nextFrame();
+      lastYield = performance.now();
     }
   }
   return times;
@@ -885,8 +943,11 @@ function summarizeTimes(times) {
   return { n, mean, sigma, ci95 };
 }
 
+const MAX_ITERATIONS = 500;
+const TARGET_DURATION_MS = 1500;
+
 async function pickIterations(test) {
-  const target = test.targetDuration ?? 4000;
+  const target = test.targetDuration ?? TARGET_DURATION_MS;
   const minIter = test.minIterations ?? 6;
   const sample = test.sampleIterations ?? 2;
   const warmup = test.warmupIterations ?? Math.min(3, sample);
@@ -900,9 +961,11 @@ async function pickIterations(test) {
     tU.reduce((a, b) => a + b, 0) / tU.length,
     tM.reduce((a, b) => a + b, 0) / tM.length,
   );
-  let iter = Math.round(target / Math.max(slowest, 0.01));
+  let iter = Math.round(target / Math.max(slowest, 0.05));
   if (!Number.isFinite(iter) || iter < 1) iter = minIter;
-  return { iterations: Math.max(iter, minIter), warmup };
+  iter = Math.max(iter, minIter);
+  iter = Math.min(iter, MAX_ITERATIONS);
+  return { iterations: iter, warmup };
 }
 
 // --- Task 4 Step 4: Orchestrators ---
@@ -1091,6 +1154,7 @@ async function runOneTest(test, fig, _index) {
   void speedupHost.offsetWidth;
   speedupHost.classList.add('stamped');
 
+  trace.flush();
   renderScatter(fig, uTimes, mTimes);
 
   allResults.push({
@@ -1119,6 +1183,7 @@ if (beginLink) {
   beginLink.addEventListener('click', (e) => {
     e.preventDefault();
     beginLink.setAttribute('disabled', '');
+    document.body.classList.add('benchmarks-started');
     const waitReady = setInterval(() => {
       if (window.rubique && window.mathjs) {
         clearInterval(waitReady);
