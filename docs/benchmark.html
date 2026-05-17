@@ -1069,7 +1069,7 @@ async function runExplore() {
   const r = await timeExplore(op, N);
   if (!r) return;
 
-  const maxT = Math.max(r.ubique, r.mathjs);
+  const maxT = Math.max(r.ubique, r.mathjs, 0.001);
   document.getElementById('bar-ubique').style.width = `${(r.ubique / maxT) * 100}%`;
   document.getElementById('bar-mathjs').style.width = `${(r.mathjs / maxT) * 100}%`;
   document.getElementById('bar-ubique-time').textContent = `${r.ubique.toFixed(2)} ms`;
