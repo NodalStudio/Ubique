@@ -209,6 +209,23 @@
 .trace-legend span::before { content: "■ "; margin-right: 0.25rem; }
 .trace-legend .leg-ubique::before { color: var(--ubique); }
 .trace-legend .leg-mathjs::before { color: var(--mathjs); }
+
+.scatter-svg {
+  width: 100%; height: 120px; display: block;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+}
+.scatter-svg .lane-label {
+  font-family: var(--font-mono); font-size: 9px;
+  fill: var(--ink-soft); letter-spacing: 0.08em;
+}
+.scatter-svg .mean-line { stroke-width: 1.2; }
+.scatter-svg .mean-ubique { stroke: var(--ubique); }
+.scatter-svg .mean-mathjs { stroke: var(--mathjs); }
+.scatter-svg .sigma-band  { opacity: 0.18; }
+.scatter-svg .sigma-ubique { fill: var(--ubique); }
+.scatter-svg .sigma-mathjs { fill: var(--mathjs); }
+.scatter-svg .pt-ubique { fill: var(--ubique); }
+.scatter-svg .pt-mathjs { fill: var(--mathjs); }
     </style>
     <style>
     #topnav { display: none; }
@@ -774,7 +791,68 @@ async function pickIterations(test) {
 
 const allResults = [];
 
-function renderScatter(_fig, _ubique, _mathjs) { /* Task 5 fills this */ }
+function renderScatter(fig, ubiqueTimes, mathjsTimes) {
+  const host = fig.querySelector('[data-role="scatter"]');
+  host.replaceChildren();
+
+  const W = 600, H = 120, padL = 60, padR = 12, padY = 22;
+  const innerW = W - padL - padR;
+  const laneH = (H - padY * 2) / 2;
+  const all = [...ubiqueTimes, ...mathjsTimes];
+  const max = Math.max(...all);
+  const xFor = (t) => padL + (t / (max || 1)) * innerW;
+  const laneY = (idx) => padY + laneH / 2 + idx * laneH;
+
+  const svg = svgEl('svg', {
+    class: 'scatter-svg', viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none',
+  });
+
+  function lane(label, times, klass, idx) {
+    const mean = times.reduce((a, b) => a + b, 0) / times.length;
+    const sigma = Math.sqrt(
+      times.reduce((a, t) => a + (t - mean) ** 2, 0) / Math.max(1, times.length - 1)
+    );
+    const y = laneY(idx);
+    const xMean = xFor(mean);
+    const xLo = xFor(Math.max(0, mean - sigma));
+    const xHi = xFor(Math.min(max, mean + sigma));
+
+    const labelEl = svgEl('text', {
+      class: 'lane-label', x: padL - 8, y: y + 3, 'text-anchor': 'end',
+    });
+    labelEl.textContent = label;
+    svg.appendChild(labelEl);
+
+    svg.appendChild(svgEl('rect', {
+      class: `sigma-band sigma-${klass}`,
+      x: xLo, y: y - laneH * 0.4,
+      width: Math.max(1, xHi - xLo), height: laneH * 0.8,
+    }));
+
+    for (const t of times) {
+      const jitter = (Math.random() - 0.5) * (laneH * 0.5);
+      svg.appendChild(svgEl('circle', {
+        class: `pt-${klass}`, cx: xFor(t).toFixed(1),
+        cy: (y + jitter).toFixed(1), r: 2,
+      }));
+    }
+
+    svg.appendChild(svgEl('line', {
+      class: `mean-line mean-${klass}`,
+      x1: xMean, x2: xMean,
+      y1: y - laneH * 0.45, y2: y + laneH * 0.45,
+    }));
+  }
+
+  lane('UBIQUE',  ubiqueTimes, 'ubique', 0);
+  lane('MATH.JS', mathjsTimes, 'mathjs', 1);
+
+  const axis = svgEl('text', { class: 'lane-label', x: W - padR, y: H - 6, 'text-anchor': 'end' });
+  axis.textContent = 'ms per iter →';
+  svg.appendChild(axis);
+
+  host.appendChild(svg);
+}
 function renderSummary() { /* Task 8 fills this */ }
 
 async function runOneTest(test, fig, _index) {
