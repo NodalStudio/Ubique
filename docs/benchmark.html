@@ -119,6 +119,75 @@
   color: var(--ink-soft);
 }
 #environment td { color: var(--ink); word-break: break-word; }
+
+.figure {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(360px, 1.4fr);
+  grid-template-rows: auto auto auto;
+  gap: 1.25rem 2rem;
+  padding: 1.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.figure:last-child { border-bottom: none; }
+.figure .fig-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 1rem; }
+.figure .fig-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  position: relative;
+}
+.figure .fig-num::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
+  height: 1px; background: var(--sepia);
+  transform: scaleX(0); transform-origin: left; transition: transform 240ms ease;
+}
+.figure:hover .fig-num::after { transform: scaleX(1); }
+.figure .fig-title {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+}
+.figure .fig-specimens {
+  grid-column: 1; grid-row: 2;
+  display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
+}
+.figure .fig-trace    { grid-column: 2; grid-row: 2; min-height: 180px; }
+.figure .fig-scatter  { grid-column: 1; grid-row: 3; min-height: 120px; }
+.figure .fig-speedup  { grid-column: 2; grid-row: 3; text-align: right; }
+
+.fig-speedup .speedup-value {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5rem); line-height: 1;
+  color: var(--ink); font-variation-settings: "opsz" 144;
+}
+.fig-speedup .speedup-label {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 0.5rem;
+}
+.fig-speedup .speedup-stats {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--ink-soft); margin-top: 0.4rem;
+}
+
+.specimen { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+.specimen-label {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft);
+}
+.specimen canvas { background: var(--paper-soft); border: 1px solid var(--rule); }
+.specimen .specimen-dim { font-family: var(--font-mono); font-size: 0.7rem; color: var(--sepia); }
+.specimen-op { font-family: var(--font-display); font-size: 1.4rem; color: var(--sepia); }
+
+@keyframes stamp {
+  0%   { transform: scale(0.85); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.fig-speedup.stamped .speedup-value {
+  animation: stamp 280ms cubic-bezier(.2,.7,.1,1) both;
+}
     </style>
     <style>
     #topnav { display: none; }
@@ -212,6 +281,339 @@ async function detectEnvironment() {
 }
 detectEnvironment().catch(console.error);
 
+// --- Top-level helpers (moved out of IIFE for new scaffold) ---
+
+function generateArray(size) {
+  return Array.from({ length: size }, () => Math.random() * 100);
+}
+
+function generateMatrix(rows, cols) {
+  return Array.from({ length: rows }, () => generateArray(cols));
+}
+
+function generateInvertibleMatrix(n) {
+  const matrix = Array(n)
+    .fill(0)
+    .map(() => Array(n).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    let rowSum = 0;
+    for (let j = 0; j < n; j++) {
+      if (i !== j) {
+        matrix[i][j] = Math.random() * 10;
+        rowSum += Math.abs(matrix[i][j]);
+      }
+    }
+    matrix[i][i] = rowSum + Math.random() * 10 + 10;
+  }
+
+  return matrix;
+}
+
+function getFunctionArgs(data) {
+  if (Array.isArray(data?.args)) {
+    return data.args;
+  }
+  if (data?.matrixA && data?.matrixB) {
+    return [data.matrixA, data.matrixB];
+  }
+  if (data?.matrixA) {
+    return [data.matrixA];
+  }
+  if (data?.data) {
+    return [data.data];
+  }
+  return [];
+}
+
+function nextFrame() {
+  return new Promise((resolve) => requestAnimationFrame(resolve));
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Test configuration - Focus on impressive matrix operations
+const tests = [
+  {
+    name: "Matrix Transpose (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 20,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.transpose(matrix),
+    mathjs: (matrix) => window.mathjs.transpose(matrix),
+  },
+  {
+    name: "Matrix Add (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 25,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      const matrixB = generateMatrix(100, 100);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.plus(a, b),
+    mathjs: (a, b) => window.mathjs.add(a, b),
+  },
+  {
+    name: "Matrix Multiply (10×10)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 60,
+    sampleIterations: 5,
+    setup: () => {
+      const matrixA = generateMatrix(10, 10);
+      const matrixB = generateMatrix(10, 10);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (50×50)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 18,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(50, 50);
+      const matrixB = generateMatrix(50, 50);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 8,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      const matrixB = generateMatrix(100, 100);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (200×200)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 2,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(200, 200);
+      const matrixB = generateMatrix(200, 200);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Inverse (20×20)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 6,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateInvertibleMatrix(20);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.inv(matrix),
+    mathjs: (matrix) => window.mathjs.inv(matrix),
+  },
+  {
+    name: "Determinant (20×20)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 8,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(20, 20);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.det(matrix),
+    mathjs: (matrix) => window.mathjs.det(matrix),
+  },
+  {
+    name: "Determinant (50×50)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 3,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(50, 50);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.det(matrix),
+    mathjs: (matrix) => window.mathjs.det(matrix),
+  },
+];
+
+// --- New matrix drawing helpers (Step 2) ---
+
+const INK = '#1a1a17';
+const PAPER_SOFT = '#ece3d0';
+
+function drawMatrix(canvas, matrix) {
+  const rows = matrix.length;
+  const cols = matrix[0]?.length || 1;
+  if (rows <= 10 && cols <= 10) drawNumberMatrix(canvas, matrix);
+  else drawBlueprintDots(canvas, matrix);
+}
+
+function drawNumberMatrix(canvas, matrix) {
+  const rows = matrix.length, cols = matrix[0].length, cell = 26;
+  canvas.width = cols * cell;
+  canvas.height = rows * cell;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = PAPER_SOFT;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = 'rgba(168, 146, 116, 0.4)';
+  ctx.lineWidth = 1;
+  ctx.font = '11px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = INK;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const x = j * cell, y = i * cell;
+      ctx.strokeRect(x + 0.5, y + 0.5, cell, cell);
+      ctx.fillText(matrix[i][j].toFixed(1), x + cell / 2, y + cell / 2);
+    }
+  }
+}
+
+function drawBlueprintDots(canvas, matrix) {
+  const rows = matrix.length, cols = matrix[0].length, D = 140;
+  canvas.width = D; canvas.height = D;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = PAPER_SOFT;
+  ctx.fillRect(0, 0, D, D);
+
+  let min = Infinity, max = -Infinity;
+  for (const row of matrix) for (const v of row) {
+    if (v < min) min = v;
+    if (v > max) max = v;
+  }
+  const range = max - min || 1;
+  const cw = D / cols, ch = D / rows;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const norm = (matrix[i][j] - min) / range;
+      const r = Math.max(0.6, Math.min(cw, ch) * 0.45 * (0.3 + 0.7 * norm));
+      ctx.fillStyle = `rgba(26, 26, 23, ${0.15 + 0.7 * norm})`;
+      ctx.beginPath();
+      ctx.arc(j * cw + cw / 2, i * ch + ch / 2, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// --- Figure builder helpers (Step 3) ---
+
+function el(tag, opts = {}, children = []) {
+  const node = document.createElement(tag);
+  if (opts.class) node.className = opts.class;
+  if (opts.id)    node.id = opts.id;
+  if (opts.text)  node.textContent = opts.text;
+  if (opts.data)  for (const k in opts.data) node.dataset[k] = opts.data[k];
+  for (const c of children) node.appendChild(c);
+  return node;
+}
+
+function buildFigure(test, index) {
+  const head = el('div', { class: 'fig-head' }, [
+    el('span', { class: 'fig-num', text: `Fig. ${index}` }),
+    el('h3',   { class: 'fig-title', text: test.name }),
+  ]);
+  const specimens = el('div', { class: 'fig-specimens', data: { role: 'specimens' } });
+  const trace     = el('div', { class: 'fig-trace',     data: { role: 'trace' } });
+  const scatter   = el('div', { class: 'fig-scatter',   data: { role: 'scatter' } });
+
+  const speedupVal   = el('div', { class: 'speedup-value', text: '—' });
+  const speedupLabel = el('div', { class: 'speedup-label', text: 'awaiting run' });
+  const speedupStats = el('div', { class: 'speedup-stats', text: '' });
+  const speedup = el('div', { class: 'fig-speedup', data: { role: 'speedup' } },
+    [speedupVal, speedupLabel, speedupStats]);
+
+  return el('article', { class: 'figure', id: `fig-${index}` },
+    [head, specimens, trace, scatter, speedup]);
+}
+
+function renderSpecimens(figure, data) {
+  const host = figure.querySelector('[data-role="specimens"]');
+  host.replaceChildren();
+
+  function specimen(label, matrix) {
+    const canvas = document.createElement('canvas');
+    const node = el('div', { class: 'specimen' }, [
+      el('div', { class: 'specimen-label', text: label }),
+      canvas,
+      el('div', { class: 'specimen-dim', text: `${matrix.length}×${matrix[0].length}` }),
+    ]);
+    drawMatrix(canvas, matrix);
+    return node;
+  }
+
+  if (data.matrixA) host.appendChild(specimen('Matrix A', data.matrixA));
+  if (data.matrixB) {
+    host.appendChild(el('div', { class: 'specimen-op', text: '×' }));
+    host.appendChild(specimen('Matrix B', data.matrixB));
+  }
+}
+
 // Legacy code IIFE (bails on new scaffold)
 (function () {
   if (!document.getElementById('startBtn')) return;
@@ -236,342 +638,9 @@ detectEnvironment().catch(console.error);
         });
       }
 
-      // Matrix Visualization Engine
-      function drawMatrix(canvas, matrix, label) {
-        const ctx = canvas.getContext("2d");
-        const rows = matrix.length;
-        const cols = matrix[0]?.length || 1;
-
-        // Determine display mode based on size
-        if (rows <= 10 && cols <= 10) {
-          // Show actual numbers
-          drawNumberMatrix(ctx, canvas, matrix);
-        } else if (rows <= 50 && cols <= 50) {
-          // Show full heatmap
-          drawHeatmap(ctx, canvas, matrix);
-        } else {
-          // Show corner preview
-          drawCornerPreview(ctx, canvas, matrix);
-        }
-      }
-
-      function drawNumberMatrix(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const cellSize = Math.min(canvas.width / cols, canvas.height / rows);
-
-        canvas.width = cols * cellSize;
-        canvas.height = rows * cellSize;
-
-        ctx.fillStyle = "#1e293b";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.font = `${cellSize * 0.3}px monospace`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            const value = matrix[i][j];
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            // Draw cell border
-            ctx.strokeStyle = "#334155";
-            ctx.strokeRect(x, y, cellSize, cellSize);
-
-            // Draw value
-            ctx.fillStyle = getValueColor(value);
-            ctx.fillText(value.toFixed(1), x + cellSize / 2, y + cellSize / 2);
-          }
-        }
-      }
-
-      function drawHeatmap(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const cellSize = Math.min(300 / cols, 300 / rows);
-
-        canvas.width = cols * cellSize;
-        canvas.height = rows * cellSize;
-
-        // Find min/max for color scaling
-        let min = Infinity,
-          max = -Infinity;
-        for (let row of matrix) {
-          for (let val of row) {
-            min = Math.min(min, val);
-            max = Math.max(max, val);
-          }
-        }
-
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            const value = matrix[i][j];
-            const normalized = (value - min) / (max - min);
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            ctx.fillStyle = getHeatmapColor(normalized);
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
-        }
-      }
-
-      function drawCornerPreview(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const previewSize = 20; // Show 20x20 corner
-        const cellSize = 10;
-
-        canvas.width = previewSize * cellSize;
-        canvas.height = previewSize * cellSize;
-
-        ctx.fillStyle = "#1e293b";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Find min/max for first 20x20 section
-        let min = Infinity,
-          max = -Infinity;
-        for (let i = 0; i < Math.min(previewSize, rows); i++) {
-          for (let j = 0; j < Math.min(previewSize, cols); j++) {
-            min = Math.min(min, matrix[i][j]);
-            max = Math.max(max, matrix[i][j]);
-          }
-        }
-
-        // Draw corner heatmap
-        for (let i = 0; i < Math.min(previewSize, rows); i++) {
-          for (let j = 0; j < Math.min(previewSize, cols); j++) {
-            const value = matrix[i][j];
-            const normalized = (value - min) / (max - min);
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            ctx.fillStyle = getHeatmapColor(normalized);
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
-        }
-
-        // Draw dimension label
-        ctx.fillStyle = "#f1f5f9";
-        ctx.font = "12px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(`${rows}×${cols}`, canvas.width / 2, canvas.height + 20);
-      }
-
-      function getValueColor(value) {
-        // Simple color scheme for numbers
-        return value > 50 ? "#f59e0b" : value > 25 ? "#3b82f6" : "#8b5cf6";
-      }
-
-      function getHeatmapColor(normalized) {
-        // Blue -> Cyan -> Green -> Yellow -> Red
-        const hue = (1 - normalized) * 240; // 240 = blue, 0 = red
-        return `hsl(${hue}, 80%, 50%)`;
-      }
-
-      // Generate test data
-      function generateArray(size) {
-        return Array.from({ length: size }, () => Math.random() * 100);
-      }
-
-      function generateMatrix(rows, cols) {
-        return Array.from({ length: rows }, () => generateArray(cols));
-      }
-
-      // Generate well-conditioned square matrix for decomposition
-      function generateInvertibleMatrix(n) {
-        // Create a diagonally dominant matrix (guarantees invertibility)
-        const matrix = Array(n)
-          .fill(0)
-          .map(() => Array(n).fill(0));
-
-        for (let i = 0; i < n; i++) {
-          let rowSum = 0;
-          for (let j = 0; j < n; j++) {
-            if (i !== j) {
-              matrix[i][j] = Math.random() * 10;
-              rowSum += Math.abs(matrix[i][j]);
-            }
-          }
-          // Make diagonal element larger than sum of other elements in row
-          matrix[i][i] = rowSum + Math.random() * 10 + 10;
-        }
-
-        return matrix;
-      }
-
-      // Benchmark results storage
+      // Benchmark results storage (legacy, kept for IIFE compatibility)
       let allResults = [];
       let currentTest = 0;
-
-      // Test configuration - Focus on impressive matrix operations
-      const tests = [
-        {
-          name: "Matrix Transpose (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 20,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.transpose(matrix),
-          mathjs: (matrix) => window.mathjs.transpose(matrix),
-        },
-        {
-          name: "Matrix Add (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 25,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            const matrixB = generateMatrix(100, 100);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.plus(a, b),
-          mathjs: (a, b) => window.mathjs.add(a, b),
-        },
-        {
-          name: "Matrix Multiply (10×10)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 60,
-          sampleIterations: 5,
-          setup: () => {
-            const matrixA = generateMatrix(10, 10);
-            const matrixB = generateMatrix(10, 10);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (50×50)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 18,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(50, 50);
-            const matrixB = generateMatrix(50, 50);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 8,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            const matrixB = generateMatrix(100, 100);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (200×200)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 2,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(200, 200);
-            const matrixB = generateMatrix(200, 200);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Inverse (20×20)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 6,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateInvertibleMatrix(20);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.inv(matrix),
-          mathjs: (matrix) => window.mathjs.inv(matrix),
-        },
-        {
-          name: "Determinant (20×20)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 8,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(20, 20);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.det(matrix),
-          mathjs: (matrix) => window.mathjs.det(matrix),
-        },
-        {
-          name: "Determinant (50×50)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 3,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(50, 50);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.det(matrix),
-          mathjs: (matrix) => window.mathjs.det(matrix),
-        },
-      ];
 
       const computeElements = {
         rubique: {
@@ -679,26 +748,6 @@ detectEnvironment().catch(console.error);
         }
         iterations = Math.max(iterations, minIterations);
         return iterations;
-      }
-
-      function getFunctionArgs(data) {
-        if (Array.isArray(data?.args)) {
-          return data.args;
-        }
-        if (data?.matrixA && data?.matrixB) {
-          return [data.matrixA, data.matrixB];
-        }
-        if (data?.matrixA) {
-          return [data.matrixA];
-        }
-        if (data?.data) {
-          return [data.data];
-        }
-        return [];
-      }
-
-      function nextFrame() {
-        return new Promise((resolve) => requestAnimationFrame(resolve));
       }
 
       // Main benchmark runner
@@ -1068,11 +1117,16 @@ detectEnvironment().catch(console.error);
         });
       }
 
-      function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-
 })();
+
+const testsList = document.getElementById('tests-list');
+tests.forEach((test, i) => {
+  const fig = buildFigure(test, i + 1);
+  testsList.appendChild(fig);
+  try {
+    renderSpecimens(fig, test.setup());
+  } catch (_) {}
+});
     </script>
   </body>
 </html>
