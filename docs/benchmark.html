@@ -65,6 +65,60 @@
     margin: 3rem 0;
     letter-spacing: 0.5em;
   }
+
+#page-header { margin-bottom: 3rem; }
+#page-header h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variation-settings: "opsz" 144;
+}
+#page-header .subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-top: 0.75rem;
+}
+#page-header .begin {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ubique);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ubique);
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+#page-header .begin:hover { color: var(--ink); border-bottom-color: var(--ink); }
+#page-header .begin[disabled] { opacity: 0.4; cursor: default; pointer-events: none; }
+
+#environment table {
+  width: 100%;
+  max-width: 640px;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+}
+#environment th, #environment td {
+  text-align: left;
+  padding: 0.4rem 0.75rem 0.4rem 0;
+  border-bottom: 1px dotted var(--rule);
+  vertical-align: top;
+}
+#environment th {
+  width: 12rem;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#environment td { color: var(--ink); word-break: break-word; }
     </style>
     <style>
     #topnav { display: none; }
@@ -72,8 +126,17 @@
 </head>
   <body>
   <div class="container">
-    <header id="page-header"></header>
-    <section id="environment"></section>
+    <header id="page-header">
+  <h1>Ubique <span style="color:var(--sepia);">//</span> Benchmark</h1>
+  <p class="subtitle">Matrix operations vs <em>math.js</em> · <span id="header-date"></span></p>
+  <a class="begin" id="begin-link" href="#tests">Begin →</a>
+</header>
+    <section id="environment">
+  <div class="section-label">Environment</div>
+  <table>
+    <tbody id="env-rows"></tbody>
+  </table>
+</section>
     <div class="rule-em">— · —</div>
     <section id="tests">
       <div class="section-label">Tests</div>
@@ -103,6 +166,53 @@
     </script>
 
     <script>
+// New code (always runs)
+const headerDate = document.getElementById('header-date');
+if (headerDate) headerDate.textContent = new Date().toISOString().slice(0, 10);
+
+async function detectEnvironment() {
+  const rows = [];
+  rows.push(['CPU logical cores', String(navigator.hardwareConcurrency ?? 'unknown')]);
+  rows.push(['Device memory (GB)', String(navigator.deviceMemory ?? 'unknown')]);
+  rows.push(['Platform', navigator.platform || 'unknown']);
+  rows.push(['User agent', navigator.userAgent]);
+
+  let simd = 'no';
+  try {
+    const bytes = new Uint8Array([
+      0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,
+      10,10,1,8,0,65,0,253,15,253,98,11
+    ]);
+    if (await WebAssembly.validate(bytes)) simd = 'yes';
+  } catch (_) {}
+  rows.push(['WASM SIMD', simd]);
+
+  let minDelta = Infinity;
+  let last = performance.now();
+  for (let i = 0; i < 1000; i++) {
+    const now = performance.now();
+    const d = now - last;
+    if (d > 0 && d < minDelta) minDelta = d;
+    last = now;
+  }
+  rows.push(['Timer resolution',
+    minDelta === Infinity ? 'unknown' : `${minDelta.toFixed(3)} ms`]);
+
+  const tbody = document.getElementById('env-rows');
+  for (const [k, v] of rows) {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.textContent = k;
+    const td = document.createElement('td');
+    td.textContent = v;
+    tr.appendChild(th);
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  }
+}
+detectEnvironment();
+
+// Legacy code IIFE (bails on new scaffold)
 (function () {
   if (!document.getElementById('startBtn')) return;
       // Slide Management
