@@ -794,6 +794,7 @@ const allResults = [];
 function renderScatter(fig, ubiqueTimes, mathjsTimes) {
   const host = fig.querySelector('[data-role="scatter"]');
   host.replaceChildren();
+  if (ubiqueTimes.length === 0 || mathjsTimes.length === 0) return;
 
   const W = 600, H = 120, padL = 60, padR = 12, padY = 22;
   const innerW = W - padL - padR;
