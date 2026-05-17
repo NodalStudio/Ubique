@@ -783,7 +783,7 @@ async function runOneTest(test, fig, _index) {
   fig.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   const data = test.setup();
-  renderSpecimens(fig, data);
+  renderSpecimens(fig, data, test.name);
 
   const { iterations, warmup } = await pickIterations(test);
 
@@ -811,8 +811,9 @@ async function runOneTest(test, fig, _index) {
     valEl.textContent = `${(1 / speedup).toFixed(1)}×`;
     labEl.textContent = 'slower';
   }
-  statsEl.textContent =
-    `n=${u.n}  σ=${u.sigma.toFixed(2)}ms  95% CI ±${u.ci95.toFixed(2)}ms`;
+  statsEl.textContent = u.n >= 5
+    ? `n=${u.n}  σ=${u.sigma.toFixed(2)}ms  95% CI ±${u.ci95.toFixed(2)}ms`
+    : `n=${u.n}  σ=${u.sigma.toFixed(2)}ms`;
   speedupHost.classList.remove('stamped');
   void speedupHost.offsetWidth;
   speedupHost.classList.add('stamped');
@@ -830,6 +831,7 @@ async function runOneTest(test, fig, _index) {
 }
 
 async function runAllTests() {
+  allResults.length = 0;
   const figures = [...document.querySelectorAll('.figure')];
   for (let i = 0; i < tests.length; i++) {
     await runOneTest(tests[i], figures[i], i + 1);
