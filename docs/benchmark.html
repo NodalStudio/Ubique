@@ -188,6 +188,27 @@
 .fig-speedup.stamped .speedup-value {
   animation: stamp 280ms cubic-bezier(.2,.7,.1,1) both;
 }
+
+.trace-svg {
+  width: 100%; height: 180px; display: block;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+}
+.trace-svg .axis-label {
+  font-family: var(--font-mono); font-size: 9px;
+  fill: var(--ink-soft); letter-spacing: 0.08em;
+}
+.trace-svg .gridline { stroke: var(--rule); stroke-width: 0.5; }
+.trace-svg .channel-ubique { fill: none; stroke: var(--ubique); stroke-width: 1.4; }
+.trace-svg .channel-mathjs { fill: none; stroke: var(--mathjs); stroke-width: 1.4; }
+
+.trace-legend {
+  display: flex; gap: 1.25rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
+  margin-top: 0.4rem;
+}
+.trace-legend span::before { content: "■ "; margin-right: 0.25rem; }
+.trace-legend .leg-ubique::before { color: var(--ubique); }
+.trace-legend .leg-mathjs::before { color: var(--mathjs); }
     </style>
     <style>
     #topnav { display: none; }
@@ -618,6 +639,218 @@ function renderSpecimens(figure, data, testName) {
     host.appendChild(el('div', { class: 'specimen-op', text: operatorFor(testName ?? '') }));
     host.appendChild(specimen('Matrix B', data.matrixB));
   }
+}
+
+// --- Task 4 Step 2: SVG trace renderer ---
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function svgEl(tag, attrs = {}) {
+  const node = document.createElementNS(SVG_NS, tag);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  return node;
+}
+
+function createTrace(host) {
+  host.replaceChildren();
+
+  const svg = svgEl('svg', {
+    class: 'trace-svg',
+    viewBox: '0 0 600 180',
+    preserveAspectRatio: 'none',
+  });
+  const gridG = svgEl('g', { class: 'grid' });
+  for (let i = 1; i < 5; i++) {
+    const y = (180 / 5) * i;
+    gridG.appendChild(svgEl('line',
+      { x1: 0, x2: 600, y1: y, y2: y, class: 'gridline' }));
+  }
+  svg.appendChild(gridG);
+
+  const pathU = svgEl('path', { class: 'channel-ubique', d: '' });
+  const pathM = svgEl('path', { class: 'channel-mathjs', d: '' });
+  svg.appendChild(pathU);
+  svg.appendChild(pathM);
+
+  const opsLabel = svgEl('text', { class: 'axis-label', x: 4, y: 14 });
+  opsLabel.textContent = 'ops/s';
+  svg.appendChild(opsLabel);
+
+  const iterLabel = svgEl('text', { class: 'axis-label', x: 596, y: 174, 'text-anchor': 'end' });
+  iterLabel.textContent = 'iteration →';
+  svg.appendChild(iterLabel);
+
+  host.appendChild(svg);
+
+  const legend = el('div', { class: 'trace-legend' }, [
+    el('span', { class: 'leg-ubique', text: 'Ubique' }),
+    el('span', { class: 'leg-mathjs', text: 'math.js' }),
+  ]);
+  host.appendChild(legend);
+
+  const channels = { ubique: { points: [], path: pathU }, mathjs: { points: [], path: pathM } };
+  let maxOps = 1;
+
+  function redraw() {
+    const W = 600, H = 180, pad = 6;
+    for (const lib of ['ubique', 'mathjs']) {
+      const pts = channels[lib].points;
+      if (pts.length === 0) { channels[lib].path.setAttribute('d', ''); continue; }
+      const n = pts.length;
+      const d = pts.map((ops, i) => {
+        const x = (n === 1) ? W / 2 : (i / (n - 1)) * W;
+        const y = H - pad - (ops / maxOps) * (H - pad * 2);
+        return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+      channels[lib].path.setAttribute('d', d);
+    }
+  }
+
+  return {
+    addPoint(lib, ops) {
+      channels[lib].points.push(ops);
+      if (ops > maxOps) maxOps = ops;
+      redraw();
+    },
+    reset() {
+      channels.ubique.points = [];
+      channels.mathjs.points = [];
+      maxOps = 1;
+      redraw();
+    },
+  };
+}
+
+// --- Task 4 Step 3: Benchmark timing primitives ---
+
+async function runTimedIterations(fn, data, totalIter, warmup, onIterTime) {
+  const args = getFunctionArgs(data);
+  for (let i = 0; i < warmup; i++) fn(...args);
+
+  const times = [];
+  for (let i = 0; i < totalIter; i++) {
+    const start = performance.now();
+    fn(...args);
+    const dt = performance.now() - start;
+    times.push(dt);
+    if (onIterTime) onIterTime(i, dt);
+    if (totalIter > 8 && (i + 1) % Math.max(1, Math.floor(totalIter / 20)) === 0) {
+      await nextFrame();
+    }
+  }
+  return times;
+}
+
+function summarizeTimes(times) {
+  const n = times.length;
+  const mean = times.reduce((a, b) => a + b, 0) / n;
+  const variance = times.reduce((a, t) => a + (t - mean) ** 2, 0) / Math.max(1, n - 1);
+  const sigma = Math.sqrt(variance);
+  const ci95 = 1.96 * sigma / Math.sqrt(n);
+  return { n, mean, sigma, ci95 };
+}
+
+async function pickIterations(test) {
+  const target = test.targetDuration ?? 4000;
+  const minIter = test.minIterations ?? 6;
+  const sample = test.sampleIterations ?? 2;
+  const warmup = test.warmupIterations ?? Math.min(3, sample);
+
+  const dU = test.setup();
+  const tU = await runTimedIterations(test.rubique, dU, sample, warmup, null);
+  const dM = test.setup();
+  const tM = await runTimedIterations(test.mathjs, dM, sample, warmup, null);
+
+  const slowest = Math.max(
+    tU.reduce((a, b) => a + b, 0) / tU.length,
+    tM.reduce((a, b) => a + b, 0) / tM.length,
+  );
+  let iter = Math.round(target / Math.max(slowest, 0.01));
+  if (!Number.isFinite(iter) || iter < 1) iter = minIter;
+  return { iterations: Math.max(iter, minIter), warmup };
+}
+
+// --- Task 4 Step 4: Orchestrators ---
+
+const allResults = [];
+
+function renderScatter(_fig, _ubique, _mathjs) { /* Task 5 fills this */ }
+function renderSummary() { /* Task 8 fills this */ }
+
+async function runOneTest(test, fig, _index) {
+  const trace = createTrace(fig.querySelector('[data-role="trace"]'));
+  trace.reset();
+  fig.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const data = test.setup();
+  renderSpecimens(fig, data);
+
+  const { iterations, warmup } = await pickIterations(test);
+
+  const uTimes = await runTimedIterations(
+    test.rubique, data, iterations, warmup,
+    (_i, dt) => trace.addPoint('ubique', 1000 / Math.max(dt, 0.001))
+  );
+  const mTimes = await runTimedIterations(
+    test.mathjs, data, iterations, warmup,
+    (_i, dt) => trace.addPoint('mathjs', 1000 / Math.max(dt, 0.001))
+  );
+
+  const u = summarizeTimes(uTimes);
+  const m = summarizeTimes(mTimes);
+  const speedup = m.mean / u.mean;
+
+  const speedupHost = fig.querySelector('[data-role="speedup"]');
+  const valEl   = speedupHost.querySelector('.speedup-value');
+  const labEl   = speedupHost.querySelector('.speedup-label');
+  const statsEl = speedupHost.querySelector('.speedup-stats');
+  if (speedup >= 1) {
+    valEl.textContent = `${speedup.toFixed(1)}×`;
+    labEl.textContent = 'faster';
+  } else {
+    valEl.textContent = `${(1 / speedup).toFixed(1)}×`;
+    labEl.textContent = 'slower';
+  }
+  statsEl.textContent =
+    `n=${u.n}  σ=${u.sigma.toFixed(2)}ms  95% CI ±${u.ci95.toFixed(2)}ms`;
+  speedupHost.classList.remove('stamped');
+  void speedupHost.offsetWidth;
+  speedupHost.classList.add('stamped');
+
+  renderScatter(fig, uTimes, mTimes);
+
+  allResults.push({
+    name: test.name,
+    rubiqueMean: u.mean, rubiqueSigma: u.sigma,
+    mathjsMean: m.mean,  mathjsSigma: m.sigma,
+    speedup, n: u.n,
+  });
+
+  await sleep(400);
+}
+
+async function runAllTests() {
+  const figures = [...document.querySelectorAll('.figure')];
+  for (let i = 0; i < tests.length; i++) {
+    await runOneTest(tests[i], figures[i], i + 1);
+  }
+  renderSummary();
+}
+
+// --- Task 4 Step 5: Wire the Begin link ---
+
+const beginLink = document.getElementById('begin-link');
+if (beginLink) {
+  beginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    beginLink.setAttribute('disabled', '');
+    const waitReady = setInterval(() => {
+      if (window.rubique && window.mathjs) {
+        clearInterval(waitReady);
+        runAllTests();
+      }
+    }, 100);
+  });
 }
 
 // Legacy code IIFE (bails on new scaffold)
