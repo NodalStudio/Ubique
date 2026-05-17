@@ -295,6 +295,40 @@
   letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--ink-soft); margin-bottom: 0.5rem;
 }
+
+.summary-grid {
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 2.5rem; align-items: start;
+}
+.summary-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+.summary-stat .big {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1;
+  color: var(--ink); font-variation-settings: "opsz" 144;
+}
+.summary-stat .label {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 0.4rem;
+}
+.summary-chart-wrap {
+  background: var(--paper-soft); border: 1px solid var(--rule);
+  padding: 1rem; position: relative; height: 360px;
+}
+.summary-foot {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 0.85rem; color: var(--ink-soft);
+  margin-top: 2rem; max-width: 720px; line-height: 1.6;
+}
+.replay {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono); font-size: 0.85rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ubique); background: transparent; border: none;
+  border-bottom: 1px solid var(--ubique);
+  padding: 2px 0; cursor: pointer;
+}
+.replay:hover { color: var(--ink); border-bottom-color: var(--ink); }
     </style>
     <style>
     #topnav { display: none; }
@@ -923,7 +957,85 @@ function renderScatter(fig, ubiqueTimes, mathjsTimes) {
 
   host.appendChild(svg);
 }
-function renderSummary() { /* Task 8 fills this */ }
+function renderSummary() {
+  if (allResults.length === 0) return;
+
+  const mean = allResults.reduce((a, r) => a + r.speedup, 0) / allResults.length;
+  const won = allResults.filter(r => r.speedup > 1).length;
+  const best = allResults.reduce((b, r) => r.speedup > b.speedup ? r : b);
+
+  document.getElementById('sum-mean').textContent =
+    mean >= 1 ? `${mean.toFixed(1)}×` : `${(1 / mean).toFixed(1)}× slower`;
+  document.getElementById('sum-won').textContent = `${won}/${allResults.length}`;
+  document.getElementById('sum-best').textContent =
+    `${best.name.replace(/\s*\(.*$/, '')} ${best.speedup.toFixed(1)}×`;
+
+  const ctx = document.getElementById('summary-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: allResults.map(r => r.name),
+      datasets: [{
+        label: 'Speedup ×',
+        data: allResults.map(r => r.speedup),
+        backgroundColor: 'rgba(164, 56, 42, 0.0)',
+        borderColor: '#a4382a',
+        borderWidth: 1.2,
+        borderSkipped: false,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#f4ede0',
+          titleColor: '#1a1a17',
+          bodyColor: '#1a1a17',
+          borderColor: '#a89274',
+          borderWidth: 1,
+          titleFont: { family: 'IBM Plex Mono', size: 11 },
+          bodyFont:  { family: 'IBM Plex Mono', size: 11 },
+          padding: 10,
+          displayColors: false,
+          callbacks: {
+            label: (cx) => {
+              const r = allResults[cx.dataIndex];
+              return [
+                `Speedup: ${r.speedup.toFixed(2)}×`,
+                `Ubique:  ${r.rubiqueMean.toFixed(2)} ± ${r.rubiqueSigma.toFixed(2)} ms`,
+                `math.js: ${r.mathjsMean.toFixed(2)} ± ${r.mathjsSigma.toFixed(2)} ms`,
+                `n = ${r.n}`,
+              ];
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(26,26,23,0.06)' },
+          ticks: {
+            color: '#4a4640',
+            font: { family: 'IBM Plex Mono', size: 10 },
+            callback: (v) => v + '×',
+          },
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: '#4a4640',
+            font: { family: 'IBM Plex Mono', size: 9 },
+            maxRotation: 45, minRotation: 45, autoSkip: false,
+          },
+        },
+      },
+    },
+  });
+}
+
+document.getElementById('replay-btn').addEventListener('click', () => location.reload());
 
 async function runOneTest(test, fig, _index) {
   const trace = createTrace(fig.querySelector('[data-role="trace"]'));
@@ -1163,6 +1275,41 @@ tests.forEach((test, i) => {
   item.appendChild(body);
   sourceList.appendChild(item);
 });
+
+const summarySection = document.getElementById('summary');
+summarySection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Summary' }),
+);
+
+function statBlock(bigId, labelText) {
+  return el('div', { class: 'summary-stat' }, [
+    el('div', { class: 'big', id: bigId, text: '—' }),
+    el('div', { class: 'label', text: labelText }),
+  ]);
+}
+
+const statsCol = el('div', { class: 'summary-stats' }, [
+  statBlock('sum-mean', 'Mean speedup'),
+  statBlock('sum-won',  'Tests where Ubique was faster'),
+  statBlock('sum-best', 'Best result'),
+]);
+
+const canvasEl = document.createElement('canvas');
+canvasEl.id = 'summary-chart';
+const chartWrap = el('div', { class: 'summary-chart-wrap' }, [canvasEl]);
+
+summarySection.appendChild(el('div', { class: 'summary-grid' }, [statsCol, chartWrap]));
+
+const foot = el('p', { class: 'summary-foot' });
+foot.append(
+  'Browser ',
+  Object.assign(document.createElement('code'), { textContent: 'performance.now()' }),
+  ' precision is capped (typically 5 µs–1 ms depending on isolation context). JS is single-threaded; results vary with hardware, browser, and ambient load. Each measurement reports the mean over n iterations after warmup discards; σ and 95% confidence interval are computed assuming approximately normal residuals.',
+);
+summarySection.appendChild(foot);
+
+const replay = el('button', { class: 'replay', id: 'replay-btn', text: '↻ Repeat experiment' });
+summarySection.appendChild(replay);
 
 // Legacy code IIFE (bails on new scaffold)
 (function () {
