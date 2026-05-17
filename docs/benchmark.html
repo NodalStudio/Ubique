@@ -329,6 +329,22 @@
   padding: 2px 0; cursor: pointer;
 }
 .replay:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.figure {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.figure.in-view { opacity: 1; transform: translateY(0); }
+
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(26,26,23,0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+.container { position: relative; z-index: 2; }
     </style>
     <style>
     #topnav { display: none; }
@@ -1821,6 +1837,16 @@ tests.forEach((test, i) => {
   testsList.appendChild(fig);
   renderSpecimens(fig, test.setup(), test.name);
 });
+
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      io.unobserve(e.target);
+    }
+  }
+}, { threshold: 0.15 });
+document.querySelectorAll('.figure').forEach(f => io.observe(f));
     </script>
   </body>
 </html>
