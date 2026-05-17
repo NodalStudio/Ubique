@@ -210,7 +210,7 @@ async function detectEnvironment() {
     tbody.appendChild(tr);
   }
 }
-detectEnvironment();
+detectEnvironment().catch(console.error);
 
 // Legacy code IIFE (bails on new scaffold)
 (function () {
