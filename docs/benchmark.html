@@ -592,7 +592,13 @@ function buildFigure(test, index) {
     [head, specimens, trace, scatter, speedup]);
 }
 
-function renderSpecimens(figure, data) {
+function operatorFor(testName) {
+  if (/add|plus/i.test(testName)) return '+';
+  if (/multiply|mtimes/i.test(testName)) return '×';
+  return '·';
+}
+
+function renderSpecimens(figure, data, testName) {
   const host = figure.querySelector('[data-role="specimens"]');
   host.replaceChildren();
 
@@ -609,7 +615,7 @@ function renderSpecimens(figure, data) {
 
   if (data.matrixA) host.appendChild(specimen('Matrix A', data.matrixA));
   if (data.matrixB) {
-    host.appendChild(el('div', { class: 'specimen-op', text: '×' }));
+    host.appendChild(el('div', { class: 'specimen-op', text: operatorFor(testName ?? '') }));
     host.appendChild(specimen('Matrix B', data.matrixB));
   }
 }
@@ -1123,9 +1129,7 @@ const testsList = document.getElementById('tests-list');
 tests.forEach((test, i) => {
   const fig = buildFigure(test, i + 1);
   testsList.appendChild(fig);
-  try {
-    renderSpecimens(fig, test.setup());
-  } catch (_) {}
+  renderSpecimens(fig, test.setup(), test.name);
 });
     </script>
   </body>
