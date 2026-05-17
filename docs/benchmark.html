@@ -1122,7 +1122,7 @@ if (beginLink) {
     const waitReady = setInterval(() => {
       if (window.rubique && window.mathjs) {
         clearInterval(waitReady);
-        runAllTests();
+        runAllTests().catch(console.error);
       }
     }, 100);
   });
