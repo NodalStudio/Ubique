@@ -226,6 +226,41 @@
 .scatter-svg .sigma-mathjs { fill: var(--mathjs); }
 .scatter-svg .pt-ubique { fill: var(--ubique); }
 .scatter-svg .pt-mathjs { fill: var(--mathjs); }
+
+.explore-controls {
+  display: flex; gap: 2rem; align-items: flex-end; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.explore-field {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+}
+.explore-field strong { color: var(--ink); font-weight: 500; }
+.explore-field select,
+.explore-field input[type="range"] {
+  font-family: var(--font-mono); font-size: 0.9rem;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+  color: var(--ink); padding: 0.4rem 0.6rem;
+}
+.explore-slider { flex: 1; min-width: 320px; }
+.explore-slider input[type="range"] { width: 100%; accent-color: var(--ubique); padding: 0; }
+
+.explore-bars { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
+.bar-row {
+  display: grid; grid-template-columns: 80px 1fr 120px;
+  align-items: center; gap: 1rem;
+  font-family: var(--font-mono); font-size: 0.85rem;
+}
+.bar-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.bar-track { height: 22px; background: var(--paper-soft); border: 1px solid var(--rule); position: relative; overflow: hidden; }
+.bar-fill  { height: 100%; width: 0%; transition: width 400ms cubic-bezier(.2,.7,.1,1); }
+.bar-ubique { background: var(--ubique); }
+.bar-mathjs { background: var(--mathjs); }
+.bar-time  { text-align: right; color: var(--ink); }
+
+.explore-result { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft); }
+.explore-result strong { color: var(--ink); }
     </style>
     <style>
     #topnav { display: none; }
@@ -933,6 +968,131 @@ if (beginLink) {
     }, 100);
   });
 }
+
+// --- Task 6 Step 2: Build explore section DOM ---
+
+const exploreSection = document.getElementById('explore');
+exploreSection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Explore' })
+);
+
+const opSelect = el('select', { id: 'explore-op' });
+for (const [val, lbl] of [
+  ['transpose', 'transpose'], ['plus', 'add'], ['mtimes', 'multiply'],
+  ['inv', 'inverse'], ['det', 'determinant'],
+]) {
+  const o = document.createElement('option');
+  o.value = val; o.textContent = lbl;
+  if (val === 'mtimes') o.selected = true;
+  opSelect.appendChild(o);
+}
+const opField = el('label', { class: 'explore-field' }, [
+  el('span', { text: 'Operation' }),
+  opSelect,
+]);
+
+const sizeSpan = el('span', { text: 'Size N = ' });
+const sizeStrong = el('strong', { id: 'explore-size', text: '64' });
+sizeSpan.appendChild(sizeStrong);
+const range = el('input', { id: 'explore-range' });
+range.type = 'range'; range.min = '2'; range.max = '500'; range.step = '1'; range.value = '64';
+const sliderField = el('label', { class: 'explore-field explore-slider' }, [sizeSpan, range]);
+
+exploreSection.appendChild(el('div', { class: 'explore-controls' }, [opField, sliderField]));
+
+function bar(libLabel, fillClass, fillId, timeId) {
+  const fill = el('div', { class: `bar-fill ${fillClass}`, id: fillId });
+  const track = el('div', { class: 'bar-track' }, [fill]);
+  return el('div', { class: 'bar-row' }, [
+    el('div', { class: 'bar-label', text: libLabel }),
+    track,
+    el('div', { class: 'bar-time', id: timeId, text: '—' }),
+  ]);
+}
+
+exploreSection.appendChild(el('div', { class: 'explore-bars' }, [
+  bar('Ubique',  'bar-ubique', 'bar-ubique',  'bar-ubique-time'),
+  bar('math.js', 'bar-mathjs', 'bar-mathjs', 'bar-mathjs-time'),
+]));
+
+const resultEl = el('div', { class: 'explore-result', id: 'explore-result',
+  text: 'Drag the slider to run.' });
+exploreSection.appendChild(resultEl);
+
+// --- Task 6 Step 3: Explore runner ---
+
+const exploreOps = {
+  transpose: { args: 1, ubique: 'transpose', mathjs: 'transpose' },
+  plus:      { args: 2, ubique: 'plus',      mathjs: 'add' },
+  mtimes:    { args: 2, ubique: 'mtimes',    mathjs: 'multiply' },
+  inv:       { args: 1, ubique: 'inv',       mathjs: 'inv', wellCond: true },
+  det:       { args: 1, ubique: 'det',       mathjs: 'det' },
+};
+
+function exploreSetup(opKey, N) {
+  const spec = exploreOps[opKey];
+  const A = spec.wellCond ? generateInvertibleMatrix(N) : generateMatrix(N, N);
+  if (spec.args === 1) return [A];
+  return [A, generateMatrix(N, N)];
+}
+
+async function timeExplore(opKey, N, iter = 5) {
+  if (!window.rubique || !window.mathjs) return null;
+  const spec = exploreOps[opKey];
+  const fnU = window.rubique[spec.ubique];
+  const fnM = window.mathjs[spec.mathjs];
+  const argsU = exploreSetup(opKey, N);
+  const argsM = exploreSetup(opKey, N);
+  fnU(...argsU); fnM(...argsM);  // warmup
+
+  let tU = 0;
+  for (let i = 0; i < iter; i++) {
+    const s = performance.now(); fnU(...argsU); tU += performance.now() - s;
+  }
+  let tM = 0;
+  for (let i = 0; i < iter; i++) {
+    const s = performance.now(); fnM(...argsM); tM += performance.now() - s;
+  }
+  return { ubique: tU / iter, mathjs: tM / iter };
+}
+
+let exploreTimer = null;
+function scheduleExplore() {
+  clearTimeout(exploreTimer);
+  exploreTimer = setTimeout(runExplore, 180);
+}
+
+async function runExplore() {
+  const op = document.getElementById('explore-op').value;
+  const N = parseInt(document.getElementById('explore-range').value, 10);
+  document.getElementById('explore-size').textContent = String(N);
+  const r = await timeExplore(op, N);
+  if (!r) return;
+
+  const maxT = Math.max(r.ubique, r.mathjs);
+  document.getElementById('bar-ubique').style.width = `${(r.ubique / maxT) * 100}%`;
+  document.getElementById('bar-mathjs').style.width = `${(r.mathjs / maxT) * 100}%`;
+  document.getElementById('bar-ubique-time').textContent = `${r.ubique.toFixed(2)} ms`;
+  document.getElementById('bar-mathjs-time').textContent = `${r.mathjs.toFixed(2)} ms`;
+
+  const speedup = r.mathjs / r.ubique;
+  const node = document.getElementById('explore-result');
+  node.replaceChildren();
+  node.append(
+    `${op}(N=${N})  ·  Ubique `,
+    Object.assign(document.createElement('strong'), { textContent: `${r.ubique.toFixed(2)}ms` }),
+    `  ·  math.js `,
+    Object.assign(document.createElement('strong'), { textContent: `${r.mathjs.toFixed(2)}ms` }),
+    `  ·  `,
+    Object.assign(document.createElement('strong'), {
+      textContent: speedup >= 1 ? `${speedup.toFixed(1)}×` : `${(1/speedup).toFixed(1)}×`,
+    }),
+    speedup >= 1 ? ' faster' : ' slower',
+  );
+}
+
+document.getElementById('explore-op').addEventListener('change', scheduleExplore);
+document.getElementById('explore-range').addEventListener('input', scheduleExplore);
 
 // Legacy code IIFE (bails on new scaffold)
 (function () {
