@@ -261,6 +261,40 @@
 
 .explore-result { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft); }
 .explore-result strong { color: var(--ink); }
+
+.source-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.source-item {
+  border: 1px solid var(--rule); background: var(--paper-soft);
+  font-family: var(--font-mono); font-size: 0.82rem;
+}
+.source-item summary {
+  cursor: pointer; padding: 0.6rem 0.9rem; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--ink-soft); letter-spacing: 0.05em;
+}
+.source-item summary::-webkit-details-marker { display: none; }
+.source-item summary::after { content: "+ show"; color: var(--sepia); }
+.source-item[open] summary::after { content: "− hide"; }
+.source-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+}
+.source-col {
+  padding: 0.75rem 1rem;
+  border-right: 1px solid var(--rule);
+  white-space: pre;
+  color: var(--ink);
+}
+.source-col:last-child { border-right: none; }
+.source-col .gutter {
+  display: inline-block; width: 1.5em;
+  color: var(--sepia); user-select: none;
+}
+.source-col .lib {
+  display: block; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 0.5rem;
+}
     </style>
     <style>
     #topnav { display: none; }
@@ -1093,6 +1127,42 @@ async function runExplore() {
 
 document.getElementById('explore-op').addEventListener('change', scheduleExplore);
 document.getElementById('explore-range').addEventListener('input', scheduleExplore);
+
+const sourceSection = document.getElementById('source');
+sourceSection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Source' }),
+);
+const sourceList = el('div', { class: 'source-list', id: 'source-list' });
+sourceSection.appendChild(sourceList);
+
+function sourceColumn(libName, codeText) {
+  const col = el('div', { class: 'source-col' });
+  col.appendChild(el('span', { class: 'lib', text: libName }));
+  const lines = codeText.split('\n');
+  lines.forEach((line, idx) => {
+    const g = el('span', { class: 'gutter', text: String(idx + 1) });
+    col.appendChild(g);
+    col.appendChild(document.createTextNode(line + (idx < lines.length - 1 ? '\n' : '')));
+  });
+  return col;
+}
+
+tests.forEach((test, i) => {
+  const uSrc = test.rubique.toString().split('\n').slice(0, 3).join('\n');
+  const mSrc = test.mathjs.toString().split('\n').slice(0, 3).join('\n');
+
+  const item = document.createElement('details');
+  item.className = 'source-item';
+  const summary = document.createElement('summary');
+  summary.textContent = `Fig. ${i + 1} · ${test.name}`;
+  item.appendChild(summary);
+  const body = el('div', { class: 'source-body' }, [
+    sourceColumn('Ubique', uSrc),
+    sourceColumn('math.js', mSrc),
+  ]);
+  item.appendChild(body);
+  sourceList.appendChild(item);
+});
 
 // Legacy code IIFE (bails on new scaffold)
 (function () {
