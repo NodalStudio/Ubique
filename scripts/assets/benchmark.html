@@ -866,11 +866,32 @@ function createTrace(host) {
   const channels = { ubique: { points: [], path: pathU }, mathjs: { points: [], path: pathM } };
   let maxOps = 1;
 
+  // Centered rolling-mean smoothing — averages each point with its
+  // neighbours so per-iteration timer jitter doesn't dominate the trace.
+  function smooth(pts) {
+    const n = pts.length;
+    if (n < 5) return pts;
+    // Window size: ~7% of the run, clamped to [3, 21], odd.
+    let w = Math.max(3, Math.min(21, Math.round(n * 0.07)));
+    if (w % 2 === 0) w += 1;
+    const half = (w - 1) / 2;
+    const out = new Array(n);
+    for (let i = 0; i < n; i++) {
+      const lo = Math.max(0, i - half);
+      const hi = Math.min(n - 1, i + half);
+      let sum = 0;
+      for (let j = lo; j <= hi; j++) sum += pts[j];
+      out[i] = sum / (hi - lo + 1);
+    }
+    return out;
+  }
+
   function redraw() {
     const W = 600, H = 180, pad = 6;
     for (const lib of ['ubique', 'mathjs']) {
-      const pts = channels[lib].points;
-      if (pts.length === 0) { channels[lib].path.setAttribute('d', ''); continue; }
+      const raw = channels[lib].points;
+      if (raw.length === 0) { channels[lib].path.setAttribute('d', ''); continue; }
+      const pts = smooth(raw);
       const n = pts.length;
       const d = pts.map((ops, i) => {
         const x = (n === 1) ? W / 2 : (i / (n - 1)) * W;
