@@ -3,3 +3,4 @@ node_modules
 priv
 target
 npm
+docs/benchmark.html
