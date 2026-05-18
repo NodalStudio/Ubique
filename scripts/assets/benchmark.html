@@ -4,707 +4,413 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ubique Performance vs Math.js</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #3b82f6;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --bg: #0f172a;
-        --bg-light: #1e293b;
-        --text: #f1f5f9;
-        --text-muted: #94a3b8;
-        --border: #334155;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        background: linear-gradient(135deg, var(--bg) 0%, #1a1f35 100%);
-        color: var(--text);
-        min-height: 100vh;
-        padding: 2rem;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      /* Hero Section */
-      .hero {
-        text-align: center;
-        padding: 3rem 2rem;
-        margin-bottom: 3rem;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .hero p {
-        font-size: 1.25rem;
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-      }
-
-      .start-btn {
-        background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
-        color: white;
-        border: none;
-        padding: 1rem 3rem;
-        font-size: 1.25rem;
-        border-radius: 0.75rem;
-        cursor: pointer;
-        font-weight: 600;
-        transition: transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-      }
-
-      .start-btn:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-      }
-
-      .start-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      /* Benchmark Test Card */
-      .test-card {
-        background: var(--bg-light);
-        border-radius: 1rem;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        border: 1px solid var(--border);
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .test-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .test-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-
-      .test-progress {
-        color: var(--text-muted);
-        font-size: 0.875rem;
-      }
-
-      /* Matrix Visualization */
-      .matrices-container {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        margin: 2rem 0;
-        flex-wrap: wrap;
-      }
-
-      .matrix-box {
-        text-align: center;
-      }
-
-      .matrix-label {
-        font-size: 0.875rem;
-        color: var(--text-muted);
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-      }
-
-      .matrix-canvas {
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        background: #000;
-      }
-
-      .operator {
-        font-size: 2rem;
-        color: var(--text-muted);
-      }
-
-      /* Computing Animation */
-      .computing {
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-        background: rgba(59, 130, 246, 0.08);
-        border-radius: 0.75rem;
-        border: 1px solid rgba(59, 130, 246, 0.15);
-      }
-
-      .compute-progress {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-      }
-
-      .compute-row {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .compute-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        font-size: 0.95rem;
-      }
-
-      .compute-meta {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        font-weight: 500;
-      }
-
-      .compute-bar-bg {
-        height: 10px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 999px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .compute-bar-fill {
-        height: 100%;
-        width: 0%;
-        border-radius: inherit;
-        transition: width 0.2s ease-out;
-      }
-
-      .compute-bar-fill.rubique {
-        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-      }
-
-      .compute-bar-fill.mathjs {
-        background: linear-gradient(90deg, #6b7280 0%, #9ca3af 100%);
-      }
-
-      .compute-subtext {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-      }
-
-      .compute-subtext strong {
-        color: var(--text);
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.5;
-        }
-      }
-
-      /* Racing Bars */
-      .race-container {
-        margin: 2rem 0;
-      }
-
-      .race-row {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .race-label {
-        width: 100px;
-        font-weight: 600;
-        font-size: 1rem;
-      }
-
-      .race-bar-container {
-        flex: 1;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 0.5rem;
-        overflow: visible;
-        position: relative;
-      }
-
-      .race-bar {
-        height: 100%;
-        border-radius: 0.5rem;
-        transition: width 0.5s ease-out;
-        position: relative;
-      }
-
-      .race-time {
-        position: absolute;
-        right: 0.75rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-weight: 600;
-        font-size: 0.875rem;
-        white-space: nowrap;
-        pointer-events: none;
-      }
-
-      .race-bar.rubique {
-        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-      }
-
-      .race-bar.mathjs {
-        background: linear-gradient(90deg, #6b7280 0%, #9ca3af 100%);
-      }
-
-      .race-status {
-        width: 80px;
-        text-align: center;
-        font-size: 1.25rem;
-      }
-
-      /* Speedup Badge */
-      .speedup-badge {
-        text-align: center;
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-        background: linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.2) 0%,
-          rgba(139, 92, 246, 0.2) 100%
-        );
-        border-radius: 0.75rem;
-        border: 1px solid rgba(59, 130, 246, 0.3);
-      }
-
-      .speedup-value {
-        font-size: 2.5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* Results Summary */
-      .results-card {
-        background: var(--bg-light);
-        border-radius: 1rem;
-        padding: 3rem;
-        text-align: center;
-        border: 1px solid var(--border);
-      }
-
-      .results-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-      }
-
-      .results-big-number {
-        font-size: 5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: countUp 1s ease-out;
-      }
-
-      @keyframes countUp {
-        from {
-          opacity: 0;
-          transform: scale(0.5);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      .results-subtitle {
-        font-size: 1.5rem;
-        color: var(--text-muted);
-      }
-
-      .results-stats {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        flex-wrap: wrap;
-        margin: 1rem;
-      }
-
-      .stat-item {
-        text-align: center;
-      }
-
-      .stat-value {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--success);
-      }
-
-      .stat-label {
-        font-size: 0.875rem;
-        color: var(--text-muted);
-        margin-top: 0.25rem;
-      }
-
-      .chart-container {
-        margin: 1rem;
-        padding: 2.5rem;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 0.75rem;
-      }
-
-      .run-again-btn {
-        background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
-        color: white;
-        border: none;
-        padding: 0.875rem 2.5rem;
-        font-size: 1.125rem;
-        border-radius: 0.75rem;
-        cursor: pointer;
-        font-weight: 600;
-        margin-top: 0.5rem;
-        transition: transform 0.2s;
-      }
-
-      .run-again-btn:hover {
-        transform: translateY(-2px);
-      }
-
-      /* Overall Progress Bar */
-      .overall-progress {
-        background: var(--bg-light);
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        border: 1px solid var(--border);
-      }
-
-      .progress-label {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.75rem;
-        font-size: 0.875rem;
-        color: var(--text-muted);
-      }
-
-      .progress-bar-bg {
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
-        overflow: hidden;
-      }
-
-      .progress-bar-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-        border-radius: 1rem;
-        transition: width 0.3s ease;
-      }
-
-      /* Slide System */
-      .slide {
-        display: none;
-        animation: slideIn 0.6s ease-out;
-        width: 100%;
-      }
-
-      .slide.active {
-        display: block;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateX(100px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes slideOut {
-        from {
-          opacity: 1;
-          transform: translateX(0);
-        }
-        to {
-          opacity: 0;
-          transform: translateX(-100px);
-        }
-      }
-
-      .slide.exiting {
-        animation: slideOut 0.6s ease-out;
-      }
-
-      /* Intro Slide - Enhanced */
-      .intro-slide {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        min-height: 85vh;
-        text-align: center;
-      }
-
-      .intro-slide.active {
-        display: flex;
-      }
-
-      .intro-content {
-        padding: 3rem 2rem;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .intro-content h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        line-height: 1.2;
-      }
-
-      .intro-content p {
-        font-size: 1.5rem;
-        color: var(--text-muted);
-        margin-bottom: 3rem;
-        line-height: 1.6;
-      }
-
-      /* Tests Slide - Centered */
-      .slide#testsSlide {
-        display: none;
-        min-height: 85vh;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .slide#testsSlide.active {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .slide#testsSlide .overall-progress,
-      .slide#testsSlide .test-card {
-        width: 80%;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* Results Slide - Centered */
-      .slide#resultsSlide {
-        display: none;
-        min-height: 85vh;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .slide#resultsSlide.active {
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero h1,
-        .intro-content h1 {
-          font-size: 2rem;
-        }
-        .intro-content p {
-          font-size: 1.125rem;
-        }
-        .matrices-container {
-          flex-direction: column;
-        }
-        .results-big-number {
-          font-size: 3rem;
-        }
-      }
+  :root {
+    --paper:        #f4ede0;
+    --paper-soft:   #ece3d0;
+    --ink:          #1a1a17;
+    --ink-soft:     #4a4640;
+    --sepia:        #a89274;
+    --sepia-soft:   #d8c9ad;
+    --ubique:       #a4382a;
+    --mathjs:       #2a3f6b;
+    --rule:         rgba(26, 26, 23, 0.18);
+    --grid:         rgba(26, 26, 23, 0.05);
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-serif:   "IBM Plex Serif", Georgia, serif;
+    --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+    --max-w: 1180px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); }
+  body {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.55;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 8px 8px, 8px 8px;
+    animation: paperDrift 30s linear infinite;
+  }
+  @keyframes paperDrift {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 8px 8px, 8px 8px; }
+  }
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 4rem 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rule-em {
+    text-align: center;
+    color: var(--sepia);
+    margin: 3rem 0;
+    letter-spacing: 0.5em;
+  }
+
+#page-header { margin-bottom: 3rem; }
+#page-header h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variation-settings: "opsz" 144;
+}
+#page-header .subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-top: 0.75rem;
+}
+#page-header .begin {
+  display: inline-block;
+  margin-top: 2.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.85rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--paper);
+  background: var(--ubique);
+  text-decoration: none;
+  padding: 0.75rem 2.25rem;
+  cursor: pointer;
+  border-bottom: none;
+  box-shadow: 0 2px 0 var(--ink);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+#page-header .begin:hover {
+  color: var(--paper);
+  background: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+#page-header .begin:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 var(--ink);
+}
+#page-header .begin[disabled] { opacity: 0.35; cursor: default; pointer-events: none; }
+
+/* Hide test figures, source, and summary until benchmarks start */
+body:not(.benchmarks-started) #tests #tests-list,
+body:not(.benchmarks-started) #source,
+body:not(.benchmarks-started) #summary {
+  display: none;
+}
+body:not(.benchmarks-started) #tests::after {
+  content: "Click Begin to populate";
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+/* Hide the em-rules around the now-hidden sections too */
+body:not(.benchmarks-started) #tests + .rule-em,
+body:not(.benchmarks-started) #explore + .rule-em,
+body:not(.benchmarks-started) #source + .rule-em {
+  display: none;
+}
+
+#environment table {
+  width: 100%;
+  max-width: 640px;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+}
+#environment th, #environment td {
+  text-align: left;
+  padding: 0.4rem 0.75rem 0.4rem 0;
+  border-bottom: 1px dotted var(--rule);
+  vertical-align: top;
+}
+#environment th {
+  width: 12rem;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#environment td { color: var(--ink); word-break: break-word; }
+
+.figure {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(360px, 1.4fr);
+  grid-template-rows: auto auto auto;
+  gap: 1.25rem 2rem;
+  padding: 1.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.figure:last-child { border-bottom: none; }
+.figure .fig-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 1rem; }
+.figure .fig-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  position: relative;
+}
+.figure .fig-num::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
+  height: 1px; background: var(--sepia);
+  transform: scaleX(0); transform-origin: left; transition: transform 240ms ease;
+}
+.figure:hover .fig-num::after { transform: scaleX(1); }
+.figure .fig-title {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+}
+.figure .fig-specimens {
+  grid-column: 1; grid-row: 2;
+  display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
+}
+.figure .fig-trace    { grid-column: 2; grid-row: 2; min-height: 180px; }
+.figure .fig-scatter  { grid-column: 1; grid-row: 3; min-height: 120px; }
+.figure .fig-speedup  { grid-column: 2; grid-row: 3; text-align: right; }
+
+.fig-speedup .speedup-value {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5rem); line-height: 1;
+  color: var(--ink); font-variation-settings: "opsz" 144;
+}
+.fig-speedup .speedup-label {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 0.5rem;
+}
+.fig-speedup .speedup-stats {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--ink-soft); margin-top: 0.4rem;
+}
+
+.specimen { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+.specimen-label {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft);
+}
+.specimen canvas { background: var(--paper-soft); border: 1px solid var(--rule); }
+.specimen .specimen-dim { font-family: var(--font-mono); font-size: 0.7rem; color: var(--sepia); }
+.specimen-op { font-family: var(--font-display); font-size: 1.4rem; color: var(--sepia); }
+
+@keyframes stamp {
+  0%   { transform: scale(0.85); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.fig-speedup.stamped .speedup-value {
+  animation: stamp 280ms cubic-bezier(.2,.7,.1,1) both;
+}
+
+.trace-svg {
+  width: 100%; height: 180px; display: block;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+}
+.trace-svg .axis-label {
+  font-family: var(--font-mono); font-size: 9px;
+  fill: var(--ink-soft); letter-spacing: 0.08em;
+}
+.trace-svg .gridline { stroke: var(--rule); stroke-width: 0.5; }
+.trace-svg .channel-ubique { fill: none; stroke: var(--ubique); stroke-width: 1.4; }
+.trace-svg .channel-mathjs { fill: none; stroke: var(--mathjs); stroke-width: 1.4; }
+
+.trace-legend {
+  display: flex; gap: 1.25rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
+  margin-top: 0.4rem;
+}
+.trace-legend span::before { content: "■ "; margin-right: 0.25rem; }
+.trace-legend .leg-ubique::before { color: var(--ubique); }
+.trace-legend .leg-mathjs::before { color: var(--mathjs); }
+
+.scatter-svg {
+  width: 100%; height: 120px; display: block;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+}
+.scatter-svg .lane-label {
+  font-family: var(--font-mono); font-size: 9px;
+  fill: var(--ink-soft); letter-spacing: 0.08em;
+}
+.scatter-svg .mean-line { stroke-width: 1.2; }
+.scatter-svg .mean-ubique { stroke: var(--ubique); }
+.scatter-svg .mean-mathjs { stroke: var(--mathjs); }
+.scatter-svg .sigma-band  { opacity: 0.18; }
+.scatter-svg .sigma-ubique { fill: var(--ubique); }
+.scatter-svg .sigma-mathjs { fill: var(--mathjs); }
+.scatter-svg .pt-ubique { fill: var(--ubique); }
+.scatter-svg .pt-mathjs { fill: var(--mathjs); }
+
+.explore-controls {
+  display: flex; gap: 2rem; align-items: flex-end; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.explore-field {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+}
+.explore-field strong { color: var(--ink); font-weight: 500; }
+.explore-field select,
+.explore-field input[type="range"] {
+  font-family: var(--font-mono); font-size: 0.9rem;
+  background: var(--paper-soft); border: 1px solid var(--rule);
+  color: var(--ink); padding: 0.4rem 0.6rem;
+}
+.explore-slider { flex: 1; min-width: 320px; }
+.explore-slider input[type="range"] { width: 100%; accent-color: var(--ubique); padding: 0; }
+
+.explore-bars { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
+.bar-row {
+  display: grid; grid-template-columns: 80px 1fr 120px;
+  align-items: center; gap: 1rem;
+  font-family: var(--font-mono); font-size: 0.85rem;
+}
+.bar-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.bar-track { height: 22px; background: var(--paper-soft); border: 1px solid var(--rule); position: relative; overflow: hidden; }
+.bar-fill  { height: 100%; width: 0%; transition: width 400ms cubic-bezier(.2,.7,.1,1); }
+.bar-ubique { background: var(--ubique); }
+.bar-mathjs { background: var(--mathjs); }
+.bar-time  { text-align: right; color: var(--ink); }
+
+.explore-result { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft); }
+.explore-result strong { color: var(--ink); }
+
+.source-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.source-item {
+  border: 1px solid var(--rule); background: var(--paper-soft);
+  font-family: var(--font-mono); font-size: 0.82rem;
+}
+.source-item summary {
+  cursor: pointer; padding: 0.6rem 0.9rem; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--ink-soft); letter-spacing: 0.05em;
+}
+.source-item summary::-webkit-details-marker { display: none; }
+.source-item summary::after { content: "+ show"; color: var(--sepia); }
+.source-item[open] summary::after { content: "− hide"; }
+.source-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+}
+.source-col {
+  padding: 0.75rem 1rem;
+  border-right: 1px solid var(--rule);
+  white-space: pre;
+  color: var(--ink);
+}
+.source-col:last-child { border-right: none; }
+.source-col .gutter {
+  display: inline-block; width: 1.5em;
+  color: var(--sepia); user-select: none;
+}
+.source-col .lib {
+  display: block; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 0.5rem;
+}
+
+.summary-grid {
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 2.5rem; align-items: start;
+}
+.summary-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+.summary-stat .big {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1;
+  color: var(--ink); font-variation-settings: "opsz" 144;
+}
+.summary-stat .label {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 0.4rem;
+}
+.summary-chart-wrap {
+  background: var(--paper-soft); border: 1px solid var(--rule);
+  padding: 1rem; position: relative; height: 360px;
+}
+.summary-foot {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 0.85rem; color: var(--ink-soft);
+  margin-top: 2rem; max-width: 720px; line-height: 1.6;
+}
+.replay {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono); font-size: 0.85rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ubique); background: transparent; border: none;
+  border-bottom: 1px solid var(--ubique);
+  padding: 2px 0; cursor: pointer;
+}
+.replay:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.figure {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.figure.in-view { opacity: 1; transform: translateY(0); }
+
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(26,26,23,0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+.container { position: relative; z-index: 2; }
     </style>
-  </head>
+    <style>
+    #topnav { display: none; }
+  </style>
+</head>
   <body>
-    <div class="container">
-      <!-- Slide 1: Intro -->
-      <div class="slide active intro-slide" id="introSlide">
-        <div class="intro-content">
-          <h1>🚀 Ubique Performance vs Math.js</h1>
-          <p>Watch real-time matrix operations & benchmarks</p>
-          <button class="start-btn" id="startBtn" onclick="startBenchmark()">
-            ▶️ Start Demo
-          </button>
-        </div>
-      </div>
+  <div class="container">
+    <header id="page-header">
+  <h1>Ubique <span style="color:var(--sepia);">//</span> Benchmark</h1>
+  <p class="subtitle">Matrix operations vs <em>math.js</em> · <span id="header-date"></span></p>
+  <a class="begin" id="begin-link" href="#tests">Begin →</a>
+</header>
+    <section id="environment">
+  <div class="section-label">Environment</div>
+  <table>
+    <tbody id="env-rows"></tbody>
+  </table>
+</section>
+    <div class="rule-em">— · —</div>
+    <section id="tests">
+      <div class="section-label">Tests</div>
+      <div id="tests-list"></div>
+    </section>
+    <div class="rule-em">— · —</div>
+    <section id="explore"></section>
+    <div class="rule-em">— · —</div>
+    <section id="source"></section>
+    <div class="rule-em">— · —</div>
+    <section id="summary"></section>
+  </div>
 
-      <!-- Slide 2: Tests -->
-      <div class="slide" id="testsSlide">
-        <!-- Overall Progress -->
-        <div class="overall-progress active" id="overallProgress">
-          <div class="progress-label">
-            <span id="progressText">Starting benchmarks...</span>
-            <span id="progressPercent">0%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div
-              class="progress-bar-fill"
-              id="progressBar"
-              style="width: 0%"
-            ></div>
-          </div>
-        </div>
-
-        <!-- Test Card -->
-        <div class="test-card active" id="testCard">
-          <div class="test-header">
-            <h2 class="test-title" id="testTitle">Test Name</h2>
-            <span class="test-progress" id="testProgress">0/12</span>
-          </div>
-
-          <!-- Matrix Visualization -->
-          <div class="matrices-container" id="matricesContainer">
-            <!-- Dynamically populated -->
-          </div>
-
-          <!-- Computing Progress -->
-          <div class="computing" id="computing">
-            <div class="compute-progress">
-              <div class="compute-row">
-                <div class="compute-header">
-                  <span>Ubique</span>
-                  <span class="compute-meta" id="rubiqueComputeMeta"
-                    >waiting…</span
-                  >
-                </div>
-                <div class="compute-bar-bg">
-                  <div
-                    class="compute-bar-fill rubique"
-                    id="rubiqueComputeBar"
-                  ></div>
-                </div>
-                <div class="compute-subtext" id="rubiqueComputeSubtext">
-                  Preparing benchmark…
-                </div>
-              </div>
-              <div class="compute-row">
-                <div class="compute-header">
-                  <span>Math.js</span>
-                  <span class="compute-meta" id="mathjsComputeMeta"
-                    >waiting…</span
-                  >
-                </div>
-                <div class="compute-bar-bg">
-                  <div
-                    class="compute-bar-fill mathjs"
-                    id="mathjsComputeBar"
-                  ></div>
-                </div>
-                <div class="compute-subtext" id="mathjsComputeSubtext">
-                  Waiting for Ubique to finish…
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Racing Bars -->
-          <div class="race-container" id="raceContainer" style="display: none">
-            <div class="race-row">
-              <div class="race-label">Ubique</div>
-              <div class="race-bar-container">
-                <div
-                  class="race-bar rubique"
-                  id="rubiqueBar"
-                  style="width: 0%"
-                ></div>
-                <span class="race-time" id="rubiqueTime"></span>
-              </div>
-              <div class="race-status" id="rubiqueStatus"></div>
-            </div>
-            <div class="race-row">
-              <div class="race-label">Math.js</div>
-              <div class="race-bar-container">
-                <div
-                  class="race-bar mathjs"
-                  id="mathjsBar"
-                  style="width: 0%"
-                ></div>
-                <span class="race-time" id="mathjsTime"></span>
-              </div>
-              <div class="race-status" id="mathjsStatus"></div>
-            </div>
-          </div>
-
-          <!-- Speedup Badge -->
-          <div class="speedup-badge" id="speedupBadge" style="display: none">
-            <div class="speedup-value" id="speedupValue">0x</div>
-            <div id="speedupLabel" style="color: var(--text-muted)">faster</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Results -->
-      <div class="slide" id="resultsSlide">
-        <!-- Results Summary -->
-        <div class="results-card active" id="resultsCard">
-          <h2 class="results-title">🎉 Benchmark Complete!</h2>
-          <div class="results-big-number" id="avgSpeedup">0x</div>
-          <div class="results-subtitle">AVERAGE SPEEDUP</div>
-
-          <div class="results-stats">
-            <div class="stat-item">
-              <div class="stat-value" id="wonTests">0/0</div>
-              <div class="stat-label">Tests Won</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value" id="bestTest">-</div>
-              <div class="stat-label">Best Performance</div>
-            </div>
-          </div>
-
-          <div class="chart-container">
-            <canvas id="resultsChart"></canvas>
-          </div>
-
-          <button class="run-again-btn" onclick="location.reload()">
-            ↻ Run Again
-          </button>
-        </div>
-      </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script type="module">
@@ -720,865 +426,986 @@
     </script>
 
     <script>
-      // Slide Management
-      let currentSlide = "introSlide";
+// New code (always runs)
+const headerDate = document.getElementById('header-date');
+if (headerDate) headerDate.textContent = new Date().toISOString().slice(0, 10);
 
-      function transitionToSlide(slideId) {
-        return new Promise((resolve) => {
-          const oldSlide = document.getElementById(currentSlide);
-          const newSlide = document.getElementById(slideId);
+async function detectEnvironment() {
+  const rows = [];
+  rows.push(['CPU logical cores', String(navigator.hardwareConcurrency ?? 'unknown')]);
+  rows.push(['Device memory (GB)', String(navigator.deviceMemory ?? 'unknown')]);
+  rows.push(['Platform', navigator.platform || 'unknown']);
+  rows.push(['User agent', navigator.userAgent]);
 
-          // Add exiting animation to current slide
-          oldSlide.classList.add("exiting");
+  let simd = 'no';
+  try {
+    const bytes = new Uint8Array([
+      0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,
+      10,10,1,8,0,65,0,253,15,253,98,11
+    ]);
+    if (await WebAssembly.validate(bytes)) simd = 'yes';
+  } catch (_) {}
+  rows.push(['WASM SIMD', simd]);
 
-          // After exit animation completes, switch slides
-          setTimeout(() => {
-            oldSlide.classList.remove("active", "exiting");
-            newSlide.classList.add("active");
-            currentSlide = slideId;
-            resolve();
-          }, 600); // Match animation duration
-        });
+  let minDelta = Infinity;
+  let last = performance.now();
+  for (let i = 0; i < 1000; i++) {
+    const now = performance.now();
+    const d = now - last;
+    if (d > 0 && d < minDelta) minDelta = d;
+    last = now;
+  }
+  rows.push(['Timer resolution',
+    minDelta === Infinity ? 'unknown' : `${minDelta.toFixed(3)} ms`]);
+
+  const tbody = document.getElementById('env-rows');
+  for (const [k, v] of rows) {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.textContent = k;
+    const td = document.createElement('td');
+    td.textContent = v;
+    tr.appendChild(th);
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  }
+}
+detectEnvironment().catch(console.error);
+
+// --- Top-level helpers (moved out of IIFE for new scaffold) ---
+
+function generateArray(size) {
+  return Array.from({ length: size }, () => Math.random() * 100);
+}
+
+function generateMatrix(rows, cols) {
+  return Array.from({ length: rows }, () => generateArray(cols));
+}
+
+function generateInvertibleMatrix(n) {
+  const matrix = Array(n)
+    .fill(0)
+    .map(() => Array(n).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    let rowSum = 0;
+    for (let j = 0; j < n; j++) {
+      if (i !== j) {
+        matrix[i][j] = Math.random() * 10;
+        rowSum += Math.abs(matrix[i][j]);
       }
+    }
+    matrix[i][i] = rowSum + Math.random() * 10 + 10;
+  }
 
-      // Matrix Visualization Engine
-      function drawMatrix(canvas, matrix, label) {
-        const ctx = canvas.getContext("2d");
-        const rows = matrix.length;
-        const cols = matrix[0]?.length || 1;
+  return matrix;
+}
 
-        // Determine display mode based on size
-        if (rows <= 10 && cols <= 10) {
-          // Show actual numbers
-          drawNumberMatrix(ctx, canvas, matrix);
-        } else if (rows <= 50 && cols <= 50) {
-          // Show full heatmap
-          drawHeatmap(ctx, canvas, matrix);
-        } else {
-          // Show corner preview
-          drawCornerPreview(ctx, canvas, matrix);
-        }
-      }
+function getFunctionArgs(data) {
+  if (Array.isArray(data?.args)) {
+    return data.args;
+  }
+  if (data?.matrixA && data?.matrixB) {
+    return [data.matrixA, data.matrixB];
+  }
+  if (data?.matrixA) {
+    return [data.matrixA];
+  }
+  if (data?.data) {
+    return [data.data];
+  }
+  return [];
+}
 
-      function drawNumberMatrix(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const cellSize = Math.min(canvas.width / cols, canvas.height / rows);
+function nextFrame() {
+  // requestAnimationFrame is heavily throttled in background tabs; fall back to setTimeout
+  // so benchmarks still progress when the tab loses focus.
+  if (document.visibilityState === 'hidden') {
+    return new Promise((resolve) => setTimeout(resolve, 0));
+  }
+  return new Promise((resolve) => requestAnimationFrame(resolve));
+}
 
-        canvas.width = cols * cellSize;
-        canvas.height = rows * cellSize;
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-        ctx.fillStyle = "#1e293b";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.font = `${cellSize * 0.3}px monospace`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            const value = matrix[i][j];
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            // Draw cell border
-            ctx.strokeStyle = "#334155";
-            ctx.strokeRect(x, y, cellSize, cellSize);
-
-            // Draw value
-            ctx.fillStyle = getValueColor(value);
-            ctx.fillText(value.toFixed(1), x + cellSize / 2, y + cellSize / 2);
-          }
-        }
-      }
-
-      function drawHeatmap(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const cellSize = Math.min(300 / cols, 300 / rows);
-
-        canvas.width = cols * cellSize;
-        canvas.height = rows * cellSize;
-
-        // Find min/max for color scaling
-        let min = Infinity,
-          max = -Infinity;
-        for (let row of matrix) {
-          for (let val of row) {
-            min = Math.min(min, val);
-            max = Math.max(max, val);
-          }
-        }
-
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            const value = matrix[i][j];
-            const normalized = (value - min) / (max - min);
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            ctx.fillStyle = getHeatmapColor(normalized);
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
-        }
-      }
-
-      function drawCornerPreview(ctx, canvas, matrix) {
-        const rows = matrix.length;
-        const cols = matrix[0].length;
-        const previewSize = 20; // Show 20x20 corner
-        const cellSize = 10;
-
-        canvas.width = previewSize * cellSize;
-        canvas.height = previewSize * cellSize;
-
-        ctx.fillStyle = "#1e293b";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Find min/max for first 20x20 section
-        let min = Infinity,
-          max = -Infinity;
-        for (let i = 0; i < Math.min(previewSize, rows); i++) {
-          for (let j = 0; j < Math.min(previewSize, cols); j++) {
-            min = Math.min(min, matrix[i][j]);
-            max = Math.max(max, matrix[i][j]);
-          }
-        }
-
-        // Draw corner heatmap
-        for (let i = 0; i < Math.min(previewSize, rows); i++) {
-          for (let j = 0; j < Math.min(previewSize, cols); j++) {
-            const value = matrix[i][j];
-            const normalized = (value - min) / (max - min);
-            const x = j * cellSize;
-            const y = i * cellSize;
-
-            ctx.fillStyle = getHeatmapColor(normalized);
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
-        }
-
-        // Draw dimension label
-        ctx.fillStyle = "#f1f5f9";
-        ctx.font = "12px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(`${rows}×${cols}`, canvas.width / 2, canvas.height + 20);
-      }
-
-      function getValueColor(value) {
-        // Simple color scheme for numbers
-        return value > 50 ? "#f59e0b" : value > 25 ? "#3b82f6" : "#8b5cf6";
-      }
-
-      function getHeatmapColor(normalized) {
-        // Blue -> Cyan -> Green -> Yellow -> Red
-        const hue = (1 - normalized) * 240; // 240 = blue, 0 = red
-        return `hsl(${hue}, 80%, 50%)`;
-      }
-
-      // Generate test data
-      function generateArray(size) {
-        return Array.from({ length: size }, () => Math.random() * 100);
-      }
-
-      function generateMatrix(rows, cols) {
-        return Array.from({ length: rows }, () => generateArray(cols));
-      }
-
-      // Generate well-conditioned square matrix for decomposition
-      function generateInvertibleMatrix(n) {
-        // Create a diagonally dominant matrix (guarantees invertibility)
-        const matrix = Array(n)
-          .fill(0)
-          .map(() => Array(n).fill(0));
-
-        for (let i = 0; i < n; i++) {
-          let rowSum = 0;
-          for (let j = 0; j < n; j++) {
-            if (i !== j) {
-              matrix[i][j] = Math.random() * 10;
-              rowSum += Math.abs(matrix[i][j]);
-            }
-          }
-          // Make diagonal element larger than sum of other elements in row
-          matrix[i][i] = rowSum + Math.random() * 10 + 10;
-        }
-
-        return matrix;
-      }
-
-      // Benchmark results storage
-      let allResults = [];
-      let currentTest = 0;
-
-      // Test configuration - Focus on impressive matrix operations
-      const tests = [
-        {
-          name: "Matrix Transpose (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 20,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.transpose(matrix),
-          mathjs: (matrix) => window.mathjs.transpose(matrix),
-        },
-        {
-          name: "Matrix Add (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 25,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            const matrixB = generateMatrix(100, 100);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.plus(a, b),
-          mathjs: (a, b) => window.mathjs.add(a, b),
-        },
-        {
-          name: "Matrix Multiply (10×10)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 60,
-          sampleIterations: 5,
-          setup: () => {
-            const matrixA = generateMatrix(10, 10);
-            const matrixB = generateMatrix(10, 10);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (50×50)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 18,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(50, 50);
-            const matrixB = generateMatrix(50, 50);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (100×100)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 8,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(100, 100);
-            const matrixB = generateMatrix(100, 100);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Multiply (200×200)",
-          category: "Matrix Operations",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 2,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(200, 200);
-            const matrixB = generateMatrix(200, 200);
-            return {
-              matrixA,
-              matrixB,
-              args: [matrixA, matrixB],
-            };
-          },
-          rubique: (a, b) => window.rubique.mtimes(a, b),
-          mathjs: (a, b) => window.mathjs.multiply(a, b),
-        },
-        {
-          name: "Matrix Inverse (20×20)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 6,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateInvertibleMatrix(20);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.inv(matrix),
-          mathjs: (matrix) => window.mathjs.inv(matrix),
-        },
-        {
-          name: "Determinant (20×20)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 8,
-          sampleIterations: 2,
-          setup: () => {
-            const matrixA = generateMatrix(20, 20);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.det(matrix),
-          mathjs: (matrix) => window.mathjs.det(matrix),
-        },
-        {
-          name: "Determinant (50×50)",
-          category: "Linear Algebra",
-          visualize: true,
-          targetDuration: 5000,
-          minIterations: 3,
-          sampleIterations: 1,
-          setup: () => {
-            const matrixA = generateMatrix(50, 50);
-            return {
-              matrixA,
-              args: [matrixA],
-            };
-          },
-          rubique: (matrix) => window.rubique.det(matrix),
-          mathjs: (matrix) => window.mathjs.det(matrix),
-        },
-      ];
-
-      const computeElements = {
-        rubique: {
-          bar: document.getElementById("rubiqueComputeBar"),
-          meta: document.getElementById("rubiqueComputeMeta"),
-          subtext: document.getElementById("rubiqueComputeSubtext"),
-        },
-        mathjs: {
-          bar: document.getElementById("mathjsComputeBar"),
-          meta: document.getElementById("mathjsComputeMeta"),
-          subtext: document.getElementById("mathjsComputeSubtext"),
-        },
+// Test configuration - Focus on impressive matrix operations
+const tests = [
+  {
+    name: "Matrix Transpose (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 20,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      return {
+        matrixA,
+        args: [matrixA],
       };
-
-      function prepareComputeRows(iterations) {
-        const totalLabel = `${iterations} iteration${
-          iterations === 1 ? "" : "s"
-        }`;
-        computeElements.rubique.bar.style.width = "0%";
-        computeElements.mathjs.bar.style.width = "0%";
-        computeElements.rubique.meta.textContent = totalLabel;
-        computeElements.mathjs.meta.textContent = "waiting…";
-        computeElements.rubique.subtext.textContent = "Preparing benchmark…";
-        computeElements.mathjs.subtext.textContent =
-          "Waiting for Ubique to finish…";
-      }
-
-      function resetRace() {
-        const rubiqueBar = document.getElementById("rubiqueBar");
-        const mathjsBar = document.getElementById("mathjsBar");
-        const rubiqueTime = document.getElementById("rubiqueTime");
-        const mathjsTime = document.getElementById("mathjsTime");
-        const rubiqueStatus = document.getElementById("rubiqueStatus");
-        const mathjsStatus = document.getElementById("mathjsStatus");
-
-        rubiqueBar.style.width = "0%";
-        mathjsBar.style.width = "0%";
-        rubiqueTime.textContent = "";
-        mathjsTime.textContent = "";
-        rubiqueStatus.textContent = "";
-        mathjsStatus.textContent = "";
-      }
-
-      function startComputeRow(library, iterations) {
-        const row = computeElements[library];
-        row.bar.style.width = "0%";
-        row.meta.textContent = `0 / ${iterations} iterations`;
-        row.subtext.textContent = "Running…";
-      }
-
-      function updateComputeRow(library, iteration, total, elapsed) {
-        const row = computeElements[library];
-        const percent = Math.min((iteration / total) * 100, 100);
-        row.bar.style.width = `${percent}%`;
-        row.meta.textContent = `${iteration} / ${total} iterations`;
-        row.subtext.textContent = `Elapsed ${formatMillis(elapsed)}`;
-      }
-
-      function completeComputeRow(library, averageTime) {
-        const row = computeElements[library];
-        row.bar.style.width = "100%";
-        row.meta.textContent = "✅ Complete";
-        row.subtext.textContent = `Average ${averageTime.toFixed(
-          2
-        )} ms per iteration`;
-      }
-
-      function formatMillis(ms) {
-        if (ms >= 1000) {
-          return `${(ms / 1000).toFixed(2)} s`;
-        }
-        if (ms >= 100) {
-          return `${ms.toFixed(0)} ms`;
-        }
-        return `${ms.toFixed(1)} ms`;
-      }
-
-      async function calculateIterations(test) {
-        const target = test.targetDuration ?? 900;
-        const minIterations = test.minIterations ?? 3;
-        const sampleIterations = test.sampleIterations ?? 1;
-
-        const sampleDataUbique = test.setup();
-        const rubiqueSample = await benchmarkFunction(
-          test.rubique,
-          sampleDataUbique,
-          sampleIterations,
-          null,
-          { silent: true }
-        );
-
-        const sampleDataMath = test.setup();
-        const mathSample = await benchmarkFunction(
-          test.mathjs,
-          sampleDataMath,
-          sampleIterations,
-          null,
-          { silent: true }
-        );
-
-        const slowestPerIteration = Math.max(rubiqueSample, mathSample);
-        let iterations = Math.round(target / slowestPerIteration);
-        if (!Number.isFinite(iterations) || iterations < 1) {
-          iterations = minIterations;
-        }
-        iterations = Math.max(iterations, minIterations);
-        return iterations;
-      }
-
-      function getFunctionArgs(data) {
-        if (Array.isArray(data?.args)) {
-          return data.args;
-        }
-        if (data?.matrixA && data?.matrixB) {
-          return [data.matrixA, data.matrixB];
-        }
-        if (data?.matrixA) {
-          return [data.matrixA];
-        }
-        if (data?.data) {
-          return [data.data];
-        }
-        return [];
-      }
-
-      function nextFrame() {
-        return new Promise((resolve) => requestAnimationFrame(resolve));
-      }
-
-      // Main benchmark runner
-      async function startBenchmark() {
-        document.getElementById("startBtn").disabled = true;
-
-        // Transition to tests slide
-        await transitionToSlide("testsSlide");
-
-        currentTest = 0;
-        allResults = [];
-
-        for (let i = 0; i < tests.length; i++) {
-          currentTest = i + 1;
-          await runTest(tests[i], i + 1, tests.length);
-        }
-
-        // Transition to results slide
-        await transitionToSlide("resultsSlide");
-        showResults();
-      }
-
-      async function runTest(test, index, total) {
-        const completedRatio = (index - 1) / total;
-        const progress = completedRatio * 100;
-        document.getElementById("progressBar").style.width = `${progress}%`;
-        document.getElementById("progressPercent").textContent = `${Math.round(
-          progress
-        )}%`;
-        document.getElementById(
-          "progressText"
-        ).textContent = `Running test ${index}/${total}: ${test.name}`;
-
-        document.getElementById("testTitle").textContent = test.name;
-
-        const iterations = await calculateIterations(test);
-        document.getElementById(
-          "testProgress"
-        ).textContent = `${index}/${total} • ${iterations} iteration${
-          iterations === 1 ? "" : "s"
-        }`;
-
-        const testData = test.setup();
-
-        if (test.visualize && testData.matrixA) {
-          await visualizeMatrices(testData);
-        } else {
-          document.getElementById("matricesContainer").innerHTML = "";
-        }
-
-        document.getElementById("computing").style.display = "block";
-        document.getElementById("raceContainer").style.display = "none";
-        document.getElementById("speedupBadge").style.display = "none";
-        resetRace();
-
-        prepareComputeRows(iterations);
-        await sleep(200);
-
-        startComputeRow("rubique", iterations);
-        const rubiqueTime = await benchmarkFunction(
-          test.rubique,
-          testData,
-          iterations,
-          (iteration, totalIter, elapsed) =>
-            updateComputeRow("rubique", iteration, totalIter, elapsed)
-        );
-        completeComputeRow("rubique", rubiqueTime);
-
-        startComputeRow("mathjs", iterations);
-        const mathjsTime = await benchmarkFunction(
-          test.mathjs,
-          testData,
-          iterations,
-          (iteration, totalIter, elapsed) =>
-            updateComputeRow("mathjs", iteration, totalIter, elapsed)
-        );
-        completeComputeRow("mathjs", mathjsTime);
-
-        document.getElementById("computing").style.display = "none";
-        document.getElementById("raceContainer").style.display = "block";
-
-        const speedup = mathjsTime / rubiqueTime;
-
-        const completedProgress = (index / total) * 100;
-        document.getElementById(
-          "progressBar"
-        ).style.width = `${completedProgress}%`;
-        document.getElementById("progressPercent").textContent = `${Math.round(
-          completedProgress
-        )}%`;
-        document.getElementById(
-          "progressText"
-        ).textContent = `Completed test ${index}/${total}: ${test.name}`;
-
-        allResults.push({
-          name: test.name,
-          rubique: rubiqueTime,
-          mathjs: mathjsTime,
-          speedup,
-          iterations,
-        });
-
-        document.getElementById("speedupBadge").style.display = "block";
-
-        if (speedup >= 1) {
-          document.getElementById(
-            "speedupValue"
-          ).textContent = `${speedup.toFixed(1)}x`;
-          document.getElementById("speedupLabel").textContent = "faster";
-        } else {
-          const slowerFactor = 1 / speedup;
-          document.getElementById(
-            "speedupValue"
-          ).textContent = `${slowerFactor.toFixed(1)}x`;
-          document.getElementById("speedupLabel").textContent = "slower";
-        }
-
-        await nextFrame();
-        await animateRace(rubiqueTime, mathjsTime);
-
-        await sleep(1500);
-      }
-
-      async function visualizeMatrices(testData) {
-        const container = document.getElementById("matricesContainer");
-        container.innerHTML = "";
-
-        if (testData.matrixA) {
-          const boxA = createMatrixBox("Matrix A", testData.matrixA);
-          container.appendChild(boxA);
-        }
-
-        if (testData.matrixB) {
-          const operator = document.createElement("div");
-          operator.className = "operator";
-          operator.textContent = "×";
-          container.appendChild(operator);
-
-          const boxB = createMatrixBox("Matrix B", testData.matrixB);
-          container.appendChild(boxB);
-        }
-
-        await nextFrame();
-      }
-
-      function createMatrixBox(label, matrix) {
-        const box = document.createElement("div");
-        box.className = "matrix-box";
-
-        const labelEl = document.createElement("div");
-        labelEl.className = "matrix-label";
-        labelEl.textContent = label;
-        box.appendChild(labelEl);
-
-        const canvas = document.createElement("canvas");
-        canvas.className = "matrix-canvas";
-        box.appendChild(canvas);
-
-        drawMatrix(canvas, matrix, label);
-
-        return box;
-      }
-
-      async function benchmarkFunction(
-        fn,
-        data,
-        iterations,
-        onProgress,
-        options = {}
-      ) {
-        const args = getFunctionArgs(data);
-
-        const yieldInterval =
-          options.yieldInterval ?? Math.max(1, Math.floor(iterations / 20));
-
-        let elapsed = 0;
-
-        for (let i = 0; i < iterations; i++) {
-          const start = performance.now();
-          const result = fn(...args);
-          const end = performance.now();
-          elapsed += end - start;
-
-          if (onProgress && !options.silent) {
-            onProgress(i + 1, iterations, elapsed);
-          }
-
-          if (
-            !options.silent &&
-            iterations > 4 &&
-            (i + 1) % yieldInterval === 0
-          ) {
-            await nextFrame();
-          }
-        }
-
-        return elapsed / iterations;
-      }
-
-      async function animateRace(rubiqueTime, mathjsTime) {
-        const rubiqueFaster = rubiqueTime <= mathjsTime;
-        const fasterTime = rubiqueFaster ? rubiqueTime : mathjsTime;
-        const slowerTime = rubiqueFaster ? mathjsTime : rubiqueTime;
-        const relativeWidth = Math.max((fasterTime / slowerTime) * 100, 8);
-
-        document.getElementById("rubiqueBar").style.width = rubiqueFaster
-          ? `${relativeWidth}%`
-          : "100%";
-        document.getElementById("mathjsBar").style.width = rubiqueFaster
-          ? "100%"
-          : `${relativeWidth}%`;
-
-        await sleep(600);
-
-        // Show times
-        document.getElementById(
-          "rubiqueTime"
-        ).textContent = `${rubiqueTime.toFixed(2)}ms`;
-        document.getElementById(
-          "mathjsTime"
-        ).textContent = `${mathjsTime.toFixed(2)}ms`;
-
-        // Show status icons
-        document.getElementById("rubiqueStatus").textContent =
-          rubiqueTime < mathjsTime ? "✅" : "⏱️";
-        document.getElementById("mathjsStatus").textContent =
-          mathjsTime < rubiqueTime ? "✅" : "⏱️";
-      }
-
-      function showResults() {
-        // Calculate summary stats
-        const avgSpeedup =
-          allResults.reduce((sum, r) => sum + r.speedup, 0) / allResults.length;
-        const wonTests = allResults.filter((r) => r.speedup > 1).length;
-        const bestTest = allResults.reduce((best, r) =>
-          r.speedup > best.speedup ? r : best
-        );
-
-        // Animate big number
-        animateNumber(
-          document.getElementById("avgSpeedup"),
-          avgSpeedup,
-          1,
-          "x"
-        );
-        document.getElementById(
-          "wonTests"
-        ).textContent = `${wonTests}/${allResults.length}`;
-        document.getElementById("bestTest").textContent = `${
-          bestTest.name.split("(")[0]
-        } (${bestTest.speedup.toFixed(1)}x)`;
-
-        // Create chart
-        createChart();
-
-        // Update progress to 100%
-        document.getElementById("progressBar").style.width = "100%";
-        document.getElementById("progressPercent").textContent = "100%";
-        document.getElementById("progressText").textContent =
-          "Benchmarks complete!";
-      }
-
-      function animateNumber(element, target, decimals = 0, suffix = "") {
-        const duration = 1000;
-        const start = 0;
-        const startTime = performance.now();
-
-        function update(currentTime) {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const current = start + (target - start) * easeOutCubic(progress);
-          element.textContent = current.toFixed(decimals) + suffix;
-
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          }
-        }
-
-        requestAnimationFrame(update);
-      }
-
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
-      }
-
-      function createChart() {
-        const ctx = document.getElementById("resultsChart").getContext("2d");
-
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: allResults.map((r) => r.name),
-            datasets: [
-              {
-                label: "Speedup (x)",
-                data: allResults.map((r) => r.speedup),
-                backgroundColor: allResults.map((r) =>
-                  r.speedup > 1
-                    ? "rgba(16, 185, 129, 0.8)"
-                    : "rgba(239, 68, 68, 0.8)"
-                ),
-                borderColor: allResults.map((r) =>
-                  r.speedup > 1 ? "rgb(16, 185, 129)" : "rgb(239, 68, 68)"
-                ),
-                borderWidth: 2,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 1.8,
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                backgroundColor: "rgba(15, 23, 42, 0.95)",
-                titleColor: "#f1f5f9",
-                bodyColor: "#f1f5f9",
-                borderColor: "#334155",
-                borderWidth: 1,
-                padding: 12,
-                displayColors: false,
-                callbacks: {
-                  label: function (context) {
-                    const result = allResults[context.dataIndex];
-                    return [
-                      `Speedup: ${result.speedup.toFixed(2)}x`,
-                      `Ubique: ${result.rubique.toFixed(2)}ms`,
-                      `Math.js: ${result.mathjs.toFixed(2)}ms`,
-                      `Iterations: ${result.iterations}`,
-                    ];
-                  },
-                },
-              },
+    },
+    rubique: (matrix) => window.rubique.transpose(matrix),
+    mathjs: (matrix) => window.mathjs.transpose(matrix),
+  },
+  {
+    name: "Matrix Add (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 25,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      const matrixB = generateMatrix(100, 100);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.plus(a, b),
+    mathjs: (a, b) => window.mathjs.add(a, b),
+  },
+  {
+    name: "Matrix Multiply (10×10)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 60,
+    sampleIterations: 5,
+    setup: () => {
+      const matrixA = generateMatrix(10, 10);
+      const matrixB = generateMatrix(10, 10);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (50×50)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 18,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(50, 50);
+      const matrixB = generateMatrix(50, 50);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (100×100)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 8,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(100, 100);
+      const matrixB = generateMatrix(100, 100);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Multiply (200×200)",
+    category: "Matrix Operations",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 2,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(200, 200);
+      const matrixB = generateMatrix(200, 200);
+      return {
+        matrixA,
+        matrixB,
+        args: [matrixA, matrixB],
+      };
+    },
+    rubique: (a, b) => window.rubique.mtimes(a, b),
+    mathjs: (a, b) => window.mathjs.multiply(a, b),
+  },
+  {
+    name: "Matrix Inverse (20×20)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 6,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateInvertibleMatrix(20);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.inv(matrix),
+    mathjs: (matrix) => window.mathjs.inv(matrix),
+  },
+  {
+    name: "Determinant (20×20)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 8,
+    sampleIterations: 2,
+    setup: () => {
+      const matrixA = generateMatrix(20, 20);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.det(matrix),
+    mathjs: (matrix) => window.mathjs.det(matrix),
+  },
+  {
+    name: "Determinant (50×50)",
+    category: "Linear Algebra",
+    visualize: true,
+    targetDuration: 5000,
+    minIterations: 3,
+    sampleIterations: 1,
+    setup: () => {
+      const matrixA = generateMatrix(50, 50);
+      return {
+        matrixA,
+        args: [matrixA],
+      };
+    },
+    rubique: (matrix) => window.rubique.det(matrix),
+    mathjs: (matrix) => window.mathjs.det(matrix),
+  },
+];
+
+// --- New matrix drawing helpers (Step 2) ---
+
+const INK = '#1a1a17';
+const PAPER_SOFT = '#ece3d0';
+
+function drawMatrix(canvas, matrix) {
+  const rows = matrix.length;
+  const cols = matrix[0]?.length || 1;
+  if (rows <= 10 && cols <= 10) drawNumberMatrix(canvas, matrix);
+  else drawBlueprintDots(canvas, matrix);
+}
+
+function drawNumberMatrix(canvas, matrix) {
+  const rows = matrix.length, cols = matrix[0].length, cell = 26;
+  canvas.width = cols * cell;
+  canvas.height = rows * cell;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = PAPER_SOFT;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = 'rgba(168, 146, 116, 0.4)';
+  ctx.lineWidth = 1;
+  ctx.font = '11px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = INK;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const x = j * cell, y = i * cell;
+      ctx.strokeRect(x + 0.5, y + 0.5, cell, cell);
+      ctx.fillText(matrix[i][j].toFixed(1), x + cell / 2, y + cell / 2);
+    }
+  }
+}
+
+function drawBlueprintDots(canvas, matrix) {
+  const rows = matrix.length, cols = matrix[0].length, D = 140;
+  canvas.width = D; canvas.height = D;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = PAPER_SOFT;
+  ctx.fillRect(0, 0, D, D);
+
+  let min = Infinity, max = -Infinity;
+  for (const row of matrix) for (const v of row) {
+    if (v < min) min = v;
+    if (v > max) max = v;
+  }
+  const range = max - min || 1;
+  const cw = D / cols, ch = D / rows;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const norm = (matrix[i][j] - min) / range;
+      const r = Math.max(0.6, Math.min(cw, ch) * 0.45 * (0.3 + 0.7 * norm));
+      ctx.fillStyle = `rgba(26, 26, 23, ${0.15 + 0.7 * norm})`;
+      ctx.beginPath();
+      ctx.arc(j * cw + cw / 2, i * ch + ch / 2, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// --- Figure builder helpers (Step 3) ---
+
+function el(tag, opts = {}, children = []) {
+  const node = document.createElement(tag);
+  if (opts.class) node.className = opts.class;
+  if (opts.id)    node.id = opts.id;
+  if (opts.text)  node.textContent = opts.text;
+  if (opts.data)  for (const k in opts.data) node.dataset[k] = opts.data[k];
+  for (const c of children) node.appendChild(c);
+  return node;
+}
+
+function buildFigure(test, index) {
+  const head = el('div', { class: 'fig-head' }, [
+    el('span', { class: 'fig-num', text: `Fig. ${index}` }),
+    el('h3',   { class: 'fig-title', text: test.name }),
+  ]);
+  const specimens = el('div', { class: 'fig-specimens', data: { role: 'specimens' } });
+  const trace     = el('div', { class: 'fig-trace',     data: { role: 'trace' } });
+  const scatter   = el('div', { class: 'fig-scatter',   data: { role: 'scatter' } });
+
+  const speedupVal   = el('div', { class: 'speedup-value', text: '—' });
+  const speedupLabel = el('div', { class: 'speedup-label', text: 'awaiting run' });
+  const speedupStats = el('div', { class: 'speedup-stats', text: '' });
+  const speedup = el('div', { class: 'fig-speedup', data: { role: 'speedup' } },
+    [speedupVal, speedupLabel, speedupStats]);
+
+  return el('article', { class: 'figure', id: `fig-${index}` },
+    [head, specimens, trace, scatter, speedup]);
+}
+
+function operatorFor(testName) {
+  if (/add|plus/i.test(testName)) return '+';
+  if (/multiply|mtimes/i.test(testName)) return '×';
+  return '·';
+}
+
+function renderSpecimens(figure, data, testName) {
+  const host = figure.querySelector('[data-role="specimens"]');
+  host.replaceChildren();
+
+  function specimen(label, matrix) {
+    const canvas = document.createElement('canvas');
+    const node = el('div', { class: 'specimen' }, [
+      el('div', { class: 'specimen-label', text: label }),
+      canvas,
+      el('div', { class: 'specimen-dim', text: `${matrix.length}×${matrix[0].length}` }),
+    ]);
+    drawMatrix(canvas, matrix);
+    return node;
+  }
+
+  if (data.matrixA) host.appendChild(specimen('Matrix A', data.matrixA));
+  if (data.matrixB) {
+    host.appendChild(el('div', { class: 'specimen-op', text: operatorFor(testName ?? '') }));
+    host.appendChild(specimen('Matrix B', data.matrixB));
+  }
+}
+
+// --- Task 4 Step 2: SVG trace renderer ---
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function svgEl(tag, attrs = {}) {
+  const node = document.createElementNS(SVG_NS, tag);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  return node;
+}
+
+function createTrace(host) {
+  host.replaceChildren();
+
+  const svg = svgEl('svg', {
+    class: 'trace-svg',
+    viewBox: '0 0 600 180',
+    preserveAspectRatio: 'none',
+  });
+  const gridG = svgEl('g', { class: 'grid' });
+  for (let i = 1; i < 5; i++) {
+    const y = (180 / 5) * i;
+    gridG.appendChild(svgEl('line',
+      { x1: 0, x2: 600, y1: y, y2: y, class: 'gridline' }));
+  }
+  svg.appendChild(gridG);
+
+  const pathU = svgEl('path', { class: 'channel-ubique', d: '' });
+  const pathM = svgEl('path', { class: 'channel-mathjs', d: '' });
+  svg.appendChild(pathU);
+  svg.appendChild(pathM);
+
+  const opsLabel = svgEl('text', { class: 'axis-label', x: 4, y: 14 });
+  opsLabel.textContent = 'ops/s';
+  svg.appendChild(opsLabel);
+
+  const iterLabel = svgEl('text', { class: 'axis-label', x: 596, y: 174, 'text-anchor': 'end' });
+  iterLabel.textContent = 'iteration →';
+  svg.appendChild(iterLabel);
+
+  host.appendChild(svg);
+
+  const legend = el('div', { class: 'trace-legend' }, [
+    el('span', { class: 'leg-ubique', text: 'Ubique' }),
+    el('span', { class: 'leg-mathjs', text: 'math.js' }),
+  ]);
+  host.appendChild(legend);
+
+  const channels = { ubique: { points: [], path: pathU }, mathjs: { points: [], path: pathM } };
+  let maxOps = 1;
+
+  function redraw() {
+    const W = 600, H = 180, pad = 6;
+    for (const lib of ['ubique', 'mathjs']) {
+      const pts = channels[lib].points;
+      if (pts.length === 0) { channels[lib].path.setAttribute('d', ''); continue; }
+      const n = pts.length;
+      const d = pts.map((ops, i) => {
+        const x = (n === 1) ? W / 2 : (i / (n - 1)) * W;
+        const y = H - pad - (ops / maxOps) * (H - pad * 2);
+        return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+      channels[lib].path.setAttribute('d', d);
+    }
+  }
+
+  // Throttle redraws — rebuilding a 500-segment SVG path on every addPoint
+  // is O(n²) and freezes the renderer for fast operations.
+  let redrawScheduled = false;
+  function scheduleRedraw() {
+    if (redrawScheduled) return;
+    redrawScheduled = true;
+    const cb = () => { redrawScheduled = false; redraw(); };
+    if (document.visibilityState === 'hidden') setTimeout(cb, 16);
+    else requestAnimationFrame(cb);
+  }
+
+  return {
+    addPoint(lib, ops) {
+      channels[lib].points.push(ops);
+      if (ops > maxOps) maxOps = ops;
+      scheduleRedraw();
+    },
+    reset() {
+      channels.ubique.points = [];
+      channels.mathjs.points = [];
+      maxOps = 1;
+      redraw();
+    },
+    flush() {
+      redrawScheduled = false;
+      redraw();
+    },
+  };
+}
+
+// --- Task 4 Step 3: Benchmark timing primitives ---
+
+async function runTimedIterations(fn, data, totalIter, warmup, onIterTime) {
+  const args = getFunctionArgs(data);
+  for (let i = 0; i < warmup; i++) fn(...args);
+
+  const times = [];
+  let lastYield = performance.now();
+  for (let i = 0; i < totalIter; i++) {
+    const start = performance.now();
+    fn(...args);
+    const dt = performance.now() - start;
+    times.push(dt);
+    if (onIterTime) onIterTime(i, dt);
+    // Yield whenever we've been on the main thread for >50ms, regardless of iter count.
+    if (performance.now() - lastYield > 50) {
+      await nextFrame();
+      lastYield = performance.now();
+    }
+  }
+  return times;
+}
+
+function summarizeTimes(times) {
+  const n = times.length;
+  const mean = times.reduce((a, b) => a + b, 0) / n;
+  const variance = times.reduce((a, t) => a + (t - mean) ** 2, 0) / Math.max(1, n - 1);
+  const sigma = Math.sqrt(variance);
+  const ci95 = 1.96 * sigma / Math.sqrt(n);
+  return { n, mean, sigma, ci95 };
+}
+
+const MAX_ITERATIONS = 500;
+const TARGET_DURATION_MS = 1500;
+
+async function pickIterations(test) {
+  const target = test.targetDuration ?? TARGET_DURATION_MS;
+  const minIter = test.minIterations ?? 6;
+  const sample = test.sampleIterations ?? 2;
+  const warmup = test.warmupIterations ?? Math.min(3, sample);
+
+  const dU = test.setup();
+  const tU = await runTimedIterations(test.rubique, dU, sample, warmup, null);
+  const dM = test.setup();
+  const tM = await runTimedIterations(test.mathjs, dM, sample, warmup, null);
+
+  const slowest = Math.max(
+    tU.reduce((a, b) => a + b, 0) / tU.length,
+    tM.reduce((a, b) => a + b, 0) / tM.length,
+  );
+  let iter = Math.round(target / Math.max(slowest, 0.05));
+  if (!Number.isFinite(iter) || iter < 1) iter = minIter;
+  iter = Math.max(iter, minIter);
+  iter = Math.min(iter, MAX_ITERATIONS);
+  return { iterations: iter, warmup };
+}
+
+// --- Task 4 Step 4: Orchestrators ---
+
+const allResults = [];
+
+function renderScatter(fig, ubiqueTimes, mathjsTimes) {
+  const host = fig.querySelector('[data-role="scatter"]');
+  host.replaceChildren();
+  if (ubiqueTimes.length === 0 || mathjsTimes.length === 0) return;
+
+  const W = 600, H = 120, padL = 60, padR = 12, padY = 22;
+  const innerW = W - padL - padR;
+  const laneH = (H - padY * 2) / 2;
+  const all = [...ubiqueTimes, ...mathjsTimes];
+  const max = Math.max(...all);
+  const xFor = (t) => padL + (t / (max || 1)) * innerW;
+  const laneY = (idx) => padY + laneH / 2 + idx * laneH;
+
+  const svg = svgEl('svg', {
+    class: 'scatter-svg', viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none',
+  });
+
+  function lane(label, times, klass, idx) {
+    const mean = times.reduce((a, b) => a + b, 0) / times.length;
+    const sigma = Math.sqrt(
+      times.reduce((a, t) => a + (t - mean) ** 2, 0) / Math.max(1, times.length - 1)
+    );
+    const y = laneY(idx);
+    const xMean = xFor(mean);
+    const xLo = xFor(Math.max(0, mean - sigma));
+    const xHi = xFor(Math.min(max, mean + sigma));
+
+    const labelEl = svgEl('text', {
+      class: 'lane-label', x: padL - 8, y: y + 3, 'text-anchor': 'end',
+    });
+    labelEl.textContent = label;
+    svg.appendChild(labelEl);
+
+    svg.appendChild(svgEl('rect', {
+      class: `sigma-band sigma-${klass}`,
+      x: xLo, y: y - laneH * 0.4,
+      width: Math.max(1, xHi - xLo), height: laneH * 0.8,
+    }));
+
+    for (const t of times) {
+      const jitter = (Math.random() - 0.5) * (laneH * 0.5);
+      svg.appendChild(svgEl('circle', {
+        class: `pt-${klass}`, cx: xFor(t).toFixed(1),
+        cy: (y + jitter).toFixed(1), r: 2,
+      }));
+    }
+
+    svg.appendChild(svgEl('line', {
+      class: `mean-line mean-${klass}`,
+      x1: xMean, x2: xMean,
+      y1: y - laneH * 0.45, y2: y + laneH * 0.45,
+    }));
+  }
+
+  lane('UBIQUE',  ubiqueTimes, 'ubique', 0);
+  lane('MATH.JS', mathjsTimes, 'mathjs', 1);
+
+  const axis = svgEl('text', { class: 'lane-label', x: W - padR, y: H - 6, 'text-anchor': 'end' });
+  axis.textContent = 'ms per iter →';
+  svg.appendChild(axis);
+
+  host.appendChild(svg);
+}
+function renderSummary() {
+  if (allResults.length === 0) return;
+
+  const mean = allResults.reduce((a, r) => a + r.speedup, 0) / allResults.length;
+  const won = allResults.filter(r => r.speedup > 1).length;
+  const best = allResults.reduce((b, r) => r.speedup > b.speedup ? r : b);
+
+  document.getElementById('sum-mean').textContent =
+    mean >= 1 ? `${mean.toFixed(1)}×` : `${(1 / mean).toFixed(1)}× slower`;
+  document.getElementById('sum-won').textContent = `${won}/${allResults.length}`;
+  document.getElementById('sum-best').textContent =
+    `${best.name.replace(/\s*\(.*$/, '')} ${best.speedup.toFixed(1)}×`;
+
+  const ctx = document.getElementById('summary-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: allResults.map(r => r.name),
+      datasets: [{
+        label: 'Speedup ×',
+        data: allResults.map(r => r.speedup),
+        backgroundColor: 'rgba(164, 56, 42, 0.0)',
+        borderColor: '#a4382a',
+        borderWidth: 1.2,
+        borderSkipped: false,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#f4ede0',
+          titleColor: '#1a1a17',
+          bodyColor: '#1a1a17',
+          borderColor: '#a89274',
+          borderWidth: 1,
+          titleFont: { family: 'IBM Plex Mono', size: 11 },
+          bodyFont:  { family: 'IBM Plex Mono', size: 11 },
+          padding: 10,
+          displayColors: false,
+          callbacks: {
+            label: (cx) => {
+              const r = allResults[cx.dataIndex];
+              return [
+                `Speedup: ${r.speedup.toFixed(2)}×`,
+                `Ubique:  ${r.rubiqueMean.toFixed(2)} ± ${r.rubiqueSigma.toFixed(2)} ms`,
+                `math.js: ${r.mathjsMean.toFixed(2)} ± ${r.mathjsSigma.toFixed(2)} ms`,
+                `n = ${r.n}`,
+              ];
             },
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: {
-                  color: "rgba(255, 255, 255, 0.1)",
-                },
-                ticks: {
-                  color: "#94a3b8",
-                  callback: function (value) {
-                    return value + "x";
-                  },
-                },
-              },
-              x: {
-                grid: {
-                  display: false,
-                },
-                ticks: {
-                  color: "#94a3b8",
-                  maxRotation: 45,
-                  minRotation: 45,
-                  autoSkip: false,
-                  font: {
-                    size: 9,
-                  },
-                },
-              },
-            },
           },
-        });
-      }
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(26,26,23,0.06)' },
+          ticks: {
+            color: '#4a4640',
+            font: { family: 'IBM Plex Mono', size: 10 },
+            callback: (v) => v + '×',
+          },
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: '#4a4640',
+            font: { family: 'IBM Plex Mono', size: 9 },
+            maxRotation: 45, minRotation: 45, autoSkip: false,
+          },
+        },
+      },
+    },
+  });
+}
 
-      function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
+async function runOneTest(test, fig, _index) {
+  const trace = createTrace(fig.querySelector('[data-role="trace"]'));
+  trace.reset();
+  fig.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // Expose startBenchmark globally
-      window.startBenchmark = startBenchmark;
+  const data = test.setup();
+  renderSpecimens(fig, data, test.name);
+
+  const { iterations, warmup } = await pickIterations(test);
+
+  const uTimes = await runTimedIterations(
+    test.rubique, data, iterations, warmup,
+    (_i, dt) => trace.addPoint('ubique', 1000 / Math.max(dt, 0.001))
+  );
+  const mTimes = await runTimedIterations(
+    test.mathjs, data, iterations, warmup,
+    (_i, dt) => trace.addPoint('mathjs', 1000 / Math.max(dt, 0.001))
+  );
+
+  const u = summarizeTimes(uTimes);
+  const m = summarizeTimes(mTimes);
+  const speedup = m.mean / u.mean;
+
+  const speedupHost = fig.querySelector('[data-role="speedup"]');
+  const valEl   = speedupHost.querySelector('.speedup-value');
+  const labEl   = speedupHost.querySelector('.speedup-label');
+  const statsEl = speedupHost.querySelector('.speedup-stats');
+  if (speedup >= 1) {
+    valEl.textContent = `${speedup.toFixed(1)}×`;
+    labEl.textContent = 'faster';
+  } else {
+    valEl.textContent = `${(1 / speedup).toFixed(1)}×`;
+    labEl.textContent = 'slower';
+  }
+  statsEl.textContent = u.n >= 5
+    ? `n=${u.n}  σ=${u.sigma.toFixed(2)}ms  95% CI ±${u.ci95.toFixed(2)}ms`
+    : `n=${u.n}  σ=${u.sigma.toFixed(2)}ms`;
+  speedupHost.classList.remove('stamped');
+  void speedupHost.offsetWidth;
+  speedupHost.classList.add('stamped');
+
+  trace.flush();
+  renderScatter(fig, uTimes, mTimes);
+
+  allResults.push({
+    name: test.name,
+    rubiqueMean: u.mean, rubiqueSigma: u.sigma,
+    mathjsMean: m.mean,  mathjsSigma: m.sigma,
+    speedup, n: u.n,
+  });
+
+  await sleep(400);
+}
+
+async function runAllTests() {
+  allResults.length = 0;
+  const figures = [...document.querySelectorAll('.figure')];
+  for (let i = 0; i < tests.length; i++) {
+    await runOneTest(tests[i], figures[i], i + 1);
+  }
+  renderSummary();
+}
+
+// --- Task 4 Step 5: Wire the Begin link ---
+
+const beginLink = document.getElementById('begin-link');
+if (beginLink) {
+  beginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    beginLink.setAttribute('disabled', '');
+    document.body.classList.add('benchmarks-started');
+    const waitReady = setInterval(() => {
+      if (window.rubique && window.mathjs) {
+        clearInterval(waitReady);
+        runAllTests().catch(console.error);
+      }
+    }, 100);
+  });
+}
+
+// --- Task 6 Step 2: Build explore section DOM ---
+
+const exploreSection = document.getElementById('explore');
+exploreSection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Explore' })
+);
+
+const opSelect = el('select', { id: 'explore-op' });
+for (const [val, lbl] of [
+  ['transpose', 'transpose'], ['plus', 'add'], ['mtimes', 'multiply'],
+  ['inv', 'inverse'], ['det', 'determinant'],
+]) {
+  const o = document.createElement('option');
+  o.value = val; o.textContent = lbl;
+  if (val === 'mtimes') o.selected = true;
+  opSelect.appendChild(o);
+}
+const opField = el('label', { class: 'explore-field' }, [
+  el('span', { text: 'Operation' }),
+  opSelect,
+]);
+
+const sizeSpan = el('span', { text: 'Size N = ' });
+const sizeStrong = el('strong', { id: 'explore-size', text: '64' });
+sizeSpan.appendChild(sizeStrong);
+const range = el('input', { id: 'explore-range' });
+range.type = 'range'; range.min = '2'; range.max = '500'; range.step = '1'; range.value = '64';
+const sliderField = el('label', { class: 'explore-field explore-slider' }, [sizeSpan, range]);
+
+exploreSection.appendChild(el('div', { class: 'explore-controls' }, [opField, sliderField]));
+
+function bar(libLabel, fillClass, fillId, timeId) {
+  const fill = el('div', { class: `bar-fill ${fillClass}`, id: fillId });
+  const track = el('div', { class: 'bar-track' }, [fill]);
+  return el('div', { class: 'bar-row' }, [
+    el('div', { class: 'bar-label', text: libLabel }),
+    track,
+    el('div', { class: 'bar-time', id: timeId, text: '—' }),
+  ]);
+}
+
+exploreSection.appendChild(el('div', { class: 'explore-bars' }, [
+  bar('Ubique',  'bar-ubique', 'bar-ubique',  'bar-ubique-time'),
+  bar('math.js', 'bar-mathjs', 'bar-mathjs', 'bar-mathjs-time'),
+]));
+
+const resultEl = el('div', { class: 'explore-result', id: 'explore-result',
+  text: 'Drag the slider to run.' });
+exploreSection.appendChild(resultEl);
+
+// --- Task 6 Step 3: Explore runner ---
+
+const exploreOps = {
+  transpose: { args: 1, ubique: 'transpose', mathjs: 'transpose' },
+  plus:      { args: 2, ubique: 'plus',      mathjs: 'add' },
+  mtimes:    { args: 2, ubique: 'mtimes',    mathjs: 'multiply' },
+  inv:       { args: 1, ubique: 'inv',       mathjs: 'inv', wellCond: true },
+  det:       { args: 1, ubique: 'det',       mathjs: 'det' },
+};
+
+function exploreSetup(opKey, N) {
+  const spec = exploreOps[opKey];
+  const A = spec.wellCond ? generateInvertibleMatrix(N) : generateMatrix(N, N);
+  if (spec.args === 1) return [A];
+  return [A, generateMatrix(N, N)];
+}
+
+async function timeExplore(opKey, N, iter = 5) {
+  if (!window.rubique || !window.mathjs) return null;
+  const spec = exploreOps[opKey];
+  const fnU = window.rubique[spec.ubique];
+  const fnM = window.mathjs[spec.mathjs];
+  const argsU = exploreSetup(opKey, N);
+  const argsM = exploreSetup(opKey, N);
+  fnU(...argsU); fnM(...argsM);  // warmup
+
+  let tU = 0;
+  for (let i = 0; i < iter; i++) {
+    const s = performance.now(); fnU(...argsU); tU += performance.now() - s;
+  }
+  let tM = 0;
+  for (let i = 0; i < iter; i++) {
+    const s = performance.now(); fnM(...argsM); tM += performance.now() - s;
+  }
+  return { ubique: tU / iter, mathjs: tM / iter };
+}
+
+let exploreTimer = null;
+function scheduleExplore() {
+  clearTimeout(exploreTimer);
+  exploreTimer = setTimeout(runExplore, 180);
+}
+
+async function runExplore() {
+  const op = document.getElementById('explore-op').value;
+  const N = parseInt(document.getElementById('explore-range').value, 10);
+  document.getElementById('explore-size').textContent = String(N);
+  const r = await timeExplore(op, N);
+  if (!r) return;
+
+  const maxT = Math.max(r.ubique, r.mathjs, 0.001);
+  document.getElementById('bar-ubique').style.width = `${(r.ubique / maxT) * 100}%`;
+  document.getElementById('bar-mathjs').style.width = `${(r.mathjs / maxT) * 100}%`;
+  document.getElementById('bar-ubique-time').textContent = `${r.ubique.toFixed(2)} ms`;
+  document.getElementById('bar-mathjs-time').textContent = `${r.mathjs.toFixed(2)} ms`;
+
+  const speedup = r.mathjs / r.ubique;
+  const node = document.getElementById('explore-result');
+  node.replaceChildren();
+  node.append(
+    `${op}(N=${N})  ·  Ubique `,
+    Object.assign(document.createElement('strong'), { textContent: `${r.ubique.toFixed(2)}ms` }),
+    `  ·  math.js `,
+    Object.assign(document.createElement('strong'), { textContent: `${r.mathjs.toFixed(2)}ms` }),
+    `  ·  `,
+    Object.assign(document.createElement('strong'), {
+      textContent: speedup >= 1 ? `${speedup.toFixed(1)}×` : `${(1/speedup).toFixed(1)}×`,
+    }),
+    speedup >= 1 ? ' faster' : ' slower',
+  );
+}
+
+document.getElementById('explore-op').addEventListener('change', scheduleExplore);
+document.getElementById('explore-range').addEventListener('input', scheduleExplore);
+
+const sourceSection = document.getElementById('source');
+sourceSection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Source' }),
+);
+const sourceList = el('div', { class: 'source-list', id: 'source-list' });
+sourceSection.appendChild(sourceList);
+
+function sourceColumn(libName, codeText) {
+  const col = el('div', { class: 'source-col' });
+  col.appendChild(el('span', { class: 'lib', text: libName }));
+  const lines = codeText.split('\n');
+  lines.forEach((line, idx) => {
+    const g = el('span', { class: 'gutter', text: String(idx + 1) });
+    col.appendChild(g);
+    col.appendChild(document.createTextNode(line + (idx < lines.length - 1 ? '\n' : '')));
+  });
+  return col;
+}
+
+tests.forEach((test, i) => {
+  const uSrc = test.rubique.toString().split('\n').slice(0, 3).join('\n');
+  const mSrc = test.mathjs.toString().split('\n').slice(0, 3).join('\n');
+
+  const item = document.createElement('details');
+  item.className = 'source-item';
+  const summary = document.createElement('summary');
+  summary.textContent = `Fig. ${i + 1} · ${test.name}`;
+  item.appendChild(summary);
+  const body = el('div', { class: 'source-body' }, [
+    sourceColumn('Ubique', uSrc),
+    sourceColumn('math.js', mSrc),
+  ]);
+  item.appendChild(body);
+  sourceList.appendChild(item);
+});
+
+const summarySection = document.getElementById('summary');
+summarySection.replaceChildren(
+  el('div', { class: 'section-label', text: 'Summary' }),
+);
+
+function statBlock(bigId, labelText) {
+  return el('div', { class: 'summary-stat' }, [
+    el('div', { class: 'big', id: bigId, text: '—' }),
+    el('div', { class: 'label', text: labelText }),
+  ]);
+}
+
+const statsCol = el('div', { class: 'summary-stats' }, [
+  statBlock('sum-mean', 'Mean speedup'),
+  statBlock('sum-won',  'Tests where Ubique was faster'),
+  statBlock('sum-best', 'Best result'),
+]);
+
+const canvasEl = document.createElement('canvas');
+canvasEl.id = 'summary-chart';
+const chartWrap = el('div', { class: 'summary-chart-wrap' }, [canvasEl]);
+
+summarySection.appendChild(el('div', { class: 'summary-grid' }, [statsCol, chartWrap]));
+
+const foot = el('p', { class: 'summary-foot' });
+foot.append(
+  'Browser ',
+  Object.assign(document.createElement('code'), { textContent: 'performance.now()' }),
+  ' precision is capped (typically 5 µs–1 ms depending on isolation context). JS is single-threaded; results vary with hardware, browser, and ambient load. Each measurement reports the mean over n iterations after warmup discards; σ and 95% confidence interval are computed assuming approximately normal residuals.',
+);
+summarySection.appendChild(foot);
+
+const replay = el('button', { class: 'replay', id: 'replay-btn', text: '↻ Repeat experiment' });
+replay.addEventListener('click', () => location.reload());
+summarySection.appendChild(replay);
+
+const testsList = document.getElementById('tests-list');
+tests.forEach((test, i) => {
+  const fig = buildFigure(test, i + 1);
+  testsList.appendChild(fig);
+  renderSpecimens(fig, test.setup(), test.name);
+});
+
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      io.unobserve(e.target);
+    }
+  }
+}, { threshold: 0.15 });
+document.querySelectorAll('.figure').forEach(f => io.observe(f));
     </script>
   </body>
 </html>
