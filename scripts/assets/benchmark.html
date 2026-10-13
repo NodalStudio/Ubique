@@ -3,395 +3,322 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ubique Performance vs Math.js</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <title>Benchmark — Ubique vs math.js · Nodal Studio</title>
+    <meta name="description" content="Run Ubique against math.js in your browser: seeded inputs, checked results, medians from alternating batches.">
+    <meta name="theme-color" content="#FFFDE9">
+    <!--ns:head-->
     <style>
+  /* Benchmark — Nodal Studio layer on top of nodal.css.
+     Ubique is drawn in ink, math.js in the Nodal data blue (second series). */
   :root {
-    --paper:        #f4ede0;
-    --paper-soft:   #ece3d0;
-    --ink:          #1a1a17;
-    --ink-soft:     #4a4640;
-    --sepia:        #a89274;
-    --sepia-soft:   #d8c9ad;
-    --ubique:       #a4382a;
-    --mathjs:       #2a3f6b;
-    --rule:         rgba(26, 26, 23, 0.18);
-    --grid:         rgba(26, 26, 23, 0.05);
-
-    --font-display: "Fraunces", Georgia, serif;
-    --font-serif:   "IBM Plex Serif", Georgia, serif;
-    --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
-
-    --max-w: 1180px;
+    --ubique: #030406;
+    --mathjs: #2f5d8a;
+    --rule: rgba(3, 4, 6, 0.14);
+    --tile: #f5f2dc;
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--paper); color: var(--ink); }
-  body {
-    font-family: var(--font-serif);
-    font-size: 16px;
-    line-height: 1.55;
-    min-height: 100vh;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 8px 8px, 8px 8px;
-    animation: paperDrift 30s linear infinite;
-  }
-  @keyframes paperDrift {
-    from { background-position: 0 0, 0 0; }
-    to   { background-position: 8px 8px, 8px 8px; }
-  }
-  .container {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-  }
+  .bench { counter-reset: sec; }
+  .bench section { padding: clamp(48px, 9vh, 112px) 0 0; }
   .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    counter-increment: sec;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 0 0 clamp(24px, 4vh, 40px);
+    padding: 0 0 18px;
+    border-bottom: var(--stroke) solid var(--ink);
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(34px, 5vw, 80px);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+  .section-label::after {
+    content: "§0" counter(sec);
+    flex: none;
+    padding-left: 48px;
+    background: linear-gradient(currentColor, currentColor) left center / 34px 2px no-repeat;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+  }
+  .rule-em { display: none; }
+
+  /* poster hero */
+  .bench-hero .ns-wordmark span + span { color: var(--mathjs); }
+  .bench-hero .bench-sub { margin: 18px 0 0; font-family: var(--display); font-weight: 500; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .bench-hero .begin { min-height: 56px; padding: 0 2em; font-size: 13px; }
+  .bench-hero .begin[disabled] { opacity: 0.35; pointer-events: none; }
+
+  /* before Begin: only the environment and a prompt */
+  body:not(.benchmarks-started) #tests #tests-list,
+  body:not(.benchmarks-started) #source,
+  body:not(.benchmarks-started) #summary { display: none; }
+  body:not(.benchmarks-started) #tests::after {
+    content: "Press Begin to populate the figures.";
+    display: block;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 4rem 0 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .rule-em {
-    text-align: center;
-    color: var(--sepia);
-    margin: 3rem 0;
-    letter-spacing: 0.5em;
+    color: var(--ink-45);
   }
 
-#page-header { margin-bottom: 3rem; }
-#page-header h1 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  font-variation-settings: "opsz" 144;
-}
-#page-header .subtitle {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--ink-soft);
-  margin-top: 0.75rem;
-}
-#page-header .begin {
-  display: inline-block;
-  margin-top: 2.25rem;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.85rem;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--paper);
-  background: var(--ubique);
-  text-decoration: none;
-  padding: 0.75rem 2.25rem;
-  cursor: pointer;
-  border-bottom: none;
-  box-shadow: 0 2px 0 var(--ink);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-#page-header .begin:hover {
-  color: var(--paper);
-  background: var(--ink);
-  transform: translateY(-1px);
-  box-shadow: 0 3px 0 var(--ink);
-}
-#page-header .begin:active {
-  transform: translateY(1px);
-  box-shadow: 0 0 0 var(--ink);
-}
-#page-header .begin[disabled] { opacity: 0.35; cursor: default; pointer-events: none; }
+  /* environment: label column in spaced caps, values in mono */
+  #environment table { width: 100%; max-width: 860px; border-collapse: collapse; }
+  #environment th, #environment td {
+    text-align: left;
+    padding: 14px 16px 14px 0;
+    border-bottom: var(--stroke) solid var(--ink-08);
+    vertical-align: top;
+  }
+  #environment th {
+    width: 16rem;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-62);
+  }
+  #environment td { font-family: var(--mono); font-size: 14px; word-break: break-word; }
 
-/* Hide test figures, source, and summary until benchmarks start */
-body:not(.benchmarks-started) #tests #tests-list,
-body:not(.benchmarks-started) #source,
-body:not(.benchmarks-started) #summary {
-  display: none;
-}
-body:not(.benchmarks-started) #tests::after {
-  content: "Click Begin to populate";
-  display: block;
-  margin-top: 1.5rem;
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-/* Hide the em-rules around the now-hidden sections too */
-body:not(.benchmarks-started) #tests + .rule-em,
-body:not(.benchmarks-started) #explore + .rule-em,
-body:not(.benchmarks-started) #source + .rule-em {
-  display: none;
-}
+  /* figures */
+  .figure {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(360px, 1.4fr);
+    gap: 1.5rem 2.5rem;
+    padding: clamp(28px, 4vh, 44px) 0;
+    border-bottom: var(--stroke) solid var(--ink-08);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+  }
+  .figure.in-view { opacity: 1; transform: none; }
+  .figure:last-child { border-bottom: none; }
+  .figure .fig-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 1.25rem; }
+  .figure .fig-num {
+    flex: none;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-45);
+  }
+  .figure .fig-title { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.2vw, 29px); letter-spacing: -0.01em; }
+  .figure .fig-specimens { grid-column: 1; grid-row: 2; display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+  .figure .fig-trace { grid-column: 2; grid-row: 2; min-height: 180px; }
+  .figure .fig-scatter { grid-column: 1; grid-row: 3; min-height: 120px; }
+  .figure .fig-speedup { grid-column: 2; grid-row: 3; text-align: right; }
+  .fig-speedup .speedup-value {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(56px, 8vw, 128px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+  .fig-speedup .speedup-label,
+  .summary-stat .label {
+    margin-top: 0.6rem;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-62);
+  }
+  .fig-speedup .speedup-stats { margin-top: 0.4rem; font-family: var(--mono); font-size: 12px; color: var(--ink-62); }
+  @keyframes stamp {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .fig-speedup.stamped .speedup-value { animation: stamp 280ms cubic-bezier(.2, .7, .1, 1) both; }
 
-#environment table {
-  width: 100%;
-  max-width: 640px;
-  border-collapse: collapse;
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
-}
-#environment th, #environment td {
-  text-align: left;
-  padding: 0.4rem 0.75rem 0.4rem 0;
-  border-bottom: 1px dotted var(--rule);
-  vertical-align: top;
-}
-#environment th {
-  width: 12rem;
-  font-weight: 400;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-#environment td { color: var(--ink); word-break: break-word; }
+  .specimen { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .specimen-label,
+  .bar-label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-62);
+  }
+  .specimen canvas { border-radius: 8px; }
+  .specimen .specimen-dim { font-family: var(--mono); font-size: 12px; color: var(--ink-45); }
+  .specimen-op { font-family: var(--display); font-weight: 800; font-size: 1.6rem; }
 
-.figure {
-  display: grid;
-  grid-template-columns: minmax(260px, 1fr) minmax(360px, 1.4fr);
-  grid-template-rows: auto auto auto;
-  gap: 1.25rem 2rem;
-  padding: 1.5rem 0 2.5rem;
-  border-bottom: 1px solid var(--rule);
-}
-.figure:last-child { border-bottom: none; }
-.figure .fig-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 1rem; }
-.figure .fig-num {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sepia);
-  position: relative;
-}
-.figure .fig-num::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
-  height: 1px; background: var(--sepia);
-  transform: scaleX(0); transform-origin: left; transition: transform 240ms ease;
-}
-.figure:hover .fig-num::after { transform: scaleX(1); }
-.figure .fig-title {
-  font-family: var(--font-display);
-  font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
-}
-.figure .fig-specimens {
-  grid-column: 1; grid-row: 2;
-  display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
-}
-.figure .fig-trace    { grid-column: 2; grid-row: 2; min-height: 180px; }
-.figure .fig-scatter  { grid-column: 1; grid-row: 3; min-height: 120px; }
-.figure .fig-speedup  { grid-column: 2; grid-row: 3; text-align: right; }
+  .trace-svg,
+  .scatter-svg { width: 100%; display: block; background: var(--tile); border-radius: var(--r-tile); }
+  .trace-svg { height: 180px; }
+  .scatter-svg { height: 120px; }
+  .trace-svg .axis-label,
+  .scatter-svg .lane-label { font-family: var(--mono); font-size: 9px; fill: var(--ink-62); }
+  .trace-svg .gridline { stroke: var(--rule); stroke-width: 0.5; }
+  .trace-svg .channel-ubique { fill: none; stroke: var(--ubique); stroke-width: 1.6; }
+  .trace-svg .channel-mathjs { fill: none; stroke: var(--mathjs); stroke-width: 1.6; }
+  .trace-legend { display: flex; gap: 1.25rem; margin-top: 0.6rem; }
+  .trace-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .trace-legend span::before { content: ""; width: 18px; height: 2px; background: currentColor; }
+  .trace-legend .leg-ubique::before { background: var(--ubique); }
+  .trace-legend .leg-mathjs::before { background: var(--mathjs); }
+  .scatter-svg .mean-line { stroke-width: 1.4; }
+  .scatter-svg .mean-ubique { stroke: var(--ubique); }
+  .scatter-svg .mean-mathjs { stroke: var(--mathjs); }
+  .scatter-svg .sigma-band { opacity: 0.16; }
+  .scatter-svg .sigma-ubique, .scatter-svg .pt-ubique { fill: var(--ubique); }
+  .scatter-svg .sigma-mathjs, .scatter-svg .pt-mathjs { fill: var(--mathjs); }
 
-.fig-speedup .speedup-value {
-  font-family: var(--font-display); font-weight: 500;
-  font-size: clamp(3rem, 7vw, 5rem); line-height: 1;
-  color: var(--ink); font-variation-settings: "opsz" 144;
-}
-.fig-speedup .speedup-label {
-  font-family: var(--font-mono); font-size: 0.78rem;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink-soft); margin-top: 0.5rem;
-}
-.fig-speedup .speedup-stats {
-  font-family: var(--font-mono); font-size: 0.72rem;
-  color: var(--ink-soft); margin-top: 0.4rem;
-}
+  /* explore */
+  .explore-controls { display: flex; gap: 2rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 2rem; }
+  .explore-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-62);
+  }
+  .explore-field strong { color: var(--ink); font-family: var(--mono); font-weight: 500; font-size: 13px; letter-spacing: 0; }
+  .explore-field select {
+    min-height: 42px;
+    padding: 0 2.2rem 0 1rem;
+    appearance: none;
+    border: var(--stroke) solid var(--ink);
+    border-radius: 999px;
+    background:
+      linear-gradient(45deg, transparent 50%, var(--ink) 50%) calc(100% - 18px) 50% / 5px 5px no-repeat,
+      linear-gradient(135deg, var(--ink) 50%, transparent 50%) calc(100% - 13px) 50% / 5px 5px no-repeat,
+      var(--cream);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .explore-slider { flex: 1; min-width: min(320px, 100%); }
+  .explore-slider input[type="range"] { width: 100%; accent-color: var(--ink); }
+  .explore-bars { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.2rem; }
+  .bar-row { display: grid; grid-template-columns: 90px 1fr 120px; align-items: center; gap: 1rem; }
+  .bar-track { height: 26px; background: var(--tile); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0%; border-radius: 999px; transition: width 400ms cubic-bezier(.2, .7, .1, 1); }
+  .bar-ubique { background: var(--ubique); }
+  .bar-mathjs { background: var(--mathjs); }
+  .bar-time { text-align: right; font-family: var(--mono); font-size: 14px; }
+  .explore-result { font-family: var(--mono); font-size: 13px; color: var(--ink-62); }
+  .explore-result strong { color: var(--ink); }
 
-.specimen { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
-.specimen-label {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft);
-}
-.specimen canvas { background: var(--paper-soft); border: 1px solid var(--rule); }
-.specimen .specimen-dim { font-family: var(--font-mono); font-size: 0.7rem; color: var(--sepia); }
-.specimen-op { font-family: var(--font-display); font-size: 1.4rem; color: var(--sepia); }
+  /* source: tiles with an ink ground, cream text */
+  .source-list { display: flex; flex-direction: column; gap: 10px; }
+  .source-item { border: var(--stroke) solid var(--ink); border-radius: var(--r-tile); overflow: hidden; }
+  .source-item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 1.2rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .source-item summary::-webkit-details-marker { display: none; }
+  .source-item summary::after {
+    content: "Show";
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: var(--stroke) solid currentColor;
+    border-radius: var(--r-chip);
+    padding: 0.45em 0.9em;
+  }
+  .source-item[open] summary::after { content: "Hide"; background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .source-body { display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); color: var(--cream); }
+  .source-col {
+    padding: 1rem 1.2rem;
+    border-right: 1px solid rgba(255, 253, 233, 0.12);
+    white-space: pre;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .source-col:last-child { border-right: none; }
+  .source-col .gutter { display: inline-block; width: 1.8em; color: rgba(255, 253, 233, 0.35); user-select: none; }
+  .source-col .lib {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 253, 233, 0.55);
+  }
 
-@keyframes stamp {
-  0%   { transform: scale(0.85); opacity: 0; }
-  60%  { transform: scale(1.04); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.fig-speedup.stamped .speedup-value {
-  animation: stamp 280ms cubic-bezier(.2,.7,.1,1) both;
-}
+  /* summary */
+  .summary-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem; align-items: start; }
+  .summary-stats { display: flex; flex-direction: column; gap: 1.8rem; }
+  .summary-stat { padding-left: 16px; border-left: 2px solid var(--ink); }
+  .summary-stat .big {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  .summary-chart-wrap { position: relative; height: 380px; padding: 1.2rem; border: var(--stroke) solid var(--ink); border-radius: var(--r-card); }
+  .summary-foot { max-width: 72ch; margin-top: 2rem; font-size: 14px; line-height: 1.6; color: var(--ink-62); }
+  .ns .replay { margin: 1.5rem 12px 0 0; }
+  .bench { padding-bottom: clamp(64px, 11vh, 140px); }
 
-.trace-svg {
-  width: 100%; height: 180px; display: block;
-  background: var(--paper-soft); border: 1px solid var(--rule);
-}
-.trace-svg .axis-label {
-  font-family: var(--font-mono); font-size: 9px;
-  fill: var(--ink-soft); letter-spacing: 0.08em;
-}
-.trace-svg .gridline { stroke: var(--rule); stroke-width: 0.5; }
-.trace-svg .channel-ubique { fill: none; stroke: var(--ubique); stroke-width: 1.4; }
-.trace-svg .channel-mathjs { fill: none; stroke: var(--mathjs); stroke-width: 1.4; }
-
-.trace-legend {
-  display: flex; gap: 1.25rem;
-  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
-  margin-top: 0.4rem;
-}
-.trace-legend span::before { content: "■ "; margin-right: 0.25rem; }
-.trace-legend .leg-ubique::before { color: var(--ubique); }
-.trace-legend .leg-mathjs::before { color: var(--mathjs); }
-
-.scatter-svg {
-  width: 100%; height: 120px; display: block;
-  background: var(--paper-soft); border: 1px solid var(--rule);
-}
-.scatter-svg .lane-label {
-  font-family: var(--font-mono); font-size: 9px;
-  fill: var(--ink-soft); letter-spacing: 0.08em;
-}
-.scatter-svg .mean-line { stroke-width: 1.2; }
-.scatter-svg .mean-ubique { stroke: var(--ubique); }
-.scatter-svg .mean-mathjs { stroke: var(--mathjs); }
-.scatter-svg .sigma-band  { opacity: 0.18; }
-.scatter-svg .sigma-ubique { fill: var(--ubique); }
-.scatter-svg .sigma-mathjs { fill: var(--mathjs); }
-.scatter-svg .pt-ubique { fill: var(--ubique); }
-.scatter-svg .pt-mathjs { fill: var(--mathjs); }
-
-.explore-controls {
-  display: flex; gap: 2rem; align-items: flex-end; flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-.explore-field {
-  display: flex; flex-direction: column; gap: 0.4rem;
-  font-family: var(--font-mono); font-size: 0.78rem;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
-}
-.explore-field strong { color: var(--ink); font-weight: 500; }
-.explore-field select,
-.explore-field input[type="range"] {
-  font-family: var(--font-mono); font-size: 0.9rem;
-  background: var(--paper-soft); border: 1px solid var(--rule);
-  color: var(--ink); padding: 0.4rem 0.6rem;
-}
-.explore-slider { flex: 1; min-width: 320px; }
-.explore-slider input[type="range"] { width: 100%; accent-color: var(--ubique); padding: 0; }
-
-.explore-bars { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
-.bar-row {
-  display: grid; grid-template-columns: 80px 1fr 120px;
-  align-items: center; gap: 1rem;
-  font-family: var(--font-mono); font-size: 0.85rem;
-}
-.bar-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
-.bar-track { height: 22px; background: var(--paper-soft); border: 1px solid var(--rule); position: relative; overflow: hidden; }
-.bar-fill  { height: 100%; width: 0%; transition: width 400ms cubic-bezier(.2,.7,.1,1); }
-.bar-ubique { background: var(--ubique); }
-.bar-mathjs { background: var(--mathjs); }
-.bar-time  { text-align: right; color: var(--ink); }
-
-.explore-result { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft); }
-.explore-result strong { color: var(--ink); }
-
-.source-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.source-item {
-  border: 1px solid var(--rule); background: var(--paper-soft);
-  font-family: var(--font-mono); font-size: 0.82rem;
-}
-.source-item summary {
-  cursor: pointer; padding: 0.6rem 0.9rem; list-style: none;
-  display: flex; justify-content: space-between; align-items: center;
-  color: var(--ink-soft); letter-spacing: 0.05em;
-}
-.source-item summary::-webkit-details-marker { display: none; }
-.source-item summary::after { content: "+ show"; color: var(--sepia); }
-.source-item[open] summary::after { content: "− hide"; }
-.source-body {
-  display: grid; grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--rule);
-}
-.source-col {
-  padding: 0.75rem 1rem;
-  border-right: 1px solid var(--rule);
-  white-space: pre;
-  color: var(--ink);
-}
-.source-col:last-child { border-right: none; }
-.source-col .gutter {
-  display: inline-block; width: 1.5em;
-  color: var(--sepia); user-select: none;
-}
-.source-col .lib {
-  display: block; font-size: 0.7rem;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--ink-soft); margin-bottom: 0.5rem;
-}
-
-.summary-grid {
-  display: grid; grid-template-columns: 1fr 2fr;
-  gap: 2.5rem; align-items: start;
-}
-.summary-stats { display: flex; flex-direction: column; gap: 1.5rem; }
-.summary-stat .big {
-  font-family: var(--font-display); font-weight: 500;
-  font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1;
-  color: var(--ink); font-variation-settings: "opsz" 144;
-}
-.summary-stat .label {
-  font-family: var(--font-mono); font-size: 0.72rem;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink-soft); margin-top: 0.4rem;
-}
-.summary-chart-wrap {
-  background: var(--paper-soft); border: 1px solid var(--rule);
-  padding: 1rem; position: relative; height: 360px;
-}
-.summary-foot {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: 0.85rem; color: var(--ink-soft);
-  margin-top: 2rem; max-width: 720px; line-height: 1.6;
-}
-.replay {
-  margin-top: 1.5rem;
-  font-family: var(--font-mono); font-size: 0.85rem;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--ubique); background: transparent; border: none;
-  border-bottom: 1px solid var(--ubique);
-  padding: 2px 0; cursor: pointer;
-}
-.replay:hover { color: var(--ink); border-bottom-color: var(--ink); }
-
-.figure {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 600ms ease, transform 600ms ease;
-}
-.figure.in-view { opacity: 1; transform: translateY(0); }
-
-body::after {
-  content: ""; position: fixed; inset: 0; pointer-events: none;
-  background-image: radial-gradient(rgba(26,26,23,0.025) 1px, transparent 1px);
-  background-size: 3px 3px;
-  mix-blend-mode: multiply;
-  z-index: 1;
-}
-.container { position: relative; z-index: 2; }
+  @media (max-width: 860px) {
+    .figure { grid-template-columns: minmax(0, 1fr); }
+    .figure .fig-specimens, .figure .fig-trace, .figure .fig-scatter, .figure .fig-speedup { grid-column: 1; grid-row: auto; }
+    .figure .fig-speedup { text-align: left; }
+    .summary-grid, .source-body { grid-template-columns: minmax(0, 1fr); }
+    .bar-row { grid-template-columns: 70px 1fr 90px; }
+  }
     </style>
-    <style>
-    #topnav { display: none; }
-  </style>
-</head>
-  <body>
-  <div class="container">
-    <header id="page-header">
-  <h1>Ubique <span style="color:var(--sepia);">//</span> Benchmark</h1>
-  <p class="subtitle">Matrix operations vs <em>math.js</em> · <span id="header-date"></span></p>
-  <a class="begin" id="begin-link" href="#tests">Begin →</a>
-</header>
+  </head>
+  <body class="ns">
+  <!--ns:header-->
+  <main id="main">
+  <section class="ns-hero bench-hero" aria-labelledby="bench-title">
+    <div class="ns-frame">
+      <canvas class="ns-mesh" aria-hidden="true"></canvas>
+      <div class="ns-frame-top">
+        <p class="kicker">Benchmark · live in your browser</p>
+        <p class="ns-tag">Matrix operations against math.js 15.2.0. Seeded inputs, results checked before timing, medians from alternating batches.</p>
+      </div>
+      <div></div>
+      <div class="ns-frame-bottom">
+        <div id="page-header">
+          <h1 class="ns-wordmark" id="bench-title"><span>Ubique</span><span>vs math.js</span></h1>
+          <p class="bench-sub">Run of <span id="header-date"></span></p>
+        </div>
+        <a class="begin ns-btn ns-btn--solid" id="begin-link" href="#tests">Begin <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+  <div class="bench ns-shell">
     <section id="environment">
   <div class="section-label">Environment</div>
   <table>
@@ -410,13 +337,18 @@ body::after {
     <div class="rule-em">— · —</div>
     <section id="summary"></section>
   </div>
+  </main>
+  <!--ns:footer-->
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script type="module">
-      import * as mathjs from "https://cdn.jsdelivr.net/npm/mathjs@13.2.2/+esm";
-      import * as rubique from "https://esm.sh/jsr/@bemayer/rubique@1.0.2";
+      import * as mathjs from "https://cdn.jsdelivr.net/npm/mathjs@15.2.0/+esm";
+      import * as rubique from "./ubique.js";
 
+      import * as protocol from "./benchmark_helpers.js";
+      window.benchmarkProtocol = protocol;
+      window.benchmarkBuild = await (await fetch("./benchmark_build.json")).json();
       // Store libraries globally for easy access
       window.mathjs = mathjs;
       window.rubique = rubique;
@@ -445,7 +377,9 @@ async function detectEnvironment() {
     ]);
     if (await WebAssembly.validate(bytes)) simd = 'yes';
   } catch (_) {}
-  rows.push(['WASM SIMD', simd]);
+  rows.push(['WASM SIMD support (kernel uses scalar build)', simd]);
+  rows.push(['Libraries', 'Local Ubique bundle; math.js 15.2.0']);
+  rows.push(['Input seed', '0x51b1c']);
 
   let minDelta = Infinity;
   let last = performance.now();
@@ -474,8 +408,13 @@ detectEnvironment().catch(console.error);
 
 // --- Top-level helpers (moved out of IIFE for new scaffold) ---
 
+let dataSeed = 0x51b1c;
+function inputRandom() {
+  dataSeed = (Math.imul(dataSeed, 1664525) + 1013904223) >>> 0;
+  return dataSeed / 4294967296;
+}
 function generateArray(size) {
-  return Array.from({ length: size }, () => Math.random() * 100);
+  return Array.from({ length: size }, () => inputRandom() * 100);
 }
 
 function generateMatrix(rows, cols) {
@@ -491,11 +430,11 @@ function generateInvertibleMatrix(n) {
     let rowSum = 0;
     for (let j = 0; j < n; j++) {
       if (i !== j) {
-        matrix[i][j] = Math.random() * 10;
+        matrix[i][j] = inputRandom() * 10;
         rowSum += Math.abs(matrix[i][j]);
       }
     }
-    matrix[i][i] = rowSum + Math.random() * 10 + 10;
+    matrix[i][i] = rowSum + inputRandom() * 10 + 10;
   }
 
   return matrix;
@@ -530,15 +469,12 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Test configuration - Focus on impressive matrix operations
+// Representative public matrix operations; every result must pass correctness.
 const tests = [
   {
     name: "Matrix Transpose (100×100)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 20,
-    sampleIterations: 2,
     setup: () => {
       const matrixA = generateMatrix(100, 100);
       return {
@@ -553,9 +489,6 @@ const tests = [
     name: "Matrix Add (100×100)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 25,
-    sampleIterations: 2,
     setup: () => {
       const matrixA = generateMatrix(100, 100);
       const matrixB = generateMatrix(100, 100);
@@ -572,9 +505,6 @@ const tests = [
     name: "Matrix Multiply (10×10)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 60,
-    sampleIterations: 5,
     setup: () => {
       const matrixA = generateMatrix(10, 10);
       const matrixB = generateMatrix(10, 10);
@@ -591,9 +521,6 @@ const tests = [
     name: "Matrix Multiply (50×50)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 18,
-    sampleIterations: 2,
     setup: () => {
       const matrixA = generateMatrix(50, 50);
       const matrixB = generateMatrix(50, 50);
@@ -610,9 +537,6 @@ const tests = [
     name: "Matrix Multiply (100×100)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 8,
-    sampleIterations: 1,
     setup: () => {
       const matrixA = generateMatrix(100, 100);
       const matrixB = generateMatrix(100, 100);
@@ -629,9 +553,6 @@ const tests = [
     name: "Matrix Multiply (200×200)",
     category: "Matrix Operations",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 2,
-    sampleIterations: 1,
     setup: () => {
       const matrixA = generateMatrix(200, 200);
       const matrixB = generateMatrix(200, 200);
@@ -648,9 +569,6 @@ const tests = [
     name: "Matrix Inverse (20×20)",
     category: "Linear Algebra",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 6,
-    sampleIterations: 1,
     setup: () => {
       const matrixA = generateInvertibleMatrix(20);
       return {
@@ -665,9 +583,6 @@ const tests = [
     name: "Determinant (20×20)",
     category: "Linear Algebra",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 8,
-    sampleIterations: 2,
     setup: () => {
       const matrixA = generateMatrix(20, 20);
       return {
@@ -682,9 +597,6 @@ const tests = [
     name: "Determinant (50×50)",
     category: "Linear Algebra",
     visualize: true,
-    targetDuration: 5000,
-    minIterations: 3,
-    sampleIterations: 1,
     setup: () => {
       const matrixA = generateMatrix(50, 50);
       return {
@@ -699,8 +611,8 @@ const tests = [
 
 // --- New matrix drawing helpers (Step 2) ---
 
-const INK = '#1a1a17';
-const PAPER_SOFT = '#ece3d0';
+const INK = '#030406';
+const PAPER_SOFT = '#f5f2dc';
 
 function drawMatrix(canvas, matrix) {
   const rows = matrix.length;
@@ -716,9 +628,9 @@ function drawNumberMatrix(canvas, matrix) {
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = PAPER_SOFT;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = 'rgba(168, 146, 116, 0.4)';
+  ctx.strokeStyle = 'rgba(3, 4, 6, 0.14)';
   ctx.lineWidth = 1;
-  ctx.font = '11px "IBM Plex Mono", monospace';
+  ctx.font = '11px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = INK;
@@ -749,7 +661,7 @@ function drawBlueprintDots(canvas, matrix) {
     for (let j = 0; j < cols; j++) {
       const norm = (matrix[i][j] - min) / range;
       const r = Math.max(0.6, Math.min(cw, ch) * 0.45 * (0.3 + 0.7 * norm));
-      ctx.fillStyle = `rgba(26, 26, 23, ${0.15 + 0.7 * norm})`;
+      ctx.fillStyle = `rgba(3, 4, 6, ${0.15 + 0.7 * norm})`;
       ctx.beginPath();
       ctx.arc(j * cw + cw / 2, i * ch + ch / 2, r, 0, Math.PI * 2);
       ctx.fill();
@@ -934,64 +846,20 @@ function createTrace(host) {
 
 // --- Task 4 Step 3: Benchmark timing primitives ---
 
-async function runTimedIterations(fn, data, totalIter, warmup, onIterTime) {
-  const args = getFunctionArgs(data);
-  for (let i = 0; i < warmup; i++) fn(...args);
-
-  const times = [];
-  let lastYield = performance.now();
-  for (let i = 0; i < totalIter; i++) {
-    const start = performance.now();
-    fn(...args);
-    const dt = performance.now() - start;
-    times.push(dt);
-    if (onIterTime) onIterTime(i, dt);
-    // Yield whenever we've been on the main thread for >50ms, regardless of iter count.
-    if (performance.now() - lastYield > 50) {
-      await nextFrame();
-      lastYield = performance.now();
-    }
-  }
-  return times;
-}
-
 function summarizeTimes(times) {
   const n = times.length;
   const mean = times.reduce((a, b) => a + b, 0) / n;
   const variance = times.reduce((a, t) => a + (t - mean) ** 2, 0) / Math.max(1, n - 1);
   const sigma = Math.sqrt(variance);
-  const ci95 = 1.96 * sigma / Math.sqrt(n);
-  return { n, mean, sigma, ci95 };
+  return { n, mean, sigma };
 }
 
-const MAX_ITERATIONS = 500;
-const TARGET_DURATION_MS = 1500;
 
-async function pickIterations(test) {
-  const target = test.targetDuration ?? TARGET_DURATION_MS;
-  const minIter = test.minIterations ?? 6;
-  const sample = test.sampleIterations ?? 2;
-  const warmup = test.warmupIterations ?? Math.min(3, sample);
-
-  const dU = test.setup();
-  const tU = await runTimedIterations(test.rubique, dU, sample, warmup, null);
-  const dM = test.setup();
-  const tM = await runTimedIterations(test.mathjs, dM, sample, warmup, null);
-
-  const slowest = Math.max(
-    tU.reduce((a, b) => a + b, 0) / tU.length,
-    tM.reduce((a, b) => a + b, 0) / tM.length,
-  );
-  let iter = Math.round(target / Math.max(slowest, 0.05));
-  if (!Number.isFinite(iter) || iter < 1) iter = minIter;
-  iter = Math.max(iter, minIter);
-  iter = Math.min(iter, MAX_ITERATIONS);
-  return { iterations: iter, warmup };
-}
 
 // --- Task 4 Step 4: Orchestrators ---
 
 const allResults = [];
+const unresolvedResults = [];
 
 function renderScatter(fig, ubiqueTimes, mathjsTimes) {
   const host = fig.querySelector('[data-role="scatter"]');
@@ -1051,15 +919,20 @@ function renderScatter(fig, ubiqueTimes, mathjsTimes) {
   lane('MATH.JS', mathjsTimes, 'mathjs', 1);
 
   const axis = svgEl('text', { class: 'lane-label', x: W - padR, y: H - 6, 'text-anchor': 'end' });
-  axis.textContent = 'ms per iter →';
+  axis.textContent = 'batch mean ms/op →';
   svg.appendChild(axis);
 
   host.appendChild(svg);
 }
 function renderSummary() {
-  if (allResults.length === 0) return;
+  if (allResults.length === 0) {
+    document.getElementById('sum-mean').textContent = 'No resolved timings';
+    document.getElementById('sum-won').textContent = '0 valid';
+    document.getElementById('sum-best').textContent = '—';
+    return;
+  }
 
-  const mean = allResults.reduce((a, r) => a + r.speedup, 0) / allResults.length;
+  const mean = Math.exp(allResults.reduce((a, r) => a + Math.log(r.speedup), 0) / allResults.length);
   const won = allResults.filter(r => r.speedup > 1).length;
   const best = allResults.reduce((b, r) => r.speedup > b.speedup ? r : b);
 
@@ -1077,9 +950,10 @@ function renderSummary() {
       datasets: [{
         label: 'Speedup ×',
         data: allResults.map(r => r.speedup),
-        backgroundColor: 'rgba(164, 56, 42, 0.0)',
-        borderColor: '#a4382a',
-        borderWidth: 1.2,
+        backgroundColor: '#030406',
+        borderColor: '#030406',
+        borderWidth: 0,
+        borderRadius: 6,
         borderSkipped: false,
       }],
     },
@@ -1089,13 +963,13 @@ function renderSummary() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#f4ede0',
-          titleColor: '#1a1a17',
-          bodyColor: '#1a1a17',
-          borderColor: '#a89274',
+          backgroundColor: '#030406',
+          titleColor: '#fffde9',
+          bodyColor: '#fffde9',
+          borderColor: '#030406',
           borderWidth: 1,
-          titleFont: { family: 'IBM Plex Mono', size: 11 },
-          bodyFont:  { family: 'IBM Plex Mono', size: 11 },
+          titleFont: { family: 'JetBrains Mono', size: 11 },
+          bodyFont:  { family: 'JetBrains Mono', size: 11 },
           padding: 10,
           displayColors: false,
           callbacks: {
@@ -1103,8 +977,8 @@ function renderSummary() {
               const r = allResults[cx.dataIndex];
               return [
                 `Speedup: ${r.speedup.toFixed(2)}×`,
-                `Ubique:  ${r.rubiqueMean.toFixed(2)} ± ${r.rubiqueSigma.toFixed(2)} ms`,
-                `math.js: ${r.mathjsMean.toFixed(2)} ± ${r.mathjsSigma.toFixed(2)} ms`,
+                `Ubique:  ${r.rubiqueMean.toPrecision(3)} ms median; batch SD ${r.rubiqueSigma.toPrecision(3)} ms`,
+                `math.js: ${r.mathjsMean.toPrecision(3)} ms median; batch SD ${r.mathjsSigma.toPrecision(3)} ms`,
                 `n = ${r.n}`,
               ];
             },
@@ -1114,18 +988,18 @@ function renderSummary() {
       scales: {
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(26,26,23,0.06)' },
+          grid: { color: 'rgba(3,4,6,0.08)' },
           ticks: {
-            color: '#4a4640',
-            font: { family: 'IBM Plex Mono', size: 10 },
+            color: 'rgba(3,4,6,0.62)',
+            font: { family: 'JetBrains Mono', size: 10 },
             callback: (v) => v + '×',
           },
         },
         x: {
           grid: { display: false },
           ticks: {
-            color: '#4a4640',
-            font: { family: 'IBM Plex Mono', size: 9 },
+            color: 'rgba(3,4,6,0.62)',
+            font: { family: 'JetBrains Mono', size: 9 },
             maxRotation: 45, minRotation: 45, autoSkip: false,
           },
         },
@@ -1142,20 +1016,35 @@ async function runOneTest(test, fig, _index) {
   const data = test.setup();
   renderSpecimens(fig, data, test.name);
 
-  const { iterations, warmup } = await pickIterations(test);
-
-  const uTimes = await runTimedIterations(
-    test.rubique, data, iterations, warmup,
-    (_i, dt) => trace.addPoint('ubique', 1000 / Math.max(dt, 0.001))
-  );
-  const mTimes = await runTimedIterations(
-    test.mathjs, data, iterations, warmup,
-    (_i, dt) => trace.addPoint('mathjs', 1000 / Math.max(dt, 0.001))
-  );
-
-  const u = summarizeTimes(uTimes);
-  const m = summarizeTimes(mTimes);
-  const speedup = m.mean / u.mean;
+  const args = getFunctionArgs(data);
+  const protocol = window.benchmarkProtocol;
+  if (!protocol.resultsAgree(test.rubique(...args), test.mathjs(...args))) {
+    fig.querySelector('.speedup-value').textContent = 'Mismatch';
+    fig.querySelector('.speedup-label').textContent = 'Correctness failed; timing suppressed';
+    return;
+  }
+  // Warm both on identical inputs. A calibrated batch reduces timer quantization.
+  for (let i = 0; i < 10; i++) { test.rubique(...args); test.mathjs(...args); }
+  const iterations = protocol.calibrateIterations([() => test.rubique(...args), () => test.mathjs(...args)]);
+  const uTimes = [], mTimes = [];
+  for (let batch = 0; batch < 9; batch++) {
+    const runU = () => uTimes.push(protocol.timeBatch(() => test.rubique(...args), iterations));
+    const runM = () => mTimes.push(protocol.timeBatch(() => test.mathjs(...args), iterations));
+    if (batch % 2 === 0) { runU(); runM(); } else { runM(); runU(); }
+    if (uTimes[batch] > 0) trace.addPoint('ubique', 1000 / uTimes[batch]);
+    if (mTimes[batch] > 0) trace.addPoint('mathjs', 1000 / mTimes[batch]);
+    await nextFrame();
+  }
+  const u = summarizeTimes(uTimes), m = summarizeTimes(mTimes);
+  const uMedian = protocol.medianTime(uTimes), mMedian = protocol.medianTime(mTimes);
+  if (!protocol.timingUsable(uTimes, iterations) || !protocol.timingUsable(mTimes, iterations)) {
+    unresolvedResults.push({name:test.name, correctness:'passed', timing:'unresolved', ubiqueSamples:uTimes, mathjsSamples:mTimes, iterationsPerBatch:iterations});
+    fig.querySelector('.speedup-value').textContent = 'Unresolved';
+    fig.querySelector('.speedup-label').textContent = 'Below timer resolution; no speed ratio';
+    fig.querySelector('.speedup-stats').textContent = `Output agrees; timing does not meet the 1 ms minimum batch duration. ${iterations} ops/batch. Excluded from summary.`;
+    return;
+  }
+  const speedup = mMedian / uMedian;
 
   const speedupHost = fig.querySelector('[data-role="speedup"]');
   const valEl   = speedupHost.querySelector('.speedup-value');
@@ -1168,9 +1057,7 @@ async function runOneTest(test, fig, _index) {
     valEl.textContent = `${(1 / speedup).toFixed(1)}×`;
     labEl.textContent = 'slower';
   }
-  statsEl.textContent = u.n >= 5
-    ? `n=${u.n}  σ=${u.sigma.toFixed(2)}ms  95% CI ±${u.ci95.toFixed(2)}ms`
-    : `n=${u.n}  σ=${u.sigma.toFixed(2)}ms`;
+  statsEl.textContent = `9 alternating batches × ${iterations} ops/batch; median ${protocol.formatDuration(uMedian)}/op; output agrees · timing resolved`;
   speedupHost.classList.remove('stamped');
   void speedupHost.offsetWidth;
   speedupHost.classList.add('stamped');
@@ -1180,8 +1067,9 @@ async function runOneTest(test, fig, _index) {
 
   allResults.push({
     name: test.name,
-    rubiqueMean: u.mean, rubiqueSigma: u.sigma,
-    mathjsMean: m.mean,  mathjsSigma: m.sigma,
+    rubiqueMean: uMedian, rubiqueSigma: u.sigma,
+    mathjsMean: mMedian, mathjsSigma: m.sigma,
+    ubiqueSamples: uTimes, mathjsSamples: mTimes, iterationsPerBatch: iterations,
     speedup, n: u.n,
   });
 
@@ -1190,6 +1078,8 @@ async function runOneTest(test, fig, _index) {
 
 async function runAllTests() {
   allResults.length = 0;
+  unresolvedResults.length = 0;
+  dataSeed = 0x51b1c;
   const figures = [...document.querySelectorAll('.figure')];
   for (let i = 0; i < tests.length; i++) {
     await runOneTest(tests[i], figures[i], i + 1);
@@ -1286,19 +1176,15 @@ async function timeExplore(opKey, N, iter = 5) {
   const spec = exploreOps[opKey];
   const fnU = window.rubique[spec.ubique];
   const fnM = window.mathjs[spec.mathjs];
+  dataSeed = (0x51b1c ^ N) >>> 0;
   const argsU = exploreSetup(opKey, N);
-  const argsM = exploreSetup(opKey, N);
-  fnU(...argsU); fnM(...argsM);  // warmup
-
-  let tU = 0;
-  for (let i = 0; i < iter; i++) {
-    const s = performance.now(); fnU(...argsU); tU += performance.now() - s;
+  try {
+    const measured = window.benchmarkProtocol.measurePair(() => fnU(...argsU), () => fnM(...argsU), iter);
+    return { ubique: measured.aMedian, mathjs: measured.bMedian };
+  } catch (error) {
+    document.getElementById('explore-result').textContent = error.message;
+    return null;
   }
-  let tM = 0;
-  for (let i = 0; i < iter; i++) {
-    const s = performance.now(); fnM(...argsM); tM += performance.now() - s;
-  }
-  return { ubique: tU / iter, mathjs: tM / iter };
 }
 
 let exploreTimer = null;
@@ -1317,17 +1203,17 @@ async function runExplore() {
   const maxT = Math.max(r.ubique, r.mathjs, 0.001);
   document.getElementById('bar-ubique').style.width = `${(r.ubique / maxT) * 100}%`;
   document.getElementById('bar-mathjs').style.width = `${(r.mathjs / maxT) * 100}%`;
-  document.getElementById('bar-ubique-time').textContent = `${r.ubique.toFixed(2)} ms`;
-  document.getElementById('bar-mathjs-time').textContent = `${r.mathjs.toFixed(2)} ms`;
+  document.getElementById('bar-ubique-time').textContent = window.benchmarkProtocol.formatDuration(r.ubique);
+  document.getElementById('bar-mathjs-time').textContent = window.benchmarkProtocol.formatDuration(r.mathjs);
 
   const speedup = r.mathjs / r.ubique;
   const node = document.getElementById('explore-result');
   node.replaceChildren();
   node.append(
     `${op}(N=${N})  ·  Ubique `,
-    Object.assign(document.createElement('strong'), { textContent: `${r.ubique.toFixed(2)}ms` }),
+    Object.assign(document.createElement('strong'), { textContent: window.benchmarkProtocol.formatDuration(r.ubique) }),
     `  ·  math.js `,
-    Object.assign(document.createElement('strong'), { textContent: `${r.mathjs.toFixed(2)}ms` }),
+    Object.assign(document.createElement('strong'), { textContent: window.benchmarkProtocol.formatDuration(r.mathjs) }),
     `  ·  `,
     Object.assign(document.createElement('strong'), {
       textContent: speedup >= 1 ? `${speedup.toFixed(1)}×` : `${(1/speedup).toFixed(1)}×`,
@@ -1388,7 +1274,7 @@ function statBlock(bigId, labelText) {
 }
 
 const statsCol = el('div', { class: 'summary-stats' }, [
-  statBlock('sum-mean', 'Mean speedup'),
+  statBlock('sum-mean', 'Geometric mean ratio'),
   statBlock('sum-won',  'Tests where Ubique was faster'),
   statBlock('sum-best', 'Best result'),
 ]);
@@ -1403,9 +1289,26 @@ const foot = el('p', { class: 'summary-foot' });
 foot.append(
   'Browser ',
   Object.assign(document.createElement('code'), { textContent: 'performance.now()' }),
-  ' precision is capped (typically 5 µs–1 ms depending on isolation context). JS is single-threaded; results vary with hardware, browser, and ambient load. Each measurement reports the mean over n iterations after warmup discards; σ and 95% confidence interval are computed assuming approximately normal residuals.',
+  ' precision is capped (typically 5 µs–1 ms depending on isolation context). JS is single-threaded; results vary with hardware, browser, and ambient load. Results use identical seeded inputs, a finite-result correctness gate (absolute 1e-10 + relative 1e-9), 10 warmups, and medians of 9 alternating batches. Ubique is bundled from this checkout; math.js is pinned to 15.2.0. Setup and module loading are excluded; JS/WASM packing is included. These are local measurements, not universal speed claims.',
 );
 summarySection.appendChild(foot);
+const exportButton = el('button', { class: 'replay', text: 'Export raw results' });
+exportButton.addEventListener('click', () => {
+  const report = {
+    metadata: { ...window.benchmarkBuild, timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent, seed: '0x51b1c', precision: 'f64',
+      protocol: '10 warmups; repeated-probe calibration targets >=10ms for faster batch; 9 alternating batches; minimum accepted batch 1ms; median ms/op; nested API including copies',
+      tolerance: { absolute: 1e-10, relative: 1e-9 } },
+    results: allResults,
+    unresolvedResults,
+  };
+  const url = URL.createObjectURL(new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' }));
+  const link = document.createElement('a'); link.href = url; link.download = 'ubique-benchmark.json';
+  document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+summarySection.appendChild(exportButton);
+
 
 const replay = el('button', { class: 'replay', id: 'replay-btn', text: '↻ Repeat experiment' });
 replay.addEventListener('click', () => location.reload());
@@ -1428,5 +1331,6 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.figure').forEach(f => io.observe(f));
     </script>
-  </body>
+  <footer style="padding:32px;text-align:center"><a href="learn.html">Read the interactive article</a> · <a href="https://nodalstudio.io/">Built by Nodal Studio ↗</a></footer>
+</body>
 </html>

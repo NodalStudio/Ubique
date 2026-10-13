@@ -1,15 +1,16 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
 import { isarray, ismatrix, isnumber } from "../../index.ts";
-import { timeswasm } from "../../rs_lib/pkg/rs_lib.js";
+import { matmul } from "../linalgebra/matmul.ts";
 
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -48,10 +49,11 @@ export default function mtimes(x: number, y: number): number;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -90,10 +92,11 @@ export default function mtimes(x: number, y: array): array;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -132,10 +135,11 @@ export default function mtimes(x: array, y: number): array;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -174,10 +178,11 @@ export default function mtimes(x: array, y: array): number;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -216,10 +221,11 @@ export default function mtimes(x: number, y: matrix): matrix;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -258,10 +264,11 @@ export default function mtimes(x: matrix, y: number): matrix;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -300,10 +307,11 @@ export default function mtimes(x: matrix, y: array): array;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -342,10 +350,11 @@ export default function mtimes(x: array, y: matrix): array;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -384,10 +393,11 @@ export default function mtimes(x: matrix, y: matrix): matrix;
 /**
  * Matrix multiplication.
  *
- * Performs matrix multiplication of two matrices or arrays. For arrays, treats them as column vectors.
+ * Multiplies matrices. Two flat arrays produce a scalar dot product; matrix-array
+ * treats the array as a column, and array-matrix treats it as a row.
  *
- * @param x The first operand, can be a number, array (treated as column vector), or matrix
- * @param y The second operand, can be a number, array (treated as column vector), or matrix
+ * @param x The first operand, can be a number, array (orientation depends on operand position), or matrix
+ * @param y The second operand, can be a number, array (orientation depends on operand position), or matrix
  * @returns The result of matrix multiplication of x and y
  * @throws If matrix dimensions do not agree for multiplication or if no arguments are provided
  *
@@ -501,45 +511,7 @@ function vectorMultiplication(x: array, y: array): number {
  * Multiply two matrices.
  */
 function matrixMultiplication(x: matrix, y: matrix): matrix {
-  if (x[0].length !== y.length) {
-    throw new Error("Matrix dimensions must agree");
-  }
-
-  const rowsX = x.length;
-  const colsX = x[0].length;
-  const colsY = y[0].length;
-
-  // Use WASM for all matrices (benchmarks show it's faster even for small ones!)
-  if (typeof timeswasm === "function") {
-    const flatX = new Float64Array(x.flat());
-    const flatY = new Float64Array(y.flat());
-
-    const flatResult = timeswasm(flatX, flatY, rowsX, colsX, colsY);
-
-    // Reshape flat result back to matrix
-    const result: matrix = [];
-    for (let i = 0; i < rowsX; i++) {
-      result[i] = [];
-      for (let j = 0; j < colsY; j++) {
-        result[i][j] = flatResult[i * colsY + j];
-      }
-    }
-    return result;
-  }
-
-  // JavaScript fallback only if WASM not available
-  const result: matrix = [];
-  for (let i = 0; i < rowsX; i++) {
-    result[i] = [];
-    for (let j = 0; j < colsY; j++) {
-      let sum = 0;
-      for (let k = 0; k < colsX; k++) {
-        sum += x[i][k] * y[k][j];
-      }
-      result[i][j] = sum;
-    }
-  }
-  return result;
+  return matmul(x, y);
 }
 
 /**

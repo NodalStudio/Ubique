@@ -1,0 +1,23 @@
+{
+  "phase": "post-correctness fixes; historical timings are separate artifacts",
+  "artifacts": {
+    "baseline": {
+      "wasmBytes": 36086,
+      "wasmSha256": "ccc2097a1cad028398034fff7d5257fb687dc3c7b503129621e425523f45f454",
+      "wrapperBytes": 50176,
+      "wrapperGzipBytes": 23420
+    },
+    "scalar": {
+      "wasmBytes": 54211,
+      "wasmSha256": "8215e57b3e29e5f07d8e52a71f8f73476864ef54df4eb81c52c1aabfbe570aea",
+      "wrapperBytes": 74964,
+      "wrapperGzipBytes": 31926
+    },
+    "simd": {
+      "wasmBytes": 53820,
+      "wasmSha256": "3287731f978a415d2da7ffac9c341f98715d698c3b85425d1b9053bb49320420",
+      "wrapperBytes": 74428,
+      "wrapperGzipBytes": 32528
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { variance } from "../internal/moments.ts";
 import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
 
@@ -287,22 +288,5 @@ export default function std(
  * Numerically stable online computation of variance
  */
 function computeStd(arr: array, flag: 0 | 1): number {
-  const n = arr.length;
-  if (n === 0) return NaN;
-  if (n === 1) return flag === 1 ? NaN : 0;
-
-  // Welford's algorithm for numerically stable variance
-  let mean = 0;
-  let m2 = 0;
-
-  for (let i = 0; i < n; i++) {
-    const x = arr[i];
-    const delta = x - mean;
-    mean += delta / (i + 1);
-    const delta2 = x - mean;
-    m2 += delta * delta2;
-  }
-
-  const variance = m2 / (n - flag);
-  return Math.sqrt(variance);
+  return Math.sqrt(variance(arr, flag));
 }

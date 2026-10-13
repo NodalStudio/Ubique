@@ -1,11 +1,10 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 
 import {
-  inv,
   isnumber,
   issquare,
   ldivide,
-  mtimes,
+  linsolve,
   ncols,
   nrows,
 } from "../../index.ts";
@@ -13,7 +12,7 @@ import {
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -30,9 +29,12 @@ import {
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -46,17 +48,20 @@ import {
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(y: number, x: number): number;
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -73,9 +78,12 @@ export default function mldivide(y: number, x: number): number;
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -89,17 +97,20 @@ export default function mldivide(y: number, x: number): number;
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(y: number, x: array): array;
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -116,9 +127,12 @@ export default function mldivide(y: number, x: array): array;
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -132,17 +146,20 @@ export default function mldivide(y: number, x: array): array;
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(y: number, x: matrix): matrix;
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -159,9 +176,12 @@ export default function mldivide(y: number, x: matrix): matrix;
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -175,17 +195,20 @@ export default function mldivide(y: number, x: matrix): matrix;
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(y: array, x: array): array;
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -202,9 +225,12 @@ export default function mldivide(y: array, x: array): array;
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -218,17 +244,20 @@ export default function mldivide(y: array, x: array): array;
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(y: matrix, x: matrix): matrix;
 /**
  * Matrix left division X \ Y.
  *
- * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Y is multiplied by the inverse of X. X must be square.
+ * Matrix left division X \ Y. If X is NxN and Y is NxM, then returns a matrix NxM. Solves X * result = Y using LU factorization. X must be square.
  *
  * @param y The left matrix or scalar (denominator)
  * @param x The right matrix or scalar (numerator)
@@ -245,9 +274,12 @@ export default function mldivide(y: matrix, x: matrix): matrix;
  *
  * @example Matrix left division
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]), [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[3, 2], [5, 2]]);
+ * const expected = [[1.0476190476190477, 0.380952380952381], [-1.285714285714286, -0.2857142857142857]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -261,10 +293,13 @@ export default function mldivide(y: matrix, x: matrix): matrix;
  *
  * @example Matrix left division with non-square matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]), [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
- *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]]);
+ * const actual = mldivide([[9, 5], [6, 1]], [[5, 6, 5], [7, 8, -1]]);
+ * const expected = [[1.4285714285714288, 1.6190476190476193, -0.4761904761904764],
+ *  [-1.5714285714285712, -1.7142857142857144, 1.8571428571428574]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function mldivide(
@@ -282,7 +317,7 @@ export default function mldivide(
     if (ncols(y as matrix) !== nrows(x as matrix)) {
       throw new Error("Matrix dimensions mismatch");
     }
-    return mtimes(inv(y as matrix), x as matrix);
+    return linsolve(y as matrix, x as matrix);
   }
 
   throw new Error("Left matrix must be square for matrix left division");

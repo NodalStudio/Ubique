@@ -1,5 +1,5 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isarray, isnumber, sort, vectorfun } from "../../index.ts";
+import { isarray, isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Median value of array.
@@ -150,7 +150,7 @@ export default function median(
       throw new Error("Input cannot be empty");
     }
 
-    const sorted = sort(a);
+    const sorted = a.slice().sort((a, b) => a - b);
     const mid = Math.floor(length / 2);
 
     if (length % 2 === 1) {

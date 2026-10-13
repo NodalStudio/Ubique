@@ -1,5 +1,7 @@
 import { build, emptyDir } from "jsr:@deno/dnt@0.41.3";
 
+const config = JSON.parse(await Deno.readTextFile("deno.json"));
+
 await emptyDir("./npm");
 
 await build({
@@ -26,7 +28,7 @@ await build({
   },
   package: {
     name: "ubique",
-    version: Deno.args[0] || "1.0.0",
+    version: Deno.args[0] || config.version,
     description:
       "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
     license: "MIT",
@@ -71,6 +73,8 @@ await build({
     Deno.copyFileSync("LICENSE", "npm/LICENSE");
     Deno.copyFileSync("README_NPM.md", "npm/README.md");
     console.log("✓ Copied LICENSE and README_NPM.md");
-    console.log("✓ WASM is inlined in rs_lib.js (no separate .wasm file needed)");
+    console.log(
+      "✓ WASM is inlined in rs_lib.js (no separate .wasm file needed)",
+    );
   },
 });

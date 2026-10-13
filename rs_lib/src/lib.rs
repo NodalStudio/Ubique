@@ -1,4 +1,4 @@
-use nalgebra::{DMatrix, DVector};
+use nalgebra::{DMatrix, DMatrixView, DVector};
 use wasm_bindgen::prelude::*;
 
 /// Performs standard matrix multiplication of two dynamic matrices.
@@ -17,18 +17,13 @@ use wasm_bindgen::prelude::*;
 /// The resulting matrix has dimensions `rows_a x cols_b`.
 #[wasm_bindgen]
 pub fn timeswasm(a: &[f64], b: &[f64], rows_a: usize, cols_a: usize, cols_b: usize) -> Vec<f64> {
-    let mat_a = DMatrix::<f64>::from_row_slice(rows_a, cols_a, a);
-    let mat_b = DMatrix::<f64>::from_row_slice(cols_a, cols_b, b);
-    let result = &mat_a * &mat_b;
-
-    // Convert result to row-major order for JavaScript
-    let mut output = Vec::with_capacity(rows_a * cols_b);
-    for i in 0..rows_a {
-        for j in 0..cols_b {
-            output.push(result[(i, j)]);
-        }
-    }
-    output
+    // Row-major A/B are column-major views of Aᵀ/Bᵀ. Computing BᵀAᵀ
+    // produces Cᵀ whose contiguous storage is already row-major C.
+    // Borrow the input slices instead of allocating/reordering two matrices.
+    let at = DMatrixView::<f64>::from_slice(a, cols_a, rows_a);
+    let bt = DMatrixView::<f64>::from_slice(b, cols_b, cols_a);
+    let result = bt * at;
+    result.data.into()
 }
 
 /// Computes the arithmetic mean of an array.
@@ -246,23 +241,38 @@ pub fn luwasm(a: &[f64], rows: usize, cols: usize) -> Vec<f64> {
 /// or a vector of NaN if the matrix is singular
 #[wasm_bindgen]
 pub fn invwasm(a: &[f64], n: usize) -> Vec<f64> {
-    let mat = DMatrix::<f64>::from_row_slice(n, n, a);
-
-    match mat.try_inverse() {
+    let scales: Vec<f64> = (0..n)
+        .map(|i| {
+            a[i * n..(i + 1) * n]
+                .iter()
+                .fold(0.0_f64, |s, v| s.max(v.abs()))
+        })
+        .collect();
+    if scales.iter().any(|s| *s == 0.0 || !s.is_finite()) {
+        return vec![f64::NAN; n * n];
+    }
+    let normalized: Vec<f64> = a
+        .iter()
+        .enumerate()
+        .map(|(idx, v)| v / scales[idx / n])
+        .collect();
+    let factor = DMatrix::<f64>::from_row_slice(n, n, &normalized).lu();
+    let u = factor.u();
+    let tolerance = n as f64 * f64::EPSILON;
+    if (0..n).any(|i| !u[(i, i)].is_finite() || u[(i, i)].abs() <= tolerance) {
+        return vec![f64::NAN; n * n];
+    }
+    match factor.try_inverse() {
         Some(inv) => {
-            // Convert to row-major order
             let mut output = Vec::with_capacity(n * n);
             for i in 0..n {
                 for j in 0..n {
-                    output.push(inv[(i, j)]);
+                    output.push(inv[(i, j)] / scales[j]);
                 }
             }
             output
         }
-        None => {
-            // Singular matrix - return NaN
-            vec![f64::NAN; n * n]
-        }
+        None => vec![f64::NAN; n * n],
     }
 }
 
@@ -280,9 +290,7 @@ pub fn invwasm(a: &[f64], n: usize) -> Vec<f64> {
 pub fn detwasm(a: &[f64], n: usize) -> f64 {
     let mat = DMatrix::<f64>::from_row_slice(n, n, a);
     let det = mat.determinant();
-
-    // Handle floating-point precision issues
-    if det.abs() < 1e-15 {
+    if det == 0.0 {
         0.0
     } else {
         det
@@ -333,4 +341,42 @@ pub fn covwasm(data: &[f64], rows: usize, cols: usize, flag: u8) -> Vec<f64> {
     }
 
     output
+}
+
+/// An owned column-major matrix kept in WASM across operations.
+#[wasm_bindgen]
+pub struct MatrixBuffer {
+    data: DMatrix<f64>,
+}
+
+#[wasm_bindgen]
+impl MatrixBuffer {
+    #[wasm_bindgen(constructor)]
+    pub fn new(rows: usize, cols: usize) -> MatrixBuffer {
+        MatrixBuffer {
+            data: DMatrix::zeros(rows, cols),
+        }
+    }
+
+    pub fn data_ptr(&self) -> usize {
+        self.data.as_ptr() as usize
+    }
+
+    /// Overwrites output; callers must not alias it with either input.
+    pub fn multiply_into(&self, rhs: &MatrixBuffer, out: &mut MatrixBuffer) -> Result<(), JsValue> {
+        if self.data.ncols() != rhs.data.nrows()
+            || out.data.nrows() != self.data.nrows()
+            || out.data.ncols() != rhs.data.ncols()
+        {
+            return Err(JsValue::from_str("Matrix dimensions must agree"));
+        }
+        out.data.gemm(1.0, &self.data, &rhs.data, 0.0);
+        Ok(())
+    }
+}
+
+/// Exposes the current memory so JavaScript can fill resident buffers directly.
+#[wasm_bindgen]
+pub fn matrix_memory() -> JsValue {
+    wasm_bindgen::memory()
 }

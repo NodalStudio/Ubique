@@ -1,6 +1,6 @@
 import type { matrix } from "../types.d.ts";
 
-import { isnumber, issquare, mtimes } from "../../index.ts";
+import { eye, inv, issquare, mtimes } from "../../index.ts";
 
 /**
  * Matrix power X ^ Y.
@@ -8,9 +8,9 @@ import { isnumber, issquare, mtimes } from "../../index.ts";
  * Raises a square matrix X to the power of a scalar exponent Y.
  *
  * @param x The base matrix (must be square)
- * @param y The exponent (must be a scalar)
+ * @param y The exponent (must be a safe integer; negative powers invert the base)
  * @returns The resulting matrix after exponentiation
- * @throws If the input is not a square matrix or the exponent is not a scalar
+ * @throws If the input is not a square matrix or the exponent is not a safe integer
  *
  * @example Raise a matrix to the power of 3
  * ```ts
@@ -25,13 +25,16 @@ export default function mpower(x: matrix, y: number): matrix {
     throw new Error("input must be a square matrix");
   }
 
-  if (!isnumber(y)) {
-    throw new Error("exponent must be a scalar value");
+  if (!Number.isSafeInteger(y)) {
+    throw new Error("Exponent must be a safe integer");
   }
-
-  let out = x;
-  for (let t = 1; t < y; t++) {
-    out = mtimes(out, x) as matrix;
+  let base = y < 0 ? inv(x) : x;
+  let exponent = Math.abs(y);
+  let result = eye(x.length, x.length);
+  while (exponent > 0) {
+    if (exponent % 2 === 1) result = mtimes(result, base);
+    exponent = Math.floor(exponent / 2);
+    if (exponent > 0) base = mtimes(base, base);
   }
-  return out;
+  return result;
 }

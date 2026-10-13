@@ -1,0 +1,38 @@
+{
+  "phase": "final local development verification",
+  "baseCommit": "ba3099fdb12b6d38909520a7402ad994143bf876",
+  "branch": "perf/reusable-wasm-matrices",
+  "published": false,
+  "checks": {
+    "deno_library_and_doctests": {
+      "passed": 2328,
+      "failed": 0,
+      "command": "DENO_JOBS=4 deno test --doc --parallel lib test/deno.test.ts test/numerics_test.ts test/correctness_test.ts"
+    },
+    "lab_and_tutorial": {
+      "passed": 5,
+      "failed": 0,
+      "command": "deno test test/lab_test.ts"
+    },
+    "npm_commonjs": {
+      "passed": 24,
+      "failed": 0
+    },
+    "npm_esm": "passed: dispatch, LU, powers, inverse rejection, ownership",
+    "browser_lab_article": "passed: CSV import/quoting/filtering/safe text, regression, kernels, scalar WASM, downloads, desktop/mobile, zero page errors",
+    "browser_benchmark": {
+      "passed": 9,
+      "injected_mismatch_rejected": true,
+      "raw_export_verified": true
+    },
+    "cli_mathjs": {
+      "passed": 17,
+      "failed": 0
+    },
+    "optional_simd": "rebuilt; product, inverse and scale-preserving determinant smoke checks passed",
+    "lint": "passed on library, new computation/build/test modules",
+    "format": "passed on changed TypeScript and test/build scripts",
+    "editorial_red_lines": "no BLOCK; Nodal Studio and Concrete warnings reviewed as intentional"
+  },
+  "scope": "Not an exhaustive numerical certification. Historical performance samples retain their original labels and hashes."
+}

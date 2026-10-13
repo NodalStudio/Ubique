@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "wasmBytes": 36086,
+    "wasmSha256": "ccc2097a1cad028398034fff7d5257fb687dc3c7b503129621e425523f45f454",
+    "wrapperBytes": 50176,
+    "wrapperGzipBytes": 23420
+  },
+  "scalar": {
+    "wasmBytes": 54339,
+    "wasmSha256": "fa6f10ee50b8fb27249dce94b692945538181ab46ce42803600f0e2f7d4b6fae",
+    "wrapperBytes": 75136,
+    "wrapperGzipBytes": 32249
+  },
+  "simd": {
+    "wasmBytes": 54100,
+    "wasmSha256": "264781b2df9cda525b53d8bd3e324636e4cb0bfc0373ee8537c6e8704ebf92ae",
+    "wrapperBytes": 74812,
+    "wrapperGzipBytes": 32750
+  }
+}

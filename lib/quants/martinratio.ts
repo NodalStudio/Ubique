@@ -1,5 +1,11 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { annreturn, isarray, ulcerindex, vectorfun } from "../../index.ts";
+import {
+  annreturn,
+  isarray,
+  ismatrix,
+  ulcerindex,
+  vectorfun,
+} from "../../index.ts";
 
 /**
  * Martin Ratio.
@@ -32,7 +38,7 @@ import { annreturn, isarray, ulcerindex, vectorfun } from "../../index.ts";
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(martinratio(x, 0, 12), 44.42545597931942);
- * assertEquals(martinratio(y, 0, 12), 2.438364078885411);
+ * assertEquals(martinratio(y, 0, 12), 2.4375036794592675);
  *
  * ```
  *
@@ -83,7 +89,7 @@ export default function martinratio(
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(martinratio(x, 0, 12), 44.42545597931942);
- * assertEquals(martinratio(y, 0, 12), 2.438364078885411);
+ * assertEquals(martinratio(y, 0, 12), 2.4375036794592675);
  *
  * ```
  *
@@ -134,7 +140,7 @@ export default function martinratio(
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * assertEquals(martinratio(x, 0, 12), 44.42545597931942);
- * assertEquals(martinratio(y, 0, 12), 2.438364078885411);
+ * assertEquals(martinratio(y, 0, 12), 2.4375036794592675);
  *
  * ```
  *
@@ -164,7 +170,7 @@ export default function martinratio(
     return (annualReturn - frisk) / ulcerindex(a, mode);
   };
 
-  if (!isarray(x)) {
+  if (!isarray(x) && !ismatrix(x)) {
     throw new Error("Input arguments must be an array or matrix");
   }
 

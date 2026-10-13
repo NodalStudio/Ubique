@@ -444,3 +444,8 @@ export {
   zeros,
   zscore,
 };
+
+export { matmul, type MatrixBackend } from "./lib/linalgebra/matmul.ts";
+export { DenseMatrix } from "./lib/linalgebra/dense_matrix.ts";
+
+export { factorize, LUFactorization } from "./lib/linalgebra/factorize.ts";

@@ -5,6 +5,14 @@ import {
   resolve,
 } from "https://deno.land/std@0.224.0/path/mod.ts";
 
+import { buildLearn } from "./build_learn.ts";
+import {
+  brandFiles,
+  brandHead,
+  siteFooter,
+  siteHeader,
+} from "./brand_chrome.ts";
+
 const docsOutput = "./docs";
 const docArgs = [
   "doc",
@@ -40,6 +48,10 @@ const assetFiles = [
   "search_index.js",
   "fuse.js",
   "search.js",
+  "nodal.css",
+  "nodal.js",
+  "favicon.svg",
+  "ubique-docs.css",
 ];
 
 function escapeRegExp(value: string): string {
@@ -132,45 +144,57 @@ async function fixDocLinks(options: FixDocAssetsOptions = {}): Promise<number> {
 }
 
 /**
- * Hides the top navigation bar by adding CSS (except on index.html)
- * On index.html, hides the .toc sidebar instead
+ * Dresses every deno-doc page in the Nodal Studio chrome: brand layer and
+ * favicon in <head>, studio header and footer around the generated content.
+ * Deno's own top bar stays as a sticky sub-bar (breadcrumbs + search). The
+ * dark theme is dropped: the brand is cream and ink. On index.html the .toc
+ * sidebar is hidden; the landing script builds the catalogue there.
  */
-async function hideTopNav(options: FixDocAssetsOptions = {}): Promise<number> {
-  const docsRootArg = options.root ?? "./docs";
-  const docsRoot = resolve(Deno.cwd(), docsRootArg);
+const sourceBase = "https://github.com/NodalStudio/Ubique/blob/HEAD/";
+
+async function brandDocPages(
+  options: FixDocAssetsOptions = {},
+): Promise<number> {
+  const docsRoot = resolve(Deno.cwd(), options.root ?? "./docs");
   let filesUpdated = 0;
 
   for await (const filePath of walkHtml(docsRoot)) {
     const original = await Deno.readTextFile(filePath);
-    let updated = original;
+    if (!original.includes('<div class="ddoc">')) continue;
+    if (original.includes('class="ns-head"')) continue;
+    const root = pathToRoot(docsRoot, dirname(filePath));
+    const isIndexPage = relative(docsRoot, filePath) === "index.html";
 
-    // Check if this is index.html
-    const isIndexPage = filePath.endsWith("index.html") ||
-      filePath.endsWith("index.html".replace(/\//g, "\\"));
-
-    if (isIndexPage) {
-      // On index.html, hide the .toc sidebar instead of topnav
-      if (!updated.includes(".toc { display: none; }")) {
-        updated = updated.replace(
-          /<\/head>/,
-          `  <style>
-    .toc { display: none; }
-  </style>
-</head>`,
-        );
-      }
-    } else {
-      // On other pages, hide the topnav
-      if (!updated.includes("#topnav { display: none; }")) {
-        updated = updated.replace(
-          /<\/head>/,
-          `  <style>
-    #topnav { display: none; }
-  </style>
-</head>`,
-        );
-      }
-    }
+    const updated = original
+      .replace(/<script src="[^"]*darkmode_toggle\.js"><\/script>/, "")
+      // "function&nbsp;mean": the kind becomes a kicker above the name.
+      .replace(/(<span class="text-[A-Za-z]+">[^<]*<\/span>)&nbsp;/, "$1")
+      // Source buttons point at the build machine's disk; send them to GitHub.
+      .replace(
+        /(class="sourceButton"\s*href=")([^"]*)"/g,
+        (_m, start: string, href: string) => {
+          const path = href.replace(/&#x2F;/g, "/").replace(/\\/g, "/");
+          const lib = path.lastIndexOf("/lib/");
+          return lib === -1
+            ? `${start}${href}"`
+            : `${start}${sourceBase}${path.slice(lib + 1)}"`;
+        },
+      )
+      .replace(
+        /<\/head>/,
+        `${
+          brandHead(root)
+        }<link rel="stylesheet" href="${root}/ubique-docs.css">` +
+          (isIndexPage ? "<style>.toc { display: none; }</style>" : "") +
+          "</head>",
+      )
+      .replace(
+        /<body>/,
+        `<body class="ns${isIndexPage ? " ns-api-home" : ""}">${
+          siteHeader("api", root)
+        }<div id="main">`,
+      )
+      .replace(/<\/body>/, `</div>${siteFooter()}</body>`);
 
     if (updated !== original) {
       await Deno.writeTextFile(filePath, updated);
@@ -269,27 +293,95 @@ const targetBenchmarkUrl = new URL("../docs/benchmark.html", import.meta.url);
 const scriptOverride = await Deno.readTextFile(landingScriptUrl);
 await Deno.writeTextFile(targetScriptUrl, scriptOverride);
 
-const cssAppend = await Deno.readTextFile(landingCssUrl);
-const cssAppendTrimmed = cssAppend.trim();
-const landingCssMarker = "/* ubique landing overrides */";
+await Deno.copyFile(landingCssUrl, `${docsOutput}/ubique-docs.css`);
+// Older builds appended the landing overrides to page.css; strip them.
+const landingCssMarker = "/* rubique landing overrides */";
 const pageCss = await Deno.readTextFile(targetCssUrl);
+const markerIndex = pageCss.indexOf(landingCssMarker);
+if (markerIndex !== -1) {
+  await Deno.writeTextFile(
+    targetCssUrl,
+    pageCss.slice(0, markerIndex).trimEnd() + "\n",
+  );
+}
 
-const escapedMarker = landingCssMarker.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
-const landingBlockRegex = new RegExp(`\n?${escapedMarker}[\\s\\S]*$`);
-const baseCss = pageCss.replace(landingBlockRegex, "");
-const normalized = baseCss.endsWith("\n") ? baseCss : `${baseCss}\n`;
-await Deno.writeTextFile(targetCssUrl, `${normalized}${cssAppendTrimmed}\n`);
+for (const file of brandFiles) {
+  await Deno.mkdir(dirname(`${docsOutput}/${file}`), { recursive: true });
+  await Deno.copyFile(
+    new URL(`brand/${file}`, assetsDirUrl),
+    `${docsOutput}/${file}`,
+  );
+}
 
-await Deno.copyFile(benchmarkHtmlUrl, targetBenchmarkUrl);
+const benchmarkHtml = (await Deno.readTextFile(benchmarkHtmlUrl))
+  .replace("<!--ns:head-->", brandHead())
+  .replace("<!--ns:header-->", siteHeader("benchmark"))
+  .replace(
+    "<!--ns:footer-->",
+    siteFooter(
+      "Timings come from your device and browser; they are not universal guarantees. Inputs are seeded, results are checked before timing.",
+    ),
+  );
+await Deno.writeTextFile(targetBenchmarkUrl, benchmarkHtml);
+
+// Benchmark the source being documented, never a stale remote package.
+for (
+  const [entry, output] of [["index.ts", "ubique.js"], [
+    "scripts/article_worker.ts",
+    "article_worker.js",
+  ], [
+    "scripts/benchmark_helpers.ts",
+    "benchmark_helpers.js",
+  ]]
+) {
+  const result = await new Deno.Command(Deno.execPath(), {
+    args: [
+      "bundle",
+      "--platform=browser",
+      entry,
+      "--output",
+      `${docsOutput}/${output}`,
+    ],
+    stdout: "inherit",
+    stderr: "inherit",
+  }).output();
+  if (!result.success) throw new Error(`Failed to bundle ${entry}`);
+}
+
+for (const file of ["article.css", "article_experiments.js", "learn.js"]) {
+  await Deno.copyFile(new URL(file, assetsDirUrl), `${docsOutput}/${file}`);
+}
+await buildLearn(docsOutput);
+
+const bundleBytes = await Deno.readFile(`${docsOutput}/ubique.js`);
+const digest = new Uint8Array(
+  await crypto.subtle.digest("SHA-256", bundleBytes),
+);
+await Deno.writeTextFile(
+  `${docsOutput}/benchmark_build.json`,
+  JSON.stringify(
+    {
+      source: Deno.env.get("GITHUB_SHA")
+        ? `https://github.com/NodalStudio/Ubique/commit/${Deno.env.get("GITHUB_SHA")}`
+        : "local checkout (package release pending)",
+      builtAt: new Date().toISOString(),
+      bundleSha256: Array.from(digest, (b) => b.toString(16).padStart(2, "0"))
+        .join(""),
+      mathjs: "15.2.0",
+    },
+    null,
+    2,
+  ),
+);
 
 const assetsUpdated = await fixDocAssets({ root: docsOutput });
 const linksUpdated = await fixDocLinks({ root: docsOutput });
-const topNavHidden = await hideTopNav({ root: docsOutput });
+const pagesBranded = await brandDocPages({ root: docsOutput });
 const searchIndexUrl = new URL("../docs/search_index.js", import.meta.url);
 const trimmed = await trimSearchIndexDocs(searchIndexUrl);
 console.log(
   `Documentation built successfully. Normalized asset paths in ${assetsUpdated} HTML file(s), ` +
     `fixed links in ${linksUpdated} HTML file(s).` +
-    (topNavHidden ? ` Hidden top navigation in ${topNavHidden} file(s).` : "") +
+    (pagesBranded ? ` Branded ${pagesBranded} API page(s).` : "") +
     (trimmed ? " Trimmed search index summaries." : ""),
 );

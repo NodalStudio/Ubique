@@ -29,16 +29,22 @@ function assert(condition, message) {
 }
 
 function assertArrayEquals(actual, expected, tolerance = 1e-10) {
-  if (actual.length !== expected.length) {
+  if (
+    !Array.isArray(actual) || !Array.isArray(expected) ||
+    actual.length !== expected.length
+  ) {
     throw new Error(`Length mismatch: ${actual.length} !== ${expected.length}`);
   }
   for (let i = 0; i < actual.length; i++) {
-    if (Array.isArray(actual[i])) {
+    if (Array.isArray(actual[i]) || Array.isArray(expected[i])) {
       assertArrayEquals(actual[i], expected[i], tolerance);
     } else {
-      if (Math.abs(actual[i] - expected[i]) > tolerance) {
+      if (
+        !Number.isFinite(actual[i]) || !Number.isFinite(expected[i]) ||
+        Math.abs(actual[i] - expected[i]) > tolerance
+      ) {
         throw new Error(
-          `Value mismatch at index ${i}: ${actual[i]} !== ${expected[i]}`
+          `Value mismatch at index ${i}: ${actual[i]} !== ${expected[i]}`,
         );
       }
     }
@@ -153,15 +159,27 @@ test("Type checking - ismatrix", () => {
 });
 
 test("Type checking - isvector", () => {
-  assert(ubique.isvector([[1, 2, 3]]) === true, "Row vector should be a vector");
-  assert(ubique.isvector([[1], [2], [3]]) === true, "Column vector should be a vector");
-  assert(ubique.isvector([[1, 2], [3, 4]]) === false, "Matrix should not be a vector");
+  assert(
+    ubique.isvector([[1, 2, 3]]) === true,
+    "Row vector should be a vector",
+  );
+  assert(
+    ubique.isvector([[1], [2], [3]]) === true,
+    "Column vector should be a vector",
+  );
+  assert(
+    ubique.isvector([[1, 2], [3, 4]]) === false,
+    "Matrix should not be a vector",
+  );
 });
 
 test("Type checking - isscalar", () => {
   assert(ubique.isscalar(5) === true, "Should be a scalar");
   assert(ubique.isscalar([5]) === true, "Single element array is scalar");
-  assert(ubique.isscalar([1, 2]) === false, "Multiple elements should not be scalar");
+  assert(
+    ubique.isscalar([1, 2]) === false,
+    "Multiple elements should not be scalar",
+  );
 });
 
 // Test 7: Matrix utilities
@@ -185,6 +203,45 @@ test("Simple returns calculation", () => {
   const returns = ubique.tick2ret(prices);
   assert(returns.length === 3, "Should have n-1 returns");
   assert(Math.abs(returns[0] - 0.1) < 1e-10, "First return should be 0.1");
+});
+
+test("Resident WASM matrix ownership and product", () => {
+  const a = ubique.DenseMatrix.from([[1, 2], [3, 4]]),
+    b = ubique.DenseMatrix.from([[5, 6], [7, 8]]),
+    out = new ubique.DenseMatrix(2, 2);
+  try {
+    a.multiplyInto(b, out);
+    assertArrayEquals(out.toArray(), [[19, 22], [43, 50]]);
+  } finally {
+    a.dispose();
+    b.dispose();
+    out.dispose();
+  }
+});
+test("Reusable factorization and corrected numerical semantics", () => {
+  assertArrayEquals(ubique.factorize([[0, 2], [1, 3]]).solve([4, 7]), [1, 2]);
+  assert(ubique.issingular([[1, 2], [2, 4]]), "rank deficiency");
+  assert(!ubique.issingular([[0, 1], [1, 0]]), "permutation is invertible");
+  assert(
+    Math.abs(ubique.det([[1e-8, 0], [0, 1e-8]]) / 1e-16 - 1) < 1e-12,
+    "tiny determinant preserved",
+  );
+  assert(Math.abs(ubique.irr([-100, 1000]) - 9) < 1e-10, "IRR large rate");
+  assert(Math.abs(ubique.drawdown([-.1]).maxdd - .1) < 1e-12, "initial loss");
+});
+
+test("npm comparator rejects NaN instead of silently passing", () => {
+  let rejected = false;
+  try {
+    assertArrayEquals([NaN], [1]);
+  } catch {
+    rejected = true;
+  }
+  assert(rejected, "Comparator accepted NaN");
+});
+test("WASM inverse dispatch above size ten", () => {
+  const a = ubique.eye(11).map((row, i) => row.map((v) => v * (i + 1)));
+  assertArrayEquals(ubique.matmul(a, ubique.inv(a)), ubique.eye(11));
 });
 
 // Summary

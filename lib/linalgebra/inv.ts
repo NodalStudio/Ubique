@@ -1,5 +1,7 @@
+import { finiteMatrix } from "../internal/lu.ts";
+import { packRows } from "../internal/matrix.ts";
 import type { matrix } from "../types.d.ts";
-import { eye, isnumber, issquare, linsolve, nrows } from "../../index.ts";
+import { eye, isnumber, issquare, linsolve } from "../../index.ts";
 import { invwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
@@ -13,21 +15,27 @@ import { invwasm } from "../../rs_lib/pkg/rs_lib.js";
  *
  * @example Inverse of a 2x2 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[3, 2], [5, 2]]), [[-0.5, 0.5], [1.25, -0.7499999999999999]]);
+ * const actual = (inv([[3, 2], [5, 2]])) as number[][];
+ * const expected = [[-0.5, 0.5], [1.25, -0.7499999999999999]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Inverse of a 3x3 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), [
+ * const actual = (inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]])) as number[][];
+ * const expected = [
  *  [0.846153846153846, 0.3076923076923077, -0.07692307692307707],
  *  [-0.3846153846153846, -0.23076923076923078, 0.30769230769230776],
  *  [-0.5384615384615384, 0.07692307692307691, 0.23076923076923078]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -51,21 +59,27 @@ export default function inv(x: number): number;
  *
  * @example Inverse of a 2x2 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[3, 2], [5, 2]]), [[-0.5, 0.5], [1.25, -0.7499999999999999]]);
+ * const actual = (inv([[3, 2], [5, 2]])) as number[][];
+ * const expected = [[-0.5, 0.5], [1.25, -0.7499999999999999]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Inverse of a 3x3 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), [
+ * const actual = (inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]])) as number[][];
+ * const expected = [
  *  [0.846153846153846, 0.3076923076923077, -0.07692307692307707],
  *  [-0.3846153846153846, -0.23076923076923078, 0.30769230769230776],
  *  [-0.5384615384615384, 0.07692307692307691, 0.23076923076923078]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -89,21 +103,27 @@ export default function inv(x: matrix): matrix;
  *
  * @example Inverse of a 2x2 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[3, 2], [5, 2]]), [[-0.5, 0.5], [1.25, -0.7499999999999999]]);
+ * const actual = (inv([[3, 2], [5, 2]])) as number[][];
+ * const expected = [[-0.5, 0.5], [1.25, -0.7499999999999999]];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Inverse of a 3x3 matrix
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]]), [
+ * const actual = (inv([[1, 1, -1], [1, -2, 3], [2, 3, 1]])) as number[][];
+ * const expected = [
  *  [0.846153846153846, 0.3076923076923077, -0.07692307692307707],
  *  [-0.3846153846153846, -0.23076923076923078, 0.30769230769230776],
  *  [-0.5384615384615384, 0.07692307692307691, 0.23076923076923078]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -124,16 +144,18 @@ export default function inv(x: number | matrix): number | matrix {
     throw new Error("matrix must be square");
   }
 
-  const n = nrows(x);
+  const [n] = finiteMatrix(x);
 
   // Use WASM for larger matrices (> 10x10) where overhead is justified
   if (typeof invwasm === "function" && n > 10) {
-    const flatX = new Float64Array(x.flat());
+    const flatX = packRows(x);
     const flatResult = invwasm(flatX, n);
 
     // Check for singular matrix (NaN values)
-    if (isNaN(flatResult[0])) {
-      throw new Error("Matrix is singular and cannot be inverted");
+    if (flatResult.some((v) => !Number.isFinite(v))) {
+      throw new Error(
+        "Matrix is singular to the working tolerance or its inverse is not representable",
+      );
     }
 
     // Reshape flat result back to matrix

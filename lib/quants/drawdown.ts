@@ -23,9 +23,10 @@ interface DrawdownResult {
  *
  * Returns an object with:
  * - dd (drawdown array)
- * - ddrecov (drawdown recovery index)
+ * - ddrecov: one-based observation index while underwater, zero at a peak
  * - maxdd (max drawdown)
- * - maxddrecov (max drawdown recovery period): [start period, end period]
+ * - maxddrecov: [peak period, trough period], with initial wealth at period 0.
+ *   It does not identify a future recovery date. [0, 0] means no drawdown.
  *
  * @param x Asset/portfolio returns
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
@@ -82,9 +83,10 @@ export default function drawdown(
  *
  * Returns an object with:
  * - dd (drawdown array)
- * - ddrecov (drawdown recovery index)
+ * - ddrecov: one-based observation index while underwater, zero at a peak
  * - maxdd (max drawdown)
- * - maxddrecov (max drawdown recovery period): [start period, end period]
+ * - maxddrecov: [peak period, trough period], with initial wealth at period 0.
+ *   It does not identify a future recovery date. [0, 0] means no drawdown.
  *
  * @param x Asset/portfolio returns
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
@@ -141,9 +143,10 @@ export default function drawdown(
  *
  * Returns an object with:
  * - dd (drawdown array)
- * - ddrecov (drawdown recovery index)
+ * - ddrecov: one-based observation index while underwater, zero at a peak
  * - maxdd (max drawdown)
- * - maxddrecov (max drawdown recovery period): [start period, end period]
+ * - maxddrecov: [peak period, trough period], with initial wealth at period 0.
+ *   It does not identify a future recovery date. [0, 0] means no drawdown.
  *
  * @param x Asset/portfolio returns
  * @param mode Drawdown calculation mode: 'return' or 'geometric' (defaults to 'return')
@@ -193,6 +196,9 @@ export default function drawdown(
   dim: 0 | 1 = 0,
 ): DrawdownResult | DrawdownResult[] {
   const calculateDrawdown = function (a: array, mode: string): DrawdownResult {
+    if (a.length === 0 || !a.every((v) => Number.isFinite(v) && v >= -1)) {
+      throw new Error("Returns must be nonempty, finite and at least -1");
+    }
     let prices;
     if (mode === "return") {
       prices = cumprod(plus(a, 1));
@@ -202,12 +208,12 @@ export default function drawdown(
       throw new Error("unknown drawdown mode");
     }
 
-    let highest = prices[0];
-    let highestidx = 1;
+    let highest = mode === "return" ? 1 : 0;
+    let highestidx = 0;
     const _dd = new Array(prices.length).fill(0);
     const _recov = new Array(prices.length).fill(0);
     let _maxdd = 0;
-    const _maxddidx: [number, number] = [1, prices.length];
+    const _maxddidx: [number, number] = [0, 0];
 
     for (let i = 0; i < prices.length; i++) {
       if (highest <= prices[i]) {

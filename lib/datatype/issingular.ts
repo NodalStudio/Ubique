@@ -1,28 +1,29 @@
-import { ismatrix, issquare, ncols } from "../../index.ts";
+import { prepareSquare } from "../internal/lu.ts";
+import { ismatrix, issquare } from "../../index.ts";
 
 /**
  * Checks if a matrix is singular (non-invertible).
  *
- * Returns `true` if the input is a singular matrix. A matrix is singular if it is square and its determinant is zero, which occurs when any of the diagonal elements is zero.
+ * Returns `true` if the input is a singular matrix. Uses row-equilibrated LU pivots, with default relative tolerance n * Number.EPSILON. This numerical test is invariant to row scaling; it is not a condition-number estimate.
  *
  * @param x The matrix to check.
  * @returns Returns `true` if the matrix is singular, otherwise `false`.
  *
  * @throws Throws an error if the input is not a matrix or not a square matrix.
  *
- * @example Non-singular square matrix
+ * @example Singular square matrix
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * assertEquals(issingular([[2, 6], [1, 3]]), false);
+ * assertEquals(issingular([[2, 6], [1, 3]]), true);
  *
  * ```
  *
- * @example Singular square matrix (diagonal element is zero)
+ * @example Invertible matrix with a zero diagonal entry
  * ```ts
  * import { assertEquals, assertThrows } from "jsr:@std/assert";
  *
- * assertEquals(issingular([[0, 6], [1, 3]]), true);
+ * assertEquals(issingular([[0, 6], [1, 3]]), false);
  *
  * ```
  *
@@ -42,7 +43,10 @@ import { ismatrix, issquare, ncols } from "../../index.ts";
  *
  * ```
  */
-export default function issingular(x: unknown): boolean {
+export default function issingular(
+  x: unknown,
+  relativeTolerance?: number,
+): boolean {
   if (!ismatrix(x)) {
     throw new Error("input must be a matrix");
   }
@@ -51,12 +55,5 @@ export default function issingular(x: unknown): boolean {
     throw new Error("input must be a square matrix");
   }
 
-  const n = ncols(x);
-  for (let i = 0; i < n; i += 1) {
-    if (x[i][i] === 0) {
-      return true;
-    }
-  }
-
-  return false;
+  return prepareSquare(x, relativeTolerance).singular;
 }

@@ -14,3 +14,8 @@ export { default as det } from "./det.ts";
 export { default as inv } from "./inv.ts";
 export { default as linsolve } from "./linsolve.ts";
 export { default as lu } from "./lu.ts";
+
+export { DenseMatrix } from "./dense_matrix.ts";
+export { matmul, type MatrixBackend } from "./matmul.ts";
+
+export { factorize, LUFactorization } from "./factorize.ts";

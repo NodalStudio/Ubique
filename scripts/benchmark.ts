@@ -5,8 +5,13 @@
  * Run with: deno task benchmark
  */
 
-// deno-lint-ignore no-unversioned-import
-import * as mathjs from "npm:mathjs";
+import * as mathjs from "npm:mathjs@15.2.0";
+import {
+  BENCHMARK_SEED,
+  measurePair,
+  seededRandom,
+} from "./benchmark_helpers.ts";
+import { cpus } from "node:os";
 import {
   corrcoef,
   det,
@@ -43,7 +48,9 @@ const colors = {
   bgRed: "\x1b[41m",
 };
 
-const COMPARISON_DECIMALS = 6;
+const random = seededRandom();
+// Read required metadata before spending time on measurements.
+const cpu = cpus()[0]?.model;
 
 // Benchmark result interface
 interface BenchmarkResult {
@@ -53,6 +60,8 @@ interface BenchmarkResult {
   mathjsTime: number;
   speedup: number;
   correct: boolean;
+  samples: { ubique: number[]; mathjs: number[] };
+  iterationsPerBatch: number;
   size?: string;
 }
 
@@ -87,7 +96,7 @@ type BenchmarkTest =
 
 // Test data generators
 function generateArray(size: number): number[] {
-  return Array.from({ length: size }, () => Math.random() * 100);
+  return Array.from({ length: size }, () => random() * 100);
 }
 
 function generateMatrix(rows: number, cols: number): number[][] {
@@ -104,38 +113,6 @@ function generateNonSingularMatrix(n: number): number[][] {
     mat[i][i] = sum + 10;
   }
   return mat;
-}
-
-// Benchmark utilities
-function benchmarkFunction<T>(fn: () => T, iterations: number): number {
-  const start = performance.now();
-  for (let i = 0; i < iterations; i++) {
-    fn();
-  }
-  const time = performance.now() - start;
-  return time / iterations; // Return average time per iteration
-}
-
-function roundToDecimals(value: number, decimals: number): number {
-  const factor = 10 ** decimals;
-  return Math.round(value * factor) / factor;
-}
-
-function arraysEqual(a: unknown, b: unknown, tolerance = 1e-9): boolean {
-  if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) return false;
-    return a.every((val, i) => arraysEqual(val, b[i], tolerance));
-  }
-  if (typeof a === "number" && typeof b === "number") {
-    const roundedA = roundToDecimals(a, COMPARISON_DECIMALS);
-    const roundedB = roundToDecimals(b, COMPARISON_DECIMALS);
-
-    // Use adaptive relative tolerance after rounding for large numbers
-    const maxVal = Math.max(Math.abs(roundedA), Math.abs(roundedB));
-    const adaptiveTolerance = Math.max(tolerance, maxVal * 1e-6);
-    return Math.abs(roundedA - roundedB) < adaptiveTolerance;
-  }
-  return a === b;
 }
 
 // Print utilities
@@ -215,8 +192,10 @@ function printSummary(results: BenchmarkResult[]) {
   console.log("\n");
   printHeader("📊 BENCHMARK SUMMARY");
 
-  const avgSpeedup = results.reduce((sum, r) => sum + r.speedup, 0) /
-    results.length;
+  const avgSpeedup = Math.exp(
+    results.reduce((sum, r) => sum + Math.log(r.speedup), 0) /
+      results.length,
+  );
   const wonTests = results.filter((r) => r.speedup > 1).length;
   const lostTests = results.filter((r) => r.speedup < 1).length;
   const allCorrect = results.every((r) => r.correct);
@@ -230,7 +209,7 @@ function printSummary(results: BenchmarkResult[]) {
   // Summary stats
   console.log(colors.bright + "Overall Performance:" + colors.reset);
   console.log(
-    `  ${colors.green}Average Speedup:${colors.reset} ${colors.bright}${
+    `  ${colors.green}Geometric mean ratio:${colors.reset} ${colors.bright}${
       avgSpeedup.toFixed(2)
     }x${colors.reset}`,
   );
@@ -269,8 +248,10 @@ function printSummary(results: BenchmarkResult[]) {
   const categories = [...new Set(results.map((r) => r.category))];
   for (const category of categories) {
     const categoryResults = results.filter((r) => r.category === category);
-    const categoryAvg = categoryResults.reduce((sum, r) => sum + r.speedup, 0) /
-      categoryResults.length;
+    const categoryAvg = Math.exp(
+      categoryResults.reduce((sum, r) => sum + Math.log(r.speedup), 0) /
+        categoryResults.length,
+    );
     const categoryWon = categoryResults.filter((r) => r.speedup > 1).length;
 
     console.log(
@@ -287,7 +268,7 @@ function printSummary(results: BenchmarkResult[]) {
 function runBenchmarks() {
   const results: BenchmarkResult[] = [];
 
-  printHeader("🚀 RUBIQUE vs math.js BENCHMARK SUITE");
+  printHeader("🚀 UBIQUE vs math.js BENCHMARK SUITE");
   console.log(
     colors.dim + "Running comprehensive performance tests...\n" + colors.reset,
   );
@@ -508,18 +489,14 @@ function runBenchmarks() {
     printProgress(index + 1, totalTests, test.name);
 
     const testData = test.setup();
-    const rubiqueTime = benchmarkFunction(
+    const measured = measurePair(
       () => test.rubique(testData),
-      test.iterations,
-    );
-    const mathjsTime = benchmarkFunction(
       () => test.mathjs(testData),
       test.iterations,
     );
-
-    const rubiqueResult = test.rubique(testData);
-    const mathjsResult = test.mathjs(testData);
-    const correct = arraysEqual(rubiqueResult, mathjsResult);
+    const rubiqueTime = measured.aMedian;
+    const mathjsTime = measured.bMedian;
+    const correct = true; // measurePair rejects mismatches before timing.
     const speedup = mathjsTime / rubiqueTime;
 
     const result: BenchmarkResult = {
@@ -529,6 +506,8 @@ function runBenchmarks() {
       mathjsTime,
       speedup,
       correct,
+      samples: { ubique: measured.aSamples, mathjs: measured.bSamples },
+      iterationsPerBatch: measured.iterations,
       size: test.size,
     };
 
@@ -582,7 +561,25 @@ function runBenchmarks() {
   );
   Deno.writeTextFileSync(
     "benchmark-unified-results.json",
-    JSON.stringify(results, null, 2),
+    JSON.stringify(
+      {
+        metadata: {
+          timestamp: new Date().toISOString(),
+          runtime: Deno.version,
+          platform: Deno.build,
+          cpu,
+          ubique: "local checkout (unreleased)",
+          mathjs: "15.2.0",
+          seed: BENCHMARK_SEED,
+          protocol:
+            "10 warmups; 9 alternating batches; median ms/op; setup excluded; nested-array API including packing/copying",
+          tolerance: { absolute: 1e-10, relative: 1e-9 },
+        },
+        results,
+      },
+      null,
+      2,
+    ),
   );
   console.log(
     colors.green + "✅ Results saved successfully!" + colors.reset + "\n",

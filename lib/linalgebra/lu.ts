@@ -1,5 +1,6 @@
+import { factorLU, finiteMatrix } from "../internal/lu.ts";
 import type { array, matrix } from "../types.d.ts";
-import { clone, ncols, nrows, zeros } from "../../index.ts";
+import { ncols, nrows, zeros } from "../../index.ts";
 
 /**
  * LU decomposition with partial pivoting.
@@ -70,8 +71,8 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *     [0.7142857142857143, 0.2857142857142856, 5.714285714285714]
  *   ],
  *   L: [
- *     [1, 0, 0],
- *     [0.7142857142857143, 1, 0]
+ *     [1, 0],
+ *     [0.7142857142857143, 1]
  *   ],
  *   U: [
  *     [7, 8, -1],
@@ -126,8 +127,7 @@ import { clone, ncols, nrows, zeros } from "../../index.ts";
  *   ],
  *   U: [
  *     [5, 6],
- *     [0, 0.7999999999999998],
- *     [0, 0]
+ *     [0, 0.7999999999999998]
  *   ],
  *   P: [2, 0, 1],
  *   S: 1
@@ -150,61 +150,15 @@ export default function lu(x: matrix): {
   P: array;
   S: number;
 } {
-  const m = nrows(x); // Number of rows
-  const n = ncols(x); // Number of columns
-  const A = clone(x); // Clone the input matrix to avoid mutating it
-  const piv = Array.from({ length: m }, (_, i) => i); // Initialize pivot vector (zero-based)
-  let pivsign = 1; // Sign of the permutation
-
-  for (let j = 0; j < Math.min(m, n); j++) {
-    // Find the pivot element in the current column
-    let maxIndex = j;
-    for (let i = j + 1; i < m; i++) {
-      if (Math.abs(A[i][j]) > Math.abs(A[maxIndex][j])) {
-        maxIndex = i;
-      }
-    }
-
-    // Swap rows in A and update the pivot vector if needed
-    if (maxIndex !== j) {
-      swapRows(A, maxIndex, j, n); // Swap rows in A
-      [piv[maxIndex], piv[j]] = [piv[j], piv[maxIndex]]; // Update the pivot vector
-      pivsign = -pivsign; // Flip the sign of the permutation
-    }
-
-    // Perform elimination below the pivot
-    if (A[j][j] !== 0) {
-      for (let i = j + 1; i < m; i++) {
-        A[i][j] /= A[j][j];
-        for (let k = j + 1; k < n; k++) {
-          A[i][k] -= A[i][j] * A[j][k];
-        }
-      }
-    }
-  }
-
+  finiteMatrix(x);
+  const { data: A, permutation: piv, sign: pivsign } = factorLU(x);
   return {
-    LU: A, // Combined LU matrix
+    LU: A,
     L: extractLowerTriangular(A),
     U: extractUpperTriangular(A),
-    P: piv, // Pivot vector (zero-based)
-    S: pivsign, // Pivot sign
+    P: piv,
+    S: pivsign,
   };
-}
-
-/**
- * Swaps two rows in a matrix.
- * @param A The matrix.
- * @param row1 The index of the first row.
- * @param row2 The index of the second row.
- * @param n The number of columns.
- */
-function swapRows(A: matrix, row1: number, row2: number, n: number): void {
-  for (let k = 0; k < n; k++) {
-    const temp = A[row1][k];
-    A[row1][k] = A[row2][k];
-    A[row2][k] = temp;
-  }
 }
 
 /**
@@ -215,9 +169,9 @@ function swapRows(A: matrix, row1: number, row2: number, n: number): void {
 function extractLowerTriangular(LU: matrix): matrix {
   const m = nrows(LU);
   const n = ncols(LU);
-  const L = zeros(m, n);
+  const L = zeros(m, Math.min(m, n));
   for (let i = 0; i < m; i++) {
-    for (let j = 0; j <= i && j < n; j++) {
+    for (let j = 0; j <= i && j < Math.min(m, n); j++) {
       L[i][j] = i === j ? 1 : LU[i][j];
     }
   }
@@ -232,8 +186,8 @@ function extractLowerTriangular(LU: matrix): matrix {
 function extractUpperTriangular(LU: matrix): matrix {
   const m = nrows(LU);
   const n = ncols(LU);
-  const U = zeros(m, n);
-  for (let i = 0; i < m; i++) {
+  const U = zeros(Math.min(m, n), n);
+  for (let i = 0; i < Math.min(m, n); i++) {
     for (let j = i; j < n; j++) {
       U[i][j] = LU[i][j];
     }

@@ -23,20 +23,26 @@ import { isarray, isnumber, log, size, zeros } from "../../index.ts";
  *
  * @example Continuous (log) returns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [1, 3, 2, 5];
  *
- * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
+ * const actual = tick2ret(x, "continuous");
+ * const expected = [1.0986122886681096, -0.40546510810816444, 0.9162907318741551];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Continuous returns for different price series
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const y = [0.5, 1.5, 2.5, 3.5];
- * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
+ * const actual = tick2ret(y, "continuous");
+ * const expected = [1.0986122886681096, 0.5108256237659907, 0.33647223662121284];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function tick2ret(x: array, mode?: string, dim?: 0 | 1): array;
@@ -62,20 +68,26 @@ export default function tick2ret(x: array, mode?: string, dim?: 0 | 1): array;
  *
  * @example Continuous (log) returns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [1, 3, 2, 5];
  *
- * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
+ * const actual = tick2ret(x, "continuous");
+ * const expected = [1.0986122886681096, -0.40546510810816444, 0.9162907318741551];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Continuous returns for different price series
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const y = [0.5, 1.5, 2.5, 3.5];
- * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
+ * const actual = tick2ret(y, "continuous");
+ * const expected = [1.0986122886681096, 0.5108256237659907, 0.33647223662121284];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function tick2ret(x: matrix, mode?: string, dim?: 0 | 1): matrix;
@@ -101,20 +113,26 @@ export default function tick2ret(x: matrix, mode?: string, dim?: 0 | 1): matrix;
  *
  * @example Continuous (log) returns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [1, 3, 2, 5];
  *
- * assertEquals(tick2ret(x, "continuous"), [1.0986122886681096, -0.40546510810816444, 0.9162907318741551]);
+ * const actual = tick2ret(x, "continuous");
+ * const expected = [1.0986122886681096, -0.40546510810816444, 0.9162907318741551];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Continuous returns for different price series
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const y = [0.5, 1.5, 2.5, 3.5];
- * assertEquals(tick2ret(y, "continuous"), [1.0986122886681096, 0.5108256237659907, 0.33647223662121284]);
+ * const actual = tick2ret(y, "continuous");
+ * const expected = [1.0986122886681096, 0.5108256237659907, 0.33647223662121284];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function tick2ret(

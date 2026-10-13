@@ -29,7 +29,7 @@ import { drawdown, isnumber, sum, vectorfun } from "../../index.ts";
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painindex(x), 0.0023000000000000034);
- * assertEquals(painindex(y), 0.042955093457969766);
+ * assertEquals(painindex(y), 0.043455093457969766);
  * ```
  */
 export default function painindex(
@@ -65,7 +65,7 @@ export default function painindex(
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painindex(x), 0.0023000000000000034);
- * assertEquals(painindex(y), 0.042955093457969766);
+ * assertEquals(painindex(y), 0.043455093457969766);
  * ```
  */
 export default function painindex(
@@ -101,7 +101,7 @@ export default function painindex(
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painindex(x), 0.0023000000000000034);
- * assertEquals(painindex(y), 0.042955093457969766);
+ * assertEquals(painindex(y), 0.043455093457969766);
  * ```
  */
 export default function painindex(

@@ -1,0 +1,262 @@
+/* Interactive article — Nodal Studio research-paper layer on top of nodal.css.
+   Signatures: §0x kickers with the 34×2 dash, Cabinet 800 headings, 1.5px ink
+   hairlines, 12px tiles, pill controls, ink code blocks with cream text. */
+
+/* ---------- premise (ink manifesto block) ---------- */
+#intro { margin-bottom: clamp(28px, 5vh, 48px); }
+.ns-ink .lede p {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: clamp(26px, 3.4vw, 52px);
+  line-height: 1.14;
+}
+.ns-ink .intro-rest { max-width: 68ch; margin: clamp(28px, 5vh, 48px) 0; color: var(--cream-55); }
+.ns-ink .intro-rest p { margin: 0 0 1em; }
+.ns-ink .ns-meta { margin-top: clamp(28px, 5vh, 56px); }
+.ns-ink .ns-rule { margin-top: clamp(40px, 7vh, 84px); }
+
+/* ---------- contents: the studio index list ---------- */
+.idx-list { list-style: none; margin: 0; padding: 0; border-top: var(--stroke) solid var(--ink); }
+.idx-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: clamp(16px, 2.2vw, 32px);
+  padding: clamp(12px, 1.6vh, 18px) clamp(4px, 1vw, 16px);
+  border-bottom: var(--stroke) solid var(--ink-08);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.35s var(--ease-draw), padding-left 0.35s var(--ease-draw);
+}
+.idx-row:hover { background: var(--ink-03); padding-left: clamp(12px, 1.6vw, 26px); }
+.idx-num {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ink-45);
+  font-variant-numeric: tabular-nums;
+}
+.idx-term {
+  font-family: var(--display);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(16px, 1.7vw, 25px);
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.idx-arrow { transition: transform 0.35s var(--ease); }
+.idx-row:hover .idx-arrow { transform: translateX(6px); }
+
+/* ---------- article body ---------- */
+.article { padding-bottom: clamp(64px, 11vh, 140px); }
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 76ch) minmax(0, 1fr);
+  padding-top: clamp(56px, 10vh, 120px);
+  border-top: var(--stroke) solid var(--ink);
+  margin-top: clamp(56px, 10vh, 120px);
+}
+.chapter:first-child { margin-top: 0; }
+.chapter > * { grid-column: 2; min-width: 0; }
+.chapter > .kicker { color: var(--ink); margin-bottom: 1rem; font-variant-numeric: tabular-nums; }
+.chapter > h2 { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.chapter > h2 {
+  margin: 0 0 clamp(20px, 3vh, 32px);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+/* wide elements break out of the reading column */
+.chapter > pre,
+.chapter > .card,
+.chapter > section,
+.chapter > .grid { grid-column: 1 / -1; max-width: 1080px; width: 100%; justify-self: center; }
+.article p, .article li { text-wrap: pretty; }
+.article p { margin: 0 0 1.1em; }
+.article ul, .article ol { margin: 0 0 1.1em; padding-left: 1.2em; }
+.article li { margin-bottom: 0.4em; }
+.article li::marker { color: var(--ink-45); }
+.article strong { font-weight: 600; }
+.article em { font-style: italic; }
+.article a { color: var(--ink); text-decoration-thickness: 1.5px; text-underline-offset: 0.18em; }
+.article h3 {
+  margin: 0 0 0.6em;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 29px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.article blockquote {
+  margin: 1.5em 0;
+  padding-left: 1em;
+  border-left: 2px solid var(--ink);
+  color: var(--muted);
+}
+.article img { max-width: 100%; border-radius: var(--r-tile); }
+.article hr { border: 0; border-top: var(--stroke) solid var(--ink-14); margin: 2.5em 0; }
+
+/* ---------- code: ink ground, cream text (as the studio blog) ---------- */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  font-variant-numeric: tabular-nums;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--ink-08);
+}
+pre {
+  margin: 1.6em 0;
+  padding: clamp(18px, 2vw, 28px);
+  overflow-x: auto;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--r-tile);
+  font-size: 14px;
+  line-height: 1.65;
+}
+pre code { padding: 0; background: none; font-size: inherit; color: inherit; }
+
+/* ---------- experiments: tiles with pill controls ---------- */
+.article .card {
+  position: relative;
+  margin: 2em 0;
+  padding: clamp(20px, 2.4vw, 36px);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-card);
+  background: var(--cream);
+  min-width: 0;
+}
+.article .card::before {
+  content: "Live";
+  position: absolute;
+  top: clamp(20px, 2.4vw, 36px);
+  right: clamp(20px, 2.4vw, 36px);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: var(--stroke) solid currentColor;
+  border-radius: var(--r-chip);
+  padding: 0.45em 0.9em;
+}
+.article .card h3 { padding-right: 80px; }
+.article .card pre { margin: 1em 0; }
+.chapter > section { margin: 2.5em 0 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 1.8vw, 28px); }
+.grid > .card { margin: 0; }
+.grid > .card:last-child::before { content: none; }
+.controls { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin: 18px 0; }
+.ns label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.ns select,
+.ns input[type="number"] {
+  min-height: 42px;
+  padding: 0 0.9rem;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 999px;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ns select {
+  appearance: none;
+  padding-right: 2.2rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.ns input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--ink); }
+[role="status"], .status {
+  min-height: 1.6em;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink);
+}
+.muted, small { color: var(--muted); font-size: 0.92em; }
+.card .muted { margin-top: 1em; }
+.error { color: #a63d2f; }
+
+/* tables: closed with an ink rule, figures in mono */
+.scroll, .card:has(table) { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: 14px; }
+th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--ink-14); }
+td { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+th {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: var(--stroke) solid var(--ink);
+}
+th:first-child, td:first-child { text-align: left; }
+textarea {
+  width: 100%;
+  height: 180px;
+  padding: 12px;
+  background: var(--cream);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-tile);
+  font: 14px/1.5 var(--mono);
+}
+canvas#plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: var(--cream-2);
+  border-radius: var(--r-tile);
+  cursor: crosshair;
+}
+
+/* memory walk: the buffer as tiles, the active one inked */
+.memory { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 1em 0; }
+.memory span {
+  padding: 12px 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  border: var(--stroke) solid var(--ink-14);
+  border-radius: 8px;
+  transition: background 0.3s var(--ease-draw), color 0.3s var(--ease-draw), border-color 0.3s;
+}
+.memory .active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* ---------- evidence (ink CTA) ---------- */
+.evidence h2 { margin: 1.2rem 0 1.4rem; font-size: clamp(40px, 6.4vw, 104px); }
+.evidence p { max-width: 60ch; color: var(--cream-55); font-size: clamp(16px, 1.3vw, 19px); }
+.evidence-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+.ns .evidence button { border-color: var(--cream); color: var(--cream); }
+.ns .evidence button.primary { background: var(--cream); color: var(--ink); }
+
+@media (max-width: 760px) {
+  .chapter { display: block; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .idx-row { grid-template-columns: 48px minmax(0, 1fr); }
+  .idx-arrow { display: none; }
+  .ns-block-head { flex-direction: column; }
+  .article .card::before { display: none; }
+  .article .card h3 { padding-right: 0; }
+}

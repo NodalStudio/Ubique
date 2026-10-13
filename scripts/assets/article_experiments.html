@@ -1,0 +1,28 @@
+<section id="regression">
+        <h3>Check stability: move a regression</h3>
+        <p>Click inside the plot to add a point. The line and residuals update together. Add a trillion to the x coordinates to exercise the numerically stable, centered fit.</p>
+        <div class="grid">
+          <div
+            class="card"><canvas id="plot" width="800" height="600" role="img" aria-label="Regression scatter plot. Use the point inputs below for keyboard access."></canvas><div class="controls"><label>x <input id="point-x" type="number" min="0" max="10" step="0.1" value="5" style="width:70px"></label><label>y <input id="point-y" type="number" min="0" max="10" step="0.1" value="6" style="width:70px"></label><button id="add-point">Add point</button><button id="reset">Reset</button></div><label><input id="offset" type="checkbox"> Add 10¹² to every x coordinate</label></div>
+          <div
+            class="card"><div id="fit-status" role="status" aria-live="polite"></div><pre><code>const fit = linearreg(y, x);
+fit.beta;   // slope
+fit.alpha;  // intercept
+fit.rsq;    // R²
+fit.fun(x); // stable prediction</code></pre><small>The graph displays coordinates before the offset. R² is undefined for a constant response; a constant predictor is rejected.</small></div>
+        </div>
+      </section>
+
+<section id="matrix">
+        <h3>Measure the JavaScript / WASM boundary</h3>
+        <p>Run the same seeded square product using JavaScript, the copying WASM API, and persistent WASM matrices. Every implementation must pass the correctness gate before timing starts.</p>
+        <div class="card">
+          <div
+            class="controls"><label for="size">Matrix side</label><select id="size"><option>2</option><option>10</option><option>32</option><option selected>64</option><option>128</option></select><button id="measure" class="primary">Measure on this device</button></div>
+          <div id="matrix-status" class="status" role="status"
+            aria-live="polite">10 warmups · 9 rotating batches · median per product</div>
+          <div id="matrix-result"></div>
+          <p
+            class="muted">JS and copying WASM include packing and full nested output allocation. Resident WASM excludes initial upload and reads one output cell: it answers a different question about repeated work. These timings do not predict every workload.</p>
+        </div>
+      </section>

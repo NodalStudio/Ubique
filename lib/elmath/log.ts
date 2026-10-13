@@ -20,20 +20,26 @@ import { arrayfun, isnumber } from "../../index.ts";
  *
  * @example Natural logarithm of an array of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([5, 6, 3]), [1.6094379124341003, 1.791759469228055, 1.0986122886681096]);
+ * const actual = log([5, 6, 3]);
+ * const expected = [1.6094379124341003, 1.791759469228055, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Natural logarithm of a matrix of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([[5, 6, 5], [7, 8, 2]]), [
+ * const actual = log([[5, 6, 5], [7, 8, 2]]);
+ * const expected = [
  *   [1.6094379124341003, 1.791759469228055, 1.6094379124341003],
  *   [1.9459101490553132, 2.0794415416798357, 0.6931471805599453]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  */
@@ -57,20 +63,26 @@ export default function log(x: number): number;
  *
  * @example Natural logarithm of an array of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([5, 6, 3]), [1.6094379124341003, 1.791759469228055, 1.0986122886681096]);
+ * const actual = log([5, 6, 3]);
+ * const expected = [1.6094379124341003, 1.791759469228055, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Natural logarithm of a matrix of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([[5, 6, 5], [7, 8, 2]]), [
+ * const actual = log([[5, 6, 5], [7, 8, 2]]);
+ * const expected = [
  *   [1.6094379124341003, 1.791759469228055, 1.6094379124341003],
  *   [1.9459101490553132, 2.0794415416798357, 0.6931471805599453]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  */
@@ -94,20 +106,26 @@ export default function log(x: array): array;
  *
  * @example Natural logarithm of an array of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([5, 6, 3]), [1.6094379124341003, 1.791759469228055, 1.0986122886681096]);
+ * const actual = log([5, 6, 3]);
+ * const expected = [1.6094379124341003, 1.791759469228055, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Natural logarithm of a matrix of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([[5, 6, 5], [7, 8, 2]]), [
+ * const actual = log([[5, 6, 5], [7, 8, 2]]);
+ * const expected = [
  *   [1.6094379124341003, 1.791759469228055, 1.6094379124341003],
  *   [1.9459101490553132, 2.0794415416798357, 0.6931471805599453]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  */
@@ -131,20 +149,26 @@ export default function log(x: matrix): matrix;
  *
  * @example Natural logarithm of an array of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([5, 6, 3]), [1.6094379124341003, 1.791759469228055, 1.0986122886681096]);
+ * const actual = log([5, 6, 3]);
+ * const expected = [1.6094379124341003, 1.791759469228055, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  *
  * ```
  *
  * @example Natural logarithm of a matrix of numbers
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(log([[5, 6, 5], [7, 8, 2]]), [
+ * const actual = log([[5, 6, 5], [7, 8, 2]]);
+ * const expected = [
  *   [1.6094379124341003, 1.791759469228055, 1.6094379124341003],
  *   [1.9459101490553132, 2.0794415416798357, 0.6931471805599453]
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  */

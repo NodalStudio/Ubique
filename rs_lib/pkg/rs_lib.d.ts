@@ -3,79 +3,69 @@
 // deno-fmt-ignore-file
 
 /**
- * Performs standard matrix multiplication of two dynamic matrices.
+ * An owned column-major matrix kept in WASM across operations.
+ */
+export class MatrixBuffer {
+  free(): void;
+  [Symbol.dispose](): void;
+  data_ptr(): number;
+  /**
+   * Overwrites output; callers must not alias it with either input.
+   */
+  multiply_into(rhs: MatrixBuffer, out: MatrixBuffer): void;
+  constructor(rows: number, cols: number);
+}
+
+/**
+ * Computes the covariance matrix for a data matrix.
  *
  * # Arguments
  *
- * * `a` - A slice of f64 values representing the first matrix in row-major order.
- * * `b` - A slice of f64 values representing the second matrix in row-major order.
- * * `rows_a` - The number of rows in the first matrix.
- * * `cols_a` - The number of columns in the first matrix (this must equal the number of rows in the second matrix).
- * * `cols_b` - The number of columns in the second matrix.
+ * * `data` - A slice of f64 values representing the data matrix in row-major order
+ * * `rows` - The number of observations (rows)
+ * * `cols` - The number of variables (columns)
+ * * `flag` - Normalization flag (0: population, 1: sample)
  *
  * # Returns
  *
- * A vector of f64 values representing the resulting matrix in row-major order.
- * The resulting matrix has dimensions `rows_a x cols_b`.
+ * A vector of f64 values representing the covariance matrix (cols x cols) in row-major order
  */
-export function timeswasm(
-  a: Float64Array,
-  b: Float64Array,
-  rows_a: number,
-  cols_a: number,
-  cols_b: number,
+export function covwasm(
+  data: Float64Array,
+  rows: number,
+  cols: number,
+  flag: number,
 ): Float64Array;
+
 /**
- * Computes the arithmetic mean of an array.
+ * Computes the determinant of a square matrix using LU decomposition.
  *
  * # Arguments
  *
- * * `arr` - A slice of f64 values
+ * * `a` - A slice of f64 values representing the square matrix in row-major order
+ * * `n` - The size of the square matrix (n x n)
  *
  * # Returns
  *
- * The mean value
+ * The determinant value
  */
-export function meanwasm(arr: Float64Array): number;
+export function detwasm(a: Float64Array, n: number): number;
+
 /**
- * Computes the standard deviation of an array using Welford's algorithm.
+ * Computes the inverse of a square matrix.
  *
  * # Arguments
  *
- * * `arr` - A slice of f64 values
- * * `flag` - Normalization flag (0: population, 1: sample)
+ * * `a` - A slice of f64 values representing the square matrix in row-major order
+ * * `n` - The size of the square matrix (n x n)
  *
  * # Returns
  *
- * The standard deviation
+ * A vector of f64 values representing the inverted matrix in row-major order,
+ * or a vector of NaN if the matrix is singular
  */
-export function stdwasm(arr: Float64Array, flag: number): number;
-/**
- * Computes the variance of an array using Welford's algorithm.
- *
- * # Arguments
- *
- * * `arr` - A slice of f64 values
- * * `flag` - Normalization flag (0: population, 1: sample)
- *
- * # Returns
- *
- * The variance
- */
-export function variancewasm(arr: Float64Array, flag: number): number;
-/**
- * Computes the standardized z-scores of an array using Welford's algorithm.
- *
- * # Arguments
- *
- * * `arr` - A slice of f64 values
- * * `flag` - Normalization flag (0: population, 1: sample)
- *
- * # Returns
- *
- * A vector of standardized z-score values
- */
-export function zscorewasm(arr: Float64Array, flag: number): Float64Array;
+export function invwasm(a: Float64Array, n: number): Float64Array;
+
 /**
  * Computes the LU decomposition with partial pivoting.
  * Implements the same algorithm as the JavaScript version for consistency.
@@ -99,50 +89,87 @@ export function luwasm(
   rows: number,
   cols: number,
 ): Float64Array;
+
 /**
- * Computes the inverse of a square matrix.
+ * Exposes the current memory so JavaScript can fill resident buffers directly.
+ */
+export function matrix_memory(): any;
+
+/**
+ * Computes the arithmetic mean of an array.
  *
  * # Arguments
  *
- * * `a` - A slice of f64 values representing the square matrix in row-major order
- * * `n` - The size of the square matrix (n x n)
+ * * `arr` - A slice of f64 values
  *
  * # Returns
  *
- * A vector of f64 values representing the inverted matrix in row-major order,
- * or a vector of NaN if the matrix is singular
+ * The mean value
  */
-export function invwasm(a: Float64Array, n: number): Float64Array;
+export function meanwasm(arr: Float64Array): number;
+
 /**
- * Computes the determinant of a square matrix using LU decomposition.
+ * Computes the standard deviation of an array using Welford's algorithm.
  *
  * # Arguments
  *
- * * `a` - A slice of f64 values representing the square matrix in row-major order
- * * `n` - The size of the square matrix (n x n)
- *
- * # Returns
- *
- * The determinant value
- */
-export function detwasm(a: Float64Array, n: number): number;
-/**
- * Computes the covariance matrix for a data matrix.
- *
- * # Arguments
- *
- * * `data` - A slice of f64 values representing the data matrix in row-major order
- * * `rows` - The number of observations (rows)
- * * `cols` - The number of variables (columns)
+ * * `arr` - A slice of f64 values
  * * `flag` - Normalization flag (0: population, 1: sample)
  *
  * # Returns
  *
- * A vector of f64 values representing the covariance matrix (cols x cols) in row-major order
+ * The standard deviation
  */
-export function covwasm(
-  data: Float64Array,
-  rows: number,
-  cols: number,
-  flag: number,
+export function stdwasm(arr: Float64Array, flag: number): number;
+
+/**
+ * Performs standard matrix multiplication of two dynamic matrices.
+ *
+ * # Arguments
+ *
+ * * `a` - A slice of f64 values representing the first matrix in row-major order.
+ * * `b` - A slice of f64 values representing the second matrix in row-major order.
+ * * `rows_a` - The number of rows in the first matrix.
+ * * `cols_a` - The number of columns in the first matrix (this must equal the number of rows in the second matrix).
+ * * `cols_b` - The number of columns in the second matrix.
+ *
+ * # Returns
+ *
+ * A vector of f64 values representing the resulting matrix in row-major order.
+ * The resulting matrix has dimensions `rows_a x cols_b`.
+ */
+export function timeswasm(
+  a: Float64Array,
+  b: Float64Array,
+  rows_a: number,
+  cols_a: number,
+  cols_b: number,
 ): Float64Array;
+
+/**
+ * Computes the variance of an array using Welford's algorithm.
+ *
+ * # Arguments
+ *
+ * * `arr` - A slice of f64 values
+ * * `flag` - Normalization flag (0: population, 1: sample)
+ *
+ * # Returns
+ *
+ * The variance
+ */
+export function variancewasm(arr: Float64Array, flag: number): number;
+
+/**
+ * Computes the standardized z-scores of an array using Welford's algorithm.
+ *
+ * # Arguments
+ *
+ * * `arr` - A slice of f64 values
+ * * `flag` - Normalization flag (0: population, 1: sample)
+ *
+ * # Returns
+ *
+ * A vector of standardized z-score values
+ */
+export function zscorewasm(arr: Float64Array, flag: number): Float64Array;

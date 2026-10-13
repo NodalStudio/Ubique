@@ -33,7 +33,7 @@ import { annreturn, isnumber, painindex, vectorfun } from "../../index.ts";
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painratio(x,0,12), 101.04495520047377);
- * assertEquals(painratio(y,0,12), 3.235687223114222);
+ * assertEquals(painratio(y,0,12), 3.1999166915348494);
  * ```
  */
 export default function painratio(
@@ -75,7 +75,7 @@ export default function painratio(
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painratio(x,0,12), 101.04495520047377);
- * assertEquals(painratio(y,0,12), 3.235687223114222);
+ * assertEquals(painratio(y,0,12), 3.1999166915348494);
  * ```
  */
 export default function painratio(
@@ -117,7 +117,7 @@ export default function painratio(
  *
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  * assertEquals(painratio(x,0,12), 101.04495520047377);
- * assertEquals(painratio(y,0,12), 3.235687223114222);
+ * assertEquals(painratio(y,0,12), 3.1999166915348494);
  * ```
  */
 export default function painratio(

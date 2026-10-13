@@ -1,15 +1,6 @@
 import type { array, matrix } from "../types.d.ts";
-import {
-  abs,
-  isarray,
-  ismatrix,
-  isnumber,
-  mean,
-  minus,
-  power,
-  sum,
-  vectorfun,
-} from "../../index.ts";
+import { isarray, ismatrix, isnumber, vectorfun } from "../../index.ts";
+import { variance } from "../internal/moments.ts";
 
 /**
  * Computes the variance.
@@ -396,7 +387,7 @@ export default function varc(
   const result = vectorfun(
     actualDim,
     x,
-    (arr: array) => computeVariance(arr, actualFlag),
+    (arr: array) => variance(arr, actualFlag),
   );
 
   if (isarray(x)) {
@@ -409,18 +400,4 @@ export default function varc(
   }
 
   throw new Error("Invalid input type");
-}
-
-function computeVariance(arr: array, flag: 0 | 1): number {
-  // WASM disabled - benchmarks show it's slower due to overhead
-  // TODO: Re-enable if we find a threshold where WASM is faster
-  // if (typeof variancewasm === "function" && arr.length > 10000) {
-  //   return variancewasm(new Float64Array(arr), flag);
-  // }
-
-  // JavaScript implementation
-  const mu = mean(arr);
-  const deviations = minus(arr, mu);
-  const squaredDeviations = power(abs(deviations), 2);
-  return sum(squaredDeviations) / (arr.length - flag);
 }

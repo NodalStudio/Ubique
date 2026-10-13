@@ -1,0 +1,295 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-13T09:10:58.470Z",
+    "cpu": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
+    "runtime": {
+      "deno": "2.9.7",
+      "v8": "15.0.245.2-rusty",
+      "typescript": "6.0.3"
+    },
+    "baseline": "file:///tmp/ubique-review-20261013/index.ts",
+    "loadBefore": [
+      25.27197265625,
+      21.9912109375,
+      13.8291015625
+    ],
+    "protocol": "Correctness gate before timing; 10 warmups; 9 alternating batches; median ms/workload; all samples retained"
+  },
+  "results": [
+    {
+      "name": "Variance of 100,000 observations",
+      "contract": "Same immutable f64 JS array; sample variance; all API work included",
+      "beforeMs": 177.1727890000002,
+      "afterMs": 23.417093000000023,
+      "speedup": 7.565960001952421,
+      "beforeSamples": [
+        211.86587400000008,
+        317.90196300000025,
+        177.1727890000002,
+        197.57218199999988,
+        121.41068199999972,
+        143.53674599999977,
+        121.82907100000011,
+        112.23143100000016,
+        495.04081700000006
+      ],
+      "afterSamples": [
+        41.97943599999962,
+        33.30950800000028,
+        250.7744329999996,
+        17.554081999999653,
+        12.62949000000026,
+        24.33927500000027,
+        23.265172999999777,
+        22.781151000000136,
+        23.417093000000023
+      ],
+      "iterationsPerBatch": 1
+    },
+    {
+      "name": "Correlation of 100,000 paired observations",
+      "contract": "Same two immutable f64 JS arrays; full 2x2 correlation output",
+      "beforeMs": 314.12575900000047,
+      "afterMs": 21.87673100000029,
+      "speedup": 14.358898456995073,
+      "beforeSamples": [
+        241.2978719999992,
+        377.9032439999992,
+        246.6298659999993,
+        303.58410900000126,
+        314.12575900000047,
+        439.2094649999999,
+        342.33698600000025,
+        413.8643979999997,
+        179.68086500000027
+      ],
+      "afterSamples": [
+        49.32486599999902,
+        18.351741000000402,
+        9.29386599999998,
+        22.8447070000002,
+        28.629672000000937,
+        26.489848999999595,
+        9.015531999999439,
+        10.300901999999041,
+        21.87673100000029
+      ],
+      "iterationsPerBatch": 1
+    },
+    {
+      "name": "Median of 100,000 observations",
+      "contract": "Same immutable f64 JS array; copying and sorting included",
+      "beforeMs": 8420.546428999995,
+      "afterMs": 212.54206000000704,
+      "speedup": 39.618259223608334,
+      "beforeSamples": [
+        7018.104001999993,
+        8420.546428999995,
+        16992.095167000007,
+        13051.892791000006,
+        16119.482458999992,
+        9754.146494999994,
+        5010.361241000006,
+        4357.911432000023,
+        7684.498778000008
+      ],
+      "afterSamples": [
+        134.56493500000215,
+        160.70633200000157,
+        640.9963439999992,
+        516.8169519999938,
+        359.66241200000513,
+        547.2893810000096,
+        161.14668200002052,
+        120.96597300001304,
+        212.54206000000704
+      ],
+      "iterationsPerBatch": 1
+    },
+    {
+      "name": "2x2 interactive updates: old API to resident API",
+      "contract": "1,000 2x2 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 6.650165499988361,
+      "afterMs": 0.9762024999945424,
+      "speedup": 6.812280751202276,
+      "beforeSamples": [
+        6.650165499988361,
+        7.600779999993392,
+        14.217715500009945,
+        9.017441999996663,
+        7.589541499997722,
+        6.211573000007775,
+        5.171155999996699,
+        5.783863499993458,
+        5.676493999999366
+      ],
+      "afterSamples": [
+        0.9762024999945424,
+        1.1115534999989904,
+        1.01775450000423,
+        1.9658179999969434,
+        0.6137579999922309,
+        1.3504925000015646,
+        0.9195734999957494,
+        0.6223114999884274,
+        0.9041310000029625
+      ],
+      "iterationsPerBatch": 2
+    },
+    {
+      "name": "2x2 interactive updates: current nested to resident API",
+      "contract": "1,000 2x2 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 2.5817296666597636,
+      "afterMs": 0.5616313333351476,
+      "speedup": 4.596840513382012,
+      "beforeSamples": [
+        3.0848246666622194,
+        4.118549333342041,
+        2.7105706666673846,
+        2.796984666667413,
+        2.543132999999216,
+        2.1239376666684016,
+        2.5817296666597636,
+        2.1158253333317893,
+        2.094553666674377
+      ],
+      "afterSamples": [
+        0.9902063333332384,
+        0.5616313333351476,
+        1.0143626666589018,
+        0.8630646666667113,
+        0.4913913333342255,
+        0.44814933332963847,
+        0.6432629999956893,
+        0.40781966666691005,
+        0.5398596666733889
+      ],
+      "iterationsPerBatch": 3
+    },
+    {
+      "name": "10x10 interactive updates: old API to resident API",
+      "contract": "1,000 10x10 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 18.097720999998273,
+      "afterMs": 2.366905000002589,
+      "speedup": 7.6461543661357245,
+      "beforeSamples": [
+        17.763128999999026,
+        18.989763000019593,
+        18.097720999998273,
+        13.903628000000026,
+        16.140717999980552,
+        25.423229000007268,
+        17.776880999997957,
+        27.352817000006326,
+        30.499070000019856
+      ],
+      "afterSamples": [
+        2.412116999999853,
+        2.3202949999831617,
+        2.366905000002589,
+        2.1870969999872614,
+        2.3181430000113323,
+        2.3668480000051204,
+        4.201086999994004,
+        4.2352940000128,
+        5.998071999987587
+      ],
+      "iterationsPerBatch": 1
+    },
+    {
+      "name": "10x10 interactive updates: current nested to resident API",
+      "contract": "1,000 10x10 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 11.447262000001501,
+      "afterMs": 2.8311324999958742,
+      "speedup": 4.043350849887168,
+      "beforeSamples": [
+        13.16169350000564,
+        14.09602850000374,
+        17.32452550000744,
+        11.447262000001501,
+        10.541060000003199,
+        10.371337999997195,
+        9.662886500009336,
+        11.892882500003907,
+        11.134580500001903
+      ],
+      "afterSamples": [
+        2.9588274999987334,
+        3.2424449999962235,
+        3.3670099999872036,
+        2.6666655000008177,
+        3.2233945000043605,
+        2.6240989999932935,
+        2.4471885000093607,
+        2.8311324999958742,
+        2.5551140000025043
+      ],
+      "iterationsPerBatch": 2
+    },
+    {
+      "name": "32x32 interactive updates: old API to resident API",
+      "contract": "1,000 32x32 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 120.90245700001833,
+      "afterMs": 43.335656999988714,
+      "speedup": 2.7899070965983004,
+      "beforeSamples": [
+        250.68233499999042,
+        117.66489099999308,
+        123.78190600001835,
+        110.88592000000062,
+        110.70130499999505,
+        102.15351599999121,
+        120.90245700001833,
+        136.00691200001165,
+        316.1818520000088
+      ],
+      "afterSamples": [
+        100.22590699998545,
+        119.85999599998468,
+        42.0367719999922,
+        30.982706999988295,
+        37.14000300000771,
+        43.335656999988714,
+        44.37777699998696,
+        38.79870200000005,
+        195.31721899998956
+      ],
+      "iterationsPerBatch": 1
+    },
+    {
+      "name": "32x32 interactive updates: current nested to resident API",
+      "contract": "1,000 32x32 products, input changes each iteration; consume one rotating result entry each iteration; include initial copies, allocation, readback and disposal; scalar WASM",
+      "beforeMs": 167.96514400001615,
+      "afterMs": 45.15173300000606,
+      "speedup": 3.7200154421535405,
+      "beforeSamples": [
+        135.19743500000914,
+        143.78294899998582,
+        131.78004400001373,
+        135.2266440000094,
+        184.83321199999773,
+        167.96514400001615,
+        351.20862900000066,
+        273.6470890000055,
+        232.0137579999864
+      ],
+      "afterSamples": [
+        43.61145600001328,
+        32.785731999989366,
+        42.30099700001301,
+        42.386605000006966,
+        46.27824499999406,
+        45.89303499998641,
+        210.82789800001774,
+        167.42433899999014,
+        45.15173300000606
+      ],
+      "iterationsPerBatch": 1
+    }
+  ],
+  "loadAfter": [
+    19.85693359375,
+    21.1298828125,
+    14.9541015625
+  ]
+}

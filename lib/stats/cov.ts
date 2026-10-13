@@ -1,3 +1,4 @@
+import { packRows } from "../internal/matrix.ts";
 import type { array, matrix } from "../types.d.ts";
 import { isarray, ismatrix, mean, varc } from "../../index.ts";
 import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
@@ -249,7 +250,7 @@ export default function cov(
 
     // Use WASM for all matrices (benchmarks show it's consistently faster)
     if (typeof covwasm === "function") {
-      const flatData = new Float64Array(matrix.flat());
+      const flatData = packRows(matrix);
       const flatResult = covwasm(flatData, numRows, numCols, actualFlag);
 
       // Reshape flat result back to matrix

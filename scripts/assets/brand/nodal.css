@@ -1,0 +1,449 @@
+/* ============================================================
+   NODAL STUDIO — brand layer shared by every Ubique page
+   (API reference, interactive article, benchmark).
+   Mirrors the studio site (NodalWebsite: design/brand.json, src/styles):
+     cream #FFFDE9 · deep black #030406 · teal #2D7F8C (brand accent)
+     Cabinet Grotesk 800 headings + logotype, 500 for every spaced-caps label
+     General Sans 400–700 running text · JetBrains Mono code and figures
+     1.5px ink hairlines · kicker = 34×2 dash + spaced caps · pill chips
+   Light only: the brand is cream and ink, ink blocks provide the contrast.
+   ============================================================ */
+
+@font-face { font-family: "Cabinet Grotesk"; src: url("fonts/display.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cabinet Grotesk"; src: url("fonts/display-medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("fonts/body.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("fonts/body-medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("fonts/body-semibold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("fonts/body-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("fonts/body-italic.woff2") format("woff2"); font-weight: 400 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/mono.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/mono-medium.woff2") format("woff2"); font-weight: 500 700; font-style: normal; font-display: swap; }
+
+:root {
+  color-scheme: light;
+  --cream: #fffde9;
+  --cream-2: #f5f2dc;
+  --ink: #030406;
+  --teal: #2d7f8c;
+  --ink-03: rgba(3, 4, 6, 0.03);
+  --ink-08: rgba(3, 4, 6, 0.08);
+  --ink-14: rgba(3, 4, 6, 0.14);
+  --ink-45: rgba(3, 4, 6, 0.45);
+  --ink-62: rgba(3, 4, 6, 0.62);
+  --cream-12: rgba(255, 253, 233, 0.12);
+  --cream-55: rgba(255, 253, 233, 0.55);
+  --muted: #5e5f58;
+
+  --display: "Cabinet Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "General Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --stroke: 1.5px;
+  --pad: clamp(20px, 4vw, 64px);
+  --nav-h: 72px;
+  --r-tile: 12px;
+  --r-card: clamp(28px, 3.4vw, 52px);
+  --r-frame: clamp(22px, 3vw, 42px);
+  --r-chip: 0.85em;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+html { -webkit-text-size-adjust: 100%; }
+.ns *, .ns *::before, .ns *::after { box-sizing: border-box; }
+body.ns {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.ns ::selection { background: var(--ink); color: var(--cream); }
+/* editorial grain, as on nodalstudio.io */
+body.ns::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.ns a:focus-visible,
+.ns button:focus-visible,
+.ns select:focus-visible,
+.ns input:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+.ns-skip {
+  position: fixed;
+  top: -100px;
+  left: var(--pad);
+  z-index: 300;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.7em 1.2em;
+  border-radius: var(--r-chip);
+  text-decoration: none;
+  font-weight: 500;
+  transition: top 0.2s;
+}
+.ns-skip:focus { top: 12px; }
+
+/* ---------- type ---------- */
+.ns-display {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.logotype {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: "";
+  width: 34px;
+  height: 2px;
+  background: currentColor;
+  flex: none;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 10.5px;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: var(--stroke) solid currentColor;
+  border-radius: var(--r-chip);
+  padding: 0.45em 0.9em;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.chip { transition: background 0.3s var(--ease-draw), color 0.3s var(--ease-draw); }
+a.chip:hover { background: var(--ink); color: var(--cream); }
+
+/* ---------- buttons: pills ---------- */
+.ns-btn,
+.ns button,
+.ns .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 42px;
+  padding: 0 1.35em;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s var(--ease-draw), color 0.3s var(--ease-draw), transform 0.3s var(--ease);
+}
+.ns-btn:hover,
+.ns button:hover:not(:disabled) { background: var(--ink); color: var(--cream); }
+.ns-btn--solid,
+.ns button.primary { background: var(--ink); color: var(--cream); }
+.ns-btn--solid:hover,
+.ns button.primary:hover:not(:disabled) { transform: translateY(-2px); }
+.ns button:disabled { opacity: 0.4; cursor: wait; }
+.ns-btn .arr { transition: transform 0.3s var(--ease); }
+.ns-btn:hover .arr { transform: translateX(4px); }
+.on-ink .ns-btn { border-color: var(--cream); color: var(--cream); }
+.on-ink .ns-btn:hover { background: var(--cream); color: var(--ink); }
+.on-ink .ns-btn--solid { background: var(--cream); color: var(--ink); }
+
+/* ---------- header (site-head) ---------- */
+.ns-head {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--pad);
+  color: var(--ink);
+  background: rgba(255, 253, 233, 0.78);
+  -webkit-backdrop-filter: saturate(1.08) blur(12px);
+  backdrop-filter: saturate(1.08) blur(12px);
+  border-bottom: 1px solid rgba(3, 4, 6, 0.1);
+}
+/* over an ink block the header inverts, as on nodalstudio.io */
+.ns-head { transition: color 0.25s linear, background 0.3s ease, border-color 0.3s ease; }
+.ns-head.on-ink {
+  color: var(--cream);
+  background: rgba(3, 4, 6, 0.72);
+  border-bottom-color: var(--cream-12);
+}
+.ns-head.on-ink .b-bg { fill: var(--cream); }
+.ns-head.on-ink .b-st { stroke: var(--ink); }
+.ns-head.on-ink .ns-brand-sub { color: var(--cream-55); }
+.ns-badge .b-bg, .ns-badge .b-st { transition: fill 0.25s linear, stroke 0.25s linear; }
+.ns-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+}
+.ns-badge { width: 40px; height: 40px; display: block; flex: none; }
+.ns-badge .b-bg { fill: var(--ink); }
+.ns-badge .b-st { stroke: var(--cream); fill: none; }
+.ns-brand-name { font-size: 19px; }
+.ns-brand-sub {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+  white-space: nowrap;
+}
+.ns-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 34px);
+}
+.ns-nav a {
+  position: relative;
+  padding: 4px 0;
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ns-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-draw);
+}
+.ns-nav a:hover::after,
+.ns-nav a[aria-current="page"]::after { transform: scaleX(1); }
+@media (max-width: 760px) {
+  .ns-brand-sub { display: none; }
+  .ns-nav { gap: 14px; overflow-x: auto; scrollbar-width: none; }
+  .ns-nav::-webkit-scrollbar { display: none; }
+  .ns-nav .ns-hide-sm { display: none; }
+}
+
+/* ---------- hero frame (the poster) ---------- */
+.ns-hero {
+  position: relative;
+  padding: clamp(12px, 1.6vw, 22px);
+}
+.ns-frame {
+  position: relative;
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-frame);
+  overflow: hidden;
+  min-height: clamp(440px, 72vh, 760px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(16px, 2vw, 28px);
+}
+.ns-frame > :not(canvas) { position: relative; z-index: 1; }
+.ns-frame canvas.ns-mesh {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.ns-frame-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+.ns-tag {
+  max-width: 28ch;
+  margin: 0;
+  text-align: right;
+  font-weight: 500;
+  font-size: clamp(16px, 1.5vw, 22px);
+  line-height: 1.45;
+}
+.ns-frame-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+.ns-wordmark {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(56px, 11vw, 168px);
+  line-height: 0.84;
+}
+.ns-wordmark span { display: block; }
+.ns-hero-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+a.ns-hero-foot { color: inherit; text-decoration: none; }
+.ns-hero-foot .tick { width: 2px; height: 36px; background: currentColor; }
+@media (max-width: 760px) {
+  .ns-frame-top { flex-direction: column; }
+  .ns-tag { text-align: left; }
+  .ns-hero-foot { display: none; }
+}
+
+/* ---------- sections ---------- */
+.ns-shell { max-width: 1320px; margin: 0 auto; padding: 0 var(--pad); }
+.ns-section { padding: clamp(64px, 11vh, 140px) 0; }
+.ns-ink { background: var(--ink); color: var(--cream); }
+.ns-ink ::selection { background: var(--cream); color: var(--ink); }
+.ns-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(32px, 6vh, 64px);
+}
+.ns-block-head h2 { margin: 0; font-size: clamp(38px, 6vw, 96px); }
+.ns-block-head .kicker { flex: none; }
+.ns-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 30ch));
+  gap: 18px clamp(18px, 4vw, 64px);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.ns-meta > div { position: relative; padding-left: 16px; }
+.ns-meta > div::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: currentColor;
+}
+.ns-meta .lbl {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+@media (max-width: 640px) { .ns-meta { grid-template-columns: minmax(0, 1fr); } }
+
+/* closing rule of an ink block (6px, non-scaling) */
+.ns-rule { display: block; width: 100%; height: clamp(26px, 3.4vw, 46px); color: inherit; }
+.ns-rule path {
+  stroke: currentColor;
+  stroke-width: 6;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+  stroke-linejoin: bevel;
+}
+
+/* ---------- footer (site-foot) ---------- */
+.ns-foot {
+  position: relative;
+  z-index: 2;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 28px var(--pad);
+  border-top: var(--stroke) solid var(--cream-12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.ns-foot .logotype { font-size: 15px; letter-spacing: -0.02em; }
+.ns-foot a { color: inherit; }
+.ns-foot-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.ns-foot-links a {
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+}
+.ns-foot-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ns-foot-note {
+  flex-basis: 100%;
+  margin: 0;
+  max-width: 90ch;
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--cream-55);
+}
+
+/* ---------- reveal (gated on .js-motion, no-JS stays visible) ---------- */
+.js-motion [data-reveal] { opacity: 0; transform: translate3d(0, 24px, 0); }
+.js-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js-motion [data-reveal] { opacity: 1; transform: none; }
+}

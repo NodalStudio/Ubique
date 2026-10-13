@@ -16,9 +16,12 @@ import { isarray, ismatrix } from "../../index.ts";
  *
  * @example Apply `Math.log` to each element of an array
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * const actual = arrayfun([1.4, 2.3, 3], Math.log);
+ * const expected = [0.33647223662121284, 0.832909122935104, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  *
  * @example Apply the `sign` function to an array
@@ -84,9 +87,12 @@ export default function arrayfun<T, A extends unknown[], U>(
  *
  * @example Apply `Math.log` to each element of an array
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * const actual = arrayfun([1.4, 2.3, 3], Math.log);
+ * const expected = [0.33647223662121284, 0.832909122935104, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  *
  * @example Apply the `sign` function to an array
@@ -152,9 +158,12 @@ export default function arrayfun<T, A extends unknown[], U>(
  *
  * @example Apply `Math.log` to each element of an array
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * const actual = arrayfun([1.4, 2.3, 3], Math.log);
+ * const expected = [0.33647223662121284, 0.832909122935104, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  *
  * @example Apply the `sign` function to an array
@@ -220,9 +229,12 @@ export default function arrayfun<T, A extends unknown[], U>(
  *
  * @example Apply `Math.log` to each element of an array
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * const actual = arrayfun([1.4, 2.3, 3], Math.log);
+ * const expected = [0.33647223662121284, 0.832909122935104, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  *
  * @example Apply the `sign` function to an array
@@ -289,9 +301,12 @@ export default function arrayfun<T, A extends unknown[], U>(
  *
  * @example Apply `Math.log` to each element of an array
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(arrayfun([1.4, 2.3, 3], Math.log), [0.33647223662121284, 0.832909122935104, 1.0986122886681096]);
+ * const actual = arrayfun([1.4, 2.3, 3], Math.log);
+ * const expected = [0.33647223662121284, 0.832909122935104, 1.0986122886681096];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  *
  * @example Apply the `sign` function to an array

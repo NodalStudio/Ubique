@@ -25,34 +25,43 @@ import {
  *
  * @example Perfect positive correlation between identical arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+ * const actual = corrcoef([1, 2, 3], [1, 2, 3]);
+ * const expected = [
  *   [1, 1],
  *   [1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Perfect negative correlation between reversed arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Zero correlation between orthogonal sequences
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+ * const actual = corrcoef([1, -1, 1, -1], [1, 1, -1, -1]);
+ * const expected = [
  *   [1, 0],
  *   [0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -69,45 +78,54 @@ import {
  *
  * @example Population flag (0) is supported for array inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1], 0);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with linearly related columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 2, -1],
  *   [2, 4, -2],
  *   [3, 6, -3],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 1, -1],
  *   [1, 1, -1],
  *   [-1, -1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with independent columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -124,34 +142,40 @@ import {
  *
  * @example Population flag also works for matrix inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ], 0), [
+ * ], 0);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix correlation handles alternating columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 0],
  *   [0, 1],
  *   [1, 0],
  *   [0, 1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function corrcoef(x: array, y: array, flag?: number): matrix;
@@ -170,34 +194,43 @@ export default function corrcoef(x: array, y: array, flag?: number): matrix;
  *
  * @example Perfect positive correlation between identical arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+ * const actual = corrcoef([1, 2, 3], [1, 2, 3]);
+ * const expected = [
  *   [1, 1],
  *   [1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Perfect negative correlation between reversed arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Zero correlation between orthogonal sequences
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+ * const actual = corrcoef([1, -1, 1, -1], [1, 1, -1, -1]);
+ * const expected = [
  *   [1, 0],
  *   [0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -214,45 +247,54 @@ export default function corrcoef(x: array, y: array, flag?: number): matrix;
  *
  * @example Population flag (0) is supported for array inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1], 0);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with linearly related columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 2, -1],
  *   [2, 4, -2],
  *   [3, 6, -3],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 1, -1],
  *   [1, 1, -1],
  *   [-1, -1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with independent columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -269,34 +311,40 @@ export default function corrcoef(x: array, y: array, flag?: number): matrix;
  *
  * @example Population flag also works for matrix inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ], 0), [
+ * ], 0);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix correlation handles alternating columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 0],
  *   [0, 1],
  *   [1, 0],
  *   [0, 1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function corrcoef(x: matrix, flag?: number): matrix;
@@ -315,34 +363,43 @@ export default function corrcoef(x: matrix, flag?: number): matrix;
  *
  * @example Perfect positive correlation between identical arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [1, 2, 3]), [
+ * const actual = corrcoef([1, 2, 3], [1, 2, 3]);
+ * const expected = [
  *   [1, 1],
  *   [1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Perfect negative correlation between reversed arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1]), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Zero correlation between orthogonal sequences
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, -1, 1, -1], [1, 1, -1, -1]), [
+ * const actual = corrcoef([1, -1, 1, -1], [1, 1, -1, -1]);
+ * const expected = [
  *   [1, 0],
  *   [0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -359,45 +416,54 @@ export default function corrcoef(x: matrix, flag?: number): matrix;
  *
  * @example Population flag (0) is supported for array inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([1, 2, 3], [3, 2, 1], 0), [
+ * const actual = corrcoef([1, 2, 3], [3, 2, 1], 0);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with linearly related columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 2, -1],
  *   [2, 4, -2],
  *   [3, 6, -3],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 1, -1],
  *   [1, 1, -1],
  *   [-1, -1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix input with independent columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
@@ -414,34 +480,40 @@ export default function corrcoef(x: matrix, flag?: number): matrix;
  *
  * @example Population flag also works for matrix inputs
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 1, -1],
  *   [-1, 1, 1],
  *   [1, -1, 1],
  *   [-1, -1, -1],
- * ], 0), [
+ * ], 0);
+ * const expected = [
  *   [1, 0, 0],
  *   [0, 1, 0],
  *   [0, 0, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  *
  * ```
  *
  * @example Matrix correlation handles alternating columns
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(corrcoef([
+ * const actual = corrcoef([
  *   [1, 0],
  *   [0, 1],
  *   [1, 0],
  *   [0, 1],
- * ]), [
+ * ]);
+ * const expected = [
  *   [1, -1],
  *   [-1, 1],
- * ]);
+ * ];
+ * assertEquals(actual.map(row => row.length), expected.map(row => row.length));
+ * actual.forEach((row, i) => row.forEach((v, j) => assertAlmostEquals(v, expected[i][j], 1e-12)));
  * ```
  */
 export default function corrcoef(
@@ -467,7 +539,28 @@ export default function corrcoef(
       throw new Error("Number inputs not supported for correlation");
     }
     if (isarray(x) && isarray(actualY)) {
-      covm = cov(x as array, actualY as array, actualFlag as 0 | 1);
+      if (actualFlag !== 0 && actualFlag !== 1) {
+        throw new Error("Normalization flag must be 0 or 1");
+      }
+      if (x.length !== actualY.length) {
+        throw new Error("input dimension must agree");
+      }
+      const vx = x as number[], vy = actualY as number[];
+      let meanX = 0, meanY = 0, xx = 0, yy = 0, xy = 0;
+      for (let i = 0; i < x.length; i++) {
+        const dx = vx[i] - meanX, dy = vy[i] - meanY;
+        meanX += dx / (i + 1);
+        meanY += dy / (i + 1);
+        xx += dx * (vx[i] - meanX);
+        yy += dy * (vy[i] - meanY);
+        xy += dx * (vy[i] - meanY);
+      }
+      const validX = x.length > actualFlag && xx > 0 && Number.isFinite(xx);
+      const validY = x.length > actualFlag && yy > 0 && Number.isFinite(yy);
+      const r = validX && validY
+        ? Math.max(-1, Math.min(1, xy / Math.sqrt(xx) / Math.sqrt(yy)))
+        : NaN;
+      return [[validX ? 1 : NaN, r], [r, validY ? 1 : NaN]];
     } else if (ismatrix(x) && ismatrix(actualY)) {
       throw new Error("Matrix-matrix covariance not implemented yet");
     } else {

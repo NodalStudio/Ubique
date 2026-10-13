@@ -1,10 +1,19 @@
-# Ubique
+<p align="center">
+  <a href="https://nodalstudio.github.io/Ubique/"><img alt="Ubique — mathematical and quantitative library for TypeScript, by Nodal Studio" src="https://cdn.jsdelivr.net/gh/NodalStudio/Ubique@main/.github/assets/banner-light.svg" width="100%"></a>
+</p>
 
-[![npm version](https://img.shields.io/npm/v/ubique.svg)](https://www.npmjs.com/package/ubique)
-[![npm downloads](https://img.shields.io/npm/d18m/ubique)](https://www.npmjs.com/package/ubique)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/NodalStudio/Ubique.svg)](https://github.com/NodalStudio/Ubique/stargazers)
-[![JSR](https://jsr.io/badges/@nodalstudio/ubique)](https://jsr.io/@nodalstudio/ubique)
+<p align="center">
+  <a href="https://nodalstudio.github.io/Ubique/"><img alt="API reference" src="https://img.shields.io/badge/API_reference_→-030406?style=for-the-badge"></a>
+  <a href="https://nodalstudio.github.io/Ubique/learn.html"><img alt="Interactive article" src="https://img.shields.io/badge/Interactive_article_→-030406?style=for-the-badge"></a>
+  <a href="https://nodalstudio.github.io/Ubique/benchmark.html"><img alt="Benchmark" src="https://img.shields.io/badge/Benchmark_→-030406?style=for-the-badge"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/ubique"><img alt="npm" src="https://img.shields.io/npm/v/ubique?style=for-the-badge&label=npm&labelColor=030406&color=FFFDE9"></a>
+  <a href="https://www.npmjs.com/package/ubique"><img alt="npm downloads" src="https://img.shields.io/npm/d18m/ubique?style=for-the-badge&label=downloads&labelColor=030406&color=FFFDE9"></a>
+  <a href="https://jsr.io/@nodalstudio/ubique"><img alt="JSR" src="https://img.shields.io/jsr/v/@nodalstudio/ubique?style=for-the-badge&label=JSR&labelColor=030406&color=FFFDE9"></a>
+  <a href="https://github.com/NodalStudio/Ubique/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-FFFDE9?style=for-the-badge&labelColor=030406"></a>
+</p>
 
 Ubique is a modern mathematical and quantitative library built with contemporary
 JavaScript, TypeScript, and WebAssembly. It delivers high-performance numerical
@@ -40,7 +49,7 @@ solutions.
 ## Key Features
 
 - **High Performance:** Uses Rust's [nalgebra](https://nalgebra.org/) compiled
-  to WebAssembly for accelerated matrix operations (up to 20x faster than math.js)
+  to WebAssembly for accelerated matrix operations
 - **WebAssembly Integration:** WASM code is inlined for zero-config deployment
   (no separate .wasm files to manage)
 - **Universal Compatibility:** Works seamlessly in Node.js, browsers, and modern
@@ -51,25 +60,13 @@ solutions.
   statistics, time series, and financial computations
 - **Zero Dependencies:** Minimal external dependencies (only dayjs for date operations)
 
-## Performance Highlights
+## Performance
 
-Ubique demonstrates exceptional performance gains across multiple operations compared to math.js (benchmarked on Mac mini M1):
-
-### Matrix Operations
-
-- **Matrix Multiply (500x500):** 13.05x faster
-- **Matrix Add (100x100):** 6.61x faster
-- **Transpose (100x100):** 4.63x faster
-
-### Linear Algebra
-
-- **Determinant (50x50):** 26.04x faster
-- **Matrix Inverse (20x20):** 7.53x faster
-- **Determinant (20x20):** 12.27x faster
-
-### Interactive Benchmark
-
-Want to see these performance gains in action? Check out our **[interactive benchmark page](https://nodalstudio.github.io/Ubique/benchmark.html)** with live matrix visualizations and real-time performance comparisons!
+Run `deno task benchmark` in the source checkout for seeded, correctness-gated
+comparisons with math.js 15.2.0, using warmups and alternating batches. Historical
+headline ratios used an older protocol and have been removed. Results depend on
+shape, hardware, runtime and whether data is already resident in WASM memory.
+See the source README and `benchmarks/README.md` for the measured protocol.
 
 ## Installation
 
@@ -303,3 +300,19 @@ page.
 ## License
 
 Ubique is released under the MIT License. See the [LICENSE](https://github.com/NodalStudio/Ubique/blob/main/LICENSE) file for details.
+
+
+## Development preview
+
+The upcoming source revision adds reusable `factorize(A).solve(b)`, corrects
+singularity/determinant behavior, integer powers, IRR, initial drawdown and
+large-coordinate regression, and provides an interactive browser lab/tutorial.
+These changes are not yet published. See the source repository's `CHANGELOG.md`,
+`docs-src/numerical-contract.md` and `examples/README.md` for the exact contracts
+and local build instructions. Existing published versions do not contain these fixes.
+
+<br>
+
+<p align="center">
+  <a href="https://nodalstudio.io/"><img alt="Built and maintained by Nodal Studio — independent software studio, Barcelona and Paris" src="https://cdn.jsdelivr.net/gh/NodalStudio/Ubique@main/.github/assets/footer.svg" width="100%"></a>
+</p>

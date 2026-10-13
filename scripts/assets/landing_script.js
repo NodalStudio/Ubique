@@ -106,84 +106,107 @@ function buildIndexMenu() {
     return indexA - indexB;
   });
 
-  const hero = document.createElement("section");
-  hero.className = "landingHero";
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+  const pad = (n) => String(n).padStart(2, "0");
+  const total = sortedGroups.reduce((sum, [, entries]) => sum + entries.length, 0);
 
-  const title = document.createElement("h1");
-  title.textContent = "Ubique API reference";
-  hero.appendChild(title);
-
-  const subtitle = document.createElement("p");
-  subtitle.textContent =
-    "Browse the library by functional area, or use the search bar above.";
-  hero.appendChild(subtitle);
-
+  // Poster hero, as on nodalstudio.io: framed, lattice behind, giant wordmark.
+  const hero = el("section", "ns-hero api-hero");
+  hero.setAttribute("aria-labelledby", "api-title");
+  const frame = el("div", "ns-frame");
+  const mesh = el("canvas", "ns-mesh");
+  mesh.setAttribute("aria-hidden", "true");
+  const top = el("div", "ns-frame-top");
+  top.append(
+    el("p", "kicker", "Mathematical & quantitative library"),
+    el(
+      "p",
+      "ns-tag",
+      "Vectors, matrices, statistics and quantitative finance for TypeScript. Linear algebra runs in Rust, compiled to WebAssembly.",
+    ),
+  );
+  const bottom = el("div", "ns-frame-bottom");
+  const titleWrap = el("div");
+  const title = el("h1", "ns-wordmark", "Ubique");
+  title.id = "api-title";
+  const install = el("div", "api-install");
+  const command = "deno add jsr:@nodalstudio/ubique";
+  install.append(el("span", "prompt", "$"), el("span", "", command));
+  const copy = el("button", "copy-install", "Copy");
+  copy.type = "button";
+  copy.addEventListener("click", () => {
+    navigator?.clipboard?.writeText(command);
+    copy.textContent = "Copied";
+    setTimeout(() => copy.textContent = "Copy", 1200);
+  });
+  install.append(copy);
+  const ctas = el("div", "api-hero-ctas");
+  for (const [href, label, solid] of [
+    ["#api", "Browse the API", true],
+    ["./learn.html", "Read the article", false],
+    ["./benchmark.html", "Run the benchmark", false],
+  ]) {
+    const a = el("a", solid ? "ns-btn ns-btn--solid" : "ns-btn");
+    a.href = href;
+    a.append(document.createTextNode(label + " "), el("span", "arr", "→"));
+    ctas.append(a);
+  }
+  titleWrap.append(title, install, ctas);
+  const foot = el("div", "ns-hero-foot");
+  foot.append(el("span", "tick"), el("span", "", `${total} functions`));
+  bottom.append(titleWrap, foot);
+  frame.append(mesh, top, el("div"), bottom);
+  hero.append(frame);
   main.appendChild(hero);
 
-  const menu = document.createElement("div");
-  menu.className = "landingMenu";
-
-  for (const [category, entries] of sortedGroups) {
-    const section = document.createElement("section");
-    section.className = "landingSection";
-
-    const heading = document.createElement("h2");
-    heading.textContent = categoryLabels[category] ?? category;
-    section.appendChild(heading);
-
-    const list = document.createElement("ul");
-
-    entries.sort((a, b) => a.name.localeCompare(b.name));
-
-    for (const entry of entries) {
-      const item = document.createElement("li");
-
-      const link = document.createElement("a");
-      link.href = entry.url.startsWith("./") ? entry.url : `./${entry.url}`;
-      link.textContent = entry.name;
-      link.className = "landingLink";
-      item.appendChild(link);
-
-      if (entry.description) {
-        const description = document.createElement("p");
-        description.textContent = entry.description;
-        description.className = "landingDescription";
-        item.appendChild(description);
-      }
-
-      list.appendChild(item);
-    }
-
-    section.appendChild(list);
-    menu.appendChild(section);
-  }
-
-  main.appendChild(menu);
-}
-
-function injectBenchmarkLink() {
-  const actionsContainer = document.querySelector(
-    "#topnav .flex.items-center.gap-2"
+  const intro = el("section", "api-intro");
+  intro.id = "api";
+  const head = el("div", "ns-block-head");
+  head.append(
+    el("h2", "ns-display", "The library"),
+    el("p", "kicker", `§ — ${sortedGroups.length} areas`),
   );
-  if (!actionsContainer) return;
-  if (actionsContainer.querySelector("[data-doc-benchmark-link]")) return;
+  const filters = el("nav", "api-filters");
+  filters.setAttribute("aria-label", "Functional areas");
+  intro.append(head, filters);
+  main.appendChild(intro);
 
-  const link = document.createElement("a");
-  link.href = "./benchmark.html";
-  link.className = "docBenchmarkLink";
-  link.dataset.docBenchmarkLink = "true";
-  link.setAttribute("aria-label", "Open the Ubique benchmark demo");
+  sortedGroups.forEach(([category, entries], index) => {
+    const label = categoryLabels[category] ?? category;
+    const chip = el("a", "chip", label);
+    chip.href = `#cat-${category}`;
+    chip.append(el("span", "n", String(entries.length)));
+    filters.append(chip);
 
-  const icon = document.createElement("span");
-  icon.className = "docBenchmarkIcon";
-  icon.textContent = "🚀";
-
-  const label = document.createElement("span");
-  label.className = "docBenchmarkLabel";
-  label.textContent = "Benchmark";
-
-  link.append(icon, label);
-  actionsContainer.prepend(link);
+    const section = el("section", "api-cat");
+    section.id = `cat-${category}`;
+    const catHead = el("div", "api-cat-head");
+    catHead.append(
+      el("span", "idx-num", `§${pad(index + 1)}`),
+      el("h2", "", label),
+      el("span", "count", `${entries.length} fn`),
+    );
+    const list = el("ul", "api-list");
+    entries.sort((a, b) => a.name.localeCompare(b.name));
+    for (const entry of entries) {
+      const item = el("li");
+      const link = el("a");
+      link.href = entry.url.startsWith("./") ? entry.url : `./${entry.url}`;
+      link.append(el("span", "fn", entry.name));
+      if (entry.description) link.append(el("span", "desc", entry.description));
+      item.append(link);
+      list.append(item);
+    }
+    section.append(catHead, list);
+    main.appendChild(section);
+  });
+  // nodal.js may already have run: start the lattice for this late canvas.
+  globalThis.dispatchEvent(new CustomEvent("ns:mesh", { detail: mesh }));
 }
 
 globalThis.addEventListener("load", () => {
@@ -202,5 +225,4 @@ globalThis.addEventListener("load", () => {
   });
 
   buildIndexMenu();
-  injectBenchmarkLink();
 });
