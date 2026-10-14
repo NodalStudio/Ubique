@@ -16,23 +16,23 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  *
  * @example Simple array kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5]), 1.7);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5]), 1.7, 1e-13);
  *
  * ```
  *
  * @example Normal distribution approximation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75, 1e-13);
  *
  * ```
  *
  * @example Matrix kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(kurtosis([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
@@ -53,23 +53,23 @@ export default function kurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
  *
  * @example Simple array kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5]), 1.7);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5]), 1.7, 1e-13);
  *
  * ```
  *
  * @example Normal distribution approximation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75, 1e-13);
  *
  * ```
  *
  * @example Matrix kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(kurtosis([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```
@@ -90,23 +90,23 @@ export default function kurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
  *
  * @example Simple array kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5]), 1.7);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5]), 1.7, 1e-13);
  *
  * ```
  *
  * @example Normal distribution approximation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75);
+ * assertAlmostEquals(kurtosis([1, 2, 3, 4, 5, 6, 7]), 1.75, 1e-13);
  *
  * ```
  *
  * @example Matrix kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(kurtosis([[1, 2, 3], [4, 5, 6]]), [1.5, 1.5]);
  * ```

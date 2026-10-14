@@ -17,6 +17,9 @@ cover the revised paths; older exports retain their documented conventions.
 | `corrcoef(x,y)` | equal-length vectors | one-pass Pearson correlation; constant/nonfinite moments yield NaN; finite valid correlations are bounded to [−1,1] |
 | `median` | finite numeric vector or matrix | sorts a copy; averages the two middle values for even lengths; empty vectors throw |
 | `linearreg(y,x)` | equal finite vectors, at least two observations | centered fit; constant x throws; constant y has NaN R²; overflowing moments throw |
+| `moment`, `mad`, `zscore` | finite vectors or matrices | center around a shifted origin; zscore preserves matrix layout in either dimension |
+| `downsiderisk`, `upsidepot` | finite returns, finite MAR | full-sample RMS shortfall and mean positive excess over MAR, respectively; changed in 1.0.4 |
+| `paramvar`, `paramcondvar` | matching scalar/vector/matrix inputs | normal loss model; mean × period, volatility × sqrt(period); 0 < p < 1, finite nonnegative sigma/amount and positive period |
 | `irr` | finite flows of both signs, matching finite dates | positive period, initial guess above −1; converged rate is checked by scaled NPV; multiple roots and convergence failure remain possible |
 | `drawdown` | finite simple returns ≥ −1 | includes wealth 1 at period 0; total loss gives return drawdown 1 / logarithmic drawdown infinity; maxddrecov is [peak,trough] |
 
@@ -25,7 +28,8 @@ flat vector; `varc(matrix)` and `std(matrix)` wrap that vector in one outer row.
 Use explicit dimensions and inspect shapes when composing these functions.
 `prctile` uses interpolation on sorted-observation ranks at i+0.5, scaled by N
 (and endpoint values outside that rank range), rather than an unspecified generic
-"percentile" convention. It was not rewritten in this change.
+"percentile" convention. Version 1.0.4 computes the same Hazen/type-5
+interpolation directly on a sorted copy.
 
 There is no library-wide missing-data imputation or omission policy. Pass finite,
 complete observations for statistics and handle missing data before calling the

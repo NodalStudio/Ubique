@@ -1,4 +1,4 @@
-import { erf } from "../../index.ts";
+import { erfc } from "../../index.ts";
 
 /**
  * Computes the cumulative distribution function (CDF) of a normal distribution.
@@ -14,41 +14,41 @@ import { erf } from "../../index.ts";
  *
  * @example Compute standard normal CDF at x = 2
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(normcdf(2), 0.9772498701098755);
+ * assertAlmostEquals(normcdf(2), 0.9772498680518208, 4.886249340259104e-13);
  *
  * ```
  *
  * @example Compute normal CDF with custom mean and standard deviation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(normcdf(0, 1, 2), 0.30853751691860176);
+ * assertAlmostEquals(normcdf(0, 1, 2), 0.3085375387259869, 1.5426876936299345e-13);
  *
  * ```
  *
  * @example Compute normal CDF at the mean (should be close to 0.5)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(normcdf(10, 10, 3), 0.5);
+ * assertAlmostEquals(normcdf(10, 10, 3), 0.5, 2.5e-13);
  *
  * ```
  *
  * @example Compute normal CDF for negative values
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(normcdf(-1.5, 0, 1), 0.06680720195906442);
+ * assertAlmostEquals(normcdf(-1.5, 0, 1), 0.06680720126885807, 3.3403600634429036e-14);
  *
  * ```
  *
  * @example Compute normal CDF for a very large value (should be close to 1)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(normcdf(100, 50, 10), 0.9999997133484314);
+ * assertAlmostEquals(normcdf(100, 50, 10), 0.9999997133484281, 4.99999856674214e-13);
  * ```
  */
 export default function normcdf(
@@ -62,5 +62,5 @@ export default function normcdf(
 
   const z = (x - mu) / (sigma * Math.sqrt(2));
 
-  return 0.5 * (1 + erf(z));
+  return 0.5 * erfc(-z);
 }

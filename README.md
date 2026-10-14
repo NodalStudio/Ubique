@@ -14,7 +14,7 @@ JavaScript. The API uses familiar MATLAB-style names such as `mtimes` and `std`.
 ### Node.js or a TypeScript application
 
 ```sh
-npm install ubique@1.0.3
+npm install ubique@1.0.4
 ```
 
 ```ts
@@ -32,17 +32,17 @@ CommonJS is also supported: `const { matmul } = require("ubique");`.
 ### Deno
 
 ```sh
-deno add jsr:@nodalstudio/ubique@1.0.3
+deno add jsr:@nodalstudio/ubique@1.0.4
 ```
 
 Use the same example with `import { matmul } from "@nodalstudio/ubique";`.
-Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.3"`.
+Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.4"`.
 
 ### Browser without a build step
 
 ```html
 <script type="module">
-  import { matmul } from "https://esm.sh/ubique@1.0.3";
+  import { matmul } from "https://esm.sh/ubique@1.0.4";
   console.log(matmul([[1, 2]], [[3], [4]])); // [[11]]
 </script>
 ```
@@ -115,7 +115,7 @@ and never use them after disposal. See the
 
 ## Numerical behavior and upgrading from 1.0.2
 
-**1.0.3 includes the new APIs and numerical corrections described here.** The
+**1.0.4 includes the new APIs and numerical corrections described here.** The
 [website](https://nodalstudio.github.io/Ubique/) builds from the repository's
 current source; npm and JSR distribute versioned releases.
 
@@ -157,9 +157,10 @@ not guarantees for the entire library or comparisons against math.js.
 
 ## Numerical validation
 
-The revised numerical paths pass 716 deterministic comparisons and invariants
+The revised numerical paths pass 1,300 deterministic comparisons and invariants
 against NumPy/SciPy (BLAS/LAPACK) and mpmath at 80-digit precision. This covers
-matrix products, solves, decompositions, statistics, regression and IRR; it is not
+matrix products, solves, decompositions, statistics, probability tails,
+financial formulas, regression and IRR; it is not
 an exhaustive verification of every export or input. See the
 [reproducible reference suite](docs-src/reference-validation.md) for coverage,
 tolerances and commands.

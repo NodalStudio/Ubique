@@ -1,0 +1,87 @@
+/* Compact software documentation, using the approved Nodal typography and colors. */
+:root { --nav-h:64px; --pad:28px; --r-card:24px; --r-frame:24px; --docs-line:#d6d2b8; --docs-select:#ece8ce; }
+body.ns { font-size:15px; line-height:1.6; }
+body.ns::after { display:none; }
+body.ns .ns-head { min-height:64px; height:auto; padding:12px 28px; gap:24px; border-bottom:1.5px solid var(--docs-line); }
+body.ns .ns-brand { gap:12px; }
+body.ns .ns-brand-name { font:800 28px/1 var(--display); letter-spacing:-.02em; }
+body.ns .ns-brand-sub { font:400 12px var(--mono); border:0; padding:0; color:var(--muted); }
+body.ns .ns-nav { gap:8px; }
+body.ns .ns-nav a { font:500 15px var(--display); text-transform:none; letter-spacing:0; padding:6px 14px; border:1.5px solid transparent; border-radius:999px; }
+body.ns .ns-nav a[aria-current] { border-color:var(--ink); background:transparent; }
+body.ns .ns-nav a::after { display:none; }
+body.ns .ns-foot { padding:22px 28px; font-size:12px; border-color:var(--docs-line); gap:16px; }
+body.ns .ns-foot a { font-family:var(--body); }
+body.ns .ns-foot-note { max-width:90ch; font-size:12px; }
+body.ns h1 { font:800 32px/1.15 var(--display); letter-spacing:-.02em; text-transform:none; margin:0 0 14px; }
+body.ns h2, body.ns .ns-display { font:800 24px/1.2 var(--display); letter-spacing:-.015em; text-transform:none; }
+body.ns h3 { font:800 20px/1.3 var(--display); text-transform:none; }
+body.ns p { max-width:78ch; }
+body.ns .docs-label { font:500 12px var(--display); color:var(--muted); margin:0 0 14px; }
+body.ns .docs-meta { font-size:12px; color:var(--muted); }
+body.ns .docs-intro { padding:28px 0 20px; border-bottom:1.5px solid var(--docs-line); margin-bottom:24px; }
+body.ns .docs-intro p { margin:0 0 14px; }
+body.ns .docs-install { padding:14px 18px; border:1.5px solid var(--docs-line); border-radius:12px; background:var(--cream-2); font:13px/1.7 var(--mono); overflow:auto; }
+body.ns .docs-quick { display:flex; flex-wrap:wrap; gap:10px 20px; margin:16px 0 0; }
+body.ns .docs-quick a { font-size:14px; text-decoration:underline; text-underline-offset:4px; }
+body.ns .docs-layout { display:grid; grid-template-columns:225px minmax(0,1fr); max-width:1440px; margin:auto; }
+body.ns .docs-sidebar { border-right:1.5px solid var(--docs-line); padding:26px 18px; }
+body.ns .docs-sidebar nav { position:sticky; top:90px; max-height:calc(100vh - 110px); overflow:auto; }
+body.ns .docs-sidebar ol { padding:0; margin:0; list-style:none; }
+body.ns .docs-sidebar li { margin:0 0 3px; }
+body.ns .docs-sidebar a { display:block; padding:6px 10px; border-radius:12px; color:var(--muted); font-size:13px; text-decoration:none; }
+body.ns .docs-sidebar a:hover,body.ns .docs-sidebar a[aria-current] { background:var(--docs-select); color:var(--ink); }
+body.ns .docs-content { min-width:0; width:100%; max-width:1000px; padding:0 36px 48px; }
+body.ns .docs-overview { margin-bottom:24px; color:var(--muted); }
+body.ns .article { padding:0; }
+body.ns .chapter { display:block; margin:28px 0 0; padding:24px 0 0; border-color:var(--docs-line); }
+body.ns .chapter > h2 { font-size:24px; margin:0 0 16px; scroll-margin-top:90px; }
+body.ns .chapter > * { max-width:100%; }
+body.ns .chapter > pre,body.ns .chapter .card,body.ns .chapter > section { margin:18px 0; }
+body.ns pre { font:13px/1.65 var(--mono); white-space:pre-wrap; overflow-wrap:anywhere; }
+body.ns .article pre { padding:16px 20px; border-radius:12px; background:var(--ink); color:var(--cream); }
+body.ns .card { border:1.5px solid var(--docs-line); border-radius:12px; padding:20px; }
+body.ns .card h3 { font-size:20px; }
+body.ns .controls { gap:12px; flex-wrap:wrap; }
+body.ns .docs-evidence { border-top:1.5px solid var(--docs-line); padding-top:24px; margin-top:28px; }
+body.ns .ns-btn,body.ns button { font-size:13px; letter-spacing:0; text-transform:none; min-height:36px; }
+body.ns .bench-intro { max-width:1280px; margin:0 auto; padding:28px; }
+body.ns .bench { padding:0 28px 40px; }
+body.ns .bench section { padding-top:28px; }
+body.ns .section-label { font:800 24px/1.2 var(--display); text-transform:none; margin:0 0 18px; padding-bottom:12px; border-color:var(--docs-line); }
+body.ns .section-label::after { display:none; }
+body.ns .fig-speedup .ratio,body.ns .summary-stat .big { font-size:36px; }
+body.ns .ddoc { padding:0 28px 40px; }
+body.ns #content { margin-top:20px; }
+body.ns .api-intro { padding:0; border:0; margin:0 0 24px; }
+body.ns .api-filters { display:flex; flex-wrap:wrap; gap:8px; }
+body.ns .api-filters .chip { font-size:12px; padding:5px 10px; }
+body.ns .api-cat { margin:22px 0 0; padding:0; }
+body.ns .api-cat-head { padding:12px 0; border-color:var(--docs-line); gap:12px; }
+body.ns .api-cat-head h2 { font-size:22px; text-transform:none; }
+body.ns .api-list { display:block; }
+body.ns .api-list a { display:grid; grid-template-columns:minmax(150px,1fr) minmax(0,3fr); gap:20px; padding:9px 12px; border-bottom:1px solid var(--docs-line); }
+body.ns .api-list .fn { font:13px var(--mono); }
+body.ns .api-list .desc { font-size:13px; }
+body.ns .symbol-header, body.ns .symbolName { font-size:30px; }
+body.ns .doc-example { padding:18px 20px; border:1.5px solid var(--docs-line); border-radius:12px; margin:20px 0; }
+body.ns .doc-example h2 { margin:0 0 12px; font-size:22px; }
+body.ns .doc-example textarea { display:block; width:100%; min-height:68px; background:var(--cream-2); color:var(--ink); border:1px solid var(--docs-line); padding:10px; border-radius:8px; font:13px/1.5 var(--mono); resize:vertical; }
+body.ns .doc-example label { display:block; margin:10px 0; font-size:13px; }
+body.ns .doc-example output { display:block; padding:12px 0 0; white-space:pre-wrap; font:13px/1.5 var(--mono); }
+body.ns .doc-example .example-controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+body.ns .doc-example button { background:var(--ink); color:var(--cream); padding:8px 18px; border:1.5px solid var(--ink); border-radius:999px; cursor:pointer; }
+@media(min-width:1100px) { body.ns.ns-api-home #content > main { padding-left:220px; position:relative; } body.ns.ns-api-home .api-filters { position:absolute; left:0; top:28px; width:195px; min-width:0; display:flex; flex-direction:column; align-items:stretch; } }
+@media(max-width:760px) { :root { --pad:16px; } body.ns .ns-head { padding:12px 16px; flex-wrap:wrap; gap:14px; } body.ns .ns-nav { gap:0; } body.ns .ns-nav a { padding:5px 10px; } body.ns .docs-layout { display:block; } body.ns .docs-sidebar { border-right:0; border-bottom:1.5px solid var(--docs-line); padding:14px 16px; } body.ns .docs-sidebar nav { position:static; max-height:160px; } body.ns .docs-content { padding:0 18px 32px; } body.ns .ddoc,body.ns .bench { padding-left:16px; padding-right:16px; } body.ns .api-list a { display:block; } body.ns .api-list .desc { display:block; margin-top:4px; } body.ns .ns-foot { padding:18px 16px; } }
+
+body.ns .api-filters .chip { white-space:normal; min-width:0; width:100%; box-sizing:border-box; border:0; border-radius:10px; text-transform:none; letter-spacing:0; font:500 13px/1.5 var(--body); }
+body.ns .api-filters .chip:hover { background:var(--docs-select); color:var(--ink); }
+body.ns .symbolTitle { padding-bottom:18px; border-color:var(--docs-line); }
+body.ns .symbolTitle .text-2xl { font-size:32px; line-height:1.2; }
+body.ns .symbolTitle .text-2xl > [class^="text-"] { font-size:12px; margin-bottom:10px; }
+
+body.ns .controls label, body.ns .controls select { max-width:100%; min-width:0; }
+body.ns .usageContent pre { white-space:pre; overflow:auto; overflow-wrap:normal; }
+
+body.ns .card label { max-width:100%; flex-wrap:wrap; }
+body.ns .card select { max-width:100%; min-width:0; }

@@ -1,3 +1,4 @@
+import { centered } from "../internal/moments.ts";
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
 import { isnumber, vectorfun } from "../../index.ts";
 
@@ -117,38 +118,34 @@ export default function zscore(
     return NaN;
   }
 
-  return vectorfun(dim, x, (arr: array) => computeZscore(arr, flag), flag);
+  const result = vectorfun(
+    dim,
+    x,
+    (arr: array) => computeZscore(arr, flag),
+    flag,
+  );
+  if (dim === 1 && Array.isArray(x[0])) {
+    const columns = result as number[][];
+    return columns[0].map((_, i) => columns.map((column) => column[i]));
+  }
+  return result;
 }
 
 /**
- * Single-pass z-score calculation using Welford's algorithm.
- * Numerically stable computation of mean and std, then standardizes
+ * Center in translated coordinates before computing squared deviations.
+ * This preserves small variations around a large common offset.
  */
 function computeZscore(arr: array, flag: 0 | 1): array {
   const n = arr.length;
   if (n === 0) return [];
   if (n === 1) return [0];
 
-  // Welford's algorithm for numerically stable variance
-  let mean = 0;
-  let m2 = 0;
-
-  for (let i = 0; i < n; i++) {
-    const x = arr[i];
-    const delta = x - mean;
-    mean += delta / (i + 1);
-    const delta2 = x - mean;
-    m2 += delta * delta2;
+  if (flag !== 0 && flag !== 1) {
+    throw new RangeError("Normalization flag must be 0 or 1");
   }
-
-  const variance = m2 / (n - flag);
-  const stdDev = Math.sqrt(variance);
-
-  // Standardize: (x - mean) / std
-  if (stdDev === 0) {
-    // All values are the same
-    return arr.map(() => 0);
-  }
-
-  return arr.map((val) => (val - mean) / stdDev);
+  const deviations = centered(arr);
+  const stdDev = Math.sqrt(
+    deviations.reduce((sum, v) => sum + v * v, 0) / (n - flag),
+  );
+  return deviations.map((value) => stdDev === 0 ? 0 : value / stdDev);
 }

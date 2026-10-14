@@ -1,11 +1,11 @@
 import type { array, matrix } from "../types.d.ts";
-import { find, isnumber, std, vectorfun } from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Downside Risk.
  *
- * Downside risk is the semi-standard deviation of returns below a
- * Minimum Acceptable Return (MAR)
+ * Root mean squared shortfall from Minimum Acceptable Return (MAR):
+ * sqrt(mean(min(x - MAR, 0)^2)), with all observations in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -14,10 +14,10 @@ import { find, isnumber, std, vectorfun } from "../../index.ts";
  *
  * @example Downside risk with default MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(downsiderisk(x), 0.0035355339059327385);
+ * assertAlmostEquals(downsiderisk(x), 0.0052630789467763076, 1e-14);
  *
  * ```
  *
@@ -25,15 +25,15 @@ import { find, isnumber, std, vectorfun } from "../../index.ts";
  * ```ts
  * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.018027756377319945, 1e-14);
  *
  * ```
  *
  * @example Downside risk with higher MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
+ * assertAlmostEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.1118033988749895, 5.5901699437494745e-14);
  * ```
  */
 export default function downsiderisk(
@@ -44,8 +44,8 @@ export default function downsiderisk(
 /**
  * Downside Risk.
  *
- * Downside risk is the semi-standard deviation of returns below a
- * Minimum Acceptable Return (MAR)
+ * Root mean squared shortfall from Minimum Acceptable Return (MAR):
+ * sqrt(mean(min(x - MAR, 0)^2)), with all observations in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -54,10 +54,10 @@ export default function downsiderisk(
  *
  * @example Downside risk with default MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(downsiderisk(x), 0.0035355339059327385);
+ * assertAlmostEquals(downsiderisk(x), 0.0052630789467763076, 1e-14);
  *
  * ```
  *
@@ -65,15 +65,15 @@ export default function downsiderisk(
  * ```ts
  * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.018027756377319945, 1e-14);
  *
  * ```
  *
  * @example Downside risk with higher MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
+ * assertAlmostEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.1118033988749895, 5.5901699437494745e-14);
  * ```
  */
 export default function downsiderisk(
@@ -84,8 +84,8 @@ export default function downsiderisk(
 /**
  * Downside Risk.
  *
- * Downside risk is the semi-standard deviation of returns below a
- * Minimum Acceptable Return (MAR)
+ * Root mean squared shortfall from Minimum Acceptable Return (MAR):
+ * sqrt(mean(min(x - MAR, 0)^2)), with all observations in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -94,10 +94,10 @@ export default function downsiderisk(
  *
  * @example Downside risk with default MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(downsiderisk(x), 0.0035355339059327385);
+ * assertAlmostEquals(downsiderisk(x), 0.0052630789467763076, 1e-14);
  *
  * ```
  *
@@ -105,15 +105,15 @@ export default function downsiderisk(
  * ```ts
  * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.018027756377319945, 1e-14);
  *
  * ```
  *
  * @example Downside risk with higher MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
+ * assertAlmostEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.1118033988749895, 5.5901699437494745e-14);
  * ```
  */
 export default function downsiderisk(
@@ -124,8 +124,8 @@ export default function downsiderisk(
 /**
  * Downside Risk.
  *
- * Downside risk is the semi-standard deviation of returns below a
- * Minimum Acceptable Return (MAR)
+ * Root mean squared shortfall from Minimum Acceptable Return (MAR):
+ * sqrt(mean(min(x - MAR, 0)^2)), with all observations in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -134,10 +134,10 @@ export default function downsiderisk(
  *
  * @example Downside risk with default MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(downsiderisk(x), 0.0035355339059327385);
+ * assertAlmostEquals(downsiderisk(x), 0.0052630789467763076, 1e-14);
  *
  * ```
  *
@@ -145,15 +145,15 @@ export default function downsiderisk(
  * ```ts
  * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.018027756377319945, 1e-14);
  *
  * ```
  *
  * @example Downside risk with higher MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.07071067811865477);
+ * assertAlmostEquals(downsiderisk([0.1, -0.2, 0.05, -0.1], 0), 0.1118033988749895, 5.5901699437494745e-14);
  * ```
  */
 export default function downsiderisk(
@@ -162,21 +162,20 @@ export default function downsiderisk(
   dim: 0 | 1 = 0,
 ): number | array | matrix {
   const _downsiderisk = function (a: array, mar: number): number {
-    // Create boolean array for values below MAR
-    const belowMar = a.map((el: number) => el < mar);
-    const idx = find(belowMar);
-    if (idx.length === 0) {
-      return 0;
+    if (!Number.isFinite(mar) || !a.every(Number.isFinite)) {
+      throw new Error("Returns and MAR must be finite");
     }
-    const downside = [];
-    for (let i = 0; i < idx.length; i++) {
-      downside[i] = a[idx[i]];
-    }
-    return std(downside) as number;
+    if (a.length === 0) return NaN;
+    let total = 0;
+    for (const value of a) total += Math.min(value - mar, 0) ** 2;
+    return Math.sqrt(total / a.length);
   };
 
   if (isnumber(x)) {
-    return 0;
+    if (!Number.isFinite(x) || !Number.isFinite(mar)) {
+      throw new Error("Returns and MAR must be finite");
+    }
+    return Math.max(mar - x, 0);
   }
 
   return vectorfun(dim, x, _downsiderisk, mar);

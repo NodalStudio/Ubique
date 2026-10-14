@@ -7,6 +7,9 @@ import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
  * Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
  * instead of standard deviation. It measures the return of an investment relative to the risk of negative returns.
  *
+ * Uses (mean(x) - frisk) / sqrt(mean(min(x - MAR, 0)^2)).
+ * frisk sets the numerator threshold; MAR sets the downside threshold.
+ *
  * @param x Asset/portfolio returns
  * @param frisk Risk-free rate (defaults to 0)
  * @param mar Minimum acceptable return threshold (defaults to 0)
@@ -16,18 +19,18 @@ import { downsiderisk, isnumber, mean, vectorfun } from "../../index.ts";
  *
  * @example Sortino ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(sortino(x), 5.062884553295679);
+ * assertAlmostEquals(sortino(x), 3.4010510161478655, 1.7005255080739327e-12);
  *
  * ```
  *
  * @example Sortino ratio with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.5303300858899106);
+ * assertAlmostEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.33541019662496846, 1.6770509831248422e-13);
  *
  * ```
  *
@@ -50,6 +53,9 @@ export default function sortino(
  * Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
  * instead of standard deviation. It measures the return of an investment relative to the risk of negative returns.
  *
+ * Uses (mean(x) - frisk) / sqrt(mean(min(x - MAR, 0)^2)).
+ * frisk sets the numerator threshold; MAR sets the downside threshold.
+ *
  * @param x Asset/portfolio returns
  * @param frisk Risk-free rate (defaults to 0)
  * @param mar Minimum acceptable return threshold (defaults to 0)
@@ -59,18 +65,18 @@ export default function sortino(
  *
  * @example Sortino ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(sortino(x), 5.062884553295679);
+ * assertAlmostEquals(sortino(x), 3.4010510161478655, 1.7005255080739327e-12);
  *
  * ```
  *
  * @example Sortino ratio with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.5303300858899106);
+ * assertAlmostEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.33541019662496846, 1.6770509831248422e-13);
  *
  * ```
  *
@@ -93,6 +99,9 @@ export default function sortino(
  * Calculates the Sortino ratio, a risk-adjusted performance measure that uses downside risk
  * instead of standard deviation. It measures the return of an investment relative to the risk of negative returns.
  *
+ * Uses (mean(x) - frisk) / sqrt(mean(min(x - MAR, 0)^2)).
+ * frisk sets the numerator threshold; MAR sets the downside threshold.
+ *
  * @param x Asset/portfolio returns
  * @param frisk Risk-free rate (defaults to 0)
  * @param mar Minimum acceptable return threshold (defaults to 0)
@@ -102,18 +111,18 @@ export default function sortino(
  *
  * @example Sortino ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(sortino(x), 5.062884553295679);
+ * assertAlmostEquals(sortino(x), 3.4010510161478655, 1.7005255080739327e-12);
  *
  * ```
  *
  * @example Sortino ratio with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.5303300858899106);
+ * assertAlmostEquals(sortino([0.1, -0.2, 0.05, -0.1], 0), -0.33541019662496846, 1.6770509831248422e-13);
  *
  * ```
  *

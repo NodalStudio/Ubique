@@ -14,6 +14,12 @@ import {
 } from "./brand_chrome.ts";
 
 const docsOutput = "./docs";
+// Remove stale generated symbol pages from previous versions.
+try {
+  await Deno.remove(docsOutput, { recursive: true });
+} catch (error) {
+  if (!(error instanceof Deno.errors.NotFound)) throw error;
+}
 const docArgs = [
   "doc",
   "--html",
@@ -52,6 +58,8 @@ const assetFiles = [
   "nodal.js",
   "favicon.svg",
   "ubique-docs.css",
+  "docs.css",
+  "docs_examples.js",
 ];
 
 function escapeRegExp(value: string): string {
@@ -94,8 +102,11 @@ async function fixDocAssets(
 
   for await (const filePath of walkHtml(docsRoot)) {
     const original = await Deno.readTextFile(filePath);
-    let updated = original;
-    let changed = false;
+    let updated = original.replace(
+      /(import \{[^;{}]+\} from )&quot;(?:datatype|elemop|elmath|linalgebra|matarrs|probdistr|quants|reglin|stats)\/[^&]+\.ts&quot;/g,
+      "$1&quot;ubique&quot;",
+    );
+    let changed = updated !== original;
 
     const prefix = pathToRoot(docsRoot, dirname(filePath));
 
@@ -184,7 +195,7 @@ async function brandDocPages(
         /<\/head>/,
         `${
           brandHead(root)
-        }<link rel="stylesheet" href="${root}/ubique-docs.css">` +
+        }<link rel="stylesheet" href="${root}/ubique-docs.css"><link rel="stylesheet" href="${root}/docs.css">` +
           (isIndexPage ? "<style>.toc { display: none; }</style>" : "") +
           "</head>",
       )
@@ -362,7 +373,9 @@ await Deno.writeTextFile(
   JSON.stringify(
     {
       source: Deno.env.get("GITHUB_SHA")
-        ? `https://github.com/NodalStudio/Ubique/commit/${Deno.env.get("GITHUB_SHA")}`
+        ? `https://github.com/NodalStudio/Ubique/commit/${
+          Deno.env.get("GITHUB_SHA")
+        }`
         : "local checkout",
       builtAt: new Date().toISOString(),
       bundleSha256: Array.from(digest, (b) => b.toString(16).padStart(2, "0"))

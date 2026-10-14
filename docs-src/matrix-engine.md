@@ -9,7 +9,7 @@ sources:
 
 Multiplying matrices is a useful way to understand numerical performance. The mathematics fits in one line, yet execution time depends on how we arrange memory, traverse it, cross runtime boundaries, and measure the result. We will build a small matrix multiplier in JavaScript, improve its data access, and follow the same calculation into Rust and WebAssembly.
 
-Ubique provides the production context: a TypeScript mathematical library maintained by Nodal Studio, with selected operations backed by Rust and nalgebra. This version builds on Max Todaro’s original Ubique library; nalgebra supplies the numerical kernels discussed here. The teaching implementations below explain possible design choices. The 1.0.2 baseline delegated matrix multiplication to nalgebra. Ubique 1.0.3 adds JS/WASM dispatch and a persistent-memory API; both run in this site’s demos and are included in the npm/JSR packages. The tiled JavaScript kernel below remains a teaching implementation.
+Ubique provides the production context: a TypeScript mathematical library maintained by Nodal Studio, with selected operations backed by Rust and nalgebra. This version builds on Max Todaro’s original Ubique library; nalgebra supplies the numerical kernels discussed here. The teaching implementations below explain possible design choices. The 1.0.2 baseline delegated matrix multiplication to nalgebra. Since 1.0.3, Ubique includes JS/WASM dispatch and a persistent-memory API; both run in this site’s demos and are included in the npm/JSR packages. The tiled JavaScript kernel below remains a teaching implementation.
 
 ## Start with one output cell
 
@@ -191,7 +191,7 @@ is a hypothesis about speed until the complete operation has been measured.
 
 There are two different improvements to try. First, pack directly into typed arrays so that `flat()` does not create an intermediate ordinary array. Second, offer an advanced API that retains matrices in WASM memory across calls.
 
-Ubique 1.0.3 exposes this API in both the site’s bundle and the npm/JSR packages:
+Ubique exposes this API in both the site’s bundle and the npm/JSR packages:
 
 ```js
 import { DenseMatrix } from "ubique";
@@ -227,7 +227,7 @@ Memory growth deserves particular care. Growing an ordinary WebAssembly memory d
 
 ## Test compiler options before writing a new kernel
 
-The reviewed baseline used `opt-level = "z"`, which prioritizes binary size. Ubique 1.0.3 uses `opt-level = 3`, LTO and one codegen unit, and retains a separate SIMD experiment. Compare the generated artifacts and measure the complete API. A larger kernel might run faster but increase download, parsing, or compilation costs. The [Rust compiler documentation](https://doc.rust-lang.org/rustc/codegen-options/index.html#opt-level) defines the optimization levels; it does not promise a speedup for this workload.
+The reviewed baseline used `opt-level = "z"`, which prioritizes binary size. Ubique uses `opt-level = 3`, LTO and one codegen unit, and retains a separate SIMD experiment. Compare the generated artifacts and measure the complete API. A larger kernel might run faster but increase download, parsing, or compilation costs. The [Rust compiler documentation](https://doc.rust-lang.org/rustc/codegen-options/index.html#opt-level) defines the optimization levels; it does not promise a speedup for this workload.
 
 SIMD is another experiment. A 128-bit vector can contain two f64 lanes or four f32 lanes. That creates opportunities to process several values per instruction, but useful speedup depends on the kernel and its memory access. Enabling a target feature does not prove that the compiler emitted the desired instructions. Inspect the binary and benchmark it. Rust exposes [WebAssembly SIMD intrinsics and feature controls](https://doc.rust-lang.org/core/arch/wasm32/index.html).
 

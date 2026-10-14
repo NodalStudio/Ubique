@@ -377,3 +377,13 @@ impl MatrixBuffer {
 pub fn matrix_memory() -> JsValue {
     wasm_bindgen::memory()
 }
+
+/// IEEE binary64 special functions from libm, including accurate small tails.
+#[wasm_bindgen]
+pub fn erfwasm(x: f64) -> f64 {
+    libm::erf(x)
+}
+#[wasm_bindgen]
+pub fn erfcwasm(x: f64) -> f64 {
+    libm::erfc(x)
+}

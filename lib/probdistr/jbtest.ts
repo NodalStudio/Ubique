@@ -13,32 +13,32 @@ import { kurtosis, skewness } from "../../index.ts";
  *
  * @example
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  * ```
  *
  * @example Compute the Jarque-Bera test statistic for normality
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(jbtest(x), 0.6360604293924916);
+ * assertAlmostEquals(jbtest(x), 0.6360604293924916, 1e-13);
  *
  * ```
  *
  * @example Compute JB test statistic for a dataset with more variation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(jbtest([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 0.6244872972145701);
+ * assertAlmostEquals(jbtest([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 0.6244872972145701, 1e-13);
  *
  * ```
  *
  * @example JB test on a perfectly normal dataset (should be close to 0)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(jbtest([0, 0, 0, 0, 0]), NaN);
  *
@@ -46,9 +46,9 @@ import { kurtosis, skewness } from "../../index.ts";
  *
  * @example Test with a highly skewed dataset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(jbtest([1, 1, 1, 1, 100]), 1.888020833333333);
+ * assertAlmostEquals(jbtest([1, 1, 1, 1, 100]), 1.888020833333333, 1e-13);
  * ```
  */
 export default function jbtest(x: array): number {

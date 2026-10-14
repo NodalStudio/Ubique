@@ -31,6 +31,15 @@ jobs:
       - name: Build documentation
         run: deno task docs
 
+      - name: Install browser for documentation checks
+        run: deno run -A npm:playwright@1.59.1 install --with-deps chromium
+
+      - name: Check documentation layouts and runnable examples
+        run: |
+          python3 -m http.server 8873 --bind 127.0.0.1 --directory docs > /tmp/ubique-docs-server.log 2>&1 &
+          deno run -A scripts/test_docs_browser.mjs
+          deno task test:browser
+
       - name: Create .nojekyll
         run: touch docs/.nojekyll
 

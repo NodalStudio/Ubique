@@ -15,7 +15,7 @@ checkout and its generated WASM untouched. Do not benchmark while compiling,
 running other tests, or in a throttled/background browser tab.
 
 The matrix harness uses deterministic f64 data, a finite absolute + relative
-correctness gate, 10 warmups, 9 batches with rotating implementation order,
+correctness gate, 10 warmups, calibration targeting 10 ms for the fastest variant, 9 batches with rotating implementation order,
 and median milliseconds per operation. Raw samples, dimensions, iteration counts,
 runtime and CPU are retained. Setup, import/compilation, and readback are excluded
 from resident timings; nested-array timings include input packing and output
@@ -93,3 +93,34 @@ zero/nonfinite-duration regression cases. With the docs server running, use
 `deno task test:benchmark:browser` to exercise all nine comparisons, inject a
 numerical mismatch and a zero clock, and verify raw export. Historical JSON files
 above retain their original calibration protocol; they were not silently rewritten.
+
+## 1.0.4 measurements
+
+[Statistics samples](statistics-1.0.4.json) compare the installed **1.0.3** npm
+ESM build against the 1.0.4 source in the same Deno process, with matching
+results checked before timing. Inputs contain 32, 1,000 and 10,000 seeded values.
+
+| Operation | Baseline / current median (32 / 1,000 / 10,000 values) |
+| --- | --- |
+| Hazen percentile | 7.60× / 6.17× / 5.93× |
+| Mean absolute deviation | 3.70× / 3.28× / 3.88× |
+| Fourth central moment | 2.61× / 2.20× / 2.18× |
+
+The host had other applications active; release tests were paused. Samples vary
+substantially, so these are **local observations**, not portable speed guarantees
+or launch headline numbers. Percentiles now sort once and interpolate directly;
+the two moment paths avoid intermediate elementwise arrays and WASM crossings.
+
+```sh
+npm install --prefix /tmp/ubique-baseline ubique@1.0.3
+deno run -A scripts/benchmark_statistics.ts \
+  --baseline=file:///tmp/ubique-baseline/node_modules/ubique/esm/index.js
+```
+
+[Matrix samples](matrices-1.0.4.json) retain scalar/SIMD, resident and copied API
+costs separately. [Loop-unrolling probes](dispatch-probe-1.0.4.json) use
+`scripts/benchmark_dispatch.ts`. Correctness gates passed, but the run's variance
+is too high to justify changing the portable default or the automatic dispatch
+threshold. SIMD remains an optional build experiment; this release does not
+claim a new matrix-kernel speedup. Recheck on an isolated host and multiple
+browser engines before changing those defaults.

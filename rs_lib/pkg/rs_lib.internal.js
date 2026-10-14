@@ -107,6 +107,25 @@ export function detwasm(a, n) {
 }
 
 /**
+ * @param {number} x
+ * @returns {number}
+ */
+export function erfcwasm(x) {
+  const ret = wasm.erfcwasm(x);
+  return ret;
+}
+
+/**
+ * IEEE binary64 special functions from libm, including accurate small tails.
+ * @param {number} x
+ * @returns {number}
+ */
+export function erfwasm(x) {
+  const ret = wasm.erfwasm(x);
+  return ret;
+}
+
+/**
  * Computes the inverse of a square matrix.
  *
  * # Arguments

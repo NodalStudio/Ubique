@@ -2,10 +2,12 @@
 import { DenseMatrix, matmul } from "../index.ts";
 import {
   BENCHMARK_SEED,
+  calibrateIterations,
   medianTime,
   resultsAgree,
   seededRandom,
   timeBatch,
+  timingUsable,
 } from "./benchmark_helpers.ts";
 import { cpus } from "node:os";
 
@@ -146,10 +148,7 @@ for (
       }
       for (let i = 0; i < 10; i++) v.fn();
     }
-    const iterations = Math.max(
-      1,
-      Math.min(1000, Math.floor(2e6 / (m * k * n))),
-    );
+    const iterations = calibrateIterations(variants.map((v) => v.fn));
     for (let batch = 0; batch < 9; batch++) {
       for (let offset = 0; offset < variants.length; offset++) {
         const v = variants[(batch + offset) % variants.length];
@@ -161,7 +160,10 @@ for (
       iterationsPerBatch: iterations,
       variants: variants.map((v) => ({
         name: v.name,
-        medianMs: medianTime(v.samples),
+        medianMs: timingUsable(v.samples, iterations)
+          ? medianTime(v.samples)
+          : null,
+        timingResolved: timingUsable(v.samples, iterations),
         samplesMs: v.samples,
       })),
     };
@@ -195,7 +197,7 @@ await Deno.writeTextFile(
         baseline: baselinePath,
         simd: !!simd,
         protocol:
-          "10 warmups; 9 rotating batches; median ms/op; f64; setup excluded; nested includes copies; resident excludes setup and readback",
+          "10 warmups; calibrated batches targeting >=10ms for fastest variant (100000-op cap); 9 rotating batches; median ms/op; f64; setup excluded; nested includes copies; resident excludes setup and readback",
         tolerance: { absolute: 1e-10, relative: 1e-9 },
       },
       results,

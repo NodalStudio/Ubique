@@ -1,16 +1,16 @@
 # Independent numerical validation
 
-The 1.0.3 release is checked against NumPy/SciPy and mpmath, independently of
+The 1.0.4 release is checked against NumPy/SciPy and mpmath, independently of
 Ubique's implementations. SciPy's linear algebra routines use BLAS/LAPACK:
 https://docs.scipy.org/doc/scipy/tutorial/linalg.html
 
-The deterministic suite currently contains **716 cases** across 18 operation names.
+The deterministic suite currently contains **1,300 cases** across 63 operation names.
 It tests source exports and can run against the generated or installed npm ESM
 package. This is a correctness comparison, **not a speed comparison with SciPy**,
 a MATLAB certification, or a proof covering every input or every Ubique export.
 
 The checked-in [source validation report](reference-results.json) records the
-release run. Node ESM and CommonJS builds also passed the same 716 cases.
+release run. Node ESM and CommonJS builds also passed the same 1,300 cases.
 
 ## Reproduce
 
@@ -55,6 +55,15 @@ seed, operation counts, failures and the largest measured error metrics.
 - IRR: conventional cash flows with a unique root, compared with SciPy's Brent
   solver in log-discount space, with relative tolerance 2e-11. Multiple-root
   semantics are covered separately by Ubique's regression tests.
+- Higher central moments, skewness, kurtosis, z-scores and Jarque–Bera, including
+  1e12 offsets; Hazen/type-5 quantiles against NumPy; distances against SciPy.
+- Normal CDF/PDF/inverse and erf/erfc/inverses against SciPy, including normal
+  probabilities down to 1e-100. Tiny tails are tested with relative error.
+- Financial formulas against independently implemented NumPy calculations:
+  full-sample downside deviation, unconditional upper/lower partial moments,
+  Omega, Sortino, M2-Sortino, Sharpe, tracking error, information ratio,
+  annualization, historical and normal VaR/ES, return conversions and Dietz.
+  These are formula comparisons, not execution of MATLAB or an R package.
 - Input preservation and finite results are checked; singular cases must throw.
 
 Powers use a 2e-12 relative bound. Exact singular determinants have a 5e-14
@@ -68,10 +77,23 @@ The first 671-case run found 36 failures in variance, standard deviation and
 vector correlation around large offsets. Extending coverage to matrix covariance
 and matrix correlation found the same centering issue there. Shifting by an
 observed origin **before** accumulating moments fixes those losses of precision.
-The final 716-case suite passes after that correction. Translation-invariance
+The 1.0.3 716-case suite passed after that correction. Translation-invariance
 regressions also run in the normal `deno task test` suite, without Python.
 
 The suite focuses on revised numerical paths. It does not independently validate
 all probability, date, portfolio or elementwise exports. Floating-point overflow,
 underflow, rank-tolerance policy and multiple IRR roots remain subject to the
 [numerical contract](numerical-contract.md).
+
+### Expanded checks in 1.0.4
+
+The first expanded run exposed inaccurate normal tails, large-offset higher
+moments and incorrectly normalized downside/upside risk formulas. The corrected
+1,300-case suite passes. Normal ES and VaR now scale drift with the horizon and
+volatility with its square root; arrays and matrices retain their shape.
+
+Downside deviation is `sqrt(mean(min(r - MAR, 0)^2))` over all observations,
+and upside potential is `mean(max(r - MAR, 0))`. This follows the full-sample
+convention documented by [PerformanceAnalytics](https://github.com/braverock/PerformanceAnalytics/blob/master/R/DownsideDeviation.R).
+Sortino retains the API's separate `frisk` numerator and `MAR` denominator
+thresholds. These corrected formulas intentionally change some 1.0.3 outputs.

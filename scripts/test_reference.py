@@ -14,6 +14,7 @@ from pathlib import Path
 import mpmath as mp
 import numpy as np
 import scipy
+from reference_extended import add_extended
 from scipy import linalg, optimize
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -265,6 +266,9 @@ for repeat in range(30):
     add("irr", [cash], np.expm1(root), tol=2e-11, label=f"irr/{repeat}")
 for cash in [[-100, 1000], [-100, 1], [-100, 121]]:
     add("irr", [cash], cash[1] / -cash[0] - 1, tol=2e-11)
+
+
+add_extended(add, rng)
 
 root = Path(__file__).resolve().parent.parent
 command = (

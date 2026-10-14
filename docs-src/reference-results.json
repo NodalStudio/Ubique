@@ -8,8 +8,8 @@
     "mpmath": "1.4.1",
     "precision": 80
   },
-  "cases": 716,
-  "passed": 716,
+  "cases": 1300,
+  "passed": 1300,
   "failed": 0,
   "operations": {
     "matmul": 90,
@@ -23,13 +23,58 @@
     "mpower": 160,
     "lu": 6,
     "issingular": 5,
-    "varc": 30,
-    "std": 15,
-    "median": 15,
+    "varc": 42,
+    "std": 27,
+    "median": 21,
     "cov": 30,
     "corrcoef": 30,
     "regression": 15,
-    "irr": 33
+    "irr": 33,
+    "mean": 12,
+    "moment": 24,
+    "mad": 6,
+    "skewness": 18,
+    "kurtosis": 18,
+    "xkurtosis": 12,
+    "zscore": 24,
+    "jbtest": 6,
+    "quantile": 48,
+    "prctile": 48,
+    "quartile": 6,
+    "iqr": 6,
+    "range": 12,
+    "min": 6,
+    "max": 6,
+    "pdist": 24,
+    "normcdf": 34,
+    "normpdf": 34,
+    "erf": 17,
+    "erfc": 17,
+    "norminv": 11,
+    "downsiderisk": 6,
+    "downsidepot": 6,
+    "upsidepot": 6,
+    "omegaratio": 6,
+    "sortino": 6,
+    "sharpe": 3,
+    "trackerr": 3,
+    "inforatio": 3,
+    "percpos": 3,
+    "annreturn": 12,
+    "annrisk": 6,
+    "activereturn": 6,
+    "ret2tick": 6,
+    "tick2ret": 6,
+    "twr": 3,
+    "cagr": 3,
+    "histvar": 9,
+    "histcondvar": 9,
+    "paramvar": 22,
+    "paramcondvar": 22,
+    "mdietz": 3,
+    "erfinv": 5,
+    "erfcinv": 7,
+    "m2sortino": 4
   },
   "failures": [],
   "largest_errors": [
@@ -46,52 +91,52 @@
       "error": 1.5097668304409652e-13
     },
     {
+      "case": "normcdf/-20/1",
+      "error": 6.384360237812551e-14
+    },
+    {
+      "case": "normcdf/-20/2",
+      "error": 6.384360237812551e-14
+    },
+    {
       "case": "irr/5",
       "error": 1.75142246933773e-14
+    },
+    {
+      "case": "normcdf/-10/1",
+      "error": 1.6198069233748634e-14
+    },
+    {
+      "case": "normcdf/-10/2",
+      "error": 1.6198069233748634e-14
     },
     {
       "case": "irr/6",
       "error": 1.5758418703940608e-14
     },
     {
-      "case": "irr/22",
-      "error": 5.402206238722375e-15
+      "case": "normcdf/-8/1",
+      "error": 1.2680692889833338e-14
     },
     {
-      "case": "covariance-vectors/1001/0",
-      "error": 2.6255300062140115e-15
+      "case": "normcdf/-8/2",
+      "error": 1.2680692889833338e-14
     },
     {
-      "case": "det",
-      "error": 2.402165005254124e-15
+      "case": "tick2ret",
+      "error": 8.057573071971257e-15
     },
     {
-      "case": "irr/24",
-      "error": 2.2940258342554497e-15
+      "case": "annreturn",
+      "error": 8.012572228013989e-15
     },
     {
-      "case": "irr/27",
-      "error": 2.1374397703342367e-15
+      "case": "tick2ret",
+      "error": 7.913794830348179e-15
     },
     {
-      "case": "irr",
-      "error": 2.1147105230955366e-15
-    },
-    {
-      "case": "mpower",
-      "error": 2.057878192377709e-15
-    },
-    {
-      "case": "irr/3",
-      "error": 2.0363507433990106e-15
-    },
-    {
-      "case": "irr/4",
-      "error": 1.8591840842584274e-15
-    },
-    {
-      "case": "irr/7",
-      "error": 1.5909313890444293e-15
+      "case": "normcdf/-6/1",
+      "error": 6.917013493820657e-15
     }
   ]
 }

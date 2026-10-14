@@ -13,25 +13,25 @@ import { erf } from "../../index.ts";
  *
  * @example Compute the inverse error function for a positive value
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfinv(0.1), 0.08885596505119556);
+ * assertAlmostEquals(erfinv(0.1), 0.08885599049425769, 4.442799524712884e-14);
  *
  * ```
  *
  * @example Compute the inverse error function for a negative value
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfinv(-0.5), -0.47693623612190483);
+ * assertAlmostEquals(erfinv(-0.5), -0.4769362762044699, 2.384681381022349e-13);
  *
  * ```
  *
  * @example Compute the inverse error function for 0 (should return 0)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfinv(0), 0);
+ * assertAlmostEquals(erfinv(0), 0.0, 1e-14);
  *
  * ```
  *

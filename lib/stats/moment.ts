@@ -1,5 +1,6 @@
+import { centered } from "../internal/moments.ts";
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { isnumber, mean, vectorfun } from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Computes the central moment of a dataset.
@@ -121,6 +122,12 @@ export default function moment(
 }
 
 function computeMoment(arr: array, order: number): number {
-  const mu = mean(arr);
-  return mean(arr.map((val: number) => (val - mu) ** order));
+  if (!Number.isInteger(order) || order < 0) {
+    throw new RangeError("Moment order must be a nonnegative integer");
+  }
+  if (order === 0) return 1;
+  if (order === 1) return 0;
+  let total = 0;
+  for (const value of centered(arr)) total += value ** order / arr.length;
+  return total;
 }

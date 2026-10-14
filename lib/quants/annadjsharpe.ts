@@ -32,30 +32,31 @@ import {
  *
  * @example Annualized adjusted Sharpe ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe(x, 0, 12), 3.735901391809159);
+ * assertAlmostEquals(annadjsharpe(x, 0, 12), 3.735901391809159, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe with different parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116);
+ * assertAlmostEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe for multiple assets (matrix)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328324, 5.030879310639437]);
+ * const expected = [3.142808756232851, 5.030879310639453];
+ * (annadjsharpe([x1, x2], 0, 12) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function annadjsharpe(
@@ -88,30 +89,31 @@ export default function annadjsharpe(
  *
  * @example Annualized adjusted Sharpe ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe(x, 0, 12), 3.735901391809159);
+ * assertAlmostEquals(annadjsharpe(x, 0, 12), 3.735901391809159, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe with different parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116);
+ * assertAlmostEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe for multiple assets (matrix)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328324, 5.030879310639437]);
+ * const expected = [3.142808756232851, 5.030879310639453];
+ * (annadjsharpe([x1, x2], 0, 12) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function annadjsharpe(
@@ -144,30 +146,31 @@ export default function annadjsharpe(
  *
  * @example Annualized adjusted Sharpe ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe(x, 0, 12), 3.735901391809159);
+ * assertAlmostEquals(annadjsharpe(x, 0, 12), 3.735901391809159, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe with different parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116);
+ * assertAlmostEquals(annadjsharpe(x, 0.02, 12, 'simple'), 3.0015320352820116, 1e-13);
  *
  * ```
  *
  * @example Annualized adjusted Sharpe for multiple assets (matrix)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x1 = [0.003, 0.026, 0.015, -0.009, 0.014];
  * const x2 = [0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(annadjsharpe([x1, x2], 0, 12), [3.1428087562328324, 5.030879310639437]);
+ * const expected = [3.142808756232851, 5.030879310639453];
+ * (annadjsharpe([x1, x2], 0, 12) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-12));
  * ```
  */
 export default function annadjsharpe(

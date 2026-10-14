@@ -1,10 +1,11 @@
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { find, isnumber, mean, vectorfun } from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Upside Potential.
  *
- * Average of positive returns, higher than a target return (MAR)
+ * Unconditional upper partial moment: mean(max(x - MAR, 0)).
+ * All observations, including zero contributions, count in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -13,30 +14,31 @@ import { find, isnumber, mean, vectorfun } from "../../index.ts";
  *
  * @example Upside potential for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(upsidepot(x), 0.025249999999999998);
+ * assertAlmostEquals(upsidepot(x), 0.0202, 1.01e-14);
  *
  * ```
  *
  * @example Upside potential with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.065);
+ * assertAlmostEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.0125, 1e-14);
  *
  * ```
  *
  * @example Upside potential for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * const matrix = [x, y];
- * assertEquals(upsidepot(matrix, 0, 0), [0.025249999999999998, 0.0598]);
+ * const expected = [0.0202, 0.0299];
+ * (upsidepot(matrix, 0, 0) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-14));
  * ```
  */
 export default function upsidepot(
@@ -47,7 +49,8 @@ export default function upsidepot(
 /**
  * Upside Potential.
  *
- * Average of positive returns, higher than a target return (MAR)
+ * Unconditional upper partial moment: mean(max(x - MAR, 0)).
+ * All observations, including zero contributions, count in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -56,30 +59,31 @@ export default function upsidepot(
  *
  * @example Upside potential for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(upsidepot(x), 0.025249999999999998);
+ * assertAlmostEquals(upsidepot(x), 0.0202, 1.01e-14);
  *
  * ```
  *
  * @example Upside potential with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.065);
+ * assertAlmostEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.0125, 1e-14);
  *
  * ```
  *
  * @example Upside potential for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * const matrix = [x, y];
- * assertEquals(upsidepot(matrix, 0, 0), [0.025249999999999998, 0.0598]);
+ * const expected = [0.0202, 0.0299];
+ * (upsidepot(matrix, 0, 0) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-14));
  * ```
  */
 export default function upsidepot(
@@ -90,7 +94,8 @@ export default function upsidepot(
 /**
  * Upside Potential.
  *
- * Average of positive returns, higher than a target return (MAR)
+ * Unconditional upper partial moment: mean(max(x - MAR, 0)).
+ * All observations, including zero contributions, count in the denominator.
  *
  * @param x array of values
  * @param mar minimum acceptable return (def: 0)
@@ -99,30 +104,31 @@ export default function upsidepot(
  *
  * @example Upside potential for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(upsidepot(x), 0.025249999999999998);
+ * assertAlmostEquals(upsidepot(x), 0.0202, 1.01e-14);
  *
  * ```
  *
  * @example Upside potential with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.065);
+ * assertAlmostEquals(upsidepot([0.05, 0.03, 0.08, -0.02], 0.04), 0.0125, 1e-14);
  *
  * ```
  *
  * @example Upside potential for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
  * const matrix = [x, y];
- * assertEquals(upsidepot(matrix, 0, 0), [0.025249999999999998, 0.0598]);
+ * const expected = [0.0202, 0.0299];
+ * (upsidepot(matrix, 0, 0) as number[]).forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-14));
  * ```
  */
 export default function upsidepot(
@@ -131,24 +137,20 @@ export default function upsidepot(
   dim: 0 | 1 = 0,
 ): number | array | matrix {
   const _upsidepot = function (a: array, mar: number): number {
-    // Create boolean array for values above MAR
-    const aboveMar = a.map((el: number) => el > mar);
-    const idx = find(aboveMar);
-
-    if (idx.length === 0) {
-      return 0;
+    if (!Number.isFinite(mar) || !a.every(Number.isFinite)) {
+      throw new Error("Returns and MAR must be finite");
     }
-
-    const upside = [];
-    for (let i = 0; i < idx.length; i++) {
-      upside[i] = a[idx[i]];
-    }
-
-    return mean(upside) as number;
+    return a.reduce(
+      (sum, value) => sum + Math.max(value - mar, 0) / a.length,
+      0,
+    );
   };
 
   if (isnumber(x)) {
-    return (x as number) > mar ? (x as number) : 0;
+    if (!Number.isFinite(x) || !Number.isFinite(mar)) {
+      throw new Error("Returns and MAR must be finite");
+    }
+    return Math.max(x - mar, 0);
   }
 
   return vectorfun(dim, x, _upsidepot, mar);

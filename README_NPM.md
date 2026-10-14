@@ -14,7 +14,7 @@ JavaScript. The API uses familiar MATLAB-style names such as `mtimes` and `std`.
 ### Node.js or a TypeScript application
 
 ```sh
-npm install ubique@1.0.3
+npm install ubique@1.0.4
 ```
 
 ```ts
@@ -32,17 +32,17 @@ CommonJS is also supported: `const { matmul } = require("ubique");`.
 ### Deno
 
 ```sh
-deno add jsr:@nodalstudio/ubique@1.0.3
+deno add jsr:@nodalstudio/ubique@1.0.4
 ```
 
 Use the same example with `import { matmul } from "@nodalstudio/ubique";`.
-Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.3"`.
+Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.4"`.
 
 ### Browser without a build step
 
 ```html
 <script type="module">
-  import { matmul } from "https://esm.sh/ubique@1.0.3";
+  import { matmul } from "https://esm.sh/ubique@1.0.4";
   console.log(matmul([[1, 2]], [[3], [4]])); // [[11]]
 </script>
 ```
@@ -111,11 +111,11 @@ To generate data directly in WASM memory, use `view()` after allocating your
 matrices. Its layout is column-major: `column * rows + row`. Views are temporary
 borrows: reacquire them after operations that can allocate or grow WASM memory,
 and never use them after disposal. See the
-[complete resident-matrix example](https://github.com/NodalStudio/Ubique/blob/v1.0.3/examples/resident_matrices.ts).
+[complete resident-matrix example](https://github.com/NodalStudio/Ubique/blob/v1.0.4/examples/resident_matrices.ts).
 
 ## Numerical behavior and upgrading from 1.0.2
 
-**1.0.3 includes the new APIs and numerical corrections described here.** The
+**1.0.4 includes the new APIs and numerical corrections described here.** The
 [website](https://nodalstudio.github.io/Ubique/) builds from the repository's
 current source; npm and JSR distribute versioned releases.
 
@@ -123,7 +123,7 @@ Calculations use JavaScript numbers and WASM f64, not exact arithmetic. Function
 contracts define shapes, dimensions, normalization and handling of invalid data.
 For example, `std` defaults to sample normalization (N−1), and general matrix
 multiplication can propagate NaN/infinity while linear solves reject nonfinite
-inputs. See the [numerical contracts](https://github.com/NodalStudio/Ubique/blob/v1.0.3/docs-src/numerical-contract.md).
+inputs. See the [numerical contracts](https://github.com/NodalStudio/Ubique/blob/v1.0.4/docs-src/numerical-contract.md).
 
 When upgrading from 1.0.2, review these changes:
 
@@ -138,7 +138,7 @@ When upgrading from 1.0.2, review these changes:
 - IRR and regression fixes can change results or reject inputs previously
   accepted. Check application-level numerical expectations when upgrading.
 
-The [changelog](https://github.com/NodalStudio/Ubique/blob/v1.0.3/CHANGELOG.md) describes these changes in detail.
+The [changelog](https://github.com/NodalStudio/Ubique/blob/v1.0.4/CHANGELOG.md) describes these changes in detail.
 
 ## Performance and learning
 
@@ -152,16 +152,17 @@ reports medians from alternating batches. Unresolved timings are excluded from
 speed ratios. Performance depends on shape, runtime and data ownership.
 
 For local commands, raw historical measurements and their limitations, see the
-[benchmark protocol](https://github.com/NodalStudio/Ubique/blob/v1.0.3/benchmarks/README.md). Historical before/after results are
+[benchmark protocol](https://github.com/NodalStudio/Ubique/blob/v1.0.4/benchmarks/README.md). Historical before/after results are
 not guarantees for the entire library or comparisons against math.js.
 
 ## Numerical validation
 
-The revised numerical paths pass 716 deterministic comparisons and invariants
+The revised numerical paths pass 1,300 deterministic comparisons and invariants
 against NumPy/SciPy (BLAS/LAPACK) and mpmath at 80-digit precision. This covers
-matrix products, solves, decompositions, statistics, regression and IRR; it is not
+matrix products, solves, decompositions, statistics, probability tails,
+financial formulas, regression and IRR; it is not
 an exhaustive verification of every export or input. See the
-[reproducible reference suite](https://github.com/NodalStudio/Ubique/blob/v1.0.3/docs-src/reference-validation.md) for coverage,
+[reproducible reference suite](https://github.com/NodalStudio/Ubique/blob/v1.0.4/docs-src/reference-validation.md) for coverage,
 tolerances and commands.
 
 ## Develop locally
@@ -182,12 +183,12 @@ WASM bindings are checked in. To change the Rust implementation, install Rust
 with the `wasm32-unknown-unknown` target and run `deno task build`.
 
 Use `deno task build:npm` and `deno task test:npm` to build and check the npm
-package. See [examples and browser checks](https://github.com/NodalStudio/Ubique/blob/v1.0.3/examples/README.md) for the interactive
+package. See [examples and browser checks](https://github.com/NodalStudio/Ubique/blob/v1.0.4/examples/README.md) for the interactive
 demonstrations. Report issues or propose changes through
 [GitHub](https://github.com/NodalStudio/Ubique/issues).
 
 ## License and credits
 
-[MIT](https://github.com/NodalStudio/Ubique/blob/v1.0.3/LICENSE). Maintained by [Nodal Studio](https://nodalstudio.io/).
+[MIT](https://github.com/NodalStudio/Ubique/blob/v1.0.4/LICENSE). Maintained by [Nodal Studio](https://nodalstudio.io/).
 Based on Max Todaro's [original Ubique](https://github.com/maxto/ubique), with
 Rust linear algebra supplied by [nalgebra](https://nalgebra.org/).

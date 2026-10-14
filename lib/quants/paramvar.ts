@@ -1,13 +1,6 @@
 import type { array, matrix } from "../types.d.ts";
-import {
-  flatten,
-  iscolumn,
-  ismatrix,
-  isnumber,
-  isrow,
-  norminv,
-  transpose,
-} from "../../index.ts";
+import { norminv } from "../../index.ts";
+import { normalRisk } from "../internal/normal_risk.ts";
 
 /**
  * Parametric Value-At-Risk.
@@ -15,34 +8,38 @@ import {
  * Parametric Value-At-Risk assuming returns are normally distributed.
  * It can work with numbers, arrays, row vectors, and column vectors.
  *
+ * Normal loss model: mean scales with period, volatility with sqrt(period).
+ * Positive results represent losses; negative results are possible. Shapes are preserved.
+ *
  * @param mu mean value (def: 0)
  * @param sigma standard deviation (def: 1)
- * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param p VaR confidence level in range (0,1) (def: 0.95)
  * @param amount portfolio/asset amount (def: 1)
  * @param period time horizon (def: 1)
  * @return Parametric Value-At-Risk
  *
  * @example VaR with default parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ * assertAlmostEquals(paramvar(0, 1), 1.6448536269514722, 8.224268134757361e-13);
  *
  * ```
  *
  * @example VaR with arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ * const expected = [1.6448536269514722, 3.2897072539029444, 4.934560880854417];
+ * paramvar([0, 0, 0], [1, 2, 3]).forEach((v, i) => assertAlmostEquals(v, expected[i], 3e-12));
  *
  * ```
  *
  * @example Parametric VaR for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * assertAlmostEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751835047117, 1.0155375917523558e-14);
  * ```
  */
 export default function paramvar(
@@ -58,34 +55,38 @@ export default function paramvar(
  * Parametric Value-At-Risk assuming returns are normally distributed.
  * It can work with numbers, arrays, row vectors, and column vectors.
  *
+ * Normal loss model: mean scales with period, volatility with sqrt(period).
+ * Positive results represent losses; negative results are possible. Shapes are preserved.
+ *
  * @param mu mean value (def: 0)
  * @param sigma standard deviation (def: 1)
- * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param p VaR confidence level in range (0,1) (def: 0.95)
  * @param amount portfolio/asset amount (def: 1)
  * @param period time horizon (def: 1)
  * @return Parametric Value-At-Risk
  *
  * @example VaR with default parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ * assertAlmostEquals(paramvar(0, 1), 1.6448536269514722, 8.224268134757361e-13);
  *
  * ```
  *
  * @example VaR with arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ * const expected = [1.6448536269514722, 3.2897072539029444, 4.934560880854417];
+ * paramvar([0, 0, 0], [1, 2, 3]).forEach((v, i) => assertAlmostEquals(v, expected[i], 3e-12));
  *
  * ```
  *
  * @example Parametric VaR for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * assertAlmostEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751835047117, 1.0155375917523558e-14);
  * ```
  */
 export default function paramvar(
@@ -101,34 +102,38 @@ export default function paramvar(
  * Parametric Value-At-Risk assuming returns are normally distributed.
  * It can work with numbers, arrays, row vectors, and column vectors.
  *
+ * Normal loss model: mean scales with period, volatility with sqrt(period).
+ * Positive results represent losses; negative results are possible. Shapes are preserved.
+ *
  * @param mu mean value (def: 0)
  * @param sigma standard deviation (def: 1)
- * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param p VaR confidence level in range (0,1) (def: 0.95)
  * @param amount portfolio/asset amount (def: 1)
  * @param period time horizon (def: 1)
  * @return Parametric Value-At-Risk
  *
  * @example VaR with default parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ * assertAlmostEquals(paramvar(0, 1), 1.6448536269514722, 8.224268134757361e-13);
  *
  * ```
  *
  * @example VaR with arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ * const expected = [1.6448536269514722, 3.2897072539029444, 4.934560880854417];
+ * paramvar([0, 0, 0], [1, 2, 3]).forEach((v, i) => assertAlmostEquals(v, expected[i], 3e-12));
  *
  * ```
  *
  * @example Parametric VaR for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * assertAlmostEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751835047117, 1.0155375917523558e-14);
  * ```
  */
 export default function paramvar(
@@ -144,34 +149,38 @@ export default function paramvar(
  * Parametric Value-At-Risk assuming returns are normally distributed.
  * It can work with numbers, arrays, row vectors, and column vectors.
  *
+ * Normal loss model: mean scales with period, volatility with sqrt(period).
+ * Positive results represent losses; negative results are possible. Shapes are preserved.
+ *
  * @param mu mean value (def: 0)
  * @param sigma standard deviation (def: 1)
- * @param p VaR confidence level in range [0,1] (def: 0.95)
+ * @param p VaR confidence level in range (0,1) (def: 0.95)
  * @param amount portfolio/asset amount (def: 1)
  * @param period time horizon (def: 1)
  * @return Parametric Value-At-Risk
  *
  * @example VaR with default parameters
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0, 1), 1.6448536127562643);
+ * assertAlmostEquals(paramvar(0, 1), 1.6448536269514722, 8.224268134757361e-13);
  *
  * ```
  *
  * @example VaR with arrays
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar([0, 0, 0], [1, 2, 3]), [1.6448536127562643, 3.2897072255125286, 4.934560838268792]);
+ * const expected = [1.6448536269514722, 3.2897072539029444, 4.934560880854417];
+ * paramvar([0, 0, 0], [1, 2, 3]).forEach((v, i) => assertAlmostEquals(v, expected[i], 3e-12));
  *
  * ```
  *
  * @example Parametric VaR for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751505285517);
+ * assertAlmostEquals(paramvar(0.0179, 0.023230487630602065), 0.020310751835047117, 1.0155375917523558e-14);
  * ```
  */
 export default function paramvar(
@@ -181,33 +190,5 @@ export default function paramvar(
   amount: number = 1,
   period: number = 1,
 ): number | array | matrix {
-  const _pvar = function (
-    _mu: number,
-    _sigma: number,
-    p: number,
-    amount: number,
-    period: number,
-  ): number {
-    return (-norminv(1 - p) * _sigma - _mu) * Math.sqrt(period) * amount;
-  };
-
-  if (isnumber(mu)) {
-    return _pvar(mu as number, sigma as number, p, amount, period);
-  }
-
-  const temp = flatten(mu as array | matrix) as array;
-  const sigmaArray = flatten(sigma as array | matrix) as array;
-  const out = temp.map(function (el: number, idx: number) {
-    return _pvar(el, sigmaArray[idx], p, amount, period);
-  });
-
-  if (ismatrix(mu) && isrow(mu)) {
-    return [out];
-  }
-
-  if (ismatrix(mu) && iscolumn(mu)) {
-    return transpose(out);
-  }
-
-  return out;
+  return normalRisk(mu, sigma, p, amount, period, -norminv(1 - p));
 }

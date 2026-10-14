@@ -51,6 +51,13 @@ export function covwasm(
  */
 export function detwasm(a: Float64Array, n: number): number;
 
+export function erfcwasm(x: number): number;
+
+/**
+ * IEEE binary64 special functions from libm, including accurate small tails.
+ */
+export function erfwasm(x: number): number;
+
 /**
  * Computes the inverse of a square matrix.
  *

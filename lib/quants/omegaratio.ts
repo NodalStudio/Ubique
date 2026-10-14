@@ -15,28 +15,28 @@ import { downsidepot, isnumber, upsidepot, vectorfun } from "../../index.ts";
  *
  * @example Omega ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(omegaratio(x), 10.978260869565217);
+ * assertAlmostEquals(omegaratio(x), 8.782608695652174, 4.391304347826087e-12);
  *
  * ```
  *
  * @example Omega ratio with custom threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 5.333333333333334);
+ * assertAlmostEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 2.5, 1.25e-12);
  *
  * ```
  *
  * @example Omega ratio with negative threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(omegaratio(x, -0.01), 53.611111111111114);
+ * assertAlmostEquals(omegaratio(x, -0.01), 70.75, 3.5375e-11);
  * ```
  */
 export default function omegaratio(
@@ -58,28 +58,28 @@ export default function omegaratio(
  *
  * @example Omega ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(omegaratio(x), 10.978260869565217);
+ * assertAlmostEquals(omegaratio(x), 8.782608695652174, 4.391304347826087e-12);
  *
  * ```
  *
  * @example Omega ratio with custom threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 5.333333333333334);
+ * assertAlmostEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 2.5, 1.25e-12);
  *
  * ```
  *
  * @example Omega ratio with negative threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(omegaratio(x, -0.01), 53.611111111111114);
+ * assertAlmostEquals(omegaratio(x, -0.01), 70.75, 3.5375e-11);
  * ```
  */
 export default function omegaratio(
@@ -101,28 +101,28 @@ export default function omegaratio(
  *
  * @example Omega ratio for a single asset
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
- * assertEquals(omegaratio(x), 10.978260869565217);
+ * assertAlmostEquals(omegaratio(x), 8.782608695652174, 4.391304347826087e-12);
  *
  * ```
  *
  * @example Omega ratio with custom threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 5.333333333333334);
+ * assertAlmostEquals(omegaratio([0.05, 0.03, 0.08, -0.02], 0.02), 2.5, 1.25e-12);
  *
  * ```
  *
  * @example Omega ratio with negative threshold
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const x = [0.003, 0.026, 0.015, -0.009, 0.014, 0.024, 0.015, 0.066, -0.014, 0.039];
  *
- * assertEquals(omegaratio(x, -0.01), 53.611111111111114);
+ * assertAlmostEquals(omegaratio(x, -0.01), 70.75, 3.5375e-11);
  * ```
  */
 export default function omegaratio(

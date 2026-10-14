@@ -16,23 +16,23 @@ import { isnumber, moment, vectorfun } from "../../index.ts";
  *
  * @example Right-skewed data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
+ * assertAlmostEquals(skewness([1, 2, 3, 10]), 1.0182337649086284, 1e-13);
  *
  * ```
  *
  * @example Symmetric data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
+ * assertAlmostEquals(skewness([1, 2, 3, 4, 5]), 0, 1e-13);
  *
  * ```
  *
  * @example Matrix skewness
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
  * ```
@@ -53,23 +53,23 @@ export default function skewness(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
  *
  * @example Right-skewed data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
+ * assertAlmostEquals(skewness([1, 2, 3, 10]), 1.0182337649086284, 1e-13);
  *
  * ```
  *
  * @example Symmetric data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
+ * assertAlmostEquals(skewness([1, 2, 3, 4, 5]), 0, 1e-13);
  *
  * ```
  *
  * @example Matrix skewness
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
  * ```
@@ -90,23 +90,23 @@ export default function skewness(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
  *
  * @example Right-skewed data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 10]), 1.0182337649086284);
+ * assertAlmostEquals(skewness([1, 2, 3, 10]), 1.0182337649086284, 1e-13);
  *
  * ```
  *
  * @example Symmetric data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(skewness([1, 2, 3, 4, 5]), 0);
+ * assertAlmostEquals(skewness([1, 2, 3, 4, 5]), 0, 1e-13);
  *
  * ```
  *
  * @example Matrix skewness
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(skewness([[1, 2, 3], [4, 5, 6]]), [0, 0]);
  * ```

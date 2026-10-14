@@ -1,5 +1,6 @@
+import { centered } from "../internal/moments.ts";
 import type { array, matrix, numarraymatrix } from "../types.d.ts";
-import { arrayfun, isnumber, mean, minus, vectorfun } from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Mean absolute deviation.
@@ -14,23 +15,23 @@ import { arrayfun, isnumber, mean, minus, vectorfun } from "../../index.ts";
  *
  * @example Simple MAD calculation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 2, 3, 4, 5]), 1.2);
+ * assertAlmostEquals(mad([1, 2, 3, 4, 5]), 1.2, 1e-13);
  *
  * ```
  *
  * @example MAD with spread data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 3, 5, 7, 9]), 2.4);
+ * assertAlmostEquals(mad([1, 3, 5, 7, 9]), 2.4, 1e-13);
  *
  * ```
  *
  * @example Matrix MAD
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(mad([[1, 2], [3, 4]]), [0.5, 0.5]);
  * ```
@@ -49,23 +50,23 @@ export default function mad(x: array, dim?: 0 | 1): number;
  *
  * @example Simple MAD calculation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 2, 3, 4, 5]), 1.2);
+ * assertAlmostEquals(mad([1, 2, 3, 4, 5]), 1.2, 1e-13);
  *
  * ```
  *
  * @example MAD with spread data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 3, 5, 7, 9]), 2.4);
+ * assertAlmostEquals(mad([1, 3, 5, 7, 9]), 2.4, 1e-13);
  *
  * ```
  *
  * @example Matrix MAD
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(mad([[1, 2], [3, 4]]), [0.5, 0.5]);
  * ```
@@ -84,30 +85,30 @@ export default function mad(x: matrix, dim?: 0 | 1): array;
  *
  * @example Simple MAD calculation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 2, 3, 4, 5]), 1.2);
+ * assertAlmostEquals(mad([1, 2, 3, 4, 5]), 1.2, 1e-13);
  *
  * ```
  *
  * @example MAD with spread data
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(mad([1, 3, 5, 7, 9]), 2.4);
+ * assertAlmostEquals(mad([1, 3, 5, 7, 9]), 2.4, 1e-13);
  *
  * ```
  *
  * @example Matrix MAD
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(mad([[1, 2], [3, 4]]), [0.5, 0.5]);
  * ```
  */
 export default function mad(x: numarraymatrix, dim: 0 | 1 = 0): numarraymatrix {
   const _mad = function (a: number[]) {
-    return mean(arrayfun(minus(a, mean(a)), Math.abs));
+    return centered(a).reduce((sum, v) => sum + Math.abs(v) / a.length, 0);
   };
 
   if (isnumber(x)) {

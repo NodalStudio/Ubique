@@ -1,6 +1,6 @@
 {
   "name": "@nodalstudio/ubique",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
   "license": "MIT",
   "compilerOptions": {
@@ -34,7 +34,7 @@
     }
   ],
   "tasks": {
-    "test": "deno fmt --check lib && deno test --doc lib test/deno.test.ts test/numerics_test.ts test/correctness_test.ts test/article_test.ts test/benchmark_timing_test.ts",
+    "test": "deno fmt --check lib && deno test --doc lib test/deno.test.ts test/numerics_test.ts test/correctness_test.ts test/article_test.ts test/benchmark_timing_test.ts test/reference_regressions_test.ts",
     "test:npm": "node scripts/test_npm.js && node scripts/test_npm_esm.mjs",
     "test:browser": "deno run -A scripts/test_browser.mjs",
     "test:benchmark:browser": "deno run -A scripts/test_benchmark_browser.mjs",

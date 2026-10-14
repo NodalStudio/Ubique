@@ -1,6 +1,6 @@
 import { marked } from "npm:marked@15.0.12";
 
-import { brandHead, nsRule, siteFooter, siteHeader } from "./brand_chrome.ts";
+import { brandHead, siteFooter, siteHeader } from "./brand_chrome.ts";
 
 /** Renders only the checked-in editorial source, never uploaded/user Markdown. */
 export async function buildLearn(output: string) {
@@ -59,40 +59,29 @@ function chapters(html: string): string {
   const parts = html.split(/(?=<h2>)/);
   intro = parts[0].startsWith("<h2>") ? "" : parts.shift()!;
   toc.length = 0;
-  return parts.map((part, index) => {
+  return parts.map((part) => {
     const title = part.match(/^<h2>([\s\S]*?)<\/h2>/)![1];
-    const id = slug(title), no = String(index + 1).padStart(2, "0");
+    const id = slug(title);
     toc.push({ id, title });
-    return `<section class="chapter" aria-labelledby="${id}"><p class="kicker">§${no}</p><h2 id="${id}">${title}</h2>${
+    return `<section class="chapter" aria-labelledby="${id}"><h2 id="${id}">${title}</h2>${
       part.replace(/^<h2>[\s\S]*?<\/h2>/, "")
     }</section>`;
   }).join("");
 }
 
 function page(body: string): string {
-  const index = toc.map((c, i) =>
-    `<li><a class="idx-row" href="#${c.id}"><span class="idx-num">§${
-      String(i + 1).padStart(2, "0")
-    }</span><span class="idx-term">${c.title}</span><span class="idx-arrow" aria-hidden="true">→</span></a></li>`
-  ).join("");
-  const [lede, ...rest] = intro.trim().split(/(?<=<\/p>)\s*/);
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Build a matrix multiplier from three JavaScript loops to persistent WebAssembly memory, with runnable experiments."><meta name="theme-color" content="#FFFDE9"><title>Build a fast matrix engine — Ubique · Nodal Studio</title>${brandHead()}<link rel="stylesheet" href="article.css"></head><body class="ns">${
+  const index = toc.map((c) => `<li><a href="#${c.id}">${c.title}</a></li>`)
+    .join("");
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Matrix multiplication from JavaScript to WebAssembly, with runnable examples."><title>Matrix multiplication guide — Ubique</title>${brandHead()}<link rel="stylesheet" href="article.css"><link rel="stylesheet" href="docs.css"></head><body class="ns">${
     siteHeader("learn")
-  }<main id="main">
-<section class="ns-hero" aria-labelledby="title"><div class="ns-frame"><canvas class="ns-mesh" aria-hidden="true"></canvas>
-<div class="ns-frame-top"><p class="kicker">Engineering notebook · Ubique</p><p class="ns-tag">From a dot product to WebAssembly, one measurable change at a time.</p></div><div></div>
-<div class="ns-frame-bottom"><h1 class="ns-wordmark" id="title"><span>Build a fast</span><span>matrix engine.</span></h1><a class="ns-hero-foot" href="#intro"><span class="tick" aria-hidden="true"></span><span>Read</span></a></div></div></section>
-<section class="ns-ink ns-section" aria-labelledby="intro"><div class="ns-shell"><p class="kicker" id="intro">§00 — Premise</p><div class="lede">${lede}</div><div class="intro-rest">${
-    rest.join("")
-  }</div><div class="ns-meta"><div><span class="lbl">Reading</span>About 20 minutes, ${toc.length} steps</div><div><span class="lbl">Runs</span>In your browser — heavy work in a worker</div><div><span class="lbl">Edition</span>Ubique 1.0.3 · npm and JSR</div></div>${nsRule}</div></section>
-<section class="ns-section" aria-labelledby="contents-h"><div class="ns-shell"><div class="ns-block-head"><h2 class="ns-display" id="contents-h">The walk</h2><p class="kicker">§ — Contents</p></div><ol class="idx-list">${index}</ol></div></section>
-<article class="article ns-shell">${body}</article>
-<section class="ns-ink ns-section evidence" aria-labelledby="evidence-h"><div class="ns-shell"><p class="kicker">§${
-    String(toc.length + 1).padStart(2, "0")
-  } — Evidence</p><h2 class="ns-display" id="evidence-h">Keep the evidence.</h2><p>Download the inputs and results from your regression and production matrix experiments. All calculations stay in your browser; heavy work runs in a worker.</p><div class="evidence-actions"><button id="download" class="primary" disabled>Download experiment JSON</button><a class="ns-btn" href="benchmark.html">Open the benchmark <span class="arr">→</span></a></div></div></section>
-</main>${
+  }
+  <div class="docs-layout"><aside class="docs-sidebar"><nav aria-label="Guide contents"><p class="docs-label">Matrix multiplication</p><ol>${index}</ol></nav></aside>
+  <main id="main" class="docs-content"><header class="docs-intro"><p class="docs-label">Guide / Linear algebra</p><h1>Matrix multiplication</h1><p>From JavaScript loops to reusable WebAssembly memory.</p><p class="docs-meta">${toc.length} sections · Runnable examples · Ubique 1.0.4</p></header>
+  <div class="docs-overview">${intro}</div><article class="article">${body}</article>
+  <section class="docs-evidence"><h2>Export your results</h2><p>Download the inputs, timings and regression results. Calculations stay in your browser.</p><button id="download" class="primary" disabled>Download experiment JSON</button> <a href="benchmark.html">Open the benchmark →</a></section>
+  </main></div>${
     siteFooter(
-      "Original article and teaching implementations. Ubique builds on Max Todaro’s work; production kernels use nalgebra. This edition explains the matrix APIs introduced in Ubique 1.0.3.",
+      "Teaching kernels explain the techniques; production matrix kernels use nalgebra.",
     )
   }<script type="module" src="learn.js"></script><script type="module" src="article_experiments.js"></script></body></html>`;
 }

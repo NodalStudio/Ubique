@@ -14,41 +14,41 @@ import erfcinv from "../elmath/erfcinv.ts";
  *
  * @example Compute the inverse CDF for standard normal distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(norminv(0.05), -1.6448536127562647);
+ * assertAlmostEquals(norminv(0.05), -1.6448536269514729, 8.224268134757364e-13);
  *
  * ```
  *
  * @example Compute inverse CDF with custom mean and standard deviation
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(norminv(0.01, 10, 2),  5.347304312449656);
+ * assertAlmostEquals(norminv(0.01, 10, 2), 5.3473042519183185, 2.673652125959159e-12);
  *
  * ```
  *
  * @example Compute inverse CDF at median (should return mean)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(norminv(0.5, 5, 1), 5);
+ * assertAlmostEquals(norminv(0.5, 5, 1), 5.0, 2.5e-12);
  *
  * ```
  *
  * @example Compute inverse CDF for a high probability (should be positive)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(norminv(0.975, 0, 1), 1.9599639471668915);
+ * assertAlmostEquals(norminv(0.975, 0, 1), 1.959963984540054, 9.79981992270027e-13);
  *
  * ```
  *
  * @example Compute inverse CDF for a low probability (should be negative)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(norminv(0.025, 0, 1), -1.9599639471668922);
+ * assertAlmostEquals(norminv(0.025, 0, 1), -1.9599639845400545, 9.799819922700272e-13);
  * ```
  */
 export default function norminv(p: number, mu = 0, sigma = 1): number {

@@ -30,3 +30,7 @@ docs/nodal.css
 docs/nodal.js
 docs/favicon.svg
 docs/ubique-docs.css
+
+docs/docs.css
+docs/docs_examples.js
+__pycache__/

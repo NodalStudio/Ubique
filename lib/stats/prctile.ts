@@ -1,13 +1,5 @@
 import type { array, matrix } from "../types.d.ts";
-import {
-  colon,
-  interp1,
-  isnumber,
-  rdivide,
-  sort,
-  times,
-  vectorfun,
-} from "../../index.ts";
+import { isnumber, vectorfun } from "../../index.ts";
 
 /**
  * Percentiles of a sample.
@@ -273,23 +265,31 @@ export default function prctile(
   p: number,
   dim?: 0 | 1,
 ): number | array {
+  if (Array.isArray(x) && x.length === 0) {
+    throw new Error("Percentiles require at least one observation");
+  }
   const actualDim = dim ?? 0;
-  if (p < 0 || p > 100) {
+  if (!Number.isFinite(p) || p < 0 || p > 100) {
     throw new Error(
       "p-th percentile must be a real value between 0 and 100 inclusive",
     );
   }
 
   const _prctile = function (a: array, pr: number): number {
-    const arrnum = colon(0.5, a.length - 0.5) as number[];
-    const _a = sort(a) as number[];
-    const pq = rdivide(times(arrnum, 100), a.length) as number[];
-
-    // Concatenate values to the beginning and end
-    const extendedPq = [0].concat(pq, [100]);
-    const extendedA = [_a[0]].concat(_a, [_a[_a.length - 1]]);
-
-    return interp1(extendedPq, extendedA, pr) as number;
+    if (a.length === 0) {
+      throw new Error("Percentiles require at least one observation");
+    }
+    const sorted = a.slice().sort((a, b) => a - b);
+    const rank = Math.max(
+      0,
+      Math.min(sorted.length - 1, pr / 100 * sorted.length - 0.5),
+    );
+    const lower = Math.floor(rank), upper = Math.ceil(rank);
+    if (lower === upper || sorted[lower] === sorted[upper]) {
+      return sorted[lower];
+    }
+    const weight = rank - lower;
+    return sorted[lower] * (1 - weight) + sorted[upper] * weight;
   };
 
   if (isnumber(x)) {

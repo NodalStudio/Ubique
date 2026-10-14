@@ -21,23 +21,23 @@ import {
  *
  * @example Normal-like distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3, 1e-13);
  *
  * ```
  *
  * @example Heavy-tailed distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001, 1e-13);
  *
  * ```
  *
  * @example Matrix excess kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
  * ```
@@ -57,23 +57,23 @@ export default function xkurtosis(x: array, flag?: 0 | 1, dim?: 0 | 1): number;
  *
  * @example Normal-like distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3, 1e-13);
  *
  * ```
  *
  * @example Heavy-tailed distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001, 1e-13);
  *
  * ```
  *
  * @example Matrix excess kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
  * ```
@@ -93,23 +93,23 @@ export default function xkurtosis(x: matrix, flag?: 0 | 1, dim?: 0 | 1): array;
  *
  * @example Normal-like distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 4, 5]), -1.3, 1e-13);
  *
  * ```
  *
  * @example Heavy-tailed distribution
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001);
+ * assertAlmostEquals(xkurtosis([1, 2, 3, 10]), -0.7696000000000001, 1e-13);
  *
  * ```
  *
  * @example Matrix excess kurtosis
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * assertEquals(xkurtosis([[1, 2, 3], [4, 5, 6]]), [-1.5, -1.5]);
  * ```

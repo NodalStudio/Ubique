@@ -14,3 +14,11 @@ export function variance(values: readonly number[], flag: 0 | 1): number {
   }
   return m2 / (values.length - flag);
 }
+
+/** Center in translated coordinates without rounding the mean back to the origin. */
+export function centered(values: readonly number[]): number[] {
+  const origin = values[0];
+  let mean = 0;
+  for (const value of values) mean += (value - origin) / values.length;
+  return values.map((value) => (value - origin) - mean);
+}

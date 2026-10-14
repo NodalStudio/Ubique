@@ -1,4 +1,24 @@
-# 1.0.3 — performance and numerical correctness
+# Changelog
+
+## 1.0.4
+
+- Replace editorial site headers with compact documentation, preserve the Nodal
+  typography/colors, and add editable examples for matmul, DenseMatrix and factorize.
+- Expand independent NumPy/SciPy/mpmath validation to 1,300 deterministic cases
+  across 63 operations, including probability tails and financial formulas.
+- Use libm erf/erfc for accurate normal tails; refine inverse calculations.
+- Center higher moments, mean absolute deviations and z-scores in translated
+  coordinates; preserve matrix layout for column z-scores.
+- Correct downside deviation and unconditional upside potential. This changes
+  Sortino, Omega and M2-Sortino outputs. Correct normal VaR/ES horizon scaling
+  and preserve input matrix shape. See the numerical validation document for conventions.
+- Compute Hazen percentiles directly on a sorted copy, avoiding intermediate
+  arrays and JS/WASM calls; retain input preservation.
+- Calibrate matrix benchmark batches and suppress unresolved timings.
+
+
+
+## 1.0.3 — performance and numerical correctness
 
 This release includes resident WASM matrices, explicit backend selection and
 reusable factorizations. It also changes numerical behavior and error handling;
@@ -6,7 +26,8 @@ review the compatibility notes below when upgrading from 1.0.2.
 
 - Independent NumPy/SciPy and 80-digit mpmath validation (716 cases) exposed and fixed large-offset precision loss in variance, standard deviation, covariance and correlation, including the WASM covariance kernel.
 
-## Faster paths and useful APIs
+
+### Faster paths and useful APIs
 
 - `matmul(a, b, backend)` supports auto/JS/WASM. The current auto heuristic uses
   WASM when m*k*n >= 262144 and every dimension is at least 16. It is provisional;
@@ -23,7 +44,7 @@ review the compatibility notes below when upgrading from 1.0.2.
 - `factorize(A).solve(b)` reuses a row-equilibrated pivoted LU decomposition.
   Matrix division solves systems instead of multiplying by an explicit inverse.
 
-## Correctness and compatibility
+### Correctness and compatibility
 
 - Determinants preserve small nonzero magnitudes and accept 1×1 matrices.
   A floating-point determinant of a singular matrix can be a small residual;
@@ -48,7 +69,7 @@ review the compatibility notes below when upgrading from 1.0.2.
   undefined R² (NaN). `fun()` uses the centered prediction formula.
 - Martin ratio now accepts matrix inputs as documented.
 
-## Reproducibility and demonstrations
+### Reproducibility and demonstrations
 
 Seeded inputs, finite unrounded correctness gates, warmup, rotating/alternating
 batches and raw JSON replace rounded-result comparisons and misleading confidence

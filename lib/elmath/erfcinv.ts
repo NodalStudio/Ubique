@@ -13,25 +13,25 @@ import { erfc } from "../../index.ts";
  *
  * @example Compute the inverse complementary error function for a value less than 1
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfcinv(1.5), -0.476936236121904);
+ * assertAlmostEquals(erfcinv(1.5), -0.4769362762044699, 2.384681381022349e-13);
  *
  * ```
  *
  * @example Compute the inverse complementary error function for a value greater than 1
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfcinv(0.5), 0.476936236121904);
+ * assertAlmostEquals(erfcinv(0.5), 0.4769362762044699, 2.384681381022349e-13);
  *
  * ```
  *
  * @example Compute the inverse complementary error function for 1
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(erfcinv(1), 0);
+ * assertAlmostEquals(erfcinv(1), -0.0, 1e-14);
  *
  * ```
  *
@@ -62,7 +62,7 @@ export default function erfcinv(y: number): number {
   let x = -0.70711 *
     ((2.30753 + t * 0.27061) / (1 + t * (0.99229 + t * 0.04481)) - t);
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 5; i++) {
     z = erfc(x) - _y;
     x += z / (1.128379167095512 * Math.exp(-x * x) - x * z);
   }
