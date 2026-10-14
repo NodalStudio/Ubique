@@ -1,17 +1,38 @@
-name: 🚀 Publish to JSR + npm
+# Deno 2.9.7 decodes OIDC JWTs with standard Base64, not Base64URL.
+# Unicode workflow names can inject '-' into the payload and fail after upload.
+name: Publish to JSR and npm
 
 on:
   push:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      provenance_check_only:
+        description: Verify real OIDC decoding without publishing a package
+        type: boolean
+        default: false
 
 permissions:
   contents: read
   id-token: write
 
 jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Test provenance regression
+        run: deno test test/provenance_test.ts
+      - name: Check actual GitHub OIDC payload before uploading anything
+        run: deno run --allow-env=ACTIONS_ID_TOKEN_REQUEST_URL,ACTIONS_ID_TOKEN_REQUEST_TOKEN --allow-net scripts/check_jsr_provenance.ts
+
   publish:
+    needs: provenance
+    if: ${{ !inputs.provenance_check_only }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -60,7 +81,13 @@ jobs:
 
       - name: Extract version from tag
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        run: |
+          version=$(deno eval 'console.log(JSON.parse(Deno.readTextFileSync("deno.json")).version)')
+          if [[ "$GITHUB_REF" == refs/tags/* && "$GITHUB_REF" != "refs/tags/v$version" ]]; then
+            echo "Release tag does not match deno.json" >&2
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build npm package
         run: deno task build:npm ${{ steps.get_version.outputs.VERSION }}

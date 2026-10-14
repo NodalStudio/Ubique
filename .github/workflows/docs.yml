@@ -31,14 +31,11 @@ jobs:
       - name: Build documentation
         run: deno task docs
 
-      - name: Setup Node.js for browser installation
-        uses: actions/setup-node@v5
-        with:
-          node-version: node
-
-      - name: Install browser for documentation checks
-        timeout-minutes: 5
-        run: npx --yes playwright@1.59.1 install chromium
+      - name: Use the Chrome already installed on the GitHub runner
+        run: |
+          chrome=$(command -v google-chrome)
+          "$chrome" --version
+          echo "PLAYWRIGHT_EXECUTABLE_PATH=$chrome" >> "$GITHUB_ENV"
 
       - name: Check documentation layouts and runnable examples
         run: |
