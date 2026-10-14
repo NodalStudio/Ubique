@@ -1,5 +1,5 @@
 ---
-title: Building a fast matrix engine with JavaScript and WebAssembly
+title: Making matrix multiplication fast
 status: published
 language: en
 sources:

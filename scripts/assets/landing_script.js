@@ -121,7 +121,7 @@ function buildIndexMenu() {
   install.textContent = "npm install ubique@1.0.4\n# Deno: deno add jsr:@nodalstudio/ubique@1.0.4";
   header.append(install);
   const quick = el("nav", "docs-quick"); quick.setAttribute("aria-label", "Start here");
-  for (const [href,label] of [["./linalgebra/matmul.ts/~/matmul.html","Matrix products"],["./linalgebra/dense_matrix.ts/~/DenseMatrix.html","Resident matrices"],["./linalgebra/factorize.ts/~/factorize.html","Solve a system"],["./learn.html","Interactive guide"]]) {
+  for (const [href,label] of [["./linalgebra/matmul.ts/~/matmul.html","Matrix products"],["./linalgebra/dense_matrix.ts/~/DenseMatrix.html","Resident matrices"],["./linalgebra/factorize.ts/~/factorize.html","Solve a system"],["./learn.html","Under the hood"]]) {
     const a=el("a","",label);a.href=href;quick.append(a);
   }
   header.append(quick);main.append(header);

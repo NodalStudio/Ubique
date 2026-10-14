@@ -39,7 +39,7 @@ export function siteHeader(current: Section, root = "."): string {
   return `<a class="ns-skip" href="#main">Skip to content</a>` +
     `<header class="ns-head"><a class="ns-brand" href="${root}/index.html" aria-label="Ubique — API reference"><span class="ns-brand-name">Ubique</span><span class="ns-brand-sub">v1.0.4</span></a>` +
     `<nav class="ns-nav" aria-label="Main">${link("api", "index.html", "API")}${
-      link("learn", "learn.html", "Guide")
+      link("learn", "learn.html", "Under the hood")
     }${
       link("benchmark", "benchmark.html", "Benchmark")
     }<a class="ns-hide-sm" href="https://github.com/NodalStudio/Ubique">GitHub ↗</a></nav></header>`;
