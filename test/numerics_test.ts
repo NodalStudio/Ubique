@@ -6,6 +6,7 @@ import {
 } from "jsr:@std/assert@1.0.14";
 import {
   corrcoef,
+  cov,
   DenseMatrix,
   matmul,
   median,
@@ -125,4 +126,36 @@ Deno.test("benchmark comparator never hides small wrong results or nonfinite fai
   assert(resultsAgree([1e10], [1e10 + 1]));
   const a = seededRandom(), b = seededRandom();
   for (let i = 0; i < 20; i++) assertEquals(a(), b());
+});
+
+Deno.test("fractional variations survive a large translation in every statistics path", () => {
+  // Binary fractions retain exactly the same differences after translation.
+  // This catches mean rounding that the integer-offset examples missed.
+  const x = [0, 0.25, 0.75, 1.125, -0.5, 0.0625];
+  const y = [0.5, -0.125, 0.875, 0.25, -0.75, 0.0625];
+  const translatedX = x.map((v) => v + 1e12);
+  const translatedY = y.map((v) => v - 1e12);
+  for (const flag of [0, 1] as const) {
+    assertAlmostEquals(varc(translatedX, flag), varc(x, flag), 1e-14);
+    assertAlmostEquals(std(translatedX, flag), std(x, flag), 1e-14);
+    for (
+      const [actual, expected] of [
+        [corrcoef(translatedX, translatedY, flag), corrcoef(x, y, flag)],
+        [cov(translatedX, translatedY, flag), cov(x, y, flag)],
+        [
+          cov(translatedX.map((v, i) => [v, translatedY[i]]), flag),
+          cov(x.map((v, i) => [v, y[i]]), flag),
+        ],
+        [
+          corrcoef(translatedX.map((v, i) => [v, translatedY[i]]), flag),
+          corrcoef(x.map((v, i) => [v, y[i]]), flag),
+        ],
+      ]
+    ) {
+      const a = actual as number[][], b = expected as number[][];
+      a.forEach((row, i) =>
+        row.forEach((v, j) => assertAlmostEquals(v, b[i][j], 1e-14))
+      );
+    }
+  }
 });

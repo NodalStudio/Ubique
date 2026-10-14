@@ -36,9 +36,9 @@ import { cumdev, isnumber, max, min, std, vectorfun } from "../../index.ts";
  *
  * @example Hurst exponent interpretation (0.5 = random walk)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468);
+ * assertAlmostEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468, 1e-13);
  * ```
  */
 export default function hurst(
@@ -78,9 +78,9 @@ export default function hurst(
  *
  * @example Hurst exponent interpretation (0.5 = random walk)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468);
+ * assertAlmostEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468, 1e-13);
  * ```
  */
 export default function hurst(
@@ -120,9 +120,9 @@ export default function hurst(
  *
  * @example Hurst exponent interpretation (0.5 = random walk)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468);
+ * assertAlmostEquals(hurst([0.01, 0.02, -0.01, 0.03, -0.02]), 0.1405484063287468, 1e-13);
  * ```
  */
 export default function hurst(

@@ -1,0 +1,97 @@
+{
+  "seed": 20261014,
+  "module": "source",
+  "runtime": "deno",
+  "references": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mpmath": "1.4.1",
+    "precision": 80
+  },
+  "cases": 716,
+  "passed": 716,
+  "failed": 0,
+  "operations": {
+    "matmul": 90,
+    "resident": 30,
+    "linsolve": 79,
+    "mldivide": 32,
+    "mrdivide": 32,
+    "inv": 37,
+    "det": 40,
+    "factorized": 37,
+    "mpower": 160,
+    "lu": 6,
+    "issingular": 5,
+    "varc": 30,
+    "std": 15,
+    "median": 15,
+    "cov": 30,
+    "corrcoef": 30,
+    "regression": 15,
+    "irr": 33
+  },
+  "failures": [],
+  "largest_errors": [
+    {
+      "case": "irr/8",
+      "error": 3.919771707160873e-13
+    },
+    {
+      "case": "irr/1",
+      "error": 2.8675112262106557e-13
+    },
+    {
+      "case": "irr/25",
+      "error": 1.5097668304409652e-13
+    },
+    {
+      "case": "irr/5",
+      "error": 1.75142246933773e-14
+    },
+    {
+      "case": "irr/6",
+      "error": 1.5758418703940608e-14
+    },
+    {
+      "case": "irr/22",
+      "error": 5.402206238722375e-15
+    },
+    {
+      "case": "covariance-vectors/1001/0",
+      "error": 2.6255300062140115e-15
+    },
+    {
+      "case": "det",
+      "error": 2.402165005254124e-15
+    },
+    {
+      "case": "irr/24",
+      "error": 2.2940258342554497e-15
+    },
+    {
+      "case": "irr/27",
+      "error": 2.1374397703342367e-15
+    },
+    {
+      "case": "irr",
+      "error": 2.1147105230955366e-15
+    },
+    {
+      "case": "mpower",
+      "error": 2.057878192377709e-15
+    },
+    {
+      "case": "irr/3",
+      "error": 2.0363507433990106e-15
+    },
+    {
+      "case": "irr/4",
+      "error": 1.8591840842584274e-15
+    },
+    {
+      "case": "irr/7",
+      "error": 1.5909313890444293e-15
+    }
+  ]
+}

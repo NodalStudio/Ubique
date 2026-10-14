@@ -84,7 +84,7 @@ function page(body: string): string {
 <div class="ns-frame-bottom"><h1 class="ns-wordmark" id="title"><span>Build a fast</span><span>matrix engine.</span></h1><a class="ns-hero-foot" href="#intro"><span class="tick" aria-hidden="true"></span><span>Read</span></a></div></div></section>
 <section class="ns-ink ns-section" aria-labelledby="intro"><div class="ns-shell"><p class="kicker" id="intro">§00 — Premise</p><div class="lede">${lede}</div><div class="intro-rest">${
     rest.join("")
-  }</div><div class="ns-meta"><div><span class="lbl">Reading</span>About 20 minutes, ${toc.length} steps</div><div><span class="lbl">Runs</span>In your browser — heavy work in a worker</div><div><span class="lbl">Edition</span>Source edition · package release pending</div></div>${nsRule}</div></section>
+  }</div><div class="ns-meta"><div><span class="lbl">Reading</span>About 20 minutes, ${toc.length} steps</div><div><span class="lbl">Runs</span>In your browser — heavy work in a worker</div><div><span class="lbl">Edition</span>Ubique 1.0.3 · npm and JSR</div></div>${nsRule}</div></section>
 <section class="ns-section" aria-labelledby="contents-h"><div class="ns-shell"><div class="ns-block-head"><h2 class="ns-display" id="contents-h">The walk</h2><p class="kicker">§ — Contents</p></div><ol class="idx-list">${index}</ol></div></section>
 <article class="article ns-shell">${body}</article>
 <section class="ns-ink ns-section evidence" aria-labelledby="evidence-h"><div class="ns-shell"><p class="kicker">§${
@@ -92,7 +92,7 @@ function page(body: string): string {
   } — Evidence</p><h2 class="ns-display" id="evidence-h">Keep the evidence.</h2><p>Download the inputs and results from your regression and production matrix experiments. All calculations stay in your browser; heavy work runs in a worker.</p><div class="evidence-actions"><button id="download" class="primary" disabled>Download experiment JSON</button><a class="ns-btn" href="benchmark.html">Open the benchmark <span class="arr">→</span></a></div></div></section>
 </main>${
     siteFooter(
-      "Original article and teaching implementations. Ubique builds on Max Todaro’s work; production kernels use nalgebra. This edition covers the current source; the npm/JSR package release is pending.",
+      "Original article and teaching implementations. Ubique builds on Max Todaro’s work; production kernels use nalgebra. This edition explains the matrix APIs introduced in Ubique 1.0.3.",
     )
   }<script type="module" src="learn.js"></script><script type="module" src="article_experiments.js"></script></body></html>`;
 }

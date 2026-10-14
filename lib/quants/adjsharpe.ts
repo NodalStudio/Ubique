@@ -46,10 +46,13 @@ import {
  *
  * @example Adjusted Sharpe ratio for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
- * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.84232950922034]);
+ * const actual = adjsharpe(matrix, 0, 0) as number[];
+ * const expected = [2.9168154723945086, 0.3572362384119537, 27.84232950922034];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-13));
  * ```
  */
 export default function adjsharpe(
@@ -95,10 +98,13 @@ export default function adjsharpe(
  *
  * @example Adjusted Sharpe ratio for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
- * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.84232950922034]);
+ * const actual = adjsharpe(matrix, 0, 0) as number[];
+ * const expected = [2.9168154723945086, 0.3572362384119537, 27.84232950922034];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-13));
  * ```
  */
 export default function adjsharpe(
@@ -144,10 +150,13 @@ export default function adjsharpe(
  *
  * @example Adjusted Sharpe ratio for matrix (row-wise)
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const matrix = [[0.01, 0.02], [0.03, -0.01], [0.05, 0.04]];
- * assertEquals(adjsharpe(matrix, 0, 0), [2.9168154723945086, 0.3572362384119537, 27.84232950922034]);
+ * const actual = adjsharpe(matrix, 0, 0) as number[];
+ * const expected = [2.9168154723945086, 0.3572362384119537, 27.84232950922034];
+ * assertEquals(actual.length, expected.length);
+ * actual.forEach((v, i) => assertAlmostEquals(v, expected[i], 1e-13));
  * ```
  */
 export default function adjsharpe(

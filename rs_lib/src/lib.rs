@@ -311,21 +311,18 @@ pub fn detwasm(a: &[f64], n: usize) -> f64 {
 /// A vector of f64 values representing the covariance matrix (cols x cols) in row-major order
 #[wasm_bindgen]
 pub fn covwasm(data: &[f64], rows: usize, cols: usize, flag: u8) -> Vec<f64> {
-    let mat = DMatrix::<f64>::from_row_slice(rows, cols, data);
-
-    // Compute column means
-    let means: Vec<f64> = (0..cols)
-        .map(|j| {
-            let col = mat.column(j);
-            col.iter().sum::<f64>() / rows as f64
-        })
-        .collect();
-
-    // Center the data
-    let mut centered = mat.clone();
-    for i in 0..rows {
-        for j in 0..cols {
-            centered[(i, j)] -= means[j];
+    // Center relative to an observed origin before averaging. Adding the large
+    // origin back would round away the small mean correction.
+    let mut centered = DMatrix::<f64>::from_row_slice(rows, cols, data);
+    for j in 0..cols {
+        let origin = centered[(0, j)];
+        let mut mean_delta = 0.0;
+        for i in 0..rows {
+            centered[(i, j)] -= origin;
+            mean_delta += centered[(i, j)] / rows as f64;
+        }
+        for i in 0..rows {
+            centered[(i, j)] -= mean_delta;
         }
     }
 

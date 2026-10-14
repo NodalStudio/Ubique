@@ -23,9 +23,9 @@ import { find, isnumber, std, vectorfun } from "../../index.ts";
  *
  * @example Downside risk with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
  *
  * ```
  *
@@ -63,9 +63,9 @@ export default function downsiderisk(
  *
  * @example Downside risk with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
  *
  * ```
  *
@@ -103,9 +103,9 @@ export default function downsiderisk(
  *
  * @example Downside risk with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
  *
  * ```
  *
@@ -143,9 +143,9 @@ export default function downsiderisk(
  *
  * @example Downside risk with custom MAR
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
- * assertEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476);
+ * assertAlmostEquals(downsiderisk([0.02, -0.01, 0.03, -0.02], 0.01), 0.007071067811865476, 1e-13);
  *
  * ```
  *

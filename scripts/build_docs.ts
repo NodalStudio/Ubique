@@ -363,7 +363,7 @@ await Deno.writeTextFile(
     {
       source: Deno.env.get("GITHUB_SHA")
         ? `https://github.com/NodalStudio/Ubique/commit/${Deno.env.get("GITHUB_SHA")}`
-        : "local checkout (package release pending)",
+        : "local checkout",
       builtAt: new Date().toISOString(),
       bundleSha256: Array.from(digest, (b) => b.toString(16).padStart(2, "0"))
         .join(""),

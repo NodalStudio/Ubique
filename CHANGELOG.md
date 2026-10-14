@@ -1,6 +1,10 @@
-# Unreleased — performance and numerical correctness
+# 1.0.3 — performance and numerical correctness
 
-This branch is a development preview. No package or site has been published.
+This release includes resident WASM matrices, explicit backend selection and
+reusable factorizations. It also changes numerical behavior and error handling;
+review the compatibility notes below when upgrading from 1.0.2.
+
+- Independent NumPy/SciPy and 80-digit mpmath validation (716 cases) exposed and fixed large-offset precision loss in variance, standard deviation, covariance and correlation, including the WASM covariance kernel.
 
 ## Faster paths and useful APIs
 
@@ -14,7 +18,7 @@ This branch is a development preview. No package or site has been published.
 - Rust multiplication borrows transposed input views and returns the owned
   result without a final Rust clone. Compilation favors speed over size.
   SIMD remains a separately measured experiment, not the default export.
-- Variance/std use Welford accumulation; vector correlation uses one pass;
+- Variance/std use shifted Welford accumulation; vector correlation uses one pass;
   median sorts a copy numerically, avoiding the old shift-heavy merge sort.
 - `factorize(A).solve(b)` reuses a row-equilibrated pivoted LU decomposition.
   Matrix division solves systems instead of multiplying by an explicit inverse.

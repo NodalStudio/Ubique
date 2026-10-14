@@ -1,6 +1,6 @@
 import { packRows } from "../internal/matrix.ts";
 import type { array, matrix } from "../types.d.ts";
-import { isarray, ismatrix, mean, varc } from "../../index.ts";
+import { isarray, ismatrix, varc } from "../../index.ts";
 import { covwasm } from "../../rs_lib/pkg/rs_lib.js";
 
 /**
@@ -226,13 +226,20 @@ export default function cov(
     const varY = varc(flatY, actualFlag as 0 | 1);
 
     // Calculate covariance between X and Y
-    const meanX = mean(flatX);
-    const meanY = mean(flatY);
+    const originX = flatX[0], originY = flatY[0];
+    const meanX = flatX.reduce(
+      (sum, v) => sum + (v - originX) / flatX.length,
+      0,
+    );
+    const meanY = flatY.reduce(
+      (sum, v) => sum + (v - originY) / flatY.length,
+      0,
+    );
     const n = flatX.length;
 
     let covXY = 0;
     for (let i = 0; i < n; i++) {
-      covXY += (flatX[i] - meanX) * (flatY[i] - meanY);
+      covXY += ((flatX[i] - originX) - meanX) * ((flatY[i] - originY) - meanY);
     }
     covXY = covXY / (n - actualFlag);
 
@@ -283,13 +290,21 @@ export default function cov(
           result[i][j] = varc(colI, actualFlag as 0 | 1);
         } else {
           // Covariance off diagonal
-          const meanI = mean(colI);
-          const meanJ = mean(colJ);
+          const originI = colI[0], originJ = colJ[0];
+          const meanI = colI.reduce(
+            (sum, v) => sum + (v - originI) / colI.length,
+            0,
+          );
+          const meanJ = colJ.reduce(
+            (sum, v) => sum + (v - originJ) / colJ.length,
+            0,
+          );
           const n = colI.length;
 
           let cov = 0;
           for (let k = 0; k < n; k++) {
-            cov += (colI[k] - meanI) * (colJ[k] - meanJ);
+            cov += ((colI[k] - originI) - meanI) *
+              ((colJ[k] - originJ) - meanJ);
           }
           result[i][j] = cov / (n - actualFlag);
         }

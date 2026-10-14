@@ -25,12 +25,12 @@ import { isarray, ismatrix, minus, std, vectorfun } from "../../index.ts";
  *
  * @example Different portfolio tracking error
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(trackerr(y, z), 0.058621668348828156);
+ * assertAlmostEquals(trackerr(y, z), 0.058621668348828156, 1e-13);
  *
  * ```
  *
@@ -66,12 +66,12 @@ export default function trackerr(x: array, y: array, dim?: 0 | 1): number;
  *
  * @example Different portfolio tracking error
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(trackerr(y, z), 0.058621668348828156);
+ * assertAlmostEquals(trackerr(y, z), 0.058621668348828156, 1e-13);
  *
  * ```
  *
@@ -111,12 +111,12 @@ export default function trackerr(
  *
  * @example Different portfolio tracking error
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * const z = [0.04, -0.022, 0.043, 0.028, -0.078, -0.011, 0.033, -0.049, 0.09, 0.087];
  *
  * const y = [-0.005, 0.081, 0.04, -0.037, -0.061, 0.058, -0.049, -0.021, 0.062, 0.058];
- * assertEquals(trackerr(y, z), 0.058621668348828156);
+ * assertAlmostEquals(trackerr(y, z), 0.058621668348828156, 1e-13);
  *
  * ```
  *

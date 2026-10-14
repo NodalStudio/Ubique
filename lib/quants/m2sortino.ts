@@ -34,14 +34,14 @@ import {
  *
  * @example Multiple assets vs different benchmark
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  *
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
  * assertEquals(m2sortino(x,z,0,0,12), 0.696982403465082);
- * assertEquals(m2sortino(y,z,0,0,12), 0.1603188447030512);
+ * assertAlmostEquals(m2sortino(y,z,0,0,12), 0.1603188447030512, 1e-13);
  * ```
  */
 export default function m2sortino(
@@ -78,14 +78,14 @@ export default function m2sortino(
  *
  * @example Multiple assets vs different benchmark
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  *
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
  * assertEquals(m2sortino(x,z,0,0,12), 0.696982403465082);
- * assertEquals(m2sortino(y,z,0,0,12), 0.1603188447030512);
+ * assertAlmostEquals(m2sortino(y,z,0,0,12), 0.1603188447030512, 1e-13);
  * ```
  */
 export default function m2sortino(
@@ -122,14 +122,14 @@ export default function m2sortino(
  *
  * @example Multiple assets vs different benchmark
  * ```ts
- * import { assertEquals } from "jsr:@std/assert";
+ * import { assertEquals, assertAlmostEquals } from "jsr:@std/assert";
  *
  * var x = [0.003,0.026,0.015,-0.009,0.014,0.024,0.015,0.066,-0.014,0.039];
  * var y = [-0.005,0.081,0.04,-0.037,-0.061,0.058,-0.049,-0.021,0.062,0.058];
  *
  * var z = [0.04,-0.022,0.043,0.028,-0.078,-0.011,0.033,-0.049,0.09,0.087];
  * assertEquals(m2sortino(x,z,0,0,12), 0.696982403465082);
- * assertEquals(m2sortino(y,z,0,0,12), 0.1603188447030512);
+ * assertAlmostEquals(m2sortino(y,z,0,0,12), 0.1603188447030512, 1e-13);
  * ```
  */
 export default function m2sortino(

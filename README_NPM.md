@@ -1,318 +1,193 @@
-<p align="center">
-  <a href="https://nodalstudio.github.io/Ubique/"><img alt="Ubique — mathematical and quantitative library for TypeScript, by Nodal Studio" src="https://cdn.jsdelivr.net/gh/NodalStudio/Ubique@main/.github/assets/banner-light.svg" width="100%"></a>
-</p>
+# Ubique
 
-<p align="center">
-  <a href="https://nodalstudio.github.io/Ubique/"><img alt="API reference" src="https://img.shields.io/badge/API_reference_→-030406?style=for-the-badge"></a>
-  <a href="https://nodalstudio.github.io/Ubique/learn.html"><img alt="Interactive article" src="https://img.shields.io/badge/Interactive_article_→-030406?style=for-the-badge"></a>
-  <a href="https://nodalstudio.github.io/Ubique/benchmark.html"><img alt="Benchmark" src="https://img.shields.io/badge/Benchmark_→-030406?style=for-the-badge"></a>
-</p>
+Numerical computing for JavaScript and TypeScript: matrices, linear systems,
+statistics, regression and financial time series. Selected linear algebra
+operations use Rust's nalgebra compiled to WebAssembly. Other operations run in
+JavaScript. The API uses familiar MATLAB-style names such as `mtimes` and `std`.
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/ubique"><img alt="npm" src="https://img.shields.io/npm/v/ubique?style=for-the-badge&label=npm&labelColor=030406&color=FFFDE9"></a>
-  <a href="https://www.npmjs.com/package/ubique"><img alt="npm downloads" src="https://img.shields.io/npm/d18m/ubique?style=for-the-badge&label=downloads&labelColor=030406&color=FFFDE9"></a>
-  <a href="https://jsr.io/@nodalstudio/ubique"><img alt="JSR" src="https://img.shields.io/jsr/v/@nodalstudio/ubique?style=for-the-badge&label=JSR&labelColor=030406&color=FFFDE9"></a>
-  <a href="https://github.com/NodalStudio/Ubique/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-FFFDE9?style=for-the-badge&labelColor=030406"></a>
-</p>
+[API reference](https://nodalstudio.github.io/Ubique/) ·
+[Interactive guide](https://nodalstudio.github.io/Ubique/learn.html) ·
+[Browser benchmark](https://nodalstudio.github.io/Ubique/benchmark.html)
 
-Ubique is a modern mathematical and quantitative library built with contemporary
-JavaScript, TypeScript, and WebAssembly. It delivers high-performance numerical
-computations by leveraging Rust's [nalgebra](https://nalgebra.org/) library
-compiled to WebAssembly. The library provides a comprehensive suite of functions
-for vectors, matrices, linear algebra, statistics, time series analysis, and
-computational finance.
+## Install and run
 
-**Version 1.0** represents a complete rewrite of the original Ubique library,
-bringing significant improvements in performance, modern tooling, and developer experience.
+### Node.js or a TypeScript application
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Performance Highlights](#performance-highlights)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Overview
-
-Ubique is designed for modern web and server-side applications requiring robust
-and efficient mathematical operations. By integrating WebAssembly for heavy
-linear algebra tasks, Ubique offers good performance while maintaining
-a simple and intuitive API. The library supports vectors, matrices, linear
-algebra, statistics, time series analysis, and computational finance—all while
-delivering performance gains of up to 20x compared to traditional JavaScript
-solutions.
-
-## Key Features
-
-- **High Performance:** Uses Rust's [nalgebra](https://nalgebra.org/) compiled
-  to WebAssembly for accelerated matrix operations
-- **WebAssembly Integration:** WASM code is inlined for zero-config deployment
-  (no separate .wasm files to manage)
-- **Universal Compatibility:** Works seamlessly in Node.js, browsers, and modern
-  JavaScript runtimes
-- **TypeScript Support:** Full TypeScript definitions included for excellent IDE
-  support and type safety
-- **Comprehensive Functionality:** Full suite of operations for vectors, matrices,
-  statistics, time series, and financial computations
-- **Zero Dependencies:** Minimal external dependencies (only dayjs for date operations)
-
-## Performance
-
-Run `deno task benchmark` in the source checkout for seeded, correctness-gated
-comparisons with math.js 15.2.0, using warmups and alternating batches. Historical
-headline ratios used an older protocol and have been removed. Results depend on
-shape, hardware, runtime and whether data is already resident in WASM memory.
-See the source README and `benchmarks/README.md` for the measured protocol.
-
-## Installation
-
-### npm
-
-```bash
-npm install ubique
+```sh
+npm install ubique@1.0.3
 ```
 
-### yarn
+```ts
+import { matmul } from "ubique";
 
-```bash
-yarn add ubique
+const A = [[1, 2], [3, 4]];
+const B = [[5, 6], [7, 8]];
+
+console.log(matmul(A, B));
+// [[19, 22], [43, 50]]
 ```
 
-### pnpm
+CommonJS is also supported: `const { matmul } = require("ubique");`.
 
-```bash
-pnpm add ubique
+### Deno
+
+```sh
+deno add jsr:@nodalstudio/ubique@1.0.3
 ```
 
-## Usage
+Use the same example with `import { matmul } from "@nodalstudio/ubique";`.
+Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.3"`.
 
-### ESM (Modern Node.js, TypeScript, bundlers)
-
-```typescript
-import * as ubique from "ubique";
-
-const A = [
-  [1, 2],
-  [3, 4],
-];
-
-const B = [
-  [5, 6],
-  [7, 8],
-];
-
-const C = ubique.mtimes(A, B);
-console.log(C);
-// Output:
-// [
-//   [19, 22],
-//   [43, 50],
-// ]
-```
-
-### CommonJS (Node.js)
-
-```javascript
-const ubique = require("ubique");
-
-const A = [
-  [1, 2],
-  [3, 4],
-];
-
-const inverse = ubique.inv(A);
-console.log(inverse);
-```
-
-### Browser (via CDN)
+### Browser without a build step
 
 ```html
 <script type="module">
-  import * as ubique from "https://esm.sh/ubique@1.0.0";
-
-  const matrix = ubique.eye(3); // Create 3x3 identity matrix
-  console.log(matrix);
+  import { matmul } from "https://esm.sh/ubique@1.0.3";
+  console.log(matmul([[1, 2]], [[3], [4]])); // [[11]]
 </script>
 ```
 
-### More Examples
+WebAssembly is included in the package; there is no separate `.wasm` file to
+serve. The browser example above loads the package through a third-party CDN.
+See the [runtime checks](https://github.com/NodalStudio/Ubique/actions/workflows/runtime-compat.yml)
+for the tested Deno, Node.js, Bun and browser environments.
 
-#### Linear Algebra
+## Choose an operation
 
-```typescript
-import { eye, inv, det, lu, linsolve } from "ubique";
+| Task | Start with |
+| --- | --- |
+| Multiply two matrices | `matmul(A, B)` |
+| Multiply scalars, vectors or matrices | `mtimes(A, B)` |
+| Solve a linear system | `linsolve(A, b)` |
+| Solve repeatedly with the same coefficient matrix | `factorize(A).solve(b)` |
+| Reuse WASM buffers across matrix products | `DenseMatrix` |
+| Summarize observations | `mean`, `median`, `std`, `corrcoef` |
+| Fit a line or analyze returns | `linearreg`, `drawdown`, `sharpe` |
 
-// Identity matrix
-const I = eye(3);
+`matmul` returns nested arrays and selects JavaScript or WASM automatically.
+Pass `"js"` or `"wasm"` as its third argument to choose explicitly. The automatic
+threshold is a heuristic; measure representative shapes before overriding it.
 
-// Matrix inversion
-const A = [
-  [1, 2],
-  [3, 4],
-];
-const A_inv = inv(A);
+## Reuse a factorization
 
-// Determinant
-const detA = det(A);
+When only the right-hand side changes, factor the coefficient matrix once:
 
-// LU decomposition
-const luResult = lu(A);
-const L = luResult.L;
-const U = luResult.U;
-const P = luResult.P;
+```ts
+import { factorize } from "ubique";
 
-// Solve linear system Ax = b
-const b = [5, 6];
-const x = linsolve(A, b);
+const system = factorize([[3, 1], [1, 2]]);
+console.log(system.solve([9, 8])); // approximately [2, 3]
+console.log(system.solve([4, 3])); // approximately [1, 1]
 ```
 
-#### Statistics
+For a single solve, use `linsolve(A, b)` directly. Solving a system avoids
+constructing an explicit inverse just to multiply it by the right-hand side.
 
-```typescript
-import { mean, std, corrcoef, cov, median } from "ubique";
+## Reuse matrix buffers
 
-const data = [1, 2, 3, 4, 5];
+Use `DenseMatrix` when repeated calculations can keep their data in WASM memory:
 
-// Descriptive statistics
-const avg = mean(data); // 3
-const stdDev = std(data); // ~1.58
-const med = median(data); // 3
+```ts
+import { DenseMatrix } from "ubique";
 
-// Correlation and covariance
-const x = [1, 2, 3, 4, 5];
-const y = [2, 4, 5, 4, 5];
-const corr = corrcoef(x, y);
-const covariance = cov(x, y);
+const a = DenseMatrix.from([[1, 2], [3, 4]]);
+const b = DenseMatrix.from([[5, 6], [7, 8]]);
+const out = new DenseMatrix(2, 2);
+try {
+  a.multiplyInto(b, out); // reuse these buffers for subsequent products
+  console.log(out.toArray()); // [[19, 22], [43, 50]]
+} finally {
+  out.dispose();
+  b.dispose();
+  a.dispose();
+}
 ```
 
-#### Quantitative Finance
+`from` and `setData` copy existing JavaScript data into WASM; `toArray` copies it
+back. `multiplyInto` reuses resident inputs and output without those boundary
+copies. The output must be distinct from both inputs.
 
-```typescript
-import { sharpe, sortino, drawdown, cagr, histvar } from "ubique";
+To generate data directly in WASM memory, use `view()` after allocating your
+matrices. Its layout is column-major: `column * rows + row`. Views are temporary
+borrows: reacquire them after operations that can allocate or grow WASM memory,
+and never use them after disposal. See the
+[complete resident-matrix example](https://github.com/NodalStudio/Ubique/blob/v1.0.3/examples/resident_matrices.ts).
 
-const returns = [0.01, 0.02, -0.01, 0.03, -0.02];
+## Numerical behavior and upgrading from 1.0.2
 
-// Risk metrics
-const sharpeRatio = sharpe(returns);
-const sortinoRatio = sortino(returns);
-const ddResult = drawdown(returns);
-const maxDD = ddResult.maxdd;
+**1.0.3 includes the new APIs and numerical corrections described here.** The
+[website](https://nodalstudio.github.io/Ubique/) builds from the repository's
+current source; npm and JSR distribute versioned releases.
 
-// Performance metrics
-// Note: cagr requires price data and time array
-const prices = [100, 101, 103, 102, 105.06, 102.96];
-const time = [0, 1, 2, 3, 4, 5];
-const annualReturn = cagr(prices, time);
+Calculations use JavaScript numbers and WASM f64, not exact arithmetic. Function
+contracts define shapes, dimensions, normalization and handling of invalid data.
+For example, `std` defaults to sample normalization (N−1), and general matrix
+multiplication can propagate NaN/infinity while linear solves reject nonfinite
+inputs. See the [numerical contracts](https://github.com/NodalStudio/Ubique/blob/v1.0.3/docs-src/numerical-contract.md).
 
-// Risk measures
-const var95 = histvar(returns, 0.95);
+When upgrading from 1.0.2, review these changes:
+
+- Singular or near-singular solves and inverses can now throw. The pivot
+  tolerance is not a condition-number estimate.
+- Rectangular `lu` returns compact factors: L is m×r and U is r×n, where
+  r = min(m, n).
+- Tiny nonzero determinants are preserved; they are not automatically zero.
+- `mpower` supports integer powers only; invalid or fractional powers throw.
+- Drawdown includes initial wealth, so first-period losses affect the result
+  and dependent ratios.
+- IRR and regression fixes can change results or reject inputs previously
+  accepted. Check application-level numerical expectations when upgrading.
+
+The [changelog](https://github.com/NodalStudio/Ubique/blob/v1.0.3/CHANGELOG.md) describes these changes in detail.
+
+## Performance and learning
+
+The [interactive guide](https://nodalstudio.github.io/Ubique/learn.html) develops
+matrix multiplication from simple loops through memory layout, tiling and WASM
+ownership. Teaching kernels are distinguished from Ubique's production kernels.
+
+The [browser benchmark](https://nodalstudio.github.io/Ubique/benchmark.html)
+compares checked results on seeded inputs, warms both implementations, and
+reports medians from alternating batches. Unresolved timings are excluded from
+speed ratios. Performance depends on shape, runtime and data ownership.
+
+For local commands, raw historical measurements and their limitations, see the
+[benchmark protocol](https://github.com/NodalStudio/Ubique/blob/v1.0.3/benchmarks/README.md). Historical before/after results are
+not guarantees for the entire library or comparisons against math.js.
+
+## Numerical validation
+
+The revised numerical paths pass 716 deterministic comparisons and invariants
+against NumPy/SciPy (BLAS/LAPACK) and mpmath at 80-digit precision. This covers
+matrix products, solves, decompositions, statistics, regression and IRR; it is not
+an exhaustive verification of every export or input. See the
+[reproducible reference suite](https://github.com/NodalStudio/Ubique/blob/v1.0.3/docs-src/reference-validation.md) for coverage,
+tolerances and commands.
+
+## Develop locally
+
+Clone the repository and use Deno to run the tests:
+
+```sh
+git clone https://github.com/NodalStudio/Ubique.git
+cd Ubique
+deno task test
+deno task lint
+deno task docs
+python3 -m http.server 8873 --bind 127.0.0.1 --directory docs
 ```
 
-#### Matrix Operations
+Open `http://127.0.0.1:8873/` for the local API, guide and benchmark. The generated
+WASM bindings are checked in. To change the Rust implementation, install Rust
+with the `wasm32-unknown-unknown` target and run `deno task build`.
 
-```typescript
-import {
-  zeros,
-  ones,
-  rand,
-  eye,
-  transpose,
-  reshape,
-  diag,
-  sum,
-  prod,
-  cumsum,
-} from "ubique";
+Use `deno task build:npm` and `deno task test:npm` to build and check the npm
+package. See [examples and browser checks](https://github.com/NodalStudio/Ubique/blob/v1.0.3/examples/README.md) for the interactive
+demonstrations. Report issues or propose changes through
+[GitHub](https://github.com/NodalStudio/Ubique/issues).
 
-// Matrix creation
-const Z = zeros(3, 3); // 3x3 zero matrix
-const O = ones(2, 4); // 2x4 ones matrix
-const R = rand(5, 5); // 5x5 random matrix
-const I = eye(4); // 4x4 identity matrix
+## License and credits
 
-// Matrix manipulation
-const A = [
-  [1, 2, 3],
-  [4, 5, 6],
-];
-const At = transpose(A); // Transpose
-const B = reshape(A, 3, 2); // Reshape to 3x2
-const d = diag(I); // Extract diagonal
-
-// Aggregations
-const s = sum(A); // Sum all elements
-const p = prod(A); // Product of all elements
-const cs = cumsum(A); // Cumulative sum
-```
-
-## API Documentation
-
-Ubique provides functions organized into the following modules:
-
-- **Data Types** (`datatype`): Type checking, assertions, data manipulation
-- **Element Operations** (`elemop`): Element-wise operations on arrays and matrices
-- **Elementary Math** (`elmath`): Mathematical functions (exp, log, sqrt, erf, etc.)
-- **Linear Algebra** (`linalgebra`): Matrix operations (inv, det, lu, linsolve)
-- **Matrix Arrays** (`matarrs`): Matrix creation and manipulation
-- **Probability Distributions** (`probdistr`): Statistical distributions and tests
-- **Quantitative Finance** (`quants`): Portfolio analytics and risk metrics
-- **Regression** (`reglin`): Regression and interpolation functions
-- **Statistics** (`stats`): Descriptive statistics (mean, std, median, etc.)
-
-For complete API documentation, visit: [https://nodalstudio.github.io/Ubique/](https://nodalstudio.github.io/Ubique/)
-
-## TypeScript Support
-
-Ubique is written in TypeScript and includes full type definitions. Your IDE will provide autocomplete and type checking out of the box:
-
-```typescript
-import { inv, Matrix } from "ubique";
-
-const A: Matrix = [
-  [1, 2],
-  [3, 4],
-];
-const A_inv = inv(A); // Type: Matrix
-```
-
-## Browser Compatibility
-
-Ubique works in all modern browsers that support WebAssembly:
-
-- Chrome/Edge 57+
-- Firefox 52+
-- Safari 11+
-- Node.js 12+
-
-The WebAssembly code is automatically inlined, so no additional configuration or file serving is required.
-
-## Contributing
-
-Contributions are welcome and encouraged! If you have ideas or improvements,
-please fork the repository and submit a pull request. For issues or feature
-requests, use the [GitHub Issues](https://github.com/nodalstudio/ubique/issues)
-page.
-
-## License
-
-Ubique is released under the MIT License. See the [LICENSE](https://github.com/NodalStudio/Ubique/blob/main/LICENSE) file for details.
-
-
-## Development preview
-
-The upcoming source revision adds reusable `factorize(A).solve(b)`, corrects
-singularity/determinant behavior, integer powers, IRR, initial drawdown and
-large-coordinate regression, and provides an interactive browser lab/tutorial.
-These changes are not yet published. See the source repository's `CHANGELOG.md`,
-`docs-src/numerical-contract.md` and `examples/README.md` for the exact contracts
-and local build instructions. Existing published versions do not contain these fixes.
-
-<br>
-
-<p align="center">
-  <a href="https://nodalstudio.io/"><img alt="Built and maintained by Nodal Studio — independent software studio, Barcelona and Paris" src="https://cdn.jsdelivr.net/gh/NodalStudio/Ubique@main/.github/assets/footer.svg" width="100%"></a>
-</p>
+[MIT](https://github.com/NodalStudio/Ubique/blob/v1.0.3/LICENSE). Maintained by [Nodal Studio](https://nodalstudio.io/).
+Based on Max Todaro's [original Ubique](https://github.com/maxto/ubique), with
+Rust linear algebra supplied by [nalgebra](https://nalgebra.org/).

@@ -28,8 +28,8 @@ Use explicit dimensions and inspect shapes when composing these functions.
 "percentile" convention. It was not rewritten in this change.
 
 There is no library-wide missing-data imputation or omission policy. Pass finite,
-complete observations for statistics; the browser CSV example explicitly filters
-complete rows first. General matrix multiplication permits IEEE NaN/infinity
+complete observations for statistics and handle missing data before calling the
+library. General matrix multiplication permits IEEE NaN/infinity
 propagation, while the finite linear-system routines reject them. Extremely scaled
 inputs can overflow, underflow or lose significance even when every entry is finite.
 
@@ -37,3 +37,6 @@ Tests compare exact integer examples exactly and numerical results with explicit
 tolerances. Solve tests check reconstruction/residuals. A small residual does not
 prove accurate coefficients for an ill-conditioned matrix; use an appropriate
 condition estimate or higher precision when that distinction matters.
+
+See the [independent reference suite](reference-validation.md) for reproducible
+NumPy/SciPy and high-precision comparisons, coverage limits and tolerances.

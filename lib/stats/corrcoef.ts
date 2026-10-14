@@ -546,14 +546,16 @@ export default function corrcoef(
         throw new Error("input dimension must agree");
       }
       const vx = x as number[], vy = actualY as number[];
+      const originX = vx[0], originY = vy[0];
       let meanX = 0, meanY = 0, xx = 0, yy = 0, xy = 0;
       for (let i = 0; i < x.length; i++) {
-        const dx = vx[i] - meanX, dy = vy[i] - meanY;
+        const shiftedX = vx[i] - originX, shiftedY = vy[i] - originY;
+        const dx = shiftedX - meanX, dy = shiftedY - meanY;
         meanX += dx / (i + 1);
         meanY += dy / (i + 1);
-        xx += dx * (vx[i] - meanX);
-        yy += dy * (vy[i] - meanY);
-        xy += dx * (vy[i] - meanY);
+        xx += dx * (shiftedX - meanX);
+        yy += dy * (shiftedY - meanY);
+        xy += dx * (shiftedY - meanY);
       }
       const validX = x.length > actualFlag && xx > 0 && Number.isFinite(xx);
       const validY = x.length > actualFlag && yy > 0 && Number.isFinite(yy);
