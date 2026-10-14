@@ -9,7 +9,7 @@ sources:
 
 Multiplying matrices is a useful way to understand numerical performance. The mathematics fits in one line, yet execution time depends on how we arrange memory, traverse it, cross runtime boundaries, and measure the result. We will build a small matrix multiplier in JavaScript, improve its data access, and follow the same calculation into Rust and WebAssembly.
 
-Ubique provides the production context: a TypeScript mathematical library maintained by Nodal Studio, with selected operations backed by Rust and nalgebra. This version builds on Max Todaro’s original Ubique library; nalgebra supplies the numerical kernels discussed here. The teaching implementations below explain possible design choices. The 1.0.2 baseline delegated matrix multiplication to nalgebra. Since 1.0.3, Ubique includes JS/WASM dispatch and a persistent-memory API; both run in this site’s demos and are included in the npm/JSR packages. The tiled JavaScript kernel below remains a teaching implementation.
+Ubique provides the production context: a TypeScript mathematical library maintained by Nodal Studio, with selected operations backed by Rust and nalgebra. This version builds on Max Todaro’s original Ubique library; nalgebra supplies the numerical kernels discussed here. The teaching implementations below explain possible design choices. The 1.0.2 baseline delegated matrix multiplication to nalgebra. Since 1.0.3, Ubique includes JS/WASM dispatch and a persistent-memory API; both run in this site’s demos and are included in the npm package. The tiled JavaScript kernel below remains a teaching implementation.
 
 ## Start with one output cell
 
@@ -191,7 +191,7 @@ is a hypothesis about speed until the complete operation has been measured.
 
 There are two different improvements to try. First, pack directly into typed arrays so that `flat()` does not create an intermediate ordinary array. Second, offer an advanced API that retains matrices in WASM memory across calls.
 
-Ubique exposes this API in both the site’s bundle and the npm/JSR packages:
+Ubique exposes this API in both the site’s bundle and the npm package:
 
 ```js
 import { DenseMatrix } from "ubique";

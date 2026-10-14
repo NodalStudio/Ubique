@@ -29,15 +29,6 @@ console.log(matmul(A, B));
 
 CommonJS is also supported: `const { matmul } = require("ubique");`.
 
-### Deno
-
-```sh
-deno add jsr:@nodalstudio/ubique@1.0.4
-```
-
-Use the same example with `import { matmul } from "@nodalstudio/ubique";`.
-Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.4"`.
-
 ### Browser without a build step
 
 ```html
@@ -50,7 +41,7 @@ Without an import map, import directly from `"jsr:@nodalstudio/ubique@1.0.4"`.
 WebAssembly is included in the package; there is no separate `.wasm` file to
 serve. The browser example above loads the package through a third-party CDN.
 See the [runtime checks](https://github.com/NodalStudio/Ubique/actions/workflows/runtime-compat.yml)
-for the tested Deno, Node.js, Bun and browser environments.
+for the tested Node.js, Bun and browser environments.
 
 ## Choose an operation
 
@@ -117,7 +108,7 @@ and never use them after disposal. See the
 
 **1.0.4 includes the new APIs and numerical corrections described here.** The
 [website](https://nodalstudio.github.io/Ubique/) builds from the repository's
-current source; npm and JSR distribute versioned releases.
+current source; npm distributes versioned releases.
 
 Calculations use JavaScript numbers and WASM f64, not exact arithmetic. Function
 contracts define shapes, dimensions, normalization and handling of invalid data.

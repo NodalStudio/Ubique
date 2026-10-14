@@ -118,7 +118,7 @@ function buildIndexMenu() {
   const title = el("h1", "", "API reference"); title.id = "api-title";
   header.append(title, el("p", "", "Matrices, statistics and quantitative tools for TypeScript. Choose a function, inspect its contract, and run an example."));
   const install = el("pre", "docs-install");
-  install.textContent = "npm install ubique@1.0.4\n# Deno: deno add jsr:@nodalstudio/ubique@1.0.4";
+  install.textContent = "npm install ubique@1.0.4";
   header.append(install);
   const quick = el("nav", "docs-quick"); quick.setAttribute("aria-label", "Start here");
   for (const [href,label] of [["./linalgebra/matmul.ts/~/matmul.html","Matrix products"],["./linalgebra/dense_matrix.ts/~/DenseMatrix.html","Resident matrices"],["./linalgebra/factorize.ts/~/factorize.html","Solve a system"],["./learn.html","Under the hood"]]) {

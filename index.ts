@@ -41,7 +41,7 @@
  *
  * @example
  * ```ts
- * import * as ubique from "jsr:@nodalstudio/ubique";
+ * import * as ubique from "ubique";
  *
  * // Matrix operations
  * const A = ubique.eye(3);

@@ -26,7 +26,7 @@ deno task build:npm
 ```
 
 The release workflow runs these checks on source, Node ESM and CommonJS before
-publishing either package. Deno must be available on PATH. The Python dependencies are development tools;
+publishing the package. Deno must be available on PATH. The Python dependencies are development tools;
 none are shipped to library users. The JSON report records reference versions,
 seed, operation counts, failures and the largest measured error metrics.
 
