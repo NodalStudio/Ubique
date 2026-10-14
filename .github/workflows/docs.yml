@@ -31,8 +31,14 @@ jobs:
       - name: Build documentation
         run: deno task docs
 
+      - name: Setup Node.js for browser installation
+        uses: actions/setup-node@v5
+        with:
+          node-version: node
+
       - name: Install browser for documentation checks
-        run: deno run -A npm:playwright@1.59.1 install --with-deps chromium
+        timeout-minutes: 5
+        run: npx --yes playwright@1.59.1 install chromium
 
       - name: Check documentation layouts and runnable examples
         run: |
