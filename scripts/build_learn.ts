@@ -1,6 +1,11 @@
 import { marked } from "npm:marked@15.0.12";
 
-import { brandHead, siteFooter, siteHeader } from "./brand_chrome.ts";
+import {
+  brandHead,
+  siteFooter,
+  siteHeader,
+  socialHead,
+} from "./brand_chrome.ts";
 
 /** Renders only the checked-in editorial source, never uploaded/user Markdown. */
 export async function buildLearn(output: string) {
@@ -72,7 +77,14 @@ function chapters(html: string): string {
 function page(body: string): string {
   const index = toc.map((c) => `<li><a href="#${c.id}">${c.title}</a></li>`)
     .join("");
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Matrix multiplication from JavaScript to WebAssembly, with runnable examples."><title>Making matrix multiplication fast — Ubique</title>${brandHead()}<link rel="stylesheet" href="article.css"><link rel="stylesheet" href="docs.css"></head><body class="ns">${
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Matrix multiplication from JavaScript to WebAssembly, with runnable examples."><title>Making matrix multiplication fast — Ubique</title>${
+    socialHead({
+      title: "Making matrix multiplication fast — Ubique",
+      description:
+        "From JavaScript loops to reusable WebAssembly memory: an interactive guide with runnable kernels and reproducible benchmarks.",
+      path: "learn.html",
+    })
+  }${brandHead()}<link rel="stylesheet" href="article.css"><link rel="stylesheet" href="docs.css"></head><body class="ns">${
     siteHeader("learn")
   }
   <div class="docs-layout"><aside class="docs-sidebar"><nav aria-label="Article contents"><p class="docs-label">Matrix multiplication</p><ol>${index}</ol></nav></aside>

@@ -11,6 +11,7 @@ export const brandFiles = [
   "docs_examples.js",
   "nodal.js",
   "favicon.svg",
+  "og.png",
   "fonts/display.woff2",
   "fonts/display-medium.woff2",
   "fonts/body.woff2",
@@ -22,6 +23,38 @@ export const brandFiles = [
   "fonts/mono-medium.woff2",
   "fonts/OFL-JetBrainsMono.txt",
 ];
+
+/** Absolute base of the published docs, for the social cards. */
+export const siteBase = "https://nodalstudio.github.io/Ubique/";
+
+/**
+ * Open Graph and Twitter tags, so that LinkedIn, Slack and the rest show a
+ * title, a description and the brand card instead of nothing. `path` is the
+ * page's path from the docs root ("learn.html", "linalgebra/index.html").
+ */
+export function socialHead(
+  { title, description, path }: {
+    title: string;
+    description: string;
+    path: string;
+  },
+): string {
+  const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  const url = siteBase + path.replace(/^\.?\//, "");
+  return `<meta property="og:type" content="website">` +
+    `<meta property="og:site_name" content="Ubique">` +
+    `<meta property="og:title" content="${esc(title)}">` +
+    `<meta property="og:description" content="${esc(description)}">` +
+    `<meta property="og:url" content="${url}">` +
+    `<meta property="og:image" content="${siteBase}og.png">` +
+    `<meta property="og:image:width" content="1200">` +
+    `<meta property="og:image:height" content="630">` +
+    `<meta property="og:image:alt" content="Ubique — Numerical and financial computing in TypeScript">` +
+    `<meta name="twitter:card" content="summary_large_image">` +
+    `<meta name="twitter:title" content="${esc(title)}">` +
+    `<meta name="twitter:description" content="${esc(description)}">` +
+    `<meta name="twitter:image" content="${siteBase}og.png">`;
+}
 
 export function brandHead(root = "."): string {
   return `<link rel="icon" href="${root}/favicon.svg" type="image/svg+xml">` +

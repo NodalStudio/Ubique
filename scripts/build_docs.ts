@@ -11,6 +11,7 @@ import {
   brandHead,
   siteFooter,
   siteHeader,
+  socialHead,
 } from "./brand_chrome.ts";
 
 const docsOutput = "./docs";
@@ -174,7 +175,19 @@ async function brandDocPages(
     if (!original.includes('<div class="ddoc">')) continue;
     if (original.includes('class="ns-head"')) continue;
     const root = pathToRoot(docsRoot, dirname(filePath));
-    const isIndexPage = relative(docsRoot, filePath) === "index.html";
+    const pagePath = relative(docsRoot, filePath).replace(/\\/g, "/");
+    const isIndexPage = pagePath === "index.html";
+    const pageTitle = original.match(/<title>([^<]*)<\/title>/)?.[1]
+      .replace(/\s*-\s*Ubique documentation\s*$/i, "").trim();
+    const social = socialHead({
+      title: isIndexPage
+        ? "Ubique — Numerical and financial computing in TypeScript"
+        : `${pageTitle ?? "API reference"} — Ubique`,
+      description: isIndexPage
+        ? "Linear algebra, statistics and quantitative finance in TypeScript, with Rust and WebAssembly kernels. API reference, interactive guide and benchmarks."
+        : "Ubique API reference: numerical and financial computing in TypeScript, with Rust and WebAssembly kernels.",
+      path: pagePath,
+    });
 
     const updated = original
       .replace(/<script src="[^"]*darkmode_toggle\.js"><\/script>/, "")
@@ -193,7 +206,7 @@ async function brandDocPages(
       )
       .replace(
         /<\/head>/,
-        `${
+        `${social}${
           brandHead(root)
         }<link rel="stylesheet" href="${root}/ubique-docs.css"><link rel="stylesheet" href="${root}/docs.css">` +
           (isIndexPage ? "<style>.toc { display: none; }</style>" : "") +
@@ -325,7 +338,15 @@ for (const file of brandFiles) {
 }
 
 const benchmarkHtml = (await Deno.readTextFile(benchmarkHtmlUrl))
-  .replace("<!--ns:head-->", brandHead())
+  .replace(
+    "<!--ns:head-->",
+    socialHead({
+      title: "Benchmark — Ubique",
+      description:
+        "JavaScript against WebAssembly on seeded inputs, timed in your own browser, results checked before timing.",
+      path: "benchmark.html",
+    }) + brandHead(),
+  )
   .replace("<!--ns:header-->", siteHeader("benchmark"))
   .replace(
     "<!--ns:footer-->",
