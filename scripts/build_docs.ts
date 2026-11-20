@@ -380,15 +380,7 @@ for (
   if (!result.success) throw new Error(`Failed to bundle ${entry}`);
 }
 
-// The last file is Google Search Console's proof of ownership: removing it loses the property.
-for (
-  const file of [
-    "article.css",
-    "article_experiments.js",
-    "learn.js",
-    "google1b1e78152817c088.html",
-  ]
-) {
+for (const file of ["article.css", "article_experiments.js", "learn.js"]) {
   await Deno.copyFile(new URL(file, assetsDirUrl), `${docsOutput}/${file}`);
 }
 await buildLearn(docsOutput);
