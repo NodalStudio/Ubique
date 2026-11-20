@@ -5,9 +5,9 @@ statistics, regression and financial time series. Selected linear algebra
 operations use Rust's nalgebra compiled to WebAssembly. Other operations run in
 JavaScript. The API uses familiar MATLAB-style names such as `mtimes` and `std`.
 
-[API reference](https://nodalstudio.github.io/Ubique/) ·
-[Interactive guide](https://nodalstudio.github.io/Ubique/learn.html) ·
-[Browser benchmark](https://nodalstudio.github.io/Ubique/benchmark.html)
+[API reference](https://ubique.nodalstudio.io/) ·
+[Interactive guide](https://ubique.nodalstudio.io/learn.html) ·
+[Browser benchmark](https://ubique.nodalstudio.io/benchmark.html)
 
 ## Install and run
 
@@ -107,7 +107,7 @@ and never use them after disposal. See the
 ## Numerical behavior and upgrading from 1.0.2
 
 **1.0.4 includes the new APIs and numerical corrections described here.** The
-[website](https://nodalstudio.github.io/Ubique/) builds from the repository's
+[website](https://ubique.nodalstudio.io/) builds from the repository's
 current source; npm distributes versioned releases.
 
 Calculations use JavaScript numbers and WASM f64, not exact arithmetic. Function
@@ -133,11 +133,11 @@ The [changelog](https://github.com/NodalStudio/Ubique/blob/v1.0.4/CHANGELOG.md) 
 
 ## Performance and learning
 
-The [interactive guide](https://nodalstudio.github.io/Ubique/learn.html) develops
+The [interactive guide](https://ubique.nodalstudio.io/learn.html) develops
 matrix multiplication from simple loops through memory layout, tiling and WASM
 ownership. Teaching kernels are distinguished from Ubique's production kernels.
 
-The [browser benchmark](https://nodalstudio.github.io/Ubique/benchmark.html)
+The [browser benchmark](https://ubique.nodalstudio.io/benchmark.html)
 compares checked results on seeded inputs, warms both implementations, and
 reports medians from alternating batches. Unresolved timings are excluded from
 speed ratios. Performance depends on shape, runtime and data ownership.

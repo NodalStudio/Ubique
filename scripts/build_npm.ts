@@ -32,6 +32,7 @@ await build({
     description:
       "A high-performance mathematical and quantitative library, leveraging WebAssembly for efficient linear algebra and numerical computations",
     license: "MIT",
+    homepage: "https://ubique.nodalstudio.io/",
     repository: {
       type: "git",
       url: "git+https://github.com/NodalStudio/Ubique.git",

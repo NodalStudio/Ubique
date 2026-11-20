@@ -25,7 +25,7 @@ export const brandFiles = [
 ];
 
 /** Absolute base of the published docs, for the social cards. */
-export const siteBase = "https://nodalstudio.github.io/Ubique/";
+export const siteBase = "https://ubique.nodalstudio.io/";
 
 /**
  * Open Graph and Twitter tags, so that LinkedIn, Slack and the rest show a
